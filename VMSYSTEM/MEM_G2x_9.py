@@ -26,7 +26,7 @@ class memory:
 		self.INSTDICT={}
 		self.DATDICT={}
 		linecnt=libbaltcalc.mni(9)
-		print "Setting up Virtual RAM system"
+		print "Setting up Virtual RAM subsystem"
 		TROMFILE=loadtrom(trom)
 		for rmline in TROMFILE:
 			rmline=rmline.replace("\n", "")
@@ -34,11 +34,12 @@ class memory:
 			self.DATDICT[linecnt]=btint(rmline[6:])
 			linecnt += 1
 		TROMFILE.close()
+		#pad memory map to max size if not already maxxed.
 		while linecnt<=libbaltcalc.mpi(9):
-			self.INSTDICT[linecnt]=btint("000000")
-			self.DATDICT[linecnt]=btint("000000000")
+			self.INSTDICT[linecnt]=btint(0)
+			self.DATDICT[linecnt]=btint(0)
 			linecnt += 1
-		print "Virtual RAM ready: " + str(len(self.DATDICT)) + " data words, \n" + str(len(self.INSTDICT)) + " instruction words"
+		print "Virtual RAM ready: " + str(len(self.DATDICT)) + " data words, \n" + str(len(self.INSTDICT)) + " instruction words\n"
 	#memory read
 	def getinst(self, addr):
 		return self.INSTDICT[int(addr)]
