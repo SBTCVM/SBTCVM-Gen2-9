@@ -4,7 +4,7 @@ from VMSYSTEM.libbaltcalc import btint
 import VMSYSTEM.MEM_G2x_9
 import VMSYSTEM.CPU_G2x_9
 
-memsys=VMSYSTEM.MEM_G2x_9.memory("DEFAULT.TROM")
+memsys=VMSYSTEM.MEM_G2x_9.memory("TESTSHORT.TROM")
 #Test Memory system.
 #data R/W
 print memsys.getdata(libbaltcalc.mni(9))

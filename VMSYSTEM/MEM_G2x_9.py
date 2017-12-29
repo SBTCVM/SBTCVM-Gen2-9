@@ -34,7 +34,7 @@ class memory:
 			self.DATDICT[linecnt]=btint(rmline[6:])
 			linecnt += 1
 		TROMFILE.close()
-		while linecnt<libbaltcalc.mpi(9):
+		while linecnt<=libbaltcalc.mpi(9):
 			self.INSTDICT[linecnt]=btint("000000")
 			self.DATDICT[linecnt]=btint("000000000")
 			linecnt += 1
