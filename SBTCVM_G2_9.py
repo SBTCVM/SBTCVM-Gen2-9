@@ -29,12 +29,20 @@ print memsys.getinst(libbaltcalc.mni(9))
 
 
 #test IO
-#dummy function to test IOSYS write notification.
+#dummy functions to test IOSYS write & read notification.
 def dummyfunct(addr, data):
-	print "IOSYS NOTIFY TEST PASSED: IO ADDRESS:" + str(int(addr)) + " DATA:" + str(int(data))
+	print "IOSYS WRITE NOTIFY TEST PASSED: IO ADDRESS:" + str(int(addr)) + " DATA:" + str(int(data))
 
+def dummyfunctread(addr, data):
+	print "IOSYS READ NOTIFY TEST PASSED: IO ADDRESS:" + str(int(addr)) + " DATA:" + str(int(data))
 #tell iosystem to call dummyfunct on write to address mni(9) (-9841)
-iosys.setnotify(libbaltcalc.mni(9), dummyfunct)
+iosys.setwritenotify(libbaltcalc.mni(9), dummyfunct)
+#tell iosystem to call dummyfunctread on read to address mni(9) (-9841)
+iosys.setreadnotify(libbaltcalc.mni(9), dummyfunctread)
 print iosys.ioread(libbaltcalc.mni(9))
 iosys.iowrite(libbaltcalc.mni(9), btint(12))
 print iosys.ioread(libbaltcalc.mni(9))
+print "Testing Device read/write"
+print iosys.deviceread(libbaltcalc.mni(9))
+iosys.devicewrite(libbaltcalc.mni(9), btint(0))
+print iosys.deviceread(libbaltcalc.mni(9))
