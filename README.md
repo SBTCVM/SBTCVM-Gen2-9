@@ -8,7 +8,7 @@ PRE-ALPHA! THIS VERSION OF SBTCVM IS STILL IN DEVELOPMENT!
 If you need help, see the SBTCVM users manual located in     
 the "manual" directory.     
      
-Copyright (c) 2016-2017 Thomas Leathers and Contributors
+Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 
 Notice: The user manual, (SBTCVM-user-manual.odt) is under a different license:
 the GNU Free Documentation License. See said manual for more information.
