@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import libbaltcalc
-from libbaltcalc import btint
+from . import libbaltcalc
+btint=libbaltcalc.btint
 import os
 import sys
 
@@ -26,7 +26,7 @@ class memory:
 		self.INSTDICT={}
 		self.DATDICT={}
 		linecnt=libbaltcalc.mni(9)
-		print "Setting up Virtual RAM subsystem"
+		print("Setting up Virtual RAM subsystem")
 		TROMFILE=loadtrom(trom)
 		for rmline in TROMFILE:
 			rmline=rmline.replace("\n", "")
@@ -39,7 +39,7 @@ class memory:
 			self.INSTDICT[linecnt]=btint(0)
 			self.DATDICT[linecnt]=btint(0)
 			linecnt += 1
-		print "Virtual RAM ready: " + str(len(self.DATDICT)) + " data words, \n" + str(len(self.INSTDICT)) + " instruction words\n"
+		print("Virtual RAM ready: " + str(len(self.DATDICT)) + " data words, \n" + str(len(self.INSTDICT)) + " instruction words\n")
 	#memory read
 	def getinst(self, addr):
 		return self.INSTDICT[int(addr)]

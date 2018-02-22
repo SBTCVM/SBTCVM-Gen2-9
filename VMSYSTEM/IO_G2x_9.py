@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import libbaltcalc
-from libbaltcalc import btint
+from . import libbaltcalc
+btint=libbaltcalc.btint
 import os
 import sys
 
@@ -9,7 +9,7 @@ import sys
 
 class io:
 	def __init__(self):
-		print "IO subsystem initalizing..."
+		print("IO subsystem initalizing...")
 		addrset=libbaltcalc.mni(9)
 		self.IODICT={}
 		self.WriteNotifyDict={}
@@ -22,7 +22,7 @@ class io:
 			self.WriteNotifyDict[addrset]=None
 			self.ReadNotifyDict[addrset]=None
 			addrset+=1
-		print "IO initalized: " + str(len(self.IODICT)) + " unique addresses\n"
+		print("IO initalized: " + str(len(self.IODICT)) + " unique addresses\n")
 	#NON-CPU components should use this to get notified of IObus writes at specific addresses.
 	#note that functref should be a refrence to a specific function that is to be run, with the form:
 	#functref(addr, data)
