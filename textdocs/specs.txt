@@ -1,0 +1,17 @@
+9-trit instructions, 9-trit data.
+
+Should work in python 2.7 AND 3 With python 2 to be dropped likely arround its 2020 EOL.
+
+Should Feature a console-only mode as well as a graphical one.
+
+
+TODO:
+- MOST IMPORTANTLY: start with planning.
+
+- specify instruction set and IRQ scheme so work on the CPU's instruction parser can begin.
+
+- identify any changes to be added to assembly language. rewrite/port assembler once instruction set is planned.
+
+- devise a more coherent bank switching scheme. also look into multi-rom assembly support.
+
+- plan out IO devices like a keyboard, Virtual Disk drive, and IRQ-equipped revisons of SBTGA and the Digital Sample device.

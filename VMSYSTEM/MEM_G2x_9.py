@@ -30,8 +30,8 @@ class memory:
 		TROMFILE=loadtrom(trom)
 		for rmline in TROMFILE:
 			rmline=rmline.replace("\n", "")
-			self.INSTDICT[linecnt]=btint(rmline[:6])
-			self.DATDICT[linecnt]=btint(rmline[6:])
+			self.INSTDICT[linecnt]=btint(rmline[:9])
+			self.DATDICT[linecnt]=btint(rmline[9:])
 			linecnt += 1
 		TROMFILE.close()
 		#pad memory map to max size if not already maxxed.
