@@ -16,11 +16,14 @@ class io:
 		self.WriteNotifyList=[]
 		self.ReadNotifyDict={}
 		self.ReadNotifyList=[]
+		self.ReadOverrideDict={}
+		self.ReadOverrideList=[]
 		#build IObus memory & Write/Read Notify dictionaries.
 		while addrset<=libbaltcalc.mpi(9):
 			self.IODICT[addrset]=btint(0)
 			self.WriteNotifyDict[addrset]=None
 			self.ReadNotifyDict[addrset]=None
+			self.ReadOverrideDict[addrset]=None
 			addrset+=1
 		print("IO initalized: " + str(len(self.IODICT)) + " unique addresses\n")
 	#NON-CPU components should use this to get notified of IObus writes at specific addresses.
@@ -32,9 +35,22 @@ class io:
 	def setreadnotify(self, addr, functref):
 		self.ReadNotifyList.extend([int(addr)])
 		self.ReadNotifyDict[addr]=functref
+	def setreadoverride(self, addr, functref):
+		self.ReadOverrideList.extend([int(addr)])
+		self.ReadOverrideDict[addr]=functref
 	#ioread and iowrite should only be used by the CPU(s) devices should use deviceread and devicewrite (see below)
 	def ioread(self, addr):
-		addrobj=self.IODICT[addr]
+		if addr in self.ReadOverrideList:
+			#get data at address anyways. (useful for refrence, ect, also needed to keep IO map updated)
+			addrobjreal=self.IODICT[addr]
+			functref=self.ReadOverrideDict[addr]
+			addrobj=functref(btint(addr), addrobjreal)
+			#update data point.
+			addrobjreal.changeval(addrobj)
+			print("ioreadoverride")
+			
+		else:
+			addrobj=self.IODICT[addr]
 		#if address is registered by a component via setreadnotify, call the specified function.
 		if addr in self.ReadNotifyList:
 			functref=self.ReadNotifyDict[addr]

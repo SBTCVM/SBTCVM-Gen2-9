@@ -35,6 +35,10 @@ def dummyfunct(addr, data):
 
 def dummyfunctread(addr, data):
 	print("IOSYS READ NOTIFY TEST PASSED: IO ADDRESS:" + str(int(addr)) + " DATA:" + str(int(data)))
+	
+def dummyfunctreadoverride(addr, data):
+	print("IOSYS READ OVERRIDE TEST PASSED. RETURNING MPI of 6")
+	return btint(libbaltcalc.mpi(6))
 #tell iosystem to call dummyfunct on write to address mni(9) (-9841)
 iosys.setwritenotify(libbaltcalc.mni(9), dummyfunct)
 #tell iosystem to call dummyfunctread on read to address mni(9) (-9841)
@@ -46,3 +50,9 @@ print("Testing Device read/write")
 print(iosys.deviceread(libbaltcalc.mni(9)))
 iosys.devicewrite(libbaltcalc.mni(9), btint(0))
 print(iosys.deviceread(libbaltcalc.mni(9)))
+print("Testing Device read notify")
+iosys.setreadoverride(libbaltcalc.mni(9), dummyfunctreadoverride)
+print(iosys.ioread(libbaltcalc.mni(9)))
+
+
+
