@@ -39,4 +39,4 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 Image and other media content created by, (unless otherwise noted below) Thomas Leathers.
 
 SBTCVM's Stylized text logo and SBTCVM's 3 eyed, 3 eared mascot were created by Thomas Leathers.
-Copyright (c) 2017 Thomas Leathers and Contributors.
+Copyright (c) 2018 Thomas Leathers and Contributors.
