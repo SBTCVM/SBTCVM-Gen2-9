@@ -1,0 +1,13 @@
+SBTCVM Balanced Ternary Virtual Disk Interface
+
+Filestructure:
+
+0/path.exa
+0/con.sdx
+0/dir/example.tx6
+
+the drive is indicated by a number followed by a slash.
+drive 0 is the system drive.
+drive 1 is the rw user drive.
+
+drives 2+ are reserved for future use.

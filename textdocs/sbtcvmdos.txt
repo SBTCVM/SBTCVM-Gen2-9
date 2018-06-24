@@ -1,0 +1,20 @@
+commands:
+(for simplicity all commands will be 4 chars long)
+
+set1 [path]
+set2 [path]
+set3 [path]
+... (repeat for # of pointers)
+get0 (should print o/con.sdx)
+get1 
+get2 
+get3
+... (repeat for # of pointers)
+exec (launch pointer 1)
+exit
+help: prints some basic help
+
+SBTVDI Pointer conventions:
+
+pointer 0 points to the console. full exec this to return to SBTCVM DOS.
+

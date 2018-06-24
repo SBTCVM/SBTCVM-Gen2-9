@@ -15,9 +15,33 @@ class cpu:
 		self.reg1=btint(0)
 		self.reg2=btint(0)
 		self.mempoint=btint(libbaltcalc.mni(9))
-	def process(self):
-		self.instval=self.memsys.getinst(self.execpoint)
-		self.dataval=self.memsys.getdata(self.execpoint)
+		self.dataval=btint(0)
+		self.instval=btint(0)
+	def cycle(self):
+		self.instval.changeval(self.memsys.getinst(self.execpoint))
+		self.dataval.changeval(self.memsys.getdata(self.execpoint))
+		print(self.instval)
+		#setreg1
+		if self.instval == -9841:
+			self.reg1.changeval(self.dataval.intval)
+			print("setreg1")
+			print(self.reg1)
+		#setreg2
+		elif self.instval == -9840:
+			self.reg2.changeval(self.dataval.intval)
+		#copy reg2 to reg1
+		elif self.instval == -9839:
+			self.reg1.changeval(self.reg2.intval)
+		#copy reg1 to reg2
+		elif self.instval == -9838:
+			self.reg2.changeval(self.reg1.intval)
+		#swap reg1 and reg2
+		elif self.instval == -9837:
+			tmpval=self.reg1.intval
+			self.reg1.changeval(self.reg2.intval)
+			self.reg2.changeval(tmpval)
+		
+		self.execpoint+=1
 		return
 		
 		

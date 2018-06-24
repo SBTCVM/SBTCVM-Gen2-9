@@ -29,9 +29,9 @@ class memory:
 		print("Setting up Virtual RAM subsystem")
 		TROMFILE=loadtrom(trom)
 		for rmline in TROMFILE:
-			rmline=rmline.replace("\n", "")
-			self.INSTDICT[linecnt]=btint(rmline[:9])
-			self.DATDICT[linecnt]=btint(rmline[9:])
+			rmline=rmline.replace("\n", "").split(",")
+			self.INSTDICT[linecnt]=btint(int(rmline[0]))
+			self.DATDICT[linecnt]=btint(int(rmline[1]))
 			linecnt += 1
 		TROMFILE.close()
 		#pad memory map to max size if not already maxxed.

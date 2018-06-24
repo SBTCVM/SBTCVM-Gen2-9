@@ -1,0 +1,11 @@
+>>>VERY EARLY! assembler is yet to be written, and only -9841 to -9835 actually work.<<<
+>>>instructions shown in form they appear in CPU_G2x_9.py source code as. key: ([instruction]: [tasm keyword]: notes)<<<
+>>>ensure carryovers from mark2 have identical assembly keywords.<<<
+-9841: setreg1
+-9840: setreg2
+-9839: copy2to1
+-9838: copy1to2
+-9837: regswap
+-9836: invert1
+-9835: invert2
+
