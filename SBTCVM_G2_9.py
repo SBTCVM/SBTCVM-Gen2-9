@@ -18,8 +18,8 @@ cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
 #basic mainloop.
 print("begin mainloop")
 while True:
-	time.sleep(0.001)
-	time.sleep(1)
+	time.sleep(0.00001)
+	#time.sleep(1)
 	cpusys.cycle()
 
 

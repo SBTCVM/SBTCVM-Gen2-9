@@ -9,3 +9,10 @@
 -9836: invert1
 -9835: invert2
 
+>>>interrupt system<<<
+>>>See 'interrupts_and_stack.txt' for stack integration details.<<<
+-9500: intsel: set interrupt selection register
+-9499: intreg: register selected interrupt with an address in data
+-9498: clearint: clear selected interrupt if registered
+-9497: clearallint: clear all registered interrupts.
+-9396: intcont: interrupt continue. see 'interrupts_and_stack.txt'
