@@ -1,11 +1,24 @@
 #Gen2's VERY FIRST assembly program! :D WOO!
 
-setreg1;10x22;start
+#custom namespace variable syntax
+#this is part of g2-asm.py's new unified namespace.
+#syntax is as follows v>[varname];varvalue
+v>bob2;10x1
+setreg1;>bob2;start
+
+#new int syntaxes:
+#10x[signed decimal int] is a new decimal syntax. 
+setreg1;10x22
+
+#the p0n notation, thats also supported by the btint object API, is exposed here.
+setreg1;pnpp0
+
 setreg1;>start
+
+#new variable length trit syntax.
 setreg1;000+0--+-
 setreg1;+
 setreg1
-setreg1;pnpp0
 
 #out of range test
 #setreg1;10x50000

@@ -14,6 +14,7 @@ versint=(3, 0, 0)
 class instruct:
 	def __init__(self, keywords, opcode):
 		self.keywords=keywords
+		self.prefixes=[]
 		self.opcode=int(opcode)
 	def p0(self, data, keyword, lineno):
 		if data==None:
@@ -36,7 +37,7 @@ class instruct:
 		return 0, None
 	#return length in words of memory. needed here for goto refrence label parsing!
 	def p1(self, data, keyword, lineno):
-		return 1
+		return 1, {}
 	#second syntax check pass:
 	def p2(self, data, keyword, gotos, lineno):
 		if data==None:
@@ -59,6 +60,57 @@ class instruct:
 		else:
 			return [[self.opcode, libbaltcalc.btint(data), lineno]]
 
+class nspacevar:
+	def __init__(self):
+		self.keywords=[]
+		self.prefixes=['v>']
+	def p0(self, data, keyword, lineno):
+		if not len(keyword)>2:
+			return 1, keyword+": Line: " + str(lineno) + ": No variable name after prefix! (v>varname)"
+		if data==None:
+			return 0, None
+		elif data.startswith(">"):
+			return 0, None
+		elif data.startswith("10x"):
+			try:
+				int(data[3:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
+			
+		else:
+			if len(data)>9:
+				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
+			for char in data:
+				
+				if char not in tritvalid:
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
+		return 0, None
+	#return length in words of memory, and if any, custom namespace entries. needed here for goto refrence label parsing!
+	def p1(self, data, keyword, lineno):
+		if data==None:
+			return 0, {keyword[2:]: 0}
+		elif data.startswith("10x"):
+			return 0, {keyword[2:]: int(data[3:])}
+		elif data.startswith(">"):
+			return 0, {keyword[2:]: gotos[data[1:]]}
+		else:
+			return 0, {keyword[2:]: libbaltcalc.btint(data)}
+	#second syntax check pass:
+	def p2(self, data, keyword, gotos, lineno):
+		if data==None:
+			return 0, None
+		elif data.startswith(">"):
+			try:
+				gotos[data[1:]]
+			except KeyError:
+				return 1, keyword+": Line " + str(lineno) + ": Nonexistant goto refrence!"
+				
+		return 0, None
+	#should return two signed ints or btint objects, or if no output, an empty list.
+	def p3(self, data, keyword, gotos, lineno):
+		return []
+
+
 #master keyword parser object list:
 instlist=[instruct(["setreg1"], -9841),
 instruct(["setreg2"], -9840),
@@ -66,7 +118,8 @@ instruct(["copy2to1"], -9839),
 instruct(["copy1to2"], -9838),
 instruct(["regswap"], -9837),
 instruct(["invert1"], -9836),
-instruct(["invert2"], -9835)]
+instruct(["invert2"], -9835),
+nspacevar()]
 
 
 #mainloop class
@@ -101,6 +154,16 @@ class mainloop:
 							else:
 								print("Syntax Error!")
 							return 1
+					else:
+						for pattern in inst.prefixes:
+							if keyword.startswith(pattern):
+								retlist=inst.p0(data, keyword, lineno)
+								if retlist[0]==1:
+									if retlist[1]!=None:
+										print("Syntax Error: "+retlist[1])
+									else:
+										print("Syntax Error!")
+									return 1
 		return 0
 	def p1(self):
 		self.fileobj.seek(0)
@@ -128,11 +191,21 @@ class mainloop:
 				addr=self.addrstart
 				for inst in instlist:
 					if keyword in inst.keywords:
-						length=inst.p1(data, keyword, lineno)
+						length, nspaceadd=inst.p1(data, keyword, lineno)
 						if glabel!="":
 							self.gotos[glabel]=addr
+						if nspaceadd!={}:
+							self.gotos.update(nspaceadd)
 						addr+=length
-						
+					else:
+						for pattern in inst.prefixes:
+							if keyword.startswith(pattern):
+								length, nspaceadd=inst.p1(data, keyword, lineno)
+								if glabel!="":
+									self.gotos[glabel]=addr
+								if nspaceadd!={}:
+									self.gotos.update(nspaceadd)
+								addr+=length
 	def p2(self):
 		self.fileobj.seek(0)
 		print("pass 2: post-prescan syntax check")
@@ -160,6 +233,16 @@ class mainloop:
 							else:
 								print("Syntax Error!")
 							return 1
+					else:
+						for pattern in inst.prefixes:
+							if keyword.startswith(pattern):
+								retlist=inst.p2(data, keyword, self.gotos, lineno)
+								if retlist[0]==1:
+									if retlist[1]!=None:
+										print("Syntax Error: "+retlist[1])
+									else:
+										print("Syntax Error!")
+									return 1
 		return 0
 	def p3(self):
 		self.datainstlist=[]
@@ -184,6 +267,11 @@ class mainloop:
 					if keyword in inst.keywords:
 						datinstpairs=inst.p3(data, keyword, self.gotos, lineno)
 						self.datainstlist.extend(datinstpairs)
+					else:
+						for pattern in inst.prefixes:
+							if keyword.startswith(pattern):
+								datinstpairs=inst.p3(data, keyword, self.gotos, lineno)
+								self.datainstlist.extend(datinstpairs)
 	def p4(self):
 		print("pass 4: Rom validity check")
 		for item in self.datainstlist:
@@ -236,6 +324,9 @@ help, -h, --help: this help
 	elif cmd in ['-v', '--version']:
 		print(asmvers)
 	else:
+		if cmd==None:
+			print("Tip: Try g2-asm.py -h for help.")
+			sys.exit()
 		if cmd in ['-b', '--build', '-s', '--syntax']:
 			argx=arg
 		else:

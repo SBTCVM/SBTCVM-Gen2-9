@@ -1,0 +1,16 @@
+
+
+--Namespace--
+
+The unified namespace of the v3 assembler is designed to provide as much flexibility to programmers as possible.
+
+for example, here is a hypothetical example for keyboard interrupt constants:
+
+
+if a key is used in several sections of a program. i.e. multiple menus,
+its possible to set this key using a custom variable like so:
+v>actionkey;>_keyl
+
+this way if you use the l key in many places, you can change this key via a single line of code.
+
+This is just one example of the uses of this new, more advanced namespace system.
