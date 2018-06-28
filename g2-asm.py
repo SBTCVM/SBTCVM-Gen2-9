@@ -15,7 +15,7 @@ class instruct:
 	def __init__(self, keywords, opcode):
 		self.keywords=keywords
 		self.opcode=int(opcode)
-	def p0(self, data, keyword):
+	def p0(self, data, keyword, lineno):
 		if data==None:
 			return 0, None
 		elif data.startswith(">"):
@@ -24,37 +24,40 @@ class instruct:
 			try:
 				int(data[3:])
 			except ValueError:
-				return 1, keyword+": decimal int syntax error!"
+				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
 			
 		else:
 			if len(data)>9:
-				return 1, keyword+": string too large!"
+				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
 			for char in data:
 				
 				if char not in tritvalid:
-					return 1, keyword+": invalid char in ternary data string!"
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
 		return 0, None
 	#return length in words of memory. needed here for goto refrence label parsing!
-	def p1(self, data, keyword):
+	def p1(self, data, keyword, lineno):
 		return 1
 	#second syntax check pass:
-	def p2(self, data, keyword, gotos):
+	def p2(self, data, keyword, gotos, lineno):
 		if data==None:
 			return 0, None
 		elif data.startswith(">"):
-			if data[1:] not in gotos:
-				return 1, keyword+": Nonexistant goto refrence!"
+			try:
+				gotos[data[1:]]
+			except KeyError:
+				return 1, keyword+": Line " + str(lineno) + ": Nonexistant goto refrence!"
+				
 		return 0, None
 	#should return two signed ints or btint objects.
-	def p3(self, data, keyword, gotos):
+	def p3(self, data, keyword, gotos, lineno):
 		if data==None:
 			return [[self.opcode, 0]]
 		elif data.startswith("10x"):
-			return [[self.opcode, int(data[3:])]]
+			return [[self.opcode, int(data[3:]), lineno]]
 		elif data.startswith(">"):
-			return [[self.opcode, gotos[data[1:]]]]
+			return [[self.opcode, gotos[data[1:]], lineno]]
 		else:
-			return [[self.opcode, libbaltcalc.btint(data)]]
+			return [[self.opcode, libbaltcalc.btint(data), lineno]]
 
 
 instlist=[instruct(["setreg1"], -9841),
@@ -70,7 +73,9 @@ class mainloop:
 	def p0(self):
 		self.fileobj.seek(0)
 		print("pass 0: syntax check")
+		lineno=0
 		for line in self.fileobj:
+			lineno+=1
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
@@ -85,19 +90,21 @@ class mainloop:
 					data=None
 				for inst in instlist:
 					if keyword in inst.keywords:
-						retlist=inst.p0(data, keyword)
+						retlist=inst.p0(data, keyword, lineno)
 						if retlist[0]==1:
 							if retlist[1]!=None:
 								print("Syntax Error: "+retlist[1])
 							else:
 								print("Syntax Error!")
 							return 1
-					return 0
+		return 0
 	def p1(self):
 		self.fileobj.seek(0)
 		self.gotos={}
 		print("pass 1: goto refrence label prescan")
+		lineno=0
 		for line in self.fileobj:
+			lineno+=1
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
@@ -117,14 +124,17 @@ class mainloop:
 				addr=self.addrstart
 				for inst in instlist:
 					if keyword in inst.keywords:
-						length=inst.p1(data, keyword)
+						length=inst.p1(data, keyword, lineno)
 						if glabel!="":
 							self.gotos[glabel]=addr
 						addr+=length
+						
 	def p2(self):
 		self.fileobj.seek(0)
 		print("pass 2: post-prescan syntax check")
+		lineno=0
 		for line in self.fileobj:
+			lineno+=1
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
@@ -139,19 +149,21 @@ class mainloop:
 					data=None
 				for inst in instlist:
 					if keyword in inst.keywords:
-						retlist=inst.p2(data, keyword, self.gotos)
+						retlist=inst.p2(data, keyword, self.gotos, lineno)
 						if retlist[0]==1:
 							if retlist[1]!=None:
 								print("Syntax Error: "+retlist[1])
 							else:
 								print("Syntax Error!")
 							return 1
-					return 0
+		return 0
 	def p3(self):
 		self.datainstlist=[]
 		self.fileobj.seek(0)
 		print("pass 3: main parse pass")
+		lineno=0
 		for line in self.fileobj:
+			lineno+=1
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
@@ -166,7 +178,7 @@ class mainloop:
 					data=None
 				for inst in instlist:
 					if keyword in inst.keywords:
-						datinstpairs=inst.p3(data, keyword, self.gotos)
+						datinstpairs=inst.p3(data, keyword, self.gotos, lineno)
 						self.datainstlist.extend(datinstpairs)
 	def p4(self):
 		print("pass 4: Rom validity check")
@@ -176,9 +188,11 @@ class mainloop:
 			data=item[1]
 			if inst<libbaltcalc.mni(9) or inst>libbaltcalc.mpi(9):
 				print("Out of range instruction word found!")
+				print("source line: " + str(item[2]))
 				return 1
 			if data<libbaltcalc.mni(9) or data>libbaltcalc.mpi(9):
 				print("Out of range data word found!")
+				print("source line: " + str(item[2]))
 				return 1
 		if len(self.datainstlist)>19683:
 			print("Memory Space Overflow!")

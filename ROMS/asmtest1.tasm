@@ -6,3 +6,9 @@ setreg1;000+0--+-
 setreg1;+
 setreg1
 setreg1;pnpp0
+
+#out of range test
+#setreg1;10x50000
+
+#nonexistant gotoref test
+#setreg1;>bob
