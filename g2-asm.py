@@ -59,11 +59,15 @@ class instruct:
 		else:
 			return [[self.opcode, libbaltcalc.btint(data), lineno]]
 
-
+#master keyword parser object list:
 instlist=[instruct(["setreg1"], -9841),
 instruct(["setreg2"], -9840),
 instruct(["copy2to1"], -9839),
-instruct(["copy1to2"], -9838)]
+instruct(["copy1to2"], -9838),
+instruct(["regswap"], -9837),
+instruct(["invert1"], -9836),
+instruct(["invert2"], -9835)]
+
 
 #mainloop class
 class mainloop:

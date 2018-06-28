@@ -3,7 +3,7 @@ from . import libbaltcalc
 btint=libbaltcalc.btint
 import os
 import sys
-
+VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
 def loadtrom(filenameg):
 	if os.path.isfile(filenameg):
 		return(open(filenameg, "r"))

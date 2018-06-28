@@ -5,22 +5,44 @@ import VMSYSTEM.MEM_G2x_9
 import VMSYSTEM.CPU_G2x_9
 import VMSYSTEM.IO_G2x_9
 import time
-
-print("SBTCVM Generation 2 9-trit VM, v2.1.0.PRE-ALPHA\n")
-#initialize memory subsystem
-memsys=VMSYSTEM.MEM_G2x_9.memory("TESTSHORT.TROM")
-#initialize IO subsystem
-iosys=VMSYSTEM.IO_G2x_9.io()
-
-cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
+import sys
+import os
 
 
-#basic mainloop.
-print("begin mainloop")
-while True:
-	time.sleep(0.00001)
-	#time.sleep(1)
-	cpusys.cycle()
+try:
+	cmd=sys.argv[1]
+except:
+	cmd=None
+try:
+	arg=sys.argv[2]
+except:
+	arg=None
+if cmd in ['help', '-h', '--help']:
+	print('''SBTCVM Gen2-9 virtual machine. pygame frontend.
+help, -h, --help: this help.
+-v, --version: VM version''')
+elif cmd in ['-v', '--version']:
+	print('v2.1.0.PRE-ALPHA')
+elif (cmd in ['-r', '--run'] and arg!=None) or cmd==None:
+	if cmd==None:
+		romfile='TESTSHORT.TROM'
+	else:
+		romfile=arg
+	print("SBTCVM Generation 2 9-trit VM, v2.1.0.PRE-ALPHA\n")
+	#initialize memory subsystem
+	memsys=VMSYSTEM.MEM_G2x_9.memory(romfile)
+	#initialize IO subsystem
+	iosys=VMSYSTEM.IO_G2x_9.io()
+	
+	cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
+	
+	
+	#basic mainloop.
+	print("begin mainloop")
+	while True:
+		time.sleep(0.00001)
+		#time.sleep(1)
+		cpusys.cycle()
 
 
 #preliminary Framework tests:
