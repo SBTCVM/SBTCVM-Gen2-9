@@ -1,0 +1,8 @@
+#Gen2's VERY FIRST assembly program! :D WOO!
+
+setreg1;10x22;start
+setreg1;>start
+setreg1;000+0--+-
+setreg1;+
+setreg1
+setreg1;pnpp0

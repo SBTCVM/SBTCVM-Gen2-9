@@ -7,9 +7,9 @@ import VMSYSTEM.IO_G2x_9
 import time
 
 print("SBTCVM Generation 2 9-trit VM, v2.1.0.PRE-ALPHA\n")
-#initalize memory subsystem
+#initialize memory subsystem
 memsys=VMSYSTEM.MEM_G2x_9.memory("TESTSHORT.TROM")
-#initalize IO subsystem
+#initialize IO subsystem
 iosys=VMSYSTEM.IO_G2x_9.io()
 
 cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
