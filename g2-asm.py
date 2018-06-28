@@ -235,12 +235,16 @@ help, -h, --help: this help
 -s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.''')
 	elif cmd in ['-v', '--version']:
 		print(asmvers)
-	elif cmd in ['-b', '--build', '-s', '--syntax'] and arg!=None:
+	else:
+		if cmd in ['-b', '--build', '-s', '--syntax']:
+			argx=arg
+		else:
+			argx=cmd
 		if cmd in ['-s', '--syntax']:
 			syntaxonly=1
 		else:
 			syntaxonly=0
-		for filenameg in [arg, arg+".tasm", arg+".TASM"]:
+		for filenameg in [argx, argx+".tasm", argx+".TASM"]:
 			filefound=1
 			if os.path.isfile(filenameg):
 				pathx=filenameg

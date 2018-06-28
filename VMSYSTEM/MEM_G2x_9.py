@@ -4,20 +4,20 @@ btint=libbaltcalc.btint
 import os
 import sys
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
-def loadtrom(filenameg):
-	if os.path.isfile(filenameg):
-		return(open(filenameg, "r"))
-	elif os.path.isfile(os.path.join("ROMS", filenameg)):
-		return(open(os.path.join("ROMS", filenameg), "r"))
-	elif os.path.isfile(os.path.join("VMUSER", filenameg)):
-		return(open(os.path.join("VMUSER", filenameg), "r"))
-	elif os.path.isfile(os.path.join("VMSYSTEM", filenameg)):
-		return(open(os.path.join("VMSYSTEM", filenameg), "r"))
-	elif os.path.isfile(os.path.join(VMSYSROMS, filenameg)):
-		return(open(os.path.join(VMSYSROMS, filenameg), "r"))
-	else:
-		#print ("FATAL ERROR: libtrom: NONEXISTENT TROM! (" + filenameg + ")")
-		sys.exit("FATAL ERROR: libtrom: NONEXISTENT TROM! (" + filenameg + ")")
+def loadtrom(fname):
+	for filenameg in [fname, fname+".trom", fname+".TROM"]:
+		if os.path.isfile(filenameg):
+			return(open(filenameg, "r"))
+		elif os.path.isfile(os.path.join("ROMS", filenameg)):
+			return(open(os.path.join("ROMS", filenameg), "r"))
+		elif os.path.isfile(os.path.join("VMUSER", filenameg)):
+			return(open(os.path.join("VMUSER", filenameg), "r"))
+		elif os.path.isfile(os.path.join("VMSYSTEM", filenameg)):
+			return(open(os.path.join("VMSYSTEM", filenameg), "r"))
+		elif os.path.isfile(os.path.join(VMSYSROMS, filenameg)):
+			return(open(os.path.join(VMSYSROMS, filenameg), "r"))
+	sys.exit("ERROR: Nonexistant TROM!")
+	
 
 
 class memory:

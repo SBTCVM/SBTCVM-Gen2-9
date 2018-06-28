@@ -23,11 +23,15 @@ help, -h, --help: this help.
 -v, --version: VM version''')
 elif cmd in ['-v', '--version']:
 	print('v2.1.0.PRE-ALPHA')
-elif (cmd in ['-r', '--run'] and arg!=None) or cmd==None:
+else:
 	if cmd==None:
 		romfile='TESTSHORT.TROM'
-	else:
+	elif cmd in ['-r', '--run']:
+		if arg==None:
+			sys.exit("Error! Must specify trom to run!")
 		romfile=arg
+	else:
+		romfile=cmd
 	print("SBTCVM Generation 2 9-trit VM, v2.1.0.PRE-ALPHA\n")
 	#initialize memory subsystem
 	memsys=VMSYSTEM.MEM_G2x_9.memory(romfile)
@@ -40,48 +44,6 @@ elif (cmd in ['-r', '--run'] and arg!=None) or cmd==None:
 	#basic mainloop.
 	print("begin mainloop")
 	while True:
-		time.sleep(0.00001)
-		#time.sleep(1)
+		time.sleep(0.0001)
+		time.sleep(1)
 		cpusys.cycle()
-
-
-#preliminary Framework tests:
-
-##Test Memory system.
-##data R/W
-#print(memsys.getdata(libbaltcalc.mni(9)))
-#memsys.setdata(libbaltcalc.mni(9), btint(12))
-#print(memsys.getdata(libbaltcalc.mni(9)))
-##instruction R/W
-#print(memsys.getinst(libbaltcalc.mni(9)))
-#memsys.setinst(libbaltcalc.mni(9), btint(13))
-#print(memsys.getinst(libbaltcalc.mni(9)))
-
-##test IO
-##dummy functions to test IOSYS write & read notification.
-#def dummyfunct(addr, data):
-	#print("IOSYS WRITE NOTIFY TEST PASSED: IO ADDRESS:" + str(int(addr)) + " DATA:" + str(int(data)))
-
-#def dummyfunctread(addr, data):
-	#print("IOSYS READ NOTIFY TEST PASSED: IO ADDRESS:" + str(int(addr)) + " DATA:" + str(int(data)))
-	
-#def dummyfunctreadoverride(addr, data):
-	#print("IOSYS READ OVERRIDE TEST PASSED. RETURNING MPI of 6")
-	#return btint(libbaltcalc.mpi(6))
-##tell iosystem to call dummyfunct on write to address mni(9) (-9841)
-#iosys.setwritenotify(libbaltcalc.mni(9), dummyfunct)
-##tell iosystem to call dummyfunctread on read to address mni(9) (-9841)
-#iosys.setreadnotify(libbaltcalc.mni(9), dummyfunctread)
-#print(iosys.ioread(libbaltcalc.mni(9)))
-#iosys.iowrite(libbaltcalc.mni(9), btint(12))
-#print(iosys.ioread(libbaltcalc.mni(9)))
-#print("Testing Device read/write")
-#print(iosys.deviceread(libbaltcalc.mni(9)))
-#iosys.devicewrite(libbaltcalc.mni(9), btint(0))
-#print(iosys.deviceread(libbaltcalc.mni(9)))
-#print("Testing Device read notify")
-#iosys.setreadoverride(libbaltcalc.mni(9), dummyfunctreadoverride)
-#print(iosys.ioread(libbaltcalc.mni(9)))
-
-
-
