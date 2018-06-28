@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#v3.1.0
+#v3.2.0
 
 def numflip(numtoflip):
 	return(numtoflip[::-1])
@@ -318,6 +318,48 @@ class btint(object):
 				return 1
 			else:
 				return 0
+		else:
+			return NotImplemented
+	def __lt__(self, other):
+		if isinstance(other, btint):
+			return self.intval<other.intval
+		elif isinstance(other, int):
+			return self.intval<other
+		else:
+			return NotImplemented
+	def __le__(self, other):
+		if isinstance(other, btint):
+			return self.intval<=other.intval
+		elif isinstance(other, int):
+			return self.intval<=other
+		else:
+			return NotImplemented
+	def __gt__(self, other):
+		if isinstance(other, btint):
+			return self.intval>other.intval
+		elif isinstance(other, int):
+			return self.intval>other
+		else:
+			return NotImplemented
+	def __ge__(self, other):
+		if isinstance(other, btint):
+			return self.intval>=other.intval
+		elif isinstance(other, int):
+			return self.intval>=other
+		else:
+			return NotImplemented
+	def __ne__(self, other):
+		if isinstance(other, btint):
+			return self.intval!=other.intval
+		elif isinstance(other, int):
+			return self.intval!=other
+		else:
+			return NotImplemented
+	def __eq__(self, other):
+		if isinstance(other, btint):
+			return self.intval==other.intval
+		elif isinstance(other, int):
+			return self.intval==other
 		else:
 			return NotImplemented
 	#length (measured in trits)

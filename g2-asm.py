@@ -188,8 +188,8 @@ class mainloop:
 		print("pass 4: Rom validity check")
 		for item in self.datainstlist:
 			#print(item)
-			inst=item[0]
-			data=item[1]
+			inst=int(item[0])
+			data=int(item[1])
 			if inst<libbaltcalc.mni(9) or inst>libbaltcalc.mpi(9):
 				print("Out of range instruction word found!")
 				print("source line: " + str(item[2]))
