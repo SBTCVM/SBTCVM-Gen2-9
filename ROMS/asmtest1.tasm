@@ -26,10 +26,17 @@ setreg1
 #nonexistant gotoref test
 #setreg1;>bob
 
+#new dual raw numeric data syntax.
+#left is instruction word, right is data. useful for i.e. double-packed data.
+raw;10x1,10x15
+#namespace references also work.
+v>int1;10x1
+v>int2;10x15
+raw;>int1,>int2
+# everyone's favorite null instruction :)
 null
 null
 null;10x10
 null
 null
 null
-raw;10x1,10x15
