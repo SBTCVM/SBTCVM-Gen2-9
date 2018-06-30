@@ -25,3 +25,11 @@ setreg1
 
 #nonexistant gotoref test
 #setreg1;>bob
+
+null
+null
+null;10x10
+null
+null
+null
+raw;10x1,10x15

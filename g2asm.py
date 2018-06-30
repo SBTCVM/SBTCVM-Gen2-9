@@ -60,6 +60,68 @@ class instruct:
 		else:
 			return [[self.opcode, libbaltcalc.btint(data), lineno]]
 
+class rawinst:
+	def __init__(self):
+		self.keywords=["raw"]
+		self.prefixes=[]
+	def p0(self, datafull, keyword, lineno):
+		if datafull==None:
+			return 1, keyword+": Line: " + str(lineno) + ": 'raw' requires TWO numeric arguments! raw;arga,argb"
+		datalist=datafull.split(",")
+		if len(datalist)!=2:
+			return 1, keyword+": Line: " + str(lineno) + ": 'raw' requires TWO numeric arguments! raw;arga,argb"
+		for data in datalist:
+			if data.startswith(">"):
+				continue
+			elif data.startswith("10x"):
+				try:
+					int(data[3:])
+				except ValueError:
+					return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error! (" + data + ")"
+				
+			else:
+				if len(data)>9:
+					return 1, keyword+": Line: " + str(lineno) + ": string too large! (" + data + ")"
+				for char in data:
+					
+					if char not in tritvalid:
+						return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string! (" + data + ")"
+		return 0, None
+	#return length in words of memory. needed here for goto refrence label parsing!
+	def p1(self, data, keyword, lineno):
+		return 1, {}
+	#second syntax check pass:
+	def p2(self, datafull, keyword, gotos, lineno):
+		datalist=datafull.split(",")
+		for data in datalist:
+			if data.startswith(">"):
+				try:
+					gotos[data[1:]]
+				except KeyError:
+					return 1, keyword+": Line " + str(lineno) + ": Nonexistant goto refrence! (" + data + ")"
+				
+		return 0, None
+	#should return two signed ints or btint objects.
+	def p3(self, data, keyword, gotos, lineno):
+		datalist=data.split(",")
+		data1=datalist[0]
+		data2=datalist[1]
+		if data1.startswith("10x"):
+			data1res=int(data1[3:])
+		elif data1.startswith(">"):
+			data1res=gotos[data1[1:]]
+		else:
+			data1res=libbaltcalc.btint(data2)
+		if data2.startswith("10x"):
+			data2res=int(data2[3:])
+		elif data2.startswith(">"):
+			data2res=gotos[data2[1:]]
+		else:
+			data2res=libbaltcalc.btint(data2)
+		
+		
+		return [[data1res, data2res, lineno]]
+
 class nspacevar:
 	def __init__(self):
 		self.keywords=[]
@@ -112,7 +174,9 @@ class nspacevar:
 
 
 #master keyword parser object list:
-instlist=[instruct(["setreg1"], -9841),
+instlist=[instruct(["null"], 0),
+rawinst(),
+instruct(["setreg1"], -9841),
 instruct(["setreg2"], -9840),
 instruct(["copy2to1"], -9839),
 instruct(["copy1to2"], -9838),
