@@ -183,6 +183,7 @@ instruct(["copy1to2"], -9838),
 instruct(["regswap"], -9837),
 instruct(["invert1"], -9836),
 instruct(["invert2"], -9835),
+instruct(["stop"], -9000),
 nspacevar()]
 
 

@@ -7,7 +7,7 @@ import VMSYSTEM.IO_G2x_9
 import time
 import sys
 import os
-
+progrun=1
 
 try:
 	cmd=sys.argv[1]
@@ -43,7 +43,10 @@ else:
 	
 	#basic mainloop.
 	print("begin mainloop")
-	while True:
+	while progrun:
 		time.sleep(0.0001)
-		time.sleep(1)
-		cpusys.cycle()
+		#time.sleep(1)
+		retval=cpusys.cycle()
+		if retval!=None:
+			progrun=0
+			

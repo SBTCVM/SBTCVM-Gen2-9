@@ -1,0 +1,9 @@
+#all exceptions are below zero!
+#closest to zero is most important
+#list of exceptions [exception : description : catchable(yes/no)]
+-1: soft stop. : no
+-2: divide by zero. : yes
+
+#all interrupts are above zero!
+#closest to zero is most important
+#list of interrupts [interrupt : description]

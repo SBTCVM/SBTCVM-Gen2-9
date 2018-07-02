@@ -40,8 +40,16 @@ class cpu:
 			tmpval=self.reg1.intval
 			self.reg1.changeval(self.reg2.intval)
 			self.reg2.changeval(tmpval)
-		
+		#soft stop:
+		elif self.instval == -9000:
+			if self.exception("soft stop.", -1):
+				return 1, -1, "soft stop."
 		self.execpoint+=1
-		return
+		return None
+	#stub. fill out with needed code once exception/interrupt system is active.
+	def exception(self, status, exid):
+		print("VMSYSHALT " + str(exid) + ": " + status)
+		return 1
+		
 		
 		

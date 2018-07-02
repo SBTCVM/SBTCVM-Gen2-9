@@ -1,18 +1,56 @@
->>>VERY EARLY! assembler is yet to be written, and only -9841 to -9835 actually work.<<<
->>>instructions shown in form they appear in CPU_G2x_9.py source code as. key: ([instruction]: [tasm keyword]: notes)<<<
+
+>>>instructions shown in form they appear in CPU_G2x_9.py source code as. key: <<<
+>>>[instruction]: [tasm keyword]: [notes] : [tasm keyword parser class] : [yes/no] (whether instruction is implemented)
+
+>>>most instructions will use the standard 'instruct' keyword parser class. all it needs is a list of keywords, and an opcode.
+
 >>>ensure carryovers from mark2 have identical assembly keywords.<<<
--9841: setreg1
--9840: setreg2
--9839: copy2to1
--9838: copy1to2
--9837: regswap
--9836: invert1
--9835: invert2
+>>>keywords shown in square brackets are aliases. most of these are for compatibility (where reasonable)<<<
+>>>remember, adding compatibility aliases is quite simple for instructions that function the same!<<< 
+-9841: setreg1 : instruct : yes
+-9840: setreg2 : instruct : yes
+-9839: copy2to1 : instruct : yes
+-9838: copy1to2 : instruct : yes
+-9837: regswap : instruct : yes
+-9836: invert1 : instruct : yes
+-9835: invert2 : instruct : yes
+
+>>>ALU: note the 3 extra instructions per basic 2-operator math function to speed up common basic maths.<<<
+-9800: add: add, put result to 1 : instruct : no
+-9799: add2: add, but put result to 2. : instruct : no
+-9798: adddata1: add data to register 1 : instruct : no
+-9797: adddata2: add data to register 2 : instruct : no
+
+-9786: sub: subtract, put result to 1 : instruct : no
+-9795: sub2: subtract, but put result to 2. : instruct : no
+-9794: subdata1: subtract data from register 1 : instruct : no
+-9793: subdata2: subtract data from register 2 : instruct : no
+
+-9792: mul: multiply, put result to 1 : instruct : no
+-9791: mul2: multiply, but put result to 2. : instruct : no
+-9790: muldata1: multiply data with register 1 : instruct : no
+-9789: muldata2: multiply data with register 2 : instruct : no
+
+>divide will instructs will be assigned an exception code for divide by zero when interrupt/exception system is operational.<
+-9788: div: divide, put result to 1 : instruct : no
+-9787: div2: divide, but put result to 2. : instruct : no
+-9786: divdata1: divide register 1 by data : instruct : no
+-9785: divdata2: divide register 2 by data : instruct : no
+
+
+>>>GOTOs<<<
+-9600: goto [gotodata]: goto address in data word. : instruct : no
+-9599: gotoif [gotodataif] goto address if reg1=reg2 : instruct : no
+-9598: gotoifless: goto address <data> if reg1<reg2 : instruct : no
+-9597: gotoifmore: [gotoifgreater]: goto address <data> if reg1>reg2 : instruct : no
 
 >>>interrupt system<<<
 >>>See 'interrupts_and_stack.txt' for stack integration details.<<<
--9500: intsel: set interrupt selection register
--9499: intreg: register selected interrupt with an address in data
--9498: clearint: clear selected interrupt if registered
--9497: clearallint: clear all registered interrupts.
--9396: intcont: interrupt continue. see 'interrupts_and_stack.txt'
+-9500: intsel: set interrupt selection register : instruct : no
+-9499: intreg: register selected interrupt with an address in data : instruct : no
+-9498: clearint: clear selected interrupt if registered : instruct : no
+-9497: clearallint: clear all registered interrupts. (also resets exception table) : instruct : no
+-9396: intcont: interrupt continue. see 'interrupts_and_stack.txt' : instruct : no
+
+-9000: stop: shutdown VM : instruct : yes
+0: null: blank instruction. does nothing. can be used for adjusting loop speed. : instruct : yes

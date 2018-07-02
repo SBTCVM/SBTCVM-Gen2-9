@@ -1,6 +1,11 @@
 Basic layout for SBTCVM's stack and interrupt systems:
 
 
+see 'except-interrupt.txt' for exception and interrupt lists.
+
+note: some exceptions, i.e. soft stop (-1), should not be catchable.
+note: while the exception/interrupt system is not implemented, all exceptions will be treated as uncaught!
+
 main stack:
 This is your bog-standard hardware stack. each entry caches important registers, etc.
 
