@@ -31,7 +31,7 @@
 -9790: muldata1: multiply data with register 1 : instruct : no
 -9789: muldata2: multiply data with register 2 : instruct : no
 
->divide will instructs will be assigned an exception code for divide by zero when interrupt/exception system is operational.<
+
 -9788: div: divide, put result to 1 : instruct : no
 -9787: div2: divide, but put result to 2. : instruct : no
 -9786: divdata1: divide register 1 by data : instruct : no
@@ -43,13 +43,32 @@
 -9599: gotoif [gotodataif] goto address if reg1=reg2 : instruct : no
 -9598: gotoifless: goto address <data> if reg1<reg2 : instruct : no
 -9597: gotoifmore: [gotoifgreater]: goto address <data> if reg1>reg2 : instruct : no
+-9596: gotoreg1: goto address <reg1>
+-9595: gotoreg1: goto address <reg2>
+
+>>>memory & IO<<<
+-9500: dataread1 [romread1]: read data word of address <data> into reg1 : instruct : no
+-9499: dataread2 [romread2]: read data word of address <data? into reg2 : instruct : no
+-9498: instread1           : read instruction word of address <data> into reg1 : instruct : no
+-9497: instread2           : read instruction word of address <data> into reg2 : instruct : no
+
+-9496: datawrite1 [setdata]: write reg1 to data word of address : instruct : no
+-9495: datawrite2          : write reg2 to data word of address : instruct : no
+-9494: instwrite1 [setinst]: write reg1 to instruction word of address : instruct : no
+-9493: instwrite2          : write reg2 to instruction word of address <data> : instruct : no
+
+-9492: iowrite1 [IOwrite1] : write reg1 to IO address <data> : instruct : no
+-9491: iowrite2 [IOwrite2] : write reg2 to IO address <data> : instruct : no
+-9490: ioread1 [IOread1]   : read io address <data> into reg1 : instruct : no
+-9489: ioread2 [IOread2]   : read io address <data> into reg2 : instruct : no
+
 
 >>>interrupt system<<<
 >>>See 'interrupts_and_stack.txt' for stack integration details.<<<
--9500: intsel: set interrupt selection register : instruct : no
--9499: intreg: register selected interrupt with an address in data : instruct : no
--9498: clearint: clear selected interrupt if registered : instruct : no
--9497: clearallint: clear all registered interrupts. (also resets exception table) : instruct : no
+-9400: intsel: set interrupt selection register : instruct : no
+-9399: intreg: register selected interrupt with an address in data : instruct : no
+-9398: clearint: clear selected interrupt if registered : instruct : no
+-9397: clearallint: clear all registered interrupts. (also resets exception table) : instruct : no
 -9396: intcont: interrupt continue. see 'interrupts_and_stack.txt' : instruct : no
 
 -9000: stop: shutdown VM : instruct : yes

@@ -1,0 +1,39 @@
+
+
+functions:
+
+where * is pointer number. legacy mempoint operations should default to pointer 0.
+
+pt*set
+pt*setdata
+pt*get
+
+pt*inc: decrement
+pt*dec: increment
+
+pt*inc2: increment though data then instruction for each address. so that : data1>inst1>data2>inst2
+pt*dec2: decrement though instruction then data for each address. so that : inst2>data2>inst1>data1
+
+pt*add: add reg1 to pointer
+pt*sub: subtract reg1 from pointer
+
+pt*adddata add data to pointer
+pt*subdata subtract data from pointer
+
+
+pt*wri
+pt*wridata write data to pointer address
+
+
+>>>these are changed by pt*inc2 and pt*dec2 automatically, but can be chosen manually.<<<
+pt*inst: select instruction word bank (for pointer address)
+pt*data: select data word bank (for pointer address)
+
+
+pt*read: 
+
+
+pt*ioup: 'stream' pointer address data to io address specified as data.
+pt*iodown: 'stream' data from io address in data to pointer address
+
+

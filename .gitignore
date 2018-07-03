@@ -1,3 +1,7 @@
 *.pyc
 *.pyo
 .~lock*
+VMUSER/*
+!VMUSER/info.txt
+CAP/*
+!CAP/dummy.txt
