@@ -16,26 +16,26 @@
 -9835: invert2 : instruct : yes
 
 >>>ALU: note the 3 extra instructions per basic 2-operator math function to speed up common basic maths.<<<
--9800: add: add, put result to 1 : instruct : no
--9799: add2: add, but put result to 2. : instruct : no
--9798: adddata1: add data to register 1 : instruct : no
--9797: adddata2: add data to register 2 : instruct : no
+-9800: add: add, put result to 1 : instruct : yes
+-9799: add2: add, but put result to 2. : instruct : yes
+-9798: adddata1: add data to register 1 : instruct : yes
+-9797: adddata2: add data to register 2 : instruct : yes
 
--9786: sub: subtract, put result to 1 : instruct : no
--9795: sub2: subtract, but put result to 2. : instruct : no
--9794: subdata1: subtract data from register 1 : instruct : no
--9793: subdata2: subtract data from register 2 : instruct : no
+-9796: sub: subtract, put result to 1 : instruct : yes
+-9795: sub2: subtract, but put result to 2. : instruct : yes
+-9794: subdata1: subtract data from register 1 : instruct : yes
+-9793: subdata2: subtract data from register 2 : instruct : yes
 
--9792: mul: multiply, put result to 1 : instruct : no
--9791: mul2: multiply, but put result to 2. : instruct : no
--9790: muldata1: multiply data with register 1 : instruct : no
--9789: muldata2: multiply data with register 2 : instruct : no
+-9792: mul: multiply, put result to 1 : instruct : yes
+-9791: mul2: multiply, but put result to 2. : instruct : yes
+-9790: muldata1: multiply data with register 1 : instruct : yes
+-9789: muldata2: multiply data with register 2 : instruct : yes
 
 
--9788: div: divide, put result to 1 : instruct : no
--9787: div2: divide, but put result to 2. : instruct : no
--9786: divdata1: divide register 1 by data : instruct : no
--9785: divdata2: divide register 2 by data : instruct : no
+-9788: div: divide, put result to 1 : instruct : yes
+-9787: div2: divide, but put result to 2. : instruct : yes
+-9786: divdata1: divide register 1 by data : instruct : yes
+-9785: divdata2: divide register 2 by data : instruct : yes
 
 
 >>>GOTOs<<<

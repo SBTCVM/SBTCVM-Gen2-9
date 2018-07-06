@@ -3,7 +3,7 @@
 #custom namespace variable syntax
 #this is part of g2-asm.py's new unified namespace.
 #syntax is as follows v>[varname];varvalue
-v>bob2;10x1
+v>bob2;10x1#new variable syntax.
 setreg1;>bob2;start
 
 #new int syntaxes:
@@ -40,4 +40,65 @@ null;10x10
 null
 null
 null
+
+#PRELIMINARY ALU TESTS. ensure these are working correctly once suitable debug interfaces are available!
+
+#add
+setreg1;10x1
+setreg2;10x1
+add
+
+setreg1;10x1
+setreg2;10x1
+add2
+
+setreg1;10x1
+adddata1;10x2
+
+setreg2;10x1
+adddata2;10x2
+#sub
+setreg1;10x1
+setreg2;10x1
+sub
+
+setreg1;10x1
+setreg2;10x1
+sub2
+
+setreg1;10x1
+subdata1;10x2
+
+setreg2;10x1
+subdata2;10x2
+#multiplication
+setreg1;10x1
+setreg2;10x1
+mul
+
+setreg1;10x1
+setreg2;10x1
+mul2
+
+setreg1;10x1
+muldata1;10x2
+
+setreg2;10x1
+muldata2;10x2
+#floor division (note: divide by zero will trigger exception -2)
+setreg1;10x1
+setreg2;10x1
+div
+
+setreg1;10x1
+setreg2;10x1
+div2
+
+setreg1;10x1
+divdata1;10x2
+
+setreg2;10x1
+divdata2;10x2
+
+#Stop VM
 stop

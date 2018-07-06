@@ -184,6 +184,23 @@ instruct(["regswap"], -9837),
 instruct(["invert1"], -9836),
 instruct(["invert2"], -9835),
 instruct(["stop"], -9000),
+instruct(["add"], -9800),#add instructions
+instruct(["add2"], -9799),
+instruct(["adddata1"], -9798),
+instruct(["adddata2"], -9797),
+instruct(["sub"], -9796),#sub instructions
+instruct(["sub2"], -9795),
+instruct(["subdata1"], -9794),
+instruct(["subdata2"], -9793),
+instruct(["mul"], -9792),#mul instructions
+instruct(["mul2"], -9791),
+instruct(["muldata1"], -9790),
+instruct(["muldata2"], -9789),
+instruct(["div"], -9788),#div instructions
+instruct(["div2"], -9787),
+instruct(["divdata1"], -9786),
+instruct(["divdata2"], -9785),
+
 nspacevar()]
 
 
@@ -201,6 +218,8 @@ class mainloop:
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
+				if '#' in line:
+					line=line.rsplit("#", 1)
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
@@ -240,6 +259,8 @@ class mainloop:
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
+				if '#' in line:
+					line=line.rsplit("#", 1)
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
@@ -280,6 +301,8 @@ class mainloop:
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
+				if '#' in line:
+					line=line.rsplit("#", 1)
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
@@ -319,6 +342,8 @@ class mainloop:
 			if not line.startswith("#"):
 				if line.endswith("\n"):
 					line=line[:-1]
+				if '#' in line:
+					line=line.rsplit("#", 1)
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
