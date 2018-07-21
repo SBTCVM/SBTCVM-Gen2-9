@@ -23,6 +23,7 @@ class uio:
 		self.ttywin=ttywin
 		self.run=1
 		
+	#status field update loop.
 	def statup(self):
 		while self.run:
 			self.statwin.erase()
@@ -30,6 +31,7 @@ class uio:
 			self.statwin.refresh()
 			time.sleep(0.1)
 		return
+	#TTY raw line input wrapper.
 	def ttyraw(self, string):
 		maxy=self.ttywin.getmaxyx()[0]
 		self.ttywin.addstr(maxy-1, 0, "ready")

@@ -23,7 +23,13 @@ except:
 if cmd in ['help', '-h', '--help']:
 	print('''SBTCVM Gen2-9 virtual machine. curses frontend.
 help, -h, --help: this help.
--v, --version: VM version''')
+-v, --version: VM version
+[trom], -r [trom], --run [trom]: launch SBTCVM with the selected TROM image 
+    loaded into memory.
+-s [trom] {slow delay in seconds}, --slow [trom] {slow delay in seconds}:
+   -s overrides the default CPU clock delay. You may specify a float/int number
+    of seconds to use (after the trom filename). defaults to 0.5 second delay
+    per clock tick''')
 elif cmd in ['-v', '--version']:
 	print('v2.1.0.PRE-ALPHA')
 else:
@@ -39,9 +45,19 @@ else:
 			sys.exit("Error! Must specify trom to run!")
 		romfile=arg
 		slow=1
+		try: 
+			slowspeed=float(sys.argv[3])
+		except IndexError:
+			print("Using default slow delay. (0.5 seconds)")
+			slowspeed=0.5
+		except ValueError:
+			sys.exit("Error. please specify slow delay as float or int.")
 	else:
 		romfile=cmd
-	
+	if slow==1:
+		clspeed=slowspeed
+	else:
+		clspeed=0.0001
 	try:
 		
 		print("SBTCVM Generation 2 9-trit VM, v2.1.0.PRE-ALPHA\n")
@@ -77,9 +93,7 @@ else:
 		dispthr.start()
 		uiosys.ttyraw("ready.")
 		while progrun:
-			time.sleep(0.0001)
-			if slow:
-				time.sleep(0.5)
+			time.sleep(clspeed)
 			retval=cpusys.cycle()
 			if retval!=None:
 				progrun=0

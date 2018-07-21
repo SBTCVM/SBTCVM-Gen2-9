@@ -219,7 +219,7 @@ class mainloop:
 				if line.endswith("\n"):
 					line=line[:-1]
 				if '#' in line:
-					line=line.rsplit("#", 1)
+					line=line.rsplit("#", 1)[0]
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
@@ -260,7 +260,7 @@ class mainloop:
 				if line.endswith("\n"):
 					line=line[:-1]
 				if '#' in line:
-					line=line.rsplit("#", 1)
+					line=line.rsplit("#", 1)[0]
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
@@ -302,7 +302,7 @@ class mainloop:
 				if line.endswith("\n"):
 					line=line[:-1]
 				if '#' in line:
-					line=line.rsplit("#", 1)
+					line=line.rsplit("#", 1)[0]
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
@@ -343,7 +343,7 @@ class mainloop:
 				if line.endswith("\n"):
 					line=line[:-1]
 				if '#' in line:
-					line=line.rsplit("#", 1)
+					line=line.rsplit("#", 1)[0]
 				line.replace("|", ";")
 				linelist=line.split(";")
 				keyword=linelist[0]
