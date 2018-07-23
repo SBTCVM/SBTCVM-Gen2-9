@@ -10,8 +10,8 @@ import sys
 import os
 import curses
 from threading import Thread
-progrun=1
-
+progrun=0
+uiosys=None
 try:
 	cmd=sys.argv[1]
 except:
@@ -67,6 +67,7 @@ else:
 		iosys=VMSYSTEM.IO_G2x_9.io()
 		
 		cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
+		progrun=1
 		curses.initscr()
 		curses.noecho()
 		curses.cbreak()
@@ -100,12 +101,12 @@ else:
 				uiosys.run=0
 				curses.echo()
 				curses.endwin()
-				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
-				
+				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])	
 	#in case of drastic failure, shutdown curses!
 	finally:
 		if progrun:
-			uiosys.run=0
+			if uiosys!=None:
+				uiosys.run=0
 			curses.endwin()
 		
 			
