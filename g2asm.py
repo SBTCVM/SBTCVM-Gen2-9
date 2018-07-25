@@ -2,6 +2,7 @@
 import VMSYSTEM.libbaltcalc as libbaltcalc
 import sys
 import os
+import VMSYSTEM.iofuncts as iofuncts
 #common vars:
 tritvalid="+0-pn"
 asmvers='v3.0.0'
@@ -425,24 +426,7 @@ help, -h, --help: this help
 			syntaxonly=1
 		else:
 			syntaxonly=0
-		for filenameg in [argx, argx+".tasm", argx+".TASM"]:
-			filefound=1
-			if os.path.isfile(filenameg):
-				pathx=filenameg
-			elif os.path.isfile(os.path.join("ROMS", filenameg)):
-				pathx=os.path.join("ROMS", filenameg)
-			elif os.path.isfile(os.path.join("VMUSER", filenameg)):
-				pathx=os.path.join("VMUSER", filenameg)
-			elif os.path.isfile(os.path.join("VMSYSTEM", filenameg)):
-				pathx=os.path.join("VMSYSTEM", filenameg)
-			elif os.path.isfile(os.path.join(VMSYSROMS, filenameg)):
-				pathx=os.path.join(VMSYSROMS, filenameg)
-			else:
-				filefound=0
-			if filefound==1:
-				break
-		if filefound==0:
-			sys.exit("source file was not found. STOP")
+		pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP")
 		basepath=pathx.split(".")[0]
 		destpath=basepath+".trom"
 		sourcefile=open(pathx, 'r')
