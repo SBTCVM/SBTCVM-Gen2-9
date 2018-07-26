@@ -12,7 +12,7 @@ asm;nsptest1A
 print;assemble trom part of example:
 asm;nsptest1B
 
-#test of extrnal command plugin.
+#test of external command plugin.
 print;testing romdump.py .xascmd plugin.
 dump;nsptest1
 dumpnp;nsptest1

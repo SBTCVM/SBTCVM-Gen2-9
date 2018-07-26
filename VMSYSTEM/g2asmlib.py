@@ -81,11 +81,15 @@ def xasparse(scrpath, syntaxonly=0):
 			if cmd==cmdobj.xcmd:
 				if cmdobj.ispython:
 					if cmdobj.takesfile and arg!=None:
+						print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
 						if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
 							sys.exit("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+						print("Done.\n")
 					else:
+						print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'")
 						if call(['python']+cmdobj.execstr.split(" "))!=0:
 							sys.exit("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+						print("Done.\n")
 	print("xas finished. exiting...")
 	xasfile.close()
 
