@@ -11,7 +11,7 @@ import sys
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
 def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!"):
 	for filenameg in [fname, fname+ext.lower(), fname+ext.upper()]:
-		if os.path.isfile(filenameg):
+		if os.path.isfile(filenameg) and filenameg.lower().endswith(ext):
 			return(open(filenameg, "r"))
 		elif os.path.isfile(os.path.join("ROMS", filenameg)):
 			return(open(os.path.join("ROMS", filenameg), "r"))
@@ -28,7 +28,7 @@ def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 #same as loadtrom, but returns path.
 def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!"):
 	for filenameg in [fname, fname+ext.lower(), fname+ext.upper()]:
-		if os.path.isfile(filenameg):
+		if os.path.isfile(filenameg) and filenameg.lower().endswith(ext):
 			return(filenameg)
 		elif os.path.isfile(os.path.join("ROMS", filenameg)):
 			return(os.path.join("ROMS", filenameg))

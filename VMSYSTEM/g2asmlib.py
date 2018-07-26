@@ -7,10 +7,11 @@ import sys
 tritvalid="+0-pn"
 #assembler library
 
-def sasparse(pathx, syntaxonly=0):
-	sasfile=open(pathx, 'r')
+
+def sasparse(scrpath, syntaxonly=0):
+	sasfile=open(scrpath, 'r')
 	print("SBTCVM Assembly Script (SAS) v1")
-	print("running: '" + pathx + "'")
+	print("running: '" + scrpath + "'\n")
 	lineno=1
 	for line in sasfile:
 		lineno+=1
@@ -23,14 +24,25 @@ def sasparse(pathx, syntaxonly=0):
 		else:
 			cmd=line
 			arg=None
+		if cmd=="sas":
+			if arg!=None:
+				pathx=iofuncts.findtrom(arg, ext=".sas", exitonfail=1, exitmsg="SAS ERROR: sas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				if pathx!=scrpath:
+					print("----SAS subscript: '" + arg + "'")
+					sasparse(pathx, syntaxonly)
+					print("-Subscript Done.\n")
+				else:
+					sys.exit("SAS ERROR: Subscript loop error. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
+			else:
+				sys.exit("SAS ERROR: no argument after command: sas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
 		if cmd=="asm":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'")
+				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="SAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 				print("assemble: '" + arg + "'")
 				assemble(pathx, syntaxonly)
-				print("Done.")
+				print("Done.\n")
 			else:
-				sys.exit("SAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
+				sys.exit("SAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 		if cmd=="print":
 			if arg!=None:
 				print("--SCRIPT: " + arg)
