@@ -1,0 +1,9 @@
+Help on SBTCVM-specific filetypes:
+
+ >>> source code & related: <<<
+*.tasm: normal SBTCVM assembly source code file.
+*.trom: SBTCVM VM memory image. (a common way of loading programs into the VM)
+*.tas0: SBTCVM assembly library file. assembled automatically when imported.
+*.nsp : SBTCVM assembly namespace file. Used for sharing tasm-sourcefile-specific
+*.xas : SBTCVM assembly script. Used for automating multi-file assembly program builds.
+     namespaces with other tasm soruce files.
