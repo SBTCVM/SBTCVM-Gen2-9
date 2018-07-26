@@ -1,4 +1,4 @@
 #tas0 files are special-case tasm source files that act as loadable 'modules'.
 #tas0 source is assembled on-the-fly via the mainloop class of the assembler, via a special assembler library mode.
 v>bob;10x1
-
+setreg1;>test;test

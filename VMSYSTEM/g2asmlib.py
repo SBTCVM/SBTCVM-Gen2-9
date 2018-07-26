@@ -270,8 +270,9 @@ class includetas0:
 		tas0main=self.tas0list[data]
 		#set address start to current main addr for proper handling of tas0 adresses.
 		tas0main.addrstart=addr
-		tas0main.p1()
-		return 1, tas0main.nspdict
+		retval=tas0main.p1()
+		print(retval-addr)
+		return retval-addr, tas0main.nspdict
 	#second syntax check pass:
 	def p2(self, datafull, keyword, gotos, lineno):
 		tas0main=self.tas0list[datafull]
@@ -509,6 +510,7 @@ class mainloop:
 		
 		print(self.pfx + "pass 1: goto reference label prescan")
 		lineno=0
+		addr=self.addrstart
 		for line in self.fileobj:
 			lineno+=1
 			if not line.startswith("#") and not line.startswith("head-"):
@@ -531,7 +533,7 @@ class mainloop:
 					glabel=None
 				if data=="":
 					data=None
-				addr=self.addrstart
+				
 				for inst in self.instlist:
 					#normal keywords
 					if keyword in inst.keywords:
@@ -559,6 +561,7 @@ class mainloop:
 										for f in nspaceadd:
 											self.nspdict.update(nspaceadd)
 								addr+=length
+		return addr
 	def p2(self):
 		self.fileobj.seek(0)
 		print(self.pfx + "pass 2: post-prescan syntax check")

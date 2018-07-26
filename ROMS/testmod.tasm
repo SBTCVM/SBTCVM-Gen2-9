@@ -8,3 +8,4 @@ include;testmod.tas0
 #copy 'bob' as self. this will cause it to become a 'local' variable.
 #if this is not done, bob would NOT be placed in testmod.nsp.
 v>bob;>bob
+setreg2;>test2;test2
