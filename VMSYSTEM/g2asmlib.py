@@ -7,6 +7,67 @@ import sys
 tritvalid="+0-pn"
 #assembler library
 
+def sasparse(pathx, syntaxonly=0):
+	sasfile=open(pathx, 'r')
+	print("SBTCVM Assembly Script (SAS) v1")
+	print("running: '" + pathx + "'")
+	lineno=1
+	for line in sasfile:
+		lineno+=1
+		if line.endswith("\n"):
+			line=line[:-1]
+		if '#' in line:
+			line=line.rsplit("#", 1)[0]
+		if ';' in line:
+			cmd, arg = line.split(';', 1)
+		else:
+			cmd=line
+			arg=None
+		if cmd=="asm":
+			if arg!=None:
+				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'")
+				print("assemble: '" + arg + "'")
+				assemble(pathx, syntaxonly)
+				print("Done.")
+			else:
+				sys.exit("SAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
+		if cmd=="print":
+			if arg!=None:
+				print("--SCRIPT: " + arg)
+		if cmd=="exit":
+			break
+	print("sas finished. exiting...")
+	sasfile.close()
+
+
+
+def assemble(pathx, syntaxonly=0):
+	#locate source file and extract destination basename and directory for mainloop class.
+	
+	basepath=pathx.rsplit(".", 1)[0]
+	bpdir=os.path.dirname(basepath)
+	bpname=os.path.basename(basepath)
+	
+	#open source file and init mainloop class
+	sourcefile=open(pathx, 'r')
+	mainl=mainloop(sourcefile, bpdir, bpname)
+	
+	#parse header
+	mainl.headload()
+	
+	#parse each pass in order.
+	if mainl.p0():
+		sys.exit("Syntax Error (pass 0)")
+	mainl.p1()
+	if mainl.p2():
+		sys.exit("Syntax Error (pass 2)")
+	mainl.p3()
+	if mainl.p4():
+		sys.exit("Error: Invalid romdata! (pass 4)")
+	if not syntaxonly:
+		mainl.p5()
+	sourcefile.close()
+
 
 #classes and instances for instructions
 

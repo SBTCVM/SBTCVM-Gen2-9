@@ -1,7 +1,9 @@
-head-name=trom
+head-mode=trom
 #include nsptest1 into namespace. (looks for nsptest1.nsp)
 head-nspin=nsptest1
 
+#override trom name
+head-rname=nsptest1
 
 #use namespace vars from nsptest1A.tasm here. (via the nsptest1.nsp file it
 #generates when assembled.

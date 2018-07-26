@@ -25,9 +25,9 @@ if __name__=="__main__":
 For SBTCVM Gen2-9.
 help, -h, --help: this help
 -v, --version: assembler version
--b, (tasmname): build SBTCVM tasm source file into rom at same location.
+-b, (tasmname/sasname): build SBTCVM tasm source file into rom at same location or run sas script.
 -s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
-(tasmname): same as -b/--build''')
+(tasmname/sasname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
 		print(asmvers)
 	else:
@@ -38,34 +38,19 @@ help, -h, --help: this help
 			argx=arg
 		else:
 			argx=cmd
-		if cmd in ['-s', '--syntax']:
+		if cmd in ['-y', '--syntax']:
 			syntaxonly=1
 		else:
 			syntaxonly=0
+		pathx=iofuncts.findtrom(argx, ext=".sas", exitonfail=0, exitmsg="source file was not found. STOP")
+		if pathx==None:
+			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP")
+			g2asmlib.assemble(pathx, syntaxonly)
+		elif pathx.lower().endswith(".tasm"):
+			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP")
+			g2asmlib.assemble(pathx, syntaxonly)
+		elif pathx.lower().endswith(".sas"):
+			g2asmlib.sasparse(pathx, syntaxonly)
+			
 		
-		#locate source file and extract destination basename and directory for mainloop class.
-		pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP")
-		basepath=pathx.rsplit(".", 1)[0]
-		bpdir=os.path.dirname(basepath)
-		bpname=os.path.basename(basepath)
-		
-		#open source file and init mainloop class
-		sourcefile=open(pathx, 'r')
-		mainl=mainloop(sourcefile, bpdir, bpname)
-		
-		#parse header
-		mainl.headload()
-		
-		#parse each pass in order.
-		if mainl.p0():
-			sys.exit("Syntax Error (pass 0)")
-		mainl.p1()
-		if mainl.p2():
-			sys.exit("Syntax Error (pass 2)")
-		mainl.p3()
-		if mainl.p4():
-			sys.exit("Error: Invalid romdata! (pass 4)")
-		if not syntaxonly:
-			mainl.p5()
-		sourcefile.close()
 	
