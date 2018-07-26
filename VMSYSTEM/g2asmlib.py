@@ -153,7 +153,7 @@ class instruct:
 					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
 		return 0, None
 	#return length in words of memory. needed here for goto refrence label parsing!
-	def p1(self, data, keyword, lineno, addr):
+	def p1(self, data, keyword, lineno, addr, gotos):
 		return 1, {}
 	#second syntax check pass:
 	def p2(self, data, keyword, gotos, lineno):
@@ -206,7 +206,7 @@ class rawinst:
 						return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string! (" + data + ")"
 		return 0, None
 	#return length in words of memory. needed here for goto refrence label parsing!
-	def p1(self, data, keyword, lineno, addr):
+	def p1(self, data, keyword, lineno, addr, gotos):
 		return 1, {}
 	#second syntax check pass:
 	def p2(self, datafull, keyword, gotos, lineno):
@@ -266,7 +266,7 @@ class includetas0:
 		self.tas0list[datafull]=tas0main
 		return 0, None
 	#return length in words of memory. needed here for goto refrence label parsing!
-	def p1(self, data, keyword, lineno, addr):
+	def p1(self, data, keyword, lineno, addr, gotos):
 		tas0main=self.tas0list[data]
 		#set address start to current main addr for proper handling of tas0 adresses.
 		tas0main.addrstart=addr
@@ -311,13 +311,16 @@ class nspacevar:
 					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
 		return 0, None
 	#return length in words of memory, and if any, custom namespace entries. needed here for goto refrence label parsing!
-	def p1(self, data, keyword, lineno, addr):
+	def p1(self, data, keyword, lineno, addr, gotos):
 		if data==None:
 			return 0, {keyword[2:]: 0}
 		elif data.startswith("10x"):
 			return 0, {keyword[2:]: int(data[3:])}
 		elif data.startswith(">"):
-			return 0, {keyword[2:]: gotos[data[1:]]}
+			try:
+				return 0, {keyword[2:]: gotos[data[1:]]}
+			except KeyError:
+				sys.exit("ERROR: v>: namespace variable: '" + data[1:] + "does not exist. line: '" + lineno + "'")
 		else:
 			return 0, {keyword[2:]: libbaltcalc.btint(data)}
 	#second syntax check pass:
@@ -532,7 +535,7 @@ class mainloop:
 				for inst in self.instlist:
 					#normal keywords
 					if keyword in inst.keywords:
-						length, nspaceadd=inst.p1(data, keyword, lineno, addr)
+						length, nspaceadd=inst.p1(data, keyword, lineno, addr, self.gotos)
 						if glabel!="":
 							self.gotos[glabel]=addr
 							if self.nspfile!=None:
@@ -547,7 +550,7 @@ class mainloop:
 						#prefix keywords
 						for pattern in inst.prefixes:
 							if keyword.startswith(pattern):
-								length, nspaceadd=inst.p1(data, keyword, lineno, addr)
+								length, nspaceadd=inst.p1(data, keyword, lineno, addr, self.gotos)
 								if glabel!="":
 									self.gotos[glabel]=addr
 								if nspaceadd!={}:

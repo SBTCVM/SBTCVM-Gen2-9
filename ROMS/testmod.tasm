@@ -1,6 +1,10 @@
 head-mode=trom
 head-nspout=1
 setreg2;>bob;sam
+
 #include testmod.tas0 tasm library file
 include;testmod.tas0
 
+#copy 'bob' as self. this will cause it to become a 'local' variable.
+#if this is not done, bob would NOT be placed in testmod.nsp.
+v>bob;>bob
