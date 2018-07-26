@@ -1,0 +1,16 @@
+#set assembler mode (defaults to 'trom' if not specified)
+head-mode=trom
+
+#override trom name (will still have extension determined by head-mode rules.)
+head-rname=headtest_rom
+
+
+#info on header vars:
+
+#the assembler parser will ignore any lines of source that begin with. 'head-'.
+Header variables are only parsed by a special header parser run before pass 0.
+
+
+#somthing to actually assemble
+setreg2;10x11
+setreg1;10x12

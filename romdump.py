@@ -30,12 +30,14 @@ if __name__=="__main__":
 	except:
 		arg=None
 	if cmd in ["-h", "--help"]:
-		print('''SBTCVM romdump utility.
+		print('''SBTCVM Gen2 romdump utility. v1.0.0
 -h --help: this help
 -v --version: version
 -d [trom] dump contents of trom to standard output in +0- form. instructions and data colums separated by two spaces. "  "
 -dnp [trom] same as -d, but using n0p representation.
 [trom] (with no options) same as -d''')
+	elif cmd in ["-v", "--version"]:
+		print("SBTCVM Gen2 romdump utility. v1.0.0")
 	elif cmd in ["-d"]:
 		romdump(iofuncts.loadtrom(arg))
 	elif cmd in ["-dnp"]:
