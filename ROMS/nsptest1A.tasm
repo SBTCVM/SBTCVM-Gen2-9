@@ -1,0 +1,13 @@
+#generate no output. (intended for .nsp tables, etc.)
+head-mode=vars
+
+#override nsp filename (extension is always '.nsp')
+head-nspname=nsptest1
+
+#generate SBTCVM assembly namespace file (.nsp file)
+#this DOES NOT include entries from other nsp files, or any builtins. 
+head-nspout=1
+
+#see nsptest1B.tasm for second part of this test.
+v>bob;10x1
+v>sam;---------

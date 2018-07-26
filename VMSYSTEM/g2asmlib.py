@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from . import libbaltcalc
+from . import iofuncts
 btint=libbaltcalc.btint
 import os
 import sys
@@ -221,6 +222,11 @@ class mainloop:
 		#header load.
 		self.fileobj.seek(0)
 		mode="trom"
+		self.nsp=0
+		self.gotos=dict(defaultnspace)
+		self.doout=1
+		self.romdestname=self.destname
+		self.nspdestname=self.destname
 		for line in self.fileobj:
 			if line.endswith("\n"):
 				line=line[:-1]
@@ -230,26 +236,56 @@ class mainloop:
 			if line.startswith("head-mode="):
 				mode=line.split("=")[1]
 			
+			if line.startswith("head-nspout="):
+				if '1' in line.split("=")[1]:
+					self.nsp=1
+			
+			if line.startswith("head-nspin="):
+				nspname=line.split("=")[1]
+				nspobj=iofuncts.loadtrom(nspname, ext=".nsp", exitonfail=1, exitmsg="ERROR: header: head-nspin: nonexistant nsp file! '" + nspname + "'")
+				for linex in nspobj:
+					linex=linex.replace("\n", "")
+					name, value = linex.split(";")
+					self.gotos[name]=int(value)
+				print("-Include namespace file: '" + nspname + "'")
+				
 			if line.startswith("head-rname="):
-				self.destname=line.split("=")[1]
-				if len(self.destname)==0:
+				self.romdestname=line.split("=")[1]
+				if len(self.romdestname)==0:
 					sys.exit("ERROR: header: head-rname: name must be at least 1 character long.")
-				for char in self.destname:
+				for char in self.romdestname:
 					if char not in nameallowed:
-						sys.exit("ERROR: header: head-rname: invalid char '" + char + "' in name: '" + self.destname + "'")
-				print("Header: rname override: '" + self.destname + "'")
+						sys.exit("ERROR: header: head-rname: invalid char '" + char + "' in name: '" + self.romdestname + "'")
+				print("Header: rom name override: '" + self.romdestname + "'")
+			if line.startswith("head-nspname="):
+				self.nspdestname=line.split("=")[1]
+				if len(self.nspdestname)==0:
+					sys.exit("ERROR: header: head-nspname: name must be at least 1 character long.")
+				for char in self.nspdestname:
+					if char not in nameallowed:
+						sys.exit("ERROR: header: head-nspname: invalid char '" + char + "' in name: '" + self.nspdestname + "'")
+				print("Header: nsp name override: '" + self.nspdestname + "'")
 		
 		#header framework for future alternate assemble modes. i.e. different starting offsets, etc.
 		if mode=="trom":
 			self.addrstart=libbaltcalc.mni(9)
 			self.destext=".trom"
 			print("Header: head-mode: trom (default)")
-			self.gotos=dict(defaultnspace)
+		elif mode=="vars":
+			self.addrstart=libbaltcalc.mni(9)
+			self.destext=".trom"
+			self.doout=0
+			print("Header: head-mode: vars (nspace vars only)")
 		else:
 			sys.exit("ERROR: header: head-mode: Invalid mode: '" + mode + "'")
 		#set assembler rom output filename.
-		self.romoutput=os.path.join(self.basepath, self.destname+self.destext)
-	
+		self.romoutput=os.path.join(self.basepath, self.romdestname+self.destext)
+		if self.nsp==1:
+			self.nspfile=os.path.join(self.basepath, self.nspdestname+'.nsp')
+			self.nspdict={}
+		else:
+			self.nspfile=None
+			self.nspdict=None
 	def p0(self):
 		self.fileobj.seek(0)
 		print("pass 0: syntax check")
@@ -329,8 +365,13 @@ class mainloop:
 						length, nspaceadd=inst.p1(data, keyword, lineno)
 						if glabel!="":
 							self.gotos[glabel]=addr
+							if self.nspfile!=None:
+								self.nspdict[glabel]=addr
 						if nspaceadd!={}:
 							self.gotos.update(nspaceadd)
+							if self.nspfile!=None:
+								for f in nspaceadd:
+									self.nspdict.update(nspaceadd)
 						addr+=length
 					else:
 						#prefix keywords
@@ -341,6 +382,9 @@ class mainloop:
 									self.gotos[glabel]=addr
 								if nspaceadd!={}:
 									self.gotos.update(nspaceadd)
+									if self.nspfile!=None:
+										for f in nspaceadd:
+											self.nspdict.update(nspaceadd)
 								addr+=length
 	def p2(self):
 		self.fileobj.seek(0)
@@ -441,10 +485,18 @@ class mainloop:
 			return 1
 		return 0
 	def p5(self):
-		print("pass 5: build rom.")
-		outfile=open(self.romoutput, "w")
-		for item in self.datainstlist:
-			inst=item[0]
-			data=item[1]
-			outfile.write(str(int(inst)) + "," + str(int(data)) + "\n")
-		outfile.close()
+		if self.nspfile!=None:
+			print("pass 5: generate nsp file.")
+			nspout=open(self.nspfile, 'w')
+			for f in self.nspdict:
+				if f != None:
+					nspout.write(str(f) + ";" + str(int(self.nspdict[f])) + "\n")
+			nspout.close()
+		if self.doout==1:
+			print("pass 5: build rom.")
+			outfile=open(self.romoutput, 'w')
+			for item in self.datainstlist:
+				inst=item[0]
+				data=item[1]
+				outfile.write(str(int(inst)) + "," + str(int(data)) + "\n")
+			outfile.close()

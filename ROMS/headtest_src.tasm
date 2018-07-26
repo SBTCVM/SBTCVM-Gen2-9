@@ -4,6 +4,11 @@ head-mode=trom
 #override trom name (will still have extension determined by head-mode rules.)
 head-rname=headtest_rom
 
+#override name of nsp file (will still have .nsp extension)
+head-nspname=headtest_nsp
+
+#generate nsp file
+head-nspout=1
 
 #info on header vars:
 
@@ -12,5 +17,5 @@ Header variables are only parsed by a special header parser run before pass 0.
 
 
 #somthing to actually assemble
-setreg2;10x11
+setreg2;10x11;bob
 setreg1;10x12
