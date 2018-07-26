@@ -25,9 +25,9 @@ if __name__=="__main__":
 For SBTCVM Gen2-9.
 help, -h, --help: this help
 -v, --version: assembler version
--b, (tasmname/sasname): build SBTCVM tasm source file into rom at same location or run sas script.
+-b, (tasmname/xasname): build SBTCVM tasm source file into rom at same location or run an xas script.
 -s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
-(tasmname/sasname): same as -b/--build''')
+(tasmname/xasname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
 		print(asmvers)
 	else:
@@ -42,15 +42,15 @@ help, -h, --help: this help
 			syntaxonly=1
 		else:
 			syntaxonly=0
-		pathx=iofuncts.findtrom(argx, ext=".sas", exitonfail=0, exitmsg="source file was not found. STOP")
+		pathx=iofuncts.findtrom(argx, ext=".xas", exitonfail=0, exitmsg="xas file was not found. STOP")
 		if pathx==None:
-			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP")
+			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source/xas file was not found. STOP")
 			g2asmlib.assemble(pathx, syntaxonly)
 		elif pathx.lower().endswith(".tasm"):
-			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP")
+			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source/xas file was not found. STOP")
 			g2asmlib.assemble(pathx, syntaxonly)
-		elif pathx.lower().endswith(".sas"):
-			g2asmlib.sasparse(pathx, syntaxonly)
+		elif pathx.lower().endswith(".xas"):
+			g2asmlib.xasparse(pathx, syntaxonly)
 			
 		
 	

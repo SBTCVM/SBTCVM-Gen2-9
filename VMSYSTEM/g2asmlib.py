@@ -8,12 +8,12 @@ tritvalid="+0-pn"
 #assembler library
 
 
-def sasparse(scrpath, syntaxonly=0):
-	sasfile=open(scrpath, 'r')
-	print("SBTCVM Assembly Script (SAS) v1")
+def xasparse(scrpath, syntaxonly=0):
+	xasfile=open(scrpath, 'r')
+	print("SBTCVM Assembly Script (XAS) v1")
 	print("running: '" + scrpath + "'\n")
 	lineno=1
-	for line in sasfile:
+	for line in xasfile:
 		lineno+=1
 		if line.endswith("\n"):
 			line=line[:-1]
@@ -24,32 +24,32 @@ def sasparse(scrpath, syntaxonly=0):
 		else:
 			cmd=line
 			arg=None
-		if cmd=="sas":
+		if cmd=="xas":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".sas", exitonfail=1, exitmsg="SAS ERROR: sas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=1, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 				if pathx!=scrpath:
-					print("----SAS subscript: '" + arg + "'")
-					sasparse(pathx, syntaxonly)
+					print("----XAS subscript: '" + arg + "'")
+					xasparse(pathx, syntaxonly)
 					print("-Subscript Done.\n")
 				else:
-					sys.exit("SAS ERROR: Subscript loop error. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
+					sys.exit("XAS ERROR: Subscript loop error. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
 			else:
-				sys.exit("SAS ERROR: no argument after command: sas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
+				sys.exit("XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
 		if cmd=="asm":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="SAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 				print("assemble: '" + arg + "'")
 				assemble(pathx, syntaxonly)
 				print("Done.\n")
 			else:
-				sys.exit("SAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				sys.exit("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 		if cmd=="print":
 			if arg!=None:
 				print("--SCRIPT: " + arg)
 		if cmd=="exit":
 			break
-	print("sas finished. exiting...")
-	sasfile.close()
+	print("xas finished. exiting...")
+	xasfile.close()
 
 
 
