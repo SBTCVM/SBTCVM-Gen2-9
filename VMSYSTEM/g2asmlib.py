@@ -4,8 +4,37 @@ from . import iofuncts
 btint=libbaltcalc.btint
 import os
 import sys
+from subprocess import call
 tritvalid="+0-pn"
 #assembler library
+
+xascmds=[]
+
+class xascmd:
+	def __init__(self, xcmd, execstr, ispython, takesfile):
+		self.takesfile=takesfile
+		self.xcmd=xcmd
+		self.execstr=execstr
+		self.ispython=ispython
+print("loading xas plugins...")
+
+plugpath=os.path.join(".", "plugins")
+for plugin in os.listdir(plugpath):
+	if plugin.lower().endswith(".xascmd"):
+		plugfile=open(os.path.join(plugpath, plugin), 'r')
+		for line in plugfile:
+			if line.endswith("\n"):
+				line=line[:-1]
+			if '#' in line:
+				line=line.rsplit("#", 1)[0]
+			if ';' in line:
+				try:
+					xcmd, execstr, ispython, takesfile = line.split(';')
+					xascmds.extend([xascmd(xcmd, execstr, ispython, takesfile)])
+				except IndexError:
+					continue
+print("plugins loaded.")
+
 
 
 def xasparse(scrpath, syntaxonly=0):
@@ -35,7 +64,7 @@ def xasparse(scrpath, syntaxonly=0):
 					sys.exit("XAS ERROR: Subscript loop error. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
 			else:
 				sys.exit("XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
-		if cmd=="asm":
+		elif cmd=="asm":
 			if arg!=None:
 				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 				print("assemble: '" + arg + "'")
@@ -43,11 +72,20 @@ def xasparse(scrpath, syntaxonly=0):
 				print("Done.\n")
 			else:
 				sys.exit("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
-		if cmd=="print":
+		elif cmd=="print":
 			if arg!=None:
 				print("--SCRIPT: " + arg)
-		if cmd=="exit":
+		elif cmd=="exit":
 			break
+		for cmdobj in xascmds:
+			if cmd==cmdobj.xcmd:
+				if cmdobj.ispython:
+					if cmdobj.takesfile and arg!=None:
+						if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
+							sys.exit("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+					else:
+						if call(['python']+cmdobj.execstr.split(" "))!=0:
+							sys.exit("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 	print("xas finished. exiting...")
 	xasfile.close()
 

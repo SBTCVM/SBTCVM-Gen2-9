@@ -6,7 +6,13 @@ print;nsp example test.
 #test xas subscript command:
 xas;nsptest1_sub
 
+
 print;assemble nsp file part of example:
 asm;nsptest1A
 print;assemble trom part of example:
 asm;nsptest1B
+
+#test of extrnal command plugin.
+print;testing romdump.py .xascmd plugin.
+dump;nsptest1
+dumpnp;nsptest1

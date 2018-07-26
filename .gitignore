@@ -5,3 +5,6 @@ VMUSER/*
 !VMUSER/info.txt
 CAP/*
 !CAP/dummy.txt
+
+plugins/*
+!plugins/romdump.xascmd
