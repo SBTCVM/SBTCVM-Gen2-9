@@ -1,6 +1,4 @@
 #tas0 files are special-case tasm source files that act as loadable 'modules'.
 #tas0 source is assembled on-the-fly via the mainloop class of the assembler, via a special assembler library mode.
-v>bob;10x1
-setreg1;>test;test
-#test of tas0 files including tas0 files.
-include;testmod_subtas.tas0
+#this tas0 is included by testmod.tas0 to test inclusion of tas0 files within other tas0 files.
+setreg2;>test3;test3

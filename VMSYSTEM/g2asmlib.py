@@ -254,7 +254,7 @@ class includetas0:
 		if tas0fobj==None:
 			return 1, keyword+": Line: " + str(lineno) + ": Unable to load tas0 file!"
 		#init mainloop
-		tas0main=mainloop(tas0fobj, ".", "foobar", pfx="--tas0 parse '" + datafull + "':")
+		tas0main=mainloop(tas0fobj, ".", "foobar", pfx="--t0: '" + datafull + "' line: '" + str(lineno) + "'\n    :")
 		#enable internal-only mode: tas0
 		tas0main.mode="tas0"
 		#run headloader
@@ -263,25 +263,25 @@ class includetas0:
 		if tas0main.p0():
 			return 1, keyword+": Line: " + str(lineno) + ": tas0 pass 0: Syntax Error!"
 		#store tas0 in dict by name.
-		self.tas0list[datafull]=tas0main
+		self.tas0list[datafull + str(lineno)]=tas0main
 		return 0, None
 	#return length in words of memory. needed here for goto refrence label parsing!
 	def p1(self, data, keyword, lineno, addr, gotos):
-		tas0main=self.tas0list[data]
+		tas0main=self.tas0list[data + str(lineno)]
 		#set address start to current main addr for proper handling of tas0 adresses.
 		tas0main.addrstart=addr
 		retval=tas0main.p1()
-		print(retval-addr)
+		#print(retval-addr)
 		return retval-addr, tas0main.nspdict
 	#second syntax check pass:
 	def p2(self, datafull, keyword, gotos, lineno):
-		tas0main=self.tas0list[datafull]
+		tas0main=self.tas0list[datafull + str(lineno)]
 		if tas0main.p2():
 			return 1, keyword+": Line: " + str(lineno) + ": tas0 pass 2: Syntax Error!"
 		return 0, None
 	#should return two signed ints or btint objects.
 	def p3(self, data, keyword, gotos, lineno):
-		tas0main=self.tas0list[data]
+		tas0main=self.tas0list[data + str(lineno)]
 		tas0main.p3()
 		return tas0main.datainstlist
 
