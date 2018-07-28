@@ -538,28 +538,32 @@ class mainloop:
 					#normal keywords
 					if keyword in inst.keywords:
 						length, nspaceadd=inst.p1(data, keyword, lineno, addr, self.gotos)
-						if glabel!="":
+						if glabel!="" and glabel!=None:
 							self.gotos[glabel]=addr
-							if self.nspfile!=None:
+							if self.nspfile!=None and not glabel.startswith("."):
 								self.nspdict[glabel]=addr
 						if nspaceadd!={}:
 							self.gotos.update(nspaceadd)
 							if self.nspfile!=None and inst.nsp:
-								for f in nspaceadd:
-									self.nspdict.update(nspaceadd)
+								for varx in nspaceadd:
+									if not varx.startswith("."):
+										self.nspdict[varx]=nspaceadd[varx]
 						addr+=length
 					else:
 						#prefix keywords
 						for pattern in inst.prefixes:
 							if keyword.startswith(pattern):
 								length, nspaceadd=inst.p1(data, keyword, lineno, addr, self.gotos)
-								if glabel!="":
+								if glabel!="" and glabel!=None:
 									self.gotos[glabel]=addr
+									if self.nspfile!=None and not glabel.startswith("."):
+										self.nspdict[glabel]=addr
 								if nspaceadd!={}:
 									self.gotos.update(nspaceadd)
 									if self.nspfile!=None and inst.nsp:
-										for f in nspaceadd:
-											self.nspdict.update(nspaceadd)
+										for varx in nspaceadd:
+											if not varx.startswith("."):
+												self.nspdict[varx]=nspaceadd[varx]
 								addr+=length
 		return addr
 	def p2(self):

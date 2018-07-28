@@ -11,3 +11,6 @@ head-nspout=1
 #see nsptest1B.tasm for second part of this test.
 v>bob;10x1
 v>sam;---------
+#variables prefixed with a pereod are NOT included in nsp files, 
+#and NOT passed to including source files when used in tas0 files.
+v>.hidden_var;10x56

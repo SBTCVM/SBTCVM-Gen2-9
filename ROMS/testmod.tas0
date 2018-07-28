@@ -2,5 +2,6 @@
 #tas0 source is assembled on-the-fly via the mainloop class of the assembler, via a special assembler library mode.
 v>bob;10x1
 setreg1;>test;test
+setreg1;>.test2;.test2
 #test of tas0 files including tas0 files.
 include;testmod_subtas.tas0
