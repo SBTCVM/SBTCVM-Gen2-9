@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 from . import libbaltcalc
+from . import iofuncts
 btint=libbaltcalc.btint
 import os
 import sys
-import iofuncts
-from iofuncts import loadtrom
 
 
 class memory:
@@ -14,7 +13,7 @@ class memory:
 		self.DATDICT={}
 		linecnt=libbaltcalc.mni(9)
 		print("Setting up Virtual RAM subsystem")
-		TROMFILE=loadtrom(trom)
+		TROMFILE=iofuncts.loadtrom(trom)
 		for rmline in TROMFILE:
 			rmline=rmline.replace("\n", "").split(",")
 			self.INSTDICT[linecnt]=btint(int(rmline[0]))

@@ -29,7 +29,7 @@ class uio:
 			self.statwin.erase()
 			self.statwin.addstr("r1:" + str(self.cpu.reg1.intval) + ", r2:" + str(self.cpu.reg2.intval) + ", in:" + str(self.cpu.instval.intval) + ", da:" + str(self.cpu.dataval.intval) + ", ex:" + str(self.cpu.execpoint.intval))
 			self.statwin.refresh()
-			time.sleep(0.1)
+			time.sleep(0.15)
 		return
 	#TTY raw line input wrapper.
 	def ttyraw(self, string):

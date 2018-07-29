@@ -57,7 +57,10 @@ else:
 	if slow==1:
 		clspeed=slowspeed
 	else:
-		clspeed=0.0001
+		#targspeed is in khz. acuracy may vary.
+		targspeed=6.5#approx. speed should be close.
+		clspeed=1/(targspeed*1000.0)
+		print(clspeed)
 	try:
 		
 		print("SBTCVM Generation 2 9-trit VM, v2.1.0.PRE-ALPHA\n")
@@ -93,15 +96,25 @@ else:
 		dispthr.daemon=True
 		dispthr.start()
 		uiosys.ttyraw("ready.")
+		stime=time.time()
+		clcnt=0.0
+		targtime=clspeed
+		sleeptarg=targtime/10.0
+		tbeg=time.time()
 		while progrun:
-			time.sleep(clspeed)
 			retval=cpusys.cycle()
+			clcnt+=1
+			xtime=(tbeg + (clcnt - 1.0) * targtime) - time.time()
+			if xtime>0.0:
+				time.sleep(xtime)
 			if retval!=None:
 				progrun=0
 				uiosys.run=0
 				curses.echo()
 				curses.endwin()
-				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])	
+				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
+				print("Approx. Speed: '" + str((float(clcnt)/(time.time()-stime))/1000) + "' KHz")
+				print("Target Speed : '" + str(targspeed) + "' Khz")
 	#in case of drastic failure, shutdown curses!
 	finally:
 		if progrun:
