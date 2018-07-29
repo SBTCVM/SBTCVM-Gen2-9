@@ -50,34 +50,47 @@ class cpu:
 		#add
 		elif self.instval == -9800:
 			self.reg1.changeval(self.reg1.intval+self.reg2.intval)
+			self.pointeroll1()
 		elif self.instval == -9799:
 			self.reg2.changeval(self.reg1.intval+self.reg2.intval)
+			self.pointeroll2()
 		elif self.instval == -9798:
 			self.reg1.changeval(self.dataval.intval+self.reg1.intval)
+			self.pointeroll1()
 		elif self.instval == -9797:
 			self.reg2.changeval(self.dataval.intval+self.reg2.intval)
+			self.pointeroll2()
 		#sub
 		elif self.instval == -9796:
 			self.reg1.changeval(self.reg1.intval-self.reg2.intval)
+			self.pointeroll1()
 		elif self.instval == -9795:
 			self.reg2.changeval(self.reg1.intval-self.reg2.intval)
+			self.pointeroll2()
 		elif self.instval == -9794:
 			self.reg1.changeval(self.reg1.intval-self.dataval.intval)
+			self.pointeroll1()
 		elif self.instval == -9793:
 			self.reg2.changeval(self.reg2.intval-self.dataval.intval)
+			self.pointeroll2()
 		#mul
 		elif self.instval == -9792:
 			self.reg1.changeval(self.reg1.intval*self.reg2.intval)
+			self.pointeroll1()
 		elif self.instval == -9791:
 			self.reg2.changeval(self.reg1.intval*self.reg2.intval)
+			self.pointeroll2()
 		elif self.instval == -9790:
 			self.reg1.changeval(self.reg1.intval*self.dataval.intval)
+			self.pointeroll1()
 		elif self.instval == -9789:
 			self.reg2.changeval(self.reg2.intval*self.dataval.intval)
+			self.pointeroll2()
 		#division
 		elif self.instval == -9788:
 			try:
 				self.reg1.changeval(self.reg1.intval//self.reg2.intval)
+				self.pointeroll1()
 			except ZeroDivisionError:
 				if self.exception("Zero Division.", -2):
 					return 1, -2, "Zero Division."
@@ -87,6 +100,7 @@ class cpu:
 		elif self.instval == -9787:
 			try:
 				self.reg2.changeval(self.reg1.intval//self.reg2.intval)
+				self.pointeroll2()
 			except ZeroDivisionError:
 				if self.exception("Zero Division.", -2):
 					return 1, -2, "Zero Division."
@@ -95,6 +109,7 @@ class cpu:
 		elif self.instval == -9786:
 			try:
 				self.reg1.changeval(self.reg1.intval//self.dataval.intval)
+				self.pointeroll1()
 			except ZeroDivisionError:
 				if self.exception("Zero Division.", -2):
 					return 1, -2, "Zero Division."
@@ -103,11 +118,41 @@ class cpu:
 		elif self.instval == -9785:
 			try:
 				self.reg2.changeval(self.reg2.intval//self.dataval.intval)
+				self.pointeroll2()
 			except ZeroDivisionError:
 				if self.exception("Zero Division.", -2):
 					return 1, -2, "Zero Division."
 				else:
 					return None
+		#  ---gotos---:
+		
+		#goto:
+		elif self.instval == -9600:
+			self.goto(self.dataval.intval)
+			return None
+		#goto if equal
+		elif self.instval == -9599:
+			if self.reg1==self.reg2:
+				self.goto(self.dataval.intval)
+				return None
+		#goto if less
+		elif self.instval == -9598:
+			if self.reg1<self.reg2:
+				self.goto(self.dataval.intval)
+				return None
+		#goto if more
+		elif self.instval == -9597:
+			if self.reg1>self.reg2:
+				self.goto(self.dataval.intval)
+				return None
+		#goto reg1
+		elif self.instval == -9596:
+			self.goto(self.reg1.intval)
+			return None
+		#goto reg2
+		elif self.instval == -9595:
+			self.goto(self.reg2.intval)
+			return None
 		
 		#soft stop:
 		elif self.instval == -9000:
@@ -115,6 +160,27 @@ class cpu:
 				return 1, -1, "soft stop."
 		self.execpoint+=1
 		return None
+	#pointer rollover code.
+	def pointeroll1(self):
+		if self.reg1.intval<-9841:
+			while self.reg1.intval<-9841:
+				self.reg1-=-9841
+		elif self.reg1.intval>9841:
+			while self.reg1.intval>9841:
+				self.reg1-=9841
+		return
+	def pointeroll2(self):
+		if self.reg2.intval<-9841:
+			while self.reg2.intval<-9841:
+				self.reg2-=-9841
+		elif self.reg2.intval>9841:
+			while self.reg2.intval>9841:
+				self.reg2-=9841
+		return
+	#goto function
+	def goto(self, address):
+		self.execpoint.changeval(address)
+		return
 	#stub. fill out with needed code once exception/interrupt system is active.
 	def exception(self, status, exid):
 		

@@ -386,6 +386,12 @@ class mainloop:
 		instruct(["div2"], -9787),
 		instruct(["divdata1"], -9786),
 		instruct(["divdata2"], -9785),
+		instruct(["goto", "gotodata"], -9600),#goto operations
+		instruct(["gotoif", "gotodataif"], -9599),
+		instruct(["gotoifless"], -9598),
+		instruct(["gotoifmore", "gotoifgreater"], -9597),
+		instruct(["gotoreg1"], -9596),
+		instruct(["gotoreg2"], -9595),
 		includetas0(),
 		nspacevar()]
 		

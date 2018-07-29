@@ -39,16 +39,16 @@
 
 
 >>>GOTOs<<<
--9600: goto [gotodata]: goto address in data word. : instruct : no
--9599: gotoif [gotodataif] goto address if reg1=reg2 : instruct : no
--9598: gotoifless: goto address <data> if reg1<reg2 : instruct : no
--9597: gotoifmore: [gotoifgreater]: goto address <data> if reg1>reg2 : instruct : no
--9596: gotoreg1: goto address <reg1>
--9595: gotoreg1: goto address <reg2>
+-9600: goto [gotodata]: goto address in data word. : instruct : yes
+-9599: gotoif [gotodataif] goto address if reg1=reg2 : instruct : yes
+-9598: gotoifless: goto address <data> if reg1<reg2 : instruct : yes
+-9597: gotoifmore: [gotoifgreater]: goto address <data> if reg1>reg2 : instruct : yes
+-9596: gotoreg1: goto address <reg1> : instruct : yes
+-9595: gotoreg2: goto address <reg2> : instruct : yes
 
 >>>memory & IO<<<
 -9500: dataread1 [romread1]: read data word of address <data> into reg1 : instruct : no
--9499: dataread2 [romread2]: read data word of address <data? into reg2 : instruct : no
+-9499: dataread2 [romread2]: read data word of address <data> into reg2 : instruct : no
 -9498: instread1           : read instruction word of address <data> into reg1 : instruct : no
 -9497: instread2           : read instruction word of address <data> into reg2 : instruct : no
 
@@ -63,7 +63,7 @@
 -9489: ioread2 [IOread2]   : read io address <data> into reg2 : instruct : no
 
 
->>>interrupt system<<<
+>>>interrupt system<<< [NOT FINAL]
 >>>See 'interrupts_and_stack.txt' for stack integration details.<<<
 -9400: intsel: set interrupt selection register : instruct : no
 -9399: intreg: register selected interrupt with an address in data : instruct : no

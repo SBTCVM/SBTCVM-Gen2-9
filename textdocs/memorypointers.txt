@@ -8,21 +8,24 @@ pt*set
 pt*setdata
 pt*get
 
-pt*inc: decrement
-pt*dec: increment
+pt*inc: increment
+pt*dec: decrement
 
 pt*inc2: increment though data then instruction for each address. so that : data1>inst1>data2>inst2
 pt*dec2: decrement though instruction then data for each address. so that : inst2>data2>inst1>data1
 
-pt*add: add reg1 to pointer
-pt*sub: subtract reg1 from pointer
+pt*add1: add reg1 to pointer
+pt*add2: add reg2 to pointer
+pt*sub1: subtract reg1 from pointer
+pt*sub2: subtract reg2 from pointer
 
 pt*adddata add data to pointer
 pt*subdata subtract data from pointer
 
 
-pt*wri
-pt*wridata write data to pointer address
+pt*wri1 write reg1 value to pointer address
+pt*wri2 write reg2 value to pointer address
+pt*wridata write data value to pointer address
 
 
 >>>these are changed by pt*inc2 and pt*dec2 automatically, but can be chosen manually.<<<
@@ -30,8 +33,8 @@ pt*inst: select instruction word bank (for pointer address)
 pt*data: select data word bank (for pointer address)
 
 
-pt*read: 
-
+pt*read1: read from pointer address into reg1
+pt*read2: read from pointer address into reg1
 
 pt*ioup: 'stream' pointer address data to io address specified as data.
 pt*iodown: 'stream' data from io address in data to pointer address
