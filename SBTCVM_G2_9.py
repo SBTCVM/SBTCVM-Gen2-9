@@ -26,10 +26,9 @@ help, -h, --help: this help.
 -v, --version: VM version
 [trom], -r [trom], --run [trom]: launch SBTCVM with the selected TROM image 
     loaded into memory.
--s [trom] {slow delay in seconds}, --slow [trom] {slow delay in seconds}:
-   -s overrides the default CPU clock delay. You may specify a float/int number
-    of seconds to use (after the trom filename). defaults to 0.5 second delay
-    per clock tick''')
+-s [trom] {CPU speed in Hz}, --slow [trom] {CPU speed in Hz}:
+   -s overrides the default CPU clock speed. You may specify a float/int Hz value
+    (after the trom filename). defaults to 2Hz''')
 elif cmd in ['-v', '--version']:
 	print('v2.1.0.PRE-ALPHA')
 else:
@@ -46,10 +45,12 @@ else:
 		romfile=arg
 		slow=1
 		try: 
-			slowspeed=float(sys.argv[3])
+			targspeed=float(sys.argv[3])/1000.0
+			slowspeed=1/(targspeed*1000.0)
 		except IndexError:
-			print("Using default slow delay. (0.5 seconds)")
-			slowspeed=0.5
+			print("Using default slow delay. (2 hz)")
+			targspeed=2/1000.0
+			slowspeed=1/(targspeed*1000.0)
 		except ValueError:
 			sys.exit("Error. please specify slow delay as float or int.")
 	else:
