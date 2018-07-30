@@ -9,6 +9,7 @@ btint=libbaltcalc.btint
 class cpu:
 	def __init__(self, memorysystem, iosystem):
 		self.memsys=memorysystem
+		self.iosys=iosystem
 		self.designation="SBTCVM_G2x_9_r1"
 		print("SBTCVM Generation 2x 9-trit CPU core Initializing...\nCPU Designation: " + self.designation + "\n")
 		self.execpoint=btint(libbaltcalc.mni(9))
@@ -27,37 +28,39 @@ class cpu:
 		#print(self.dataval.intval)
 		#print(self.reg1.intval)
 		#print(self.reg2.intval)
+		if self.instval.intval == 0:
+			pass
 		#setreg1
-		if self.instval == -9841:
+		elif self.instval.intval == -9841:
 			self.reg1.changeval(self.dataval.intval)
 			#print("setreg1")
 			#print(self.reg1)
 		#setreg2
-		elif self.instval == -9840:
+		elif self.instval.intval == -9840:
 			self.reg2.changeval(self.dataval.intval)
 		#copy reg2 to reg1
-		elif self.instval == -9839:
+		elif self.instval.intval == -9839:
 			self.reg1.changeval(self.reg2.intval)
 		#copy reg1 to reg2
-		elif self.instval == -9838:
+		elif self.instval.intval == -9838:
 			self.reg2.changeval(self.reg1.intval)
 		#swap reg1 and reg2
-		elif self.instval == -9837:
+		elif self.instval.intval == -9837:
 			tmpval=self.reg1.intval
 			self.reg1.changeval(self.reg2.intval)
 			self.reg2.changeval(tmpval)
 		#ALU
 		#add
-		elif self.instval == -9800:
+		elif self.instval.intval == -9800:
 			self.reg1.changeval(self.reg1.intval+self.reg2.intval)
 			self.pointeroll1()
-		elif self.instval == -9799:
+		elif self.instval.intval == -9799:
 			self.reg2.changeval(self.reg1.intval+self.reg2.intval)
 			self.pointeroll2()
-		elif self.instval == -9798:
+		elif self.instval.intval == -9798:
 			self.reg1.changeval(self.dataval.intval+self.reg1.intval)
 			self.pointeroll1()
-		elif self.instval == -9797:
+		elif self.instval.intval == -9797:
 			self.reg2.changeval(self.dataval.intval+self.reg2.intval)
 			self.pointeroll2()
 		#sub
@@ -70,24 +73,24 @@ class cpu:
 		elif self.instval == -9794:
 			self.reg1.changeval(self.reg1.intval-self.dataval.intval)
 			self.pointeroll1()
-		elif self.instval == -9793:
+		elif self.instval.intval == -9793:
 			self.reg2.changeval(self.reg2.intval-self.dataval.intval)
 			self.pointeroll2()
 		#mul
-		elif self.instval == -9792:
+		elif self.instval.intval == -9792:
 			self.reg1.changeval(self.reg1.intval*self.reg2.intval)
 			self.pointeroll1()
-		elif self.instval == -9791:
+		elif self.instval.intval == -9791:
 			self.reg2.changeval(self.reg1.intval*self.reg2.intval)
 			self.pointeroll2()
-		elif self.instval == -9790:
+		elif self.instval.intval == -9790:
 			self.reg1.changeval(self.reg1.intval*self.dataval.intval)
 			self.pointeroll1()
-		elif self.instval == -9789:
+		elif self.instval.intval == -9789:
 			self.reg2.changeval(self.reg2.intval*self.dataval.intval)
 			self.pointeroll2()
 		#division
-		elif self.instval == -9788:
+		elif self.instval.intval == -9788:
 			try:
 				self.reg1.changeval(self.reg1.intval//self.reg2.intval)
 				self.pointeroll1()
@@ -97,7 +100,7 @@ class cpu:
 				else:
 					return None
 				
-		elif self.instval == -9787:
+		elif self.instval.intval == -9787:
 			try:
 				self.reg2.changeval(self.reg1.intval//self.reg2.intval)
 				self.pointeroll2()
@@ -106,7 +109,7 @@ class cpu:
 					return 1, -2, "Zero Division."
 				else:
 					return None
-		elif self.instval == -9786:
+		elif self.instval.intval == -9786:
 			try:
 				self.reg1.changeval(self.reg1.intval//self.dataval.intval)
 				self.pointeroll1()
@@ -115,7 +118,7 @@ class cpu:
 					return 1, -2, "Zero Division."
 				else:
 					return None
-		elif self.instval == -9785:
+		elif self.instval.intval == -9785:
 			try:
 				self.reg2.changeval(self.reg2.intval//self.dataval.intval)
 				self.pointeroll2()
@@ -127,35 +130,84 @@ class cpu:
 		#  ---gotos---:
 		
 		#goto:
-		elif self.instval == -9600:
+		elif self.instval.intval == -9600:
 			self.goto(self.dataval.intval)
 			return None
 		#goto if equal
-		elif self.instval == -9599:
+		elif self.instval.intval == -9599:
 			if self.reg1==self.reg2:
 				self.goto(self.dataval.intval)
 				return None
 		#goto if less
-		elif self.instval == -9598:
+		elif self.instval.intval == -9598:
 			if self.reg1<self.reg2:
 				self.goto(self.dataval.intval)
 				return None
 		#goto if more
-		elif self.instval == -9597:
+		elif self.instval.intval == -9597:
 			if self.reg1>self.reg2:
 				self.goto(self.dataval.intval)
 				return None
 		#goto reg1
-		elif self.instval == -9596:
+		elif self.instval.intval == -9596:
 			self.goto(self.reg1.intval)
 			return None
 		#goto reg2
-		elif self.instval == -9595:
+		elif self.instval.intval == -9595:
 			self.goto(self.reg2.intval)
 			return None
 		
+		
+		
+		#--memory read --
+		#dataread1:
+		elif self.instval.intval == -9500:
+			self.reg1.changeval(self.memsys.getdata(self.dataval))
+		#dataread2:
+		elif self.instval.intval == -9499:
+			self.reg2.changeval(self.memsys.getdata(self.dataval))
+		#ioread1
+		elif self.instval.intval == -9498:
+			self.reg1.changeval(self.memsys.getinst(self.dataval))
+		#ioread2:
+		elif self.instval.intval == -9497:
+			self.reg2.changeval(self.memsys.getinst(self.dataval))
+		
+		#--Memory write --
+		#datawrite1
+		elif self.instval.intval == -9496:
+			self.memsys.setdata(self.dataval, self.reg1)
+		#datawrite2
+		elif self.instval.intval == -9495:
+			self.memsys.setdata(self.dataval, self.reg2)
+		#instwrite1
+		elif self.instval.intval == -9494:
+			self.memsys.setinst(self.dataval, self.reg1)
+		#instwrite2
+		elif self.instval.intval == -9493:
+			self.memsys.setinst(self.dataval, self.reg2)
+		
+		#--IO write --
+		#iowrite1
+		elif self.instval.intval == -9492:
+			self.iosys.iowrite(self.dataval, self.reg1)
+		#iowrite2
+		elif self.instval.intval == -9491:
+			self.iosys.iowrite(self.dataval, self.reg2)
+		
+		#--IO read --
+		#ioread1
+		elif self.instval.intval == -9490:
+			self.reg1.changeval(self.iosys.ioread(self.dataval))
+		#ioread2
+		elif self.instval.intval == -9489:
+			self.reg2.changeval(self.iosys.ioread(self.dataval))
+		
+		
+		
+		
 		#soft stop:
-		elif self.instval == -9000:
+		elif self.instval.intval == -9000:
 			if self.exception("soft stop.", -1):
 				return 1, -1, "soft stop."
 		self.execpoint+=1
@@ -177,6 +229,9 @@ class cpu:
 			while self.reg2.intval>9841:
 				self.reg2-=9841
 		return
+	
+	
+	
 	#goto function
 	def goto(self, address):
 		self.execpoint.changeval(address)

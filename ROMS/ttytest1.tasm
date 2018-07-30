@@ -1,0 +1,37 @@
+
+#SBTCVM Standard namsepace file.
+head-nspin=stdnsp
+
+#memory pointers and a string syntax in the assembler will make writing text to the tty MUCH EASIER.
+
+#print 'abc'
+setreg1;------
+iowrite1;>io.ttywr
+setreg1;-----0
+iowrite1;>io.ttywr
+setreg1;-----+
+iowrite1;>io.ttywr
+
+#newline
+setreg1;:\n
+iowrite1;>io.ttywr
+
+#print 'SBTCVM'
+setreg1;:S
+iowrite1;>io.ttywr
+setreg1;:B
+iowrite1;>io.ttywr
+setreg1;:T
+iowrite1;>io.ttywr
+setreg1;:C
+iowrite1;>io.ttywr
+setreg1;:V
+iowrite1;>io.ttywr
+setreg1;:M
+iowrite1;>io.ttywr
+#newline
+setreg1;:\n
+iowrite1;>io.ttywr
+setreg1;:\0
+iowrite1;>io.ttywr
+#stop

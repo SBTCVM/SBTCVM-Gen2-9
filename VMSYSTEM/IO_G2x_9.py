@@ -42,26 +42,26 @@ class io:
 	def ioread(self, addr):
 		if addr in self.ReadOverrideList:
 			#get data at address anyways. (useful for refrence, ect, also needed to keep IO map updated)
-			addrobjreal=self.IODICT[addr]
-			functref=self.ReadOverrideDict[addr]
-			addrobj=functref(btint(addr), addrobjreal)
+			addrobjreal=self.IODICT[int(addr)]
+			functref=self.ReadOverrideDict[int(addr)]
+			addrobj=functref(btint(int(addr)), addrobjreal)
 			#update data point.
 			addrobjreal.changeval(addrobj)
 			print("ioreadoverride")
 			
 		else:
-			addrobj=self.IODICT[addr]
+			addrobj=self.IODICT[int(addr)]
 		#if address is registered by a component via setreadnotify, call the specified function.
 		if addr in self.ReadNotifyList:
-			functref=self.ReadNotifyDict[addr]
-			functref(btint(addr), addrobj)
+			functref=self.ReadNotifyDict[int(addr)]
+			functref(btint(int(addr)), addrobj)
 		return addrobj
 	def iowrite(self, addr, data):
-		addrobj=self.IODICT[addr]
+		addrobj=self.IODICT[int(addr)]
 		addrobj.changeval(data)
 		#if address is registered by a component via setwritenotify, call the specified function.
 		if addr in self.WriteNotifyList:
-			functref=self.WriteNotifyDict[addr]
+			functref=self.WriteNotifyDict[int(addr)]
 			functref(btint(addr), addrobj)
 	#deviceread and devicewrite functions are for IObus Devices, and any non-CPU subsystem
 	#that needs to read/write the IObus without triggering the read and write function callbacks.

@@ -47,20 +47,20 @@
 -9595: gotoreg2: goto address <reg2> : instruct : yes
 
 >>>memory & IO<<<
--9500: dataread1 [romread1]: read data word of address <data> into reg1 : instruct : no
--9499: dataread2 [romread2]: read data word of address <data> into reg2 : instruct : no
--9498: instread1           : read instruction word of address <data> into reg1 : instruct : no
--9497: instread2           : read instruction word of address <data> into reg2 : instruct : no
+-9500: dataread1 [romread1]: read data word of address <data> into reg1 : instruct : yes
+-9499: dataread2 [romread2]: read data word of address <data> into reg2 : instruct : yes
+-9498: instread1           : read instruction word of address <data> into reg1 : instruct : yes
+-9497: instread2           : read instruction word of address <data> into reg2 : instruct : yes
 
--9496: datawrite1 [setdata]: write reg1 to data word of address : instruct : no
--9495: datawrite2          : write reg2 to data word of address : instruct : no
--9494: instwrite1 [setinst]: write reg1 to instruction word of address : instruct : no
--9493: instwrite2          : write reg2 to instruction word of address <data> : instruct : no
+-9496: datawrite1 [setdata]: write reg1 to data word of address : instruct : yes
+-9495: datawrite2          : write reg2 to data word of address : instruct : yes
+-9494: instwrite1 [setinst]: write reg1 to instruction word of address : instruct : yes
+-9493: instwrite2          : write reg2 to instruction word of address <data> : instruct : yes
 
--9492: iowrite1 [IOwrite1] : write reg1 to IO address <data> : instruct : no
--9491: iowrite2 [IOwrite2] : write reg2 to IO address <data> : instruct : no
--9490: ioread1 [IOread1]   : read io address <data> into reg1 : instruct : no
--9489: ioread2 [IOread2]   : read io address <data> into reg2 : instruct : no
+-9492: iowrite1 [IOwrite1] : write reg1 to IO address <data> : instruct : yes
+-9491: iowrite2 [IOwrite2] : write reg2 to IO address <data> : instruct : yes
+-9490: ioread1 [IOread1]   : read io address <data> into reg1 : instruct : yes
+-9489: ioread2 [IOread2]   : read io address <data> into reg2 : instruct : yes
 
 
 >>>interrupt system<<< [NOT FINAL]

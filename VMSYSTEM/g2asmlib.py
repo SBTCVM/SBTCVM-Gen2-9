@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from . import libbaltcalc
 from . import iofuncts
+from . import libtextcon as tcon
 btint=libbaltcalc.btint
 import os
 import sys
@@ -138,6 +139,11 @@ class instruct:
 			return 0, None
 		elif data.startswith(">"):
 			return 0, None
+		elif data.startswith(":"):
+			if data[1:] in tcon.asm_chrtodat:
+				return 0, None
+			else:
+				return 1, keyword+": Line: " + str(lineno) + ": unknown text character!"
 		elif data.startswith("10x"):
 			try:
 				int(data[3:])
@@ -174,6 +180,9 @@ class instruct:
 			return [[self.opcode, int(data[3:]), lineno]]
 		elif data.startswith(">"):
 			return [[self.opcode, gotos[data[1:]], lineno]]
+		elif data.startswith(":"):
+			chdat=data[1:]
+			return [[self.opcode, tcon.asm_chrtodat[chdat], lineno]]
 		else:
 			return [[self.opcode, libbaltcalc.btint(data), lineno]]
 
@@ -191,6 +200,11 @@ class rawinst:
 		for data in datalist:
 			if data.startswith(">"):
 				continue
+			elif data.startswith(":"):
+				if data[1:] in tcon.asm_chrtodat:
+					return 0, None
+				else:
+					return 1, keyword+": Line: " + str(lineno) + ": unknown text character!(" + data + ")"
 			elif data.startswith("10x"):
 				try:
 					int(data[3:])
@@ -228,12 +242,18 @@ class rawinst:
 			data1res=int(data1[3:])
 		elif data1.startswith(">"):
 			data1res=gotos[data1[1:]]
+		elif data1.startswith(":"):
+			chdat=data1[1:]
+			data1res=tcon.asm_chrtodat[chdat]
 		else:
 			data1res=libbaltcalc.btint(data2)
 		if data2.startswith("10x"):
 			data2res=int(data2[3:])
 		elif data2.startswith(">"):
 			data2res=gotos[data2[1:]]
+		elif data2.startswith(":"):
+			chdat=data2[1:]
+			data2res=tcon.asm_chrtodat[chdat]
 		else:
 			data2res=libbaltcalc.btint(data2)
 		
@@ -297,6 +317,11 @@ class nspacevar:
 			return 0, None
 		elif data.startswith(">"):
 			return 0, None
+		elif data.startswith(":"):
+			if data[1:] in tcon.asm_chrtodat:
+				return 0, None
+			else:
+				return 1, keyword+": Line: " + str(lineno) + ": unknown text character!"
 		elif data.startswith("10x"):
 			try:
 				int(data[3:])
@@ -317,6 +342,9 @@ class nspacevar:
 			return 0, {keyword[2:]: 0}
 		elif data.startswith("10x"):
 			return 0, {keyword[2:]: int(data[3:])}
+		elif data.startswith(":"):
+			chdat=data[1:]
+			return 0, {keyword[2:]: tcon.asm_chrtodat[chdat]}
 		elif data.startswith(">"):
 			try:
 				return 0, {keyword[2:]: gotos[data[1:]]}
@@ -392,6 +420,18 @@ class mainloop:
 		instruct(["gotoifmore", "gotoifgreater"], -9597),
 		instruct(["gotoreg1"], -9596),
 		instruct(["gotoreg2"], -9595),
+		instruct(["dataread1", "romread1"], -9500),#memory read
+		instruct(["dataread2", "romread2"], -9499),
+		instruct(["instread1"], -9498),
+		instruct(["instread2"], -9497),
+		instruct(["datawrite1", "setdata"], -9496),#memory write
+		instruct(["datawrite2"], -9495),
+		instruct(["instwrite1", "setinst"], -9494),
+		instruct(["instwrite2"], -9493),
+		instruct(["iowrite1", "IOwrite1"], -9492),#io write
+		instruct(["iowrite2", "IOwrite2"], -9491),
+		instruct(["ioread1", "IOread1"], -9490),#io read
+		instruct(["ioread2", "IOread2"], -9489),
 		includetas0(),
 		nspacevar()]
 		

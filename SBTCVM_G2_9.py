@@ -97,6 +97,7 @@ else:
 		dispthr.daemon=True
 		dispthr.start()
 		uiosys.ttyraw("ready.")
+		time.sleep(0.3)
 		stime=time.time()
 		clcnt=0.0
 		targtime=clspeed
@@ -121,6 +122,7 @@ else:
 		if progrun:
 			if uiosys!=None:
 				uiosys.run=0
+			curses.echo()
 			curses.endwin()
 		
 			

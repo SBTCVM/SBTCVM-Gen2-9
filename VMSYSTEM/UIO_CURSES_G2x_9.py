@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from . import libbaltcalc
 btint=libbaltcalc.btint
+from . import libtextcon as tcon
 import os
 import sys
 import curses
@@ -22,7 +23,8 @@ class uio:
 		self.statwin=statwin
 		self.ttywin=ttywin
 		self.run=1
-		
+		ioref.setwritenotify(1, self.ttywrite)
+		self.xttycharpos=0
 	#status field update loop.
 	def statup(self):
 		while self.run:
@@ -34,7 +36,19 @@ class uio:
 	#TTY raw line input wrapper.
 	def ttyraw(self, string):
 		maxy=self.ttywin.getmaxyx()[0]
-		self.ttywin.addstr(maxy-1, 0, "ready")
+		self.ttywin.addstr(maxy-1, 0, string)
 		self.ttywin.scroll(1)
 		self.ttywin.refresh()
-		
+		self.xttycharpos=0
+	def ttywrite(self, addr, data):
+		if data==1:
+			self.ttywin.scroll(1)
+			self.ttywin.refresh()
+			self.xttycharpos=0
+		elif int(data) in tcon.dattostr:
+			maxy=self.ttywin.getmaxyx()[0]
+			self.ttywin.addch(maxy-1, self.xttycharpos, tcon.dattostr[data.intval])
+			self.ttywin.refresh()
+			self.xttycharpos += 1
+			
+			

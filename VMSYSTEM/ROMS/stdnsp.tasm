@@ -1,0 +1,8 @@
+#Standard SBTCVM Namespace file
+
+head-mode=vars
+ 
+head-nspout=1
+
+#IO
+v>io.ttywr;10x1
