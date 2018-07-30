@@ -246,7 +246,7 @@ class rawinst:
 			chdat=data1[1:]
 			data1res=tcon.asm_chrtodat[chdat]
 		else:
-			data1res=libbaltcalc.btint(data2)
+			data1res=libbaltcalc.btint(data1)
 		if data2.startswith("10x"):
 			data2res=int(data2[3:])
 		elif data2.startswith(">"):

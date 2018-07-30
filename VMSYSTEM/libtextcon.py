@@ -17,19 +17,28 @@ chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
 #print(len(chardata3))
 
 class schr:
-	def __init__(self, uchar, asmchar, dataval, chrname=None):
+	def __init__(self, uchar, asmchar, dataval, chrname=None, dumpstr=None, bldumpstr=None):
 		if chrname==None:
 			self.chrname=uchar
 		else:
 			self.chrname=chrname
+		if dumpstr==None:
+			self.dumpstr=" "+uchar
+		else:
+			self.dumpstr=dumpstr
+		if bldumpstr==None:
+			self.bldumpstr=uchar
+		else:
+			self.bldumpstr=bldumpstr
+		
 		self.uchar=uchar
 		self.asmchar=asmchar
 		self.dataval=dataval
 
 def nchr(uchar, dataval):
-	return schr(uchar, uchar, dataval, chrname=None)
+	return schr(uchar, uchar, dataval, chrname=None, dumpstr=None, bldumpstr=None)
 #Special case chars (currently newline and NULL
-spchars=[schr("\n", "\\n", 1, "newline"), schr(None, "\\0", 0, "null")]
+spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", ".")]
 
 normchars=[]
 normcharlist=list(chardata0 + chardata1 + chardata2 + chardata3)
