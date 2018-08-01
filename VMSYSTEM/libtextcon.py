@@ -6,13 +6,6 @@ import os
 import sys
 #character data
 
-#refrence for SBTCVM-BTT-6-v2 (SBTCVM-BTT2)
-#WARNING: THE ORDER OF CHARS IN STRING DETERMINE HOW THEY ARE MAPPED!
-chardata0="""abcdefghijklmnopqrstuvwxyz """
-chardata1="""ABCDEFGHIJKLMNOPQRSTUVWXYZ."""
-chardata2="""0123456789`-=~!@#$%^&*()_+!"""
-chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
-
 
 #print(len(chardata3))
 
@@ -36,20 +29,58 @@ class schr:
 		self.dataval=dataval
 
 def nchr(uchar, dataval):
-	return schr(uchar, uchar, dataval, chrname=None, dumpstr=None, bldumpstr=None)
-#Special case chars (currently newline and NULL
-spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", ".")]
+	#check for normal chars used in assembler syntax. (aka that need escaping) (only vertical bar and semicolon for now)
+	if uchar in asmchar_special:
+		return schr(uchar, asmchar_special[uchar], dataval, chrname=None, dumpstr=None, bldumpstr=None)
+	else:
+		return schr(uchar, uchar, dataval, chrname=None, dumpstr=None, bldumpstr=None)
 
+#----------dataset startup code below---------
+
+
+# master normal character reference for SBTCVM-BTT-6-v2 (SBTCVM-BTT2)
+#WARNING: THE ORDER OF CHARS IN STRING DETERMINE HOW THEY ARE MAPPED!
+#ensure each of these are precisely 27 chars long.
+chardata0="""abcdefghijklmnopqrstuvwxyz """
+chardata1="""ABCDEFGHIJKLMNOPQRSTUVWXYZ."""
+chardata2="""0123456789`-=~!@#$%^&*()_+!"""
+chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
+
+
+#normal characters that require escaping.
+asmchar_special={"|": "\\v", ";": "\\c", "\\": "\\b", " ": "\\s"}
+
+
+#Special case chars (currently newline and NULL. Both have fixed positions in datastructure.)
+
+spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", ".")]
+spcharlist_asm=["\\n", "\\0"]
+
+
+
+
+# --- INIT NORMAL CHARACTERS ---
 normchars=[]
 normcharlist=list(chardata0 + chardata1 + chardata2 + chardata3)
-spcharlist_asm=["\\n", "\\0"]
+
+#assign codes to each of the normal chars algorithmically.
 charval=libbaltcalc.mni(6)
 for ch in normcharlist:
 	normchars.extend([nchr(ch, charval)])
 	charval+=1
+	#skip special chars (null and newline)
+	if charval==0:
+		charval+=2
 
+
+#debug messages (comment out if not working on lib)
+#print("SBTCVM-BTT2 (libtextcon): Last assigned normal char: '" + ch + "'")
+#print("SBTCVM-BTT2 (libtextcon): next available normal charcode: '" + str(charval) + "'")
+#print("SBTCVM-BTT2 (libtextcon): normal chars assigned: " + str(len(normcharlist)))
+
+#build main character list
 allchars=normchars+spchars
-allcharlist_asm=normcharlist+spcharlist_asm
+
 
 #build dict for UIO to use.
 dattostr={}
@@ -57,8 +88,18 @@ for ch in allchars:
 	if ch.uchar!=None:
 		dattostr[ch.dataval]=ch.uchar
 
-asm_chrtodat={}
+#--- ASSEMBLER DATA STRUCTURES ---
 
+#build raw list of all characters for assembler
+allcharlist_asm=normcharlist+spcharlist_asm
+
+#build assembler character data lookup and escaped character reference list.
+asm_chrtodat={}
+asm_escaped=[]
 for ch in allchars:
 	if ch.asmchar!=None:
 		asm_chrtodat[ch.asmchar]=ch.dataval
+	#dynamically add escaped chars to 
+	if ch.asmchar.startswith("\\"):
+		asm_escaped.extend([ch.asmchar])
+		

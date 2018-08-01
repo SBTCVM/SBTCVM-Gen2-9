@@ -4,7 +4,13 @@ head-nspin=stdnsp
 
 #memory pointers and a string syntax in the assembler will make writing text to the tty MUCH EASIER.
 
-#print 'abc'
+#should print as follows (minus ' and #):
+#'abc'
+#'SBTCVM'
+#'\ ;|'
+
+
+#---print 'abc'---
 setreg1;------
 iowrite1;>io.ttywr
 setreg1;-----0
@@ -12,11 +18,11 @@ iowrite1;>io.ttywr
 setreg1;-----+
 iowrite1;>io.ttywr
 
-#newline
+#---newline---
 setreg1;:\n
 iowrite1;>io.ttywr
 
-#print 'SBTCVM'
+#---print 'SBTCVM'---
 setreg1;:S
 iowrite1;>io.ttywr
 setreg1;:B
@@ -29,12 +35,37 @@ setreg1;:V
 iowrite1;>io.ttywr
 setreg1;:M
 iowrite1;>io.ttywr
+
+
+#---special chars---
+
 #newline
 setreg1;:\n
 iowrite1;>io.ttywr
+
+#null. (TTY will ignore this, mainly useful for terminating strings read via memory pointers.)
 setreg1;:\0
 iowrite1;>io.ttywr
-#stop
+
+#---normal chars with escapes---
+
+#backslash. (mainly to ease string parsing)
+setreg1;:\b
+iowrite1;>io.ttywr
+
+#space
+setreg1;:\s
+iowrite1;>io.ttywr
+
+#semicolon
+setreg1;:\c
+iowrite1;>io.ttywr
+
+#vertical bar
+setreg1;:\v
+iowrite1;>io.ttywr
+
+
 
 null;:h
 null;:e

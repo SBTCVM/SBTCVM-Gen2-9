@@ -15,7 +15,22 @@ class cpu:
 		self.execpoint=btint(libbaltcalc.mni(9))
 		self.reg1=btint(0)
 		self.reg2=btint(0)
-		self.mempoint=btint(libbaltcalc.mni(9))
+		#memory pointers
+		
+		#address of memory pointer
+		self.mempoint1=btint(libbaltcalc.mni(9))
+		#column position: data=0 Inst=1
+		self.mempoint2_di=0
+		#address of memory pointer
+		self.mempoint2=btint(libbaltcalc.mni(9))
+		#column position: data=0 Inst=1
+		self.mempoint2_di=0
+		#address of memory pointer
+		self.mempoint3=btint(libbaltcalc.mni(9))
+		#column position: data=0 Inst=1
+		self.mempoint3_di=0
+		
+		
 		self.dataval=btint(0)
 		self.instval=btint(0)
 	def cycle(self):

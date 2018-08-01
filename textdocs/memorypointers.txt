@@ -4,9 +4,11 @@ functions:
 
 where * is pointer number. legacy mempoint operations should default to pointer 0.
 
-pt*set
+pt*set1
+pt*set2
 pt*setdata
-pt*get
+pt*get1
+pt*get2
 
 pt*inc: increment
 pt*dec: decrement
