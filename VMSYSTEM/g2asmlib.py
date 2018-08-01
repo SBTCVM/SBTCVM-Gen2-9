@@ -432,6 +432,12 @@ class mainloop:
 		instruct(["iowrite2", "IOwrite2"], -9491),
 		instruct(["ioread1", "IOread1"], -9490),#io read
 		instruct(["ioread2", "IOread2"], -9489),
+		instruct(["fopwri1"], -9460), #fast output ports (FOPs)
+		instruct(["fopset1"], -9459),
+		instruct(["fopwri2"], -9458),
+		instruct(["fopset2"], -9457),
+		instruct(["fopwri3"], -9456),
+		instruct(["fopset3"], -9455),
 		includetas0(),
 		nspacevar()]
 		

@@ -29,7 +29,9 @@ class cpu:
 		self.mempoint3=btint(libbaltcalc.mni(9))
 		#column position: data=0 Inst=1
 		self.mempoint3_di=0
-		
+		self.fop1=btint(0)
+		self.fop2=btint(0)
+		self.fop3=btint(0)
 		
 		self.dataval=btint(0)
 		self.instval=btint(0)
@@ -181,10 +183,10 @@ class cpu:
 		#dataread2:
 		elif self.instval.intval == -9499:
 			self.reg2.changeval(self.memsys.getdata(self.dataval))
-		#ioread1
+		#instread1
 		elif self.instval.intval == -9498:
 			self.reg1.changeval(self.memsys.getinst(self.dataval))
-		#ioread2:
+		#instread2:
 		elif self.instval.intval == -9497:
 			self.reg2.changeval(self.memsys.getinst(self.dataval))
 		
@@ -205,21 +207,38 @@ class cpu:
 		#--IO write --
 		#iowrite1
 		elif self.instval.intval == -9492:
-			self.iosys.iowrite(self.dataval, self.reg1)
+			self.iosys.iowrite(self.dataval, self.reg1.intval)
 		#iowrite2
 		elif self.instval.intval == -9491:
-			self.iosys.iowrite(self.dataval, self.reg2)
+			self.iosys.iowrite(self.dataval, self.reg2.intval)
 		
 		#--IO read --
 		#ioread1
 		elif self.instval.intval == -9490:
-			self.reg1.changeval(self.iosys.ioread(self.dataval))
+			self.reg1.changeval(self.iosys.ioread(self.dataval.intval))
 		#ioread2
 		elif self.instval.intval == -9489:
-			self.reg2.changeval(self.iosys.ioread(self.dataval))
+			self.reg2.changeval(self.iosys.ioread(self.dataval.intval))
 		
-		
-		
+		#--fast output ports--
+		#fopwri1
+		elif self.instval.intval == -9460:
+			self.iosys.iowrite(self.fop1, self.dataval)
+		#fopset1
+		elif self.instval.intval == -9459:
+			self.fop1.changeval(self.dataval.intval)
+		#fopwri2
+		elif self.instval.intval == -9458:
+			self.iosys.iowrite(self.fop2, self.dataval)
+		#fopset2
+		elif self.instval.intval == -9457:
+			self.fop2.changeval(self.dataval.intval)
+		#fopwri3
+		elif self.instval.intval == -9456:
+			self.iosys.iowrite(self.fop3, self.dataval)
+		#fopset3
+		elif self.instval.intval == -9455:
+			self.fop3.changeval(self.dataval.intval)
 		
 		#soft stop:
 		elif self.instval.intval == -9000:

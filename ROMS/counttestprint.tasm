@@ -1,0 +1,38 @@
+#basic test involving gotos.
+head-nspin=stdnsp
+#reg1 will count up to 0 from MNI(9), while reg2 will count down to 0 from MPI(9)
+#when they reach 0, the program will jump to the stop instruction on line 10
+fopset1;>io.ttywr
+
+setreg1;---------
+setreg2;+++++++++
+adddata1;+;loop
+adddata2;-
+iowrite2;>io.decdump
+fopwri1;:\n
+gotoif;>end
+goto;>loop
+null;;end
+
+
+setreg1;---------
+setreg2;+++++++++
+adddata1;+;loop2
+adddata2;-
+iowrite2;>io.tritdump
+fopwri1;:\n
+gotoif;>end2
+goto;>loop2
+null;;end2
+
+setreg1;---------
+setreg2;+++++++++
+adddata1;+;loop3
+adddata2;-
+iowrite1;>io.decdump
+fopwri1;:\s
+iowrite2;>io.tritdump
+fopwri1;:\n
+gotoif;>end3
+goto;>loop3
+stop;;end3

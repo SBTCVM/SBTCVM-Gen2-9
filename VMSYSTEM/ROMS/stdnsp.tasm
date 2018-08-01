@@ -6,3 +6,7 @@ head-nspout=1
 
 #IO
 v>io.ttywr;10x1
+v>io.tritdump;10x2
+v>io.decdump;10x3
+
+

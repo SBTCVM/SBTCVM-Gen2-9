@@ -62,6 +62,14 @@
 -9490: ioread1 [IOread1]   : read io address <data> into reg1 : instruct : yes
 -9489: ioread2 [IOread2]   : read io address <data> into reg2 : instruct : yes
 
+#fast output ports (FOPs)
+
+-9460: fopwri1   : write data to iopointer addr        : instruct : yes
+-9459: fopset1   : set iopointer addr                  : instruct : yes
+-9458: fopwri2   : write data to iopointer addr        : instruct : yes
+-9457: fopset2   : set iopointer addr                  : instruct : yes
+-9456: fopwri3   : write data to iopointer addr        : instruct : yes
+-9455: fopset3   : set iopointer addr                  : instruct : yes
 
 >>>interrupt system<<< [NOT FINAL]
 >>>See 'interrupts_and_stack.txt' for stack integration details.<<<

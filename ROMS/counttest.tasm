@@ -2,6 +2,7 @@
 
 #reg1 will count up to 0 from MNI(9), while reg2 will count down to 0 from MPI(9)
 #when they reach 0, the program will jump to the stop instruction on line 10
+setreg1;---------
 setreg2;+++++++++
 adddata1;+;loop
 adddata2;-
