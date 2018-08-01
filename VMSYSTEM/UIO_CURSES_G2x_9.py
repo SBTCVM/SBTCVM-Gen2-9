@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from . import libbaltcalc
+from . import iofuncts
 btint=libbaltcalc.btint
 from . import libtextcon as tcon
 import os
@@ -15,15 +16,19 @@ import time
 #currently, it uses 2 curses windows: a 2 line status area (statwin), with a tty area (ttywin) using the rest of the lines.
 #uiolog=open(os.path.join("CAP", "uio_curses.log"), "w")
 
+
 class uio:
-	def __init__(self, cpuref, memref, ioref, statwin, ttywin):
+	def __init__(self, cpuref, memref, ioref, statwin, ttywin, ttylogname="tty_log.log"):
 		self.cpu=cpuref
 		self.mem=memref
 		self.io=ioref
 		self.statwin=statwin
 		self.ttywin=ttywin
 		self.run=1
-		
+		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
+		#self.ttylogdata=""
+		self.ttylog=iofuncts.logit(ttylogname, 1024)
+		self.ttylog.write("frontend: Curses\nBegin UIO tty log:\n")
 		ioref.setwritenotify(1, self.ttywrite)
 		ioref.setwritenotify(2, self.tritdump)
 		ioref.setwritenotify(3, self.decdump)
@@ -41,11 +46,18 @@ class uio:
 			self.statwin.refresh()
 			self.ttywin.refresh()
 			time.sleep(0.05)
+			
+			
 		return
 	#TTY raw line input wrapper.
 	def ttyraw(self, string):
+		if self.xttycharpos==self.maxx:
+			self.xttycharpos=0
+			self.ttywin.scroll(1)
+			self.ttylog.write("\n")
 		self.ttywin.addstr(self.maxy-1, 0, string)
 		self.ttywin.scroll(1)
+		self.ttylog.write(string+"\n")
 		self.ttywin.refresh()
 		self.xttycharpos=0
 	
@@ -53,8 +65,10 @@ class uio:
 		for xnumchar in data.bttrunk(9):
 			if self.xttycharpos==self.maxx:
 				self.xttycharpos=0
-				#self.ttywin.scroll(1)
-			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar[0])
+				self.ttywin.scroll(1)
+				self.ttylog.write("\n")
+			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar)
+			self.ttylog.write(xnumchar)
 			#self.ttywin.refresh()
 			self.xttycharpos += 1
 	
@@ -64,8 +78,10 @@ class uio:
 			#uiolog.write(xnumchar+  "\n")
 			if self.xttycharpos==self.maxx:
 				self.xttycharpos=0
-				#self.ttywin.scroll(1)
-			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar[0])
+				self.ttywin.scroll(1)
+				self.ttylog.write("\n")
+			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar)
+			self.ttylog.write(xnumchar)
 			#self.ttywin.refresh()
 			self.xttycharpos += 1
 			
@@ -75,12 +91,19 @@ class uio:
 			self.ttywin.scroll(1)
 			#self.ttywin.refresh()
 			self.xttycharpos=0
+			self.ttylog.write("\n")
 		elif int(data) in tcon.dattostr:
 			if self.xttycharpos==self.maxx:
+				
 				self.xttycharpos=0
-				#self.ttywin.scroll(1)
+				self.ttywin.scroll(1)
+				self.ttylog.write("\n")
 			self.ttywin.addch(self.maxy-1, self.xttycharpos, tcon.dattostr[data.intval])
+			self.ttylog.write(tcon.dattostr[data.intval])
 			#self.ttywin.refresh()
 			self.xttycharpos += 1
 			
-			
+	def powoff(self):
+		#write last of TTY log and close.
+		self.ttylog.close()
+		self.run=0

@@ -110,18 +110,19 @@ else:
 			if xtime>0.0:
 				time.sleep(xtime)
 			if retval!=None:
-				progrun=0
-				uiosys.run=0
+				
+				
 				curses.echo()
 				curses.endwin()
+				uiosys.powoff()
 				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
 				print("Approx. Speed: '" + str((float(clcnt)/(time.time()-stime))/1000) + "' KHz")
 				print("Target Speed : '" + str(targspeed) + "' Khz")
+				
+				progrun=0
 	#in case of drastic failure, shutdown curses!
 	finally:
 		if progrun:
-			if uiosys!=None:
-				uiosys.run=0
 			curses.echo()
 			curses.endwin()
 		

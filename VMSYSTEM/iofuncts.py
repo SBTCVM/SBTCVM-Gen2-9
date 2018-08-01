@@ -6,6 +6,23 @@ import sys
 
 #file io common functions
 
+#Buffered logging class.
+class logit:
+	def __init__(self, logname, buffsize=60):
+		self.buff=""
+		self.fname=logname
+		self.logfile=open(os.path.join("CAP", logname), "w")
+		self.buffsize=buffsize
+	def write(self, data):
+		self.buff+=data
+		if len(self.buff)>=self.buffsize:
+			self.writelog()
+	def writelog(self):
+		self.logfile.write(self.buff)
+		self.buff=""
+	def close(self):
+		self.writelog()
+		self.logfile.close()
 
 #trom loader. can also be used for other file types.
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")

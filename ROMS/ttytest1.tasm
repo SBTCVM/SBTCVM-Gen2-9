@@ -9,61 +9,47 @@ head-nspin=stdnsp
 #'SBTCVM'
 #'\ ;|'
 
-
+fopset1;>io.ttywr
 #---print 'abc'---
-setreg1;:a
-iowrite1;>io.ttywr
-setreg1;:b
-iowrite1;>io.ttywr
-setreg1;:c
-iowrite1;>io.ttywr
+fopwri1;:a
+fopwri1;:b
+fopwri1;:c
 
 #---newline---
-setreg1;:\n
-iowrite1;>io.ttywr
+fopwri1;:\n
+
 
 #---print 'SBTCVM'---
-setreg1;:S
-iowrite1;>io.ttywr
-setreg1;:B
-iowrite1;>io.ttywr
-setreg1;:T
-iowrite1;>io.ttywr
-setreg1;:C
-iowrite1;>io.ttywr
-setreg1;:V
-iowrite1;>io.ttywr
-setreg1;:M
-iowrite1;>io.ttywr
-
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:C
+fopwri1;:V
+fopwri1;:M
 
 #---special chars---
 
 #newline
-setreg1;:\n
-iowrite1;>io.ttywr
+fopwri1;:\n
+
 
 #null. (TTY will ignore this, mainly useful for terminating strings read via memory pointers.)
-setreg1;:\0
-iowrite1;>io.ttywr
+fopwri1;:\0
 
 #---normal chars with escapes---
 
 #backslash. (mainly to ease string parsing)
-setreg1;:\b
-iowrite1;>io.ttywr
+fopwri1;:\b
 
 #space
-setreg1;:\s
-iowrite1;>io.ttywr
+fopwri1;:\s
 
 #semicolon
-setreg1;:\c
-iowrite1;>io.ttywr
+fopwri1;:\c
 
 #vertical bar
-setreg1;:\v
-iowrite1;>io.ttywr
+fopwri1;:\v
+
 
 
 
