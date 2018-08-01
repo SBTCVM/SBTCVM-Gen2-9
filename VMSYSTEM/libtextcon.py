@@ -4,10 +4,10 @@ from . import libbaltcalc
 btint=libbaltcalc.btint
 import os
 import sys
-#character data
-
-
-#print(len(chardata3))
+#SBTCVM-BTT2: SBTCVM Gen2's next generation text encoding.
+#NOTE: while the encoding currently contains ~100 chars, and the latin set
+#   begins at MNI(5), various virtual hardware & software of SBTCVM is designed
+#   to accept a full 9 trits.
 
 class schr:
 	def __init__(self, uchar, asmchar, dataval, chrname=None, dumpstr=None, bldumpstr=None):
@@ -38,7 +38,7 @@ def nchr(uchar, dataval):
 #----------dataset startup code below---------
 
 
-# master normal character reference for SBTCVM-BTT-6-v2 (SBTCVM-BTT2)
+# master latin bank #1 character reference for SBTCVM-BTT2
 #WARNING: THE ORDER OF CHARS IN STRING DETERMINE HOW THEY ARE MAPPED!
 #ensure each of these are precisely 27 chars long.
 chardata0="""abcdefghijklmnopqrstuvwxyz """
@@ -50,7 +50,7 @@ chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
 #normal characters that require escaping.
 asmchar_special={"|": "\\v", ";": "\\c", "\\": "\\b", " ": "\\s"}
 
-
+# Special bank #1 (0-??)
 #Special case chars (currently newline and NULL. Both have fixed positions in datastructure.)
 
 spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", ".")]
@@ -63,8 +63,11 @@ spcharlist_asm=["\\n", "\\0"]
 normchars=[]
 normcharlist=list(chardata0 + chardata1 + chardata2 + chardata3)
 
+#latin bank #1 (MNI(5)-0)
+
 #assign codes to each of the normal chars algorithmically.
-charval=libbaltcalc.mni(9)
+charval=libbaltcalc.mni(5)
+#charval=1
 for ch in normcharlist:
 	normchars.extend([nchr(ch, charval)])
 	charval+=1
@@ -73,7 +76,7 @@ for ch in normcharlist:
 		charval+=2
 
 
-#debug messages (comment out if not working on lib)
+####debug messages (comment out if not working on lib)
 #print("SBTCVM-BTT2 (libtextcon): Last assigned normal char: '" + ch + "'")
 #print("SBTCVM-BTT2 (libtextcon): next available normal charcode: '" + str(charval) + "'")
 #print("SBTCVM-BTT2 (libtextcon): normal chars assigned: " + str(len(normcharlist)))
