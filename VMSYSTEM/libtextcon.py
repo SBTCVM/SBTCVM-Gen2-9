@@ -64,7 +64,7 @@ normchars=[]
 normcharlist=list(chardata0 + chardata1 + chardata2 + chardata3)
 
 #assign codes to each of the normal chars algorithmically.
-charval=libbaltcalc.mni(6)
+charval=libbaltcalc.mni(9)
 for ch in normcharlist:
 	normchars.extend([nchr(ch, charval)])
 	charval+=1
