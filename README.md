@@ -2,8 +2,6 @@
 Simple Balanced Ternary Computer Virtual Machine     
      
 v2.1.0.alpha    
-    
-PRE-ALPHA! THIS VERSION OF SBTCVM IS STILL IN DEVELOPMENT!    
      
 If you need help, see the SBTCVM users manual located in     
 the "manual" directory.     
