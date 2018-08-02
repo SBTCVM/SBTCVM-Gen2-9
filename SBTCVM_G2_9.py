@@ -24,13 +24,36 @@ if cmd in ['help', '-h', '--help']:
 	print('''SBTCVM Gen2-9 virtual machine. curses frontend.
 help, -h, --help: this help.
 -v, --version: VM version
+-a, --about: about SBTCVM
 [trom], -r [trom], --run [trom]: launch SBTCVM with the selected TROM image 
     loaded into memory.
 -s [trom] {CPU speed in Hz}, --slow [trom] {CPU speed in Hz}:
    -s overrides the default CPU clock speed. You may specify a float/int Hz value
     (after the trom filename). defaults to 2Hz''')
+elif cmd in ["-a", "--about"]:
+	print('''SBTCVM Gen2-9 virtual machine. curses frontend.
+v2.1.0.alpha
+
+Copyright (c) 2016-2018 Thomas Leathers and Contributors 
+
+see readme.md for more information and licensing of media.
+
+  SBTCVM Gen2-9 is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  SBTCVM Gen2-9 is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
+  
+  ''')
 elif cmd in ['-v', '--version']:
-	print('v2.1.0.PRE-ALPHA')
+	print('v2.1.0.alpha')
 else:
 	slow=0
 	if cmd==None:

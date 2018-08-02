@@ -25,11 +25,35 @@ if __name__=="__main__":
 For SBTCVM Gen2-9.
 help, -h, --help: this help
 -v, --version: assembler version
+-a, --about: about SBTCVM
 -b, (tasmname/xasname): build SBTCVM tasm source file into rom at same location or run an xas script.
 -s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
 (tasmname/xasname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
 		print(asmvers)
+	elif cmd in ["-a", "--about"]:
+		print('''SBTCVM Assembler v3
+''' + asmvers + '''
+part of SBTCVM-Gen2-9 (v2.1.0.alpha)
+
+Copyright (c) 2016-2018 Thomas Leathers and Contributors 
+
+see readme.md for more information and licensing of media.
+
+  SBTCVM Gen2-9 is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  SBTCVM Gen2-9 is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
+  
+  ''')
 	else:
 		if cmd==None:
 			print("Tip: Try g2-asm.py -h for help.")

@@ -61,13 +61,37 @@ if __name__=="__main__":
 		print('''SBTCVM Gen2 romdump utility. v1.0.0
 -h --help: this help
 -v --version: version
+-a, --about: about SBTCVM
 -d [trom] dump contents of trom to standard output in +0- form. instructions and data colums separated by two spaces. "  "
 -r [trom] same as -d, but also prints chars & decimal values
 -dnp [trom] same as -d, but using n0p representation.
 -rnp [trom] same as -dnp, but also prints chars & decimal values
 [trom] (with no options) same as -d''')
 	elif cmd in ["-v", "--version"]:
-		print("SBTCVM Gen2 romdump utility. v1.0.0")
+		print("SBTCVM Gen2 romdump utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
+	elif cmd in ["-a", "--about"]:
+		print('''SBTCVM Gen2-9 romdump utility.
+v1.0.0
+part of SBTCVM-Gen2-9 (v2.1.0.alpha)
+
+Copyright (c) 2016-2018 Thomas Leathers and Contributors 
+
+see readme.md for more information and licensing of media.
+
+  SBTCVM Gen2-9 is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  SBTCVM Gen2-9 is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
+  
+  ''')
 	elif cmd in ["-d"]:
 		romdump(iofuncts.loadtrom(arg))
 	elif cmd in ["-dnp"]:

@@ -1,7 +1,7 @@
 #SBTCVM Gen2 9-trit      
 Simple Balanced Ternary Computer Virtual Machine     
      
-v2.1.0     
+v2.1.0.alpha    
     
 PRE-ALPHA! THIS VERSION OF SBTCVM IS STILL IN DEVELOPMENT!    
      
