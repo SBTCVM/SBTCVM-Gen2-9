@@ -1,0 +1,14 @@
+In any of the standard ROM/Source/important-file paths
+
+ROMS
+VMSYSTEM
+VMSYSTEM/ROMS
+VMUSER
+
+you can use subdirectories prefixed with 'r_' to create project directories that are also searched.
+
+
+Any utility who wishes to use this feature MUST use either findtrom or loadtrom
+in iofuncts to load files for which this feature is needed.
+
+Recommended for anything that produces or works with source code!
