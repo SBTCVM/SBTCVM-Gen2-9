@@ -1,0 +1,12 @@
+print;---Standard library rebuild script.---
+
+#standard library master build script.
+
+
+
+#Standard namespace library
+print;standard namespace library
+asm;stdnsp
+
+
+print;rebuild complete.
