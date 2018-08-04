@@ -1,0 +1,23 @@
+var data1=10x1
+var data2=10x1
+var data3=10x0
+
+#Sbtcvm simplified ternary numeric programming langauge
+label bob
+
+
+goto bob
+
+
+label sam
+do data3=data1+data2
+do data1=data1+data2
+dumpd data3
+dumpt data3
+print Hello world
+return
+
+
+#other commands
+#copy data1 data2#copy data1 to data2
+#swap data1 data2#swap data1 and data2

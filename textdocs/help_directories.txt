@@ -1,0 +1,48 @@
+Help on SBTCVM's directories:
+
+
+
+Path directories (in search order):
+VMSYSTEM
+VMSYSTEM/ROMS
+ROMS
+VMUSER
+
+SBTCVM also searches subdirectories (project directories) in the 4 main path directories, provided
+they are prefixed with 'r_'.
+
+SBTCVM's path system allows files to be specified via just the base name. 
+even the extension can be omitted in some cases.
+
+e.g.
+
+g2asm.py example would match VMUSER/r_myproject/example.tasm
+
+
+VMSYSTEM:
+
+This directory contains much of SBTCVM's code. Also, important assembler and
+rom files are here two. such as the default trom, and the assembler's 
+standard library.
+
+ROMS:
+
+This directory contains most of the included VM software, along with its source code.
+(This includes test code used in development)
+
+VMUSER:
+
+This is the user's personal directory for any roms, project directories, source code, etc.
+
+
+plugins: 
+
+This directory contains plugins for various SBTCVM utilities and programs.
+
+textdocs:
+
+Various development and general documentation.
+
+extras:
+
+Assorted extra content. mainly graphics & logos.
