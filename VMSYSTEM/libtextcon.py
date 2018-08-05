@@ -76,6 +76,7 @@ for ch in normcharlist:
 		charval+=2
 
 
+
 ####debug messages (comment out if not working on lib)
 #print("SBTCVM-BTT2 (libtextcon): Last assigned normal char: '" + ch + "'")
 #print("SBTCVM-BTT2 (libtextcon): next available normal charcode: '" + str(charval) + "'")
@@ -84,12 +85,21 @@ for ch in normcharlist:
 #build main character list
 allchars=normchars+spchars
 
+normal_char_list=normcharlist
+
 
 #build dict for UIO to use.
 dattostr={}
 for ch in allchars:
 	if ch.uchar!=None:
 		dattostr[ch.dataval]=ch.uchar
+		
+
+#build asm char lookup for compilers
+chartoasmchar={}
+for ch in allchars:
+	if ch.uchar!=None:
+		chartoasmchar[ch.uchar]=ch.asmchar
 
 #--- ASSEMBLER DATA STRUCTURES ---
 

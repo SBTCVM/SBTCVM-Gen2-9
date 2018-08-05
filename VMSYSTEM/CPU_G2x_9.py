@@ -66,6 +66,12 @@ class cpu:
 			tmpval=self.reg1.intval
 			self.reg1.changeval(self.reg2.intval)
 			self.reg2.changeval(tmpval)
+		#invert1
+		elif self.instval.intval == -9836:
+			self.reg1.changeval( - self.reg1.intval)
+		#invert2
+		elif self.instval.intval == -9835:
+			self.reg2.changeval( - self.reg2.intval)
 		#ALU
 		#add
 		elif self.instval.intval == -9800:

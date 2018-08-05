@@ -3,7 +3,7 @@ import VMSYSTEM.libbaltcalc as libbaltcalc
 import sys
 import os
 import VMSYSTEM.iofuncts as iofuncts
-import VMSYSTEM.g2asmlib as g2asmlib
+import VMSYSTEM.stnplib as stnplib
 from VMSYSTEM.g2asmlib import mainloop
 
 
@@ -25,16 +25,19 @@ if __name__=="__main__":
 	except:
 		arg=None
 	if cmd in ['help', '-h', '--help']:
-		print('''SBTCVM simplfied ternary numeric programming language.
+		print('''SBTCVM simplified ternary numeric programming language.
 For SBTCVM Gen2-9.
 help, -h, --help: this help
 -v, --version: stnp compiler version
 -a, --about: about SBTCVM
+-c [sourcefile], --compile [sourcefile]: Compile source file into a tasm file, then
+    run the assembler on it automatically, if successful.
+[sourcefile]: same as -c
 Note: if source is example.stnp, tasm file will be example__stnp.tasm. rom will be example.trom''')
 	elif cmd in ['-v', '--version']:
 		print(stnpvers)
 	elif cmd in ["-a", "--about"]:
-		print('''SBTCVM simplfied ternary numeric programming language.
+		print('''SBTCVM simplified ternary numeric programming language.
 ''' + stnpvers + '''
 part of SBTCVM-Gen2-9 (v2.1.0.alpha)
 
@@ -57,4 +60,10 @@ see readme.md for more information and licensing of media.
   
   ''')
 	else:
-		print("COMPILER NOT READY!")
+		if cmd in ['-c', '--compile']:
+			argx=arg
+		else:
+			argx=cmd
+		pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP")
+		stnplib.compwrap(pathx)
+		

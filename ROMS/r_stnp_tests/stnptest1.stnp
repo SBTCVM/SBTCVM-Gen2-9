@@ -1,0 +1,50 @@
+var data1=10x1
+var data2=10x3000
+var data3=10x0
+var endcount=10x900
+#make data2 1 (as example of a val, set pair)
+val 10x1
+set data2
+
+#Sbtcvm simplified ternary numeric programming language
+label bob
+goto sam
+#conditional goto: in this example if data1==endcount goto: label 'end'
+if data1,endcount goto end
+goto bob
+
+#subroutine
+label sam
+
+#add data1 and data2. notice how set must be used to assign the result to variable(s).
+add data1,data2
+set data3
+set data1
+#io.decdump
+dumpd data3
+#print space
+space
+#io.tritdump
+dumpt data3
+#invert data3
+space
+invert data3
+dumpd data3
+
+#print command
+print  Hello world
+#print newline
+newline
+return
+
+#shutdown routine
+label end
+print goodbye :)
+stop
+
+#other commands (not tested here for other than syntax and
+#   checking for blatantly broken parser instruction classes)
+copy data1,data2#  copy data1 to data2
+swap data1,data2#  swap data1 and data2
+ifmore data1,data2 goto end
+ifless data1,data2 goto end
