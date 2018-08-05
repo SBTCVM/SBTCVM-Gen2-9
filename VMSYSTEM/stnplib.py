@@ -160,7 +160,7 @@ class in_labelgoto:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + args + "'"
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
 		
-		destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto__jumper_" +  str(lineno) + "\nadddata1;+\ndatawrite1;>stnpreturnpoint\ngoto;>" + args +"--label" + "\nnull;;goto__jumper_" +  str(lineno) + "\n")
+		destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto__jumper_" +  str(lineno) + "\ndatawrite1;>stnpreturnpoint\ngoto;>" + args +"--label" + "\nnull;;goto__jumper_" +  str(lineno) + "\n")
 		return
 
 class in_condgoto:
@@ -198,7 +198,7 @@ dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto__branch_''' + str(lineno) + '''
 goto;>goto__jumper_''' +  str(lineno) + '''
-setreg1;>goto__jumper_''' +  str(lineno) + ";goto__branch_" +  str(lineno) + "\nadddata1;+\ndatawrite1;>stnpreturnpoint\ngoto;>" + label + "--label\nnull;;goto__jumper_" +  str(lineno) + "\n")
+setreg1;>goto__jumper_''' +  str(lineno) + ";goto__branch_" +  str(lineno) + "\ndatawrite1;>stnpreturnpoint\ngoto;>" + label + "--label\nnull;;goto__jumper_" +  str(lineno) + "\n")
 		return
 
 class in_int2opmath:

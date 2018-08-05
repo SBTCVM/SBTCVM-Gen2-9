@@ -17,7 +17,6 @@ datawrite1;>data2
 null;;bob--label
 #goto (extra code stores away return address.)
 setreg1;>goto__jumper_11
-adddata1;+
 datawrite1;>stnpreturnpoint
 goto;>sam--label
 null;;goto__jumper_11
@@ -27,13 +26,11 @@ dataread2;>endcount
 gotoif;>goto__branch_13
 goto;>goto__jumper_13
 setreg1;>goto__jumper_13;goto__branch_13
-adddata1;+
 datawrite1;>stnpreturnpoint
 goto;>end--label
 null;;goto__jumper_13
 #goto (extra code stores away return address.)
 setreg1;>goto__jumper_14
-adddata1;+
 datawrite1;>stnpreturnpoint
 goto;>bob--label
 null;;goto__jumper_14
@@ -111,7 +108,6 @@ dataread2;>data2
 gotoifmore;>goto__branch_49
 goto;>goto__jumper_49
 setreg1;>goto__jumper_49;goto__branch_49
-adddata1;+
 datawrite1;>stnpreturnpoint
 goto;>end--label
 null;;goto__jumper_49
@@ -121,7 +117,6 @@ dataread2;>data2
 gotoifless;>goto__branch_50
 goto;>goto__jumper_50
 setreg1;>goto__jumper_50;goto__branch_50
-adddata1;+
 datawrite1;>stnpreturnpoint
 goto;>end--label
 null;;goto__jumper_50
