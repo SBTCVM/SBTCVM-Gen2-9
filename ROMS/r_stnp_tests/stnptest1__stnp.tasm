@@ -14,12 +14,12 @@ setreg1;10x1
 #set (used after 2-op math, or get)
 datawrite1;>data2
 #label
-null;;bob
+null;;bob--label
 #goto (extra code stores away return address.)
 setreg1;>goto__jumper_11
 adddata1;+
 datawrite1;>stnpreturnpoint
-goto;>sam
+goto;>sam--label
 null;;goto__jumper_11
 #conditional goto
 dataread1;>data1
@@ -29,16 +29,16 @@ goto;>goto__jumper_13
 setreg1;>goto__jumper_13;goto__branch_13
 adddata1;+
 datawrite1;>stnpreturnpoint
-goto;>end
+goto;>end--label
 null;;goto__jumper_13
 #goto (extra code stores away return address.)
 setreg1;>goto__jumper_14
 adddata1;+
 datawrite1;>stnpreturnpoint
-goto;>bob
+goto;>bob--label
 null;;goto__jumper_14
 #label
-null;;sam
+null;;sam--label
 #add (2op math)
 dataread1;>data1
 dataread2;>data2
@@ -83,7 +83,7 @@ fopwri1;:\n
 dataread1;>stnpreturnpoint
 gotoreg1
 #label
-null;;end
+null;;end--label
 #print
 fopwri1;:g
 fopwri1;:o
@@ -113,7 +113,7 @@ goto;>goto__jumper_49
 setreg1;>goto__jumper_49;goto__branch_49
 adddata1;+
 datawrite1;>stnpreturnpoint
-goto;>end
+goto;>end--label
 null;;goto__jumper_49
 #conditional goto
 dataread1;>data1
@@ -123,6 +123,6 @@ goto;>goto__jumper_50
 setreg1;>goto__jumper_50;goto__branch_50
 adddata1;+
 datawrite1;>stnpreturnpoint
-goto;>end
+goto;>end--label
 null;;goto__jumper_50
 #END OF FILE

@@ -23,7 +23,7 @@ class npvar:
 
 tritvalid="+0-pn"
 varvalid="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_1234567890"
-reservednames=["stnpreturnpoint"]
+reservednames=["stnpreturnpoint", ""]
 class in_var:
 	def __init__(self):
 		self.keywords=["var"]
@@ -39,7 +39,6 @@ class in_var:
 				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in variable name! '" + char + "'"
 		if name in reservednames:
 			return 1, keyword+": Line: " + str(lineno) + ": variable name: '" + args + "' Is reserved."
-
 		if data.startswith("10x"):
 			try:
 				int(data[3:])
@@ -106,7 +105,7 @@ class in_label:
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
-		destobj.write("#label\n" + "null;;" + args + "\n")
+		destobj.write("#label\n" + "null;;" + args+"--label" + "\n")
 		return
 
 class in_intcommon1:
@@ -158,10 +157,10 @@ class in_labelgoto:
 		if args in labels:
 			return 0, None
 		else:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + args + "'"
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
 		
-		destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto__jumper_" +  str(lineno) + "\nadddata1;+\ndatawrite1;>stnpreturnpoint\ngoto;>" + args + "\nnull;;goto__jumper_" +  str(lineno) + "\n")
+		destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto__jumper_" +  str(lineno) + "\nadddata1;+\ndatawrite1;>stnpreturnpoint\ngoto;>" + args +"--label" + "\nnull;;goto__jumper_" +  str(lineno) + "\n")
 		return
 
 class in_condgoto:
@@ -180,7 +179,7 @@ class in_condgoto:
 		if label in labels:
 			return 0, None
 		else:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + label + "'"
 		for x in arglist[0].split(","):
 			if x in valid_nvars:
 				return 0, None
@@ -199,7 +198,7 @@ dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto__branch_''' + str(lineno) + '''
 goto;>goto__jumper_''' +  str(lineno) + '''
-setreg1;>goto__jumper_''' +  str(lineno) + ";goto__branch_" +  str(lineno) + "\nadddata1;+\ndatawrite1;>stnpreturnpoint\ngoto;>" + label + "\nnull;;goto__jumper_" +  str(lineno) + "\n")
+setreg1;>goto__jumper_''' +  str(lineno) + ";goto__branch_" +  str(lineno) + "\nadddata1;+\ndatawrite1;>stnpreturnpoint\ngoto;>" + label + "--label\nnull;;goto__jumper_" +  str(lineno) + "\n")
 		return
 
 class in_int2opmath:
