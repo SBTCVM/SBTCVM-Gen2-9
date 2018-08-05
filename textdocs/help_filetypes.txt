@@ -4,6 +4,7 @@ Help on SBTCVM-specific filetypes and certain special files:
 
  >>> source code & related: <<<
 *.tasm: normal SBTCVM assembly source code file.
+*.stnp: SBTCVM Simplified Ternary Numeric Programming Language source code.
 *.trom: SBTCVM VM memory image. (a common way of loading programs into the VM)
 *.tas0: SBTCVM assembly library file. assembled automatically when imported.
 *.nsp : SBTCVM assembly namespace library. Used for sharing tasm-sourcefile-specific

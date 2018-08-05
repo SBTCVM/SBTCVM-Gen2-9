@@ -1,0 +1,22 @@
+Help on the various python programs & utilities included with SBTCVM gen 2-9
+
+>>>g2asm.py:
+   SBTCVM's assembler. Not only does it act as the primary language SBTCVM's
+   VM is programmed with, it also acts as a target for other programming
+   languages, like SSTNPL. Helps to have a grasp of balanced ternary and how
+   lower level programming works.
+   It also is in charge of running XAS build scripts.
+>>>stnpcom.py:
+   the SSTNPL compiler. This is the ideal way to learn balanced ternary math,
+   along with a bit of programing too. Ideal for beginners. for more serious
+   algorithms, you may find the assembler better suited.
+   When used, the SSTNPL compiler will automatically run the assembler for you.
+
+>>>romdump.py:
+   A nifty SBTCVM trom dump utility with 2 formatting modes and 2 trit
+   representations. akin to unix/linux 'hexdump' command.
+   
+>>>SBTCVM_G2_9.py:
+   SBTCVM's virtual machine. (with curses frontend)
+   This version must be run in a terminal!
+   also, the curses frontend may lack certain features. i.e. graphics.

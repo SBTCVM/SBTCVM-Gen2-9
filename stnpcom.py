@@ -30,10 +30,11 @@ For SBTCVM Gen2-9.
 help, -h, --help: this help
 -v, --version: stnp compiler version
 -a, --about: about SBTCVM
--c [sourcefile], --compile [sourcefile]: Compile source file into a tasm file, then
-    run the assembler on it automatically, if successful.
+-c [sourcefile], --compile [sourcefile]: Compile source file into a tasm file,
+  then run the assembler on it automatically, if successful.
 [sourcefile]: same as -c
-Note: if source is example.stnp, tasm file will be example__stnp.tasm. rom will be example.trom''')
+Note: if source is example.stnp, tasm file will be example__stnp.tasm. rom
+   will be example.trom''')
 	elif cmd in ['-v', '--version']:
 		print(stnpvers)
 	elif cmd in ["-a", "--about"]:
