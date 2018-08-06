@@ -1,0 +1,66 @@
+
+#tell the assembler we want to build a memory image (.trom)
+head-mode=trom
+#tell assembler to include stdnsp (part of assembler's standard library)
+
+head-nspin=stdnsp
+
+null;;reg2temp
+
+#setup F.O.P. #1 for tty printing so we can quickly format our output.
+fopset1;>io.ttywr
+
+#set reg1 and reg2 to 1
+setreg1;10x1
+setreg2;+
+
+
+
+#--------MAINLOOP--------
+#print and format our results to TTY
+iowrite1;>io.decdump;loopbegin
+fopwri1;:\s
+iowrite1;>io.tritdump
+fopwri1;:\n
+
+#check our output for last number (4181)
+datawrite2;>reg2temp
+setreg2;10x4181
+gotoif;>end
+dataread2;>reg2temp
+
+#do the math
+add
+regswap
+
+#return to first part of loop (printing section)
+goto;>loopbegin
+
+
+#exit
+null;;end
+
+#print 'SBTCVM ASM'
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:C
+fopwri1;:V
+fopwri1;:M
+fopwri1;:\s
+fopwri1;:A
+fopwri1;:S
+fopwri1;:M
+
+stop
+
+
+
+
+
+
+
+
+
+
+

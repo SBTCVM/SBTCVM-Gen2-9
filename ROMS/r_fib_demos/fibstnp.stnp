@@ -1,0 +1,39 @@
+#Fibonacci sequence in SSTNPL
+
+var endnum=10x4181
+
+#both of these == 1 at first.
+var num0=10x1
+var num1=+
+
+
+
+#----mainloop----
+label loop
+
+#result printing:
+dumpd num0
+space
+dumpt num0
+newline
+
+#end condition
+if num0,endnum goto end
+
+#math
+add num0,num1
+set num0
+swap num0,num1
+
+#loop back around
+goto loop
+
+
+
+
+
+
+#end routine
+label end
+print written in SSTNPL
+stop

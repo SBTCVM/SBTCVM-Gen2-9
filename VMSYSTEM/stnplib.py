@@ -249,7 +249,7 @@ class in_int2opswap:
 
 class in_int2opcopy:
 	def __init__(self):
-		self.keywords=["swap"]
+		self.keywords=["copy"]
 	def p0(self, args, keyword, lineno):
 		return 0, None
 	def p1(self, args, keyword, lineno):
