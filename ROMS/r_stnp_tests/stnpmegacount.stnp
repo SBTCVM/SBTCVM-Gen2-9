@@ -1,0 +1,40 @@
+var minicount=10x0
+var megacount=---------
+var addval=10x1
+var endval=+++++++++
+var endval2=10x-9839
+
+label mainloop
+val ---------
+set minicount
+
+goto sub
+label subreturn
+
+add megacount,addval
+set megacount
+
+if endval2,megacount goto end
+
+goto mainloop
+
+label sub
+dumpt minicount
+space
+dumpd megacount
+newline
+
+add minicount,addval
+set minicount
+
+
+if endval,minicount goto subreturn
+
+goto sub
+
+
+
+
+
+label end
+stop
