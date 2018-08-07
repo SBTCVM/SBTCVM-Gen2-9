@@ -9,8 +9,8 @@ from VMSYSTEM.g2asmlib import mainloop
 
 
 
-stnpvers='v0.1.0'
-versint=(0, 1, 0)
+stnpvers=stnplib.stnpvers
+versint=stnplib.versint
 
 
 

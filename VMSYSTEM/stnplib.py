@@ -10,9 +10,11 @@ nptype_int=2
 nptype_str=3
 nptype_label=4
 
+
+
+
 stnpvers='v0.1.0'
 versint=(0, 1, 0)
-
 
 class npvar:
 	def __init__(self, vname, vdata, vtype=nptype_int):
