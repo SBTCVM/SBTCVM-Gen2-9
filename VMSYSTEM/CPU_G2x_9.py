@@ -36,11 +36,13 @@ class cpu:
 		self.dataval=btint(0)
 		self.instval=btint(0)
 	def cycle(self):
-		if self.execpoint>9841:
+		if self.execpoint.intval>9841:
 			if self.exception("Exec Pointer Overrun", -3):
 				return 1, -3, "Exec Pointer Overrun"
-		self.instval.changeval(self.memsys.getinst(self.execpoint))
-		self.dataval.changeval(self.memsys.getdata(self.execpoint))
+		#self.instval.changeval(self.memsys.getinst(self.execpoint))
+		#self.dataval.changeval(self.memsys.getdata(self.execpoint))
+		self.instval.intval=self.memsys.getinst(self.execpoint).intval
+		self.dataval.intval=self.memsys.getdata(self.execpoint).intval
 		#print(self.instval.intval)
 		#print(self.dataval.intval)
 		#print(self.reg1.intval)
@@ -250,7 +252,7 @@ class cpu:
 		elif self.instval.intval == -9000:
 			if self.exception("soft stop.", -1):
 				return 1, -1, "soft stop."
-		self.execpoint+=1
+		self.execpoint.intval+=1
 		return None
 	#pointer rollover code.
 	def pointeroll1(self):
@@ -274,7 +276,7 @@ class cpu:
 	
 	#goto function
 	def goto(self, address):
-		self.execpoint.changeval(address)
+		self.execpoint.intval=address
 		return
 	#stub. fill out with needed code once exception/interrupt system is active.
 	def exception(self, status, exid):
