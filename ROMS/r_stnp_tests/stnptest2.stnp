@@ -1,0 +1,56 @@
+var data1=10x300
+var data2=10x700
+
+
+#basic test of embedded assembler code within SSTNPL source code.
+
+#BE WARNED: while the embedded assembler support is powerful,
+#it also makes it very easy to break you SSTNPL program if misused.
+
+
+#to embed assembly into SSTNPL use the 'asm' keyword (or its shortcut 'a')
+#be sure to include a space between the keyword and the start of the assembler
+#line of code.  Also, comments are not placed into the assembler output.
+
+#ensure you use the asm/a keyword for each line of assembler code.
+
+#for lengthy routines, using tas0 files isn't a bad idea, and actually may
+#be less likely to cause broken code.
+
+#Integer variables are identical in name
+#goto labels take this form: '<name>--label' so if <name>='bob' it would
+#be 'bob--label' in assembly code.
+
+
+
+get1 data1
+
+
+#you /can/ throw in some assembler. it might break things in places,
+#but SSTNPL isn't going to stop you :p
+#SSTNPL does include stdnsp.nsp (standard namespace library)
+
+#this is redundant in practice, as the dumpd keyword does this, but it serves as an example.
+
+asm iowrite1;>io.decdump
+
+
+
+#get1 is the same as get, but do use get1 and set1 when you use embedded assembly. especially if you also use get2 and set2.
+
+get1 data2
+get2 data1
+
+
+
+###assembler code section
+#'a ' can also be used.
+
+a iowrite1;>io.decdump
+a iowrite2;>io.tritdump
+a dataread1;>data1
+a iowrite1;>io.decdump
+
+###end of assembler code.
+
+stop

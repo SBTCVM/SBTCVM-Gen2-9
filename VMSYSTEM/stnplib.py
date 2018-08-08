@@ -110,6 +110,21 @@ class in_label:
 		destobj.write("#label\n" + "null;;" + args+"--label" + "\n")
 		return
 
+
+class in_rawasm:
+	def __init__(self):
+		self.keywords=["a", "asm"]
+	def p0(self, args, keyword, lineno):
+		print("Embedded assembly code at line: '" + str(lineno) + "': " + args)
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return [npvar(args, None, vtype=nptype_label)]
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+		destobj.write("#___RAW ASSEMBLY CODE___\n#_______NOTE: this corresponds to SSTNPL source line #" + str(lineno) + "\n" + args + "\n")
+		return
+
 class in_intcommon1:
 	def __init__(self, keywords, prearg, postarg, comment):
 		self.keywords=keywords
@@ -355,8 +370,10 @@ class mainloop:
 		self.instructs=[in_var(),
 		in_label(),
 		in_intcommon1(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
-		in_intcommon1(["set"], "datawrite1;>", "\n", "set (used after 2-op math, or get)"),
-		in_intcommon1(["get"], "dataread1;>", "\n", "get (may be used with set)"),
+		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
+		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
+		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),
+		in_intcommon1(["get2"], "dataread2;>", "\n", "get2 (may be used with set2, and asm code.)"),
 		in_int2opmath(["add"], "add\n", "add (2op math)"),
 		in_int2opmath(["sub"], "sub\n", "subtract (2op math)"),
 		in_int2opmath(["div"], "div\n", "divide (2op math)"),
@@ -367,6 +384,7 @@ class mainloop:
 		in_val(),
 		in_invert(),
 		in_print(),
+		in_rawasm(),
 		in_condgoto(["if"], "gotoif"),
 		in_condgoto(["ifmore"], "gotoifmore"),
 		in_condgoto(["ifless"], "gotoifless"),
