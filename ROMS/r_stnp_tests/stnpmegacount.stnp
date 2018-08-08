@@ -1,14 +1,29 @@
+#----vars----:
+
+#this is set later.
 var minicount=10x0
+
+#start for BOTH counters
 var megacount=---------
+
+#increment for BOTH counters
 var addval=10x1
+
+#end value for subroutine counter.
 var endval=+++++++++
+
+#when to stop mainloop.
 var endval2=10x-9839
 
+#-------
+
+#main count routine (tracks how many times subroutine is run)
 label mainloop
 val ---------
 set minicount
 
 goto sub
+#return from the looping subroutine via label.
 label subreturn
 
 add megacount,addval
@@ -18,6 +33,8 @@ if endval2,megacount goto end
 
 goto mainloop
 
+
+#subroutine (counts from MNI(9) to MPI(9) in increments of 1)
 label sub
 dumpt minicount
 space
@@ -35,6 +52,6 @@ goto sub
 
 
 
-
+#exit routine
 label end
 stop
