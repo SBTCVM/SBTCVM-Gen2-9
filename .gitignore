@@ -8,3 +8,4 @@ CAP/*
 
 plugins/*
 !plugins/romdump.xascmd
+!plugins/sstnpl.xascmd

@@ -1,2 +1,4 @@
 dump;romdump.py;1;1
 dumpnp;romdump.py -dnp;1;1
+vdump;romdump.py -r;1;1
+vdumpnp;romdump.py -rnp;1;1
