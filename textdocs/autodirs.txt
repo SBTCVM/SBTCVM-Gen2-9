@@ -1,0 +1,27 @@
+Similar, but somewhat different to r_ (recursive) project directories,
+autodirs provide a means to sort project files.
+
+
+They require no prefix like project directories, however, they do only allow
+certain files into the path.
+
+Specifically:
+
+*.trom  SBTCVM VM memory image files.
+*.tasm  SBTCVM assembly source files.
+*.xas   XAS script files
+*.stnp  SSTNPL source code files.
+
+>>>>HOWEVER:
+
+files of these types MUST BE PREFIXED WITH 'auto_' IN THEIR FILENAMES!
+
+
+>>Technical notes on autodir implementation, and how to enable it.:
+
+in order for loadtrom and findtrom to use autodir functionality, you must
+specify the dirauto attribute as 1. i.e.:
+
+iofuncts.findtrom(filename, ext=".whatever", exitonfail=1, exitmsg="THIS IS AN EXAMPLE :)",  dirauto=1)
+
+

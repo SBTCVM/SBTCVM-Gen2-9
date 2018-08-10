@@ -1,0 +1,11 @@
+#use autodirname+filename. DO NOT USE '/' OR '\' !!!!
+print;This is a test of an XAS script in an autodir
+
+#SBTCVM uses a special path system that is limited to specific places
+#and conditions in its directory tree. These are agnostic across operating 
+#systems.
+
+#use + pathjoin syntax due to test.tasm not being in SBTCVM's path.
+
+
+asm;autodir_test+test.tasm

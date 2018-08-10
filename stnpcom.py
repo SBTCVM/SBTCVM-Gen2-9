@@ -65,6 +65,6 @@ see readme.md for more information and licensing of media.
 			argx=arg
 		else:
 			argx=cmd
-		pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP")
+		pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP", dirauto=1)
 		stnplib.compwrap(pathx)
 		

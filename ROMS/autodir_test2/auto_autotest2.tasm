@@ -1,0 +1,17 @@
+#this file is in the path. because its using the autodir 'auto_' file prefix.
+#(this only works on troms, tasm files, SSTNPL source, and XAS scripts. limit 1 per 
+#auto-directory.
+
+
+head-nspin=stdnsp
+
+fopset1;>io.ttywr
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:o
+fopwri1;:\s
+fopwri1;::
+fopwri1;:)
+

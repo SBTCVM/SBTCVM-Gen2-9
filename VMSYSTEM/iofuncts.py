@@ -25,9 +25,10 @@ class logit:
 		self.logfile.close()
 
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
+reservedpaths=["cfg"]
 
 def recur_dir(fnameg):
-	for maindir in ["VMSYSTEM", VMSYSROMS, "ROMS", "VMUSER", ]:
+	for maindir in ["VMSYSTEM", VMSYSROMS, "ROMS", "VMUSER"]:
 		for dirname in os.listdir(maindir):
 			dirpath=os.path.join(maindir, dirname)
 			if dirname.lower().startswith("r_") and os.path.isdir(dirpath):
@@ -36,9 +37,27 @@ def recur_dir(fnameg):
 					return filepath
 	return None
 
+def auto_dir(fnameg, ext):
+	#autodir functionality.
+	for maindir in ["VMSYSTEM", VMSYSROMS, "ROMS", "VMUSER"]:
+		dirpath=os.path.join(maindir, fnameg)
+		if os.path.isdir(dirpath):
+			for filex in os.listdir(dirpath):
+				if filex.lower().startswith("auto_") and filex.lower().endswith(ext):
+					fpath=os.path.join(dirpath, filex)
+					if os.path.isfile(fpath):
+						return fpath
+	return None
+
 #trom loader. can also be used for other file types.
 
-def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!"):
+def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!", dirauto=0):
+	if '+' in fname:
+		fname=os.path.join(*fname.split("+"))
+	if dirauto:
+		dirauret=auto_dir(fname, ext)
+		if dirauret!=None:
+			return open(dirauret, 'r')
 	for filenameg in [fname, fname+ext.lower(), fname+ext.upper()]:
 		if os.path.isfile(filenameg) and filenameg.lower().endswith(ext):
 			return (open(filenameg, "r"))
@@ -59,7 +78,13 @@ def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 	else:
 		return None
 #same as loadtrom, but returns path.
-def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!"):
+def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!", dirauto=0):
+	if '+' in fname:
+		fname=os.path.join(*fname.split("+"))
+	if dirauto:
+		dirauret=auto_dir(fname, ext)
+		if dirauret!=None:
+			return dirauret
 	for filenameg in [fname, fname+ext.lower(), fname+ext.upper()]:
 		if os.path.isfile(filenameg) and filenameg.lower().endswith(ext):
 			return (filenameg)
@@ -72,6 +97,7 @@ def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 			return (os.path.join("ROMS", filenameg))
 		elif os.path.isfile(os.path.join("VMUSER", filenameg)):
 			return (os.path.join("VMUSER", filenameg))
+		
 		recurret=recur_dir(filenameg)
 		if recurret!=None:
 			return (recurret)

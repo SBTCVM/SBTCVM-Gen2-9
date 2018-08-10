@@ -66,12 +66,12 @@ see readme.md for more information and licensing of media.
 			syntaxonly=1
 		else:
 			syntaxonly=0
-		pathx=iofuncts.findtrom(argx, ext=".xas", exitonfail=0, exitmsg="xas file was not found. STOP")
+		pathx=iofuncts.findtrom(argx, ext=".xas", exitonfail=0, exitmsg="xas file was not found. STOP", dirauto=1)
 		if pathx==None:
-			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source/xas file was not found. STOP")
+			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source/xas file was not found. STOP", dirauto=1)
 			g2asmlib.assemble(pathx, syntaxonly)
 		elif pathx.lower().endswith(".tasm"):
-			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source/xas file was not found. STOP")
+			pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source/xas file was not found. STOP", dirauto=1)
 			g2asmlib.assemble(pathx, syntaxonly)
 		elif pathx.lower().endswith(".xas"):
 			g2asmlib.xasparse(pathx, syntaxonly)

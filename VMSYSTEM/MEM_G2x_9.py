@@ -13,7 +13,7 @@ class memory:
 		self.DATDICT={}
 		linecnt=libbaltcalc.mni(9)
 		print("Setting up Virtual RAM subsystem")
-		TROMFILE=iofuncts.loadtrom(trom)
+		TROMFILE=iofuncts.loadtrom(trom, dirauto=1)
 		for rmline in TROMFILE:
 			rmline=rmline.replace("\n", "").split(",")
 			self.INSTDICT[linecnt]=btint(int(rmline[0]))

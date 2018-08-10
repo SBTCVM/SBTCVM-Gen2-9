@@ -1,0 +1,19 @@
+#this tasm file isn't in a normal path, 
+#because it doesn't have 'auto_' at the start of its name
+
+#however, auto_autotest.xas IS in the normal path.
+
+#ensure trom has 'auto_' at start of name so its detected.
+head-rname=auto_autotest
+head-nspin=stdnsp
+
+fopset1;>io.ttywr
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:o
+fopwri1;:\s
+fopwri1;::
+fopwri1;:)
+
