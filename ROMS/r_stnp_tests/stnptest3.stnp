@@ -1,0 +1,32 @@
+var countend=-0+0
+var countinc=+
+var counter=-----
+
+
+#prints SBTCVM-BTT2 latin bank 1 characters
+
+########mainloop########
+label loop
+
+#get value of counter
+get1 counter
+
+#write counter to TTY via some assembler.
+asm iowrite1;>io.ttywr
+space
+dumpt counter
+newline
+
+
+#add countinc to counter
+add counter,countinc
+set1 counter
+
+#####goto end if reached countend, else goto loop
+if counter,countend goto end
+goto loop
+
+
+
+label end
+stop
