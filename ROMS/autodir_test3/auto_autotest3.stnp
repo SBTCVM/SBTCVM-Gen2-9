@@ -1,0 +1,6 @@
+#this file is in the path. because its using the autodir 'auto_' file prefix.
+#(this only works on troms, tasm files, SSTNPL source, and XAS scripts. limit 1 per 
+#auto-directory.
+
+
+print hello :)

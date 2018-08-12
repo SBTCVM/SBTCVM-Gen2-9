@@ -14,35 +14,35 @@ null;10x-9839;endval2
 null;;mainloop--label
 #val (used with set to change variable value during runtime.)
 setreg1;---------
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>minicount
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-11
+setreg1;>goto--jumper-25
 datawrite1;>--stnpreturnpoint
 goto;>sub--label
-null;;goto--jumper-11
+null;;goto--jumper-25
 #label
 null;;subreturn--label
 #add (2op math)
 dataread1;>megacount
 dataread2;>addval
 add
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>megacount
 #conditional goto
 dataread1;>endval2
 dataread2;>megacount
-gotoif;>goto--branch-17
-goto;>goto--jumper-17
-setreg1;>goto--jumper-17;goto--branch-17
+gotoif;>goto--branch-32
+goto;>goto--jumper-32
+setreg1;>goto--jumper-32;goto--branch-32
 datawrite1;>--stnpreturnpoint
 goto;>end--label
-null;;goto--jumper-17
+null;;goto--jumper-32
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-19
+setreg1;>goto--jumper-34
 datawrite1;>--stnpreturnpoint
 goto;>mainloop--label
-null;;goto--jumper-19
+null;;goto--jumper-34
 #label
 null;;sub--label
 #Dump (trits)
@@ -59,22 +59,22 @@ fopwri1;:\n
 dataread1;>minicount
 dataread2;>addval
 add
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>minicount
 #conditional goto
 dataread1;>endval
 dataread2;>minicount
-gotoif;>goto--branch-31
-goto;>goto--jumper-31
-setreg1;>goto--jumper-31;goto--branch-31
+gotoif;>goto--branch-48
+goto;>goto--jumper-48
+setreg1;>goto--jumper-48;goto--branch-48
 datawrite1;>--stnpreturnpoint
 goto;>subreturn--label
-null;;goto--jumper-31
+null;;goto--jumper-48
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-33
+setreg1;>goto--jumper-50
 datawrite1;>--stnpreturnpoint
 goto;>sub--label
-null;;goto--jumper-33
+null;;goto--jumper-50
 #label
 null;;end--label
 #stop (shutdown vm)

@@ -33,7 +33,7 @@ null;;goto--jumper-21
 dataread1;>num0
 dataread2;>num1
 add
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>num0
 #swap variables 
 dataread1;>num0

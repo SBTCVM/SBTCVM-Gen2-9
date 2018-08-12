@@ -11,7 +11,7 @@ null;10x0;data3
 null;10x900;endcount
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>data2
 #label
 null;;bob--label
@@ -40,9 +40,9 @@ null;;sam--label
 dataread1;>data1
 dataread2;>data2
 add
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>data3
-#set (used after 2-op math, or get)
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>data1
 #Dump (decimal)
 dataread1;>data3

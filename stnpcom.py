@@ -4,7 +4,7 @@ import sys
 import os
 import VMSYSTEM.iofuncts as iofuncts
 import VMSYSTEM.stnplib as stnplib
-from VMSYSTEM.g2asmlib import mainloop
+#from VMSYSTEM.g2asmlib import mainloop
 
 
 

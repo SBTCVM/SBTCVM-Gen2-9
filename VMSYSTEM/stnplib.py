@@ -3,8 +3,9 @@ from . import libbaltcalc
 btint=libbaltcalc.btint
 import os
 import sys
-from subprocess import call
+#from subprocess import call
 from . import libtextcon as tcon
+from . import g2asmlib
 #variable type constants
 nptype_int=2
 nptype_str=3
@@ -333,12 +334,17 @@ null;---------;--stnpreturnpoint
 '''
 
 def compwrap(sourcepath):
+	##SSTNPL compile procedure function.
+	
 	basepath=sourcepath.rsplit(".", 1)[0]
 	bpdir=os.path.dirname(basepath)
 	bpname=os.path.basename(basepath)
+	asmname=bpname
 	
 	#open source file and init mainloop class
-	destpath=os.path.join(bpdir, bpname+"__stnp.tasm")
+	if asmname.startswith("auto_"):
+		asmname="x_" + asmname
+	destpath=os.path.join(bpdir, asmname + "__stnp.tasm")
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
@@ -355,7 +361,9 @@ def compwrap(sourcepath):
 	print("Pass 3: compile pass")
 	mainl.p3()
 	print("autorunning assembler:")
-	call(['python',  'g2asm.py', destpath])
+	#call(['python',  'g2asm.py', destpath])
+	#call assembler's wrapper function.
+	g2asmlib.assemble(destpath, syntaxonly=0, pfx=("g2asm:   "))
 	return
 
 

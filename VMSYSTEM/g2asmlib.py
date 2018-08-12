@@ -106,7 +106,7 @@ def assemble(pathx, syntaxonly=0, pfx=""):
 	
 	#open source file and init mainloop class
 	sourcefile=open(pathx, 'r')
-	mainl=mainloop(sourcefile, bpdir, bpname, pfx)
+	mainl=mainloop(sourcefile, bpdir, bpname, pfx=pfx)
 	
 	#parse header
 	mainl.headload()
@@ -464,7 +464,7 @@ class mainloop:
 			
 			if line.startswith("head-nspin="):
 				nspname=line.split("=")[1]
-				nspobj=iofuncts.loadtrom(nspname, ext=".nsp", exitonfail=1, exitmsg="ERROR: header: head-nspin: nonexistant nsp file! '" + nspname + "'")
+				nspobj=iofuncts.loadtrom(nspname, ext=".nsp", exitonfail=1, exitmsg="ERROR: header: head-nspin: nonexistant nsp file! '" + nspname + "'", dirauto=1)
 				for linex in nspobj:
 					linex=linex.replace("\n", "")
 					name, value = linex.split(";")
