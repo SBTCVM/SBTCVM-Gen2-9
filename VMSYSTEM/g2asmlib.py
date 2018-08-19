@@ -7,7 +7,7 @@ import os
 import sys
 from subprocess import call
 tritvalid="+0-pn"
-#assembler library
+#SBTCVM assembly v3 main routine library.
 
 xascmds=[]
 

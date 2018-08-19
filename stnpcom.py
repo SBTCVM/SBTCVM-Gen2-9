@@ -60,6 +60,8 @@ see readme.md for more information and licensing of media.
   along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
   
   ''')
+	if cmd == None:
+		print("Tip: Try stnpcom.py -h for help.")
 	else:
 		if cmd in ['-c', '--compile']:
 			argx=arg

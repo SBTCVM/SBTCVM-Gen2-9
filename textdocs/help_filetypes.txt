@@ -4,12 +4,15 @@ Help on SBTCVM-specific filetypes and certain special files:
 
  >>> source code & related: <<<
 *.tasm: normal SBTCVM assembly source code file.
-*.stnp: SBTCVM Simplified Ternary Numeric Programming Language source code.
+*.stnp: SBTCVM Simplified Ternary Numeric Programming Language (SSTNPL) source code.
 *.trom: SBTCVM VM memory image. (a common way of loading programs into the VM)
 *.tas0: SBTCVM assembly library file. assembled automatically when imported.
-*.nsp : SBTCVM assembly namespace library. Used for sharing tasm-sourcefile-specific
-*.xas : SBTCVM assembly script. Used for automating multi-file assembly program builds.
-     namespaces with other tasm source files. may also be used for any external language compilers and utilities.
+*.nsp : SBTCVM assembly namespace library. Used for sharing 
+     tasm-sourcefile-specific namespaces with other tasm source files.
+     must be assembled manually, or as a separate XAS script command.
+*.xas : SBTCVM assembly script. Used for automating multi-file program builds.
+     Not limited to assembler.
+
 
 
  >>> plugin files: <<<

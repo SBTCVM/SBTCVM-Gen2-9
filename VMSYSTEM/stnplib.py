@@ -12,7 +12,7 @@ nptype_str=3
 nptype_label=4
 
 
-
+#SSTNPL compiler main routine library.
 
 stnpvers='v0.1.0'
 versint=(0, 1, 0)

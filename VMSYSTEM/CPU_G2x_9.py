@@ -35,6 +35,9 @@ class cpu:
 		
 		self.dataval=btint(0)
 		self.instval=btint(0)
+		self.intercaught={}
+		self.intstack=[]
+		
 	def cycle(self):
 		if self.execpoint.intval>9841:
 			if self.exception("Exec Pointer Overrun", -3):
@@ -250,7 +253,7 @@ class cpu:
 		
 		#soft stop:
 		elif self.instval.intval == -9000:
-			if self.exception("soft stop.", -1):
+			if self.exception("soft stop.", -1, cancatch=0):
 				return 1, -1, "soft stop."
 		self.execpoint.intval+=1
 		return None
@@ -279,7 +282,8 @@ class cpu:
 		self.execpoint.intval=address
 		return
 	#stub. fill out with needed code once exception/interrupt system is active.
-	def exception(self, status, exid):
+	#ensure uncatchable exceptions set the cancatch attribute to zero.
+	def exception(self, status, exid, cancatch=1):
 		
 		return 1
 		

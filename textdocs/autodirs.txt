@@ -9,12 +9,18 @@ Specifically:
 
 *.trom  SBTCVM VM memory image files.
 *.tasm  SBTCVM assembly source files.
-*.xas   XAS script files
+*.xas   XAS script files.
+*.nsp   Assembler NameSpace libraries.
 *.stnp  SSTNPL source code files.
 
 >>>>HOWEVER:
 
 files of these types MUST BE PREFIXED WITH 'auto_' IN THEIR FILENAMES!
+
+sidenote:
+SSTNPL compiler will add a 'x_' prefix when the 'auto_' prefix is found in the
+SSTNPL source file.
+
 
 
 >>Technical notes on autodir implementation, and how to enable it.:

@@ -11,6 +11,9 @@ VMUSER
 SBTCVM also searches subdirectories (project directories) in the 4 main path directories, provided
 they are prefixed with 'r_'.
 
+SBTCVM will also load certain prefixed files from non-prefixed subdirectories,
+via the name of the subdirectory. (see autodirs.txt)
+
 SBTCVM's path system allows files to be specified via just the base name. 
 even the extension can be omitted in some cases.
 

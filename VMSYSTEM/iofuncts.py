@@ -6,7 +6,7 @@ import sys
 
 #file io common functions
 
-#Buffered logging class.
+#Buffered logging class. used in high-speed components. i.e. TTY's logging functionality.
 class logit:
 	def __init__(self, logname, buffsize=60):
 		self.buff=""
@@ -27,6 +27,7 @@ class logit:
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
 reservedpaths=["cfg"]
 
+#handles r_* directories.
 def recur_dir(fnameg):
 	for maindir in ["VMSYSTEM", VMSYSROMS, "ROMS", "VMUSER"]:
 		for dirname in os.listdir(maindir):
@@ -49,7 +50,7 @@ def auto_dir(fnameg, ext):
 						return fpath
 	return None
 
-#trom loader. can also be used for other file types.
+#trom loader. also used for other file types.
 
 def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!", dirauto=0):
 	if '+' in fname:
@@ -77,7 +78,7 @@ def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 		sys.exit(exitmsg)
 	else:
 		return None
-#same as loadtrom, but returns path.
+#same as loadtrom, but returns path. also used for other file types. i.e. source code in compilers.
 def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!", dirauto=0):
 	if '+' in fname:
 		fname=os.path.join(*fname.split("+"))

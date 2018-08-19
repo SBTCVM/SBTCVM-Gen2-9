@@ -5,6 +5,7 @@ btint=libbaltcalc.btint
 import os
 import sys
 
+#this is SBTCVM Gen 2's Memory bus subsystem.
 
 class memory:
 	def __init__(self, trom):
