@@ -79,12 +79,12 @@ else:
 	else:
 		romfile=cmd
 	if slow==1:
-		clspeed=slowspeed
+		targtime=slowspeed
 	else:
 		#targspeed is in khz. acuracy may vary.
 		targspeed=6.5#approx. speed should be close.
-		clspeed=1/(targspeed*1000.0)
-		print(clspeed)
+		#calculate approx speed.
+		targtime=1/(targspeed*1000.0)
 	try:
 		
 		print("SBTCVM Generation 2 9-trit VM, v2.1.0.alpha\n")
@@ -95,13 +95,15 @@ else:
 		
 		cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
 		progrun=1
+		
+		#curses startup
 		curses.initscr()
 		curses.noecho()
 		curses.cbreak()
 		mainscr=curses.initscr()
 		mainscr.keypad(1)
 		
-		#basic mainloop.
+		
 		mhig, mwid = mainscr.getmaxyx()
 		statwin = curses.newwin(2, mwid, 0, 0)
 		ttywin = curses.newwin(mhig-2, mwid, 2, 0)
@@ -111,35 +113,36 @@ else:
 		ttywin.scrollok(1)
 		ttywin.scroll(1)
 		ttywin.refresh()
-		#statwin.addstr("r1: 0, r2: 0")
-		#statwin.refresh()
 		
+		#uio startup
 		uiosys = UIO.uio(cpusys, memsys, iosys, statwin, ttywin)
-		
 		dispthr=Thread(target = uiosys.statup, args = [])
 		dispthr.daemon=True
 		dispthr.start()
 		uiosys.ttyraw("ready.")
+		
 		time.sleep(0.3)
-		stime=time.time()
+		
+		#main loop
 		clcnt=0.0
-		targtime=clspeed
-		sleeptarg=targtime/10.0
-		tbeg=time.time()
+		starttime=time.time()
 		while progrun:
+			#CPU Parse
 			retval=cpusys.cycle()
+			#increment clock tick.
 			clcnt+=1
-			xtime=(tbeg + (clcnt - 1.0) * targtime) - time.time()
+			#project when the next cycle should start, then subtract current time.
+			xtime=(starttime + (clcnt - 1.0) * targtime) - time.time()
+			#sleep for remaining time (xtime) if it is above 0
 			if xtime>0.0:
 				time.sleep(xtime)
+			#exit code:
 			if retval!=None:
-				
-				
 				curses.echo()
 				curses.endwin()
 				uiosys.powoff()
 				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
-				print("Approx. Speed: '" + str((float(clcnt)/(time.time()-stime))/1000) + "' KHz")
+				print("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
 				print("Target Speed : '" + str(targspeed) + "' Khz")
 				
 				progrun=0
@@ -148,5 +151,3 @@ else:
 		if progrun:
 			curses.echo()
 			curses.endwin()
-		
-			

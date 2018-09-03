@@ -16,24 +16,20 @@ datawrite1;>data2
 #label
 null;;bob--label
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-11
+setreg1;>goto--jumper-12
 datawrite1;>--stnpreturnpoint
 goto;>sam--label
-null;;goto--jumper-11
+null;;goto--jumper-12
 #conditional goto
 dataread1;>data1
 dataread2;>endcount
-gotoif;>goto--branch-13
-goto;>goto--jumper-13
-setreg1;>goto--jumper-13;goto--branch-13
-datawrite1;>--stnpreturnpoint
+gotoif;>goto--branch-15
+goto;>goto--jumper-15
+setreg1;>goto--jumper-15;goto--branch-15
 goto;>end--label
-null;;goto--jumper-13
+null;;goto--jumper-15
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-14
-datawrite1;>--stnpreturnpoint
 goto;>bob--label
-null;;goto--jumper-14
 #label
 null;;sam--label
 #add (2op math)
@@ -105,19 +101,17 @@ datawrite2;>data1
 #conditional goto
 dataread1;>data1
 dataread2;>data2
-gotoifmore;>goto--branch-49
-goto;>goto--jumper-49
-setreg1;>goto--jumper-49;goto--branch-49
-datawrite1;>--stnpreturnpoint
+gotoifmore;>goto--branch-52
+goto;>goto--jumper-52
+setreg1;>goto--jumper-52;goto--branch-52
 goto;>end--label
-null;;goto--jumper-49
+null;;goto--jumper-52
 #conditional goto
 dataread1;>data1
 dataread2;>data2
-gotoifless;>goto--branch-50
-goto;>goto--jumper-50
-setreg1;>goto--jumper-50;goto--branch-50
-datawrite1;>--stnpreturnpoint
+gotoifless;>goto--branch-53
+goto;>goto--jumper-53
+setreg1;>goto--jumper-53;goto--branch-53
 goto;>end--label
-null;;goto--jumper-50
+null;;goto--jumper-53
 #END OF FILE

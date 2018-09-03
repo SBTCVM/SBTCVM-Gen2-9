@@ -8,8 +8,10 @@ set data2
 
 #Sbtcvm simplified ternary numeric programming language
 label bob
-goto sam
+#subroutine goto.
+gsub sam
 #conditional goto: in this example if data1==endcount goto: label 'end'
+#replace 'goto' in conditionals with 'gsub' for subroutine calls.
 if data1,endcount goto end
 goto bob
 
@@ -35,6 +37,7 @@ dumpd data3
 print  Hello world
 #print newline
 newline
+#used with gsub jumps, not goto jumps!
 return
 
 #shutdown routine

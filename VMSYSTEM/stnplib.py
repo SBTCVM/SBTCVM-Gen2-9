@@ -166,7 +166,7 @@ class in_invert:
 
 class in_labelgoto:
 	def __init__(self):
-		self.keywords=["goto"]
+		self.keywords=["goto", "gsub"]
 	def p0(self, args, keyword, lineno):
 		return 0, None
 	def p1(self, args, keyword, lineno):
@@ -177,8 +177,11 @@ class in_labelgoto:
 		else:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + args + "'"
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
-		
-		destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ndatawrite1;>--stnpreturnpoint\ngoto;>" + args +"--label" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		if keyword=="gsub":
+			
+			destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ndatawrite1;>--stnpreturnpoint\ngoto;>" + args +"--label" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		else:
+			destobj.write("#goto (extra code stores away return address.)\n" + "goto;>" + args +"--label" + "\n")
 		return
 
 class in_condgoto:
@@ -194,6 +197,8 @@ class in_condgoto:
 		if len(arglist)!=3:
 			return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 		label=arglist[2]
+		if arglist[1] not in ["goto", "gsub"]:
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid goto mode! must be 'goto' or 'gsub'"
 		if label in labels:
 			return 0, None
 		else:
@@ -210,13 +215,20 @@ class in_condgoto:
 		label=arglist[2]
 		
 		var0, var1 = arglist[0].split(",")
-		
-		destobj.write('''#conditional goto
+		if arglist[1]=="gsub":
+			destobj.write('''#conditional goto
 dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' +  str(lineno) + '''
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>--stnpreturnpoint\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		else:
+			destobj.write('''#conditional goto
+dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' +  str(lineno) + '''
+setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		return
 
 class in_int2opmath:
