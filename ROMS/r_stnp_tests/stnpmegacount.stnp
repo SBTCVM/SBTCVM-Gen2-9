@@ -22,9 +22,7 @@ label mainloop
 val ---------
 set minicount
 
-goto sub
-#return from the looping subroutine via label.
-label subreturn
+gsub sub
 
 add megacount,addval
 set megacount
@@ -44,8 +42,8 @@ newline
 add minicount,addval
 set minicount
 
-
-if endval,minicount goto subreturn
+#conditional return
+if endval,minicount return
 
 goto sub
 

@@ -21,8 +21,6 @@ setreg1;>goto--jumper-25
 datawrite1;>--stnpreturnpoint
 goto;>sub--label
 null;;goto--jumper-25
-#label
-null;;subreturn--label
 #add (2op math)
 dataread1;>megacount
 dataread2;>addval
@@ -32,17 +30,13 @@ datawrite1;>megacount
 #conditional goto
 dataread1;>endval2
 dataread2;>megacount
-gotoif;>goto--branch-32
-goto;>goto--jumper-32
-setreg1;>goto--jumper-32;goto--branch-32
-datawrite1;>--stnpreturnpoint
+gotoif;>goto--branch-30
+goto;>goto--jumper-30
+setreg1;>goto--jumper-30;goto--branch-30
 goto;>end--label
-null;;goto--jumper-32
+null;;goto--jumper-30
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-34
-datawrite1;>--stnpreturnpoint
 goto;>mainloop--label
-null;;goto--jumper-34
 #label
 null;;sub--label
 #Dump (trits)
@@ -61,20 +55,16 @@ dataread2;>addval
 add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>minicount
-#conditional goto
+#conditional return
 dataread1;>endval
 dataread2;>minicount
-gotoif;>goto--branch-48
-goto;>goto--jumper-48
-setreg1;>goto--jumper-48;goto--branch-48
-datawrite1;>--stnpreturnpoint
-goto;>subreturn--label
-null;;goto--jumper-48
+gotoif;>goto--branch-46
+goto;>goto--jumper-46
+dataread1;>--stnpreturnpoint;goto--branch-46
+gotoreg1
+null;;goto--jumper-46
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-50
-datawrite1;>--stnpreturnpoint
 goto;>sub--label
-null;;goto--jumper-50
 #label
 null;;end--label
 #stop (shutdown vm)

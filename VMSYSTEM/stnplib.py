@@ -195,33 +195,46 @@ class in_condgoto:
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
 		arglist=args.split(" ")
 		if len(arglist)!=3:
-			return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
-		label=arglist[2]
-		if arglist[1] not in ["goto", "gsub"]:
-			return 1, keyword+": Line: " + str(lineno) + ": Invalid goto mode! must be 'goto' or 'gsub'"
-		if label in labels:
-			return 0, None
-		else:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + label + "'"
+			if len(arglist)!=2:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
+			#return mode doesn't need label argument.
+			elif arglist[1]!="return":
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
+		#check label for goto and gsub
+		if len(arglist)==3:
+			label=arglist[2]
+			if not label in labels:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + label + "'"
+		#check goto mode
+		if arglist[1] not in ["goto", "gsub", "return"]:
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid goto mode! must be 'goto', 'gsub', or 'return'"
+		#variable check
 		for x in arglist[0].split(","):
-			if x in valid_nvars:
-				return 0, None
-			else:
+			if not x in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + x + "'"
+		return 0, None
 		
 
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
 		arglist=args.split(" ")
-		label=arglist[2]
+		if len(arglist)==3:
+			label=arglist[2]
 		
 		var0, var1 = arglist[0].split(",")
 		if arglist[1]=="gsub":
-			destobj.write('''#conditional goto
+			destobj.write('''#conditional subroutine goto
 dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' +  str(lineno) + '''
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>--stnpreturnpoint\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		elif arglist[1]=="return":
+			destobj.write('''#conditional return
+dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' +  str(lineno) + '''
+dataread1;>--stnpreturnpoint'''";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		else:
 			destobj.write('''#conditional goto
 dataread1;>''' + var0 + '''
