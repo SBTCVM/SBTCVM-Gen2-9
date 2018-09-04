@@ -343,10 +343,11 @@ class in_print:
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
 		destobj.write("#" + self.comment + "\n")
-		if keyword=="prline":
-			destobj.write("fopwri1;:\\n\n")
+		
 		for char in args:
 			destobj.write("fopwri1;:" + tcon.chartoasmchar[char] + "\n")
+		if keyword=="prline":
+			destobj.write("fopwri1;:\\n\n")
 		return
 
 
