@@ -26,7 +26,6 @@ dataread2;>endnum
 gotoif;>goto--branch-21
 goto;>goto--jumper-21
 setreg1;>goto--jumper-21;goto--branch-21
-datawrite1;>--stnpreturnpoint
 goto;>end--label
 null;;goto--jumper-21
 #add (2op math)
@@ -41,10 +40,7 @@ dataread2;>num1
 datawrite1;>num1
 datawrite2;>num0
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-29
-datawrite1;>--stnpreturnpoint
 goto;>loop--label
-null;;goto--jumper-29
 #label
 null;;end--label
 #print
