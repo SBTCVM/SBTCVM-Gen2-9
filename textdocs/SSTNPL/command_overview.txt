@@ -1,0 +1,63 @@
+SSTNPL: SBTCVM Simplified Numeric Programming Language
+
+Command documentation:
+
+--Variables:
+	var [varname]=[nvalue]  : create a integer variable called [varname], with the value [nvalue].
+	
+	get1/get  : get value of a variable into register 1
+	get2      : get value of a variable into register 2
+	
+	set1/set [varname]  : set variable using value of register 1.
+	set2 [varname]      : set variable using value of register 2.
+	
+	val [nvalue] : set register 1 with value. use with set1/set.
+	
+	swap [var1],[var2] : swap the values of [var1] & [var2]
+	copy [var1],[var2] : copy [var1] to [var2]
+
+--System:
+	stop : Shutdown SBTCVM (this is how you quit a program in SBTCVM, when its loaded via a trom image.
+
+--Math:
+	add [var1],[var2] : add 2 integer variables. use 'set' to store result.
+	sub [var1],[var2] : subtract 2 integer variables. use 'set' to store result.
+	mul [var1],[var2] : multiply 2 integer variables. use 'set' to store result.
+	div [var1],[var2] : divide 2 integer variables. use 'set' to store result.
+
+--Logic and tritwise:
+	invert [varname] : invert the sign of variable [varname], in-place.
+
+--Gotos & conditionals:
+	label [name] : create a label with the name [name], for use with gotos.
+	goto [name] : goto label [name]
+	gsub [name] : goto label [name], but store next block (line) of code as return address.
+	return : return to most recent return address stored.
+	
+	[condition] [var1],[var2] [mode] (label)
+	
+	(a goto label (label) is only needed for goto & gsub modes)
+	
+	--conditions:
+		if : true if [var1]=[var2]
+		ifmore : true if [var1]>[var2]
+		ifless : true if [var1]<[var2]
+	
+	--modes:
+		goto : ordinary goto.
+		gsub : store next block (line) of code as return address. (same as normal gsub command)
+		return : just like normal return command. should omit label.
+	  
+	--Examples:
+		if var1,var2 goto somelabel
+		if var1,var2 return
+	  
+
+--TTY output:
+	print [string] : print specified raw text.
+	prline [string] : print specified raw text, but append a newline.
+	newline : print newline
+	space : print space
+	dumpt [varname] : Dump integer variable [varname], to TTY in ternary form.
+	dumpd [varname] : Dump integer variable [varname], to TTY in signed decimal form.
+
