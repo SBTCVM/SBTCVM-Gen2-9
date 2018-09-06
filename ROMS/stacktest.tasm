@@ -1,0 +1,25 @@
+head-nspin=stdnsp
+fopset1;>io.ttywr
+
+setreg1;10x1
+setreg2;10x2
+
+#push reg1 to stack 1
+s1push1
+#push reg2 to stack 1
+s1push2
+
+#peek at top of stack1 (stores in reg2, use s1peek1/s1peek for reg1)
+s1peek2
+iowrite2;>io.decdump
+fopwri1;:\s
+
+#pop top of stack1
+s1pop
+iowrite1;>io.decdump
+fopwri1;:\s
+
+#pop top of stack1
+s1pop
+iowrite1;>io.decdump
+stop

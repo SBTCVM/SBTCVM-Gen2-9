@@ -127,6 +127,26 @@ def assemble(pathx, syntaxonly=0, pfx=""):
 
 #classes and instances for instructions
 
+#used for instructions with static data. i.e. multiplexed instructions.
+class statinst:
+	def __init__(self, keywords, opcode, subcode):
+		self.keywords=keywords
+		self.prefixes=[]
+		self.opcode=int(opcode)
+		self.subcode=int(subcode)
+		self.nsp=0
+	def p0(self, data, keyword, lineno):
+		return 0, None
+	#return length in words of memory. needed here for goto reference label parsing!
+	def p1(self, data, keyword, lineno, addr, gotos):
+		return 1, {}
+	#second syntax check pass:
+	def p2(self, data, keyword, gotos, lineno):
+		return 0, None
+	#should return two signed ints or btint objects.
+	def p3(self, data, keyword, gotos, lineno):
+		return [[self.opcode, self.subcode, lineno]]
+
 #basic instruction. literally any instruction that uses this automatically supports goto refrence carrot stntax (keyword;>gotorefrence)
 class instruct:
 	def __init__(self, keywords, opcode):
@@ -438,6 +458,18 @@ class mainloop:
 		instruct(["fopset2"], -9457),
 		instruct(["fopwri3"], -9456),
 		instruct(["fopset3"], -9455),
+		statinst(["s1pop1", "s1pop"], -9100, 0),#stack1
+		statinst(["s1pop2"], -9100, 1),
+		statinst(["s1push1", "s1push"], -9100, 2),
+		statinst(["s1push2"], -9100, 3),
+		statinst(["s1peek1", "s1peek"], -9100, 4),
+		statinst(["s1peek2"], -9100, 5),
+		statinst(["s2pop1", "s2pop"], -9101, 0),#stack2
+		statinst(["s2pop2"], -9101, 1),
+		statinst(["s2push1", "s2push"], -9101, 2),
+		statinst(["s2push2"], -9101, 3),
+		statinst(["s2peek1", "s2peek"], -9101, 4),
+		statinst(["s2peek2"], -9101, 5),
 		includetas0(),
 		nspacevar()]
 		

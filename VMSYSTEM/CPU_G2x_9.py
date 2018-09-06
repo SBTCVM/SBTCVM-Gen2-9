@@ -37,7 +37,8 @@ class cpu:
 		self.instval=btint(0)
 		self.intercaught={}
 		self.intstack=[]
-		
+		self.stack1=[]
+		self.stack2=[]
 	def cycle(self):
 		if self.execpoint.intval>9841:
 			if self.exception("Exec Pointer Overrun", -3):
@@ -250,7 +251,16 @@ class cpu:
 		#fopset3
 		elif self.instval.intval == -9455:
 			self.fop3.changeval(self.dataval.intval)
-		
+		#stack1
+		elif self.instval.intval == -9100:
+			if self.stack_subparse(self.dataval, self.stack1)==1:
+				if self.exception("Stack1 Underflow", -4, cancatch=1):
+					return 1, -4, "Stack1 Underflow"
+		#stack2
+		elif self.instval.intval == -9101:
+			if self.stack_subparse(self.dataval, self.stack2)==1:
+				if self.exception("Stack2 Underflow", -5, cancatch=1):
+					return 1, -5, "Stack2 Underflow"
 		#soft stop:
 		elif self.instval.intval == -9000:
 			if self.exception("soft stop.", -1, cancatch=0):
@@ -281,6 +291,41 @@ class cpu:
 	def goto(self, address):
 		self.execpoint.intval=address
 		return
+	def stack_subparse(self, dataval, stacklist):
+		#pop
+		if dataval.intval==0:
+			try:
+				self.reg1.intval=stacklist.pop(0)
+				return None
+			except IndexError:
+				return 1
+		elif dataval.intval==1:
+			try:
+				self.reg2.intval=stacklist.pop(0)
+				return None
+			except IndexError:
+				return 1
+		#push
+		elif dataval.intval==2:
+			stacklist.insert(0, self.reg1.intval)
+			return None
+		elif dataval.intval==3:
+			stacklist.insert(0, self.reg2.intval)
+			return None
+		#peek
+		elif dataval.intval==4:
+			try:
+				self.reg1.intval=stacklist[0]
+				return None
+			except IndexError:
+				return 1
+		elif dataval.intval==5:
+			try:
+				self.reg2.intval=stacklist[0]
+				return None
+			except IndexError:
+				return 1
+		
 	#stub. fill out with needed code once exception/interrupt system is active.
 	#ensure uncatchable exceptions set the cancatch attribute to zero.
 	def exception(self, status, exid, cancatch=1):
