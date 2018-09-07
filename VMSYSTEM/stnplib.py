@@ -179,9 +179,9 @@ class in_labelgoto:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
 		if keyword=="gsub":
 			
-			destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ndatawrite1;>--stnpreturnpoint\ngoto;>" + args +"--label" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+			destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ns1push1\ngoto;>" + args +"--label" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		else:
-			destobj.write("#goto (extra code stores away return address.)\n" + "goto;>" + args +"--label" + "\n")
+			destobj.write("#goto \n" + "goto;>" + args +"--label" + "\n")
 		return
 
 class in_condgoto:
@@ -227,14 +227,14 @@ dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' +  str(lineno) + '''
-setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>--stnpreturnpoint\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ns1push1\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		elif arglist[1]=="return":
 			destobj.write('''#conditional return
 dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' +  str(lineno) + '''
-dataread1;>--stnpreturnpoint'''";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-" +  str(lineno) + "\n")
+s1pop1;''' + ";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		else:
 			destobj.write('''#conditional goto
 dataread1;>''' + var0 + '''
@@ -424,7 +424,7 @@ class mainloop:
 		in_condgoto(["if"], "gotoif"),
 		in_condgoto(["ifmore"], "gotoifmore"),
 		in_condgoto(["ifless"], "gotoifless"),
-		in_common0(["return"], "dataread1;>--stnpreturnpoint\ngotoreg1\n", "return from subroutine."),
+		in_common0(["return"], "s1pop1\ngotoreg1\n", "return from subroutine."),
 		in_common0(["newline"], "fopwri1;:\\n\n", "print newline"),
 		in_common0(["space"], "fopwri1;:\\s\n", "print space"),
 		in_common0(["stop"], "stop\n", "stop (shutdown vm)"),

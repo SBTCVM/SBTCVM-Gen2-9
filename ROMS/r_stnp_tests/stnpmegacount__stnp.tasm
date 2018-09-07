@@ -18,7 +18,7 @@ setreg1;---------
 datawrite1;>minicount
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-25
-datawrite1;>--stnpreturnpoint
+s1push1
 goto;>sub--label
 null;;goto--jumper-25
 #add (2op math)
@@ -35,7 +35,7 @@ goto;>goto--jumper-30
 setreg1;>goto--jumper-30;goto--branch-30
 goto;>end--label
 null;;goto--jumper-30
-#goto (extra code stores away return address.)
+#goto 
 goto;>mainloop--label
 #label
 null;;sub--label
@@ -60,10 +60,10 @@ dataread1;>endval
 dataread2;>minicount
 gotoif;>goto--branch-46
 goto;>goto--jumper-46
-dataread1;>--stnpreturnpoint;goto--branch-46
+s1pop1;;goto--branch-46
 gotoreg1
 null;;goto--jumper-46
-#goto (extra code stores away return address.)
+#goto 
 goto;>sub--label
 #label
 null;;end--label

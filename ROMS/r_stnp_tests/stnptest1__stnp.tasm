@@ -17,7 +17,7 @@ datawrite1;>data2
 null;;bob--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-12
-datawrite1;>--stnpreturnpoint
+s1push1
 goto;>sam--label
 null;;goto--jumper-12
 #conditional goto
@@ -28,7 +28,7 @@ goto;>goto--jumper-15
 setreg1;>goto--jumper-15;goto--branch-15
 goto;>end--label
 null;;goto--jumper-15
-#goto (extra code stores away return address.)
+#goto 
 goto;>bob--label
 #label
 null;;sam--label
@@ -73,7 +73,7 @@ fopwri1;:d
 #print newline
 fopwri1;:\n
 #return from subroutine.
-dataread1;>--stnpreturnpoint
+s1pop1
 gotoreg1
 #label
 null;;end--label

@@ -1,0 +1,23 @@
+
+
+#this is a test of SSTNPL's Stack-based subroutine return implementation.
+#Note: it only uses stack 1, but stack 2 may be used in the future.
+
+prline Hello, I'm a main routine.
+gsub sub
+prline Goodbye, I'm a main routine.
+stop
+
+
+
+
+label sub
+prline hi, I'm a subroutine.
+gsub subofsub
+prline bye, I'm a subroutine.
+return
+
+
+label subofsub
+prline Oh-hi! I'm a subroutine in a subroutine :D
+return
