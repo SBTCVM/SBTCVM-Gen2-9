@@ -105,12 +105,13 @@ class uio:
 			self.ttywin.scroll(1)
 			#self.ttywin.refresh()
 			self.xttycharpos=0
-			self.ttywin.addch(self.maxy-1, self.xttycharpos, " ")
+			self.ttywin.move(self.maxy-1, self.xttycharpos)
 			self.ttylog.write("\n")
 		elif data==2:
 			if self.xttycharpos!=0:
 				self.xttycharpos-=1
 				self.ttywin.addch(self.maxy-1, self.xttycharpos, " ")
+				self.ttywin.move(self.maxy-1, self.xttycharpos)
 			#else:
 			#	self.ttywin.scroll(-1)
 			#	self.xttycharpos=self.maxx-1
@@ -120,7 +121,7 @@ class uio:
 				
 				self.xttycharpos=0
 				self.ttywin.scroll(1)
-				self.ttywin.addch(self.maxy-1, self.xttycharpos, " ")
+				self.ttywin.move(self.maxy-1, self.xttycharpos)
 				self.ttylog.write("\n")
 			self.ttywin.addch(self.maxy-1, self.xttycharpos, tcon.dattostr[data.intval])
 			self.ttylog.write(tcon.dattostr[data.intval])
