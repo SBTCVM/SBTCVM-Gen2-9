@@ -48,7 +48,7 @@ class in_var:
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
 		#this syntax will make this var equal the encoding data of the specified character.
-		if data.startswith(":"):
+		elif data.startswith(":"):
 			if len(data)<2:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify character"
 		else:
@@ -80,7 +80,9 @@ class in_val:
 				int(args[3:])
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
-			
+		elif args.startswith(":"):
+			if len(args)<2:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify character"
 		else:
 			if len(args)>9:
 				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
