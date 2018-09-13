@@ -106,7 +106,7 @@ class uio:
 			#self.ttywin.refresh()
 			self.xttycharpos=0
 			self.ttylog.write("\n")
-		if data==2:
+		elif data==2:
 			if self.xttycharpos!=0:
 				self.xttycharpos-=1
 				self.ttywin.addch(self.maxy-1, self.xttycharpos, " ")
