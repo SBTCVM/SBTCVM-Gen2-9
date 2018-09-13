@@ -51,13 +51,13 @@ chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
 asmchar_special={"|": "\\v", ";": "\\c", "\\": "\\b", " ": "\\s"}
 
 # Special bank #1 (0-??)
-#Special case chars (currently newline and NULL. Both have fixed positions in datastructure.)
+#Special case chars (currently newline, backspace, and NULL. all three have fixed positions in datastructure.)
 
-spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", ".")]
-spcharlist_asm=["\\n", "\\0"]
+spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", "."), schr('\b', "\\x", 2, "backspace", "\\x", ".")]
+spcharlist_asm=["\\n", "\\0", "\\x"]
 
 
-
+curses_specials={'KEY_BACKSPACE': '\b'}
 
 # --- INIT NORMAL CHARACTERS ---
 normchars=[]
@@ -94,6 +94,10 @@ for ch in allchars:
 	if ch.uchar!=None:
 		dattostr[ch.dataval]=ch.uchar
 		
+strtodat={}
+for ch in allchars:
+	if ch.uchar!=None:
+		strtodat[ch.uchar]=ch.dataval
 
 #build asm char lookup for compilers
 chartoasmchar={}

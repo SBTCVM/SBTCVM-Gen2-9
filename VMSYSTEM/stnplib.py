@@ -47,7 +47,10 @@ class in_var:
 				int(data[3:])
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
-			
+		#this syntax will make this var equal the encoding data of the specified character.
+		if data.startswith(":"):
+			if len(data)<2:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify character"
 		else:
 			if len(data)>9:
 				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
@@ -161,6 +164,23 @@ class in_invert:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
 		destobj.write("#" + self.comment + "\ndataread1;>" + args + "\ninvert1\ndatawrite1;>" + args + "\n")
+		return
+
+class in_getchar:
+	def __init__(self):
+		self.keywords=["getchar"]
+		self.comment="Get character from TTY input."
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+		if args in valid_nvars:
+			return 0, None
+		else:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+		destobj.write("#" + self.comment + "\nioread1;>io.ttyrd\ndatawrite1;>" + args + "\n")
 		return
 
 
@@ -328,6 +348,9 @@ class in_common0:
 		return
 		
 
+
+
+
 class in_print:
 	def __init__(self):
 		self.keywords=["print", "prline"]
@@ -405,6 +428,7 @@ class mainloop:
 		self.instructs=[in_var(),
 		in_label(),
 		in_intcommon1(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
+		in_intcommon1(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),
@@ -420,6 +444,7 @@ class mainloop:
 		in_invert(),
 		in_print(),
 		in_rawasm(),
+		in_getchar(),
 		in_condgoto(["if"], "gotoif"),
 		in_condgoto(["ifmore"], "gotoifmore"),
 		in_condgoto(["ifless"], "gotoifless"),

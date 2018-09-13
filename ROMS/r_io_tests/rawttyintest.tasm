@@ -1,0 +1,14 @@
+head-nspin=stdnsp
+
+#basic keyboard input test.
+
+setreg2;10x0
+
+null;;loop
+ioread1;>io.ttyrd
+#jump to start of loop if char is null.
+gotoif;>loop
+
+iowrite1;>io.decdump
+iowrite1;>io.ttywr
+goto;>loop

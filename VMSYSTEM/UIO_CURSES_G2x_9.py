@@ -18,12 +18,14 @@ import time
 
 
 class uio:
-	def __init__(self, cpuref, memref, ioref, statwin, ttywin, ttylogname="tty_log.log"):
+	def __init__(self, cpuref, memref, ioref, statwin, ttywin, mainwin, ttylogname="tty_log.log"):
 		self.cpu=cpuref
 		self.mem=memref
 		self.io=ioref
 		self.statwin=statwin
 		self.ttywin=ttywin
+		self.mainwin=mainwin
+		
 		self.run=1
 		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
 		#self.ttylogdata=""
@@ -32,9 +34,11 @@ class uio:
 		ioref.setwritenotify(1, self.ttywrite)
 		ioref.setwritenotify(2, self.tritdump)
 		ioref.setwritenotify(3, self.decdump)
+		ioref.setreadoverride(4, self.ttyread)
 		self.xttycharpos=0
 		self.maxy=self.ttywin.getmaxyx()[0]
 		self.maxx=self.ttywin.getmaxyx()[1]
+		self.keyinbuff=[]
 	#status field update loop.
 	
 	def statup(self):
@@ -46,10 +50,16 @@ class uio:
 			self.statwin.refresh()
 			self.ttywin.refresh()
 			time.sleep(0.05)
-			
-			
+			#todo: Get Function & special key input parsing working, and add IO line for TTY read.
+			try:
+				keyinp=self.mainwin.getkey()
+				if keyinp in tcon.strtodat:
+					self.keyinbuff.append(tcon.strtodat[keyinp])
+				elif keyinp in tcon.curses_specials:
+					self.keyinbuff.append(tcon.strtodat[tcon.curses_specials[keyinp]])
+			except curses.error:
+				continue
 		return
-	#TTY raw line input wrapper.
 	def ttyraw(self, string):
 		if self.xttycharpos==self.maxx:
 			self.xttycharpos=0
@@ -84,14 +94,26 @@ class uio:
 			self.ttylog.write(xnumchar)
 			#self.ttywin.refresh()
 			self.xttycharpos += 1
-			
-	
+	#Ready for basic testing.
+	def ttyread(self, addr, data):
+		if len(self.keyinbuff)>0:
+			return btint(self.keyinbuff.pop(0))
+		else:
+			return btint(0)
 	def ttywrite(self, addr, data):
 		if data==1:
 			self.ttywin.scroll(1)
 			#self.ttywin.refresh()
 			self.xttycharpos=0
 			self.ttylog.write("\n")
+		if data==2:
+			if self.xttycharpos!=0:
+				self.xttycharpos-=1
+				self.ttywin.addch(self.maxy-1, self.xttycharpos, " ")
+			else:
+				self.ttywin.scroll(-1)
+				self.xttycharpos=self.maxx-1
+				self.ttywin.addch(self.maxy-1, self.xttycharpos, " ")
 		elif int(data) in tcon.dattostr:
 			if self.xttycharpos==self.maxx:
 				

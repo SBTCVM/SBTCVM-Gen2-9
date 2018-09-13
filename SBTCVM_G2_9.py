@@ -102,7 +102,7 @@ else:
 		curses.cbreak()
 		mainscr=curses.initscr()
 		mainscr.keypad(1)
-		
+		mainscr.nodelay(1)
 		
 		mhig, mwid = mainscr.getmaxyx()
 		statwin = curses.newwin(2, mwid, 0, 0)
@@ -115,14 +115,17 @@ else:
 		ttywin.refresh()
 		
 		#uio startup
-		uiosys = UIO.uio(cpusys, memsys, iosys, statwin, ttywin)
+		uiosys = UIO.uio(cpusys, memsys, iosys, statwin, ttywin, mainscr)
 		dispthr=Thread(target = uiosys.statup, args = [])
 		dispthr.daemon=True
 		dispthr.start()
 		uiosys.ttyraw("ready.")
 		
-		time.sleep(0.3)
-		
+		time.sleep(0.5)
+		ttywin.redrawwin()
+		ttywin.refresh()
+		statwin.redrawwin()
+		statwin.refresh()
 		#main loop
 		clcnt=0.0
 		starttime=time.time()

@@ -1,0 +1,19 @@
+#use var's colon-character syntax (identical to assembly colon-character syntax)
+#to create some constants. Note the case sensitivity.
+
+
+#character buffer for getchar
+var chval=0
+var nullchar=0
+
+prline This program should mirror your text input.
+newline
+
+label main
+#read 1 character from TTY input buffer. (TTY returns 0 (null character) upon empty buffer)
+getchar chval
+
+if nullchar,chval goto main
+chardump chval
+
+goto main

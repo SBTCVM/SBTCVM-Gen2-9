@@ -1,0 +1,63 @@
+#use var's colon-character syntax (identical to assembly colon-character syntax)
+#to create some constants. Note the case sensitivity.
+var helpchar=:h
+var helpchar2=:H
+
+var aboutchar=:a
+var aboutchar2=:A
+
+var quitchar=:q
+var quitchar2=:Q
+
+#character buffer for getchar
+var chval=0
+
+prline Hello. Im a simple interactive
+prline program, written in SSTNPL
+prline Please press 'h' key for help.
+newline
+
+label main
+#read 1 character from TTY input buffer. (TTY returns 0 (null character) upon empty buffer)
+getchar chval
+#check against our constants and jump to subroutines as needed.
+if helpchar,chval gsub help
+if helpchar2,chval gsub help
+
+if aboutchar,chval gsub about
+if aboutchar2,chval gsub about
+
+if quitchar,chval gsub quit
+if quitchar2,chval gsub quit
+
+goto main
+
+#-----shutdown routine (QUIT)-----
+label quit
+stop
+
+
+
+#-----about subroutine-----
+label about
+
+#writes character form of variable 'chval', to TTY.
+chardump chval
+newline
+
+prline --ABOUT--
+prline   This is a test of SSTNPL's ability to use 
+prline   the new TTY (keyboard) input, in a crude 
+prline   interactive application.
+return
+
+#-----help subroutine-----
+label help
+chardump chval
+newline
+prline --HELP--
+prline   commands:
+prline   h: Print this help text.
+prline   a: about this test.
+prline   q: quit (shutdown VM).
+return

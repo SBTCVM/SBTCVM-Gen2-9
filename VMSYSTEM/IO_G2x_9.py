@@ -43,19 +43,19 @@ class io:
 		if addr in self.ReadOverrideList:
 			#get data at address anyways. (useful for refrence, ect, also needed to keep IO map updated)
 			addrobjreal=self.IODICT[int(addr)]
-			functref=self.ReadOverrideDict[int(addr)]
-			addrobj=functref(btint(int(addr)), addrobjreal)
+			xfunctref=self.ReadOverrideDict[int(addr)]
+			gaddrobj=xfunctref(btint(int(addr)), addrobjreal)
 			#update data point.
-			addrobjreal.changeval(addrobj)
-			print("ioreadoverride")
+			addrobjreal.changeval(gaddrobj)
+			#print("ioreadoverride")
 			
 		else:
 			addrobj=self.IODICT[int(addr)]
 		#if address is registered by a component via setreadnotify, call the specified function.
 		if addr in self.ReadNotifyList:
 			functref=self.ReadNotifyDict[int(addr)]
-			functref(btint(int(addr)), addrobj)
-		return addrobj
+			functref(btint(int(addr)), gaddrobj)
+		return gaddrobj
 	def iowrite(self, addr, data):
 		addrobj=self.IODICT[int(addr)]
 		addrobj.changeval(data)

@@ -10,7 +10,7 @@ import VMSYSTEM.iofuncts as iofuncts
 
 def romdump(fileobj, n0p=0):
 	for line in fileobj:
-		line=line.replace("/n", "")
+		line=line.replace("\n", "")
 		ival0, ival1 = line.split(",")
 		trval0=btint(int(ival0))
 		trval1=btint(int(ival1))
@@ -21,7 +21,7 @@ def romdump(fileobj, n0p=0):
 
 def romdumpver(fileobj, n0p=0):
 	for line in fileobj:
-		line=line.replace("/n", "")
+		line=line.replace("\n", "")
 		ival0, ival1 = line.split(",")
 		trval0=btint(int(ival0))
 		trval1=btint(int(ival1))
