@@ -35,6 +35,7 @@ class uio:
 		ioref.setwritenotify(2, self.tritdump)
 		ioref.setwritenotify(3, self.decdump)
 		ioref.setreadoverride(4, self.ttyread)
+		ioref.setwritenotify(4, self.ttyread)
 		self.xttycharpos=0
 		self.maxy=self.ttywin.getmaxyx()[0]
 		self.maxx=self.ttywin.getmaxyx()[1]
@@ -100,6 +101,8 @@ class uio:
 			return btint(self.keyinbuff.pop(0))
 		else:
 			return btint(0)
+	def ttyreadclearbuff(self, addr, data):
+		self.keyinbuff=[]
 	def ttywrite(self, addr, data):
 		if data==1:
 			self.ttywin.scroll(1)

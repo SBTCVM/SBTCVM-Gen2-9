@@ -1,0 +1,9 @@
+var randstart=10x10
+var randend=10x-10
+var randbuff=10x0
+
+
+rrange randstart,randend
+set randbuff
+dumpt randbuff
+stop

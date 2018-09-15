@@ -10,4 +10,28 @@ v>io.tritdump;10x2
 v>io.decdump;10x3
 v>io.ttyrd;10x4
 
+#random1:
+
+v>rand1.start;10x50
+v>rand1.end;10x51
+v>rand1.get;10x52
+
+
+#random2:
+
+v>rand2.start;10x53
+v>rand2.end;10x54
+v>rand2.get;10x55
+
+#random3:
+
+v>rand3.start;10x56
+v>rand3.end;10x57
+v>rand3.get;10x58
+
+#random4:
+
+v>rand4.start;10x59
+v>rand4.end;10x60
+v>rand4.get;10x61
 

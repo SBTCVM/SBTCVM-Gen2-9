@@ -290,6 +290,29 @@ class in_int2opmath:
 		return
 
 
+class in_rrange:
+	def __init__(self):
+		self.keywords=["rrange"]
+		self.comment="Random ranged number"
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+		argsplit=args.split(",")
+		if len(argsplit)!=2:
+			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
+		for argx in argsplit:
+			if argx in valid_nvars:
+				return 0, None
+			else:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + argx + "'"
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+		arg0, arg1 = args.split(",")
+		destobj.write("#" + self.comment + "\ndataread1;>" + arg0 + "\ndataread2;>" + arg1 + "\niowrite1;>rand1.start\n" + "iowrite2;>rand1.end\n" + "ioread1;>rand1.get")
+		return
+
+
 class in_int2opswap:
 	def __init__(self):
 		self.keywords=["swap"]
@@ -350,6 +373,25 @@ class in_common0:
 		return
 		
 
+
+class in_keyprompt:
+	def __init__(self):
+		self.keywords=["keyprompt"]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+		destobj.write("#keprompt: prompt for single keypress, continue only when keypress is received." + """
+setreg2;0
+iowrite1;>io.ttyrd
+ioread1;>io.ttyrd;keyprompt--loop-""" + str(lineno) + """
+gotoif;>keyprompt--loop-""" + str(lineno) + """
+""")
+		return
+		
 
 
 
@@ -442,6 +484,8 @@ class mainloop:
 		in_labelgoto(), 
 		in_int2opcopy(),
 		in_int2opswap(),
+		in_rrange(),
+		in_keyprompt(),
 		in_val(),
 		in_invert(),
 		in_print(),
@@ -454,6 +498,7 @@ class mainloop:
 		in_common0(["newline"], "fopwri1;:\\n\n", "print newline"),
 		in_common0(["space"], "fopwri1;:\\s\n", "print space"),
 		in_common0(["stop"], "stop\n", "stop (shutdown vm)"),
+		in_common0(["clearcharbuff"], "iowrite1;>io.ttyrd", "Clear TTY input buffer"),
 		in_intcommon1(["dumpd"], "dataread1;>", "\niowrite1;>io.decdump\n", "Dump (decimal)")]
 		self.bpname=bpname
 		self.labels=[]

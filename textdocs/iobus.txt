@@ -1,0 +1,28 @@
+key:
+
+m=mode
+[w]=write only
+[r]=read only
+[b]=bidirectional/both read & write
+
+x=address
+
+x :  m : asm varname  : description
+--+----+--------------+------------------------- 
+1 : [w]: io.ttywr     : TTY (terminal) write
+2 : [w]: io.tritdump  : trit dump
+3 : [w]: io.decdump   : decimal dump
+4 : [r]: io.ttyrd     : TTY (terminal) read (buffered, returns null upon empty buffer)
+
+50: [b]: rand1.start  : set start of random 1 range.
+51: [b]: rand1.end    : set end of random 1 range.
+52: [r]: rand1.get    : get random number 1 from configured range.
+53: [b]: rand2.start  : set start of random 2 range.
+54: [b]: rand2.end    : set end of random 2 range.
+55: [r]: rand2.get    : get random number 2 from configured range.
+56: [b]: rand3.start  : set start of random 3 range.
+57: [b]: rand3.end    : set end of random 3 range.
+58: [r]: rand3.get    : get random number 3 from configured range.
+59: [b]: rand4.start  : set start of random 4 range.
+60: [b]: rand4.end    : set end of random 4 range.
+61: [r]: rand4.get    : get random number 4 from configured range.

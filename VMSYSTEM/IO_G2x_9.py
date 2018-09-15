@@ -40,7 +40,7 @@ class io:
 		self.ReadOverrideDict[addr]=functref
 	#ioread and iowrite should only be used by the CPU(s) devices should use deviceread and devicewrite (see below)
 	def ioread(self, addr):
-		if addr in self.ReadOverrideList:
+		if int(addr) in self.ReadOverrideList:
 			#get data at address anyways. (useful for refrence, ect, also needed to keep IO map updated)
 			addrobjreal=self.IODICT[int(addr)]
 			xfunctref=self.ReadOverrideDict[int(addr)]
@@ -50,7 +50,7 @@ class io:
 			#print("ioreadoverride")
 			
 		else:
-			addrobj=self.IODICT[int(addr)]
+			gaddrobj=self.IODICT[int(addr)]
 		#if address is registered by a component via setreadnotify, call the specified function.
 		if addr in self.ReadNotifyList:
 			functref=self.ReadNotifyDict[int(addr)]

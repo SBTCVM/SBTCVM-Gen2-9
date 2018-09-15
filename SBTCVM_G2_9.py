@@ -5,6 +5,7 @@ import VMSYSTEM.MEM_G2x_9
 import VMSYSTEM.CPU_G2x_9
 import VMSYSTEM.IO_G2x_9
 import VMSYSTEM.UIO_CURSES_G2x_9 as UIO
+import VMSYSTEM.COMMON_IO_G2x_9 as devcommon
 import time
 import sys
 import os
@@ -94,6 +95,7 @@ else:
 		iosys=VMSYSTEM.IO_G2x_9.io()
 		
 		cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
+		devcommon.factorydevs(iosys)
 		progrun=1
 		
 		#curses startup

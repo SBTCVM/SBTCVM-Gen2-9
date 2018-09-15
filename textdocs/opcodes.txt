@@ -80,8 +80,10 @@
 -9396: intcont: interrupt continue. see 'interrupts_and_stack.txt' : instruct : no
 
 
+#dual stack multiplexed instruction banks.
 -9100: stack1: multiplexer bank for stack #1 see stack.txt : statinst : yes
 -9101: stack2: multiplexer bank for stack #2 see stack.txt : statinst : yes
 
+-9001: reset: restart CPU.  : instruct : no
 -9000: stop: shutdown VM : instruct : yes
 0: null: blank instruction. does nothing. can be used for adjusting loop speed. : instruct : yes

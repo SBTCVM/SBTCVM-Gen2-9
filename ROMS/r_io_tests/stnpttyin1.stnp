@@ -9,6 +9,9 @@ var aboutchar2=:A
 var quitchar=:q
 var quitchar2=:Q
 
+var waitchar=:w
+var waitchar2=:W
+
 #character buffer for getchar
 var chval=0
 
@@ -30,12 +33,26 @@ if aboutchar2,chval gsub about
 if quitchar,chval gsub quit
 if quitchar2,chval gsub quit
 
+if waitchar,chval gsub waittest
+if waitchar2,chval gsub waittest
+
 goto main
 
 #-----shutdown routine (QUIT)-----
 label quit
 stop
 
+
+#wait test subroutine
+
+label waittest
+
+prline Press any key to continue...
+#use set after this command to get returned key.
+#loops until a non-null character is entered.
+keyprompt
+prline Ok. Returning to main menu.
+return
 
 
 #-----about subroutine-----
@@ -59,5 +76,6 @@ prline --HELP--
 prline   commands:
 prline   h: Print this help text.
 prline   a: about this test.
+prline   w: run waiting prompt (keyprompt) test.
 prline   q: quit (shutdown VM).
 return

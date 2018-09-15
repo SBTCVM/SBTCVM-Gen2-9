@@ -1,4 +1,16 @@
+rand3.end;57
+rand1.get;52
+rand1.end;51
+rand2.end;54
+rand3.get;58
 io.ttyrd;4
 io.tritdump;2
 io.ttywr;1
+rand2.get;55
+rand4.start;59
+rand2.start;53
+rand3.start;56
+rand1.start;50
+rand4.get;61
 io.decdump;3
+rand4.end;60
