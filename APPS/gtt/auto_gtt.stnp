@@ -149,7 +149,7 @@ stop
 #####-----about subroutine-----
 label about
 
-#writes character form of variable 'chval', to TTY.
+
 prline --ABOUT--
 prline Guess That Trit v2.0
 prline Part of SBTCVM Gen2-9

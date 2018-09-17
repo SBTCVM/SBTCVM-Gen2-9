@@ -1,5 +1,18 @@
 SSTNPL: SBTCVM Simplified Numeric Programming Language
 
+
+####[nvalue] syntax for var and val:####
+for decimal values prepend '10x' i.e. 
+	var somevar=10x-15
+	var somevar=10x54
+for characters prepend ':' i.e.
+	var somevar=:x
+
+for ternary values, no prefix is needed:
+	var somevar=+-0+0
+	var somevar=pn0p0
+
+
 Command documentation:
 
 --Variables:
@@ -60,4 +73,12 @@ Command documentation:
 	space : print space
 	dumpt [varname] : Dump integer variable [varname], to TTY in ternary form.
 	dumpd [varname] : Dump integer variable [varname], to TTY in signed decimal form.
+	chardump [varname] : Dump a variable to the TTY as a character.
 
+
+--Random
+	rrange [start],[end] : Get a random number between [start] and [end]. use set to store result.
+
+--TTY input:
+	getchar [var] : Gets a character from the TTY input buffer and puts it in [var] returns 0/null on empty buffer.
+	keyprompt : Wait in a loop until a keystroke is detected, then continue. use set to store result.
