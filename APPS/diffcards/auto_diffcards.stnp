@@ -1,0 +1,252 @@
+##deck ranges
+#short
+var shortstart=10x1
+var shortend=10x40
+var shortbuff=10x0
+#long
+var longstart=10x21
+var longend=10x60
+var longbuff=10x0
+##
+var p1card=10x0
+var p2card=10x0
+
+var overshoot=10x29
+var undershoot=10x-29
+
+
+var ssbuff=0
+var chval=0
+
+
+var 1player1=:1
+var 1player2=:!
+var 2player1=:2
+var 2player2=:@
+var khelp1=:h
+var khelp2=:H
+var kquit1=:q
+var kquit2=:Q
+var kabout1=:a
+var kabout2=:A
+
+
+
+
+
+
+
+
+#player Controls:
+#player1
+var p1short1=:z
+var p1short2=:Z
+var p1long1=:x
+var p1long2=:X
+
+#player2
+var p2short1=:n
+var p2short2=:N
+var p2long1=:m
+var p2long2=:M
+
+########## MENU & DOC SCREENS ############
+
+label menu
+
+prline DIFFERENCE CARDS
+prline a 2-player game.
+prline press 'h' for rules/controls.
+prline 'a' for about info.
+prline 'q' to quit.
+prline and '2' to start 2 player game.
+prline Main Menu:
+
+label menuloop
+getchar chval
+
+##guess entry
+if 2player2,chval goto 2player
+if 2player1,chval goto 2player
+
+if khelp1,chval gsub help
+if khelp2,chval gsub help
+
+if kabout1,chval gsub about
+if kabout2,chval gsub about
+
+if kquit1,chval gsub quit
+if kquit2,chval gsub quit
+
+goto menuloop
+
+
+label help
+prline --RULES--
+prline Each Player takes a card from either the 'short' or 'long' decks.
+prline 
+prline short is: random from 1 to 40
+prline 
+prline long is: random from 21 to 60
+prline 
+prline differences of 30 and more go to the higher card
+prline otherwise it goes to the lower card. 
+prline be careful what you choose!
+goto menu
+
+label about
+prline --ABOUT--
+prline Difference Cards v1.0
+prline Part of SBTCVM Gen2-9
+prline 
+prline Copyright (c) 2018 Thomas Leathers & Contributors
+prline 
+prline Difference Cards is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline Difference Cards is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with Difference Cards. If not, see <http://www.gnu.org/licenses/>
+prline 
+goto menu
+
+
+label quit
+prline Goodbye!
+stop
+
+
+########### 2 PLAYER MODE ###########
+
+
+label 2player
+newline
+prline ----------GAME START----------
+newline
+prline 2 player mode:
+
+####PLAYER 1####
+
+prline PLAYER 1: z=short x=long
+label P1
+getchar chval
+
+##guess entry
+if p1short1,chval goto p1short
+if p1short2,chval goto p1short
+
+if p1long1,chval goto p1long
+if p1long2,chval goto p1long
+goto P1
+
+
+
+####PLAYER 2####
+label P2
+prline PLAYER 2: n=short m=long
+label P2loop
+getchar chval
+if p2short1,chval goto p2short
+if p2short2,chval goto p2short
+
+if p2long1,chval goto p2long
+if p2long2,chval goto p2long
+goto P2loop
+
+####SCORING CODE####
+
+label score2
+#get diff
+sub p1card,p2card
+set ssbuff
+#check if overshot.
+ifmore ssbuff,overshoot goto morewin
+ifless ssbuff,undershoot goto morewin
+
+#DIFF UNDER 30
+prline diff under 30. lower wins:
+ifmore p1card,p2card goto p2win
+ifless p1card,p2card goto p1win
+goto tie
+
+
+#OVERSHOT
+label morewin
+prline OVERSHOT! higher wins:
+ifmore p1card,p2card goto p1win
+ifless p1card,p2card goto p2win
+goto tie
+
+#PLAYER 1 WIN
+label p1win
+prline player 1 WINS!
+print player 1: 
+dumpd p1card
+newline
+print player 2: 
+dumpd p2card
+newline
+prline ----------GAME OVER----------
+newline
+goto menu
+
+#PLAYER 2 WIN
+label p2win
+prline player 2 WINS!
+print player 1: 
+dumpd p1card
+newline
+print player 2: 
+dumpd p2card
+newline
+prline ----------GAME OVER----------
+newline
+goto menu
+
+#TIE
+label tie
+prline Its a TIE!
+print player 1: 
+dumpd p1card
+newline
+print player 2: 
+dumpd p2card
+newline
+prline ----------GAME OVER----------
+newline
+goto menu
+
+
+### hardcoded return location subroutines.
+
+label p1short
+rrange shortstart,shortend
+set p1card
+goto P2
+
+label p1long
+rrange longstart,longend
+set p1card
+goto P2
+
+
+
+label p2short
+rrange shortstart,shortend
+set p2card
+goto score2
+
+label p2long
+rrange longstart,longend
+set p2card
+goto score2
+
+
+#######SINGLEPLAYER########
+#NOT IMPLEMENTED YET.
