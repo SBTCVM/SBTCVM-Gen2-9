@@ -18,7 +18,7 @@ var undershoot=10x-29
 var ssbuff=0
 var chval=0
 
-
+#menu keys
 var 1player1=:1
 var 1player2=:!
 var 2player1=:2
@@ -29,12 +29,6 @@ var kquit1=:q
 var kquit2=:Q
 var kabout1=:a
 var kabout2=:A
-
-
-
-
-
-
 
 
 #player Controls:
@@ -50,17 +44,31 @@ var p2short2=:N
 var p2long1=:m
 var p2long2=:M
 
-########## MENU & DOC SCREENS ############
-
-label menu
-
+########### SPLASH #############
 prline DIFFERENCE CARDS
-prline a 2-player game.
-prline press 'h' for rules/controls.
-prline 'a' for about info.
-prline 'q' to quit.
-prline and '2' to start 2 player game.
+prline
+prline     ___      ___      _____ ____  __    ___    ___
+prline    /---\  / /---     /---- /---/ /--\  /---\  /
+prline   /    / / /__      /     /___/ /___/ /    / /___
+prline  /    / / /--      /     /---/ /\--- /    /  ---/
+prline /____/ / /   *    /____ /   / /  \  /____/ ____/
+prline _______________________________________________
+prline -----------------------------------------------
+prline a 2-player 'numbered card' game.
+prline PRESS A KEY.
+print >
+keyprompt
+newline
+
+########## MENU & DOC SCREENS ############
+label menu
+prline
 prline Main Menu:
+prline [h]: rules.
+prline [a]: about info.
+prline [q]: quit.
+prline [2]: start 2 player game.
+prline >
 
 label menuloop
 getchar chval
@@ -82,6 +90,9 @@ goto menuloop
 
 
 label help
+newline
+newline
+newline
 prline --RULES--
 prline Each Player takes a card from either the 'short' or 'long' decks.
 prline 
@@ -92,9 +103,17 @@ prline
 prline differences of 30 and more go to the higher card
 prline otherwise it goes to the lower card. 
 prline be careful what you choose!
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+keyprompt
+newline
 goto menu
 
 label about
+newline
+newline
+newline
 prline --ABOUT--
 prline Difference Cards v1.0
 prline Part of SBTCVM Gen2-9
@@ -114,6 +133,10 @@ prline
 prline You should have received a copy of the GNU General Public License
 prline along with Difference Cards. If not, see <http://www.gnu.org/licenses/>
 prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+keyprompt
+newline
 goto menu
 
 
@@ -128,12 +151,12 @@ stop
 label 2player
 newline
 prline ----------GAME START----------
-newline
 prline 2 player mode:
 
 ####PLAYER 1####
 
-prline PLAYER 1: z=short x=long
+prline PLAYER 1: [z]=short [x]=long
+print > 
 label P1
 getchar chval
 
@@ -149,7 +172,8 @@ goto P1
 
 ####PLAYER 2####
 label P2
-prline PLAYER 2: n=short m=long
+prline PLAYER 2: [n]=short [m]=long
+print > 
 label P2loop
 getchar chval
 if p2short1,chval goto p2short
@@ -162,6 +186,7 @@ goto P2loop
 ####SCORING CODE####
 
 label score2
+prline ----------SCORE----------
 #get diff
 sub p1card,p2card
 set ssbuff
@@ -228,11 +253,13 @@ goto menu
 label p1short
 rrange shortstart,shortend
 set p1card
+prline Player 1 chose short
 goto P2
 
 label p1long
 rrange longstart,longend
 set p1card
+prline Player 1 chose long
 goto P2
 
 
@@ -240,11 +267,13 @@ goto P2
 label p2short
 rrange shortstart,shortend
 set p2card
+prline Player 2 chose short
 goto score2
 
 label p2long
 rrange longstart,longend
 set p2card
+prline Player 2 chose long
 goto score2
 
 
