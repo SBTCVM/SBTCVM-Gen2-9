@@ -43,7 +43,7 @@ class uio:
 	#status field update loop.
 	
 	def statup(self):
-		
+		self.running=1
 		while self.run:
 			self.maxy=self.ttywin.getmaxyx()[0]
 			self.statwin.erase()
@@ -60,6 +60,7 @@ class uio:
 					self.keyinbuff.append(tcon.strtodat[tcon.curses_specials[keyinp]])
 			except curses.error:
 				continue
+		self.running=0
 		return
 	def ttyraw(self, string):
 		if self.xttycharpos==self.maxx:
@@ -135,3 +136,7 @@ class uio:
 		#write last of TTY log and close.
 		self.ttylog.close()
 		self.run=0
+		while self.running:
+			time.sleep(0.1)
+		return
+		

@@ -143,13 +143,19 @@ else:
 				time.sleep(xtime)
 			#exit code:
 			if retval!=None:
+				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
+				#(Store text in variables, as they need to be printed after curses has been shut down.
+				postout1=("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
+				postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
+				postout3=("Target Speed : '" + str(targspeed) + "' Khz")
+				#shutdown UIO & curses
+				uiosys.powoff()
 				curses.echo()
 				curses.endwin()
-				uiosys.powoff()
-				print("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
-				print("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
-				print("Target Speed : '" + str(targspeed) + "' Khz")
 				
+				print(postout1)
+				print(postout2)
+				print(postout3)
 				progrun=0
 	#in case of drastic failure, shutdown curses!
 	finally:
