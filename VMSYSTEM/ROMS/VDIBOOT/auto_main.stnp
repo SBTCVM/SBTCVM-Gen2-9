@@ -1,0 +1,17 @@
+prline booting SBTVDI Shell
+prline |   |___
+prline |    H  \ Please wait while
+prline |____H__/ I prepare the boot...
+var exitcode=0
+
+#simple VDI shell in SSTNPL with vdishell.tas0 (part of standard library)
+asm include;vdishell.tas0
+asm dataread1;>vdiexitcode
+set exitcode
+
+
+prline Shell has returned...
+dumpd exitcode
+newline
+prline Exiting...
+stop

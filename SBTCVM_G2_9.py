@@ -6,6 +6,7 @@ import VMSYSTEM.CPU_G2x_9
 import VMSYSTEM.IO_G2x_9
 import VMSYSTEM.UIO_CURSES_G2x_9 as UIO
 import VMSYSTEM.COMMON_IO_G2x_9 as devcommon
+import VMSYSTEM.SBTVDI_IO_G2x_9 as vdi
 import time
 import sys
 import os
@@ -58,7 +59,8 @@ elif cmd in ['-v', '--version']:
 else:
 	slow=0
 	if cmd==None:
-		romfile='TESTSHORT.TROM'
+		#romfile='TESTSHORT.TROM'
+		romfile='VDIBOOT'
 	elif cmd in ['-r', '--run']:
 		if arg==None:
 			sys.exit("Error! Must specify trom to run!")
@@ -96,6 +98,8 @@ else:
 		
 		cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
 		devcommon.factorydevs(iosys)
+		#init SBTVDI interface.
+		vdi.sbtvdi(iosys, cpusys, memsys)
 		progrun=1
 		
 		#curses startup

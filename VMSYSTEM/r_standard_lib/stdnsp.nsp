@@ -1,7 +1,10 @@
 rand3.end;57
 rand1.get;52
 rand1.end;51
+vdi.cli.status;102
+vdi.cli.out;101
 rand2.end;54
+vdi.cli.in;100
 rand3.get;58
 io.ttyrd;4
 io.tritdump;2

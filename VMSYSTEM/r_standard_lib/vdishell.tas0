@@ -1,0 +1,64 @@
+head-nspin=stdnsp
+
+#basic, self-contained SBTVDI CLI shell wrapper.
+
+#part of SBTCVM assembly standard library
+
+
+#########SSTNPL embed code:
+#asm include;vdishell.tas0
+#asm dataread1;>vdiexitcode
+#set exitcode
+
+#########ASSEMBLY embed code: (vdiexitcode is a ram address, with the VDI CLI status
+#that caused the exit, stored in its data.
+#include;vdishell.tas0
+#dataread1;>vdiexitcode
+
+
+#store away SBTVDI values.
+datawrite1;>.store1;.store1
+datawrite2;>.store2;.store2
+
+
+
+#reset TTY input buffer, then SBTVDI CLI
+setreg1;0
+iowrite1;>io.ttyrd
+iowrite1;>vdi.cli.status
+
+#status check
+ioread1;>vdi.cli.status;.mainloop
+setreg2;10x2
+gotoif;>.quit
+
+setreg2;10x1
+gotoif;>.return
+
+#data piping
+ioread1;>io.ttyrd
+iowrite1;>vdi.cli.in
+
+ioread1;>vdi.cli.out
+iowrite1;>io.ttywr
+
+
+goto;>.mainloop
+
+null;;.quit
+datawrite1;>vdiexitcode
+dataread1;>.store1
+dataread2;>.store2
+goto;>.end
+
+
+#public exit code variable
+null;;vdiexitcode
+
+
+#return to program.
+null;;.return
+datawrite1;>vdiexitcode
+dataread1;>.store1
+dataread2;>.store2
+null;;.end

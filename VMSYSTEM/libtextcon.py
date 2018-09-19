@@ -120,3 +120,16 @@ for ch in allchars:
 	if ch.asmchar.startswith("\\"):
 		asm_escaped.extend([ch.asmchar])
 		
+def datlisttostr(datlist):
+	retval=''
+	for x in datlist:
+		if x in dattostr:
+			retval+=dattostr[x]
+	return retval
+
+def strtodatlist(strinp):
+	retval=[]
+	for x in strinp:
+		if x in strtodat:
+			retval.append(strtodat[x])
+	return retval

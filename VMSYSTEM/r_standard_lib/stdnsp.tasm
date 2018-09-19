@@ -4,6 +4,15 @@ head-mode=vars
  
 head-nspout=1
 
+#SBTVDI
+
+v>vdi.cli.in;10x100
+v>vdi.cli.out;10x101
+v>vdi.cli.status;10x102
+
+
+
+
 #IO
 v>io.ttywr;10x1
 v>io.tritdump;10x2

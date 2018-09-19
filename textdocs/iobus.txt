@@ -26,3 +26,23 @@ x :  m : asm varname  : description
 59: [b]: rand4.start  : set start of random 4 range.
 60: [b]: rand4.end    : set end of random 4 range.
 61: [r]: rand4.get    : get random number 4 from configured range.
+
+100-180 reserved for SBTVDI
+####SBTVDI design is not finished, vdi.* varnames MAY NOT be in the standard library yet!
+#relbuffer and namebuffer can have backspaces piped into them for crude line-editing.
+
+#VDI CLI will handle character mirroring itself. 
+
+100: [w] vdi.cli.in      : VDI CLI SERIAL: write TTY input data here.
+101: [r] vdi.cli.out     : VDI CLI SERIAL: read data from here and write to TTY output
+102: [b] vdi.cli.status  : write: init VDI CLI interface. read: 0=ok 1=user return 2=user shutdown
+
+110: [w] vdi.f0.dir      : file0 relbuffer
+111: [w] vdi.f0.name     : file0 namebuffer
+112: [b] vdi.f0.status   : write resets file0, read gets most recent status code. i.e. load failure.
+113: [w] vdi.f0.loadat   : file0 load at
+114: [w] vdi.f0.bootload : file0 soft-reset CPU, load selected file into RAM.
+115: [w] vdi.f0.loadat   : file0 relbuffer load at
+116: [w] vdi.f0.bootload : file0 relbuffer soft-reset CPU, load selected file into RAM.
+117: [w] vdi.f0.dirs     : file0 display text list of dirs in path (if any/applicable.)
+118: [w] vdi.f0.files    : file0 display text list of files in path (if any/applicable.)
