@@ -63,9 +63,9 @@ class sbtvdi:
 			self.status=2
 		if cmd=='help':
 			self.outstr('''SBTVDI CLI Shell command help:
-help: this text
-return: request to return to application
-quit: request to quit.
+help   : this text
+return : request to return to application
+quit   : request to quit.
 ''')
 		
 		

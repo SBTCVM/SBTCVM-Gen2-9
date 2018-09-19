@@ -1,7 +1,15 @@
-prline booting SBTVDI Shell
-prline |   |___
-prline |    H  \ Please wait while
-prline |____H__/ I prepare the boot...
+prline booting into SBTVDI Shell...
+prline  ^^^^^^^^^^^^^^^
+prline <+-------------+>
+prline <|      x      |>
+prline <| .___/0\___. |>
+prline <| |+/     \-| |>
+prline <| |/  <|>  \| |>
+prline <| |<|> _ <|>| |>
+prline <| \  ._|_.  / |>
+prline <|__|       |__|>
+prline <+Mni-------inM+>
+prline  vvvvvvvvvvvvvvv   SBTCVM Gen 2-9
 var exitcode=0
 
 #simple VDI shell in SSTNPL with vdishell.tas0 (part of standard library)
