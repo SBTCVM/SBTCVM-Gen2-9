@@ -27,7 +27,7 @@ runc: run SBTCVM Curses Frontend (same as SBTCVM_G2_9.py)
 
 ###Language Compilers:
 
-asm: SBTCVM assembly (same arguments as g2asm.py)
+asm: SBTCVM assembly (takes assembly source file as argument)
 stnp: SSTNPL (same arguments as stnpcom.py)
 
 ###Debug tools:
