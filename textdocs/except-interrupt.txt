@@ -6,6 +6,7 @@
 -3: exec overrun. : yes
 -4: stack1 underflow (called upon peek or pop when stack1 is empty) : yes
 -5: stack2 underflow (called upon peek or pop when stack2 is empty) : yes
+-50: User Stop. i.e. Ctrl+C in curses frontend. : no
 
 #all interrupts are above zero!
 #closest to zero is most important

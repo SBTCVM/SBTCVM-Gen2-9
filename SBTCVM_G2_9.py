@@ -11,9 +11,21 @@ import time
 import sys
 import os
 import curses
+import signal
+
 from threading import Thread
 progrun=0
 uiosys=None
+
+#catch KeyboardInterrupts and shutdown cleanly.
+sigintflg=0
+def siginthandle(sig, frame):
+	global sigintflg
+	sigintflg=1
+signal.signal(signal.SIGINT, siginthandle)
+
+
+
 try:
 	cmd=sys.argv[1]
 except:
@@ -150,6 +162,21 @@ else:
 				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
 				#(Store text in variables, as they need to be printed after curses has been shut down.
 				postout1=("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
+				postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
+				postout3=("Target Speed : '" + str(targspeed) + "' Khz")
+				#shutdown UIO & curses
+				uiosys.powoff()
+				curses.echo()
+				curses.endwin()
+				
+				print(postout1)
+				print(postout2)
+				print(postout3)
+				progrun=0
+			if sigintflg:
+				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
+				#(Store text in variables, as they need to be printed after curses has been shut down.
+				postout1=("VMSYSHALT -50: User Stop.")
 				postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
 				postout3=("Target Speed : '" + str(targspeed) + "' Khz")
 				#shutdown UIO & curses
