@@ -55,10 +55,8 @@ see readme.md for more information and licensing of media.
   
   ''')
 	elif cmd in ["-i"]:
-		print("XAS Shell v1 ready:")
 		xaslib.xasshell()
 	if cmd==None:
-		print("XAS Shell v1 ready:")
 		xaslib.xasshell()
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:

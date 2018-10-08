@@ -12,8 +12,11 @@ tritvalid="+0-pn"
 
 xascmds=[]
 
-xasvers='v1.0.0'
-versint=(1, 0, 0)
+xasvers='v1.0.1'
+versint=(1, 0, 1)
+
+shellwelcome="---SBTCVM XAS shell " + xasvers + ". Ready.---"
+
 class xascmd:
 	def __init__(self, xcmd, execstr, ispython, takesfile):
 		self.takesfile=takesfile
@@ -40,24 +43,32 @@ for plugin in os.listdir(plugpath):
 print("plugins loaded.")
 
 
+verinfo="SBTCVM XAS Shell " + xasvers + "\nPart Of SBTCVM Gen 2-9"
+
+
 helptext='''----XAS shell help:----
 --common--
-help: this text.
-exit: exit shell.
-print [arg]: print text
+   help: this text.
+   exit: exit shell.
+   print [arg]: print text
+   list/ls/dir [path]: list a path. i.e. 'ls APPS+gtt' would list APPS/gtt
+      Also accepts / and \ as path delineators. only shows files with
+      relevant XAS commands. paths are CASE SENSITIVE.
+   find [string]: Search filenames containing [string]. only shows files with
+      relevant XAS commands.
 --build--
-xas: run xas script
-asm [tasm source file]: SBTCVM assembler
-stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
-       Language (SSTNPL)
+   xas: run xas script
+   asm [tasm source file]: SBTCVM assembler
+   stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
+      Language (SSTNPL)
 --VM--
-runc [trom image]: run the VM with curses frontend.
+   runc [trom image]: run the VM with curses frontend.
 --tools--
-dump [trom image]: Dump TROM image
-dumpnp [trom image]: Dump TROM image in n0p format (same as romdump.py -dnp)
-vdump [trom image]: Dump TROM image in verbose format (same as romdump.py -r)
-vdumpnp [trom image]: Dump TROM image in verbose n0p format
-       (same as romdump.py -rnp)
+   dump [trom image]: Dump TROM image
+   dumpnp [trom image]: Dump TROM image in n0p format (romdump.py -dnp)
+   vdump [trom image]: Dump TROM image in verbose format (romdump.py -r)
+   vdumpnp [trom image]: Dump TROM image in verbose n0p format
+      (romdump.py -rnp)
 '''
 
 
@@ -84,7 +95,20 @@ see readme.md for more information and licensing of media.
   along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
   
   '''
+#generic fileinfo printer (used by find and list)
+def fileinfo(filen, pathx):
+	if filen.lower().endswith(".trom"):
+		print("Rom Image  : " + pathx)
+	elif filen.lower().endswith(".tasm"):
+		print("Assembly   : " + pathx)
+	elif filen.lower().endswith(".stnp"):
+		print("SSTNPL     : " + pathx)
+	elif filen.lower().endswith(".xas"):
+		print("XAS script : " + pathx)
+	elif filen.lower().endswith(".nsp"):
+		print("NSP library: " + pathx)
 
+#shell input function
 def getinput():
 	try:
 		try:
@@ -95,8 +119,77 @@ def getinput():
 		print("Keyboard Interrupt. Exiting.")
 		return 'exit'
 
+#Print function for findcmd
+def matcherprint(filen, search, pathx, dirshow=0):
+	if dirshow:
+		if search.lower() in filen.lower():
+			print("Directory  : " + pathx)
+	else:
+		if search.lower() in filen.lower():
+			fileinfo(filen, pathx)
 
+#find: filename search command.
+def findcmd(search):
+	if search==None:
+		print("XAS ERROR: No search string given!")
+		return
+	print("Search Results For: '" + search + "':")
+	for smartd in iofuncts.smartpaths:
+		for filen in os.listdir(smartd):
+			joinedpath=os.path.join(smartd, filen)
+			if os.path.isdir(joinedpath):
+				if filen.startswith("r_"):
+					for filesub in os.listdir(joinedpath):
+						matcherprint(filesub, search, smartd + "+" + filen + "+" + filesub)
+				matcherprint(filen, search, smartd + "+" + filen, dirshow=1)
+			elif os.path.isfile(joinedpath):
+				matcherprint(filen, search, smartd + "+" + filen)
+			
+		
+
+#directory listing helper for listcmd
+def showlisting(realpath, pathdesc):
+	print("------listing of: '" + pathdesc + "'")
+	for filen in sorted(os.listdir(realpath)):
+		if os.path.isfile(os.path.join(realpath, filen)):
+			fileinfo(filen, filen)
+			#else:
+			#	print("Other      : " + filen)
+		elif os.path.isdir(os.path.join(realpath, filen)):
+			if not filen.startswith("."):
+				print("Directory  : " + filen)
+#list: directory listing command.
+def listcmd(path):
+	if path==None or path.startswith("."):
+		path="."
+	path=path.replace("/", "+").replace("\\", "+").replace("..", "").replace(":\\", "")
+	pathlist=path.split("+")
+	pathdesc=path
+	if len(pathlist)==0:
+		realpath="."
+	else:
+		if pathlist[0]=="0":
+			pathlist[0]=os.path.join("disk", "0")
+			pathdesc="Drive 0"
+		if pathlist[0]=="1":
+			pathlist[0]=os.path.join("disk", "1")
+			pathdesc="Drive 1"
+		realpath=os.path.join(*pathlist)
+	if os.path.isdir(realpath):
+		showlisting(realpath, pathdesc)
+		return
+	else:
+		print("searching for directory...")
+		for smartd in iofuncts.smartpaths:
+			if os.path.isdir(os.path.join(smartd, realpath)):
+				showlisting(os.path.join(smartd, realpath), smartd.replace("\\", "+").replace("/", "+") + "+" + pathdesc)
+				return
+	print("XAS ERROR: path not found.")
+		
+
+#interactive interpreter
 def xasshell():
+	print(shellwelcome)
 	try:
 		import readline
 	except ImportError:
@@ -125,6 +218,7 @@ def xasshell():
 						print("-The script was not run successfully.\n")
 					else:
 						print("-Subscript Done.\n")
+					print(shellwelcome)
 			else:
 				print("XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "'")	
 		elif cmd=="asm":
@@ -139,6 +233,7 @@ def xasshell():
 						print("Assembler returned an error.\n")
 					else:
 						print("Done.\n")
+					print(shellwelcome)
 			else:
 				print("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
 		elif cmd=="print":
@@ -147,26 +242,38 @@ def xasshell():
 			print(helptext)
 		elif cmd=="about":
 			print(abouttext)
+		elif cmd in ["ver", "version", "info"]:
+			print(verinfo)
 		elif cmd=="exit":
 			return
+		elif cmd in ["list", "ls", "dir"]:
+			listcmd(arg)
+		elif cmd in ["find"]:
+			findcmd(arg)
 		for cmdobj in xascmds:
 			if cmd==cmdobj.xcmd:
 				if cmdobj.ispython:
 					if cmdobj.takesfile and arg!=None:
 						print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
-						if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
-							print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
-						print("Done.\n")
+						try:
+							if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
+								print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
+						except KeyboardInterrupt:
+							pass
+						print(shellwelcome)
 					else:
 						print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'")
-						if call(['python']+cmdobj.execstr.split(" "))!=0:
-							print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
-						print("Done.\n")
+						try:
+							if call(['python']+cmdobj.execstr.split(" "))!=0:
+								print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
+						except KeyboardInterrupt:
+							pass
+						print(shellwelcome)
 	print(ppx + "xas finished. exiting...")
 
 
 
-
+#script interpreter 
 def xasparse(scrpath, syntaxonly=0, printprefix=""):
 	ppx=printprefix
 	xasfile=open(scrpath, 'r')

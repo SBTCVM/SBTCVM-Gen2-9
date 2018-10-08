@@ -3,6 +3,7 @@ SBTCVM eXtensible Assembly Script help
 xas scripts provide a portable, integrated build script system
 for complex SBTCVM Applications.
 
+for help on interactive mode, see help_xas_shell.txt
 
 to run XAS scripts, use the interpreter: 'xas.py'
 

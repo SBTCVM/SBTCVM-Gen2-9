@@ -1,0 +1,51 @@
+SBTCVM eXtensible Assembly Script (XAS) Interactive Shell mode help
+
+When you run xas.py with no arguments, or with the -i option,
+you will be greeted by a welcome message and a prompt. This is the
+XAS interactive mode (AKA XAS shell)
+
+The prompt looks like so:
+>
+
+
+
+
+
+In addition to the commands outlined in help_xas.txt, XAS' interactive shell
+mode has the following interactive-only commands.:
+
+find [string]: a case-insensitive file search function. 
+	handy for remembering those pesky rom names and such.
+
+list [path]: will either list the path verbatim, or if not found, search for the path in 
+	ROMS, APPS, VMSYSTEM, VMUSER, and VMSYSTEM/ROMS,
+	and then list any XAS-relavant files and directories it finds there.
+
+help: a quick refresher on available commands
+
+version/ver/info: version information
+
+about: about the shell.
+
+
+
+###Tips###
+
+remember: often SBTCVM is able to find it by itself. find can help you here, as
+		it searches the same locations as SBTCVM's file lookup routines.
+
+Both recursive and auto directories can be listed by their name alone, and
+		list should find them without needing their full path at all.
+		i.e. to list the included gtt app's directory, enter 'list gtt' at
+		the XAS prompt.
+
+Recursive Directories: Any directory in ROMS, APPS, VMSYSTEM, VMUSER, or
+		VMSYSTEM/ROMS, prefixed with 'r_' will be searched automatically by
+		SBTCVM when opening things like source code and TROMs
+
+'Auto' directories: Any directory in ROMS, APPS, VMSYSTEM, VMUSER, or
+		VMSYSTEM/ROMS, may be matched as a particular file if it contains a
+		file of that type prefixed with 'auto_' i.e. 'auto_build.xas' in that
+		example, passing the directory to the xas command as a script will run
+		'auto_build.xas'
+

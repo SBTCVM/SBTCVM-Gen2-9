@@ -27,9 +27,11 @@ class logit:
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
 reservedpaths=["cfg"]
 
+smartpaths=["VMSYSTEM", VMSYSROMS, "ROMS", "APPS", "VMUSER"]
+
 #handles r_* directories.
 def recur_dir(fnameg):
-	for maindir in ["VMSYSTEM", VMSYSROMS, "ROMS", "APPS", "VMUSER"]:
+	for maindir in smartpaths:
 		for dirname in os.listdir(maindir):
 			dirpath=os.path.join(maindir, dirname)
 			if dirname.lower().startswith("r_") and os.path.isdir(dirpath):
@@ -40,7 +42,7 @@ def recur_dir(fnameg):
 
 def auto_dir(fnameg, ext):
 	#autodir functionality.
-	for maindir in ["VMSYSTEM", VMSYSROMS, "ROMS", "APPS", "VMUSER"]:
+	for maindir in smartpaths:
 		dirpath=os.path.join(maindir, fnameg)
 		if os.path.isdir(dirpath):
 			for filex in os.listdir(dirpath):
