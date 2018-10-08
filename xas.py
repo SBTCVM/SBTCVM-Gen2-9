@@ -70,7 +70,8 @@ see readme.md for more information and licensing of media.
 		else:
 			syntaxonly=0
 		pathx=iofuncts.findtrom(argx, ext=".xas", exitonfail=1, exitmsg="xas file was not found. STOP", dirauto=1)
-		xaslib.xasparse(pathx, syntaxonly)
+		if xaslib.xasparse(pathx, syntaxonly):
+			sys.exit("The script was not run successfully.")
 			
 		
 	

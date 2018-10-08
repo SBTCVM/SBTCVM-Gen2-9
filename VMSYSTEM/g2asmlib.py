@@ -12,7 +12,7 @@ tritvalid="+0-pn"
 
 
 
-def assemble(pathx, syntaxonly=0, pfx=""):
+def assemble(pathx, syntaxonly=0, pfx="", exitonerr=1):
 	#locate source file and extract destination basename and directory for mainloop class.
 	
 	basepath=pathx.rsplit(".", 1)[0]
@@ -27,17 +27,33 @@ def assemble(pathx, syntaxonly=0, pfx=""):
 	mainl.headload()
 	
 	#parse each pass in order.
-	if mainl.p0():
-		sys.exit(pfx + "Syntax Error (pass 0)")
-	mainl.p1()
-	if mainl.p2():
-		sys.exit(pfx + "Syntax Error (pass 2)")
-	mainl.p3()
-	if mainl.p4():
-		sys.exit(pfx + "Error: Invalid romdata! (pass 4)")
-	if not syntaxonly:
-		mainl.p5()
+	if exitonerr:
+		if mainl.p0():
+			sys.exit(pfx + "Syntax Error (pass 0)")
+		mainl.p1()
+		if mainl.p2():
+			sys.exit(pfx + "Syntax Error (pass 2)")
+		mainl.p3()
+		if mainl.p4():
+			sys.exit(pfx + "Error: Invalid romdata! (pass 4)")
+		if not syntaxonly:
+			mainl.p5()
+	else:
+		if mainl.p0():
+			print(pfx + "Syntax Error (pass 0)")
+			return 1
+		mainl.p1()
+		if mainl.p2():
+			print(pfx + "Syntax Error (pass 2)")
+			return 1
+		mainl.p3()
+		if mainl.p4():
+			print(pfx + "Error: Invalid romdata! (pass 4)")
+			return 1
+		if not syntaxonly:
+			mainl.p5()
 	sourcefile.close()
+	return 0
 
 
 #classes and instances for instructions

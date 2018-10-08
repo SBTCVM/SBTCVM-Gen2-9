@@ -116,26 +116,29 @@ def xasshell():
 			arg=None
 		if cmd=="xas":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=0, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "'")
+				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=0, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
 				if pathx==None:
 					print("XAS ERROR: xas script '" + arg + "' not found!")
-				elif pathx!=scrpath:
-					print("----XAS script: '" + arg + "'")
-					xasparse(pathx, syntaxonly, "  ")
-					print("-Subscript Done.\n")
 				else:
-					print("XAS ERROR: Subscript loop error. Line: '" + str(lineno) + "'")	
+					print("----XAS script: '" + arg + "'")
+					if xasparse(pathx, 0, "  "):
+						print("-The script was not run successfully.\n")
+					else:
+						print("-Subscript Done.\n")
 			else:
 				print("XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "'")	
 		elif cmd=="asm":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'")
+				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
 				if pathx==None:
 					print("XAS ERROR: Assembly source file '" + arg + "' not found!")
 				else:
 					print("assemble: '" + arg + "'")
-					g2asmlib.assemble(pathx, syntaxonly, printprefix+"  ")
-					print("Done.\n")
+					
+					if g2asmlib.assemble(pathx, 0, "  ", exitonerr=0):
+						print("Assembler returned an error.\n")
+					else:
+						print("Done.\n")
 			else:
 				print("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
 		elif cmd=="print":
@@ -162,6 +165,8 @@ def xasshell():
 	print(ppx + "xas finished. exiting...")
 
 
+
+
 def xasparse(scrpath, syntaxonly=0, printprefix=""):
 	ppx=printprefix
 	xasfile=open(scrpath, 'r')
@@ -183,23 +188,36 @@ def xasparse(scrpath, syntaxonly=0, printprefix=""):
 			arg=None
 		if cmd=="xas":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=1, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=0, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'", dirauto=1)
+				if pathx==None:
+					print("XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+					return 1
 				if pathx!=scrpath:
 					print(ppx + "----XAS subscript: '" + arg + "'")
-					xasparse(pathx, syntaxonly, printprefix+"  ")
+					if xasparse(pathx, syntaxonly, printprefix+"  "):
+						return 1
 					print(ppx + "-Subscript Done.\n")
 				else:
-					sys.exit(ppx + "XAS ERROR: Subscript loop error. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
+					print(ppx + "XAS ERROR: Subscript loop error. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+					return 1
 			else:
-				sys.exit(ppx + "XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")	
+				print(ppx + "XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				return 1
 		elif cmd=="asm":
 			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=1, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'", dirauto=1)
+				
+				if pathx==None:
+					print("XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+					return 1
 				print(ppx + "assemble: '" + arg + "'")
-				g2asmlib.assemble(pathx, syntaxonly, printprefix+"  ")
+				if g2asmlib.assemble(pathx, syntaxonly, printprefix+"  ", exitonerr=0):
+					print(ppx + "ERROR.")
+					return 1
 				print(ppx + "Done.\n")
 			else:
-				sys.exit(ppx + "XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				print(ppx + "XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				return 1
 		elif cmd=="print":
 			if arg!=None:
 				print(ppx + "--SCRIPT: " + arg)
@@ -211,12 +229,15 @@ def xasparse(scrpath, syntaxonly=0, printprefix=""):
 					if cmdobj.takesfile and arg!=None:
 						print(ppx + "plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
 						if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
-							sys.exit(ppx + "XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+							print(ppx + "XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+							return 1
 						print(ppx + "Done.\n")
 					else:
 						print(ppx + "plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'")
 						if call(['python']+cmdobj.execstr.split(" "))!=0:
-							sys.exit(ppx + "XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+							print(ppx + "XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+							return 1
 						print(ppx + "Done.\n")
 	print(ppx + "xas finished. exiting...")
 	xasfile.close()
+	return 0
