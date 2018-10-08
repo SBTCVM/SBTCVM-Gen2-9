@@ -93,14 +93,14 @@ see readme.md for more information and licensing of media.
   
   ''')
 	elif cmd in ["-d"]:
-		romdump(iofuncts.loadtrom(arg))
+		romdump(iofuncts.loadtrom(arg, dirauto=1))
 	elif cmd in ["-dnp"]:
-		romdump(iofuncts.loadtrom(arg), n0p=1)
+		romdump(iofuncts.loadtrom(arg, dirauto=1), n0p=1)
 	elif cmd in ["-r"]:
-		romdumpver(iofuncts.loadtrom(arg))
+		romdumpver(iofuncts.loadtrom(arg, dirauto=1))
 	elif cmd in ["-rnp"]:
-		romdumpver(iofuncts.loadtrom(arg), n0p=1)
+		romdumpver(iofuncts.loadtrom(arg, dirauto=1), n0p=1)
 	elif cmd == None:
 		print("Tip: try romdump.py -h for help.")
 	else:
-		romdump(iofuncts.loadtrom(cmd))
+		romdump(iofuncts.loadtrom(cmd, dirauto=1))

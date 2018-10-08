@@ -6,6 +6,12 @@ for complex SBTCVM Applications.
 
 to run XAS scripts, use the interpreter: 'xas.py'
 
+syntax:
+commands must be separated from arguments by either a space or a semicolon:
+i.e.
+	print;hello world
+	print hello world
+
 ###basic commands:
 
 print: print strings to standard output. i.e.
@@ -15,6 +21,9 @@ exit: exit the xas script. note that this WILL NOT close 'parent' XAS scripts, b
 xas: call another xas script as a 'child' script.
 	xas;xasname
 
+###VM:
+
+runc: run SBTCVM Curses Frontend (same as SBTCVM_G2_9.py)
 
 ###Language Compilers:
 

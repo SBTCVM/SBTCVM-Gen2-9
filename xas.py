@@ -5,8 +5,8 @@ import os
 import VMSYSTEM.iofuncts as iofuncts
 import VMSYSTEM.xaslib as xaslib
 #common vars:
-xasvers='v1.0.0'
-versint=(3, 0, 0)
+xasvers=xaslib.xasvers
+versint=xaslib.versint
 
 
 
@@ -23,6 +23,7 @@ if __name__=="__main__":
 		print('''SBTCVM eXtensible Assembly Script (XAS) v1
 For SBTCVM Gen2-9.
 help, -h, --help: this help
+-i, [no argument]: run XAS in interactive shell mode.
 -v, --version: SBTCVM XAS version
 -a, --about: about SBTCVM
 -s, --syntax: assembly syntax check mode
@@ -53,8 +54,12 @@ see readme.md for more information and licensing of media.
   along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
   
   ''')
+	elif cmd in ["-i"]:
+		print("XAS Shell v1 ready:")
+		xaslib.xasshell()
 	if cmd==None:
-		print("Tip: Try xas.py -h for help.")
+		print("XAS Shell v1 ready:")
+		xaslib.xasshell()
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:
 			argx=arg
