@@ -1,0 +1,30 @@
+SBTCVM eXtensible Assembly Script help
+
+xas scripts provide a portable, integrated build script system
+for complex SBTCVM Applications.
+
+
+to run XAS scripts, use the interpreter: 'xas.py'
+
+###basic commands:
+
+print: print strings to standard output. i.e.
+	print;hello world
+exit: exit the xas script. note that this WILL NOT close 'parent' XAS scripts, but return to them.
+	exit
+xas: call another xas script as a 'child' script.
+	xas;xasname
+
+
+###Language Compilers:
+
+asm: SBTCVM assembly (same arguments as g2asm.py)
+stnp: SSTNPL (same arguments as stnpcom.py)
+
+###Debug tools:
+
+#romdump.py macros:
+dump: Dump TROM image
+dumpnp: Dump TROM image in n0p format (same as romdump.py -dnp)
+vdump: Dump TROM image in verbose format (same as romdump.py -r)
+vdumpnp: Dump TROM image in verbose n0p format (same as romdump.py -rnp)

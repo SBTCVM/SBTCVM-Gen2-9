@@ -5,7 +5,13 @@ Help on the various python programs & utilities included with SBTCVM gen 2-9
    VM is programmed with, it also acts as a target for other programming
    languages, like SSTNPL. Helps to have a grasp of balanced ternary and how
    lower level programming works.
-   It also is in charge of running XAS build scripts.
+
+>>>xas.py:
+   SBTCVM's eXtensible Assembly Script, or XAS, is in charge of scripting
+   together complex build processes of more complex applications and 
+   components. Though many TROM programs lack need for it, and so use
+   stnpcom.py or g2asm.py directly.
+
 >>>stnpcom.py:
    the SSTNPL compiler. This is the ideal way to learn balanced ternary math,
    along with a bit of programing too. Ideal for beginners. for more serious

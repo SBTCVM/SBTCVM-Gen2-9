@@ -1,0 +1,4 @@
+0: normal operation.
+1: return to program. (user request)
+2: quit VM (user request)
+

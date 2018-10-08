@@ -7,4 +7,19 @@ s*push2        : 3 : push (register 2)
 s*peek1/s*peek : 4 : peek (register 1) (read top of stack, but don't remove it.)
 s*peek2        : 5 : peek (register 2) (read top of stack, but don't remove it.)
 
-to add:
+
+------------to add:------------
+	s*topadd       : 10: add top 2 of stack
+	s*topsub       : 11: sub top 2 of stack
+	s*topdiv       : 12: div top 2 of stack
+	s*topmul       : 13: mul top 2 of stack
+	s*getsize1     : 20: Get size of stack (register 1)
+	s*getsize2     : 21: Get size of stack (register 2)
+	s*flip         : 22: flip entire stack back-to-front.
+	
+	Double Full word multiplexed opcodes.
+	s*getat1      [data: stack index]
+	s*getat2      [data: stack index]
+	s*setat1      [data: stack index]
+	s*setat2      [data: stack index]
+	s*stsetat     [inst: value, data: stack index]

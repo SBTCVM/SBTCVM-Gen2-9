@@ -1,0 +1,20 @@
+#sfx/DMA channel:
+play 
+stop 
+freq
+vol 0-100
+pan -(L), 0(LR), +(R)
+voice 0-3
+pulsewidth -- to ++
+--=0.1
+-0=0.2
+-+=0.3
+0-=0.4
+00=0.5
+0+=0.6
++-=0.7
++0=0.8
+++=0.9
+
+
+##chip DMA:

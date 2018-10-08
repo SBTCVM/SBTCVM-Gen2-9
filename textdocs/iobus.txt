@@ -36,6 +36,7 @@ x :  m : asm varname  : description
 100: [w] vdi.cli.in      : VDI CLI SERIAL: write TTY input data here.
 101: [r] vdi.cli.out     : VDI CLI SERIAL: read data from here and write to TTY output
 102: [b] vdi.cli.status  : write: init VDI CLI interface. read: 0=ok 1=user return 2=user shutdown
+103: [b] vdi.cli.mode    : get/set CLI mode.
 
 110: [w] vdi.f0.dir      : file0 relbuffer
 111: [w] vdi.f0.name     : file0 namebuffer
@@ -46,3 +47,8 @@ x :  m : asm varname  : description
 116: [w] vdi.f0.bootload : file0 relbuffer soft-reset CPU, load selected file into RAM.
 117: [w] vdi.f0.dirs     : file0 display text list of dirs in path (if any/applicable.)
 118: [w] vdi.f0.files    : file0 display text list of files in path (if any/applicable.)
+
+
+
+
+200:

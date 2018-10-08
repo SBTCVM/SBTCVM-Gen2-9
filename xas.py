@@ -3,10 +3,9 @@ import VMSYSTEM.libbaltcalc as libbaltcalc
 import sys
 import os
 import VMSYSTEM.iofuncts as iofuncts
-import VMSYSTEM.g2asmlib as g2asmlib
-from VMSYSTEM.g2asmlib import mainloop
+import VMSYSTEM.xaslib as xaslib
 #common vars:
-asmvers='v3.0.0'
+xasvers='v1.0.0'
 versint=(3, 0, 0)
 
 
@@ -21,19 +20,19 @@ if __name__=="__main__":
 	except:
 		arg=None
 	if cmd in ['help', '-h', '--help']:
-		print('''SBTCVM assembler v3
+		print('''SBTCVM eXtensible Assembly Script (XAS) v1
 For SBTCVM Gen2-9.
 help, -h, --help: this help
--v, --version: assembler version
+-v, --version: SBTCVM XAS version
 -a, --about: about SBTCVM
--b, (tasmname): build SBTCVM tasm source file into rom at same location or run an xas script.
--s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
-(tasmname): same as -b/--build''')
+-s, --syntax: assembly syntax check mode
+-b, --build (xasname): run xas script.
+(xasname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
-		print(asmvers)
+		print(xasvers)
 	elif cmd in ["-a", "--about"]:
-		print('''SBTCVM Assembler v3
-''' + asmvers + '''
+		print('''SBTCVM eXtensible Assembly Script (XAS) v1
+''' + xasvers + '''
 part of SBTCVM-Gen2-9 (v2.1.0.alpha)
 
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
@@ -55,7 +54,7 @@ see readme.md for more information and licensing of media.
   
   ''')
 	if cmd==None:
-		print("Tip: Try g2-asm.py -h for help.")
+		print("Tip: Try xas.py -h for help.")
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:
 			argx=arg
@@ -65,8 +64,8 @@ see readme.md for more information and licensing of media.
 			syntaxonly=1
 		else:
 			syntaxonly=0
-		pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP", dirauto=1)
-		g2asmlib.assemble(pathx, syntaxonly)
+		pathx=iofuncts.findtrom(argx, ext=".xas", exitonfail=1, exitmsg="xas file was not found. STOP", dirauto=1)
+		xaslib.xasparse(pathx, syntaxonly)
 			
 		
 	
