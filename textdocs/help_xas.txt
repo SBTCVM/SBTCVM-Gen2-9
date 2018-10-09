@@ -24,6 +24,8 @@ xas: call another xas script as a 'child' script.
 
 ###VM:
 
+[avoid this command for now]
+[CURRENTLY HAS A BUG THAT CAN BREAK TERMINAL SESSIONS WHEN CTRL+C IS USED TO EXIT!!!!]
 runc: run SBTCVM Curses Frontend (same as SBTCVM_G2_9.py)
 
 ###Language Compilers:

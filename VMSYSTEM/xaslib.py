@@ -62,7 +62,8 @@ helptext='''----XAS shell help:----
    stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
       Language (SSTNPL)
 --VM--
-   runc [trom image]: run the VM with curses frontend.
+   runc [trom image]: run the VM with curses frontend. 
+      [BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py]
 --tools--
    dump [trom image]: Dump TROM image
    dumpnp [trom image]: Dump TROM image in n0p format (romdump.py -dnp)
@@ -118,6 +119,17 @@ def getinput():
 	except KeyboardInterrupt:
 		print("Keyboard Interrupt. Exiting.")
 		return 'exit'
+
+#shell input function
+def getsubinput(prompt=">"):
+	try:
+		try:
+			return raw_input(prompt)
+		except NameError:
+			return input(prompt)
+	except KeyboardInterrupt:
+		print("\nPlease press Ctrl+C again to exit.")
+		return ""
 
 #Print function for findcmd
 def matcherprint(filen, search, pathx, dirshow=0):
@@ -250,28 +262,41 @@ def xasshell():
 			listcmd(arg)
 		elif cmd in ["find"]:
 			findcmd(arg)
-		for cmdobj in xascmds:
-			if cmd==cmdobj.xcmd:
-				if cmdobj.ispython:
-					if cmdobj.takesfile and arg!=None:
-						print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
-						try:
-							if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
-								print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
-						except KeyboardInterrupt:
-							pass
-						print(shellwelcome)
-					else:
-						print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'")
-						try:
-							if call(['python']+cmdobj.execstr.split(" "))!=0:
-								print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
-						except KeyboardInterrupt:
-							pass
-						print(shellwelcome)
+		if cmdvalid(cmd):
+			for cmdobj in xascmds:
+				if cmd==cmdobj.xcmd:
+					if cmdobj.ispython:
+						if cmdobj.takesfile and arg!=None:
+							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
+							try:
+								if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
+									print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
+							except KeyboardInterrupt:
+								pass
+							print(shellwelcome)
+						else:
+							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'")
+							try:
+								if call(['python']+cmdobj.execstr.split(" "))!=0:
+									print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
+							except KeyboardInterrupt:
+								pass
+							print(shellwelcome)
 	print(ppx + "xas finished. exiting...")
 
-
+def cmdvalid(cmd):
+	if cmd=="runc":
+		print('''!!!!!!! WARNING !!!!!!!
+runc currently has a bug where terminal sessions are
+broken after terminating the vm with Ctrl+C
+PLEASE RUN SBTCVM_G2_9.py DIRECTLY!!!!!!! Press enter to return to prompt.
+If your testing this, please enter 'yes' then press enter.''')
+		if getsubinput("Are you sure?>")=="yes":
+			return 1
+		else:
+			return 0
+	return 1
+	
 
 #script interpreter 
 def xasparse(scrpath, syntaxonly=0, printprefix=""):

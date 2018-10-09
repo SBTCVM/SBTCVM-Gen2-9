@@ -21,6 +21,10 @@ uiosys=None
 sigintflg=0
 def siginthandle(sig, frame):
 	global sigintflg
+	
+	uiosys.powoff()
+	curses.echo()
+	curses.endwin()
 	sigintflg=1
 signal.signal(signal.SIGINT, siginthandle)
 
@@ -115,10 +119,10 @@ else:
 		progrun=1
 		
 		#curses startup
-		curses.initscr()
-		curses.noecho()
-		curses.cbreak()
 		mainscr=curses.initscr()
+		curses.noecho()
+		#curses.raw()
+		curses.cbreak()
 		mainscr.keypad(1)
 		mainscr.nodelay(1)
 		
@@ -158,7 +162,20 @@ else:
 			if xtime>0.0:
 				time.sleep(xtime)
 			#exit code:
-			if retval!=None:
+			if sigintflg:
+				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
+				#(Store text in variables, as they need to be printed after curses has been shut down.
+				postout1=("VMSYSHALT -50: User Stop.")
+				postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
+				postout3=("Target Speed : '" + str(targspeed) + "' Khz")
+				#shutdown UIO & curses
+				
+				print(postout1)
+				print(postout2)
+				print(postout3)
+				progrun=0
+				
+			elif retval!=None:
 				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
 				#(Store text in variables, as they need to be printed after curses has been shut down.
 				postout1=("VMSYSHALT " + str(retval[1]) + ": " + retval[2])
@@ -173,21 +190,7 @@ else:
 				print(postout2)
 				print(postout3)
 				progrun=0
-			if sigintflg:
-				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
-				#(Store text in variables, as they need to be printed after curses has been shut down.
-				postout1=("VMSYSHALT -50: User Stop.")
-				postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
-				postout3=("Target Speed : '" + str(targspeed) + "' Khz")
-				#shutdown UIO & curses
-				uiosys.powoff()
-				curses.echo()
-				curses.endwin()
-				
-				print(postout1)
-				print(postout2)
-				print(postout3)
-				progrun=0
+			
 	#in case of drastic failure, shutdown curses!
 	finally:
 		if progrun:

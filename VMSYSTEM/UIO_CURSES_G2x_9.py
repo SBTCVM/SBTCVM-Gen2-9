@@ -40,6 +40,7 @@ class uio:
 		self.maxy=self.ttywin.getmaxyx()[0]
 		self.maxx=self.ttywin.getmaxyx()[1]
 		self.keyinbuff=[]
+		self.shutdown=0
 	#status field update loop.
 	
 	def statup(self):
