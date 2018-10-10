@@ -29,6 +29,9 @@ Command documentation:
 	swap [var1],[var2] : swap the values of [var1] & [var2]
 	copy [var1],[var2] : copy [var1] to [var2]
 
+--Debugging:
+	marker [name] : Print an assembly debugging marker at assemble time. (with sstnpl source line appended to name)
+
 --System:
 	stop : Shutdown SBTCVM (this is how you quit a program in SBTCVM, when its loaded via a trom image.
 

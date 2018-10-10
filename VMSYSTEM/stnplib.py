@@ -116,6 +116,21 @@ class in_label:
 		destobj.write("#label\n" + "null;;" + args+"--label" + "\n")
 		return
 
+class in_marker:
+	def __init__(self):
+		self.keywords=["marker"]
+	def p0(self, args, keyword, lineno):
+		if args=="":
+			return 1, keyword+": Line: " + str(lineno) + ": Unnamed Debug Marker!"
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return [npvar(args, None, vtype=nptype_label)]
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+		destobj.write("#marker\n" + "marker;" + args + "' .stnp line: '" + str(lineno) + "\n")
+		return
+
 
 class in_rawasm:
 	def __init__(self):
@@ -128,7 +143,7 @@ class in_rawasm:
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
-		destobj.write("#___RAW ASSEMBLY CODE___\n#_______NOTE: this corresponds to SSTNPL source line #" + str(lineno) + "\n" + args + "\n")
+		destobj.write("#___RAW ASSEMBLY CODE___\n#_______NOTE: this corresponds to SSTNPL source line #" + str(lineno) + "\n" + args + "#SSTNPL Source Line: '" + str(lineno) + "' \n")
 		return
 
 class in_intcommon1:
@@ -487,6 +502,7 @@ class mainloop:
 		in_rrange(),
 		in_keyprompt(),
 		in_val(),
+		in_marker(),
 		in_invert(),
 		in_print(),
 		in_rawasm(),

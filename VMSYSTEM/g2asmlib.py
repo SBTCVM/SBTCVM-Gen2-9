@@ -78,6 +78,28 @@ class statinst:
 	def p3(self, data, keyword, gotos, lineno):
 		return [[self.opcode, self.subcode, lineno]]
 
+
+#special zerosize debug marker that prints the associated string along with the
+#address it was placed at.
+class marker:
+	def __init__(self):
+		self.keywords=["marker"]
+		self.prefixes=[]
+		self.nsp=0
+		self.marks={}
+	def p0(self, data, keyword, lineno):
+		if data==None:
+			return 1, keyword+": Line: " + str(lineno) + ": Unnamed Debug Marker!"
+		return 0, "DEBUG Marker: '" + data + "' source line: '" + str(lineno) + "'"
+	def p1(self, data, keyword, lineno, addr, gotos):
+		self.marks[lineno]=addr
+		return 0, {}
+	def p2(self, data, keyword, gotos, lineno):
+		
+		return 0, "DEBUG Marker: '" + data + "' address: '" + str(self.marks[lineno])  + "' source line: '" + str(lineno) + "'"
+	def p3(self, data, keyword, gotos, lineno):
+		return []
+
 #basic instruction. literally any instruction that uses this automatically supports goto refrence carrot stntax (keyword;>gotorefrence)
 class instruct:
 	def __init__(self, keywords, opcode):
@@ -402,7 +424,8 @@ class mainloop:
 		statinst(["s2peek1", "s2peek"], -9101, 4),
 		statinst(["s2peek2"], -9101, 5),
 		includetas0(),
-		nspacevar()]
+		nspacevar(),
+		marker()]
 		
 	def headload(self):
 		#header load.
@@ -486,7 +509,9 @@ class mainloop:
 				if line.endswith("\n"):
 					line=line[:-1]
 				if '#' in line:
-					line=line.rsplit("#", 1)[0]
+					line, comment=line.rsplit("#", 1)
+				else:
+					comment=None
 				line.replace("|", ";")
 				#parse
 				linelist=line.split(";")
@@ -507,7 +532,12 @@ class mainloop:
 								print(self.pfx + "Syntax Error: "+retlist[1])
 							else:
 								print(self.pfx + "Syntax Error!")
+							if comment!=None:
+								print(self.pfx + "----NOTICE----: Comment from faulty line: \n" + self.pfx + "'" + comment + "'")
 							return 1
+							
+						elif retlist[1]!=None:
+							print(self.pfx + retlist[1])
 					else:
 						#prefix keywords
 						for pattern in inst.prefixes:
@@ -518,7 +548,11 @@ class mainloop:
 										print(self.pfx + "Syntax Error: "+retlist[1])
 									else:
 										print(self.pfx + "Syntax Error!")
+									if comment!=None:
+										print(self.pfx + "----NOTICE----: Comment from faulty line: \n" + self.pfx + "'" + comment + "'")
 									return 1
+								elif retlist[1]!=None:
+									print(self.pfx + retlist[1])
 		return 0
 	def p1(self):
 		self.fileobj.seek(0)
@@ -592,7 +626,9 @@ class mainloop:
 				if line.endswith("\n"):
 					line=line[:-1]
 				if '#' in line:
-					line=line.rsplit("#", 1)[0]
+					line, comment=line.rsplit("#", 1)
+				else:
+					comment=None
 				
 				line.replace("|", ";")
 				#parse
@@ -613,7 +649,11 @@ class mainloop:
 								print(self.pfx + "Syntax Error: "+retlist[1])
 							else:
 								print(self.pfx + "Syntax Error!")
+							if comment!=None:
+								print(self.pfx + "----NOTICE----: Comment from faulty line: \n" + self.pfx + "'" + comment + "'")
 							return 1
+						elif retlist[1]!=None:
+							print(self.pfx + retlist[1])
 					else:
 						#prefix keywords
 						for pattern in inst.prefixes:
@@ -624,7 +664,11 @@ class mainloop:
 										print(self.pfx + "Syntax Error: "+retlist[1])
 									else:
 										print(self.pfx + "Syntax Error!")
+									if comment!=None:
+										print(self.pfx + "----NOTICE----: Comment from faulty line: \n" + self.pfx + "'" + comment + "'")
 									return 1
+								elif retlist[1]!=None:
+									print(self.pfx + retlist[1])
 		return 0
 	def p3(self):
 		self.datainstlist=[]

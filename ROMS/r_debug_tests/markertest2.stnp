@@ -1,0 +1,52 @@
+#test program for SSTNPL's 'marker' debug marker feature.
+
+#markers show the STARTING address of the FOLLOWING instruction block.
+
+#SSTNPL's Debug markers are a wrapper for SBTCVM assembly's markers.
+#SSTNPL will automatically append the appropriate SSTNPL source file line
+#number to your given label.
+
+#--WHEN USING EMBEDDED ASSEMBLY--:
+#using SSTNPL's marker instruction is recommended over
+#using the marker assembler keyword directly. as with SSTNPL's marker
+#instruction, the .stnp source line number of the marker will automatically be appened.
+
+#assembly markers are zerosize, and will print their given label along with source line
+#and the aforementioned address during assembler pass 2. 
+#it will also be printed during pass 0, but lacking the address.
+#these addresses can then be used with romdump.py's optional ranged mode.
+
+marker top
+val 10x0
+val 10x1
+val 10x2
+val 10x3
+val 10x4
+val 10x5
+val 10x6
+val 10x7
+val 10x8
+val 10x9
+val 10x10
+marker center
+val 10x0
+val 10x1
+val 10x2
+val 10x3
+val 10x4
+val 10x5
+val 10x6
+val 10x7
+val 10x8
+val 10x9
+val 10x10
+#this marker will show the address of the following 'stop' instruction.
+marker end
+stop
+
+#example of using romdump range:
+
+#romdump.py -r markertest [start] [end]
+
+#To get the data between two markers, just use the first one's address as
+#[start], and the last one's address as [end]

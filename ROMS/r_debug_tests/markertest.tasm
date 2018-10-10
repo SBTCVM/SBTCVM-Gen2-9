@@ -1,0 +1,49 @@
+#test program for SBTCVM assembly's 'marker' debug marker feature.
+
+#markers show the address of the FOLLOWING keyword. For multi-word keywords,
+#this is the START ADDRESS of that keyword's output.
+
+#markers are zerosize, and will print their given label along with source line
+#and the aforementioned address during assembler pass 2. 
+#it will also be printed during pass 0, but lacking the address.
+#these addresses can then be used with romdump.py's optional ranged mode.
+
+
+
+
+#syntax is simple. just be sure to specify a plain text label as the data.
+marker;top
+null;10x0
+null;10x1
+null;10x2
+null;10x3
+null;10x4
+null;10x5
+null;10x6
+null;10x7
+null;10x8
+null;10x9
+null;10x10
+marker;center
+null;10x0
+null;10x1
+null;10x2
+null;10x3
+null;10x4
+null;10x5
+null;10x6
+null;10x7
+null;10x8
+null;10x9
+null;10x10
+#this marker will show the address of the following 'stop' keyword.
+marker;end
+stop
+
+
+#example of using romdump range:
+
+#romdump.py -r markertest [start] [end]
+
+#To get the data between two markers, just use the first one's address as
+#[start], and the last one's address as [end]
