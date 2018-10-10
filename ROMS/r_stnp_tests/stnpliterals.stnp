@@ -1,0 +1,22 @@
+var varbuff=0
+
+
+#see SSTNPL/tables.txt and SSTNPL/iterate.txt for more instructions that allow literals.
+
+add @10,@10
+set varbuff
+
+
+dumpd varbuff
+
+newline
+if @10,@10 gsub sub
+prline press a key
+
+keyprompt
+stop
+
+
+label sub
+prline hello
+return

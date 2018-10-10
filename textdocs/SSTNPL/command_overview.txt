@@ -13,6 +13,16 @@ for ternary values, no prefix is needed:
 	var somevar=pn0p0
 
 
+'@' Literals:
+
+Certain instructions allow use of literal integers via an @ prefix:
+add @20,@-4
+
+A note on literals: literals still use a word of memory,
+	and just ease working with static values in some cases.
+
+
+
 Command documentation:
 
 
@@ -43,7 +53,8 @@ Command documentation:
 --System:
 	stop : Shutdown SBTCVM (this is how you quit a program in SBTCVM, when its loaded via a trom image.
 
---Math:
+--Math: 
+	-----NOTE var1 and var2 can be '@' literals as well as variables.-----
 	add [var1],[var2] : add 2 integer variables. use 'set' to store result.
 	sub [var1],[var2] : subtract 2 integer variables. use 'set' to store result.
 	mul [var1],[var2] : multiply 2 integer variables. use 'set' to store result.
@@ -57,6 +68,8 @@ Command documentation:
 	goto [name] : goto label [name]
 	gsub [name] : goto label [name], but store next block (line) of code as return address.
 	return : return to most recent return address stored.
+	
+	-----NOTE FOR CONDITIONAL GOTOS: var1 and var2 can be '@' literals as well as variables.-----
 	
 	[condition] [var1],[var2] [mode] (label)
 	

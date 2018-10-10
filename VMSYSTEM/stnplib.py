@@ -403,10 +403,6 @@ class in_condgoto:
 		self.keywords=keywords
 		self.gotoop=gotoop
 	def p0(self, args, keyword, lineno):
-		return 0, None
-	def p1(self, args, keyword, lineno):
-		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		arglist=args.split(" ")
 		if len(arglist)!=3:
 			if len(arglist)!=2:
@@ -414,6 +410,36 @@ class in_condgoto:
 			#return mode doesn't need label argument.
 			elif arglist[1]!="return":
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
+		try:
+			arga, argb=arglist[0].split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
+		if arga.startswith("@"):
+			try:
+				int(arga[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
+		if argb.startswith("@"):
+			try:
+				int(argb[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
+			
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		arglist=args.split(" ")
+		arga, argb=arglist[0].split(",")
+		retlist=[]
+		if arga.startswith("@"):
+			argaint="10x" + str(argb[1:])
+			retlist.extend([npvar(arga, argaint, vtype=nptype_int)])
+		if argb.startswith("@"):
+			argbint="10x" + str(argb[1:])
+			retlist.extend([npvar(argb, argbint, vtype=nptype_int)])
+		
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		arglist=args.split(" ")
 		#check label for goto and gsub
 		if len(arglist)==3:
 			label=arglist[2]
@@ -464,13 +490,35 @@ class in_int2opmath:
 		self.instruct=instruct
 		self.comment=comment
 	def p0(self, args, keyword, lineno):
-		return 0, None
-	def p1(self, args, keyword, lineno):
-		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
 		if len(argsplit)!=2:
-			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
+			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable/literal arguments required!"
+		arga, argb=args.split(",")
+		if arga.startswith("@"):
+			try:
+				int(arga[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
+		if argb.startswith("@"):
+			try:
+				int(argb[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
+			
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		arga, argb=args.split(",")
+		retlist=[]
+		if arga.startswith("@"):
+			argaint="10x" + str(argb[1:])
+			retlist.extend([npvar(arga, argaint, vtype=nptype_int)])
+		if argb.startswith("@"):
+			argbint="10x" + str(argb[1:])
+			retlist.extend([npvar(argb, argbint, vtype=nptype_int)])
+		
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		argsplit=args.split(",")
 		for argx in argsplit:
 			if argx in valid_nvars:
 				return 0, None
