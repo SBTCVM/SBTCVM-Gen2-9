@@ -15,6 +15,13 @@ for ternary values, no prefix is needed:
 
 Command documentation:
 
+
+--Tables:
+	[see tables.txt]
+
+--Iterators:
+	[see iterate.txt]
+
 --Variables:
 	var [varname]=[nvalue]  : create a integer variable called [varname], with the value [nvalue].
 	
@@ -28,6 +35,7 @@ Command documentation:
 	
 	swap [var1],[var2] : swap the values of [var1] & [var2]
 	copy [var1],[var2] : copy [var1] to [var2]
+
 
 --Debugging:
 	marker [name] : Print an assembly debugging marker at assemble time. (with sstnpl source line appended to name)

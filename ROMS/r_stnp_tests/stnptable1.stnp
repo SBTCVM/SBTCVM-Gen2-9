@@ -1,0 +1,60 @@
+
+var xpos=0
+var ypos=0
+var readbuff=0
+
+var dataset=:r
+prline test1 (basic read/write. reads, changes then reads 0,0 
+prline       (it should start as 's' and end as 'r'. Note this for test 2.)
+
+### 
+#read value at 'xpos','ypos' in table 'sam'
+tabr sam,xpos,ypos
+set readbuff
+
+#print value for reference (should print 's')
+chardump readbuff
+newline
+
+#write to position 'xpos','ypos' of table 'sam', the value of 'dataset'
+tabw sam,xpos,ypos,dataset
+
+#read the same position of 'sam' a second time.
+tabr sam,xpos,ypos
+set readbuff
+
+#print value for reference (should print 'r')
+chardump readbuff
+newline
+
+prline test 1 finished. press a key
+keyprompt
+
+###NOTE: 's' in sam in the table 'sam' will be an 'r' by this point.
+
+prline test 2 (tabcd, tabdd, tabtd results for 0,0 follow in that order.)
+tabcd sam,xpos,ypos#print raw char at xpos,ypos in sam
+newline
+tabdd sam,xpos,ypos#print charcode at xpos,ypos in sam (decimal)
+newline
+tabtd sam,xpos,ypos#print charcode at xpos,ypos in sam (ternary)
+newline
+prline test 2 finished. press a key
+keyprompt
+
+stop
+
+#note: 'set' can still be used with tabcd, tabdd, and tabtd
+
+
+table sam,3,3
+tstr sam
+tstr abc
+tstr 123
+
+
+table bob,3,3
+tdat 10x1;10x2;10x3
+tdat -;0;+
+tdat 10x1;+-;:c
+

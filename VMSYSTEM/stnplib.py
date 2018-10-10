@@ -10,6 +10,7 @@ from . import g2asmlib
 nptype_int=2
 nptype_str=3
 nptype_label=4
+nptype_table=5
 
 
 #SSTNPL compiler main routine library.
@@ -64,9 +65,9 @@ class in_var:
 		name=argsplit[0]
 		data=argsplit[1]
 		return [npvar(name, data, vtype=nptype_int)]
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		return
 
 
@@ -93,9 +94,9 @@ class in_val:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#val (used with set to change variable value during runtime.)\nsetreg1;" + args + "\n")
 		return
 class in_label:
@@ -110,11 +111,55 @@ class in_label:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return [npvar(args, None, vtype=nptype_label)]
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#label\n" + "null;;" + args+"--label" + "\n")
 		return
+		
+
+
+#used in tandem with tstr statements to create character tables.
+class in_table:
+	def __init__(self):
+		self.keywords=["table"]
+	def p0(self, args, keyword, lineno):
+		try:
+			args, w, h= args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": MUST SPECIFY [name],[width],[height] as arguments."
+		
+		try:
+			w=int(w)
+			if w<0:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid width argument. must be positive."
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid width argument. must be decimal."
+		
+		try:
+			h=int(h)
+			if h<0:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid width argument. must be positive."
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid width argument. must be decimal."
+		
+		
+		for char in args:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in table! '" + char + "'"
+		if args in reservednames:
+			return 1, keyword+": Line: " + str(lineno) + ": table name: '" + args + "' Is reserved."
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		args, w, h= args.split(",")
+		return [npvar(args, [int(w), int(h)], vtype=nptype_table)]
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		args, w, h= args.split(",")
+		destobj.write("#table width=" + w + ", height=" + h + "\n" + "null;;" + args+"--table" + "\n")
+		return
+		
 
 class in_marker:
 	def __init__(self):
@@ -125,9 +170,9 @@ class in_marker:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return [npvar(args, None, vtype=nptype_label)]
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#marker\n" + "marker;" + args + "' .stnp line: '" + str(lineno) + "\n")
 		return
 
@@ -140,9 +185,9 @@ class in_rawasm:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return [npvar(args, None, vtype=nptype_label)]
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#___RAW ASSEMBLY CODE___\n#_______NOTE: this corresponds to SSTNPL source line #" + str(lineno) + "\n" + args + "#SSTNPL Source Line: '" + str(lineno) + "' \n")
 		return
 
@@ -156,12 +201,12 @@ class in_intcommon1:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		if args in valid_nvars:
 			return 0, None
 		else:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + self.comment + "\n" + self.prearg + args + self.postarg)
 		return
 		
@@ -174,13 +219,102 @@ class in_invert:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		if args in valid_nvars:
 			return 0, None
 		else:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + self.comment + "\ndataread1;>" + args + "\ninvert1\ndatawrite1;>" + args + "\n")
+		return
+
+
+class in_tabr:
+	def __init__(self):
+		self.keywords=["tabr", "tabcd", "tabdd", "tabtd"]
+	def p0(self, args, keyword, lineno):
+		try:
+			tname, xv, yv = args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Must Specify [name],[xvar],[yvar] as arguments."
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		
+		tname, xv, yv = args.split(",")
+		if xv not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		if yv not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		if tname not in tables:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + args + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		tname, xv, yv = args.split(",")
+		tabvar=tables[tname]
+		destobj.write('''#SSTNPL table read instruction.
+setreg1;10x''' + str(tabvar.vdata[0]) + '''
+dataread2;>''' + yv + '''
+mul
+dataread2;>''' + xv + '''
+add
+setreg2;10x1
+add
+setreg2;>''' + tname + '''--table
+add
+datawrite1;>tabr--adrbuff--''' + str(lineno) + '''
+dataread1;;tabr--adrbuff--''' + str(lineno) + '''
+''')
+		if keyword=="tabcd":
+			destobj.write("iowrite1;>io.ttywr\n")
+		if keyword=="tabdd":
+			destobj.write("iowrite1;>io.decdump\n")
+		if keyword=="tabtd":
+			destobj.write("iowrite1;>io.tritdump\n")
+		return
+
+
+class in_tabw:
+	def __init__(self):
+		self.keywords=["tabw"]
+	def p0(self, args, keyword, lineno):
+		try:
+			tname, xv, yv, datav = args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Must Specify [name],[xvar],[yvar],[datavar] as arguments."
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		
+		tname, xv, yv, datav = args.split(",")
+		if xv not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		if datav not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		if yv not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		if tname not in tables:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + args + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		tname, xv, yv, datav = args.split(",")
+		tabvar=tables[tname]
+		destobj.write('''#SSTNPL table write instruction.
+setreg1;10x''' + str(tabvar.vdata[0]) + '''
+dataread2;>''' + yv + '''
+mul
+dataread2;>''' + xv + '''
+add
+setreg2;10x1
+add
+setreg2;>''' + tname + '''--table
+add
+datawrite1;>tabw--adrbuff--''' + str(lineno) + '''
+dataread1;>''' + datav + '''
+datawrite1;;tabw--adrbuff--''' + str(lineno) + '''
+''')
 		return
 
 class in_getchar:
@@ -191,12 +325,12 @@ class in_getchar:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		if args in valid_nvars:
 			return 0, None
 		else:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + self.comment + "\nioread1;>io.ttyrd\ndatawrite1;>" + args + "\n")
 		return
 
@@ -208,12 +342,12 @@ class in_labelgoto:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		if args in labels:
 			return 0, None
 		else:
 			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + args + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		if keyword=="gsub":
 			
 			destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ns1push1\ngoto;>" + args +"--label" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
@@ -229,7 +363,7 @@ class in_condgoto:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		arglist=args.split(" ")
 		if len(arglist)!=3:
 			if len(arglist)!=2:
@@ -252,7 +386,7 @@ class in_condgoto:
 		return 0, None
 		
 
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		arglist=args.split(" ")
 		if len(arglist)==3:
 			label=arglist[2]
@@ -290,7 +424,7 @@ class in_int2opmath:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
 		if len(argsplit)!=2:
 			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
@@ -299,7 +433,7 @@ class in_int2opmath:
 				return 0, None
 			else:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + argx + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		arg0, arg1 = args.split(",")
 		destobj.write("#" + self.comment + "\ndataread1;>" + arg0 + "\ndataread2;>" + arg1 + "\n" + self.instruct)
 		return
@@ -313,7 +447,7 @@ class in_rrange:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
 		if len(argsplit)!=2:
 			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
@@ -322,7 +456,7 @@ class in_rrange:
 				return 0, None
 			else:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + argx + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		arg0, arg1 = args.split(",")
 		destobj.write("#" + self.comment + "\ndataread1;>" + arg0 + "\ndataread2;>" + arg1 + "\niowrite1;>rand1.start\n" + "iowrite2;>rand1.end\n" + "ioread1;>rand1.get")
 		return
@@ -335,7 +469,7 @@ class in_int2opswap:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
 		if len(argsplit)!=2:
 			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
@@ -344,7 +478,7 @@ class in_int2opswap:
 				return 0, None
 			else:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + argx + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		arg0, arg1 = args.split(",")
 		destobj.write("#swap variables \ndataread1;>" + arg0 + "\ndataread2;>" + arg1 + "\ndatawrite1;>" + arg1 + "\ndatawrite2;>" + arg0 + "\n")
 		return
@@ -357,7 +491,7 @@ class in_int2opcopy:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
 		if len(argsplit)!=2:
 			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
@@ -366,7 +500,7 @@ class in_int2opcopy:
 				return 0, None
 			else:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + argx + "'"
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		arg0, arg1 = args.split(",")
 		destobj.write("#copy variables \ndataread1;>" + arg0 + "\ndatawrite1;>" + arg1 + "\n")
 		return
@@ -381,9 +515,9 @@ class in_common0:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + self.comment + "\n" + self.xcode)
 		return
 		
@@ -396,9 +530,9 @@ class in_keyprompt:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#keprompt: prompt for single keypress, continue only when keypress is received." + """
 setreg2;0
 iowrite1;>io.ttyrd
@@ -409,10 +543,132 @@ gotoif;>keyprompt--loop-""" + str(lineno) + """
 		
 
 
+class in_uiter:
+	def __init__(self):
+		self.keywords=["uiter"]
+	def p0(self, args, keyword, lineno):
+		try:
+			namex, subx, startx, endx = args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid character'" + char + "'"
+		for char in namex:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator State Integer variable! '" + char + "'"
+		if startx.startswith("@"):
+			try:
+				int(startx[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
+		if endx.startswith("@"):
+			try:
+				int(endx[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
+			
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		namex, subx, startx, endx = args.split(",")
+		retlist=[]
+		if startx.startswith("@"):
+			startint="10x" + str(startx[1:])
+			retlist.extend([npvar(startx, startint, vtype=nptype_int)])
+		if endx.startswith("@"):
+			endint="10x" + str(endx[1:])
+			retlist.extend([npvar(endx, endint, vtype=nptype_int)])
+		retlist.extend([npvar(namex, "10x0", vtype=nptype_int)])
+		
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		namex, subx, startx, endx = args.split(",")
+		
+		if subx not in labels:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + subx + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		namex, subx, startx, endx = args.split(",")
+		destobj.write('''#Upward range iterator
+dataread1;>''' + startx + '''
+datawrite1;>''' + namex + '''
+setreg1;>uiter-retpos-''' +  str(lineno) + ''';uiter-loopback-''' +  str(lineno) + '''
+s1push1
+goto;>''' + subx + '''--label
+dataread1;>''' + namex + ''';uiter-retpos-''' +  str(lineno) + '''
+setreg2;10x1
+add
+datawrite1;>''' + namex + '''
+dataread2;>''' + endx + '''
+gotoifless;>uiter-loopback-''' +  str(lineno) + '''
+gotoif;>uiter-loopback-''' +  str(lineno) + '''
 
+''')
+		return
+
+
+class in_diter:
+	def __init__(self):
+		self.keywords=["diter"]
+	def p0(self, args, keyword, lineno):
+		try:
+			namex, subx, startx, endx = args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid character'" + char + "'"
+		for char in namex:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator State Integer variable! '" + char + "'"
+		if startx.startswith("@"):
+			try:
+				int(startx[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
+		if endx.startswith("@"):
+			try:
+				int(endx[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
+			
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		namex, subx, startx, endx = args.split(",")
+		retlist=[]
+		if startx.startswith("@"):
+			startint="10x" + str(startx[1:])
+			retlist.extend([npvar(startx, startint, vtype=nptype_int)])
+		if endx.startswith("@"):
+			endint="10x" + str(endx[1:])
+			retlist.extend([npvar(endx, endint, vtype=nptype_int)])
+		retlist.extend([npvar(namex, "10x0", vtype=nptype_int)])
+		
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		namex, subx, startx, endx = args.split(",")
+		
+		if subx not in labels:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + subx + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		namex, subx, startx, endx = args.split(",")
+		destobj.write('''#Downward range iterator
+dataread1;>''' + startx + '''
+datawrite1;>''' + namex + '''
+setreg1;>diter-retpos-''' +  str(lineno) + ''';diter-loopback-''' +  str(lineno) + '''
+s1push1
+goto;>''' + subx + '''--label
+dataread1;>''' + namex + ''';diter-retpos-''' +  str(lineno) + '''
+setreg2;10x1
+sub
+datawrite1;>''' + namex + '''
+dataread2;>''' + endx + '''
+gotoifmore;>diter-loopback-''' +  str(lineno) + '''
+gotoif;>diter-loopback-''' +  str(lineno) + '''
+
+''')
+		return
+
+
+#also handles table string tstr syntax
 class in_print:
 	def __init__(self):
-		self.keywords=["print", "prline"]
+		self.keywords=["print", "prline", "tstr"]
 		self.comment="print"
 	def p0(self, args, keyword, lineno):
 		for char in args:
@@ -421,15 +677,57 @@ class in_print:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels):
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
-	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, destobj):
-		destobj.write("#" + self.comment + "\n")
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + keyword + "\n")
 		
+			
 		for char in args:
-			destobj.write("fopwri1;:" + tcon.chartoasmchar[char] + "\n")
+			if keyword=="tstr":
+				destobj.write("null;:" + tcon.chartoasmchar[char] + "\n")
+			else:
+				destobj.write("fopwri1;:" + tcon.chartoasmchar[char] + "\n")
 		if keyword=="prline":
 			destobj.write("fopwri1;:\\n\n")
+		
+		return
+
+#also handles table string tstr syntax
+class in_tdat:
+	def __init__(self):
+		self.keywords=["tdat"]
+	def p0(self, args, keyword, lineno):
+		if args=="":
+			return 1, keyword+": Line: " + str(lineno) + ": Blank table Error"
+		arglist=args.split(";")
+		for arg in arglist:
+			if arg.startswith("10x"):
+				try:
+					int(arg[3:])
+				except ValueError:
+					return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!: '" + arg + "' "
+			elif arg.startswith(":"):
+				if len(arg)<2:
+					return 1, keyword+": Line: " + str(lineno) + ": Must specify character: '" + arg + "' "
+			else:
+				if len(arg)>9:
+					return 1, keyword+": Line: " + str(lineno) + ": string too large!: '" + arg + "' "
+				for char in arg:
+					
+					if char not in tritvalid:
+						return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!: '" + arg + "' "
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + keyword + "\n")
+		arglist=args.split(";")
+		for arg in arglist:
+			destobj.write("null;" + arg + "\n")
+		
 		return
 
 
@@ -484,8 +782,16 @@ class mainloop:
 		self.destpath=destpath
 		self.nvars=[]
 		self.valid_nvars=[]
+		self.tables={}
+		
 		self.instructs=[in_var(),
 		in_label(),
+		in_table(),
+		in_tabr(),
+		in_tabw(),
+		in_tdat(),
+		in_uiter(),
+		in_diter(),
 		in_intcommon1(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
 		in_intcommon1(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
@@ -561,6 +867,8 @@ class mainloop:
 							self.nvars.extend([rvar])
 						if rvar.vtype==nptype_label:
 							self.labels.extend([rvar.vname])
+						if rvar.vtype==nptype_table:
+							self.tables[rvar.vname]=rvar
 	def p2(self):
 		self.srcobj.seek(0)
 		lineno=0
@@ -577,7 +885,7 @@ class mainloop:
 				data=""
 			for inst in self.instructs:
 				if keyword in inst.keywords:
-					retval, errordesc = inst.p2(data, keyword, lineno, self.nvars, self.valid_nvars, self.labels)
+					retval, errordesc = inst.p2(data, keyword, lineno, self.nvars, self.valid_nvars, self.labels, self.tables)
 					if retval!=0:
 						return 1, errordesc
 		return 0, None
@@ -601,7 +909,7 @@ class mainloop:
 				data=""
 			for inst in self.instructs:
 				if keyword in inst.keywords:
-					inst.p3(data, keyword, lineno, self.nvars, self.valid_nvars, self.labels, self.outobj)
+					inst.p3(data, keyword, lineno, self.nvars, self.valid_nvars, self.labels, self.tables, self.outobj)
 					
 		self.outobj.write("#END OF FILE\n")
 		self.outobj.close()

@@ -1,0 +1,44 @@
+
+
+
+##SSTNPL Instruction test: uiter & diter
+
+
+#uiter & diter are two wonderful instructions for looping subroutines.
+
+#need to iterate over a table? no problem.
+#need to run a subroutine on a linear range of numbers? no sweat. 
+
+uiter: normal upward sweep. from START to END. START must be higher than END
+diter: downward sweep. from START to END. END must be higer than START
+
+
+#syntax:
+#[u/d]iter [name],[subroutine],[start],[end]
+
+#START and END can either be integer variables, or static decimal values
+#	using the '@' syntax used in this test.
+
+#SUBROUTINE is the associated label of the subroutine to be looped.
+
+#NAME is a unique variable name (NO VAR STATEMENT REQUIRED)
+#	NAME is used to provide the subroutine with an easy way of getting the
+#	iterator's state.
+
+#iterates UP from 
+
+prline I should print values -5 to +5 (uiter) THEN from +5 to -5 (diter)
+
+uiter itval,sub,@-5,@5
+newline
+diter itval,sub,@5,@-5
+
+newline
+prline I'm done. press a key to exit.
+keyprompt
+stop
+
+
+label sub
+dumpd itval
+return

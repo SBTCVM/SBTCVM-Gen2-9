@@ -1,0 +1,41 @@
+#Overview of SSTNPL's tables:
+
+SSTNPL provides a capable 2-axis data table system.
+
+You can use this system for game level data, algorithms, and other sorts of things.
+
+
+
+#Table COMMANDS
+
+-
+tabr [name],[xpos],[ypos]
+set [var]
+
+--write at [xpos],[ypos] in table [name] using data in variable [var]
+tabw [name],[xpos],[ypos],[var]
+
+
+The following share syntax with tabr, but have the following added actions:
+tabcd: print raw character
+tabdd: print data in decimal
+tabtd: print data in ternary
+
+
+
+-Building your tables works like so:
+table [name],[width],[height]
+tstr ABC
+tstr 123
+tstr .|.
+tdat 10x1;+0-;:F
+
+[name] is the table name of your table.
+[width] is the table width in decimal
+[height] is the table height in decimal
+
+As you can see, the table is built of tstr and tdat statements.
+
+tstr is handy for tables containing rows of only characters
+tdat is semicolon-divided and accepts the same data value syntaxes as var and val. (shown)
+

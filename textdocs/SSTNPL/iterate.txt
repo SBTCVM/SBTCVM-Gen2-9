@@ -1,0 +1,28 @@
+#SSTNPL iterator commands:
+
+
+
+
+
+#overview:
+
+SSTNPL provides several ways to look subroutines. iterators do so for given ranges.
+
+
+uiter [name],[subroutine],[start],[end]
+diter [name],[subroutine],[start],[end]
+
+uiter counts from START UP TO END, and needs END to be greater than START
+diter counts from START DOWN TO END, and needs END to be less than START
+
+
+
+#START and END can either be integer variables, or static decimal values
+#	using the '@' syntax i.e. @-40
+
+#SUBROUTINE is the associated label of the subroutine to be looped.
+
+#NAME is a unique variable name (NO VAR STATEMENT REQUIRED)
+#	NAME is used to provide the subroutine with an easy way of getting the
+#	iterator's state.
+
