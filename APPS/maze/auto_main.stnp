@@ -1,0 +1,309 @@
+
+goto skipdata
+
+#maze size
+var mazewide=10x11
+var mazetall=10x6
+
+#player start (topleft is 0,0)
+var px=10x1
+var py=10x1
+
+
+#mazetop is the pointer to maze data.
+asm null;;mazetop
+#ensure mazewide and mazetall matches the dimensions of your maze!
+print XXXXXXXXXXX
+print X X XX XX X
+print X X       X
+print X   XX XX X
+print X X X  X  X
+print XXXXXXXX=XX
+
+label skipdata
+
+var add1=10x1
+var set0=0
+var mazememtop=10x0
+
+
+
+var drawx=10x0
+var drawy=10x0
+
+#lookup subroutine argument variables.
+var lookx=10x0
+var looky=10x0
+
+var floor=:\s
+var win=:=
+
+var upk=:w
+var dnk=:s
+var lk=:a
+var rk=:d
+
+
+var quitk=:q
+
+var mapk=:m
+
+var aboutk=:o
+
+var ymul=10x0
+var lookpos=10x0
+var lookresult=10x0
+
+var keybuff=10x0
+
+
+var newx=10x0
+var newy=10x0
+
+prline ternary maze engine. v0.1
+
+#magic maze address retrieval code.
+asm setreg1;>mazetop
+set mazememtop
+add add1,mazememtop
+set mazememtop
+
+
+
+####TEST CODE####
+#gsub drawfull
+#newline
+#gsub draw2
+#keyprompt
+#stop
+#################
+
+label main
+prline Maze View:
+newline
+prline ---------------
+newline
+gsub draw2
+newline
+prline ---------------
+newline
+prline w,a,s,d=move, q=quit, m=map, o=about this game
+keyprompt
+set keybuff
+if keybuff,upk gsub doup
+if keybuff,dnk gsub dodown
+if keybuff,lk gsub doleft
+if keybuff,rk gsub doright
+if keybuff,mapk gsub drawfull
+if keybuff,aboutk gsub about
+if keybuff,quitk goto quit
+goto main
+
+
+label quit
+prline GAME OVER.
+prline press a key to exit.
+keyprompt
+stop
+
+label doup
+sub py,add1
+set newy
+copy px,newx
+gsub check
+return
+
+label dodown
+add py,add1
+set newy
+copy px,newx
+gsub check
+return
+
+label doleft
+sub px,add1
+set newx
+copy py,newy
+gsub check
+return
+
+label doright
+add px,add1
+set newx
+copy py,newy
+gsub check
+return
+
+
+label check
+copy newx,lookx
+copy newy,looky
+gsub lookup
+if lookresult,floor goto check_pass
+if lookresult,win goto winner
+prline I can't go that way.
+return
+label check_pass
+copy newx,px
+copy newy,py
+return
+
+label winner
+prline YOU WIN!!!
+prline Press a key to exit
+keyprompt
+stop
+
+label draw2
+#--
+sub px,add1
+set lookx
+sub py,add1
+set looky
+gsub lookup
+chardump lookresult
+#0-
+copy px,lookx
+sub py,add1
+set looky
+gsub lookup
+chardump lookresult
+#+-
+add px,add1
+set lookx
+sub py,add1
+set looky
+gsub lookup
+chardump lookresult
+print  |
+newline
+#-0
+sub px,add1
+set lookx
+copy py,looky
+gsub lookup
+chardump lookresult
+#00
+print @
+#+0
+add px,add1
+set lookx
+copy py,looky
+gsub lookup
+chardump lookresult
+print  |
+newline
+
+#-+
+sub px,add1
+set lookx
+add py,add1
+set looky
+gsub lookup
+chardump lookresult
+
+#0+
+copy px,lookx
+add py,add1
+set looky
+gsub lookup
+chardump lookresult
+
+#++
+add px,add1
+set lookx
+add py,add1
+set looky
+gsub lookup
+chardump lookresult
+print  |
+newline
+
+return
+
+
+label drawfull
+prline You are at '@'. exit is at '='.
+get set0
+set drawx
+set drawy
+
+label draw_yl
+label draw_xl
+###Check if at play pos
+if drawy,py goto draw_poscheck
+goto draw_skippos
+
+#POSCHECK X
+label draw_poscheck
+if drawx,px gsub draw_pointget
+if drawx,px goto draw_skiplook
+
+label draw_skippos
+copy drawx,lookx
+copy drawy,looky
+gsub lookup
+chardump lookresult
+label draw_skiplook
+
+
+add drawx,add1
+set drawx
+if drawx,mazewide goto draw_xret
+goto draw_xl
+
+label draw_xret
+get set0
+set drawx
+newline
+add drawy,add1
+set drawy
+if drawy,mazetall return
+goto draw_yl
+
+
+label draw_pointget
+print @
+return
+
+#####nifty little lookup routine.
+
+label lookup
+mul mazewide,looky
+set ymul
+add ymul,lookx
+set lookpos
+add lookpos,mazememtop
+asm datawrite1;>ASMKEEP
+asm dataread1;;ASMKEEP
+set lookresult
+return
+
+label about
+prline --ABOUT--
+prline ternary maze engine v0.1
+prline Part of SBTCVM Gen2-9
+prline 
+prline Copyright (c) 2018 Thomas Leathers & Contributors
+prline 
+prline ternary maze engine is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline ternary maze engine is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with ternary maze engine. If not, see <http://www.gnu.org/licenses/>
+prline 
+prline PRESS A KEY TO RETURN TO GAME
+print >
+keyprompt
+newline
+return
+
+
+
