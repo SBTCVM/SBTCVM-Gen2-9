@@ -12,6 +12,10 @@ You can use this system for game level data, algorithms, and other sorts of thin
 tabr [name],[xpos],[ypos]
 set [var]
 
+[xpos] and [ypos] can either be an integer variable or a literal decimal
+	value via prefixing the decimal value with an '@' symbol. i.e. @-40
+
+
 --write at [xpos],[ypos] in table [name] using data in variable [var]
 tabw [name],[xpos],[ypos],[var]
 

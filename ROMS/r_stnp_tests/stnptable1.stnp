@@ -31,7 +31,7 @@ prline test 1 finished. press a key
 keyprompt
 
 ###NOTE: 's' in sam in the table 'sam' will be an 'r' by this point.
-
+newline
 prline test 2 (tabcd, tabdd, tabtd results for 0,0 follow in that order.)
 tabcd sam,xpos,ypos#print raw char at xpos,ypos in sam
 newline
@@ -40,6 +40,18 @@ newline
 tabtd sam,xpos,ypos#print charcode at xpos,ypos in sam (ternary)
 newline
 prline test 2 finished. press a key
+keyprompt
+newline
+prline test 3 (static value positions. 1,1 in table this time.)
+
+
+tabcd sam,@1,@1
+tabw sam,@1,@1,dataset
+newline
+tabcd sam,@1,@1
+newline
+
+prline test 3 finished. press a key
 keyprompt
 
 stop

@@ -237,9 +237,32 @@ class in_tabr:
 			tname, xv, yv = args.split(",")
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": Must Specify [name],[xvar],[yvar] as arguments."
+		if xv.startswith("@"):
+			try:
+				int(xv[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + xv + "' Must use signed decimal."
+		if yv.startswith("@"):
+			try:
+				int(yv[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + yv + "' Must use signed decimal."
+			
+		
 		return 0, None
+		
 	def p1(self, args, keyword, lineno):
-		return []
+		tname, xv, yv = args.split(",")
+		
+		retlist=[]
+		if xv.startswith("@"):
+			xvint="10x" + str(xv[1:])
+			retlist.extend([npvar(xv, xvint, vtype=nptype_int)])
+		if yv.startswith("@"):
+			yvint="10x" + str(yv[1:])
+			retlist.extend([npvar(yv, yvint, vtype=nptype_int)])
+		
+		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		
 		tname, xv, yv = args.split(",")
@@ -283,9 +306,29 @@ class in_tabw:
 			tname, xv, yv, datav = args.split(",")
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": Must Specify [name],[xvar],[yvar],[datavar] as arguments."
+		if xv.startswith("@"):
+			try:
+				int(xv[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + xv + "' Must use signed decimal."
+		if yv.startswith("@"):
+			try:
+				int(yv[1:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + yv + "' Must use signed decimal."
+		
 		return 0, None
 	def p1(self, args, keyword, lineno):
-		return []
+		tname, xv, yv, datav = args.split(",")
+		retlist=[]
+		if xv.startswith("@"):
+			xvint="10x" + str(xv[1:])
+			retlist.extend([npvar(xv, xvint, vtype=nptype_int)])
+		if yv.startswith("@"):
+			yvint="10x" + str(yv[1:])
+			retlist.extend([npvar(yv, yvint, vtype=nptype_int)])
+		
+		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		
 		tname, xv, yv, datav = args.split(",")
@@ -563,7 +606,7 @@ class in_uiter:
 			try:
 				int(endx[1:])
 			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + endx + "' Must use signed decimal."
 			
 		return 0, None
 	def p1(self, args, keyword, lineno):
@@ -624,7 +667,7 @@ class in_diter:
 			try:
 				int(endx[1:])
 			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + endx + "' Must use signed decimal."
 			
 		return 0, None
 	def p1(self, args, keyword, lineno):
