@@ -237,16 +237,14 @@ class in_tabr:
 			tname, xv, yv = args.split(",")
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": Must Specify [name],[xvar],[yvar] as arguments."
-		if xv.startswith("@"):
-			try:
-				int(xv[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + xv + "' Must use signed decimal."
-		if yv.startswith("@"):
-			try:
-				int(yv[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + yv + "' Must use signed decimal."
+		if isaliteral(yv):
+			xret=literal_syntax(yv, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(xv):
+			xret=literal_syntax(yv, keyword, lineno)
+			if xret!=None:
+				return xret
 			
 		
 		return 0, None
@@ -255,13 +253,10 @@ class in_tabr:
 		tname, xv, yv = args.split(",")
 		
 		retlist=[]
-		if xv.startswith("@"):
-			xvint="10x" + str(xv[1:])
-			retlist.extend([npvar(xv, xvint, vtype=nptype_int)])
-		if yv.startswith("@"):
-			yvint="10x" + str(yv[1:])
-			retlist.extend([npvar(yv, yvint, vtype=nptype_int)])
-		
+		if isaliteral(xv):
+			retlist.extend(literal_do(xv))
+		if isaliteral(yv):
+			retlist.extend(literal_do(yv))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		
@@ -306,28 +301,22 @@ class in_tabw:
 			tname, xv, yv, datav = args.split(",")
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": Must Specify [name],[xvar],[yvar],[datavar] as arguments."
-		if xv.startswith("@"):
-			try:
-				int(xv[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + xv + "' Must use signed decimal."
-		if yv.startswith("@"):
-			try:
-				int(yv[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + yv + "' Must use signed decimal."
-		
+		if isaliteral(yv):
+			xret=literal_syntax(yv, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(xv):
+			xret=literal_syntax(yv, keyword, lineno)
+			if xret!=None:
+				return xret
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		tname, xv, yv, datav = args.split(",")
 		retlist=[]
-		if xv.startswith("@"):
-			xvint="10x" + str(xv[1:])
-			retlist.extend([npvar(xv, xvint, vtype=nptype_int)])
-		if yv.startswith("@"):
-			yvint="10x" + str(yv[1:])
-			retlist.extend([npvar(yv, yvint, vtype=nptype_int)])
-		
+		if isaliteral(xv):
+			retlist.extend(literal_do(xv))
+		if isaliteral(yv):
+			retlist.extend(literal_do(yv))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		
@@ -414,40 +403,51 @@ class in_condgoto:
 			arga, argb=arglist[0].split(",")
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
-		if arga.startswith("@"):
-			try:
-				int(arga[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
-		if argb.startswith("@"):
-			try:
-				int(argb[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
-			
+		if isaliteral(arga):
+			xret=literal_syntax(arga, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(argb):
+			xret=literal_syntax(argb, keyword, lineno)
+			if xret!=None:
+				return xret
+		if arglist[1].startswith("="):
+			if isaliteral(arglist[2]):
+				xret=literal_syntax(arglist[2], keyword, lineno)
+				if xret!=None:
+					return xret
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		arglist=args.split(" ")
 		arga, argb=arglist[0].split(",")
 		retlist=[]
-		if arga.startswith("@"):
-			argaint="10x" + str(argb[1:])
-			retlist.extend([npvar(arga, argaint, vtype=nptype_int)])
-		if argb.startswith("@"):
-			argbint="10x" + str(argb[1:])
-			retlist.extend([npvar(argb, argbint, vtype=nptype_int)])
-		
+		if isaliteral(arga):
+			retlist.extend(literal_do(arga))
+		if isaliteral(argb):
+			retlist.extend(literal_do(argb))
+		if arglist[1].startswith("="):
+			if isaliteral(arglist[2]):
+				retlist.extend(literal_do(arglist[2]))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		arglist=args.split(" ")
 		#check label for goto and gsub
-		if len(arglist)==3:
+		if len(arglist)==3 and not arglist[1].startswith("="):
 			label=arglist[2]
 			if not label in labels:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + label + "'"
+		if arglist[1].startswith("="):
+			vnname=arglist[1][1:]
+			if vnname not in valid_nvars:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant destination variable'" + vname + "'"
+			valname=arglist[2]
+			if valname not in valid_nvars:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant source variable'" + vname + "'"
+			
+				
 		#check goto mode
-		if arglist[1] not in ["goto", "gsub", "return"]:
-			return 1, keyword+": Line: " + str(lineno) + ": Invalid goto mode! must be 'goto', 'gsub', or 'return'"
+		if (arglist[1] not in ["goto", "gsub", "return"]) and (not arglist[1].startswith("=")):
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! must be 'goto', 'gsub', or 'return' or =[var]"
 		#variable check
 		for x in arglist[0].split(","):
 			if not x in valid_nvars:
@@ -468,6 +468,13 @@ dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' +  str(lineno) + '''
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ns1push1\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		elif arglist[1].startswith("="):
+			destobj.write('''#conditional set
+dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' +  str(lineno) + '''
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>" + arglist[1][1:] + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		elif arglist[1]=="return":
 			destobj.write('''#conditional return
 dataread1;>''' + var0 + '''
@@ -494,28 +501,22 @@ class in_int2opmath:
 		if len(argsplit)!=2:
 			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable/literal arguments required!"
 		arga, argb=args.split(",")
-		if arga.startswith("@"):
-			try:
-				int(arga[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
-		if argb.startswith("@"):
-			try:
-				int(argb[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arga + "' Must use signed decimal."
-			
+		if isaliteral(arga):
+			xret=literal_syntax(arga, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(argb):
+			xret=literal_syntax(argb, keyword, lineno)
+			if xret!=None:
+				return xret
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		arga, argb=args.split(",")
 		retlist=[]
-		if arga.startswith("@"):
-			argaint="10x" + str(argb[1:])
-			retlist.extend([npvar(arga, argaint, vtype=nptype_int)])
-		if argb.startswith("@"):
-			argbint="10x" + str(argb[1:])
-			retlist.extend([npvar(argb, argbint, vtype=nptype_int)])
-		
+		if isaliteral(arga):
+			retlist.extend(literal_do(arga))
+		if isaliteral(argb):
+			retlist.extend(literal_do(argb))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
@@ -530,18 +531,70 @@ class in_int2opmath:
 		return
 
 
+def isaliteral(arg):
+	if arg.startswith("@"):
+		return 1
+	if arg.startswith(":"):
+		return 1
+	if arg.startswith("*"):
+		return 1
+	return 0
+
+def literal_syntax(arg, keyword, lineno):
+	if arg.startswith("@"):
+		try:
+			int(arg[1:])
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arg + "' Must use signed decimal."
+	if arg.startswith(":"):
+		if arg[1:] not in tcon.normal_char_list:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid character in literal'" + arg + "'"
+	if arg.startswith("*"):
+		for x in arg[1:]:
+			if x not in tritvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": invalid ternary literal'" + arg + "'"
+	return None
+	
+def literal_do(arg):
+	if arg.startswith("@"):
+		return [npvar(arg, "10x" + arg[1:], vtype=nptype_int)]
+	if arg.startswith(":"):
+		return [npvar(arg, ":" + arg[1:], vtype=nptype_int)]
+	if arg.startswith("*"):
+		return [npvar(arg, arg[1:], vtype=nptype_int)]
+		
+
+
 class in_rrange:
 	def __init__(self):
 		self.keywords=["rrange"]
 		self.comment="Random ranged number"
 	def p0(self, args, keyword, lineno):
-		return 0, None
-	def p1(self, args, keyword, lineno):
-		return []
-	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		argsplit=args.split(",")
 		if len(argsplit)!=2:
 			return 1, keyword+": Line: " + str(lineno) + ": Two comma-separated variable arguments required!"
+		arga, argb=args.split(",")
+		
+		if isaliteral(arga):
+			xret=literal_syntax(arga, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(argb):
+			xret=literal_syntax(argb, keyword, lineno)
+			if xret!=None:
+				return xret
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		arga, argb=args.split(",")
+		retlist=[]
+		if isaliteral(arga):
+			retlist.extend(literal_do(arga))
+		if isaliteral(argb):
+			retlist.extend(literal_do(argb))
+		
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		argsplit=args.split(",")
 		for argx in argsplit:
 			if argx in valid_nvars:
 				return 0, None
@@ -645,29 +698,23 @@ class in_uiter:
 		for char in namex:
 			if char not in varvalid:
 				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator State Integer variable! '" + char + "'"
-		if startx.startswith("@"):
-			try:
-				int(startx[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
-		if endx.startswith("@"):
-			try:
-				int(endx[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + endx + "' Must use signed decimal."
-			
+		if isaliteral(startx):
+			xret=literal_syntax(startx, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(endx):
+			xret=literal_syntax(endx, keyword, lineno)
+			if xret!=None:
+				return xret
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		namex, subx, startx, endx = args.split(",")
 		retlist=[]
-		if startx.startswith("@"):
-			startint="10x" + str(startx[1:])
-			retlist.extend([npvar(startx, startint, vtype=nptype_int)])
-		if endx.startswith("@"):
-			endint="10x" + str(endx[1:])
-			retlist.extend([npvar(endx, endint, vtype=nptype_int)])
 		retlist.extend([npvar(namex, "10x0", vtype=nptype_int)])
-		
+		if isaliteral(startx):
+			retlist.extend(literal_do(startx))
+		if isaliteral(endx):
+			retlist.extend(literal_do(endx))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		namex, subx, startx, endx = args.split(",")
@@ -706,27 +753,22 @@ class in_diter:
 		for char in namex:
 			if char not in varvalid:
 				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator State Integer variable! '" + char + "'"
-		if startx.startswith("@"):
-			try:
-				int(startx[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + startx + "' Must use signed decimal."
-		if endx.startswith("@"):
-			try:
-				int(endx[1:])
-			except ValueError:
-				return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + endx + "' Must use signed decimal."
-			
+		if isaliteral(startx):
+			xret=literal_syntax(startx, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(endx):
+			xret=literal_syntax(endx, keyword, lineno)
+			if xret!=None:
+				return xret
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		namex, subx, startx, endx = args.split(",")
 		retlist=[]
-		if startx.startswith("@"):
-			startint="10x" + str(startx[1:])
-			retlist.extend([npvar(startx, startint, vtype=nptype_int)])
-		if endx.startswith("@"):
-			endint="10x" + str(endx[1:])
-			retlist.extend([npvar(endx, endint, vtype=nptype_int)])
+		if isaliteral(startx):
+			retlist.extend(literal_do(startx))
+		if isaliteral(endx):
+			retlist.extend(literal_do(endx))
 		retlist.extend([npvar(namex, "10x0", vtype=nptype_int)])
 		
 		return retlist

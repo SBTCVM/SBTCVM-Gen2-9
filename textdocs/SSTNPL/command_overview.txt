@@ -13,10 +13,19 @@ for ternary values, no prefix is needed:
 	var somevar=pn0p0
 
 
-'@' Literals:
+ Literals:
 
-Certain instructions allow use of literal integers via an @ prefix:
+Certain instructions allow use of Literals:
+
+Decimal
 add @20,@-4
+
+Ternary
+add *+-,*++
+
+Character:
+if :a,:a, goto somthing
+
 
 A note on literals: literals still use a word of memory,
 	and just ease working with static values in some cases.
@@ -69,7 +78,7 @@ Command documentation:
 	gsub [name] : goto label [name], but store next block (line) of code as return address.
 	return : return to most recent return address stored.
 	
-	-----NOTE FOR CONDITIONAL GOTOS: var1 and var2 can be '@' literals as well as variables.-----
+	-----NOTE FOR CONDITIONAL GOTOS: var1 var2 and var4 can be Literals as well as variables.-----
 	
 	[condition] [var1],[var2] [mode] (label)
 	
@@ -84,10 +93,15 @@ Command documentation:
 		goto : ordinary goto.
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
 		return : just like normal return command. should omit label.
+		=[var3] : conditional variable copy: set [var3] using a [var4] in place of label. (var4 can be a literal)
 	  
 	--Examples:
 		if var1,var2 goto somelabel
 		if var1,var2 return
+		if var1,@1 return
+		if var1,var2 =var3 var4
+		if var1,var2 =var3 @1
+		if var1,var2 =var3 :a
 	  
 
 --TTY output:

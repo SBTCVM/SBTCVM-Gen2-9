@@ -1,19 +1,40 @@
 var varbuff=0
 
+var setval=0
+
 
 #see SSTNPL/tables.txt and SSTNPL/iterate.txt for more instructions that allow literals.
 
+#decimal literals
 add @10,@10
 set varbuff
+dumpd varbuff
 
+newline
 
+#ternary literals
+add *+-,*+-
+set varbuff
 dumpd varbuff
 
 newline
 if @10,@10 gsub sub
+
 prline press a key
 
 keyprompt
+
+prline Test: dump variable, then test conditional set, then dump again.
+
+dumpd setval
+#character literals
+if :a,:a =setval @10
+dumpd setval
+newline
+
+prline press a key
+keyprompt
+
 stop
 
 

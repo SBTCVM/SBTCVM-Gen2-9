@@ -9,8 +9,8 @@
 #need to iterate over a table? no problem.
 #need to run a subroutine on a linear range of numbers? no sweat. 
 
-uiter: normal upward sweep. from START to END. START must be higher than END
-diter: downward sweep. from START to END. END must be higer than START
+#uiter: normal upward sweep. from START to END. START must be higher than END
+#diter: downward sweep. from START to END. END must be higer than START
 
 
 #syntax:
