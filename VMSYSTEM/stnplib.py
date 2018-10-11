@@ -43,9 +43,9 @@ class in_var:
 				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in variable name! '" + char + "'"
 		if name in reservednames:
 			return 1, keyword+": Line: " + str(lineno) + ": variable name: '" + args + "' Is reserved."
-		if data.startswith("10x"):
+		if data.replace("@", "10x").startswith("10x"):
 			try:
-				int(data[3:])
+				int(data.replace("@", "10x")[3:])
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
 		#this syntax will make this var equal the encoding data of the specified character.
@@ -53,9 +53,9 @@ class in_var:
 			if len(data)<2:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify character"
 		else:
-			if len(data)>9:
+			if len(data.replace("*", ""))>9:
 				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
-			for char in data:
+			for char in data.replace("*", ""):
 				
 				if char not in tritvalid:
 					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
@@ -64,6 +64,10 @@ class in_var:
 		argsplit=args.split("=", 1)
 		name=argsplit[0]
 		data=argsplit[1]
+		if data.startswith("*"):
+			data=data.replace("*", "")
+		if data.startswith("@"):
+			data=data.replace("@", "10x")
 		return [npvar(name, data, vtype=nptype_int)]
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
@@ -76,18 +80,18 @@ class in_val:
 	def __init__(self):
 		self.keywords=["val"]
 	def p0(self, args, keyword, lineno):
-		if args.startswith("10x"):
+		if args.replace("@", "10x").startswith("10x"):
 			try:
-				int(args[3:])
+				int(args.replace("@", "10x")[3:])
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
 		elif args.startswith(":"):
 			if len(args)<2:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify character"
 		else:
-			if len(args)>9:
+			if len(args.replace("*", ""))>9:
 				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
-			for char in args:
+			for char in args.replace("*", ""):
 				
 				if char not in tritvalid:
 					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
@@ -97,6 +101,10 @@ class in_val:
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		if args.startswith("*"):
+			args=args.replace("*", "")
+		if args.startswith("@"):
+			args=args.replace("@", "10x")
 		destobj.write("#val (used with set to change variable value during runtime.)\nsetreg1;" + args + "\n")
 		return
 class in_label:
@@ -210,6 +218,34 @@ class in_intcommon1:
 		destobj.write("#" + self.comment + "\n" + self.prearg + args + self.postarg)
 		return
 		
+#same as intcommon1, but supports literals.
+class in_intcommon1b:
+	def __init__(self, keywords, prearg, postarg, comment):
+		self.keywords=keywords
+		self.prearg=prearg
+		self.postarg=postarg
+		self.comment=comment
+	def p0(self, args, keyword, lineno):
+		if isaliteral(args):
+			xret=literal_syntax(args, keyword, lineno)
+			if xret!=None:
+				return xret
+		
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		retlist=[]
+		if isaliteral(args):
+			retlist.extend(literal_do(args))
+			
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		if args in valid_nvars:
+			return 0, None
+		else:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + self.comment + "\n" + self.prearg + args + self.postarg)
+		return
 
 class in_invert:
 	def __init__(self):
@@ -531,38 +567,6 @@ class in_int2opmath:
 		return
 
 
-def isaliteral(arg):
-	if arg.startswith("@"):
-		return 1
-	if arg.startswith(":"):
-		return 1
-	if arg.startswith("*"):
-		return 1
-	return 0
-
-def literal_syntax(arg, keyword, lineno):
-	if arg.startswith("@"):
-		try:
-			int(arg[1:])
-		except ValueError:
-			return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arg + "' Must use signed decimal."
-	if arg.startswith(":"):
-		if arg[1:] not in tcon.normal_char_list:
-			return 1, keyword+": Line: " + str(lineno) + ": invalid character in literal'" + arg + "'"
-	if arg.startswith("*"):
-		for x in arg[1:]:
-			if x not in tritvalid:
-				return 1, keyword+": Line: " + str(lineno) + ": invalid ternary literal'" + arg + "'"
-	return None
-	
-def literal_do(arg):
-	if arg.startswith("@"):
-		return [npvar(arg, "10x" + arg[1:], vtype=nptype_int)]
-	if arg.startswith(":"):
-		return [npvar(arg, ":" + arg[1:], vtype=nptype_int)]
-	if arg.startswith("*"):
-		return [npvar(arg, arg[1:], vtype=nptype_int)]
-		
 
 
 class in_rrange:
@@ -863,6 +867,39 @@ class in_tdat:
 		
 		return
 
+def isaliteral(arg):
+	if arg.startswith("@"):
+		return 1
+	if arg.startswith(":"):
+		return 1
+	if arg.startswith("*"):
+		return 1
+	return 0
+
+def literal_syntax(arg, keyword, lineno):
+	if arg.startswith("@"):
+		try:
+			int(arg[1:])
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arg + "' Must use signed decimal."
+	if arg.startswith(":"):
+		if arg[1:] not in tcon.normal_char_list:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid character in literal'" + arg + "'"
+	if arg.startswith("*"):
+		for x in arg[1:]:
+			if x not in tritvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": invalid ternary literal'" + arg + "'"
+	return None
+	
+def literal_do(arg):
+	if arg.startswith("@"):
+		return [npvar(arg, "10x" + arg[1:], vtype=nptype_int)]
+	if arg.startswith(":"):
+		return [npvar(arg, ":" + arg[1:], vtype=nptype_int)]
+	if arg.startswith("*"):
+		return [npvar(arg, arg[1:], vtype=nptype_int)]
+		
+
 
 def headinfo(filename, basename):
 	return '''#SSTNPL COMPILER ''' + stnpvers + '''
@@ -925,8 +962,8 @@ class mainloop:
 		in_tdat(),
 		in_uiter(),
 		in_diter(),
-		in_intcommon1(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
-		in_intcommon1(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),
+		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
+		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),
@@ -954,7 +991,7 @@ class mainloop:
 		in_common0(["space"], "fopwri1;:\\s\n", "print space"),
 		in_common0(["stop"], "stop\n", "stop (shutdown vm)"),
 		in_common0(["clearcharbuff"], "iowrite1;>io.ttyrd", "Clear TTY input buffer"),
-		in_intcommon1(["dumpd"], "dataread1;>", "\niowrite1;>io.decdump\n", "Dump (decimal)")]
+		in_intcommon1b(["dumpd"], "dataread1;>", "\niowrite1;>io.decdump\n", "Dump (decimal)")]
 		self.bpname=bpname
 		self.labels=[]
 	def p0(self):

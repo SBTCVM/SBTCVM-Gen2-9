@@ -2,6 +2,8 @@ var varbuff=0
 
 var setval=0
 
+var test1=@10
+var test2=*+-
 
 #see SSTNPL/tables.txt and SSTNPL/iterate.txt for more instructions that allow literals.
 

@@ -17,8 +17,7 @@ diter counts from START DOWN TO END, and needs END to be less than START
 
 
 
-#START and END can either be integer variables, or static decimal values
-#	using the '@' syntax i.e. @-40
+#START and END can either be integer variables, or Literals
 
 #SUBROUTINE is the associated label of the subroutine to be looped.
 

@@ -2,18 +2,23 @@ SSTNPL: SBTCVM Simplified Numeric Programming Language
 
 
 ####[nvalue] syntax for var and val:####
-for decimal values prepend '10x' i.e. 
+Literal prefixes are also acceptable
+So feel free to use them if its less confusing to you.
+
+for decimal values prepend '10x' or '@' i.e. 
 	var somevar=10x-15
 	var somevar=10x54
+	var somevar=@54
 for characters prepend ':' i.e.
 	var somevar=:x
 
-for ternary values, no prefix is needed:
+for ternary values, no prefix is needed. you may use the '*' prefix though.:
 	var somevar=+-0+0
 	var somevar=pn0p0
+	var somevar=*pn0p0
 
 
- Literals:
+Literals:
 
 Certain instructions allow use of Literals:
 
@@ -63,7 +68,7 @@ Command documentation:
 	stop : Shutdown SBTCVM (this is how you quit a program in SBTCVM, when its loaded via a trom image.
 
 --Math: 
-	-----NOTE var1 and var2 can be '@' literals as well as variables.-----
+	-----NOTE var1 and var2 can be Literals-----
 	add [var1],[var2] : add 2 integer variables. use 'set' to store result.
 	sub [var1],[var2] : subtract 2 integer variables. use 'set' to store result.
 	mul [var1],[var2] : multiply 2 integer variables. use 'set' to store result.
@@ -109,13 +114,13 @@ Command documentation:
 	prline [string] : print specified raw text, but append a newline.
 	newline : print newline
 	space : print space
-	dumpt [varname] : Dump integer variable [varname], to TTY in ternary form.
-	dumpd [varname] : Dump integer variable [varname], to TTY in signed decimal form.
-	chardump [varname] : Dump a variable to the TTY as a character.
+	dumpt [varname] : Dump integer variable [varname], to TTY in ternary form. Can use Literals
+	dumpd [varname] : Dump integer variable [varname], to TTY in signed decimal form. Can use Literals
+	chardump [varname] : Dump a variable to the TTY as a character. Can use Literals
 
 
 --Random
-	rrange [start],[end] : Get a random number between [start] and [end]. use set to store result.
+	rrange [start],[end] : Get a random number between [start] and [end]. use set to store result. Can use Literals
 
 --TTY input:
 	getchar [var] : Gets a character from the TTY input buffer and puts it in [var] returns 0/null on empty buffer.
