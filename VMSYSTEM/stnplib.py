@@ -424,9 +424,47 @@ class in_labelgoto:
 		return
 
 class in_condgoto:
-	def __init__(self, keywords, gotoop):
+	def __init__(self, keywords, gotoop, condmode=0, gotoop2=None):
 		self.keywords=keywords
 		self.gotoop=gotoop
+		self.gotoop2=gotoop2
+		self.condmode=condmode
+	#conditional logic selector function.
+	def getcond(self, lineno, var0, var1, thirdarg=None):
+		if self.condmode==0:
+			return '''dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' +  str(lineno)
+		if self.condmode==1:
+			return '''dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--jumper-''' + str(lineno) + '''
+goto;>goto--branch-''' +  str(lineno)
+		#range checks
+		if self.condmode==2:
+			return '''dataread1;>''' + thirdarg + '''
+dataread2;>''' + var0 + '''
+''' + self.gotoop + ''';>goto--halfstep-''' + str(lineno) + '''
+gotoif;>goto--halfstep-''' + str(lineno) + '''
+goto;>goto--jumper-''' + str(lineno) + '''
+dataread1;>''' + thirdarg + ''';goto--halfstep-''' + str(lineno) + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop2 + ''';>goto--branch-''' + str(lineno) + '''
+gotoif;>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' + str(lineno)
+		#not range
+		if self.condmode==3:
+			return '''dataread1;>''' + thirdarg + '''
+dataread2;>''' + var0 + '''
+''' + self.gotoop + ''';>goto--halfstep-''' + str(lineno) + '''
+gotoif;>goto--halfstep-''' + str(lineno) + '''
+goto;>goto--branch-''' + str(lineno) + '''
+dataread1;>''' + thirdarg + ''';goto--halfstep-''' + str(lineno) + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop2 + ''';>goto--jumper-''' + str(lineno) + '''
+gotoif;>goto--jumper-''' + str(lineno) + '''
+goto;>goto--branch-''' + str(lineno)
 	def p0(self, args, keyword, lineno):
 		arglist=args.split(" ")
 		if len(arglist)!=3:
@@ -435,10 +473,19 @@ class in_condgoto:
 			#return mode doesn't need label argument.
 			elif arglist[1]!="return":
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
-		try:
-			arga, argb=arglist[0].split(",")
-		except ValueError:
-			return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
+		if self.condmode in [2, 3]:
+			try:
+				arga, argb, argc=arglist[0].split(",")
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify range condition args as '<startvar>,<endvar>,<valuevar>'"
+		else:
+			
+			try:
+				arga, argb=arglist[0].split(",")
+				argc=None
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify condition args as '<var>,<var>'"
+		###LITERALS
 		if isaliteral(arga):
 			xret=literal_syntax(arga, keyword, lineno)
 			if xret!=None:
@@ -447,6 +494,12 @@ class in_condgoto:
 			xret=literal_syntax(argb, keyword, lineno)
 			if xret!=None:
 				return xret
+		if argc!=None:
+			if isaliteral(argc):
+				xret=literal_syntax(argc, keyword, lineno)
+				if xret!=None:
+					return xret
+		
 		if arglist[1].startswith("="):
 			if isaliteral(arglist[2]):
 				xret=literal_syntax(arglist[2], keyword, lineno)
@@ -455,12 +508,26 @@ class in_condgoto:
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		arglist=args.split(" ")
-		arga, argb=arglist[0].split(",")
+		if self.condmode in [2, 3]:
+			try:
+				arga, argb, argc=arglist[0].split(",")
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify range condition args as '<startvar>,<endvar>,<valuevar>'"
+		else:
+			
+			try:
+				arga, argb=arglist[0].split(",")
+				argc=None
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify condition args as '<var>,<var>'"
 		retlist=[]
 		if isaliteral(arga):
 			retlist.extend(literal_do(arga))
 		if isaliteral(argb):
 			retlist.extend(literal_do(argb))
+		if argc!=None:
+			if isaliteral(argc):
+				retlist.extend(literal_do(argc))
 		if arglist[1].startswith("="):
 			if isaliteral(arglist[2]):
 				retlist.extend(literal_do(arglist[2]))
@@ -495,35 +562,32 @@ class in_condgoto:
 		arglist=args.split(" ")
 		if len(arglist)==3:
 			label=arglist[2]
-		
-		var0, var1 = arglist[0].split(",")
+		try:
+			var0, var1, thirdarg = arglist[0].split(",")
+		except ValueError:
+			var0, var1 = arglist[0].split(",")
+			thirdarg=None
+		#action code for individual 'modes'
+		#see getcond for condition logic modes.
+		#gsub goto
 		if arglist[1]=="gsub":
 			destobj.write('''#conditional subroutine goto
-dataread1;>''' + var0 + '''
-dataread2;>''' + var1 + '''
-''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
-goto;>goto--jumper-''' +  str(lineno) + '''
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ns1push1\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		#set variable
 		elif arglist[1].startswith("="):
 			destobj.write('''#conditional set
-dataread1;>''' + var0 + '''
-dataread2;>''' + var1 + '''
-''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
-goto;>goto--jumper-''' +  str(lineno) + '''
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>" + arglist[1][1:] + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		#return from subroutine
 		elif arglist[1]=="return":
 			destobj.write('''#conditional return
-dataread1;>''' + var0 + '''
-dataread2;>''' + var1 + '''
-''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
-goto;>goto--jumper-''' +  str(lineno) + '''
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 s1pop1;''' + ";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		#basic goto
 		else:
 			destobj.write('''#conditional goto
-dataread1;>''' + var0 + '''
-dataread2;>''' + var1 + '''
-''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
-goto;>goto--jumper-''' +  str(lineno) + '''
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		return
 
@@ -983,9 +1047,14 @@ class mainloop:
 		in_print(),
 		in_rawasm(),
 		in_getchar(),
-		in_condgoto(["if"], "gotoif"),
-		in_condgoto(["ifmore"], "gotoifmore"),
-		in_condgoto(["ifless"], "gotoifless"),
+		in_condgoto(["if"], "gotoif", condmode=0),
+		in_condgoto(["ifmore"], "gotoifmore", condmode=0),
+		in_condgoto(["ifless"], "gotoifless", condmode=0),
+		in_condgoto(["ifnot"], "gotoif", condmode=1),
+		in_condgoto(["ifnotmore"], "gotoifmore", condmode=1),
+		in_condgoto(["ifnotless"], "gotoifless", condmode=1),
+		in_condgoto(["ifrange"], "gotoifmore", condmode=2, gotoop2="gotoifless"),
+		in_condgoto(["ifnotrange"], "gotoifmore", condmode=3, gotoop2="gotoifless"),
 		in_common0(["return"], "s1pop1\ngotoreg1\n", "return from subroutine."),
 		in_common0(["newline"], "fopwri1;:\\n\n", "print newline"),
 		in_common0(["space"], "fopwri1;:\\s\n", "print space"),

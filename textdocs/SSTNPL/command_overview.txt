@@ -83,30 +83,38 @@ Command documentation:
 	gsub [name] : goto label [name], but store next block (line) of code as return address.
 	return : return to most recent return address stored.
 	
-	-----NOTE FOR CONDITIONAL GOTOS: var1 var2 and var4 can be Literals as well as variables.-----
-	
-	[condition] [var1],[var2] [mode] (label)
+	-----NOTE FOR CONDITIONAL GOTOS: var1 var2 var3 and var5 can be Literals as well as variables.-----
+	two argument conditionals:
+		[condition] [var1],[var2] [mode] (label)
+	three argument conditionals:
+		[condition] [var1],[var2],[var3] [mode] (label)
 	
 	(a goto label (label) is only needed for goto & gsub modes)
 	
-	--conditions:
+	--2-argument conditions:
 		if : true if [var1]=[var2]
+		if not : true if [var1]!=[var2] (var1 not equal to var2)
 		ifmore : true if [var1]>[var2]
 		ifless : true if [var1]<[var2]
+		ifnotmore : true if [var1]<=[var2]
+		ifnotless : true if [var1]>=[var2]
+	--3-argument conditions:
+		ifrange : true if [var1]<=[var3]<=[var2]
+		ifnotrange : true if [var1]<=[var3]<=[var2]
 	
 	--modes:
 		goto : ordinary goto.
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
 		return : just like normal return command. should omit label.
-		=[var3] : conditional variable copy: set [var3] using a [var4] in place of label. (var4 can be a literal)
+		=[var4] : conditional variable copy: set [var4] using a [var5] in place of label. (var5 can be a literal)
 	  
 	--Examples:
 		if var1,var2 goto somelabel
 		if var1,var2 return
 		if var1,@1 return
-		if var1,var2 =var3 var4
-		if var1,var2 =var3 @1
-		if var1,var2 =var3 :a
+		if var1,var2 =var4 var5
+		if var1,var2 =var4 @1
+		if var1,var2 =var4 :a
 	  
 
 --TTY output:
@@ -120,7 +128,7 @@ Command documentation:
 
 
 --Random
-	rrange [start],[end] : Get a random number between [start] and [end]. use set to store result. Can use Literals
+	rrange [start],[end] : Get a random number between [start] and [end] (including [start] and [end]. use set to store result. Can use Literals
 
 --TTY input:
 	getchar [var] : Gets a character from the TTY input buffer and puts it in [var] returns 0/null on empty buffer.

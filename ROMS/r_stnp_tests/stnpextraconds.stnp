@@ -1,0 +1,91 @@
+
+
+### testing ifnot, ifnotmore, ifnotless, ifrange, and ifnotrange
+
+prline ---- if,ifnot ----
+prline 1 != 1
+ifnot @1,@1 gsub subtrue
+if @1,@1 gsub subfalse
+
+prline 2 != 1
+ifnot @2,@1 gsub subtrue
+if @2,@1 gsub subfalse
+
+prline press a key
+keyprompt
+
+prline ---- ifmore,ifnotmore ----
+
+prline 1 !> 4
+ifnotmore @1,@4 gsub subtrue
+ifmore @1,@4 gsub subfalse
+
+prline 4 !> 1
+ifnotmore @4,@1 gsub subtrue
+ifmore @4,@1 gsub subfalse
+
+prline 4 !> 4
+ifnotmore @4,@4 gsub subtrue
+ifmore @4,@4 gsub subfalse
+
+prline press a key
+keyprompt
+
+prline ---- ifless,ifnotless ----
+
+prline 1 !< 4
+ifnotless @1,@4 gsub subtrue
+ifless @1,@4 gsub subfalse
+
+prline 4 !< 1
+ifnotless @4,@1 gsub subtrue
+ifless @4,@1 gsub subfalse
+
+prline 4 !< 4
+ifnotless @4,@4 gsub subtrue
+ifless @4,@4 gsub subfalse
+
+prline press a key
+keyprompt
+
+prline ---- ifrange,ifnotrange ----
+
+
+#note on ifrange and ifnotrange 3 comparison arguments:
+# v1,v2,v3
+# v1 is range start
+# v2 is range end
+# v3 is value to be checked
+# v3 is 'in range when its (greater than or equal to v1) and (less than or equal to v2)
+
+prline 4 >= 1 & 4 <= 10
+ifnotrange @1,@10,@4 gsub subfalse
+ifrange @1,@10,@4 gsub subtrue
+
+prline 40 >= 1 & 40 <= 10
+ifnotrange @1,@10,@40 gsub subfalse
+ifrange @1,@10,@40 gsub subtrue
+
+prline 1 >= 1 & 1 <= 10
+ifnotrange @1,@10,@1 gsub subfalse
+ifrange @1,@10,@1 gsub subtrue
+
+prline 10 >= 1 & 10 <= 10
+ifnotrange @1,@10,@10 gsub subfalse
+ifrange @1,@10,@10 gsub subtrue
+
+prline press a key
+keyprompt
+stop
+
+
+
+
+
+label subtrue
+prline yes
+return
+
+label subfalse
+prline no
+return
