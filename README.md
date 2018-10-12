@@ -1,11 +1,27 @@
-#SBTCVM Gen2 9-trit      
-Simple Balanced Ternary Computer Virtual Machine     
+# SBTCVM Gen2 9 — v2.1.0.alpha
+
+<img src='https://4.bp.blogspot.com/-VOftcXOLnpc/W52LYvA65AI/AAAAAAAACgU/-XHn-so7SZ87uVlIFFaKUXNtf8-ZdgqYACK4BGAYYCw/s1600/banex2.png' />
      
-v2.1.0.alpha    
-     
-If you need help, see the SBTCVM users manual located in     
-the "manual" directory.     
-     
+- **What does SBTCVM stand for?**
+- Simple Balanced Ternary Computer Virtual Machine
+
+SBTCVM uses the Simplified Ternary Numeric Programming Language, you can learn more about STNPL [here](https://github.com/SBTCVM/SBTCVM-Gen2-9/blob/master/textdocs/SSTNPL/command_overview.txt). Stay tuned to the latest updated at [https://sbtcvm.blogspot.com](https://sbtcvm.blogspot.com).
+
+## Start TVDI Shell
+
+```
+python SBTCVM_G2_9.py
+```
+
+### Start Application
+
+```
+python SBTCVM_G2_9.py maze
+```
+
+
+## Copyrights
+
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 
 Notice: The user manual, (SBTCVM-user-manual.odt) is under a different license:
@@ -26,7 +42,7 @@ an Opaque copy. See the Gnu FDL in the manual itself for more information.
   You should have received a copy of the GNU General Public License
   along with SBTCVM Gen2 9-trit. If not, see <http://www.gnu.org/licenses/>
 
-##licensing For images and media below
+## Licensing For images and media below
 
 all images and other media content, unless otherwise noted,
 are licensed under the Creative Commons Attribution-ShareAlike 4.0
