@@ -1017,7 +1017,7 @@ class mainloop:
 		self.nvars=[]
 		self.valid_nvars=[]
 		self.tables={}
-		
+		self.comped_nvars=[]
 		self.instructs=[in_var(),
 		in_label(),
 		in_table(),
@@ -1133,8 +1133,9 @@ class mainloop:
 	def p3(self):
 		self.outobj.write(headinfo(self.filename, self.bpname))
 		for rvar in self.nvars:
-			if rvar.vtype==nptype_int:
+			if rvar.vtype==nptype_int and rvar.vname not in self.comped_nvars:
 				self.outobj.write('null;' + rvar.vdata + ';' + rvar.vname + "\n")
+				self.comped_nvars.extend([rvar.vname])
 		self.srcobj.seek(0)
 		lineno=0
 		for line in self.srcobj:
