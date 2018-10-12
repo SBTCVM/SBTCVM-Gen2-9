@@ -1,11 +1,18 @@
-#SBTCVM Gen2 9-trit      
-Simple Balanced Ternary Computer Virtual Machine     
-     
-v2.1.0.alpha    
+# SBTCVM Gen2 9-trit      
+
+Simple Balanced Ternary Computer Virtual Machine — v2.1.0.alpha   
      
 If you need help, see the SBTCVM users manual located in     
 the "manual" directory.     
-     
+
+## Start
+
+```
+python SBTCVM_G2_9.py maze
+```
+
+### Copyright
+
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 
 Notice: The user manual, (SBTCVM-user-manual.odt) is under a different license:
@@ -26,7 +33,7 @@ an Opaque copy. See the Gnu FDL in the manual itself for more information.
   You should have received a copy of the GNU General Public License
   along with SBTCVM Gen2 9-trit. If not, see <http://www.gnu.org/licenses/>
 
-##licensing For images and media below
+## Licensing For images and media below
 
 all images and other media content, unless otherwise noted,
 are licensed under the Creative Commons Attribution-ShareAlike 4.0
