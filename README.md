@@ -1,17 +1,22 @@
 # SBTCVM Gen2 9-trit      
 
 Simple Balanced Ternary Computer Virtual Machine — v2.1.0.alpha   
-     
-If you need help, see the SBTCVM users manual located in     
-the "manual" directory.     
 
-## Start
+<img src='https://4.bp.blogspot.com/-VOftcXOLnpc/W52LYvA65AI/AAAAAAAACgU/-XHn-so7SZ87uVlIFFaKUXNtf8-ZdgqYACK4BGAYYCw/s1600/banex2.png' />
+     
+- **What does SBTCVM stand for?**
+- Simple Balanced Ternary Computer Virtual Machine
+
+SBTCVM uses the Simplified Ternary Numeric Programming Language, you can learn
+more about it [here](https://github.com/SBTCVM/SBTCVM-Gen2-9/blob/master/textdocs/SSTNPL/command_overview.txt). Stay tuned to the latest updated at [https://sbtcvm.blogspot.com](https://sbtcvm.blogspot.com).
+
+## Start Application
 
 ```
 python SBTCVM_G2_9.py maze
 ```
 
-### Copyright
+## Copyrights
 
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 
