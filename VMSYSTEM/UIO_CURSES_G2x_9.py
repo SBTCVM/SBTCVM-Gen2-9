@@ -69,7 +69,7 @@ class uio:
 			self.ttywin.scroll(1)
 			self.ttylog.write("\n")
 		self.ttywin.addstr(self.maxy-1, 0, string)
-		self.ttywin.scroll(1)
+		#self.ttywin.scroll(1)
 		self.ttylog.write(string+"\n")
 		self.ttywin.refresh()
 		self.xttycharpos=0
@@ -78,7 +78,7 @@ class uio:
 		for xnumchar in data.bttrunk(9):
 			if self.xttycharpos==self.maxx:
 				self.xttycharpos=0
-				self.ttywin.scroll(1)
+				#self.ttywin.scroll(1)
 				self.ttylog.write("\n")
 			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar)
 			self.ttylog.write(xnumchar)
@@ -91,7 +91,7 @@ class uio:
 			#uiolog.write(xnumchar+  "\n")
 			if self.xttycharpos==self.maxx:
 				self.xttycharpos=0
-				self.ttywin.scroll(1)
+				#self.ttywin.scroll(1)
 				self.ttylog.write("\n")
 			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar)
 			self.ttylog.write(xnumchar)
@@ -125,7 +125,7 @@ class uio:
 			if self.xttycharpos==self.maxx:
 				
 				self.xttycharpos=0
-				self.ttywin.scroll(1)
+				#self.ttywin.scroll(1)
 				self.ttywin.move(self.maxy-1, self.xttycharpos)
 				self.ttylog.write("\n")
 			self.ttywin.addch(self.maxy-1, self.xttycharpos, tcon.dattostr[data.intval])

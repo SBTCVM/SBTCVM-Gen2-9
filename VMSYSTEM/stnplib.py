@@ -947,7 +947,7 @@ def literal_syntax(arg, keyword, lineno):
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": Invalid static integer value '" + arg + "' Must use signed decimal."
 	if arg.startswith(":"):
-		if arg[1:] not in tcon.normal_char_list:
+		if arg[1:] not in tcon.asm_chrtodat:
 			return 1, keyword+": Line: " + str(lineno) + ": invalid character in literal'" + arg + "'"
 	if arg.startswith("*"):
 		for x in arg[1:]:

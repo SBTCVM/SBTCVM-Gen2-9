@@ -10,10 +10,14 @@ Utilities and systems programming:
   Thomas Leathers        
   eekee        
         
-STREG and TROM programming:        
+TROM programming:        
   Thomas Leathers        
   eekee        
-        
+
+Compilers & Interpreters:
+  Thomas Leathers        
+  eekee        
+ 
 VM architecture and system design:        
   Thomas Leathers        
   eekee        
