@@ -1,9 +1,28 @@
 var randstart=10x10
 var randend=10x-10
 var randbuff=10x0
-
-
+var absbuff=0
+var nabsbuff=0
+prline normal
 rrange randstart,randend
 set randbuff
 dumpt randbuff
+newline
+
+prline Absolute value
+abs randbuff
+set absbuff
+dumpt absbuff
+newline
+
+prline Inverted absolute value
+nabs randbuff
+set nabsbuff
+dumpt nabsbuff
+newline
+
+prline press a key
+keyprompt
+
 stop
+

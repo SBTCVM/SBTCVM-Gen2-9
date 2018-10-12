@@ -1,4 +1,4 @@
-SSTNPL: SBTCVM Simplified Numeric Programming Language
+SSTNPL: SBTCVM Simplified Ternary Numeric Programming Language
 
 
 ####[nvalue] syntax for var and val:####
@@ -76,6 +76,8 @@ Command documentation:
 
 --Logic and tritwise:
 	invert [varname] : invert the sign of variable [varname], in-place.
+	abs [varname] : get the absolute value of an integer variable or literal. use set to store result.
+	nabs [varname] : get the INVERTED absolute value of an integer variable or literal. use set to store result.
 
 --Gotos & conditionals:
 	label [name] : create a label with the name [name], for use with gotos.

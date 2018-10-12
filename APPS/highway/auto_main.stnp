@@ -1,0 +1,363 @@
+#highway
+
+
+var tstart=10x1
+var tcnt=10x1
+#'car' position
+var tpos=10x3
+
+#road length
+var tend=10x10
+
+var tinc=10x1
+
+#keyboard scan:
+var retflg=0
+var kb=0
+
+var p1=10x0
+
+var p2=10x0
+
+var comp=10x0
+var pacer=10x0
+
+var compscore=0
+var p1score=0
+var p2score=0
+var ties=0
+
+var p1buff=0
+var compbuff=0
+var p2buff=0
+
+
+label mainmenu
+prline          ---HIGHWAY v1.0---
+prline ---A 1 or 2 player guessing game.---
+prline 1: Try to outguess the computer (1 player)
+prline 2: Try to outguess a friend (2 player)
+prline h: Help on this game
+prline a: about this game
+prline q: quit game
+keyprompt
+set kb
+if kb,:1 gsub p1main
+if kb,:2 gsub p2main
+if kb,:q gsub quit
+if kb,:Q gsub quit
+if kb,:a gsub about
+if kb,:A gsub about
+if kb,:h gsub help
+if kb,:H gsub help
+goto mainmenu
+
+
+
+
+
+
+
+
+
+
+label p1main
+newline
+newline
+newline
+gsub do_p1
+gsub do_pacer
+gsub do_comp
+newline
+newline
+newline
+gsub board_1p
+gsub score_1p
+goto p1main
+
+label p2main
+newline
+newline
+newline
+gsub do_p1
+gsub do_pacer
+gsub do_p2
+newline
+newline
+newline
+gsub board_2p
+gsub score_2p
+goto p2main
+
+
+
+
+label score_1p
+sub p1,pacer
+set p1buff
+abs p1buff
+set p1buff
+print Player 1 was:
+dumpd p1buff
+print , miles away from target
+newline
+sub comp,pacer
+set compbuff
+abs compbuff
+set compbuff
+print Computer was:
+dumpd compbuff
+print , miles away from target
+newline
+ifless p1buff,compbuff gsub p1win
+ifmore p1buff,compbuff gsub compwin
+if p1buff,compbuff gsub tiewin
+print Player 1 wins:
+dumpd p1score
+newline
+print Computer wins:
+dumpd compscore
+newline
+print Ties:
+dumpd ties
+newline
+return
+
+label score_2p
+sub p1,pacer
+set p1buff
+abs p1buff
+set p1buff
+print Player 1 was:
+dumpd p1buff
+print , miles away from target
+newline
+sub p2,pacer
+set p2buff
+abs p2buff
+set p2buff
+print Player 2 was:
+dumpd p2buff
+print , miles away from target
+newline
+ifless p1buff,p2buff gsub p1win
+ifmore p1buff,p2buff gsub p2win
+if p1buff,p2buff gsub tiewin
+print Player 1 wins:
+dumpd p1score
+newline
+print Player 2 wins:
+dumpd p2score
+newline
+print Ties:
+dumpd ties
+newline
+return
+
+label tiewin
+prline _____    __
+prline   |   | |__
+prline   |   | |__
+add @1,ties
+set ties
+return
+
+label p1win
+prline  __                  __
+prline |__|    | | | | |\| |__
+prline |   1   |_|_| | | |  __|
+add @1,p1score
+set p1score
+return
+
+label p2win
+
+prline  __                  __
+prline |__|    | | | | |\| |__
+prline |   2   |_|_| | | |  __|
+add @1,p2score
+set p2score
+return
+
+
+label compwin
+prline  __  __   ___                 __
+prline |   |  | | | |   | | | | |\| |__
+prline |__ |__| | | |.  |_|_| | | |  __|
+add @1,compscore
+set compscore
+return
+
+label board_1p
+prline _____|1_|2_|3_|4_|5_|6_|7_|8_|9_
+print PLAY1
+copy p1,tpos
+gsub trace
+print TARGT
+copy pacer,tpos
+gsub trace
+print COMPU
+copy comp,tpos
+gsub trace
+return
+
+label board_2p
+prline _____|1_|2_|3_|4_|5_|6_|7_|8_|9_
+print PLAY1
+copy p1,tpos
+gsub trace
+print TARGT
+copy pacer,tpos
+gsub trace
+print PLAY2
+copy p2,tpos
+gsub trace
+return
+
+
+
+label do_pacer
+rrange @1,@9
+set pacer
+return
+
+label do_comp
+rrange @1,@9
+set comp
+return
+
+label do_p1
+val 0
+set retflg
+prline PLAYER 1: pick a number from 1 to 9 or x to quit
+label do_p1_loop
+keyprompt
+set kb
+if kb,:1 =p1 @1
+if kb,:1 =retflg @1
+if kb,:2 =p1 @2
+if kb,:2 =retflg @1
+if kb,:3 =p1 @3
+if kb,:3 =retflg @1
+if kb,:4 =p1 @4
+if kb,:4 =retflg @1
+if kb,:5 =p1 @5
+if kb,:5 =retflg @1
+if kb,:6 =p1 @6
+if kb,:6 =retflg @1
+if kb,:7 =p1 @7
+if kb,:7 =retflg @1
+if kb,:8 =p1 @8
+if kb,:8 =retflg @1
+if kb,:9 =p1 @9
+if kb,:9 =retflg @1
+if kb,:x gsub quit
+
+if retflg,@1 return
+goto do_p1_loop
+
+
+label quit
+prline Goodbye!
+stop
+prline 
+
+
+label do_p2
+val 0
+set retflg
+prline PLAYER 2: pick a number from 1 to 9 or x to quit
+label do_p2_loop
+keyprompt
+set kb
+if kb,:1 =p2 @1
+if kb,:1 =retflg @1
+if kb,:2 =p2 @2
+if kb,:2 =retflg @1
+if kb,:3 =p2 @3
+if kb,:3 =retflg @1
+if kb,:4 =p2 @4
+if kb,:4 =retflg @1
+if kb,:5 =p2 @5
+if kb,:5 =retflg @1
+if kb,:6 =p2 @6
+if kb,:6 =retflg @1
+if kb,:7 =p2 @7
+if kb,:7 =retflg @1
+if kb,:8 =p2 @8
+if kb,:8 =retflg @1
+if kb,:9 =p2 @9
+if kb,:9 =retflg @1
+if kb,:x gsub quit
+
+if retflg,@1 return
+goto do_p1_loop
+
+
+######Complicated 'road' drawing subroutine.
+label trace
+#if tcnt=tpos, draw car, else draw road.
+if tcnt,tpos goto trace_car
+goto trace_road
+###Car tile draw
+label trace_car
+print +ED
+goto trace_inc
+###Road tile draw
+label trace_road
+print +__
+goto trace_inc
+###increment & exit condition
+label trace_inc
+add tcnt,tinc
+set tcnt
+if tcnt,tend goto trace_end
+goto trace
+###return code for trace
+label trace_end
+get tstart
+set tcnt
+newline
+return
+
+label about
+newline
+prline --ABOUT--
+prline Highway v1.0: A 1 or 2 player guessing game
+prline Part of SBTCVM Gen2-9
+prline 
+prline Copyright (c) 2018 Thomas Leathers & Contributors
+prline 
+prline Difference Cards is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline Difference Cards is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with Difference Cards. If not, see <http://www.gnu.org/licenses/>
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+keyprompt
+newline
+return
+label help
+prline Highway v1.0: A 1 or 2 player guessing game
+prline ----RULES----
+prline each player picks a 'mile marker' from 1 to 9.
+prline a random 'mile marker' is chosen, and the closest player to it wins.
+prline if each player is equal distance away the game ties.
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+
+keyprompt
+newline
+return
+
+

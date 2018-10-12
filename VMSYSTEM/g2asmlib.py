@@ -363,14 +363,18 @@ class mainloop:
 		#instruction list
 		self.instlist=[instruct(["null"], 0),
 		rawinst(),
-		instruct(["setreg1"], -9841),
+		instruct(["setreg1"], -9841),#register manip
 		instruct(["setreg2"], -9840),
 		instruct(["copy2to1"], -9839),
 		instruct(["copy1to2"], -9838),
 		instruct(["regswap"], -9837),
-		instruct(["invert1"], -9836),
+		instruct(["invert1"], -9836),#tritwise inversion
 		instruct(["invert2"], -9835),
-		instruct(["stop"], -9000),
+		instruct(["abs1"], -9834),#ABSOLUTE and inverted absolute instructions
+		instruct(["abs2"], -9833),
+		instruct(["nabs1"], -9832),
+		instruct(["nabs2"], -9831),
+		instruct(["stop"], -9000),#system STOP
 		instruct(["add"], -9800),#add instructions
 		instruct(["add2"], -9799),
 		instruct(["adddata1"], -9798),

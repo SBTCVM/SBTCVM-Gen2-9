@@ -78,6 +78,19 @@ class cpu:
 		#invert2
 		elif self.instval.intval == -9835:
 			self.reg2.changeval( - self.reg2.intval)
+		#abs1
+		elif self.instval.intval == -9834:
+			self.reg1.changeval(abs(self.reg1.intval))
+		#abs2
+		elif self.instval.intval == -9833:
+			self.reg2.changeval(abs(self.reg2.intval))
+		#nabs1
+		elif self.instval.intval == -9832:
+			self.reg1.changeval( - abs(self.reg1.intval))
+		#nabs2
+		elif self.instval.intval == -9831:
+			self.reg2.changeval( - abs(self.reg2.intval))
+		
 		#ALU
 		#add
 		elif self.instval.intval == -9800:

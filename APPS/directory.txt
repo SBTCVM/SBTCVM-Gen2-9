@@ -1,0 +1,10 @@
+gtt:
+	Guess That trit: a classic number guessing game from all the way back
+	in the Gen 1 era.
+highway:
+	Highway: a 1 or 2 player number guessing game themed after a road
+	race of sorts.
+maze:
+	A nifty maze engine demo. currently only has 1 level.
+diffcards:
+	A 2-player card-drawing game based on a 'short' and 'long' deck of 'cards'

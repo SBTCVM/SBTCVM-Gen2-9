@@ -14,6 +14,10 @@
 -9837: regswap : instruct : yes
 -9836: invert1 : instruct : yes
 -9835: invert2 : instruct : yes
+-9834: abs1: absolute register 1 : instruct : yes
+-9833: abs2: absolute register 2 : instruct : yes
+-9832: nabs1: negative absolute register 1 : instruct : yes
+-9831: nabs2: negative absolute register 2 : instruct : yes
 
 >>>ALU: note the 3 extra instructions per basic 2-operator math function to speed up common basic maths.<<<
 -9800: add: add, put result to 1 : instruct : yes

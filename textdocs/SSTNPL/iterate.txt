@@ -24,4 +24,5 @@ diter counts from START DOWN TO END, and needs END to be less than START
 #NAME is a unique variable name (NO VAR STATEMENT REQUIRED)
 #	NAME is used to provide the subroutine with an easy way of getting the
 #	iterator's state.
+#   DO NOT WRITE TO THIS VARIABLE
 

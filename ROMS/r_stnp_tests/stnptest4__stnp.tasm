@@ -7,6 +7,16 @@ fopset1;>io.ttywr
 null;10x10;randstart
 null;10x-10;randend
 null;10x0;randbuff
+null;0;absbuff
+null;0;nabsbuff
+#prline
+fopwri1;:n
+fopwri1;:o
+fopwri1;:r
+fopwri1;:m
+fopwri1;:a
+fopwri1;:l
+fopwri1;:\n
 #Random ranged number
 dataread1;>randstart
 dataread2;>randend
@@ -17,6 +27,46 @@ datawrite1;>randbuff
 #Dump (trits)
 dataread1;>randbuff
 iowrite1;>io.tritdump
+#print newline
+fopwri1;:\n
+#Get abs of var
+dataread1;>randbuff
+abs1
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>absbuff
+#Dump (trits)
+dataread1;>absbuff
+iowrite1;>io.tritdump
+#print newline
+fopwri1;:\n
+#Get inverted abs of var
+dataread1;>randbuff
+nabs1
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>nabsbuff
+#Dump (trits)
+dataread1;>nabsbuff
+iowrite1;>io.tritdump
+#print newline
+fopwri1;:\n
+#prline
+fopwri1;:p
+fopwri1;:r
+fopwri1;:e
+fopwri1;:s
+fopwri1;:s
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:\s
+fopwri1;:k
+fopwri1;:e
+fopwri1;:y
+fopwri1;:\n
+#keprompt: prompt for single keypress, continue only when keypress is received.
+setreg2;0
+iowrite1;>io.ttyrd
+ioread1;>io.ttyrd;keyprompt--loop-23
+gotoif;>keyprompt--loop-23
 #stop (shutdown vm)
 stop
 #END OF FILE
