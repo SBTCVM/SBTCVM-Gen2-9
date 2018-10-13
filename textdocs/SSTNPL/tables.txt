@@ -32,6 +32,8 @@ tstr ABC
 tstr 123
 tstr .|.
 tdat 10x1;+0-;:F
+#@ (decimal) and * (ternary) syntaxes are also valid:
+tdat @1;*+-;:F
 
 [name] is the table name of your table.
 [width] is the table width in decimal

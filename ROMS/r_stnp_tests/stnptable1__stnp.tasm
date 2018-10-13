@@ -9,11 +9,6 @@ null;0;ypos
 null;0;readbuff
 null;:r;dataset
 null;10x1;@1
-null;10x1;@1
-null;10x1;@1
-null;10x1;@1
-null;10x1;@1
-null;10x1;@1
 #prline
 fopwri1;:t
 fopwri1;:e
@@ -541,6 +536,10 @@ null;10x3
 null;-
 null;0
 null;+
+#tdat
+null;10x1
+null;+-
+null;:c
 #tdat
 null;10x1
 null;+-

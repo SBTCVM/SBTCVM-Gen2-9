@@ -69,4 +69,6 @@ table bob,3,3
 tdat 10x1;10x2;10x3
 tdat -;0;+
 tdat 10x1;+-;:c
+#literal syntax for ternary and decimal also valid.
+tdat @1;*+-;:c
 

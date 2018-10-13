@@ -903,18 +903,18 @@ class in_tdat:
 			return 1, keyword+": Line: " + str(lineno) + ": Blank table Error"
 		arglist=args.split(";")
 		for arg in arglist:
-			if arg.startswith("10x"):
+			if arg.replace("@", "10x").startswith("10x"):
 				try:
-					int(arg[3:])
+					int(arg.replace("@", "10x")[3:])
 				except ValueError:
 					return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!: '" + arg + "' "
 			elif arg.startswith(":"):
 				if len(arg)<2:
 					return 1, keyword+": Line: " + str(lineno) + ": Must specify character: '" + arg + "' "
 			else:
-				if len(arg)>9:
+				if len(arg.replace("*", ""))>9:
 					return 1, keyword+": Line: " + str(lineno) + ": string too large!: '" + arg + "' "
-				for char in arg:
+				for char in arg.replace("*", ""):
 					
 					if char not in tritvalid:
 						return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!: '" + arg + "' "
@@ -927,6 +927,10 @@ class in_tdat:
 		destobj.write("#" + keyword + "\n")
 		arglist=args.split(";")
 		for arg in arglist:
+			if arg.startswith("@"):
+				arg=arg.replace("@", "10x")
+			if arg.startswith("*"):
+				arg=arg.replace("*", "")
 			destobj.write("null;" + arg + "\n")
 		
 		return
