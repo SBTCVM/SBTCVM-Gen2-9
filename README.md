@@ -1,10 +1,12 @@
-#SBTCVM Gen2 9-trit      
+## SBTCVM Gen2 9-trit      
 Simple Balanced Ternary Computer Virtual Machine     
      
 v2.1.0.alpha    
      
-If you need help, see the SBTCVM users manual located in     
-the "manual" directory.     
+If you need help, see [guide.md](/guide.md)
+
+[Project blog](https://sbtcvm.blogspot.com/)
+
      
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 
@@ -26,7 +28,7 @@ an Opaque copy. See the Gnu FDL in the manual itself for more information.
   You should have received a copy of the GNU General Public License
   along with SBTCVM Gen2 9-trit. If not, see <http://www.gnu.org/licenses/>
 
-##licensing For images and media below
+## licensing For images and media below
 
 all images and other media content, unless otherwise noted,
 are licensed under the Creative Commons Attribution-ShareAlike 4.0
