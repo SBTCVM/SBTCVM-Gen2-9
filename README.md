@@ -10,10 +10,6 @@ If you need help, see [guide.md](/guide.md)
      
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 
-Notice: The user manual, (SBTCVM-user-manual.odt) is under a different license:
-the GNU Free Documentation License. See said manual for more information.
-A pdf export of SBTCVM-user-manual.odt, is provided and should be considered
-an Opaque copy. See the Gnu FDL in the manual itself for more information.
 
   SBTCVM Gen2 9-trit is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
