@@ -1,15 +1,16 @@
 # Quick start guide
 
 Run a trom application in curses frontend:     
-	./SBTCVM_G2_9.py maze
+`./SBTCVM_G2_9.py maze`
      
 Boot into VDI shell (unfinished):     
- 	./SBTCVM_G2_9.py
+`./SBTCVM_G2_9.py`
      
      
 ### more information:
-- The textdocs/ directory in this repository contains both technical and user documentation.
-- APPS/directory.txt in this repository, has a guide on the TROM applications available there.
+- The [textdocs](/textdocs/) directory in this repository contains both technical and user documentation.
+- [textdocs/SSTNPL](textdocs/SSTNPL/) contains documentation to the SSTNPL programming language.
+- [APPS/directory.txt](/APPS/directory.txt) in this repository, has a guide on the TROM applications available there.
 
 ### Links:
 - [Project blog](https://sbtcvm.blogspot.com/)
