@@ -34,6 +34,31 @@ newline
 diter itval,sub,@5,@-5
 
 newline
+prline I'm done. press a key to continue.
+
+keyprompt
+prline Now ill count from -1 to 1 for each number in -4 to -2
+u2iter itvalX,itvalY,sub2,@-1,@1,@-4,@-2
+newline
+prline now the Opposite :D
+d2iter itvalX,itvalY,sub2,@1,@-1,@-2,@-4
+
+newline
+prline I'm done. press a key to continue.
+keyprompt
+prline now to test them a second time for good measure!
+uiter itval,sub,@-5,@5
+newline
+diter itval,sub,@5,@-5
+newline
+u2iter itvalX,itvalY,sub2,@-1,@1,@-4,@-2
+newline
+d2iter itvalX,itvalY,sub2,@1,@-1,@-2,@-4
+newline
+
+
+
+newline
 prline I'm done. press a key to exit.
 keyprompt
 stop
@@ -41,4 +66,10 @@ stop
 
 label sub
 dumpd itval
+return
+
+
+label sub2
+dumpd itvalX
+dumpd itvalY
 return

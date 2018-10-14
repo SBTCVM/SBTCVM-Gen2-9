@@ -9,6 +9,9 @@
 SSTNPL provides several ways to look subroutines. iterators do so for given ranges.
 
 
+#### SINGULAR ITERATORS ####
+
+
 uiter [name],[subroutine],[start],[end]
 diter [name],[subroutine],[start],[end]
 
@@ -17,12 +20,37 @@ diter counts from START DOWN TO END, and needs END to be less than START
 
 
 
+
 #START and END can either be integer variables, or Literals
 
 #SUBROUTINE is the associated label of the subroutine to be looped.
 
 #NAME is a unique variable name (NO VAR STATEMENT REQUIRED)
-#	NAME is used to provide the subroutine with an easy way of getting the
-#	iterator's state.
-#   DO NOT WRITE TO THIS VARIABLE
+	NAME is used to provide the subroutine with an easy way of getting the
+	iterator's state.
+    DO NOT WRITE TO THIS VARIABLE
 
+
+
+#### XY (DOUBLE) ITERATORS #### 
+(handy for working with tables!)
+
+
+u2iter [namex],[namey],[subroutine,[startx],[endx],[starty],[endy]
+d2iter [namex],[namey],[subroutine,[startx],[endx],[starty],[endy]
+
+Don't let the 7 arguments scare you!
+
+u2iter counts from STARTX UP TO ENDX for each number of STARTY UP TO ENDY
+	and needs both ENDs to be GREATER than their respective STARTs
+	
+d2iter counts from STARTX DOWN TO ENDX for each number of STARTY DOWN TO ENDY
+	and needs both ENDs to be LESS than their respective STARTs
+
+
+Also note the separate x and y NAMEs
+	As with uiter and diter, NAMEX and NAMEY don't need var statements.
+	NAMEX stores the X iterator value. 
+	NAMEY stores the Y iterator value.
+	again, DO NOT WRITE TO NAMEX AND NAMEY!!!!!!!
+	[NOTE: the x iterator is itself run for each iteration of the y iterator]

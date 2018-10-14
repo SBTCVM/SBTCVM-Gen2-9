@@ -755,6 +755,166 @@ gotoif;>keyprompt--loop-""" + str(lineno) + """
 		
 
 
+
+class in_u2iter:
+	def __init__(self):
+		self.keywords=["u2iter"]
+	def p0(self, args, keyword, lineno):
+		try:
+			namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + char + "'"
+		for char in namex:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator X State Integer variable! '" + char + "'"
+		for char in namey:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator Y State Integer variable! '" + char + "'"
+
+		if isaliteral(startx):
+			xret=literal_syntax(startx, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(endx):
+			xret=literal_syntax(endx, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(starty):
+			xret=literal_syntax(starty, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(endy):
+			xret=literal_syntax(endy, keyword, lineno)
+			if xret!=None:
+				return xret
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		retlist=[]
+		retlist.extend([npvar(namex, "10x0", vtype=nptype_int)])
+		retlist.extend([npvar(namey, "10x0", vtype=nptype_int)])
+		if isaliteral(startx):
+			retlist.extend(literal_do(startx))
+		if isaliteral(endx):
+			retlist.extend(literal_do(endx))
+		if isaliteral(starty):
+			retlist.extend(literal_do(starty))
+		if isaliteral(endy):
+			retlist.extend(literal_do(endy))
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		if subx not in labels:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + subx + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		destobj.write('''#XY Upward range iterator
+dataread1;>''' + starty + '''
+datawrite1;>''' + namey + '''
+dataread1;>''' + startx + ''';u2iter-yloop-''' +  str(lineno) + '''
+datawrite1;>''' + namex + '''
+setreg1;>u2iter-retpos-''' +  str(lineno) + ''';u2iter-loopback-''' +  str(lineno) + '''
+s1push1
+goto;>''' + subx + '''--label
+dataread1;>''' + namex + ''';u2iter-retpos-''' +  str(lineno) + '''
+setreg2;10x1
+add
+datawrite1;>''' + namex + '''
+dataread2;>''' + endx + '''
+gotoifless;>u2iter-loopback-''' +  str(lineno) + '''
+gotoif;>u2iter-loopback-''' +  str(lineno) + '''
+dataread1;>''' + namey + '''
+setreg2;10x1
+add
+datawrite1;>''' + namey + '''
+dataread2;>''' + endy + '''
+gotoifless;>u2iter-yloop-''' +  str(lineno) + '''
+gotoif;>u2iter-yloop-''' +  str(lineno) + '''
+''')
+		return
+
+class in_d2iter:
+	def __init__(self):
+		self.keywords=["d2iter"]
+	def p0(self, args, keyword, lineno):
+		try:
+			namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + char + "'"
+		for char in namex:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator X State Integer variable! '" + char + "'"
+		for char in namey:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator Y State Integer variable! '" + char + "'"
+
+		if isaliteral(startx):
+			xret=literal_syntax(startx, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(endx):
+			xret=literal_syntax(endx, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(starty):
+			xret=literal_syntax(starty, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(endy):
+			xret=literal_syntax(endy, keyword, lineno)
+			if xret!=None:
+				return xret
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		retlist=[]
+		retlist.extend([npvar(namex, "10x0", vtype=nptype_int)])
+		retlist.extend([npvar(namey, "10x0", vtype=nptype_int)])
+		if isaliteral(startx):
+			retlist.extend(literal_do(startx))
+		if isaliteral(endx):
+			retlist.extend(literal_do(endx))
+		if isaliteral(starty):
+			retlist.extend(literal_do(starty))
+		if isaliteral(endy):
+			retlist.extend(literal_do(endy))
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		if subx not in labels:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + subx + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		namex, namey, subx, startx, endx, starty, endy = args.split(",")
+		destobj.write('''#XY Downward range iterator
+dataread1;>''' + starty + '''
+datawrite1;>''' + namey + '''
+dataread1;>''' + startx + ''';d2iter-yloop-''' +  str(lineno) + '''
+datawrite1;>''' + namex + '''
+setreg1;>d2iter-retpos-''' +  str(lineno) + ''';d2iter-loopback-''' +  str(lineno) + '''
+s1push1
+goto;>''' + subx + '''--label
+dataread1;>''' + namex + ''';d2iter-retpos-''' +  str(lineno) + '''
+setreg2;10x1
+sub
+datawrite1;>''' + namex + '''
+dataread2;>''' + endx + '''
+gotoifmore;>d2iter-loopback-''' +  str(lineno) + '''
+gotoif;>d2iter-loopback-''' +  str(lineno) + '''
+dataread1;>''' + namey + '''
+setreg2;10x1
+sub
+datawrite1;>''' + namey + '''
+dataread2;>''' + endy + '''
+gotoifmore;>d2iter-yloop-''' +  str(lineno) + '''
+gotoif;>d2iter-yloop-''' +  str(lineno) + '''
+''')
+		return
+
+
+
+
 class in_uiter:
 	def __init__(self):
 		self.keywords=["uiter"]
@@ -762,7 +922,7 @@ class in_uiter:
 		try:
 			namex, subx, startx, endx = args.split(",")
 		except ValueError:
-			return 1, keyword+": Line: " + str(lineno) + ": invalid character'" + char + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + char + "'"
 		for char in namex:
 			if char not in varvalid:
 				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator State Integer variable! '" + char + "'"
@@ -817,7 +977,7 @@ class in_diter:
 		try:
 			namex, subx, startx, endx = args.split(",")
 		except ValueError:
-			return 1, keyword+": Line: " + str(lineno) + ": invalid character'" + char + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + char + "'"
 		for char in namex:
 			if char not in varvalid:
 				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Iterator State Integer variable! '" + char + "'"
@@ -1030,6 +1190,8 @@ class mainloop:
 		in_tdat(),
 		in_uiter(),
 		in_diter(),
+		in_u2iter(),
+		in_d2iter(),
 		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
