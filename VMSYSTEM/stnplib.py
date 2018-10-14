@@ -1200,12 +1200,18 @@ class mainloop:
 		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
-		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),
+		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),#set,get
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),
 		in_intcommon1(["get2"], "dataread2;>", "\n", "get2 (may be used with set2, and asm code.)"),
-		in_int2opmath(["add"], "add\n", "add (2op math)"),
+		in_common0(["pop", "pop1"], "s2pop1\n", "stack pop (uses stack 2)"),#stack
+		in_common0(["peek", "peek1"], "s2peek1\n", "stack peek (uses stack 2)"),
+		in_common0(["push", "push1"], "s2push1\n", "stack push (uses stack 2)"),
+		in_common0(["pop2"], "s2pop2\n", "stack pop (uses stack 2)"),
+		in_common0(["peek2"], "s2peek2\n", "stack peek (uses stack 2)"),
+		in_common0(["push2"], "s2push2\n", "stack push (uses stack 2)"),
+		in_int2opmath(["add"], "add\n", "add (2op math)"),#alu
 		in_int2opmath(["sub"], "sub\n", "subtract (2op math)"),
 		in_int2opmath(["div"], "div\n", "divide (2op math)"),
 		in_int2opmath(["mul"], "mul\n", "multiply (2op math)"),
@@ -1220,7 +1226,7 @@ class mainloop:
 		in_print(),
 		in_rawasm(),
 		in_getchar(),
-		in_condgoto(["if"], "gotoif", condmode=0),
+		in_condgoto(["if"], "gotoif", condmode=0),#conditionals
 		in_condgoto(["ifmore"], "gotoifmore", condmode=0),
 		in_condgoto(["ifless"], "gotoifless", condmode=0),
 		in_condgoto(["ifnot"], "gotoif", condmode=1),

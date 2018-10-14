@@ -1,0 +1,23 @@
+# SSTNPL stack instructions:
+
+var buff=0
+
+val @1
+push
+val @2
+push
+val @3
+push
+
+pop
+set buff
+dumpd buff
+peek
+set buff
+dumpd buff
+pop
+set buff
+dumpd buff
+pop
+set buff
+dumpd buff

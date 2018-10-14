@@ -61,6 +61,27 @@ Command documentation:
 	copy [var1],[var2] : copy [var1] to [var2]
 
 
+--Stack: 
+		SSTNPL exposes stack 2 of SBTCVM Gen 2's CPU as a general use stack:
+		Note: push2,peek2, and pop2 are available. they use register 2 instead
+			of register 1. intended for assembly-heavy programs.
+	push/push1: push item to stack. [use with 'get' or 'val']
+		like:
+			get [varname]
+			push
+		or:
+			val @10
+			push
+	pop/pop1: get item from stack [use with 'set']
+		like:
+			pop
+			set [varname]
+	peek/peek1: 'peek' at top of stack, but don't remove it. [use with 'set']
+		like:
+			peek
+			set [varname]
+
+
 --Debugging:
 	marker [name] : Print an assembly debugging marker at assemble time. (with sstnpl source line appended to name)
 
