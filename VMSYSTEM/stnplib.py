@@ -471,7 +471,7 @@ goto;>goto--branch-''' + str(lineno)
 			if len(arglist)!=2:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 			#return mode doesn't need label argument.
-			elif arglist[1]!="return":
+			elif arglist[1]!="return" and arglist[1]!="stop":
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 		if self.condmode in [2, 3]:
 			try:
@@ -549,8 +549,8 @@ goto;>goto--branch-''' + str(lineno)
 			
 				
 		#check goto mode
-		if (arglist[1] not in ["goto", "gsub", "return"]) and (not arglist[1].startswith("=")):
-			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! must be 'goto', 'gsub', or 'return' or =[var]"
+		if (arglist[1] not in ["goto", "gsub", "stop", "return"]) and (not arglist[1].startswith("=")):
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! must be 'goto', 'gsub', 'stop', or 'return' or =[var]"
 		#variable check
 		for x in arglist[0].split(","):
 			if not x in valid_nvars:
@@ -584,6 +584,11 @@ dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>"
 			destobj.write('''#conditional return
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 s1pop1;''' + ";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		#conditional stop
+		elif arglist[1]=="stop":
+			destobj.write('''#conditional stop
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
+stop;''' + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		#basic goto
 		else:
 			destobj.write('''#conditional goto

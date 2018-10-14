@@ -91,7 +91,9 @@ Command documentation:
 	three argument conditionals:
 		[condition] [var1],[var2],[var3] [mode] (label)
 	
-	(a goto label (label) is only needed for goto & gsub modes)
+	(a goto label (label) is only needed for goto & gsub modes, but for
+	variable set mode (=[varname], it is replaced with an extra variable name
+	(that can be a literal))
 	
 	--2-argument conditions:
 		if : true if [var1]=[var2]
@@ -108,6 +110,7 @@ Command documentation:
 		goto : ordinary goto.
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
 		return : just like normal return command. should omit label.
+		stop : just like normal stop command. should omit label.
 		=[var4] : conditional variable copy: set [var4] using a [var5] in place of label. (var5 can be a literal)
 	  
 	--Examples:
