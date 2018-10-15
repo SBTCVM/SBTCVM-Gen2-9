@@ -20,13 +20,11 @@ in SBTCVM, this is 1000 units rather than 1024 in binary. eg.
 - 1 Mt3 = 1000 Kt3 = 1000000 t3 (triads)
 - 1 Mt9 = 1000 Kt9 = 1000000 t9 (nonets)
 - 1 Mt12 = 1000 Kt12 = 1000000 t12 (ditrytes)    
-SBTCVM 
-eg.    
+
+SBTCVM used to use 1093 or MPI(7) instead of 1000, but it was both rarely used,
+and didn't accomplish anything 1000 can't, so it was changed.
+       
+measurement examples:    
 - SBTCVM has (3^9)*2 or 39366 t9's or 39.366 Kt9's (KiloNonets) of ram
 - A 12 trit SBTCVM would have (3^12)*2 or 1062882 t12's, 1062.882 Kt12's (KiloDiTrytes), or approx. 1.06 Mt12's (MegaDiTrytes) of ram.
 
-
-NOTICE OF CHANGE: SBTCVM used to use '1093' instead of '1000' for
-Ktrytes, Mtrytes, etc. however, this is NO LONGER USED. Please use 1000 instead. 
-
-thank you.
