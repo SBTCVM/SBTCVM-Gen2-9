@@ -26,12 +26,17 @@ var compscore=0
 var p1score=0
 var p2score=0
 var ties=0
+var games=0
+
 
 var p1buff=0
 var compbuff=0
 var p2buff=0
-
-
+newline
+prline   /.../......./..|..../............CD.....
+prline  /---/ * __  /-. | / / __    -------CD---
+prline /.../././_/./../.|/|/./_{.\/.....CD.....
+prline        ._/                /
 label mainmenu
 prline          ---HIGHWAY v1.0---
 prline ---A 1 or 2 player guessing game.---
@@ -121,6 +126,9 @@ newline
 print Ties:
 dumpd ties
 newline
+print Games:
+dumpd games
+newline
 return
 
 label score_2p
@@ -152,6 +160,9 @@ newline
 print Ties:
 dumpd ties
 newline
+print Games:
+dumpd games
+newline
 return
 
 label tiewin
@@ -160,6 +171,8 @@ prline   |   | |__
 prline   |   | |__
 add @1,ties
 set ties
+add @1,games
+set games
 return
 
 label p1win
@@ -168,6 +181,8 @@ prline |__|    | | | | |\| |__
 prline |   1   |_|_| | | |  __|
 add @1,p1score
 set p1score
+add @1,games
+set games
 return
 
 label p2win
@@ -177,6 +192,8 @@ prline |__|    | | | | |\| |__
 prline |   2   |_|_| | | |  __|
 add @1,p2score
 set p2score
+add @1,games
+set games
 return
 
 
@@ -186,6 +203,8 @@ prline |   |  | | | |   | | | | |\| |__
 prline |__ |__| | | |.  |_|_| | | |  __|
 add @1,compscore
 set compscore
+add @1,games
+set games
 return
 
 label board_1p

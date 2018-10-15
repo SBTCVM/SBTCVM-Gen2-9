@@ -1,0 +1,47 @@
+## Exception catch system test.
+
+## CAP/tty_log.log should look like this (minus the '#'s):
+#r
+#error    -2
+#g
+
+
+##Expect a Zero Division VMSYSTEM fault message (status -2)
+
+head-nspin=stdnsp
+fopset1;>io.ttywr
+
+setreg1;0
+setreg2;0
+
+div
+expass
+
+fopwri1;:r
+fopwri1;:\n
+
+div
+excatch;>ex_routine
+
+
+div
+excatch;>ex_routine_2
+
+
+null;;ex_routine
+fopwri1;:e
+fopwri1;:r
+fopwri1;:r
+fopwri1;:o
+fopwri1;:r
+exceptcode
+iowrite1;>io.decdump
+fopwri1;:\n
+exreturn
+
+
+null;;ex_routine_2
+exclear
+fopwri1;:g
+fopwri1;:\n
+div

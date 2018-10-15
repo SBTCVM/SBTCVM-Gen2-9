@@ -1,0 +1,27 @@
+#this is an explanation of SBTCVM Gen 2-9s exception system:
+
+#exceptions are caught on a per-opcode basis.
+#exceptions are ONLY raised by CPU instructions.
+
+#exception and interrupt codes are contained in 'except-interrupt.txt'
+
+to catch a exception (using division by zero as example):
+	div
+	excatch;>except_routine
+--OR--
+	div
+	expass
+
+to return from an exception routine use:
+	exreturn
+
+to NOT RETURN but CONTINUE from an exception routine address, use:
+	exclear
+This clears the exception & resets the exception status code.
+You may also use this i.e. upon divide by zero, and just return to the
+right location with a default value other than 0, when 0 is inappropriate.
+[SEE: Division Note]
+
+
+Division Note: upon exception -2 (Divide By Zero), zero will be set as an
+	answer IF THE EXCEPTION IS CAUGHT.

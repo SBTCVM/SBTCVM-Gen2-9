@@ -427,6 +427,11 @@ class mainloop:
 		statinst(["s2push2"], -9101, 3),
 		statinst(["s2peek1", "s2peek"], -9101, 4),
 		statinst(["s2peek2"], -9101, 5),
+		instruct(["excatch"], 100),#EXCEPTION SYSTEM
+		instruct(["expass"], 101),
+		instruct(["exreturn"], 102),
+		instruct(["exclear"], 103),
+		instruct(["exceptcode"], 104),
 		includetas0(),
 		nspacevar(),
 		marker()]

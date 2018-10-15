@@ -39,18 +39,42 @@ class cpu:
 		self.intstack=[]
 		self.stack1=[]
 		self.stack2=[]
+		self.exintreturns=[]
+		self.exints=[]
+		self.normintreturns=[]
+		self.normints=[]
+		self.exceptcode=0
+		self.exceptflg=0
+		self.critfault=None
 	def cycle(self):
 		if self.execpoint.intval>9841:
-			if self.exception("Exec Pointer Overrun", -3):
+			if self.exception("Exec Pointer Overrun", -3, cancatch=0):
 				return 1, -3, "Exec Pointer Overrun"
-		#self.instval.changeval(self.memsys.getinst(self.execpoint))
-		#self.dataval.changeval(self.memsys.getdata(self.execpoint))
 		self.instval.intval=self.memsys.getinst(self.execpoint).intval
 		self.dataval.intval=self.memsys.getdata(self.execpoint).intval
-		#print(self.instval.intval)
-		#print(self.dataval.intval)
-		#print(self.reg1.intval)
-		#print(self.reg2.intval)
+		##EXCEPTION SYSTEM
+		if self.critfault!=None:
+			return 1, self.critfault[0], self.critfault[1]
+		elif self.exceptflg:
+			self.exceptflg=0
+			exid, status = self.exints.pop(0)
+			if self.instval.intval!=100 and self.instval.intval!=101:
+				return 1, exid, status
+			elif self.instval.intval==101:
+				self.exceptcode=0
+			elif self.execpoint.intval==9841:
+				if self.exception("Exec Pointer Overrun", -3, 0):
+					return 1, -3, "Exec Pointer Overrun"
+			else:
+				self.execpoint.intval+=1
+				self.normintreturns.insert(0, [self.reg1.intval, self.reg2.intval, self.execpoint.intval, self.exceptcode])
+				self.execpoint.intval=self.dataval.intval
+				self.instval.intval=self.memsys.getinst(self.execpoint).intval
+				self.dataval.intval=self.memsys.getdata(self.execpoint).intval
+				
+				
+			
+		#opcode parser
 		if self.instval.intval == 0:
 			pass
 		#setreg1
@@ -137,38 +161,34 @@ class cpu:
 				self.reg1.changeval(self.reg1.intval//self.reg2.intval)
 				self.pointeroll1()
 			except ZeroDivisionError:
-				if self.exception("Zero Division.", -2):
+				self.reg1.intval=0
+				if self.exception("Zero Division.", -2, cancatch=1):
 					return 1, -2, "Zero Division."
-				else:
-					return None
 				
 		elif self.instval.intval == -9787:
 			try:
 				self.reg2.changeval(self.reg1.intval//self.reg2.intval)
 				self.pointeroll2()
 			except ZeroDivisionError:
-				if self.exception("Zero Division.", -2):
+				self.reg2.intval=0
+				if self.exception("Zero Division.", -2, cancatch=1):
 					return 1, -2, "Zero Division."
-				else:
-					return None
 		elif self.instval.intval == -9786:
 			try:
 				self.reg1.changeval(self.reg1.intval//self.dataval.intval)
 				self.pointeroll1()
 			except ZeroDivisionError:
-				if self.exception("Zero Division.", -2):
+				self.reg1.intval=0
+				if self.exception("Zero Division.", -2, cancatch=1):
 					return 1, -2, "Zero Division."
-				else:
-					return None
 		elif self.instval.intval == -9785:
 			try:
 				self.reg2.changeval(self.reg2.intval//self.dataval.intval)
 				self.pointeroll2()
 			except ZeroDivisionError:
-				if self.exception("Zero Division.", -2):
+				self.reg2.intval=0
+				if self.exception("Zero Division.", -2, cancatch=1):
 					return 1, -2, "Zero Division."
-				else:
-					return None
 		#  ---gotos---:
 		
 		#goto:
@@ -279,7 +299,32 @@ class cpu:
 			if self.exception("soft stop.", -1, cancatch=0):
 				return 1, -1, "soft stop."
 		self.execpoint.intval+=1
+		#exreturn
+		if self.instval.intval == 102:
+			self.exreturn()
+		#exclear
+		if self.instval.intval == 103:
+			self.exclear()
+		#exceptcode
+		if self.instval.intval == 104:
+			self.reg1.intval = self.exceptcode
+		
 		return None
+	def exreturn(self):
+		try:
+			self.reg1.intval, self.reg2.intval, self.execpoint.intval, self.exceptcode=self.exintreturns.pop(0)
+			if self.exceptcode!=0:
+				self.exceptflag=1
+		except IndexError:
+			return
+	#clears the Exception status, but keeps going at current address, and doesn't reset registers.
+	def exclear(self):
+		try:
+			foo1, foo2, foo3, self.exceptcode=self.exintreturns.pop(0)
+			if self.exceptcode!=0:
+				self.exceptflag=1
+		except IndexError:
+			return
 	#pointer rollover code.
 	def pointeroll1(self):
 		if self.reg1.intval<-9841:
@@ -339,11 +384,17 @@ class cpu:
 			except IndexError:
 				return 1
 		
-	#stub. fill out with needed code once exception/interrupt system is active.
 	#ensure uncatchable exceptions set the cancatch attribute to zero.
 	def exception(self, status, exid, cancatch=1):
-		
-		return 1
+		if cancatch:
+			self.exints.insert(0, [exid, status])
+			self.exceptcode=exid
+			self.exceptflg=1
+		else:
+			self.critfault=[exid, status]
+			self.exceptcode=exid
+			self.exceptflg=1
+			return 1
 		
 		
 		

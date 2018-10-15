@@ -75,14 +75,6 @@
 -9456: fopwri3   : write data to iopointer addr        : instruct : yes
 -9455: fopset3   : set iopointer addr                  : instruct : yes
 
->>>interrupt system<<< [NOT FINAL]
->>>See 'interrupts_and_stack.txt' for stack integration details.<<<
--9400: intsel: set interrupt selection register : instruct : no
--9399: intreg: register selected interrupt with an address in data : instruct : no
--9398: clearint: clear selected interrupt if registered : instruct : no
--9397: clearallint: clear all registered interrupts. (also resets exception table) : instruct : no
--9396: intcont: interrupt continue. see 'interrupts_and_stack.txt' : instruct : no
-
 
 #dual stack multiplexed instruction banks.
 -9100: stack1: multiplexer bank for stack #1 see stack.txt : statinst : yes
@@ -90,4 +82,14 @@
 
 -9001: reset: restart CPU.  : instruct : no
 -9000: stop: shutdown VM : instruct : yes
+
+#exceptions
+
+100: excatch: Catch Exception on previous operation.                      : instruct : yes
+101: expass: do not raise ANY catchable exception on previous operation.  : instruct : yes
+102: exreturn: return from an exception routine                           : instruct : yes
+103: exclear: Continue past a jump to an exception routine                : instruct : yes
+104: exceptcode: Get exception code. into reg1                            : instruct : yes
+
+#other
 0: null: blank instruction. does nothing. can be used for adjusting loop speed. : instruct : yes
