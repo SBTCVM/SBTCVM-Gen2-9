@@ -3,6 +3,7 @@ from . import libbaltcalc
 from . import iofuncts
 from . import libtextcon as tcon
 btint=libbaltcalc.btint
+from . import g2common
 import os
 import sys
 from subprocess import call
@@ -52,6 +53,7 @@ def assemble(pathx, syntaxonly=0, pfx="", exitonerr=1):
 			return 1
 		if not syntaxonly:
 			mainl.p5()
+	g2common.standardsizeprint(len(mainl.datainstlist))
 	sourcefile.close()
 	return 0
 
