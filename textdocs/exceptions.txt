@@ -1,7 +1,8 @@
 #this is an explanation of SBTCVM Gen 2-9s exception system:
 
 #exceptions are caught on a per-opcode basis.
-#exceptions are ONLY raised by CPU instructions.
+#exceptions may be raised by CPU instructions, AND
+  reads/writes to/from IOBUS devices.
 
 excatch will save the existing register 1 and register 2 values along with
 the exreturn pointer.
@@ -13,6 +14,8 @@ use exclear an some assembly goto refrences if you need to preserve new values.
 
 
 #exception and interrupt codes are contained in 'except-interrupt.txt'
+#IMPORTANT: NOT ALL EXCEPTIONS ARE CATCHABLE!!!!!!!!!!!!
+
 
 to catch a exception (using division by zero as example):
 	div
