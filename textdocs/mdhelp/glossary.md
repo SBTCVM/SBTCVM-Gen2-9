@@ -44,7 +44,7 @@ the absolute value of MNI(9) equals MPI(9),
 so the formulas are nearly identical.
 
 ## MCV:
-The Maximum Combinations Value of a length of trits.
+The _Maximum Combinations Value_ of a length of trits.
 The number of combinations in a length of trits. Formula:
 
 	((3^t))=m       
