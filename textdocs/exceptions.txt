@@ -3,6 +3,15 @@
 #exceptions are caught on a per-opcode basis.
 #exceptions are ONLY raised by CPU instructions.
 
+excatch will save the existing register 1 and register 2 values along with
+the exreturn pointer.
+
+IT WILL NOT RESET THEM FOR YOUR ROUTINE. Do see the notes at the end of this file.
+
+exreturn Will in turn restore previous register values. 
+use exclear an some assembly goto refrences if you need to preserve new values.
+
+
 #exception and interrupt codes are contained in 'except-interrupt.txt'
 
 to catch a exception (using division by zero as example):
@@ -22,6 +31,8 @@ You may also use this i.e. upon divide by zero, and just return to the
 right location with a default value other than 0, when 0 is inappropriate.
 [SEE: Division Note]
 
+
+----NOTES----
 
 Division Note: upon exception -2 (Divide By Zero), zero will be set as an
 	answer IF THE EXCEPTION IS CAUGHT.
