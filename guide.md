@@ -8,6 +8,7 @@ Boot into VDI shell (unfinished):
      
      
 ### more information:
+- [textdocs/glossary.md](/textdocs/mdhelp/glossary.md) Is a Glossary of various technical terms used in SBTCVM.
 - The [textdocs](/textdocs/) directory in this repository contains both technical and user documentation.
 - [textdocs/SSTNPL](textdocs/SSTNPL/) contains documentation to the SSTNPL programming language.
 - [APPS/directory.txt](/APPS/directory.txt) in this repository, has a guide on the TROM applications available there.
