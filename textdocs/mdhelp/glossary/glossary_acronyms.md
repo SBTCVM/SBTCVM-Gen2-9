@@ -1,4 +1,5 @@
 # Acronyms
+[return to glossary index](glossary.md)
 Brief descriptions of SBTCVM's numerous acronyms.
 ## SBTCVM
 Simple Balanced Ternary Computer Virtual Machine
