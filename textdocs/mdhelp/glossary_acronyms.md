@@ -1,0 +1,16 @@
+# Acronyms
+Brief descriptions of SBTCVM's numerous acronyms.
+## SBTCVM
+Simple Balanced Ternary Computer Virtual Machine
+
+## SSTNPL
+SBTCVM Simplified Ternary Numeric Programming Language
+
+## SBTVDI
+SBTCVM Balanced Ternary Virtual Disk Interface
+
+## VDI
+Short for SBTVDI (see above)
+
+## SBTGA
+SBTCVM Balanced Ternary Graphics Adapter
