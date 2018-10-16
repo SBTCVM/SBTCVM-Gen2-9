@@ -8,3 +8,5 @@ maze:
 	A nifty maze engine demo. currently only has 1 level.
 diffcards:
 	A 2-player card-drawing game based on a 'short' and 'long' deck of 'cards'
+match:
+	a completely random 12-card matching game.

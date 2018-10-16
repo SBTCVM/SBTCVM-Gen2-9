@@ -1,0 +1,309 @@
+
+
+
+var cardx=0
+var cardy=0
+var cardplacebuff=0
+
+var kb=0
+
+var qk=:q
+var wk=:w
+var ek=:e
+var rk=:r
+var ak=:a
+var sk=:s
+var dk=:d
+var fk=:f
+var zk=:z
+var xk=:x
+var ck=:c
+var vk=:v
+
+var quitk=:k
+
+var matches=0
+
+var card1=0
+var card2=0
+var card1val=0
+var card2val=0
+
+var x1=0
+var y1=0
+var x2=0
+var y2=0
+
+var kb2=0
+
+prline please wait while i shuffle the cards...
+##Build randomized arrangement
+uiter cardv,placecard,@1,@6
+uiter cardv,placecard,@1,@6
+
+
+var pickx=0
+var picky=0
+var didpick=0
+####MAIN####
+prline Cards ready.
+
+
+
+
+label menu
+prline Card Match v1.0
+prline g: start game
+prline q: quit
+prline a: about
+prline h: help/rules.
+prline >
+newline
+keyprompt
+set kb2
+if kb2,:g goto main
+if kb2,:a gsub about
+if kb2,:q stop
+if kb2,:h gsub help
+goto menu
+
+
+
+label main
+newline
+prline ------- NEXT ROUND -------
+newline
+gsub step1
+gsub step2
+gsub domatch
+if matches,@6 goto win
+goto main
+
+#### MATCHING CHECK ####
+label domatch
+if card1,card2 goto domatch_same
+if card1val,card2val goto domatch_true
+prline Try Again!
+return
+
+label domatch_true
+add matches,@1
+set matches
+prline Yay! A match!
+tabw cardview,x1,y1,:+
+tabw cardview,x2,y2,:+
+return
+
+label domatch_same
+prline HEY! you can't just pick the same one!
+return
+
+
+#### CARD SELECTOR 1 ####
+
+label step1
+newline
+gsub showcards
+newline
+prline Pick first lettered card. or i for quit
+gsub getcard
+copy pickx,x1
+copy picky,y1
+tabr cardvals,pickx,picky
+set card1val
+tabr cardview,pickx,picky
+set card1
+
+print Card 
+chardump kb
+print  is 
+dumpd card1val
+newline
+
+ifnot card1,:+ return
+prline Card already matched!
+goto step1
+
+#### CARD SELECTOR 2 ####
+
+label step2
+newline
+gsub showcards
+newline
+prline Pick second lettered card. or i for quit
+gsub getcard
+
+copy pickx,x2
+copy picky,y2
+tabr cardvals,pickx,picky
+set card2val
+tabr cardview,pickx,picky
+set card2
+
+print Card 
+chardump kb
+print  is 
+dumpd card2val
+newline
+
+ifnot card2,:+ return
+prline Card already matched!
+goto step2
+
+
+#### COMMON CARD-CHOOSER SUBROUTINE ####
+
+label getcard
+val 0
+set didpick
+keyprompt
+set kb
+if kb,:q =pickx @0
+if kb,:q =picky @0
+if kb,:q =didpick @1
+if kb,:w =pickx @1
+if kb,:w =picky @0
+if kb,:w =didpick @1
+if kb,:e =pickx @2
+if kb,:e =picky @0
+if kb,:e =didpick @1
+if kb,:r =pickx @3
+if kb,:r =picky @0
+if kb,:r =didpick @1
+
+if kb,:a =pickx @0
+if kb,:a =picky @1
+if kb,:a =didpick @1
+if kb,:s =pickx @1
+if kb,:s =picky @1
+if kb,:s =didpick @1
+if kb,:d =pickx @2
+if kb,:d =picky @1
+if kb,:d =didpick @1
+if kb,:f =pickx @3
+if kb,:f =picky @1
+if kb,:f =didpick @1
+
+if kb,:z =pickx @0
+if kb,:z =picky @2
+if kb,:z =didpick @1
+if kb,:x =pickx @1
+if kb,:x =picky @2
+if kb,:x =didpick @1
+if kb,:c =pickx @2
+if kb,:c =picky @2
+if kb,:c =didpick @1
+if kb,:v =pickx @3
+if kb,:v =picky @2
+if kb,:v =didpick @1
+if kb,:i goto quit
+if didpick,@1 return
+goto getcard
+
+
+
+
+
+#### WIN ####
+
+label win
+newline
+prline \   / _        |   |       |
+prline  \ / | | | |   | | | * |\| |
+prline   |  |_| |_|   |_|_| | | | *
+prline Press a key to exit.
+keyprompt
+stop
+
+#### QUIT ####
+
+label quit
+prline Goodbye! Press a key to exit.
+keyprompt
+stop
+
+
+#### CARD VIEW DATA/MATCH STATUS ####
+#SELF-PRINTING TABLE USING PRLINE
+#cells are set to '+' upon match.
+#this acts as both a user indicator of the card being matched, 
+#and as a flag for checking if the card is matched.
+
+label showcards
+table cardview,5,3
+prline QWER
+prline ASDF
+prline ZXCV
+return
+
+
+
+#### CARD PLACER ####
+
+label placecard
+rrange @0,@3
+set cardx
+rrange @0,@2
+set cardy
+tabr cardvals,cardx,cardy
+set cardplacebuff
+if cardplacebuff,@0 goto placecard_write
+goto placecard
+
+label placecard_write
+tabw cardvals,cardx,cardy,cardv
+return
+
+
+table cardvals,4,3
+tdat 0;0;0;0
+tdat 0;0;0;0
+tdat 0;0;0;0
+
+
+
+label about
+newline
+prline --ABOUT--
+prline Card Match v1.0: a simple random matching game
+prline Part of SBTCVM Gen2-9
+prline 
+prline Copyright (c) 2018 Thomas Leathers & Contributors
+prline 
+prline Card Match is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline Card Match is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with Card Match. If not, see <http://www.gnu.org/licenses/>
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+keyprompt
+newline
+return
+label help
+prline Card Match v1.0: a simple random matching game
+prline ----RULES----
+prline each card is assigned a letter. shown in the view:
+prline 
+prline QWER
+prline ASDF
+prline ZXCV
+prline 
+prline When a card is 'matched' it turns to a '+'
+prline Match all pairs of cards to win!
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+
+keyprompt
+newline
+return
+
