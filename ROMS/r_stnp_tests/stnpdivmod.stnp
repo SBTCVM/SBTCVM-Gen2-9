@@ -1,0 +1,28 @@
+
+
+var op1=@10
+var op2=@4
+var quot=0
+var remain=0
+
+prline divmod test.
+print operator 1: 
+dumpd op1
+newline
+
+print operator 2: 
+dumpd op2
+newline
+
+divmod op1,op2
+set1 remain
+set2 quot
+
+print quotient: 
+dumpd quot
+newline
+print remainder: 
+dumpd remain
+newline
+
+

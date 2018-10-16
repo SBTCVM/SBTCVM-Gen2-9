@@ -41,6 +41,7 @@
 -9786: divdata1: divide register 1 by data : instruct : yes
 -9785: divdata2: divide register 2 by data : instruct : yes
 
+-9784: divmod: divide, put remainder in register 1, put quotient in register 2
 
 >>>GOTOs<<<
 -9600: goto [gotodata]: goto address in data word. : instruct : yes

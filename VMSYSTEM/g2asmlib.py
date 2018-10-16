@@ -393,6 +393,7 @@ class mainloop:
 		instruct(["div2"], -9787),
 		instruct(["divdata1"], -9786),
 		instruct(["divdata2"], -9785),
+		instruct(["divmod"], -9784),#divrem
 		instruct(["goto", "gotodata"], -9600),#goto operations
 		instruct(["gotoif", "gotodataif"], -9599),
 		instruct(["gotoifless"], -9598),

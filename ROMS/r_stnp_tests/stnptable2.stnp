@@ -1,0 +1,55 @@
+
+var vb0=0
+var vb1=0
+
+####explanation:
+
+##This will read the double-cell values at 0,0
+##swap them via writes
+##then read them again
+
+
+
+tabr sam2,@0,@0
+set vb0
+dumpd vb0
+newline
+chardump vb0
+newline
+
+tabr2 sam2,@0,@0
+set vb1
+dumpd vb1
+newline
+chardump vb1
+newline
+
+tabw2 sam2,@0,@0,vb0
+tabw sam2,@0,@0,vb1
+
+tabr sam2,@0,@0
+set vb0
+
+dumpd vb0
+newline
+chardump vb0
+newline
+
+tabr2 sam2,@0,@0
+set vb1
+dumpd vb1
+newline
+chardump vb1
+newline
+
+
+stop
+
+
+## DO NOT LET DOUBLE-CELL TABLES RUN!!!!!
+
+table sam2,2,4
+tdat @1 :a;@2 :b
+tdat @3 :c;@4 :d
+tdat @1 :a;@2 :b
+tdat :c;:d

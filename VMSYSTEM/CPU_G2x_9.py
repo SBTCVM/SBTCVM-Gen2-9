@@ -189,6 +189,16 @@ class cpu:
 				self.reg2.intval=0
 				if self.exception("Zero Division.", -2, cancatch=1):
 					return 1, -2, "Zero Division."
+		# special remainder-quotient division
+		#divmod
+		elif self.instval.intval == -9784:
+			try:
+				self.reg2.intval, self.reg1.intval=divmod(self.reg1.intval, self.reg2.intval)
+				self.pointeroll2()
+			except ZeroDivisionError:
+				self.reg2.intval=0
+				if self.exception("Zero Division.", -2, cancatch=1):
+					return 1, -2, "Zero Division."
 		#  ---gotos---:
 		
 		#goto:

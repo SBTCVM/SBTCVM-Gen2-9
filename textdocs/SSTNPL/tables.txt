@@ -25,6 +25,8 @@ tabdd: print data in decimal
 tabtd: print data in ternary
 
 
+##### BASIC (SINGLE CELL) TABLES #####
+
 
 -Building your tables works like so:
 table [name],[width],[height]
@@ -34,6 +36,7 @@ tstr .|.
 tdat 10x1;+0-;:F
 #@ (decimal) and * (ternary) syntaxes are also valid:
 tdat @1;*+-;:F
+prline HI
 
 [name] is the table name of your table.
 [width] is the table width in decimal
@@ -43,4 +46,51 @@ As you can see, the table is built of tstr and tdat statements.
 
 tstr is handy for tables containing rows of only characters
 tdat is semicolon-divided and accepts the same data value syntaxes as var and val. (shown)
+
+
+##### MAKING FAST SELF-PRINTING TABLES #####
+	prline statements must use strings ONE LESS than actual table width.
+	This is due to the appended NEWLINE. ALSO: DON'T USE tab*2 (DOUBLE CELL)
+	instructions with tables made this way!
+	
+	You CAN however, make prline-based tables function as self-printing tables.
+	Just avoid writing to the highest column (where the newline characters are):
+		label tableprint
+		table mytable,4,3
+		prline abc
+		prline 123
+		prline XYZ
+		return
+	This gives you an ultra-fast-printing table. This is due to prline using a
+	Fast Output Port (or FOP) connected to the TTY. Each cell taking 1 cycle to
+	print. Giving a THEORETICAL print speed of 6500 characters per second.
+
+
+
+
+############# (ADVANCED) DOUBLE CELL TABLES #############
+### WARNING: DOUBLE CELL TABLES USE THE INSTRUCTION WORD FOR EXTRA VALUE
+##### TRYING TO 'RUN' THEM WILL HAVE UNPREDICTABLE RESULTS!!!!!!!!!!
+
+to use DOUBLE CELL TABLES use the following tdat syntax:
+
+Notice cell2 is on the LEFT
+Notice 'cell' (with no number) IS ON THE RIGHT.
+Notice each DOUBLE-CELL's pair of values is space-separated.
+	tdat cell2 cell;cell2 cell
+
+Note: you CAN mix and match single and double cells in tdat statements.
+
+ALL tab* instructions by themselves reference the RIGHT cell HOWEVER, 
+They can be suffixed with 2 to reference the LEFT cell (cell2 in tdat example),
+in double-cell tables.
+i.e.
+	tabr2
+	tabw2
+	tabcd2
+	tabdd2
+	tabtd2
+Otherwise, syntax is IDENTICAL 
+
+
 

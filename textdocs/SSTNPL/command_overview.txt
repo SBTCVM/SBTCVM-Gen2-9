@@ -94,6 +94,11 @@ Command documentation:
 	sub [var1],[var2] : subtract 2 integer variables. use 'set' to store result.
 	mul [var1],[var2] : multiply 2 integer variables. use 'set' to store result.
 	div [var1],[var2] : divide 2 integer variables. use 'set' to store result.
+	
+	divmod [var1],[var2] : modulo division. use set1 to store modulo, use set2 to store quotient.
+		divmod @11,@2
+		set1 modulo
+		set2 quotient
 
 --Logic and tritwise:
 	invert [varname] : invert the sign of variable [varname], in-place.

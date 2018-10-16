@@ -267,7 +267,7 @@ class in_invert:
 
 class in_tabr:
 	def __init__(self):
-		self.keywords=["tabr", "tabcd", "tabdd", "tabtd"]
+		self.keywords=["tabr", "tabcd", "tabdd", "tabtd", "tabr2", "tabcd2", "tabdd2", "tabtd2"]
 	def p0(self, args, keyword, lineno):
 		try:
 			tname, xv, yv = args.split(",")
@@ -307,6 +307,10 @@ class in_tabr:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		tname, xv, yv = args.split(",")
 		tabvar=tables[tname]
+		if keyword.endswith("2"):
+			readop="instread1"
+		else:
+			readop="dataread1"
 		destobj.write('''#SSTNPL table read instruction.
 setreg1;10x''' + str(tabvar.vdata[0]) + '''
 dataread2;>''' + yv + '''
@@ -318,20 +322,20 @@ add
 setreg2;>''' + tname + '''--table
 add
 datawrite1;>tabr--adrbuff--''' + str(lineno) + '''
-dataread1;;tabr--adrbuff--''' + str(lineno) + '''
+''' + readop +  ''';;tabr--adrbuff--''' + str(lineno) + '''
 ''')
-		if keyword=="tabcd":
+		if keyword in ["tabcd", "tabcd2"]:
 			destobj.write("iowrite1;>io.ttywr\n")
-		if keyword=="tabdd":
+		if keyword in ["tabdd", "tabdd2"]:
 			destobj.write("iowrite1;>io.decdump\n")
-		if keyword=="tabtd":
+		if keyword in ["tabtd", "tabtd2"]:
 			destobj.write("iowrite1;>io.tritdump\n")
 		return
 
 
 class in_tabw:
 	def __init__(self):
-		self.keywords=["tabw"]
+		self.keywords=["tabw", "tabw2"]
 	def p0(self, args, keyword, lineno):
 		try:
 			tname, xv, yv, datav = args.split(",")
@@ -369,6 +373,10 @@ class in_tabw:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		tname, xv, yv, datav = args.split(",")
 		tabvar=tables[tname]
+		if keyword.endswith("2"):
+			writeop="instwrite1"
+		else:
+			writeop="datawrite1"
 		destobj.write('''#SSTNPL table write instruction.
 setreg1;10x''' + str(tabvar.vdata[0]) + '''
 dataread2;>''' + yv + '''
@@ -381,7 +389,7 @@ setreg2;>''' + tname + '''--table
 add
 datawrite1;>tabw--adrbuff--''' + str(lineno) + '''
 dataread1;>''' + datav + '''
-datawrite1;;tabw--adrbuff--''' + str(lineno) + '''
+''' + writeop + ''';;tabw--adrbuff--''' + str(lineno) + '''
 ''')
 		return
 
@@ -1059,7 +1067,7 @@ class in_print:
 		
 		return
 
-#also handles table string tstr syntax
+
 class in_tdat:
 	def __init__(self):
 		self.keywords=["tdat"]
@@ -1068,21 +1076,25 @@ class in_tdat:
 			return 1, keyword+": Line: " + str(lineno) + ": Blank table Error"
 		arglist=args.split(";")
 		for arg in arglist:
-			if arg.replace("@", "10x").startswith("10x"):
-				try:
-					int(arg.replace("@", "10x")[3:])
-				except ValueError:
-					return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!: '" + arg + "' "
-			elif arg.startswith(":"):
-				if len(arg)<2:
-					return 1, keyword+": Line: " + str(lineno) + ": Must specify character: '" + arg + "' "
-			else:
-				if len(arg.replace("*", ""))>9:
-					return 1, keyword+": Line: " + str(lineno) + ": string too large!: '" + arg + "' "
-				for char in arg.replace("*", ""):
-					
-					if char not in tritvalid:
-						return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!: '" + arg + "' "
+			sublist=arg.split(" ")
+			if len(sublist)>2:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid double.  '" + arg + "' please use format: 'arg1a arg1b;arg2a arg2b' etc."
+			for subarg in sublist:
+				if subarg.replace("@", "10x").startswith("10x"):
+					try:
+						int(subarg.replace("@", "10x")[3:])
+					except ValueError:
+						return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!: '" + subarg + "' "
+				elif subarg.startswith(":"):
+					if len(subarg)<2:
+						return 1, keyword+": Line: " + str(lineno) + ": Must specify character: '" + subarg + "' "
+				else:
+					if len(subarg.replace("*", ""))>9:
+						return 1, keyword+": Line: " + str(lineno) + ": string too lsubarge!: '" + subarg + "' "
+					for char in subarg.replace("*", ""):
+						
+						if char not in tritvalid:
+							return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!: '" + subarg + "' "
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
@@ -1091,12 +1103,26 @@ class in_tdat:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + keyword + "\n")
 		arglist=args.split(";")
+		
 		for arg in arglist:
-			if arg.startswith("@"):
-				arg=arg.replace("@", "10x")
-			if arg.startswith("*"):
-				arg=arg.replace("*", "")
-			destobj.write("null;" + arg + "\n")
+			try:
+				suba, subb=arg.split(" ")
+				if suba.startswith("@"):
+					suba=suba.replace("@", "10x")
+				if suba.startswith("*"):
+					suba=suba.replace("*", "")
+				if subb.startswith("@"):
+					subb=subb.replace("@", "10x")
+				if subb.startswith("*"):
+					subb=subb.replace("*", "")
+				destobj.write("raw;" + suba + "," + subb + "\n")
+			except ValueError:
+				
+				if arg.startswith("@"):
+					arg=arg.replace("@", "10x")
+				if arg.startswith("*"):
+					arg=arg.replace("*", "")
+				destobj.write("null;" + arg + "\n")
 		
 		return
 
@@ -1214,6 +1240,7 @@ class mainloop:
 		in_int2opmath(["add"], "add\n", "add (2op math)"),#alu
 		in_int2opmath(["sub"], "sub\n", "subtract (2op math)"),
 		in_int2opmath(["div"], "div\n", "divide (2op math)"),
+		in_int2opmath(["divmod"], "divmod\n", "divide modulo (2op math)"),
 		in_int2opmath(["mul"], "mul\n", "multiply (2op math)"),
 		in_labelgoto(), 
 		in_int2opcopy(),
