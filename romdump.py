@@ -6,6 +6,7 @@ import time
 import sys
 import os
 import VMSYSTEM.iofuncts as iofuncts
+import VMSYSTEM.g2common as g2com
 
 
 def romdump(fileobj, start, end, n0p=0):
@@ -66,7 +67,12 @@ def romdumpver(fileobj, start, end, n0p=0):
 			pstring += str(int(trval0)).rjust(8) + str(int(trval1)).rjust(8)
 			pstring += " | adr:" + str(mempos).rjust(6)
 			print(pstring)
-	
+
+def rominfo(tromfile):
+	print("path: " + tromfile)
+	tromobj=open(tromfile)
+	g2com.standardsizeprint(g2com.gettromsize(tromobj))
+
 
 if __name__=="__main__":
 	try:
@@ -78,9 +84,11 @@ if __name__=="__main__":
 	except IndexError:
 		arg=None
 	#ensure arg is none when just file and range values are passed.
-	if cmd not in ["-d", "-dnp", "-r", "-rnp"]:
+	if cmd not in ["-d", "-dnp", "-r", "-rnp", "-i", "--info"]:
 		arg=None
-	if arg!=None:
+	if cmd in ["-a", "-h", "-v", "-i", "--about", "--help", "--version", "--info"]:
+		pass
+	elif arg!=None:
 		try:
 			start=int(sys.argv[3])
 			end=int(sys.argv[4])
@@ -103,15 +111,16 @@ if __name__=="__main__":
 -h --help: this help
 -v --version: version
 -a, --about: about SBTCVM
--d [trom] dump contents of trom to standard output in +0- form.
+-i [trom]: show general information on trom. including size.
+-d [trom]: dump contents of trom to standard output in +0- form.
     instructions and data colums separated by two spaces. "  "
     a third column containing the address in signed decmimal
     is separated via a vertical bar "|"
--r [trom] same as -d, but also prints chars & decimal values and labels
+-r [trom]: same as -d, but also prints chars & decimal values and labels
     address column
--dnp [trom] same as -d, but using n0p representation.
--rnp [trom] same as -dnp, but also prints chars & decimal values
-[trom] (with no options) same as -d
+-dnp [trom]: same as -d, but using n0p representation.
+-rnp [trom]: same as -dnp, but also prints chars & decimal values
+[trom]: (with no options) same as -d
 -Specifying a start and end address (in signed decimal, space-separated)
     after the rom name enables ranged mode. In this mode, only the range given
     is used.''')
@@ -142,6 +151,8 @@ see readme.md for more information and licensing of media.
   ''')
 	elif cmd in ["-d"]:
 		romdump(iofuncts.loadtrom(arg, dirauto=1), start, end)
+	elif cmd in ["-i", "--info"]:
+		rominfo(iofuncts.findtrom(arg, dirauto=1))
 	elif cmd in ["-dnp"]:
 		romdump(iofuncts.loadtrom(arg, dirauto=1), start, end, n0p=1)
 	elif cmd in ["-r"]:

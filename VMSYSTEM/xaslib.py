@@ -65,6 +65,7 @@ helptext='''----XAS shell help:----
    runc [trom image]: run the VM with curses frontend. 
       [BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py]
 --tools--
+   trominfo [trom image]: get some basic info on a trom. i.e. size.
    dump [trom image]: Dump TROM image
    dumpnp [trom image]: Dump TROM image in n0p format (romdump.py -dnp)
    vdump [trom image]: Dump TROM image in verbose format (romdump.py -r)

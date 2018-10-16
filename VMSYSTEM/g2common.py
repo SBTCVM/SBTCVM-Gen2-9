@@ -30,3 +30,13 @@ def standardsizeprint(romsize):
 	print("remaining (Nonets): " + nonetformatted_smart(19683-romsize) + " left.")
 	print("\nsize (words) : " + str(romsize) + " words used.")
 	print("remaining (words) : " + str(19683-romsize) + " words left.")
+
+
+def gettromsize(romfile):
+	romfile.seek(0)
+	size=0
+	for word in romfile:
+		if "," in word:
+			size+=1
+	romfile.seek(0)
+	return size
