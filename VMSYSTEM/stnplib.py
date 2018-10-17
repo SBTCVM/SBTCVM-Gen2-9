@@ -768,7 +768,6 @@ gotoif;>keyprompt--loop-""" + str(lineno) + """
 		
 
 
-
 class in_u2iter:
 	def __init__(self):
 		self.keywords=["u2iter"]
@@ -1233,6 +1232,7 @@ class mainloop:
 		in_intcommon1(["get2"], "dataread2;>", "\n", "get2 (may be used with set2, and asm code.)"),
 		in_common0(["pop", "pop1"], "s2pop1\n", "stack pop (uses stack 2)"),#stack
 		in_common0(["peek", "peek1"], "s2peek1\n", "stack peek (uses stack 2)"),
+		in_common0(["stackrev"], "s2reverse\n", "stack reverse (uses stack 2)"),
 		in_common0(["push", "push1"], "s2push1\n", "stack push (uses stack 2)"),
 		in_common0(["pop2"], "s2pop2\n", "stack pop (uses stack 2)"),
 		in_common0(["peek2"], "s2peek2\n", "stack peek (uses stack 2)"),

@@ -1,4 +1,4 @@
-added: (where * is the stack number (either 1 or 2)
+added: (where * is the stack number (either 1, 2, 3, 4, 5, or 6)
 
 s*pop1/s*pop   : 0 : pop (register 1)
 s*pop2         : 1 : pop (register 2)
@@ -6,6 +6,7 @@ s*push1/s*push : 2 : push (register 1
 s*push2        : 3 : push (register 2)
 s*peek1/s*peek : 4 : peek (register 1) (read top of stack, but don't remove it.)
 s*peek2        : 5 : peek (register 2) (read top of stack, but don't remove it.)
+s*invert       : 6 : invert the whole stack back-to-front
 
 
 ------------to add:------------
@@ -15,7 +16,6 @@ s*peek2        : 5 : peek (register 2) (read top of stack, but don't remove it.)
 	s*topmul       : 13: mul top 2 of stack
 	s*getsize1     : 20: Get size of stack (register 1)
 	s*getsize2     : 21: Get size of stack (register 2)
-	s*flip         : 22: flip entire stack back-to-front.
 	
 	Double Full word multiplexed opcodes.
 	s*getat1      [data: stack index]

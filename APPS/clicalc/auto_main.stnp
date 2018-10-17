@@ -1,0 +1,346 @@
+########
+###gett vars###
+var gett_ch=0
+var gett_val=0
+var gett_cnt=0
+var gett_decv=0
+var gett_numb=0
+var gett_disp=0
+########
+
+var v1buff=0
+var v2buff=0
+var resbuff=0
+var resbuff2=0
+var kb=0
+
+####### CALCULATOR MAIN ROUTINE #######
+
+prline clicalc: A ternary CLI calculator.
+prline Version 1.0
+prline press 'h' for help, and '?' for about info.
+label main
+print >
+keyprompt
+set kb
+newline
+if kb,:a gsub add
+if kb,:A gsub add
+if kb,:s gsub sub
+if kb,:S gsub sub
+if kb,:m gsub mul
+if kb,:M gsub mul
+if kb,:d gsub div
+if kb,:D gsub div
+if kb,:r gsub divm
+if kb,:R gsub divm
+if kb,:i gsub inv
+if kb,:I gsub inv
+if kb,:b gsub abso
+if kb,:B gsub abso
+if kb,:h gsub help
+if kb,:H gsub help
+if kb,:? gsub about
+if kb,:/ gsub about
+if kb,:q stop
+if kb,:Q stop
+
+goto main
+
+
+#### ADD ####
+label add
+prline ADDITION:
+gsub getnums
+add v1buff,v2buff
+set resbuff
+print sum is   : 
+dumpt resbuff
+print  ( 
+dumpd resbuff
+prline  )
+return
+
+#### INVERT ####
+label inv
+prline INVERT:
+gsub get1num
+invert v1buff
+print result is: 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+return
+
+#### ABSOLUTE ####
+label abso
+prline ABSOLUTE:
+gsub get1num
+abs v1buff
+set v1buff
+print result is: 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+return
+
+
+#### SUBTRACTION ####
+label sub
+prline SUBTRACTION:
+gsub getnums
+sub v1buff,v2buff
+set resbuff
+print result is: 
+dumpt resbuff
+print  ( 
+dumpd resbuff
+prline  )
+return
+
+
+#### MULTIPLICATION ####
+label mul
+prline MULTIPLICATION:
+gsub getnums
+mul v1buff,v2buff
+set resbuff
+print result is: 
+dumpt resbuff
+print  ( 
+dumpd resbuff
+prline  )
+return
+
+#### DIVISION ####
+label div
+prline DIVISION:
+gsub getnums
+#######catch those sneaky zero divisions early.
+if v2buff,@0 goto div_err
+div v1buff,v2buff
+set resbuff
+print result is: 
+dumpt resbuff
+print  ( 
+dumpd resbuff
+prline  )
+return
+
+#### MODULO DIVISION ####
+label divm
+prline DIVISION (modulo):
+gsub getnums
+#######catch those sneaky zero divisions early.
+if v2buff,@0 goto div_err
+divmod v1buff,v2buff
+set resbuff
+set2 resbuff2
+print remainder is: 
+dumpt resbuff
+print  ( 
+dumpd resbuff
+prline  )
+print quotient is : 
+dumpt resbuff2
+print  ( 
+dumpd resbuff2
+prline  )
+return
+
+#### a message for the age old zero division error: ####
+label div_err
+prline ERROR: Not even in balanced ternary, can you divide by zero.
+return
+
+
+#### Dual Number prompt code (see 'gett' for actual number input) ####
+label getnums
+print num0? >
+gsub gett
+copy gett_val,v1buff
+newline
+print num0 is  : 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+
+print num1? >
+gsub gett
+copy gett_val,v2buff
+newline
+print num1 is  : 
+dumpt v2buff
+print  ( 
+dumpd v2buff
+prline  )
+return
+
+#### Single Number prompt code (see 'gett' for actual number input) ####
+label get1num
+print num? >
+gsub gett
+copy gett_val,v1buff
+newline
+print num is   : 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+return
+
+####### GETT: TERNARY VALUE INPUT CODE ########
+
+label gett
+val 0
+set gett_val
+val 0
+set gett_cnt
+label gett_loop
+keyprompt
+set gett_ch
+if gett_ch,:\x =gett_disp :\x
+if gett_ch,:\x gsub gett_backone
+#valid zero keys
+if gett_ch,:0 =gett_decv @0
+if gett_ch,:0 =gett_disp :0
+if gett_ch,:0 gsub gett_donum
+if gett_ch,:) =gett_decv @0
+if gett_ch,:) =gett_disp :0
+if gett_ch,:) gsub gett_donum
+
+#valid negative keys
+if gett_ch,:- =gett_decv @-1
+if gett_ch,:- =gett_disp :-
+if gett_ch,:- gsub gett_donum
+if gett_ch,:_ =gett_decv @-1
+if gett_ch,:_ =gett_disp :-
+if gett_ch,:_ gsub gett_donum
+if gett_ch,:n =gett_decv @-1
+if gett_ch,:n =gett_disp :-
+if gett_ch,:n gsub gett_donum
+if gett_ch,:N =gett_decv @-1
+if gett_ch,:N =gett_disp :-
+if gett_ch,:N gsub gett_donum
+
+#valid positive keys
+if gett_ch,:+ =gett_decv @1
+if gett_ch,:+ =gett_disp :+
+if gett_ch,:+ gsub gett_donum
+if gett_ch,:= =gett_decv @1
+if gett_ch,:= =gett_disp :+
+if gett_ch,:= gsub gett_donum
+if gett_ch,:p =gett_decv @1
+if gett_ch,:p =gett_disp :+
+if gett_ch,:p gsub gett_donum
+if gett_ch,:P =gett_decv @1
+if gett_ch,:P =gett_disp :+
+if gett_ch,:P gsub gett_donum
+
+#confirm key
+if gett_ch,:\n goto gett_end
+#comment out the following 2 conditionals to disable user exit in number prompts.
+if gett_ch,:q stop
+if gett_ch,:Q stop
+goto gett_loop
+
+#####calculate number
+label gett_end
+stackrev
+label gett_end_loop
+if gett_cnt,@0 return
+sub gett_cnt,@1
+set gett_cnt
+pop
+set gett_numb
+mul gett_val,@3
+set gett_val
+add gett_val,gett_numb
+set gett_val
+goto gett_end_loop
+
+
+
+
+
+####push number value to stack
+label gett_donum
+if gett_cnt,@9 return
+chardump gett_disp
+get gett_decv
+push
+add gett_cnt,@1
+set gett_cnt
+return
+
+
+
+#if number count isn't 0, pop last from stack.
+label gett_backone
+
+if gett_cnt,@0 return
+chardump gett_disp
+sub gett_cnt,@1
+set gett_cnt
+pop
+return
+
+####### ABOUT & HELP #######
+
+label about
+newline
+prline --ABOUT--
+prline clicalc v1.0: A ternary CLI calculator
+prline Part of SBTCVM Gen2-9
+prline 
+prline Copyright (c) 2018 Thomas Leathers & Contributors
+prline 
+prline clicalc is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline clicalc is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with clicalc. If not, see <http://www.gnu.org/licenses/>
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print ?>>>
+keyprompt
+newline
+return
+label help
+prline clicalc v1.0: A ternary CLI calculator
+prline COMMANDS:
+prline   a: add
+prline   s: subtract
+prline   m: multiply
+prline   d: divide
+prline   r: modulo divide
+prline   i: inversion
+prline   b: absolute value
+prline   h: This text.
+prline   ?: about clicalc
+prline   q: quit clicalc
+prline WHEN ENTERING NUMBER:
+prline [p,P,+,=] enter a positive digit
+prline [0,)] enter a ground/zero digit
+prline [n,N,-,_] enter a negative digit
+prline [q,Q] quits clicalc.
+prline [BACKSPACE] remove last-entered digit.
+prline <input is limited to 9 trits>
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print ?>>>
+
+keyprompt
+newline
+return
+

@@ -80,6 +80,10 @@
 #dual stack multiplexed instruction banks.
 -9100: stack1: multiplexer bank for stack #1 see stack.txt : statinst : yes
 -9101: stack2: multiplexer bank for stack #2 see stack.txt : statinst : yes
+-9102: stack3: multiplexer bank for stack #3 see stack.txt : statinst : yes
+-9103: stack4: multiplexer bank for stack #4 see stack.txt : statinst : yes
+-9104: stack5: multiplexer bank for stack #5 see stack.txt : statinst : yes
+-9105: stack6: multiplexer bank for stack #6 see stack.txt : statinst : yes
 
 -9001: reset: restart CPU.  : instruct : no
 -9000: stop: shutdown VM : instruct : yes
