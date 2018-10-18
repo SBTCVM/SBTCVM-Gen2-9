@@ -8,6 +8,22 @@ var gett_numb=0
 var gett_disp=0
 ########
 
+########
+###getd vars###
+var getd_ch=0
+var getd_val=0
+var getd_cnt=0
+var getd_decv=0
+var getd_numb=0
+var getd_disp=0
+var getd_negflg=0
+########
+
+
+var inmode=@1
+var valbuff=0
+var promptprefix=:d
+
 var v1buff=0
 var v2buff=0
 var resbuff=0
@@ -16,10 +32,12 @@ var kb=0
 
 ####### CALCULATOR MAIN ROUTINE #######
 
-prline clicalc: A ternary CLI calculator.
+prline clicalc: A ternary/decimal CLI calculator.
 prline Version 1.0
 prline press 'h' for help, and '?' for about info.
+gsub do_mode_decimal
 label main
+chardump promptprefix
 print >
 keyprompt
 set kb
@@ -42,10 +60,33 @@ if kb,:h gsub help
 if kb,:H gsub help
 if kb,:? gsub about
 if kb,:/ gsub about
+if kb,:1 gsub do_mode_decimal
+if kb,:! gsub do_mode_decimal
+if kb,:2 gsub do_mode_ternary
+if kb,:@ gsub do_mode_ternary
 if kb,:q stop
 if kb,:Q stop
 
 goto main
+
+
+#### enable ternary mode ####
+label do_mode_ternary
+prline ----- TERNARY MODE ENABLED -----
+val @2
+set inmode
+val :t
+set promptprefix
+return
+
+#### enable ternary mode ####
+label do_mode_decimal
+prline ----- DECIMAL MODE ENABLED -----
+val @1
+set inmode
+val :d
+set promptprefix
+return
 
 
 #### ADD ####
@@ -159,8 +200,8 @@ return
 #### Dual Number prompt code (see 'gett' for actual number input) ####
 label getnums
 print num0? >
-gsub gett
-copy gett_val,v1buff
+gsub inget
+copy valbuff,v1buff
 newline
 print num0 is  : 
 dumpt v1buff
@@ -169,8 +210,8 @@ dumpd v1buff
 prline  )
 
 print num1? >
-gsub gett
-copy gett_val,v2buff
+gsub inget
+copy valbuff,v2buff
 newline
 print num1 is  : 
 dumpt v2buff
@@ -182,8 +223,8 @@ return
 #### Single Number prompt code (see 'gett' for actual number input) ####
 label get1num
 print num? >
-gsub gett
-copy gett_val,v1buff
+gsub inget
+copy valbuff,v1buff
 newline
 print num is   : 
 dumpt v1buff
@@ -191,6 +232,15 @@ print  (
 dumpd v1buff
 prline  )
 return
+
+########## input chooser for use with GETT & GETD ########
+label inget
+if inmode,@1 gsub getd
+if inmode,@1 =valbuff getd_val
+if inmode,@2 gsub gett
+if inmode,@2 =valbuff gett_val
+return
+
 
 ####### GETT: TERNARY VALUE INPUT CODE ########
 
@@ -288,12 +338,127 @@ set gett_cnt
 pop
 return
 
+
+
+####### getd: DECIMAL VALUE INPUT CODE ########
+
+label getd
+val 0
+set getd_val
+set getd_cnt
+set getd_negflg
+label getd_loop
+keyprompt
+set getd_ch
+if getd_ch,:\x =getd_disp :\x
+if getd_ch,:\x gsub getd_backone
+#valid keys
+if getd_ch,:- =getd_decv @10
+if getd_ch,:- =getd_disp :-
+if getd_ch,:- gsub getd_donum
+
+if getd_ch,:0 =getd_decv @0
+if getd_ch,:0 =getd_disp :0
+if getd_ch,:0 gsub getd_donum
+if getd_ch,:1 =getd_decv @1
+if getd_ch,:1 =getd_disp :1
+if getd_ch,:1 gsub getd_donum
+if getd_ch,:2 =getd_decv @2
+if getd_ch,:2 =getd_disp :2
+if getd_ch,:2 gsub getd_donum
+if getd_ch,:3 =getd_decv @3
+if getd_ch,:3 =getd_disp :3
+if getd_ch,:3 gsub getd_donum
+if getd_ch,:4 =getd_decv @4
+if getd_ch,:4 =getd_disp :4
+if getd_ch,:4 gsub getd_donum
+if getd_ch,:5 =getd_decv @5
+if getd_ch,:5 =getd_disp :5
+if getd_ch,:5 gsub getd_donum
+if getd_ch,:6 =getd_decv @6
+if getd_ch,:6 =getd_disp :6
+if getd_ch,:6 gsub getd_donum
+if getd_ch,:7 =getd_decv @7
+if getd_ch,:7 =getd_disp :7
+if getd_ch,:7 gsub getd_donum
+if getd_ch,:8 =getd_decv @8
+if getd_ch,:8 =getd_disp :8
+if getd_ch,:8 gsub getd_donum
+if getd_ch,:9 =getd_decv @9
+if getd_ch,:9 =getd_disp :9
+if getd_ch,:9 gsub getd_donum
+
+#confirm key
+if getd_ch,:\n goto getd_end
+#comment out the following 2 conditionals to disable user exit in number prompts.
+if getd_ch,:q stop
+if getd_ch,:Q stop
+goto getd_loop
+
+#####calculate number
+label getd_end
+stackrev
+label getd_end_loop
+if getd_cnt,@0 goto getd_negdo
+sub getd_cnt,@1
+set getd_cnt
+pop
+set getd_numb
+## check for 10 in input, this means to set the negative flag!
+if getd_numb,@10 gsub getd_doneg
+if getd_numb,@10 goto getd_end_loop
+
+mul getd_val,@10
+set getd_val
+add getd_val,getd_numb
+set getd_val
+goto getd_end_loop
+
+### negative flag setter helper for getd_end
+label getd_doneg
+val @1
+set getd_negflg
+return
+
+####invert number if negative flag set, then return
+label getd_negdo
+if getd_negflg,@0 return
+invert getd_val
+return
+
+
+
+
+####push number value to stack
+label getd_donum
+if getd_cnt,@6 return
+chardump getd_disp
+get getd_decv
+push
+add getd_cnt,@1
+set getd_cnt
+return
+
+
+
+#if number count isn't 0, pop last from stack.
+label getd_backone
+if getd_cnt,@0 =getd_negflg @0
+if getd_cnt,@0 return
+chardump getd_disp
+sub getd_cnt,@1
+set getd_cnt
+pop
+return
+
+
+
 ####### ABOUT & HELP #######
 
 label about
 newline
 prline --ABOUT--
-prline clicalc v1.0: A ternary CLI calculator
+prline clicalc v1.0: A ternary/decimal CLI calculator
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018 Thomas Leathers & Contributors
@@ -317,7 +482,7 @@ keyprompt
 newline
 return
 label help
-prline clicalc v1.0: A ternary CLI calculator
+prline clicalc v1.0: A ternary/decimal CLI calculator
 prline COMMANDS:
 prline   a: add
 prline   s: subtract
@@ -329,13 +494,14 @@ prline   b: absolute value
 prline   h: This text.
 prline   ?: about clicalc
 prline   q: quit clicalc
-prline WHEN ENTERING NUMBER:
-prline [p,P,+,=] enter a positive digit
-prline [0,)] enter a ground/zero digit
-prline [n,N,-,_] enter a negative digit
+prline   1: enter DECIMAL MODE (indicated by 'd>' prompt) (default)
+prline   2: enter TERNARY MODE (indicated by 't>' prompt)
+prline WHEN ENTERING NUMBERS:
+prline [+,0,-]/[p,0,n] When in TERNARY MODE
+prline [0-9] as well as [-] at start for negatives, When in DECIMAL MODE
 prline [q,Q] quits clicalc.
 prline [BACKSPACE] remove last-entered digit.
-prline <input is limited to 9 trits>
+prline <input is limited to 9 trits <-9841 to 9841>>
 prline 
 prline PRESS A KEY TO RETURN TO MAIN MENU
 print ?>>>

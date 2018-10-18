@@ -2,9 +2,9 @@
 ----TOOLS----
 
 clicalc:
-	clicalc: A ternary CLI calculator capable of 9-trit integer: addition,
-	multiplication, division, subtraction, inversion, absolute value, and
-	modulo division.
+	clicalc: A ternary/decimal CLI calculator capable of 9-trit integer:
+	addition, multiplication, division, subtraction, inversion, absolute value,
+	and modulo division.
 
 
 ----GAMES----
