@@ -298,11 +298,11 @@ class in_tabr:
 		
 		tname, xv, yv = args.split(",")
 		if xv not in valid_nvars:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + xv + "'"
 		if yv not in valid_nvars:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + yv + "'"
 		if tname not in tables:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + tname + "'"
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		tname, xv, yv = args.split(",")
@@ -349,6 +349,10 @@ class in_tabw:
 			xret=literal_syntax(yv, keyword, lineno)
 			if xret!=None:
 				return xret
+		if isaliteral(datav):
+			xret=literal_syntax(datav, keyword, lineno)
+			if xret!=None:
+				return xret
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		tname, xv, yv, datav = args.split(",")
@@ -357,18 +361,20 @@ class in_tabw:
 			retlist.extend(literal_do(xv))
 		if isaliteral(yv):
 			retlist.extend(literal_do(yv))
+		if isaliteral(datav):
+			retlist.extend(literal_do(datav))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		
 		tname, xv, yv, datav = args.split(",")
 		if xv not in valid_nvars:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + xv + "'"
 		if datav not in valid_nvars:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + datav + "'"
 		if yv not in valid_nvars:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + yv + "'"
 		if tname not in tables:
-			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + args + "'"
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + tname + "'"
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		tname, xv, yv, datav = args.split(",")

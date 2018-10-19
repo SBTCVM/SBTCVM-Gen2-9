@@ -15,7 +15,7 @@ set [var]
 [xpos] and [ypos] can either be an integer variable or a Literal
 
 
---write at [xpos],[ypos] in table [name] using data in variable [var]
+--write at [xpos],[ypos] in table [name] using data in variable/literal [var]
 tabw [name],[xpos],[ypos],[var]
 
 
