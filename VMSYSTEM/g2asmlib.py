@@ -81,6 +81,39 @@ class statinst:
 		return [[self.opcode, self.subcode, lineno]]
 
 
+
+class stackbank:
+	def __init__(self, prefix, opcode):
+		pf=prefix
+		self.keywords=[]
+		self.subdict={pf+"pop1": 0,
+		pf+"pop":0,
+		pf+"pop2": 1,
+		pf+"push1": 2,
+		pf+"push": 2,
+		pf+"push2": 3,
+		pf+"peek": 4,
+		pf+"peek1": 4,
+		pf+"peek2": 5,
+		pf+"reverse": 6}
+		for itm in self.subdict:
+			self.keywords.extend([itm])
+		self.prefixes=[]
+		self.opcode=int(opcode)
+		self.nsp=0
+	def p0(self, data, keyword, lineno):
+		return 0, None
+	#return length in words of memory. needed here for goto reference label parsing!
+	def p1(self, data, keyword, lineno, addr, gotos):
+		return 1, {}
+	#second syntax check pass:
+	def p2(self, data, keyword, gotos, lineno):
+		return 0, None
+	#should return two signed ints or btint objects.
+	def p3(self, data, keyword, gotos, lineno):
+		return [[self.opcode, self.subdict[keyword], lineno]]
+
+
 #special zerosize debug marker that prints the associated string along with the
 #address it was placed at.
 class marker:
@@ -418,48 +451,12 @@ class mainloop:
 		instruct(["fopset2"], -9457),
 		instruct(["fopwri3"], -9456),
 		instruct(["fopset3"], -9455),
-		statinst(["s1pop1", "s1pop"], -9100, 0),#stack1
-		statinst(["s1pop2"], -9100, 1),
-		statinst(["s1push1", "s1push"], -9100, 2),
-		statinst(["s1push2"], -9100, 3),
-		statinst(["s1peek1", "s1peek"], -9100, 4),
-		statinst(["s1peek2"], -9100, 5),
-		statinst(["s1reverse"], -9100, 6),
-		statinst(["s2pop1", "s2pop"], -9101, 0),#stack2
-		statinst(["s2pop2"], -9101, 1),
-		statinst(["s2push1", "s2push"], -9101, 2),
-		statinst(["s2push2"], -9101, 3),
-		statinst(["s2peek1", "s2peek"], -9101, 4),
-		statinst(["s2peek2"], -9101, 5),
-		statinst(["s2reverse"], -9101, 6),
-		statinst(["s3pop1", "s3pop"], -9102, 0),#stack3
-		statinst(["s3pop2"], -9102, 1),
-		statinst(["s3push1", "s3push"], -9102, 2),
-		statinst(["s3push2"], -9102, 3),
-		statinst(["s3peek1", "s3peek"], -9102, 4),
-		statinst(["s3peek2"], -9102, 5),
-		statinst(["s3reverse"], -9102, 6),
-		statinst(["s4pop1", "s4pop"], -9103, 0),#stack4
-		statinst(["s4pop2"], -9103, 1),
-		statinst(["s4push1", "s4push"], -9103, 2),
-		statinst(["s4push2"], -9103, 3),
-		statinst(["s4peek1", "s4peek"], -9103, 4),
-		statinst(["s4peek2"], -9103, 5),
-		statinst(["s4reverse"], -9103, 6),
-		statinst(["s5pop1", "s5pop"], -9104, 0),#stack5
-		statinst(["s5pop2"], -9104, 1),
-		statinst(["s5push1", "s5push"], -9104, 2),
-		statinst(["s5push2"], -9104, 3),
-		statinst(["s5peek1", "s5peek"], -9104, 4),
-		statinst(["s5peek2"], -9104, 5),
-		statinst(["s5reverse"], -9104, 6),
-		statinst(["s6pop1", "s6pop"], -9105, 0),#stack6
-		statinst(["s6pop2"], -9105, 1),
-		statinst(["s6push1", "s6push"], -9105, 2),
-		statinst(["s6push2"], -9105, 3),
-		statinst(["s6peek1", "s6peek"], -9105, 4),
-		statinst(["s6peek2"], -9105, 5),
-		statinst(["s6reverse"], -9105, 6),
+		stackbank("s1", -9100),#stackbank handles all single-word stack instructions. 
+		stackbank("s2", -9101),
+		stackbank("s3", -9102),
+		stackbank("s4", -9103),
+		stackbank("s5", -9104),
+		stackbank("s6", -9105),
 		instruct(["excatch"], 100),#EXCEPTION SYSTEM
 		instruct(["expass"], 101),
 		instruct(["exreturn"], 102),
