@@ -1,0 +1,13 @@
+#NOTE: This test program causing Stack1 overflow and stack1 underflow exceptions
+#is FULLY EXPECTED, and is infact NOT a bug.
+
+
+
+
+#Test for stack underflow
+#s1pop1
+
+
+# test for Stack Overflow
+s1push1;;loop
+goto;>loop

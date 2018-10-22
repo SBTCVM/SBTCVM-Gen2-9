@@ -300,35 +300,41 @@ class cpu:
 			self.fop3.changeval(self.dataval.intval)
 		#stack1
 		elif self.instval.intval == -9100:
-			if self.stack_subparse(self.dataval, self.stack1)==1:
-				if self.exception("Stack1 Underflow", -4, cancatch=1):
-					return 1, -4, "Stack1 Underflow"
+			stsubr=self.stack_subparse(self.dataval, self.stack1, -4)
+			if stsubr!=None:
+				if self.exception("Stack1" + stsubr[1], stsubr[0], cancatch=1):
+					return 1, stsubr[0], "Stack1" + stsubr[1]
 		#stack2
 		elif self.instval.intval == -9101:
-			if self.stack_subparse(self.dataval, self.stack2)==1:
-				if self.exception("Stack2 Underflow", -5, cancatch=1):
-					return 1, -5, "Stack2 Underflow"
+			stsubr=self.stack_subparse(self.dataval, self.stack2, -5)
+			if stsubr!=None:
+				if self.exception("Stack2" + stsubr[1], stsubr[0], cancatch=1):
+					return 1, stsubr[0], "Stack2" + stsubr[1]
 		#stack3
 		elif self.instval.intval == -9102:
-			if self.stack_subparse(self.dataval, self.stack3)==1:
-				if self.exception("Stack3 Underflow", -6, cancatch=1):
-					return 1, -6, "Stack3 Underflow"
+			stsubr=self.stack_subparse(self.dataval, self.stack3, -6)
+			if stsubr!=None:
+				if self.exception("Stack3" + stsubr[1], stsubr[0], cancatch=1):
+					return 1, stsubr[0], "Stack3" + stsubr[1]
 		#stack4
 		elif self.instval.intval == -9103:
-			if self.stack_subparse(self.dataval, self.stack4)==1:
-				if self.exception("Stack4 Underflow", -7, cancatch=1):
-					return 1, -7, "Stack4 Underflow"
+			stsubr=self.stack_subparse(self.dataval, self.stack4, -7)
+			if stsubr!=None:
+				if self.exception("Stack4" + stsubr[1], stsubr[0], cancatch=1):
+					return 1, stsubr[0], "Stack4" + stsubr[1]
 					
 		#stack5
 		elif self.instval.intval == -9104:
-			if self.stack_subparse(self.dataval, self.stack5)==1:
-				if self.exception("Stack5 Underflow", -8, cancatch=1):
-					return 1, -8, "Stack5 Underflow"
+			stsubr=self.stack_subparse(self.dataval, self.stack5, -8)
+			if stsubr!=None:
+				if self.exception("Stack5" + stsubr[1], stsubr[0], cancatch=1):
+					return 1, stsubr[0], "Stack5" + stsubr[1]
 		#stack6
 		elif self.instval.intval == -9105:
-			if self.stack_subparse(self.dataval, self.stack6)==1:
-				if self.exception("Stack6 Underflow", -9, cancatch=1):
-					return 1, -9, "Stack6 Underflow"
+			stsubr=self.stack_subparse(self.dataval, self.stack6, -9)
+			if stsubr!=None:
+				if self.exception("Stack6" + stsubr[1], stsubr[0], cancatch=1):
+					return 1, stsubr[0], "Stack6" + stsubr[1]
 		#soft stop:
 		elif self.instval.intval == -9000:
 			if self.exception("soft stop.", -1, cancatch=0):
@@ -384,25 +390,29 @@ class cpu:
 	def goto(self, address):
 		self.execpoint.intval=address
 		return
-	def stack_subparse(self, dataval, stacklist):
+	def stack_subparse(self, dataval, stacklist, baseexcept):
 		#pop
 		if dataval.intval==0:
 			try:
 				self.reg1.intval=stacklist.pop(0)
 				return None
 			except IndexError:
-				return 1
+				return baseexcept, " Underflow"
 		elif dataval.intval==1:
 			try:
 				self.reg2.intval=stacklist.pop(0)
 				return None
 			except IndexError:
-				return 1
+				return baseexcept, " Underflow"
 		#push
 		elif dataval.intval==2:
+			if len(stacklist)>9841:
+				return baseexcept-10, " Overflow"
 			stacklist.insert(0, self.reg1.intval)
 			return None
 		elif dataval.intval==3:
+			if len(stacklist)>9841:
+				return baseexcept-10, " Overflow"
 			stacklist.insert(0, self.reg2.intval)
 			return None
 		#peek
@@ -411,13 +421,13 @@ class cpu:
 				self.reg1.intval=stacklist[0]
 				return None
 			except IndexError:
-				return 1
+				return baseexcept, " Underflow"
 		elif dataval.intval==5:
 			try:
 				self.reg2.intval=stacklist[0]
 				return None
 			except IndexError:
-				return 1
+				return baseexcept, " Underflow"
 		elif dataval.intval==6:
 			stacklist.reverse()
 			

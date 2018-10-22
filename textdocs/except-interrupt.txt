@@ -4,12 +4,26 @@
 -1: soft stop. : no
 -2: divide by zero. : yes
 -3: exec overrun. : yes
+
 -4: stack1 underflow (called upon peek or pop when stack1 is empty) : yes
 -5: stack2 underflow (called upon peek or pop when stack2 is empty) : yes
 -6: stack3 underflow (called upon peek or pop when stack3 is empty) : yes
 -7: stack4 underflow (called upon peek or pop when stack4 is empty) : yes
 -8: stack5 underflow (called upon peek or pop when stack5 is empty) : yes
 -9: stack6 underflow (called upon peek or pop when stack6 is empty) : yes
+-14: stack1 overflow (called upon push when stack1 is at max size (9841)) : yes
+-15: stack2 overflow (called upon push when stack2 is at max size (9841)) : yes
+-16: stack3 overflow (called upon push when stack3 is at max size (9841)) : yes
+-17: stack4 overflow (called upon push when stack4 is at max size (9841)) : yes
+-18: stack5 overflow (called upon push when stack5 is at max size (9841)) : yes
+-19: stack6 overflow (called upon push when stack6 is at max size (9841)) : yes
+-24: stack1 index fault (upon trying to access a null index (beyond current size) in stack1) : yes
+-25: stack2 index fault (upon trying to access a null index (beyond current size) in stack1) : yes
+-26: stack3 index fault (upon trying to access a null index (beyond current size) in stack1) : yes
+-27: stack4 index fault (upon trying to access a null index (beyond current size) in stack1) : yes
+-28: stack5 index fault (upon trying to access a null index (beyond current size) in stack1) : yes
+-29: stack6 index fault (upon trying to access a null index (beyond current size) in stack1) : yes
+
 -50: User Stop. i.e. Ctrl+C in curses frontend. : no
 
 #all interrupts are above zero!
