@@ -2,13 +2,13 @@
 [return to glossary index](glossary.md)
 ## These are SBTCVM's measurements for lengths of trits.
 
-name    | size     | short  | (alt 1) | (alt 2)
-:-------|:---------|:----- -|:----:|:----:
+name    | size     | short  | alt 1 | alt 2
+:------:|:--------:|:------:|:----:|:----:
 trit    | 1 trit   | t1     | t^1  | t
-triad   | 3 trits  | t3     | t^3  | 
+triad   | 3 trits  | t3     | t^3  | N/A
 tryte   | 6 trits  | t6     | t^6  | T
-nonet   | 9 trits  | t9     | t^9  | 
-ditryte | 12 trits | t12    | t^12 | 
+nonet   | 9 trits  | t9     | t^9  | N/A
+ditryte | 12 trits | t12    | t^12 | N/A
 
 **Note:** _In numbered shorthands (shorthands with the form **t(n)**,
 it is recommended that **(n)** be in superscript when possible, as shown in **(alt 1)**._
