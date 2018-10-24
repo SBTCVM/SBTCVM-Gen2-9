@@ -5,4 +5,4 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 
 - [Glossary Index](glossary/glossary.md)
 - [Welcome](welcome.md)
-- [Troubleshooting](troubleshoot.md) (read this BEFORE submitting bug reports!!!!!!!)
+- [Troubleshooting Guide (index)](/troubleshoot/troubleshoot.md) (read this BEFORE submitting bug reports!!!!!!!)

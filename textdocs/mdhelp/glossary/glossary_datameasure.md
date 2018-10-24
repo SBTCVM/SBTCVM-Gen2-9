@@ -10,8 +10,8 @@ tryte   | 6 trits  | t6     | T
 nonet   | 9 trits  | t9     | N/A
 ditryte | 12 trits | t12    | N/A
 
-**Note:** _In numbered shorthands (shorthands with the form **t(n)**,
-it is recommended that **(n)** be in superscript when possible.
+**Note:** _In numbered shorthands (shorthands with the form **t(n)**),
+it is recommended that **(n)** be in superscript when possible._
 
 ## Kt, Mt, etc.
 With the above shorthands, you may find a metric prefix being used with it.
