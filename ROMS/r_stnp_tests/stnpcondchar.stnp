@@ -1,0 +1,19 @@
+#conditional character dump (chardump) test
+var charc=:c
+
+
+if @1,@1 chardump :A
+
+#since this is false, we won't be printing B today :)
+if @1,@2 chardump :B
+
+#you can do newlines via the \n escape sequence.
+if @1,@1 chardump :\n
+
+#print from a variable for good measure.
+if @1,@1 chardump charc
+
+
+
+
+stop

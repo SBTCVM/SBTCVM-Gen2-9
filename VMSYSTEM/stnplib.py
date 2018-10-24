@@ -513,7 +513,11 @@ goto;>goto--branch-''' + str(lineno)
 				xret=literal_syntax(argc, keyword, lineno)
 				if xret!=None:
 					return xret
-		
+		if arglist[1] in ["chardump", "dumpt", "dumpd"]:
+			if isaliteral(arglist[2]):
+				xret=literal_syntax(arglist[2], keyword, lineno)
+				if xret!=None:
+					return xret
 		if arglist[1].startswith("="):
 			if isaliteral(arglist[2]):
 				xret=literal_syntax(arglist[2], keyword, lineno)
@@ -545,11 +549,14 @@ goto;>goto--branch-''' + str(lineno)
 		if arglist[1].startswith("="):
 			if isaliteral(arglist[2]):
 				retlist.extend(literal_do(arglist[2]))
+		if arglist[1] in ["chardump", "dumpt", "dumpd"]:
+			if isaliteral(arglist[2]):
+				retlist.extend(literal_do(arglist[2]))
 		return retlist
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		arglist=args.split(" ")
 		#check label for goto and gsub
-		if len(arglist)==3 and not arglist[1].startswith("="):
+		if len(arglist)==3 and not arglist[1].startswith("=") and not arglist[1] in ["chardump", "dumpt", "dumpd"]:
 			label=arglist[2]
 			if not label in labels:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + label + "'"
@@ -560,11 +567,13 @@ goto;>goto--branch-''' + str(lineno)
 			valname=arglist[2]
 			if valname not in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant source variable'" + vname + "'"
-			
-				
+		if arglist[1] in ["chardump", "dumpt", "dumpd"]:
+			valname=arglist[2]
+			if valname not in valid_nvars:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant character variable'" + vname + "'"
 		#check goto mode
-		if (arglist[1] not in ["goto", "gsub", "stop", "return"]) and (not arglist[1].startswith("=")):
-			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! must be 'goto', 'gsub', 'stop', or 'return' or =[var]"
+		if (arglist[1] not in ["goto", "gsub", "stop", "return", "chardump", "dumpt", "dumpd"]) and (not arglist[1].startswith("=")):
+			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! See documentation for valid modes."
 		#variable check
 		for x in arglist[0].split(","):
 			if not x in valid_nvars:
@@ -593,6 +602,28 @@ setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\n
 			destobj.write('''#conditional set
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>" + arglist[1][1:] + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
+		
+		#conditional character dump
+		elif arglist[1]=="chardump":
+			destobj.write('''#conditional chardump
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.ttywr" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
+		#conditional decimal dump
+		elif arglist[1]=="dumpd":
+			destobj.write('''#conditional dumpd
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.decdump" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
+		#conditional ternary dump
+		elif arglist[1]=="dumpt":
+			destobj.write('''#conditional dumpt
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.tritdump" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
+		
+		
 		#return from subroutine
 		elif arglist[1]=="return":
 			destobj.write('''#conditional return

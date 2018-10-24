@@ -137,6 +137,9 @@ Command documentation:
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
 		return : just like normal return command. should omit label.
 		stop : just like normal stop command. should omit label.
+		chardump : a conditional character dump operation. using a [var5] in place of label. (var5 can be a literal)
+		dumpd : a conditional decimal dump. using a [var5] in place of label. (var5 can be a literal)
+		dumpt : a conditional ternary dump. using a [var5] in place of label. (var5 can be a literal)
 		=[var4] : conditional variable copy: set [var4] using a [var5] in place of label. (var5 can be a literal)
 	  
 	--Examples:
@@ -146,6 +149,12 @@ Command documentation:
 		if var1,var2 =var4 var5
 		if var1,var2 =var4 @1
 		if var1,var2 =var4 :a
+		if var1,var2 chardump var5
+		if var1,var2 chardump :c
+		if var1,var2 dumpd var5
+		if var1,var2 dumpd @1
+		if var1,var2 dumpt var5
+		if var1,var2 dumpt *+0-
 	  
 
 --TTY output:

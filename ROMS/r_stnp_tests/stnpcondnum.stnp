@@ -1,0 +1,15 @@
+#conditional decimal/ternary dump test
+
+
+##the first 2 conditions are true, so they print. 
+if @1,@1 dumpd @10
+newline
+if @1,@1 dumpt @10
+
+#these next 2 conditions are false, so they DO NOT print.
+newline
+ifnot @1,@1 dumpd @10
+newline
+ifnot @1,@1 dumpt @10
+stop
+
