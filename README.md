@@ -7,6 +7,9 @@ If you need help, see [guide.md](/guide.md)
 
 [Project blog](https://sbtcvm.blogspot.com/)
 
+
+SBTCVM gen2-9 ships with **fssynthlib.py**, a general-use waveform synthesis library from
+the FSSS synthesizer suite. You can find its readme in the [textdocs directory.](/textdocs/fssynthlib_README.md)
      
 Copyright (c) 2016-2018 Thomas Leathers and Contributors 
 

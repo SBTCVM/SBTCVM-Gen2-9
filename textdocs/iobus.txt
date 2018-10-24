@@ -49,6 +49,26 @@ x :  m : asm varname  : description
 118: [w] vdi.f0.files    : file0 display text list of files in path (if any/applicable.)
 
 
+#NOTE: the SBTSND-200 sound chip is only emulated when a valid backend is available.
+#currently this is limited to pygame.
 
+### NOT FINISHED. THE VM DOES NOT LOAD THIS MODULE YET!
 
-200:
+#SFX channel 1
+200: [w] sfx1.play  : (write fadetime in ms)
+201: [w] sfx1.stop  : (write fadetime in ms)
+202: [w] sfx1.pulse : (write 0-10)
+203: [w] sfx1.vol   : (write 0-10)
+204: [w] sfx1.voice : (write 0-5) 
+205: [w] sfx1.pan   : (1=left, 0=center, -1=right)
+
+#SFX channel 2
+210: [w] sfx2.play  : (write fadetime in ms)
+211: [w] sfx2.stop  : (write fadetime in ms)
+212: [w] sfx2.pulse : (write 0-10)
+213: [w] sfx2.vol   : (write 0-10)
+214: [w] sfx2.voice : (write 0-5) 
+215: [w] sfx2.pan   : (1=left, 0=center, -1=right)
+
+[TODO: map out music controller IO lines]
+
