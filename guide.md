@@ -14,6 +14,10 @@ Boot into VDI shell (unfinished):
 - [textdocs/SSTNPL](textdocs/SSTNPL/) contains documentation to the SSTNPL programming language.
 - [APPS/directory.txt](/APPS/directory.txt) in this repository, has a guide on the TROM applications available there.
 
+#### Before filing bug reports, read the troubleshooting guide:
+- [Troubleshooting guide](/textdocs/mdhelp/troubleshoot/troubleshoot.md)
+
+
 ### Links:
 - [Project blog](https://sbtcvm.blogspot.com/)
 - [FAQ](https://sbtcvm.blogspot.com/p/faqs.html)

@@ -23,7 +23,7 @@ in SBTCVM, this is _1000_ units rather than _1024_ in binary. eg.
 - 1 Mt9 = 1000 Kt9 = 1000000 t9 (nonets)
 - 1 Mt12 = 1000 Kt12 = 1000000 t12 (ditrytes)    
 
-**Note: **_SBTCVM used to use 1093 or MPI(7) instead of 1000, but it was both rarely used,
+**Note:** _SBTCVM used to use 1093 or MPI(7) instead of 1000, but it was both rarely used,
 and didn't accomplish anything 1000 can't, so it was changed._
 
 ### measurement examples:    

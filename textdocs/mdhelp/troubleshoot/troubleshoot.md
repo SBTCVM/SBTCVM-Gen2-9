@@ -1,6 +1,9 @@
 # troubleshooting guide
-[help index](../index.md)
+- [help index](../index.md)
+- [Quick Start Guide](../../../guide.md)
+
 ### Index
+
 - [VMSYSTEM status codes](troubleshoot_vmsystem.md)
 - [clicalc calculator](troubleshoot_clicalc.md) *1
 
