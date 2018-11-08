@@ -79,8 +79,10 @@ def romdump_stringfind(fileobj, start, end):
 		end=9841
 	if end<start:
 		sys.exit("Error range start must be less than end")
-	pstring=""
+	
 	for searchpass in [0, 1]:
+		pstring=""
+		stringcnt=0
 		fileobj.seek(0)
 		mempos=-9842
 		isstring=0
@@ -90,16 +92,18 @@ def romdump_stringfind(fileobj, start, end):
 				line=line.replace("\n", "")
 				ival0, ival1 = line.split(",")
 				if searchpass==0:
-					trval=btint(int(ival0))
-				else:
 					trval=btint(int(ival1))
+				else:
+					trval=btint(int(ival0))
 				trischar=0
 				for char in tcon.allchars:
 					if char.dataval==trval and trval!=0 and trval!=2:
 						#Break string on newline
 						if char.dataval==1 and isstring==1:
 							isstring=0
-							print(pstring)
+							if stringcnt>1:
+								print(pstring)
+							stringcnt=0
 						elif char.dataval==1:
 							pass
 						else:
@@ -108,12 +112,62 @@ def romdump_stringfind(fileobj, start, end):
 								isstring=1
 								pstring=str(searchpass) + ", At " + str(mempos).rjust(5) + " :"
 							pstring += (char.bldumpstr)
+							stringcnt+=1
 						trischar=1
 				#break string on non-character.
 				if not trischar:
 					if isstring==1:
 						isstring=0
-						print(pstring)
+						if stringcnt>1:
+							print(pstring)
+						stringcnt=0
+	
+
+def romdump_stringfind_interlaced(fileobj, start, end):
+	
+	if start==None:
+		start=-9841
+	if end==None:
+		end=9841
+	if end<start:
+		sys.exit("Error range start must be less than end")
+	pstring=""
+	fileobj.seek(0)
+	mempos=-9842
+	isstring=0
+	stringcnt=0
+	for line in fileobj:
+		mempos+=1
+		if mempos in xrange(start, end+1):
+			line=line.replace("\n", "")
+			ival0, ival1 = line.split(",")
+			for trval in [btint(int(ival1)), btint(int(ival0))]:
+				trischar=0
+				for char in tcon.allchars:
+					if char.dataval==trval and trval!=0 and trval!=2:
+						#Break string on newline
+						if char.dataval==1 and isstring==1:
+							isstring=0
+							if stringcnt>1:
+								print(pstring)
+							stringcnt=0
+						elif char.dataval==1:
+							pass
+						else:
+							#if at start of string, start with pass no. and starting address.
+							if isstring==0:
+								isstring=1
+								pstring="At " + str(mempos).rjust(5) + " :"
+							pstring += (char.bldumpstr)
+							stringcnt+=1
+						trischar=1
+				#break string on non-character.
+				if not trischar:
+					if isstring==1:
+						isstring=0
+						if stringcnt>1:
+							print(pstring)
+						stringcnt=0
 	
 
 def romdumpver(fileobj, start, end, n0p=0):
@@ -170,7 +224,7 @@ if __name__=="__main__":
 	except IndexError:
 		arg=None
 	#ensure arg is none when just file and range values are passed.
-	if cmd not in ["-d", "-dnp", "-r", "-rnp", "-i", "--info", "-t1", "-t2", "-t0", "-t", "-f"]:
+	if cmd not in ["-d", "-dnp", "-r", "-rnp", "-i", "--info", "-t1", "-t2", "-t0", "-t", "-f", "-f2"]:
 		arg=None
 	if cmd in ["-a", "-h", "-v", "-i", "--about", "--help", "--version", "--info"]:
 		pass
@@ -182,7 +236,7 @@ if __name__=="__main__":
 			start=None
 			end=None
 		except ValueError:
-			sys.exit("Error: ranged mode requires 2, space-separated signed decimal adresses.")
+			sys.exit("Error: ranged mode requires 2, space-separated signed decimal addresses.")
 	else:
 		try:
 			start=int(sys.argv[2])
@@ -191,7 +245,7 @@ if __name__=="__main__":
 			start=None
 			end=None
 		except ValueError:
-			sys.exit("Error: ranged mode requires 2, space-separated signed decimal adresses.")
+			sys.exit("Error: ranged mode requires 2, space-separated signed decimal addresses.")
 	if cmd in ["-h", "--help"]:
 		print('''SBTCVM Gen2 romdump utility. v1.1.0
 -h --help: this help
@@ -199,7 +253,9 @@ if __name__=="__main__":
 -a, --about: about SBTCVM
 -i [trom]: show general information on trom. including size.
 -f [trom]: search for strings and print them per-line with their starting
-	addresses.
+    addresses.
+-f2 [trom]: same as -f, but try to find interlaced strings instead of normal
+    ones.
 -d [trom]: dump contents of trom to standard output in +0- form.
     instructions and data colums separated by two spaces. "  "
     a third column containing the address in signed decmimal
@@ -215,9 +271,11 @@ if __name__=="__main__":
 -t2 [trom]: dump raw character data from both banks (interlaced, excluding
     special characters)
 [trom]: (with no options) same as -d
--Specifying a start and end address (in signed decimal, space-separated)
+>>> Specifying a start and end address (in signed decimal, space-separated)
     after the rom name enables ranged mode. In this mode, only the range given
-    is used.''')
+    is used. does NOT apply to: -h, -v, -a, and -i
+>>> -f and -f2 will ignore strings less than 2 characters long.
+''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2 romdump utility. v1.1.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -251,6 +309,8 @@ see readme.md for more information and licensing of media.
 		romdump_rawtext(iofuncts.loadtrom(arg, dirauto=1), start, end, bank=2)
 	elif cmd in ["-f"]:
 		romdump_stringfind(iofuncts.loadtrom(arg, dirauto=1), start, end)
+	elif cmd in ["-f2"]:
+		romdump_stringfind_interlaced(iofuncts.loadtrom(arg, dirauto=1), start, end)
 	elif cmd in ["-d"]:
 		romdump(iofuncts.loadtrom(arg, dirauto=1), start, end)
 	elif cmd in ["-i", "--info"]:
