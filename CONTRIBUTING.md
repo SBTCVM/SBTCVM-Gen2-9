@@ -1,6 +1,7 @@
 ## Overview:
 
 Basic Requirements:
+
 - python 2 & python 3 (python 2 compatibility will be **REQURED** up until its EOL in 2020.
 - knodlege of SBTCVM's virtual architecture, its languages, and balanced ternary.
 
