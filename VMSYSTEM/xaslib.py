@@ -62,8 +62,9 @@ helptext='''----XAS shell help:----
    stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
       Language (SSTNPL)
 --VM--
+   run/runp [trom image]: run the VM with pygame frontend.
    runc [trom image]: run the VM with curses frontend. 
-      [BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py]
+      [RUNC IS BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py]
 --tools--
    trominfo [trom image]: get some basic info on a trom. i.e. size.
    dump [trom image]: Dump TROM image
