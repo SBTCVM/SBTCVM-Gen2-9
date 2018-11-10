@@ -12,3 +12,4 @@ plugins/*
 !plugins/asm.xascmd
 !plugins/vmpygame.xascmd
 !plugins/vmcurses.xascmd
+!plugins/gfxcon.xascmd

@@ -1,6 +1,13 @@
 ----Terminal----
+
 packtest2:
-	A simple example of 3-trit greyscale images in SBTCVM's TTY output.
+	A simple example of ternary-packed-art: 3-trit greyscale images in SBTCVM's TTY output.
 	Note that the curses frontend, logs, and standard output, will use
 	ascii aproximations in place of the graphical blocks the pygame frontend
 	uses.
+
+vscroll:
+	A massive 72x400 graphical scroller using Ternary-packed-art
+	Art and Code: Thomas Leathers
+	
+	Meant partly as an example for anyone wanting a pixel-art challenge.

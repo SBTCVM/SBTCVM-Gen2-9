@@ -1,0 +1,22 @@
+var yn=0
+prline This demo is a MASSIVE 27x400 Ternary Packed art scroll.
+prline I reccomend the pygame frontend, it looks nicer and isn't too fast.
+prline also there is CAP/tty_log.log you can also check the source image in
+prline the vscroll directory.
+prline Art & code: Thomas Leathers
+prline PRESS ANY KEY TO CONTINUE
+keyprompt
+
+
+label loop
+asm include;vscroll+image.tas0
+
+prline Again? [y]es or [n]o
+label prompt
+keyprompt
+set yn
+if yn,:y goto loop
+if yn,:Y goto loop
+if yn,:n stop
+if yn,:N stop
+goto prompt
