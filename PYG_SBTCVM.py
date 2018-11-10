@@ -60,6 +60,7 @@ see readme.md for more information and licensing of media.
 elif cmd in ['-v', '--version']:
 	print('v2.1.0.alpha')
 else:
+	
 	slow=0
 	if cmd==None:
 		#romfile='TESTSHORT.TROM'
@@ -104,7 +105,7 @@ else:
 	progrun=1
 	
 	#uio startup
-	uiosys = UIO.uio(cpusys, memsys, iosys)
+	uiosys = UIO.uio(cpusys, memsys, iosys, romfile)
 	uiosys.ttyraw("SBTCVM Pygame frontend. SBTCVM Gen2-9 v2.1.0")
 	uiosys.ttyraw("ready.")
 	dispthr=Thread(target = uiosys.statup, args = [])

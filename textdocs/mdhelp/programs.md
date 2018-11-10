@@ -13,7 +13,7 @@ also, the curses frontend may lack certain features. i.e. graphics.
 ### PYG_SBTCVM.py: (PYGAME)
 SBTCVM's virtual machine. (with pygame frontend)
 
-[NOTE: run in terminal! TTY rendering hasn't been added yet!
+Features an, 80-column by 25-line graphical TTY display, and launch-from-xas integration that isn't buggy.
 
 
 # Development
