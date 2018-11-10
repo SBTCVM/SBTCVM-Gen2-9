@@ -1,12 +1,12 @@
 # Quick start guide
 
+Run a trom application in pygame frontend:      
+`./PYG_SBTCVM.py maze`
+
 Run a trom application in curses frontend:     
 `./SBTCVM_G2_9.py maze`
 
-Run a trom application in pygame frontend:
-`./PYG_SBTCVM.py maze`
-
-Start SBTCVM XAS interactive shell:
+Start SBTCVM XAS interactive shell:      
 `./xas.py`
      
 Boot into VDI shell (unfinished):     
@@ -16,6 +16,8 @@ Boot into VDI shell (unfinished):
 ### more information:
 - [SBTCVM Technical Glossary](/textdocs/mdhelp/glossary/glossary.md) A, markdown-based, Glossary of various technical terms used in SBTCVM.
 - [SBTCVM Help Index](/textdocs/mdhelp/index.md) A, markdown-based, set of help documents (main index)
+- [XAS help](/textdocs/mdhelp/xas.md) Help on SBTCVM's XAS shell/build script system, with detailed command listing.
+
 - The [textdocs](/textdocs/) directory in this repository contains both technical and user documentation.
 - [textdocs/SSTNPL](textdocs/SSTNPL/) contains documentation to the SSTNPL programming language.
 - [APPS/directory.txt](/APPS/directory.txt) in this repository, has a guide on the TROM applications available there.
