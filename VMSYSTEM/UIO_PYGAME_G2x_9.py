@@ -100,7 +100,6 @@ class uio:
 		while self.run:
 			sys.stdout.flush()
 			self.clock.tick(30)
-			#todo: Get Function & special key input parsing working, and add IO line for TTY read.
 			for event in pygame.event.get():
 				if event.type==pygame.KEYDOWN:
 					keyinp=event.unicode
@@ -113,6 +112,8 @@ class uio:
 			#if in gamode=0 (TTY mode), draw TTY output.
 			if self.gamode==0 and len(self.ttybuff)>0:
 				dcount=0
+				fulldraw=0
+				uprects=[]
 				while len(self.ttybuff)>0 and dcount!=30:
 					dcount+=1
 					char=self.ttybuff.pop(0)
@@ -121,18 +122,22 @@ class uio:
 						self.screensurf.scroll(0, -charheight)
 						self.charx=0
 						pygame.draw.rect(self.screensurf, TTYbg, self.newline_rect, 0)
-						pygame.display.flip()
+						fulldraw=1
 					#backspace handler
 					elif char=="\b":
 						if self.charx!=0 and self.pchar!="\n" and self.pchar!="\b":
 							uprect=self.screensurf.blit(self.backfill, (self.charx, self.chary))
-							pygame.display.update(uprect)
+							uprects.append(uprect)
 							self.charx-=charwidth
 					#normal character handler
 					else:
 						self.charx+=charwidth
 						uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
-						pygame.display.update(uprect)
+						uprects.append(uprect)
+				if fulldraw:
+					pygame.display.flip()
+				else:
+					pygame.display.update(uprects)
 		self.running=0
 		return
 	def charrender(self, char):
