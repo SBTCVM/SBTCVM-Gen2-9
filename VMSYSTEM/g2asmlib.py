@@ -278,7 +278,7 @@ class includetas0:
 		if datafull==None:
 			return 1, keyword+": Line: " + str(lineno) + ": 'raw' requires tas0 filename as argument!"
 		#load tas0 file.
-		tas0fobj=iofuncts.loadtrom(datafull, ext=".tas0", exitonfail=0)
+		tas0fobj=iofuncts.loadtrom(datafull, ext=".tas0", exitonfail=0, dirauto=1)
 		if tas0fobj==None:
 			return 1, keyword+": Line: " + str(lineno) + ": Unable to load tas0 file!"
 		#init mainloop

@@ -106,17 +106,23 @@ see readme.md for more information and licensing of media.
   
   '''
 #generic fileinfo printer (used by find and list)
-def fileinfo(filen, pathx):
+def fileinfo(filen, pathx, sublist=0):
+	if sublist:
+		prfx="    "
+	else:
+		prfx=""
 	if filen.lower().endswith(".trom"):
-		print("   Rom Image  : " + pathx)
+		print(prfx + "   Rom Image   : " + pathx)
 	elif filen.lower().endswith(".tasm"):
-		print("   Assembly   : " + pathx)
+		print(prfx + "   Assembly    : " + pathx)
+	elif filen.lower().endswith(".tas0"):
+		print(prfx + "   tas0 library: " + pathx)
 	elif filen.lower().endswith(".stnp"):
-		print("   SSTNPL     : " + pathx)
+		print(prfx + "   SSTNPL      : " + pathx)
 	elif filen.lower().endswith(".xas"):
-		print("   XAS script : " + pathx)
+		print(prfx + "   XAS script  : " + pathx)
 	elif filen.lower().endswith(".nsp"):
-		print("   NSP library: " + pathx)
+		print(prfx + "   NSP library : " + pathx)
 
 #shell input function
 def getinput():
@@ -141,13 +147,20 @@ def getsubinput(prompt=">"):
 		return ""
 
 #Print function for findcmd
-def matcherprint(filen, search, pathx, dirshow=0):
+def matcherprint(filen, search, pathx, dirshow=0, sublist=0):
+	if sublist:
+		prfx="    "
+	else:
+		prfx=""
 	if dirshow:
 		if search.lower() in filen.lower():
-			print("   Directory  : " + pathx)
+			print(prfx + "   Directory   : " + pathx)
+			return 1
 	else:
 		if search.lower() in filen.lower():
-			fileinfo(filen, pathx)
+			fileinfo(filen, pathx, sublist=sublist)
+			return 1
+	return 0
 
 #find: filename search command.
 def findcmd(search):
@@ -159,12 +172,21 @@ def findcmd(search):
 		for filen in os.listdir(smartd):
 			joinedpath=os.path.join(smartd, filen)
 			if os.path.isdir(joinedpath):
+				matcherprint(filen, search, filen, dirshow=1)
 				if filen.startswith("r_"):
 					for filesub in os.listdir(joinedpath):
-						matcherprint(filesub, search, smartd + "+" + filen + "+" + filesub)
-				matcherprint(filen, search, smartd + "+" + filen, dirshow=1)
+						matcherprint(filesub, search, filesub)
+				else:
+					for filesub in os.listdir(joinedpath):
+						#Detect SBTCVM smart app directories.
+						if filesub.startswith("auto_") and search.lower() in filen.lower():
+							fileinfo(filesub, filen, sublist=1)
+						else:
+							matcherprint(filesub, search,  filen + "+" + filesub)
+							
+				
 			elif os.path.isfile(joinedpath):
-				matcherprint(filen, search, smartd + "+" + filen)
+				matcherprint(filen, search, filen)
 			
 		
 
@@ -178,7 +200,12 @@ def showlisting(realpath, pathdesc):
 			#	print("Other      : " + filen)
 		elif os.path.isdir(os.path.join(realpath, filen)):
 			if not filen.startswith("."):
-				print("   Directory  : " + filen)
+				print("   Directory   : " + filen)
+				#Detect SBTCVM smart app directories.
+				if pathdesc in iofuncts.smartpaths:
+					for filesub in os.listdir(os.path.join(realpath, filen)):
+						if filesub.startswith("auto_"):
+							fileinfo(filesub, filen, sublist=1)
 #list: directory listing command.
 def listcmd(path):
 	if path==None or path.startswith("."):
