@@ -248,33 +248,33 @@ if __name__=="__main__":
 			sys.exit("Error: ranged mode requires 2, space-separated signed decimal addresses.")
 	if cmd in ["-h", "--help"]:
 		print('''SBTCVM Gen2 romdump utility. v1.1.0
--h --help: this help
--v --version: version
--a, --about: about SBTCVM
--i [trom]: show general information on trom. including size.
--f [trom]: search for strings and print them per-line with their starting
-    addresses.
--f2 [trom]: same as -f, but try to find interlaced strings instead of normal
-    ones.
--d [trom]: dump contents of trom to standard output in +0- form.
-    instructions and data colums separated by two spaces. "  "
-    a third column containing the address in signed decmimal
-    is separated via a vertical bar "|"
--r [trom]: same as -d, but also prints chars & decimal values and labels
-    address column
--dnp [trom]: same as -d, but using n0p representation.
--rnp [trom]: same as -dnp, but also prints chars & decimal values
--t0/-t [trom]: dump raw character data from data bank (excluding special
-    characters)
--t1 [trom]: dump raw character data from instruction bank (excluding
-    special characters)
--t2 [trom]: dump raw character data from both banks (interlaced, excluding
-    special characters)
-[trom]: (with no options) same as -d
->>> Specifying a start and end address (in signed decimal, space-separated)
-    after the rom name enables ranged mode. In this mode, only the range given
-    is used. does NOT apply to: -h, -v, -a, and -i
->>> -f and -f2 will ignore strings less than 2 characters long.
+   -h --help: this help
+   -v --version: version
+   -a, --about: about SBTCVM
+   -i [trom]: show general information on trom. including size.
+   -f [trom]: search for strings and print them per-line with their starting
+      addresses.
+   -f2 [trom]: same as -f, but try to find interlaced strings instead of normal
+      ones.
+   -d [trom]: dump contents of trom to standard output in +0- form.
+      instructions and data colums separated by two spaces. "  "
+      a third column containing the address in signed decmimal
+      is separated via a vertical bar "|"
+   -r [trom]: same as -d, but also prints chars & decimal values and labels
+      address column
+   -dnp [trom]: same as -d, but using n0p representation.
+   -rnp [trom]: same as -dnp, but also prints chars & decimal values
+   -t0/-t [trom]: dump raw character data from data bank (excluding special
+      characters)
+   -t1 [trom]: dump raw character data from instruction bank (excluding
+      special characters)
+   -t2 [trom]: dump raw character data from both banks (interlaced, excluding
+      special characters)
+   [trom]: (with no options) same as -d
+   >>> Specifying a start and end address (in signed decimal, space-separated)
+      after the rom name enables ranged mode. In this mode, only the range given
+      is used. does NOT apply to: -h, -v, -a, and -i
+   >>> -f and -f2 will ignore strings less than 2 characters long.
 ''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2 romdump utility. v1.1.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")

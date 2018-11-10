@@ -2,7 +2,6 @@
 from . import libbaltcalc
 from . import iofuncts
 from . import libtextcon as tcon
-from . import g2asmlib
 btint=libbaltcalc.btint
 import os
 import sys
@@ -12,10 +11,10 @@ tritvalid="+0-pn"
 
 xascmds=[]
 
-xasvers='v1.0.1'
-versint=(1, 0, 1)
+xasvers='v2.0.0'
+versint=(2, 0, 0)
 
-shellwelcome="---SBTCVM XAS shell " + xasvers + ". Ready.---"
+shellwelcome="\n---SBTCVM XAS shell " + xasvers + ". Ready.---"
 
 class xascmd:
 	def __init__(self, xcmd, execstr, ispython, takesfile):
@@ -46,33 +45,41 @@ print("plugins loaded.")
 verinfo="SBTCVM XAS Shell " + xasvers + "\nPart Of SBTCVM Gen 2-9"
 
 
-helptext='''----XAS shell help:----
---common--
-   help: this text.
-   exit: exit shell.
+helpdict={
+"help" :
+'''  How to use help:
+   help list: list categories.
+   help [category]: show category
+   help all: show all categories.
+   help/help help: this text.'''
+, "common" : 
+'''   exit: exit shell.
    print [arg]: print text
    list/ls/dir [path]: list a path. i.e. 'ls APPS+gtt' would list APPS/gtt
       Also accepts / and \ as path delineators. only shows files with
       relevant XAS commands. paths are CASE SENSITIVE.
    find [string]: Search filenames containing [string]. only shows files with
-      relevant XAS commands.
---build--
-   xas: run xas script
-   asm [tasm source file]: SBTCVM assembler
+      relevant XAS commands.'''
+, "build" : 
+'''   xas: run xas script
+   asm [tasm source file]: SBTCVM assembler. See stnp -h for help.
    stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
-      Language (SSTNPL)
---VM--
-   run/runp [trom image]: run the VM with pygame frontend.
+      Language (SSTNPL) See stnp -h for help.'''
+, "vm" : 
+'''   run/runp [trom image]: run the VM with pygame frontend.
    runc [trom image]: run the VM with curses frontend. 
-      [RUNC IS BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py]
---tools--
+      [RUNC IS BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py
+      or use another frontend.]'''
+, "dump" : 
+'''   dump: direct access to romdump.py utility. see dump -h for help.
+ -MACROS:
    trominfo [trom image]: get some basic info on a trom. i.e. size.
-   dump [trom image]: Dump TROM image
-   dumpnp [trom image]: Dump TROM image in n0p format (romdump.py -dnp)
-   vdump [trom image]: Dump TROM image in verbose format (romdump.py -r)
-   vdumpnp [trom image]: Dump TROM image in verbose n0p format
-      (romdump.py -rnp)
-'''
+   dumpnp [trom image]: Dump TROM image
+   vdump(np) [trom image]: Dump TROM image in verbose format (romdump.py -r)
+   sdump [trom image]: Dump strings from TROM image.
+   t0dump/t1dump [trom image] Dump raw character data from
+      data/instruction words respectvely'''
+}
 
 
 abouttext='''SBTCVM eXtensible Assembly Script (XAS) v1
@@ -101,15 +108,15 @@ see readme.md for more information and licensing of media.
 #generic fileinfo printer (used by find and list)
 def fileinfo(filen, pathx):
 	if filen.lower().endswith(".trom"):
-		print("Rom Image  : " + pathx)
+		print("   Rom Image  : " + pathx)
 	elif filen.lower().endswith(".tasm"):
-		print("Assembly   : " + pathx)
+		print("   Assembly   : " + pathx)
 	elif filen.lower().endswith(".stnp"):
-		print("SSTNPL     : " + pathx)
+		print("   SSTNPL     : " + pathx)
 	elif filen.lower().endswith(".xas"):
-		print("XAS script : " + pathx)
+		print("   XAS script : " + pathx)
 	elif filen.lower().endswith(".nsp"):
-		print("NSP library: " + pathx)
+		print("   NSP library: " + pathx)
 
 #shell input function
 def getinput():
@@ -137,7 +144,7 @@ def getsubinput(prompt=">"):
 def matcherprint(filen, search, pathx, dirshow=0):
 	if dirshow:
 		if search.lower() in filen.lower():
-			print("Directory  : " + pathx)
+			print("   Directory  : " + pathx)
 	else:
 		if search.lower() in filen.lower():
 			fileinfo(filen, pathx)
@@ -171,7 +178,7 @@ def showlisting(realpath, pathdesc):
 			#	print("Other      : " + filen)
 		elif os.path.isdir(os.path.join(realpath, filen)):
 			if not filen.startswith("."):
-				print("Directory  : " + filen)
+				print("   Directory  : " + filen)
 #list: directory listing command.
 def listcmd(path):
 	if path==None or path.startswith("."):
@@ -235,25 +242,41 @@ def xasshell():
 					print(shellwelcome)
 			else:
 				print("XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "'")	
-		elif cmd=="asm":
-			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
-				if pathx==None:
-					print("XAS ERROR: Assembly source file '" + arg + "' not found!")
-				else:
-					print("assemble: '" + arg + "'")
+		#elif cmd=="asm":
+			#if arg!=None:
+				#pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
+				#if pathx==None:
+					#print("XAS ERROR: Assembly source file '" + arg + "' not found!")
+				#else:
+					#print("assemble: '" + arg + "'")
 					
-					if g2asmlib.assemble(pathx, 0, "  ", exitonerr=0):
-						print("Assembler returned an error.\n")
-					else:
-						print("Done.\n")
-					print(shellwelcome)
-			else:
-				print("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
+					#if g2asmlib.assemble(pathx, 0, "  ", exitonerr=0):
+						#print("Assembler returned an error.\n")
+					#else:
+						#print("Done.\n")
+					#print(shellwelcome)
+			#else:
+				#print("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
 		elif cmd=="print":
 			print(arg)
 		elif cmd=="help":
-			print(helptext)
+			
+			if arg==None or arg=="":
+				hlparg="list"
+			else:
+				hlparg=arg.lower()
+			if hlparg=="all":
+				for hsection in helpdict:
+					print("--" + hsection + "--\n" + helpdict[hsection])
+			elif hlparg=="list":
+				print("Help Sections: (use 'help [section]' to view. or 'help all' for all.)")
+				for hsection in helpdict:
+					print("   " + hsection)
+			elif hlparg in helpdict:
+				print("--" + hlparg + "--\n" + helpdict[hlparg])
+			else:
+				print("XAS ERROR: Cannot find help section: " + hlparg)
+				
 		elif cmd=="about":
 			print(abouttext)
 		elif cmd in ["ver", "version", "info"]:
@@ -269,15 +292,15 @@ def xasshell():
 				if cmd==cmdobj.xcmd:
 					if cmdobj.ispython:
 						if cmdobj.takesfile and arg!=None:
-							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
+							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'\n")
 							try:
-								if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
+								if call(['python']+cmdobj.execstr.split(" ")+arg.split(" "))!=0:
 									print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
 							except KeyboardInterrupt:
 								pass
 							print(shellwelcome)
 						else:
-							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'")
+							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'\n")
 							try:
 								if call(['python']+cmdobj.execstr.split(" "))!=0:
 									print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
@@ -337,21 +360,21 @@ def xasparse(scrpath, syntaxonly=0, printprefix=""):
 			else:
 				print(ppx + "XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 				return 1
-		elif cmd=="asm":
-			if arg!=None:
-				pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'", dirauto=1)
+		#elif cmd=="asm":
+			#if arg!=None:
+				#pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'", dirauto=1)
 				
-				if pathx==None:
-					print("XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
-					return 1
-				print(ppx + "assemble: '" + arg + "'")
-				if g2asmlib.assemble(pathx, syntaxonly, printprefix+"  ", exitonerr=0):
-					print(ppx + "ERROR.")
-					return 1
-				print(ppx + "Done.\n")
-			else:
-				print(ppx + "XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
-				return 1
+				#if pathx==None:
+					#print("XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+					#return 1
+				#print(ppx + "assemble: '" + arg + "'")
+				#if g2asmlib.assemble(pathx, syntaxonly, printprefix+"  ", exitonerr=0):
+					#print(ppx + "ERROR.")
+					#return 1
+				#print(ppx + "Done.\n")
+			#else:
+				#print(ppx + "XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "' in: '" + scrpath + "'")
+				#return 1
 		elif cmd=="print":
 			if arg!=None:
 				print(ppx + "--SCRIPT: " + arg)
@@ -362,7 +385,7 @@ def xasparse(scrpath, syntaxonly=0, printprefix=""):
 				if cmdobj.ispython:
 					if cmdobj.takesfile and arg!=None:
 						print(ppx + "plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'")
-						if call(['python']+cmdobj.execstr.split(" ")+[arg])!=0:
+						if call(['python']+cmdobj.execstr.split(" ")+arg.split(" "))!=0:
 							print(ppx + "XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "' in: '" + scrpath + "'")
 							return 1
 						print(ppx + "Done.\n")

@@ -9,3 +9,6 @@ CAP/*
 plugins/*
 !plugins/romdump.xascmd
 !plugins/sstnpl.xascmd
+!plugins/asm.xascmd
+!plugins/vmpygame.xascmd
+!plugins/vmcurses.xascmd

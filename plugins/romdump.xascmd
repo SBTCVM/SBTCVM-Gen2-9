@@ -3,3 +3,6 @@ dumpnp;romdump.py -dnp;1;1
 vdump;romdump.py -r;1;1
 vdumpnp;romdump.py -rnp;1;1
 trominfo;romdump.py -i;1;1
+sdump;romdump.py -f;1;1
+t0dump;romdump.py -t0;1;1
+t1dump;romdump.py -t1;1;1

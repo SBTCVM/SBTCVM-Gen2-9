@@ -23,12 +23,12 @@ if __name__=="__main__":
 	if cmd in ['help', '-h', '--help']:
 		print('''SBTCVM assembler v3
 For SBTCVM Gen2-9.
-help, -h, --help: this help
--v, --version: assembler version
--a, --about: about SBTCVM
--b, (tasmname): build SBTCVM tasm source file into rom at same location or run an xas script.
--s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
-(tasmname): same as -b/--build''')
+   help, -h, --help: this help
+   -v, --version: assembler version
+   -a, --about: about SBTCVM
+   -b, (tasmname): build SBTCVM tasm source file into rom at same location or run an xas script.
+   -s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
+   (tasmname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
 		print(asmvers)
 	elif cmd in ["-a", "--about"]:

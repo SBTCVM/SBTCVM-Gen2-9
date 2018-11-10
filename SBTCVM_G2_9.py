@@ -40,14 +40,14 @@ except:
 	arg=None
 if cmd in ['help', '-h', '--help']:
 	print('''SBTCVM Gen2-9 virtual machine. curses frontend.
-help, -h, --help: this help.
--v, --version: VM version
--a, --about: about SBTCVM
-[trom], -r [trom], --run [trom]: launch SBTCVM with the selected TROM image 
-    loaded into memory.
--s [trom] {CPU speed in Hz}, --slow [trom] {CPU speed in Hz}:
-   -s overrides the default CPU clock speed. You may specify a float/int Hz value
-    (after the trom filename). defaults to 2Hz''')
+   help, -h, --help: this help.
+   -v, --version: VM version
+   -a, --about: about SBTCVM
+   [trom], -r [trom], --run [trom]: launch SBTCVM with the selected TROM image 
+      loaded into memory.
+   -s [trom] {CPU speed in Hz}, --slow [trom] {CPU speed in Hz}:
+      -s overrides the default CPU clock speed. You may specify a float/int Hz value
+      (after the trom filename). defaults to 2Hz''')
 elif cmd in ["-a", "--about"]:
 	print('''SBTCVM Gen2-9 virtual machine. curses frontend.
 v2.1.0.alpha

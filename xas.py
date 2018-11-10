@@ -23,12 +23,12 @@ if __name__=="__main__":
 		print('''SBTCVM eXtensible Assembly Script (XAS) v1
 For SBTCVM Gen2-9.
 help, -h, --help: this help
--i, [no argument]: run XAS in interactive shell mode.
--v, --version: SBTCVM XAS version
--a, --about: about SBTCVM
--s, --syntax: assembly syntax check mode
--b, --build (xasname): run xas script.
-(xasname): same as -b/--build''')
+   -i, [no argument]: run XAS in interactive shell mode.
+   -v, --version: SBTCVM XAS version
+   -a, --about: about SBTCVM
+   -s, --syntax: assembly syntax check mode
+   -b, --build (xasname): run xas script.
+   (xasname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
 		print(xasvers)
 	elif cmd in ["-a", "--about"]:
