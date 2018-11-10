@@ -126,13 +126,14 @@ class uio:
 					#backspace handler
 					elif char=="\b":
 						if self.charx!=0 and self.pchar!="\n" and self.pchar!="\b":
+							self.charx-=charwidth
 							uprect=self.screensurf.blit(self.backfill, (self.charx, self.chary))
 							uprects.append(uprect)
-							self.charx-=charwidth
+							
 					#normal character handler
 					else:
-						self.charx+=charwidth
 						uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
+						self.charx+=charwidth
 						uprects.append(uprect)
 				if fulldraw:
 					pygame.display.flip()
