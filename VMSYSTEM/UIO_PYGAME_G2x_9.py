@@ -54,7 +54,9 @@ class uio:
 		self.cpu=cpuref
 		self.mem=memref
 		self.io=ioref
-		
+		self.pakp="#"
+		self.pak0="-"
+		self.pakn=" "
 		self.maxy=25
 		self.maxx=80
 		#load and set window icon.
@@ -76,6 +78,7 @@ class uio:
 		ioref.setwritenotify(3, self.decdump)
 		ioref.setreadoverride(4, self.ttyread)
 		ioref.setwritenotify(4, self.ttyread)
+		ioref.setwritenotify(5, self.packart)
 		self.xttycharpos=0
 		
 		####TTY RENDERING
@@ -83,6 +86,9 @@ class uio:
 		self.charcache={}
 		self.backfill=monofont.render(" ", True, TTYbg, TTYbg).convert()
 		
+		self.gfxpakp=monofont.render(" ", True, (210, 210, 255), (210, 210, 255)).convert()
+		self.gfxpak0=monofont.render(" ", True, (100, 200, 127), (100, 100, 127)).convert()
+		self.gfxpakn=monofont.render(" ", True, (0, 0, 30), (0, 0, 30)).convert()
 		self.ttybuff=[]
 		self.pchar=""
 		self.charx=0
@@ -129,12 +135,26 @@ class uio:
 							self.charx-=charwidth
 							uprect=self.screensurf.blit(self.backfill, (self.charx, self.chary))
 							uprects.append(uprect)
-							
+					#ternary packed art rendering
+					elif char==-1:
+						uprect=self.screensurf.blit(self.gfxpakn, (self.charx, self.chary))
+						self.charx+=charwidth
+						uprects.append(uprect)
+					elif char==0:
+						uprect=self.screensurf.blit(self.gfxpak0, (self.charx, self.chary))
+						self.charx+=charwidth
+						uprects.append(uprect)
+					elif char==1:
+						uprect=self.screensurf.blit(self.gfxpakp, (self.charx, self.chary))
+						self.charx+=charwidth
+						uprects.append(uprect)
 					#normal character handler
-					else:
+					elif char!=" ":
 						uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
 						self.charx+=charwidth
 						uprects.append(uprect)
+					else:
+						self.charx+=charwidth
 				if fulldraw:
 					pygame.display.flip()
 				else:
@@ -160,6 +180,27 @@ class uio:
 		self.ttylog.write(string+"\n")
 		self.xttycharpos=0
 	
+	def packart(self, addr, data):
+		datstr=data.bttrunk(9)
+		for xnumchar in datstr:
+			if self.xttycharpos==self.maxx:
+				self.xttycharpos=0
+				print("")
+				self.ttybuff.append("\n")
+				self.ttylog.write("\n")
+			if xnumchar=="+":
+				pval=self.pakp
+				buffval=1
+			elif xnumchar=="0":
+				pval=self.pak0
+				buffval=0
+			else:
+				pval=self.pakn
+				buffval=-1
+			self.ttylog.write(pval)
+			self.xttycharpos += 1
+			self.ttybuff.append(buffval)
+			sys.stdout.write(pval)
 	def tritdump(self, addr, data):
 		datstr=data.bttrunk(9)
 		for xnumchar in datstr:
@@ -171,7 +212,7 @@ class uio:
 			self.ttylog.write(xnumchar)
 			self.xttycharpos += 1
 			self.ttybuff.append(xnumchar)
-		sys.stdout.write(datstr)
+			sys.stdout.write(datstr)
 		
 
 	

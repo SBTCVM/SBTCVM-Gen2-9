@@ -44,3 +44,6 @@ When used, the SSTNPL compiler will automatically run the assembler for you.
 A nifty SBTCVM trom dump utility with 2 formatting modes and 2 trit
 representations. akin to unix/linux 'hexdump' command.
 
+### gfxcon.py:
+Assorted graphics conversion functions. 
+note: requires pygame.

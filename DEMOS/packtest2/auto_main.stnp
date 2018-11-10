@@ -1,0 +1,7 @@
+#Ternary-packed art encoding test.
+
+asm include;packtest2+test.tas0
+
+prline Press a key to exit
+keyprompt
+stop

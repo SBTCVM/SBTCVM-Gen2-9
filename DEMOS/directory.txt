@@ -1,0 +1,6 @@
+----Terminal----
+packtest2:
+	A simple example of 3-trit greyscale images in SBTCVM's TTY output.
+	Note that the curses frontend, logs, and standard output, will use
+	ascii aproximations in place of the graphical blocks the pygame frontend
+	uses.

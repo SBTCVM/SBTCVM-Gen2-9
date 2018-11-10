@@ -13,6 +13,7 @@ x :  m : asm varname  : description
 2 : [w]: io.tritdump  : trit dump
 3 : [w]: io.decdump   : decimal dump
 4 : [r]: io.ttyrd     : TTY (terminal) read (buffered, returns null upon empty buffer)
+5 : [w]: io.packart   : 3-shade, trit-encoded terminal art mechanism. output quality varies with frontend.
 
 50: [b]: rand1.start  : set start of random 1 range.
 51: [b]: rand1.end    : set end of random 1 range.

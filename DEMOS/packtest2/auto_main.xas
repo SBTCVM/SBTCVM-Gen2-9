@@ -1,0 +1,3 @@
+print TEST: Test conversion tool in gfxcon, for Ternary-packed art conversion.
+gfxcon -p packtest2+test.png
+stnp packtest2

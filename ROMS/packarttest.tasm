@@ -1,0 +1,23 @@
+head-nspin=stdnsp
+fopset1;>io.ttywr
+fopset2;>io.packart
+
+#Ternary-packed art
+
+#test 1
+
+
+#simple test graphic
+fopwri2;+++++++++
+fopwri1;:\n
+fopwri2;+0000000+
+fopwri1;:\n
+fopwri2;+-------+
+fopwri1;:\n
+fopwri2;+0000000+
+fopwri1;:\n
+fopwri2;+++++++++
+fopwri1;:\n
+
+#quick and dirty loop
+goto;>self;self

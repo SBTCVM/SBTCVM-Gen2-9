@@ -27,7 +27,7 @@ class logit:
 VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
 reservedpaths=["cfg"]
 
-smartpaths=["VMSYSTEM", VMSYSROMS, "ROMS", "APPS", "VMUSER"]
+smartpaths=["VMSYSTEM", VMSYSROMS, "ROMS", "APPS", "DEMOS", "VMUSER"]
 
 #handles r_* directories.
 def recur_dir(fnameg):
@@ -73,6 +73,8 @@ def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 			return (open(os.path.join("ROMS", filenameg), "r"))
 		elif os.path.isfile(os.path.join("APPS", filenameg)):
 			return (open(os.path.join("APPS", filenameg), "r"))
+		elif os.path.isfile(os.path.join("DEMOS", filenameg)):
+			return (open(os.path.join("DEMOS", filenameg), "r"))
 		elif os.path.isfile(os.path.join("VMUSER", filenameg)):
 			return (open(os.path.join("VMUSER", filenameg), "r"))
 		recurret=recur_dir(filenameg)
@@ -102,6 +104,8 @@ def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 			return (os.path.join("ROMS", filenameg))
 		elif os.path.isfile(os.path.join("APPS", filenameg)):
 			return (os.path.join("APPS", filenameg))
+		elif os.path.isfile(os.path.join("DEMOS", filenameg)):
+			return (os.path.join("DEMOS", filenameg))
 		elif os.path.isfile(os.path.join("VMUSER", filenameg)):
 			return (os.path.join("VMUSER", filenameg))
 		

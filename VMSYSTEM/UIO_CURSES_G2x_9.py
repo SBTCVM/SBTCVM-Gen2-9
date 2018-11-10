@@ -25,7 +25,12 @@ class uio:
 		self.statwin=statwin
 		self.ttywin=ttywin
 		self.mainwin=mainwin
-		
+		self.pakp="#"
+		self.pak0="-"
+		self.pakn=" "
+		self.gfxpakp="#"
+		self.gfxpak0="-"
+		self.gfxpakn=" "
 		self.run=1
 		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
 		#self.ttylogdata=""
@@ -36,6 +41,7 @@ class uio:
 		ioref.setwritenotify(3, self.decdump)
 		ioref.setreadoverride(4, self.ttyread)
 		ioref.setwritenotify(4, self.ttyread)
+		ioref.setwritenotify(5, self.packart)
 		self.xttycharpos=0
 		self.maxy=self.ttywin.getmaxyx()[0]
 		self.maxx=self.ttywin.getmaxyx()[1]
@@ -82,6 +88,25 @@ class uio:
 				self.ttylog.write("\n")
 			self.ttywin.addch(self.maxy-1, self.xttycharpos, xnumchar)
 			self.ttylog.write(xnumchar)
+			#self.ttywin.refresh()
+			self.xttycharpos += 1
+	def packart(self, addr, data):
+		for xnumchar in data.bttrunk(9):
+			if self.xttycharpos==self.maxx:
+				self.xttycharpos=0
+				#self.ttywin.scroll(1)
+				self.ttylog.write("\n")
+			if xnumchar=="+":
+				pval=self.pakp
+				gfxpval=self.gfxpakp
+			elif xnumchar=="0":
+				pval=self.pak0
+				gfxpval=self.gfxpak0
+			else:
+				pval=self.pakn
+				gfxpval=self.gfxpakn
+			self.ttywin.addch(self.maxy-1, self.xttycharpos, gfxpval)
+			self.ttylog.write(pval)
 			#self.ttywin.refresh()
 			self.xttycharpos += 1
 	

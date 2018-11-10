@@ -41,7 +41,7 @@ For example say we have a TROM APP directory called `SOMEAPP` in `VMUSER`, and w
 
 
 Since `something.xas` is not the 'auto' xas (prefixed with `auto_`), we need to
-tell XAS its NOT in the main search path. **(`APPS, VMSYSTEM, VMSYSTEM/ROMS, ROMS, VMUSER` and `r_*` directories within them)**
+tell XAS its NOT in the main search path. **(`APPS, DEMOS, VMSYSTEM, VMSYSTEM/ROMS, ROMS, VMUSER` and `r_*` directories within them)**
 
 As `SOMEAPP` is in `VMUSER`, aka in the search path, we only need:
 
