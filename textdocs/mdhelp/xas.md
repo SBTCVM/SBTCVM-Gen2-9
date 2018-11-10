@@ -72,7 +72,8 @@ help|all|view all help categories
 help|list|view a list of help categories.
 ls/list/dir|(path)|list SBTCVM-relevant files in (path), in valid XAS '+' path syntax.
 find|(string)|find filenames containing (string) and list them with their valid XAS '+' path syntax.
-
+ver/version/info|NONE|print version information
+about|NONE|about XAS
 
 ## Build
 
