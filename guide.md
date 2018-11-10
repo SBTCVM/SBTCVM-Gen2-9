@@ -2,6 +2,12 @@
 
 Run a trom application in curses frontend:     
 `./SBTCVM_G2_9.py maze`
+
+Run a trom application in pygame frontend:
+`./PYG_SBTCVM.py maze`
+
+Start SBTCVM XAS interactive shell:
+`./xas.py`
      
 Boot into VDI shell (unfinished):     
 `./SBTCVM_G2_9.py`

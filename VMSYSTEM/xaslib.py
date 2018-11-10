@@ -82,7 +82,7 @@ helpdict={
 }
 
 
-abouttext='''SBTCVM eXtensible Assembly Script (XAS) v1
+abouttext='''SBTCVM eXtensible Assembly Script (XAS) v2
 interactive shell mode.
 ''' + xasvers + '''
 part of SBTCVM-Gen2-9 (v2.1.0.alpha)

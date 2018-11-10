@@ -30,6 +30,10 @@ together complex build processes of more complex applications and
 components. Though many TROM programs lack need for it, and so use
 stnpcom.py or g2asm.py directly.
 
+It also features an interactive mode with some extra commands.
+
+
+
 ### stnpcom.py:
 the SSTNPL compiler. This is the ideal way to learn balanced ternary math,
 along with a bit of programing too. Ideal for beginners. for more serious
