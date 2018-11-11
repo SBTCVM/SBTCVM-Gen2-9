@@ -5,6 +5,8 @@
 ### Index
 
 - [VMSYSTEM status codes](troubleshoot_vmsystem.md)
+- [Other VM Problem](troubleshoot_vm.md)
+
 - [clicalc calculator](troubleshoot_clicalc.md) *1
 
 Footnotes:
