@@ -1,0 +1,115 @@
+
+
+prline Hello. If the frontend you are using supports TTY text colors,
+
+
+gsub atrainbow
+
+
+#set text to a nice blue, on black
+asm setreg1;-0+---
+asm iowrite1;>io.textcolor
+
+prline you should see this text as blue and the next text white on red.
+
+#set text to white on dark red
+asm setreg1;+++0--
+asm iowrite1;>io.textcolor
+
+prline Press any key to exit.
+asm setreg1;+++---
+asm iowrite1;>io.textcolor
+keyprompt
+stop
+
+
+
+
+label atrainbow
+
+asm setreg1;------
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;--0---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;--+---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;-0----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;-00---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;-0+---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;-+----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;-+0---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;-++---
+asm iowrite1;>io.textcolor
+print @
+
+
+asm setreg1;0-----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;0-0---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;0-+---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;00----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;000---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;00+---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;0+----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;0+0---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;0++---
+asm iowrite1;>io.textcolor
+print @
+
+asm setreg1;+-----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;+-0---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;+-+---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;+0----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;+00---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;+0+---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;++----
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;++0---
+asm iowrite1;>io.textcolor
+print @
+asm setreg1;+++---
+asm iowrite1;>io.textcolor
+print @
+newline
+return

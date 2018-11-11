@@ -40,13 +40,6 @@ charwidth=monofont.size("_")[0]
 charheight=monofont.size("|_ABC123")[1]
 
 
-#colors:
-
-textfg=(255, 255, 255)
-textbg=(0, 0, 0)
-TTYbg=(0, 0, 0)
-
-
 
 pygame.display.set_caption("SBTCVM Gen2-9", "SBTCVM Gen2-9")
 class uio:
@@ -59,6 +52,15 @@ class uio:
 		self.pakn=" "
 		self.maxy=25
 		self.maxx=80
+		
+		
+		self.textfg=(255, 255, 255)
+		self.textbg=(0, 0, 0)
+		self.TTYbg=(0, 0, 0)
+		self.colorkey="+++---"
+		self.linebgfill=0
+		self.newcol="+++---"
+		
 		#load and set window icon.
 		self.picon=pygame.image.load(os.path.join(*["VMSYSTEM", "GFX", "icon32.png"]))
 		pygame.display.set_icon(self.picon)
@@ -79,12 +81,13 @@ class uio:
 		ioref.setreadoverride(4, self.ttyread)
 		ioref.setwritenotify(4, self.ttyread)
 		ioref.setwritenotify(5, self.packart)
+		ioref.setwritenotify(6, self.settextcol)
 		self.xttycharpos=0
 		
 		####TTY RENDERING
 		self.keyinbuff=[]
 		self.charcache={}
-		self.backfill=monofont.render(" ", True, TTYbg, TTYbg).convert()
+		self.backfill=monofont.render(" ", True, self.TTYbg, self.TTYbg).convert()
 		
 		self.gfxpakp=monofont.render(" ", True, (210, 210, 255), (210, 210, 255)).convert()
 		self.gfxpak0=monofont.render(" ", True, (100, 200, 127), (100, 100, 127)).convert()
@@ -120,15 +123,29 @@ class uio:
 				dcount=0
 				fulldraw=0
 				uprects=[]
+				
 				while len(self.ttybuff)>0 and dcount!=30:
 					dcount+=1
 					char=self.ttybuff.pop(0)
+					
+					#list codes:
+					if isinstance(char, list):
+						#When list code 20 is detected, change colors using helper method.
+						if char[0]==20:
+							self.newcolor(char[1])
+							
+						
 					#newline handler
-					if char=="\n":
+					elif char=="\n":
+						if self.linebgfill==1:
+							self.linebgfill=0
+							pxrect=pygame.Rect(self.charx, self.chary, charwidth*self.maxx, charheight)
+							pygame.draw.rect(self.screensurf, self.TTYbg, pxrect, 0)
 						self.screensurf.scroll(0, -charheight)
 						self.charx=0
-						pygame.draw.rect(self.screensurf, TTYbg, self.newline_rect, 0)
+						pygame.draw.rect(self.screensurf, self.TTYbg, self.newline_rect, 0)
 						fulldraw=1
+						
 					#backspace handler
 					elif char=="\b":
 						if self.charx!=0 and self.pchar!="\n" and self.pchar!="\b":
@@ -148,13 +165,14 @@ class uio:
 						uprect=self.screensurf.blit(self.gfxpakp, (self.charx, self.chary))
 						self.charx+=charwidth
 						uprects.append(uprect)
-					#normal character handler
-					elif char!=" ":
+					
+					elif char=="\n" and not self.linebgfill:
+						self.charx+=charwidth
+					else:
+						#normal character handler
 						uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
 						self.charx+=charwidth
 						uprects.append(uprect)
-					else:
-						self.charx+=charwidth
 				if fulldraw:
 					pygame.display.flip()
 				else:
@@ -162,12 +180,28 @@ class uio:
 		self.running=0
 		return
 	def charrender(self, char):
-		if char in self.charcache:
-			return self.charcache[char]
+		if char+self.colorkey in self.charcache:
+			return self.charcache[char+self.colorkey]
 		else:
-			chtx=monofont.render(char, True, textfg, textbg).convert()
-			self.charcache[char]=chtx
+			chtx=monofont.render(char, True, self.textfg, self.textbg).convert()
+			self.charcache[char+self.colorkey]=chtx
 			return chtx
+	#don't set colors yet, but add a special integer code to TTY buffer.
+	def settextcol(self, addr, data):
+		newcol=data.bttrunk(9)[3:]
+		#print(self.newcol)
+		self.ttybuff.append([20, newcol])
+	#color setter called by text render upon  TTY render buffer list code 20
+	def newcolor(self, newcol):
+		self.textfg=getRGB27(newcol[:3])
+		self.textbg=getRGB27(newcol[3:])
+		#print(self.textbg)
+		#print(self.textfg)
+		#print(self.newcol)
+		self.TTYbg=self.textbg
+		self.colorkey=newcol
+		self.backfill=monofont.render(" ", True, self.TTYbg, self.TTYbg).convert()
+		self.linebgfill=1
 	def ttyraw(self, string):
 		if self.xttycharpos==self.maxx:
 			self.xttycharpos=0
@@ -270,4 +304,30 @@ class uio:
 		while self.running:
 			time.sleep(0.1)
 		return
-		
+
+
+def getRGB27(string):
+	redch=string[0]
+	greench=string[1]
+	bluech=string[2]
+	if redch=="-":
+		redre=0
+	if redch=="0":
+		redre=127
+	if redch=="+":
+		redre=255
+	if greench=="-":
+		greenre=0
+	if greench=="0":
+		greenre=127
+	if greench=="+":
+		greenre=255
+	if bluech=="-":
+		bluere=0
+	if bluech=="0":
+		bluere=127
+	if bluech=="+":
+		bluere=255
+	return (redre, greenre, bluere)
+
+

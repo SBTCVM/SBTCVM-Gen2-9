@@ -11,3 +11,12 @@ vscroll:
 	Art and Code: Thomas Leathers
 	
 	Meant partly as an example for anyone wanting a pixel-art challenge.
+
+colortext:
+	A demo of the pygame frontend's enhanced TTY color capacity:
+	27-color 3-trit RGB color, for BOTH foreground and background!
+	thats 729 foreground-background combinations!
+	
+	If you run this demo in the curses frontend, it will work, just without
+	the colors. so using it DOES NOT break compatibility with the curses
+	frontend.

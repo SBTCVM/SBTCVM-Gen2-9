@@ -13,6 +13,7 @@ io.ttywr;1
 rand2.get;55
 io.packart;5
 rand2.start;53
+io.textcolor;6
 rand3.start;56
 rand1.start;50
 rand4.get;61
