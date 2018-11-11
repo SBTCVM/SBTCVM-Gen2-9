@@ -20,6 +20,7 @@ v>io.decdump;10x3
 v>io.ttyrd;10x4
 v>io.packart;10x5
 v>io.textcolor;10x6
+v>io.packcolor;10x7
 
 #random1:
 

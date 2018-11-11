@@ -1,0 +1,46 @@
+#Ternary-packed art encoding test.
+
+### Set text color
+asm setreg1;0++--0
+asm iowrite1;>io.textcolor
+
+prline NOTE: Ternary-packed-art and text colors are not supported in the curses
+prline frontend.
+newline
+prline This packed art test will show custom Ternary-packed-art colors.
+prline The first will be blue/blue-green/black, the next pink/blue-green/black 
+prline and the third pink/black/dark green.
+prline Press a key to continue
+keyprompt
+
+#override pack art colors
+asm setreg1;-0+-00---
+asm iowrite1;>io.packcolor
+gsub printart
+
+prline Press a key to continue
+keyprompt
+
+
+asm setreg1;+-0-00---
+asm iowrite1;>io.packcolor
+gsub printart
+
+prline Press a key to continue
+keyprompt
+
+
+asm setreg1;++0----0-
+asm iowrite1;>io.packcolor
+gsub printart
+
+
+prline Press a key to exit
+keyprompt
+stop
+
+
+
+label printart
+asm include;packtest2+test.tas0
+return

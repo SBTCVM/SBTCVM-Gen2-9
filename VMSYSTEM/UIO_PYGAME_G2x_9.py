@@ -75,13 +75,16 @@ class uio:
 		#self.ttylogdata=""
 		self.ttylog=iofuncts.logit(ttylogname, 1024)
 		self.ttylog.write("frontend: Pygame\nBegin UIO tty log:\n")
+		#Base TTY IO
 		ioref.setwritenotify(1, self.ttywrite)
 		ioref.setwritenotify(2, self.tritdump)
 		ioref.setwritenotify(3, self.decdump)
 		ioref.setreadoverride(4, self.ttyread)
 		ioref.setwritenotify(4, self.ttyread)
 		ioref.setwritenotify(5, self.packart)
-		ioref.setwritenotify(6, self.settextcol)
+		#Enhanced TTY IO (colors, etc.)
+		ioref.setwritenotify(6, self.settextcol)#text fg/bg
+		ioref.setwritenotify(7, self.setpackcol)#3 packed art colors as 3, 3-trit RGB values.
 		self.xttycharpos=0
 		
 		####TTY RENDERING
@@ -89,9 +92,9 @@ class uio:
 		self.charcache={}
 		self.backfill=monofont.render(" ", True, self.TTYbg, self.TTYbg).convert()
 		
-		self.gfxpakp=monofont.render(" ", True, (210, 210, 255), (210, 210, 255)).convert()
-		self.gfxpak0=monofont.render(" ", True, (100, 200, 127), (100, 100, 127)).convert()
-		self.gfxpakn=monofont.render(" ", True, (0, 0, 30), (0, 0, 30)).convert()
+		self.gfxpakp=monofont.render(" ", True, (255, 255, 255), (255, 255, 255)).convert()
+		self.gfxpak0=monofont.render(" ", True, (127, 127, 127), (127, 127, 127)).convert()
+		self.gfxpakn=monofont.render(" ", True, (0, 0, 0), (0, 0, 0)).convert()
 		self.ttybuff=[]
 		self.pchar=""
 		self.charx=0
@@ -133,6 +136,8 @@ class uio:
 						#When list code 20 is detected, change colors using helper method.
 						if char[0]==20:
 							self.newcolor(char[1])
+						if char[0]==21:
+							self.newpackcolor(char[1])
 							
 						
 					#newline handler
@@ -186,7 +191,7 @@ class uio:
 			chtx=monofont.render(char, True, self.textfg, self.textbg).convert()
 			self.charcache[char+self.colorkey]=chtx
 			return chtx
-	#don't set colors yet, but add a special integer code to TTY buffer.
+	#don't set colors yet, but add a special list code to TTY buffer.
 	def settextcol(self, addr, data):
 		newcol=data.bttrunk(9)[3:]
 		#print(self.newcol)
@@ -202,6 +207,22 @@ class uio:
 		self.colorkey=newcol
 		self.backfill=monofont.render(" ", True, self.TTYbg, self.TTYbg).convert()
 		self.linebgfill=1
+		
+	#PACKART COLOR SET
+	#don't set colors yet, but add a special list code to TTY buffer.
+	def setpackcol(self, addr, data):
+		newcol=data.bttrunk(9)
+		#print(self.newcol)
+		self.ttybuff.append([21, newcol])
+	#color setter called by text render upon  TTY render buffer list code 21
+	def newpackcolor(self, newcol):
+		
+		self.pakpcol=getRGB27(newcol[:3])
+		self.pak0col=getRGB27(newcol[3:6])
+		self.pakncol=getRGB27(newcol[6:])
+		self.gfxpakp=monofont.render(" ", True, self.pakpcol, self.pakpcol).convert()
+		self.gfxpak0=monofont.render(" ", True, self.pak0col, self.pak0col).convert()
+		self.gfxpakn=monofont.render(" ", True, self.pakncol, self.pakncol).convert()
 	def ttyraw(self, string):
 		if self.xttycharpos==self.maxx:
 			self.xttycharpos=0

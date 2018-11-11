@@ -19,11 +19,11 @@ In the pygame frontend, they use the following colored-block scheme:
 
 trit|printed as
 ---|---------
-`+`|White **(1)**
-`0`|Grey **(1)**
-`-`|Black **(1)**
+`+`|White
+`0`|Grey
+`-`|Black
 
-1. tinted slightly blue with default colors.
+Default colors can be changed. for more information see [TTY colors](tty_colors.md)
 
 ## curses, standard output, logs
 
