@@ -15,7 +15,7 @@ import time
 
 pygame.display.init()
 pygame.font.init()
-
+pygame.key.set_repeat(200, 50)
 
 #TODO: add configuration override for monospace font.
 def getmonofont(fontsize):
@@ -52,7 +52,9 @@ class uio:
 		self.pakn=" "
 		self.maxy=25
 		self.maxx=80
-		
+		self.curxcnt=0
+		self.blinkspeed=20
+		self.blinkflg=0
 		
 		self.textfg=(255, 255, 255)
 		self.textbg=(0, 0, 0)
@@ -122,10 +124,24 @@ class uio:
 				if event.type==pygame.QUIT:
 					self.cpu.exception("User Stop", -50, cancatch=0)
 			#if in gamode=0 (TTY mode), draw TTY output.
-			if self.gamode==0 and len(self.ttybuff)>0:
+			if self.gamode==0:
 				dcount=0
 				fulldraw=0
 				uprects=[]
+				
+				
+				
+				self.curxcnt+=1
+				if self.curxcnt==self.blinkspeed:
+					self.curxcnt=0
+					if len(self.ttybuff)>0:
+						pass
+					elif self.blinkflg:
+						self.blinkflg=0
+						uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+					else:
+						self.blinkflg=1
+						uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
 				
 				while len(self.ttybuff)>0 and dcount!=30:
 					dcount+=1
@@ -146,6 +162,8 @@ class uio:
 							self.linebgfill=0
 							pxrect=pygame.Rect(self.charx, self.chary, charwidth*self.maxx, charheight)
 							pygame.draw.rect(self.screensurf, self.TTYbg, pxrect, 0)
+							self.curcnt=self.blinkspeed
+						pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2)
 						self.screensurf.scroll(0, -charheight)
 						self.charx=0
 						pygame.draw.rect(self.screensurf, self.TTYbg, self.newline_rect, 0)
@@ -154,8 +172,15 @@ class uio:
 					#backspace handler
 					elif char=="\b":
 						if self.charx!=0 and self.pchar!="\n" and self.pchar!="\b":
+							#clear cursor
+							uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+							
 							self.charx-=charwidth
 							uprect=self.screensurf.blit(self.backfill, (self.charx, self.chary))
+							if len(self.ttybuff)<4:
+								uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+								self.blinkflg=0
+								self.curxcnt=0
 							uprects.append(uprect)
 					#ternary packed art rendering
 					elif char==-1:
@@ -170,12 +195,13 @@ class uio:
 						uprect=self.screensurf.blit(self.gfxpakp, (self.charx, self.chary))
 						self.charx+=charwidth
 						uprects.append(uprect)
-					
-					elif char=="\n" and not self.linebgfill:
-						self.charx+=charwidth
 					else:
 						#normal character handler
 						uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
+						if len(self.ttybuff)<4:
+							uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2+charwidth, self.chary), (self.charx+2+charwidth, self.chary+charheight), 2))
+							self.blinkflg=0
+							self.curxcnt=0
 						self.charx+=charwidth
 						uprects.append(uprect)
 				if fulldraw:

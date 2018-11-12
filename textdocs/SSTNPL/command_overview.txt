@@ -165,6 +165,9 @@ Command documentation:
 	dumpt [varname] : Dump integer variable [varname], to TTY in ternary form. Can use Literals
 	dumpd [varname] : Dump integer variable [varname], to TTY in signed decimal form. Can use Literals
 	chardump [varname] : Dump a variable to the TTY as a character. Can use Literals
+	textcolor [varname] : set text color (on frontends that support it) Can use Literals
+	packcolor [varname] : set ternary packed art color (on frontends that support it) Can use Literals
+	tpack [varname] : Print ternary packed art segment. Can use Literals
 
 
 --Random

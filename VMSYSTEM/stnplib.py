@@ -218,6 +218,9 @@ class in_intcommon1:
 		destobj.write("#" + self.comment + "\n" + self.prearg + args + self.postarg)
 		return
 		
+
+
+
 #same as intcommon1, but supports literals.
 class in_intcommon1b:
 	def __init__(self, keywords, prearg, postarg, comment):
@@ -1264,6 +1267,9 @@ class mainloop:
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
 		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),#set,get
+		in_intcommon1b(["textcolor"], "dataread1;>", "\niowrite1;>io.textcolor\n", "Set text colors"),
+		in_intcommon1b(["packcolor"], "dataread1;>", "\niowrite1;>io.packcolor\n", "Set ternary packed art colors"),
+		in_intcommon1b(["tpack"], "dataread1;>", "\niowrite1;>io.packart\n", "Draw ternary Packed art"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),

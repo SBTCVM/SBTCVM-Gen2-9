@@ -7,18 +7,18 @@ gsub atrainbow
 
 
 #set text to a nice blue, on black
-asm setreg1;-0+---
-asm iowrite1;>io.textcolor
+textcolor *-0+---
+
 
 prline you should see this text as blue and the next text white on red.
 
 #set text to white on dark red
-asm setreg1;+++0--
-asm iowrite1;>io.textcolor
+textcolor *+++0--
+
 
 prline Press any key to exit.
-asm setreg1;+++---
-asm iowrite1;>io.textcolor
+textcolor *+++---
+
 keyprompt
 stop
 
@@ -27,89 +27,89 @@ stop
 
 label atrainbow
 
-asm setreg1;------
-asm iowrite1;>io.textcolor
+
+textcolor *------
 print @
-asm setreg1;--0---
-asm iowrite1;>io.textcolor
+
+textcolor *--0---
 print @
-asm setreg1;--+---
-asm iowrite1;>io.textcolor
+
+textcolor *--+---
 print @
-asm setreg1;-0----
-asm iowrite1;>io.textcolor
+
+textcolor *-0----
 print @
-asm setreg1;-00---
-asm iowrite1;>io.textcolor
+
+textcolor *-00---
 print @
-asm setreg1;-0+---
-asm iowrite1;>io.textcolor
+
+textcolor *-0+---
 print @
-asm setreg1;-+----
-asm iowrite1;>io.textcolor
+
+textcolor *-+----
 print @
-asm setreg1;-+0---
-asm iowrite1;>io.textcolor
+
+textcolor *-+0---
 print @
-asm setreg1;-++---
-asm iowrite1;>io.textcolor
+
+textcolor *-++---
 print @
 
 
-asm setreg1;0-----
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;0-0---
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;0-+---
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;00----
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;000---
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;00+---
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;0+----
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;0+0---
-asm iowrite1;>io.textcolor
-print @
-asm setreg1;0++---
-asm iowrite1;>io.textcolor
+
+textcolor *0-----
 print @
 
-asm setreg1;+-----
-asm iowrite1;>io.textcolor
+textcolor *0-0---
 print @
-asm setreg1;+-0---
-asm iowrite1;>io.textcolor
+
+textcolor *0-+---
 print @
-asm setreg1;+-+---
-asm iowrite1;>io.textcolor
+
+textcolor *00----
 print @
-asm setreg1;+0----
-asm iowrite1;>io.textcolor
+
+textcolor *000---
 print @
-asm setreg1;+00---
-asm iowrite1;>io.textcolor
+
+textcolor *00+---
 print @
-asm setreg1;+0+---
-asm iowrite1;>io.textcolor
+
+textcolor *0+----
 print @
-asm setreg1;++----
-asm iowrite1;>io.textcolor
+
+textcolor *0+0---
 print @
-asm setreg1;++0---
-asm iowrite1;>io.textcolor
+
+textcolor *0++---
 print @
-asm setreg1;+++---
-asm iowrite1;>io.textcolor
+
+
+textcolor *+-----
+print @
+
+textcolor *+-0---
+print @
+
+textcolor *+-+---
+print @
+
+textcolor *+0----
+print @
+
+textcolor *+00---
+print @
+
+textcolor *+0+---
+print @
+
+textcolor *++----
+print @
+
+textcolor *++0---
+print @
+
+textcolor *+++---
 print @
 newline
 return

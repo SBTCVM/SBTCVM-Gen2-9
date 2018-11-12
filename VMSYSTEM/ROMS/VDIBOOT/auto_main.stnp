@@ -1,3 +1,6 @@
+
+textcolor *0++--0
+
 prline booting into SBTVDI Shell...
 prline  ^^^^^^^^^^^^^^^
 prline <+-------------+>
@@ -10,6 +13,10 @@ prline <| \  ._|_.  / |>
 prline <|__|       |__|>
 prline <+Mni-------inM+>
 prline  vvvvvvvvvvvvvvv   SBTCVM Gen 2-9
+
+
+textcolor *+++---
+
 var exitcode=0
 
 #simple VDI shell in SSTNPL with vdishell.tas0 (part of standard library)
