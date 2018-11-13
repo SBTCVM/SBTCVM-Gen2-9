@@ -8,7 +8,7 @@ prline frontend.
 newline
 prline This packed art test will show custom Ternary-packed-art colors.
 prline The first will be blue/blue-green/black, the next pink/blue-green/black 
-prline and the third pink/black/dark green.
+prline and the third yellow/black/dark green.
 prline Press a key to continue
 keyprompt
 
@@ -52,6 +52,10 @@ asm include;packtest2+test.tas0
 return
 
 label testbars
+#mulpk lets you specify multiple ternary packed art chunks (semicolon separated)
+mulpk +++++++++;000000000
+#same as mulpk, but appends newline
+linepk ---------;+++++++++
 tpack *-0+0-0+0-
 tpack *-0+0-0+0-
 tpack *-0+0-0+0-

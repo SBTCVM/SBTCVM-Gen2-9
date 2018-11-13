@@ -45,7 +45,7 @@ _(overrides `fop1` and `fop2`, so you may need to reset those if not using SSTNP
 **note:** `gfxcon.py` requires pygame in order to process images, and will
 refuse to run should it be missing.
 
-have a look at `packtest2` in `DEMOS` for a simple example.
+have a look at `packtest2` and `packtest3` in `DEMOS` for a simple example.
 
 ## other ways:
 You can also just specify it using raw strings of 9 trits if your doing something fancy.

@@ -19,6 +19,9 @@ var getd_disp=0
 var getd_negflg=0
 ########
 
+var promptcolor=0+0---
+
+
 
 var inmode=@1
 var valbuff=0
@@ -31,14 +34,17 @@ var resbuff2=0
 var kb=0
 
 ####### CALCULATOR MAIN ROUTINE #######
-
+textcolor *+++--0
 prline clicalc: A ternary/decimal CLI calculator.
-prline Version 1.0
+prline Version 1.1
 prline press 'h' for help, and '?' for about info.
+textcolor *+++---
 gsub do_mode_decimal
 label main
+textcolor *0++---
 chardump promptprefix
 print >
+textcolor *+++---
 keyprompt
 set kb
 newline
@@ -72,7 +78,9 @@ goto main
 
 #### enable ternary mode ####
 label do_mode_ternary
+textcolor *+0----
 prline ----- TERNARY MODE ENABLED -----
+textcolor *+++---
 val @2
 set inmode
 val :t
@@ -81,7 +89,9 @@ return
 
 #### enable ternary mode ####
 label do_mode_decimal
+textcolor *+-0---
 prline ----- DECIMAL MODE ENABLED -----
+textcolor *+++---
 val @1
 set inmode
 val :d
@@ -197,10 +207,12 @@ prline ERROR: Not even in balanced ternary, can you divide by zero.
 return
 
 
-#### Dual Number prompt code (see 'gett' for actual number input) ####
+#### Dual Number prompt code (see 'inget' for actual number input) ####
 label getnums
+textcolor *0++---
 print num0? >
 gsub inget
+textcolor *+++---
 copy valbuff,v1buff
 newline
 print num0 is  : 
@@ -208,9 +220,10 @@ dumpt v1buff
 print  ( 
 dumpd v1buff
 prline  )
-
+textcolor *0++---
 print num1? >
 gsub inget
+textcolor *+++---
 copy valbuff,v2buff
 newline
 print num1 is  : 
@@ -220,10 +233,12 @@ dumpd v2buff
 prline  )
 return
 
-#### Single Number prompt code (see 'gett' for actual number input) ####
+#### Single Number prompt code (see 'inget' for actual number input) ####
 label get1num
+textcolor *0++---
 print num? >
 gsub inget
+textcolor *+++---
 copy valbuff,v1buff
 newline
 print num is   : 
@@ -456,9 +471,10 @@ return
 ####### ABOUT & HELP #######
 
 label about
+textcolor *+++--0
 newline
 prline --ABOUT--
-prline clicalc v1.0: A ternary/decimal CLI calculator
+prline clicalc v1.1: A ternary/decimal CLI calculator
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018 Thomas Leathers & Contributors
@@ -475,14 +491,19 @@ prline GNU General Public License for more details.
 prline 
 prline You should have received a copy of the GNU General Public License
 prline along with clicalc. If not, see <http://www.gnu.org/licenses/>
+textcolor *+++---
 prline 
-prline PRESS A KEY TO RETURN TO MAIN MENU
+prline PRESS A KEY TO RETURN TO MAIN PROMPT
+textcolor *0++---
 print ?>>>
 keyprompt
 newline
 return
+
+
 label help
-prline clicalc v1.0: A ternary/decimal CLI calculator
+textcolor *+++--0
+prline clicalc v1.1: A ternary/decimal CLI calculator
 prline COMMANDS:
 prline   a: add
 prline   s: subtract
@@ -502,8 +523,10 @@ prline [0-9] as well as [-] at start for negatives, When in DECIMAL MODE
 prline [q,Q] quits clicalc.
 prline [BACKSPACE] remove last-entered digit.
 prline <input is limited to 9 trits <-9841 to 9841>>
+textcolor *+++---
 prline 
-prline PRESS A KEY TO RETURN TO MAIN MENU
+prline PRESS A KEY TO RETURN TO MAIN PROMPT
+textcolor *0++---
 print ?>>>
 
 keyprompt

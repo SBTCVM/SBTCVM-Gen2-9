@@ -293,7 +293,7 @@ class uio:
 			self.ttylog.write(xnumchar)
 			self.xttycharpos += 1
 			self.ttybuff.append(xnumchar)
-			sys.stdout.write(datstr)
+			sys.stdout.write(xnumchar)
 		
 
 	

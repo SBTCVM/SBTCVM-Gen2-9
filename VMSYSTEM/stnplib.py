@@ -419,6 +419,33 @@ class in_getchar:
 		destobj.write("#" + self.comment + "\nioread1;>io.ttyrd\ndatawrite1;>" + args + "\n")
 		return
 
+class in_mulpack:
+	def __init__(self):
+		self.keywords=["mulpk", "linepk"]
+	def p0(self, args, keyword, lineno):
+		if args=="":
+			return 1, keyword+": Line: " + str(lineno) + ": No data."
+		arglist=args.split(";")
+		for arg in arglist:
+			if len(arg)!=9:
+				return 1, keyword+": Line: " + str(lineno) + ": Pack Chunk '" + arg + "' Not 9 trits."
+			for char in arg:
+				if char not in tritvalid:
+					return 1, keyword+": Line: " + str(lineno) + ": Invalid character in Pack Chunk '" + arg + "': '" + char + "'"
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + keyword + "\n")
+		arglist=args.split(";")
+		for arg in arglist:
+			destobj.write("fopwri2;" + arg + "\n")
+		if keyword=="linepk":
+			destobj.write("fopwri1;:\\n\n")
+		return
+
 
 class in_labelgoto:
 	def __init__(self):
@@ -1270,6 +1297,7 @@ class mainloop:
 		in_intcommon1b(["textcolor"], "dataread1;>", "\niowrite1;>io.textcolor\n", "Set text colors"),
 		in_intcommon1b(["packcolor"], "dataread1;>", "\niowrite1;>io.packcolor\n", "Set ternary packed art colors"),
 		in_intcommon1b(["tpack"], "dataread1;>", "\niowrite1;>io.packart\n", "Draw ternary Packed art"),
+		in_mulpack(),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),

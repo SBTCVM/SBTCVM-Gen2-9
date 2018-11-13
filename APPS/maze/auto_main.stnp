@@ -60,7 +60,7 @@ var keybuff=10x0
 var newx=10x0
 var newy=10x0
 
-prline ternary maze engine. v0.1
+prline ternary maze engine. v0.2
 
 #magic maze address retrieval code.
 asm setreg1;>mazetop
@@ -79,28 +79,41 @@ set mazememtop
 #################
 
 label main
+textcolor *+++---
 prline Maze View:
 newline
+textcolor *+++000
 prline ---------------
 newline
+textcolor *0++---
 gsub draw2
 newline
+textcolor *+++000
 prline ---------------
 newline
+textcolor *+++---
 prline w,a,s,d=move, q=quit, m=map, o=about this game
+label main_input
 keyprompt
 set keybuff
 if keybuff,upk gsub doup
+if keybuff,upk goto main
 if keybuff,dnk gsub dodown
+if keybuff,dnk goto main
 if keybuff,lk gsub doleft
+if keybuff,lk goto main
 if keybuff,rk gsub doright
+if keybuff,rk goto main
 if keybuff,mapk gsub drawfull
+if keybuff,mapk goto main
 if keybuff,aboutk gsub about
+if keybuff,aboutk goto main
 if keybuff,quitk goto quit
-goto main
+goto main_input
 
 
 label quit
+textcolor *+-----
 prline GAME OVER.
 prline press a key to exit.
 keyprompt
@@ -141,7 +154,9 @@ copy newy,looky
 gsub lookup
 if lookresult,floor goto check_pass
 if lookresult,win goto winner
+textcolor *+++0--
 prline I can't go that way.
+textcolor *+++---
 return
 label check_pass
 copy newx,px
@@ -223,6 +238,7 @@ return
 
 
 label drawfull
+textcolor *0++---
 prline You are at '@'. exit is at '='.
 get set0
 set drawx
@@ -280,8 +296,9 @@ set lookresult
 return
 
 label about
+textcolor *+++--0
 prline --ABOUT--
-prline ternary maze engine v0.1
+prline ternary maze engine v0.2
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018 Thomas Leathers & Contributors
@@ -298,8 +315,10 @@ prline GNU General Public License for more details.
 prline 
 prline You should have received a copy of the GNU General Public License
 prline along with ternary maze engine. If not, see <http://www.gnu.org/licenses/>
+textcolor *+++---
 prline 
 prline PRESS A KEY TO RETURN TO GAME
+
 print >
 keyprompt
 newline

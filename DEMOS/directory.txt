@@ -6,6 +6,9 @@ packtest2:
 	ascii aproximations in place of the graphical blocks the pygame frontend
 	uses.
 
+packtest3:
+	Similar to packtest2, but with a basic example of custom ternary-packed-art
+	colors. colors are NOT supported by curses.
 vscroll:
 	A massive 72x400 graphical scroller using Ternary-packed-art
 	Art and Code: Thomas Leathers
