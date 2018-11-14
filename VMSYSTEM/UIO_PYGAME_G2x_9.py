@@ -71,7 +71,7 @@ class uio:
 		self.screensurf=pygame.display.set_mode((charwidth*self.maxx, charheight*self.maxy))
 		self.gamode=0
 		####
-		
+		self.fscreen=0
 		self.run=1
 		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
 		#self.ttylogdata=""
@@ -116,11 +116,28 @@ class uio:
 			self.clock.tick(30)
 			for event in pygame.event.get():
 				if event.type==pygame.KEYDOWN:
-					keyinp=event.unicode
-					if keyinp in tcon.strtodat:
-						self.keyinbuff.append(tcon.strtodat[keyinp])
-					if event.key==pygame.K_RETURN:
-						self.keyinbuff.append(1)
+					mods=pygame.key.get_mods()
+					if event.key==pygame.K_RETURN and mods & pygame.KMOD_ALT:
+						if self.fscreen:
+							self.fscreen=0
+							scbak=self.screensurf.copy()
+							self.screensurf=pygame.display.set_mode((self.screensurf.get_width(), self.screensurf.get_height()))
+							self.screensurf.blit(scbak, (0, 0))
+							pygame.display.flip()
+						else:
+							self.fscreen=1
+							scbak=self.screensurf.copy()
+							self.screensurf=pygame.display.set_mode((self.screensurf.get_width(), self.screensurf.get_height()), pygame.FULLSCREEN)
+							self.screensurf.blit(scbak, (0, 0))
+							pygame.display.flip()
+					elif event.key==pygame.K_ESCAPE and mods & pygame.KMOD_ALT:
+						self.cpu.exception("User Stop", -50, cancatch=0)
+					else:
+						keyinp=event.unicode
+						if keyinp in tcon.strtodat:
+							self.keyinbuff.append(tcon.strtodat[keyinp])
+						if event.key==pygame.K_RETURN:
+							self.keyinbuff.append(1)
 				if event.type==pygame.QUIT:
 					self.cpu.exception("User Stop", -50, cancatch=0)
 			#if in gamode=0 (TTY mode), draw TTY output.

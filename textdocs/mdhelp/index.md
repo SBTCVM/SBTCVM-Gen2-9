@@ -8,6 +8,10 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 - [Welcome](welcome.md)
 - [Programs](programs.md)
 
+### Frontends
+
+- [vm - pygame frontend](vm_pygame.md)
+
 ### Development
 
 - [XAS shell/script help](xas.md) - SBTCVM's integrated build script system and interactive shell.
