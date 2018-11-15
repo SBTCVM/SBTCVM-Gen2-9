@@ -47,3 +47,18 @@ v>rand4.start;10x59
 v>rand4.end;10x60
 v>rand4.get;10x61
 
+##SBTGA
+v>ga.mode;10x500
+v>ga.mode.plotter;10x30
+v>ga.mode.tty;10x0
+
+#Plotter
+v>plot.x1;10x501
+v>plot.y1;10x502
+v>plot.x2;10x503
+v>plot.y2;10x504
+v>plot.color;10x505
+v>plot.line;10x506
+v>plot.fill;10x507
+v>plot.fhalt;10x508
+

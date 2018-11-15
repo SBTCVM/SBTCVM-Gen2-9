@@ -23,3 +23,13 @@ colortext:
 	If you run this demo in the curses frontend, it will work, just without
 	the colors. so using it DOES NOT break compatibility with the curses
 	frontend.
+	
+plottest:
+	A basic example of SBTGA mode 30: plotter mode.
+	This vector-based mode, cannot be engaged in the curses frontend, for 
+	obvious reasons. It starts with a tty-mode-based explanation, switches to
+	mode 30 for its demonstration, then switches back to tty mode.
+	
+	note: using any SBTGA mode other than 0 (tty mode), DOES break
+	compatibility with the curses frontend.
+	

@@ -63,6 +63,12 @@ class uio:
 		self.linebgfill=0
 		self.newcol="+++---"
 		
+		self.plotx=800
+		self.ploty=600
+		
+		self.plotobj=PlotterEngine(ioref, 243, 243, self.plotx, self.ploty, 30)
+		
+		
 		#load and set window icon.
 		self.picon=pygame.image.load(os.path.join(*["VMSYSTEM", "GFX", "icon32.png"]))
 		pygame.display.set_icon(self.picon)
@@ -87,6 +93,8 @@ class uio:
 		#Enhanced TTY IO (colors, etc.)
 		ioref.setwritenotify(6, self.settextcol)#text fg/bg
 		ioref.setwritenotify(7, self.setpackcol)#3 packed art colors as 3, 3-trit RGB values.
+		
+		ioref.setwritenotify(500, self.setgamode)
 		self.xttycharpos=0
 		
 		####TTY RENDERING
@@ -103,12 +111,11 @@ class uio:
 		self.chary=charheight*(self.maxy-1)
 		self.newline_rect=pygame.Rect(0, self.chary, charwidth*self.maxx, charheight)
 		####
-		
+		self.newmode=None
 		self.shutdown=0
 		self.clock=pygame.time.Clock()
 		pygame.display.set_caption(romname + " - SBTCVM Gen2-9", romname + " - SBTCVM Gen2-9")
-	#status field update loop.
-	
+	#input and display thread
 	def statup(self):
 		self.running=1
 		while self.run:
@@ -141,99 +148,49 @@ class uio:
 				if event.type==pygame.QUIT:
 					self.cpu.exception("User Stop", -50, cancatch=0)
 			#if in gamode=0 (TTY mode), draw TTY output.
+			if self.newmode!=None:
+				self.dogamode(self.newmode)
+				self.newmode=None
 			if self.gamode==0:
-				dcount=0
-				fulldraw=0
-				uprects=[]
-				
-				
-				
-				self.curxcnt+=1
-				if self.curxcnt==self.blinkspeed:
-					self.curxcnt=0
-					if len(self.ttybuff)>0:
-						pass
-					elif self.blinkflg:
-						self.blinkflg=0
-						uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
-					else:
-						self.blinkflg=1
-						uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
-				
-				while len(self.ttybuff)>0 and dcount!=30:
-					dcount+=1
-					char=self.ttybuff.pop(0)
-					
-					#list codes:
-					if isinstance(char, list):
-						#When list code 20 is detected, change colors using helper method.
-						if char[0]==20:
-							self.newcolor(char[1])
-						if char[0]==21:
-							self.newpackcolor(char[1])
-							
-						
-					#newline handler
-					elif char=="\n":
-						if self.linebgfill==1:
-							self.linebgfill=0
-							pxrect=pygame.Rect(self.charx, self.chary, charwidth*self.maxx, charheight)
-							pygame.draw.rect(self.screensurf, self.TTYbg, pxrect, 0)
-							self.curcnt=self.blinkspeed
-						pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2)
-						self.screensurf.scroll(0, -charheight)
-						self.charx=0
-						pygame.draw.rect(self.screensurf, self.TTYbg, self.newline_rect, 0)
-						fulldraw=1
-						
-					#backspace handler
-					elif char=="\b":
-						if self.charx!=0 and self.pchar!="\n" and self.pchar!="\b":
-							#clear cursor
-							uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
-							
-							self.charx-=charwidth
-							uprect=self.screensurf.blit(self.backfill, (self.charx, self.chary))
-							if len(self.ttybuff)<4:
-								uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
-								self.blinkflg=0
-								self.curxcnt=0
-							uprects.append(uprect)
-					#ternary packed art rendering
-					elif char==-1:
-						uprect=self.screensurf.blit(self.gfxpakn, (self.charx, self.chary))
-						self.charx+=charwidth
-						uprects.append(uprect)
-					elif char==0:
-						uprect=self.screensurf.blit(self.gfxpak0, (self.charx, self.chary))
-						self.charx+=charwidth
-						uprects.append(uprect)
-					elif char==1:
-						uprect=self.screensurf.blit(self.gfxpakp, (self.charx, self.chary))
-						self.charx+=charwidth
-						uprects.append(uprect)
-					else:
-						#normal character handler
-						uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
-						if len(self.ttybuff)<4:
-							uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2+charwidth, self.chary), (self.charx+2+charwidth, self.chary+charheight), 2))
-							self.blinkflg=0
-							self.curxcnt=0
-						self.charx+=charwidth
-						uprects.append(uprect)
-				if fulldraw:
-					pygame.display.flip()
-				else:
-					pygame.display.update(uprects)
+				self.render_dumbtty()
+			else:
+				self.ttybuff=[]
+			if self.gamode==30:
+				self.plotobj.draw(self.screensurf)
 		self.running=0
 		return
-	def charrender(self, char):
-		if char+self.colorkey in self.charcache:
-			return self.charcache[char+self.colorkey]
+		
+	def setgamode(self, addr, data):
+		self.newmode=int(data)
+	def dogamode(self, data):
+		if self.gamode==30:
+			self.plotobj.disable()
+		
+		if self.fscreen:
+			if data==0:
+				self.gamode=0
+				self.screensurf=pygame.display.set_mode((charwidth*self.maxx, charheight*self.maxy), pygame.FULLSCREEN)
+				self.screensurf.fill(self.textbg)
+				pygame.display.flip()
+			if data==30:
+				self.gamode=30
+				self.screensurf=pygame.display.set_mode((self.plotx, self.ploty), pygame.FULLSCREEN)
+				self.plotobj.enable()
+				self.screensurf.fill((127, 127, 127))
+				pygame.display.flip()
 		else:
-			chtx=monofont.render(char, True, self.textfg, self.textbg).convert()
-			self.charcache[char+self.colorkey]=chtx
-			return chtx
+			if data==0:
+				self.gamode=0
+				self.screensurf=pygame.display.set_mode((charwidth*self.maxx, charheight*self.maxy))
+				self.screensurf.fill(self.textbg)
+				pygame.display.flip()
+			if data==30:
+				self.gamode=30
+				self.screensurf=pygame.display.set_mode((self.plotx, self.ploty))
+				self.plotobj.enable()
+				self.screensurf.fill((127, 127, 127))
+				pygame.display.flip()
+	
 	#don't set colors yet, but add a special list code to TTY buffer.
 	def settextcol(self, addr, data):
 		newcol=data.bttrunk(9)[3:]
@@ -368,7 +325,174 @@ class uio:
 		while self.running:
 			time.sleep(0.1)
 		return
+	
+	def charrender(self, char):
+		if char+self.colorkey in self.charcache:
+			return self.charcache[char+self.colorkey]
+		else:
+			chtx=monofont.render(char, True, self.textfg, self.textbg).convert()
+			self.charcache[char+self.colorkey]=chtx
+			return chtx
+	#GAMODE 0 (dumb tty) rendering engine.
+	def render_dumbtty(self):
+		dcount=0
+		fulldraw=0
+		uprects=[]
+		
+		
+		
+		self.curxcnt+=1
+		if self.curxcnt==self.blinkspeed:
+			self.curxcnt=0
+			if len(self.ttybuff)>0:
+				pass
+			elif self.blinkflg:
+				self.blinkflg=0
+				uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+			else:
+				self.blinkflg=1
+				uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+		
+		while len(self.ttybuff)>0 and dcount!=30:
+			dcount+=1
+			char=self.ttybuff.pop(0)
+			
+			#list codes:
+			if isinstance(char, list):
+				#When list code 20 is detected, change colors using helper method.
+				if char[0]==20:
+					self.newcolor(char[1])
+				if char[0]==21:
+					self.newpackcolor(char[1])
+					
+				
+			#newline handler
+			elif char=="\n":
+				if self.linebgfill==1:
+					self.linebgfill=0
+					pxrect=pygame.Rect(self.charx, self.chary, charwidth*self.maxx, charheight)
+					pygame.draw.rect(self.screensurf, self.TTYbg, pxrect, 0)
+					self.curcnt=self.blinkspeed
+				pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2)
+				self.screensurf.scroll(0, -charheight)
+				self.charx=0
+				pygame.draw.rect(self.screensurf, self.TTYbg, self.newline_rect, 0)
+				fulldraw=1
+				
+			#backspace handler
+			elif char=="\b":
+				if self.charx!=0 and self.pchar!="\n" and self.pchar!="\b":
+					#clear cursor
+					uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+					
+					self.charx-=charwidth
+					uprect=self.screensurf.blit(self.backfill, (self.charx, self.chary))
+					if len(self.ttybuff)<4:
+						uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
+						self.blinkflg=0
+						self.curxcnt=0
+					uprects.append(uprect)
+			#ternary packed art rendering
+			elif char==-1:
+				uprect=self.screensurf.blit(self.gfxpakn, (self.charx, self.chary))
+				self.charx+=charwidth
+				uprects.append(uprect)
+			elif char==0:
+				uprect=self.screensurf.blit(self.gfxpak0, (self.charx, self.chary))
+				self.charx+=charwidth
+				uprects.append(uprect)
+			elif char==1:
+				uprect=self.screensurf.blit(self.gfxpakp, (self.charx, self.chary))
+				self.charx+=charwidth
+				uprects.append(uprect)
+			else:
+				#normal character handler
+				uprect=self.screensurf.blit(self.charrender(char), (self.charx, self.chary))
+				if len(self.ttybuff)<4:
+					uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2+charwidth, self.chary), (self.charx+2+charwidth, self.chary+charheight), 2))
+					self.blinkflg=0
+					self.curxcnt=0
+				self.charx+=charwidth
+				uprects.append(uprect)
+		if fulldraw:
+			pygame.display.flip()
+		else:
+			pygame.display.update(uprects)
 
+
+class PlotterEngine:
+	def __init__(self, ioref, xsize, ysize, realx, realy, itemlimit=30):
+		self.xsize=xsize
+		self.ysize=ysize
+		self.drawbuff=[]
+		self.itemlimit=itemlimit
+		self.realx=realx
+		self.realy=realy
+		self.xmag=realx/float(xsize)
+		self.ymag=realy/float(ysize)
+		self.active=0
+		self.x1=0
+		self.y1=0
+		self.x2=0
+		self.y2=0
+		self.color=(127, 127, 127)
+		
+		
+		ioref.setwritenotify(501, self.dx1)
+		ioref.setwritenotify(502, self.dy1)
+		ioref.setwritenotify(503, self.dx2)
+		ioref.setwritenotify(504, self.dy2)
+		ioref.setwritenotify(505, self.dcolor)
+		ioref.setwritenotify(506, self.line)
+		ioref.setwritenotify(507, self.fill)
+		ioref.setwritenotify(520, self.fhalt)
+	def dx1(self, addr, data):
+		self.x1=int(data)+121
+	def dx2(self, addr, data):
+		self.x2=int(data)+121
+	def dy1(self, addr, data):
+		self.y1=int(data)+121
+	def dy2(self, addr, data):
+		self.y2=int(data)+121
+	def dcolor(self, addr, data):
+		newcol=data.bttrunk(9)
+		R=getGREY27(newcol[:3])
+		G=getGREY27(newcol[3:6])
+		B=getGREY27(newcol[6:])
+		self.color=(R, G, B)
+	def line(self, addr, data):
+		self.drawbuff.append([1, self.x1, self.y1, self.x2, self.y2, self.color])
+	def fill(self, addr, data):
+		newcol=data.bttrunk(9)
+		R=getGREY27(newcol[:3])
+		G=getGREY27(newcol[3:6])
+		B=getGREY27(newcol[6:])
+		self.drawbuff.append([0, (R, G, B)])
+	def fhalt(self, addr, data):
+		self.drawbuff.append([-1])
+	def draw(self, surface):
+		cnt=0
+		uprects=[]
+		fullup=0
+		while len(self.drawbuff)>0 and cnt!=self.itemlimit:
+			cnt+=1
+			
+			chunk=self.drawbuff.pop(0)
+			if chunk[0]==-1:
+				break
+			if chunk[0]==0:
+				surface.fill(chunk[1])
+				fullup=1
+			if chunk[0]==1:
+				uprects.append(pygame.draw.line(surface, chunk[5], (int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag))))
+		if fullup:
+			pygame.display.flip()
+		else:
+			pygame.display.update(uprects)
+	def enable(self):
+		self.active=1
+	def disable(self):
+		self.active=0
 
 def getRGB27(string):
 	redch=string[0]
@@ -395,3 +519,58 @@ def getRGB27(string):
 	return (redre, greenre, bluere)
 
 
+def getGREY27(lookupcode):
+	if lookupcode=="---":
+		return(0)
+	if lookupcode=="--0":
+		return(10)
+	if lookupcode=="--+":
+		return(20)
+	if lookupcode=="-0-":
+		return(31)
+	if lookupcode=="-00":
+		return(43)
+	if lookupcode=="-0+":
+		return(54)
+	if lookupcode=="-+-":
+		return(64)
+	if lookupcode=="-+0":
+		return(74)
+	if lookupcode=="-++":
+		return(82)
+	if lookupcode=="0--":
+		return(92)
+	if lookupcode=="0-0":
+		return(99)
+	if lookupcode=="0-+":
+		return(110)
+	if lookupcode=="00-":
+		return(117)
+	if lookupcode=="000":
+		return(127)
+	if lookupcode=="00+":
+		return(138)
+	if lookupcode=="0+-":
+		return(145)
+	if lookupcode=="0+0":
+		return(156)
+	if lookupcode=="0++":
+		return(163)
+	if lookupcode=="+--":
+		return(173)
+	if lookupcode=="+-0":
+		return(181)
+	if lookupcode=="+-+":
+		return(191)
+	if lookupcode=="+0-":
+		return(201)
+	if lookupcode=="+00":
+		return(212)
+	if lookupcode=="+0+":
+		return(222)
+	if lookupcode=="++-":
+		return(235)
+	if lookupcode=="++0":
+		return(245)
+	if lookupcode=="+++":
+		return(255)

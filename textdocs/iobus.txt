@@ -78,3 +78,14 @@ x :  m : asm varname  : description
 
 [TODO: map out music controller IO lines]
 
+### SBTGA system
+
+500: [w] ga.mode    : set SBTGA mode (ignored by curses frontend)
+501: [w] plot.x1    : set plotter x1 position register
+502: [w] plot.y1    : set plotter y1 position register
+503: [w] plot.x2    : set plotter x2 position register
+504: [w] plot.y2    : set plotter y2 position register
+505: [w] plot.color : set plotter 9-trit RGB color register
+506: [w] plot.line  : draw line
+507: [w] plot.fill  : write a 9-trit RGB color to fill the display with.
+520: [w] plot.fhalt : instruct the plotter to wait until next frame.
