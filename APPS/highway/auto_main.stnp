@@ -33,12 +33,21 @@ var p1buff=0
 var compbuff=0
 var p2buff=0
 newline
-prline   /.../......./..|..../............CD.....
-prline  /---/ * __  /-. | / / __    -------CD---
-prline /.../././_/./../.|/|/./_{.\/.....CD.....
-prline        ._/                /
+
 label mainmenu
-prline          ---HIGHWAY v1.0---
+gsub skybox
+prline   /.../......./..|..../............CD.....
+textcolor *++----
+prline  /---/ * __  /-. | / / __    -------CD---
+textcolor *+++---
+prline /.../././_/./../.|/|/./_{.\/.....CD.....
+textcolor *+++-0-
+print        ._/                /            
+textcolor *+++---
+newline
+
+
+prline          ---HIGHWAY v1.1---
 prline ---A 1 or 2 player guessing game.---
 prline 1: Try to outguess the computer (1 player)
 prline 2: Try to outguess a friend (2 player)
@@ -65,7 +74,7 @@ goto mainmenu
 
 
 
-
+#1-player mode
 label p1main
 newline
 newline
@@ -78,8 +87,18 @@ newline
 newline
 gsub board_1p
 gsub score_1p
+textcolor *+00---
+prline Again? [n]=main menu, [q]=quit, any other to continue.
+textcolor *+++---
+keyprompt
+set kb
+if kb,:n return
+if kb,:N return
+if kb,:q stop
+if kb,:Q stop
 goto p1main
 
+#2-player mode
 label p2main
 newline
 newline
@@ -92,6 +111,15 @@ newline
 newline
 gsub board_2p
 gsub score_2p
+textcolor *+00---
+prline Again? [n]=main menu, [q]=quit, any other to continue.
+textcolor *+++---
+keyprompt
+set kb
+if kb,:n return
+if kb,:N return
+if kb,:q stop
+if kb,:Q stop
 goto p2main
 
 
@@ -166,9 +194,11 @@ newline
 return
 
 label tiewin
+textcolor *++----
 prline _____    __
 prline   |   | |__
 prline   |   | |__
+textcolor *+++---
 add @1,ties
 set ties
 add @1,games
@@ -176,9 +206,11 @@ set games
 return
 
 label p1win
+textcolor *+-+---
 prline  __                  __
 prline |__|    | | | | |\| |__
 prline |   1   |_|_| | | |  __|
+textcolor *+++---
 add @1,p1score
 set p1score
 add @1,games
@@ -186,10 +218,11 @@ set games
 return
 
 label p2win
-
+textcolor *-++---
 prline  __                  __
 prline |__|    | | | | |\| |__
 prline |   2   |_|_| | | |  __|
+textcolor *+++---
 add @1,p2score
 set p2score
 add @1,games
@@ -198,9 +231,11 @@ return
 
 
 label compwin
+textcolor *-++---
 prline  __  __   ___                 __
 prline |   |  | | | |   | | | | |\| |__
 prline |__ |__| | | |.  |_|_| | | |  __|
+textcolor *+++---
 add @1,compscore
 set compscore
 add @1,games
@@ -209,28 +244,36 @@ return
 
 label board_1p
 prline _____|1_|2_|3_|4_|5_|6_|7_|8_|9_
+textcolor *+-+---
 print PLAY1
 copy p1,tpos
 gsub trace
+textcolor *++----
 print TARGT
 copy pacer,tpos
 gsub trace
+textcolor *-++---
 print COMPU
 copy comp,tpos
 gsub trace
+textcolor *+++---
 return
 
 label board_2p
 prline _____|1_|2_|3_|4_|5_|6_|7_|8_|9_
+textcolor *+-+---
 print PLAY1
 copy p1,tpos
 gsub trace
+textcolor *++----
 print TARGT
 copy pacer,tpos
 gsub trace
+textcolor *-++---
 print PLAY2
 copy p2,tpos
 gsub trace
+textcolor *+++---
 return
 
 
@@ -248,7 +291,9 @@ return
 label do_p1
 val 0
 set retflg
+textcolor *+-+---
 prline PLAYER 1: pick a number from 1 to 9 or x to quit
+textcolor *+++---
 label do_p1_loop
 keyprompt
 set kb
@@ -285,7 +330,9 @@ prline
 label do_p2
 val 0
 set retflg
+textcolor *-++---
 prline PLAYER 2: pick a number from 1 to 9 or x to quit
+textcolor *+++---
 label do_p2_loop
 keyprompt
 set kb
@@ -340,9 +387,10 @@ newline
 return
 
 label about
+textcolor *+++--0
 newline
 prline --ABOUT--
-prline Highway v1.0: A 1 or 2 player guessing game
+prline Highway v1.1: A 1 or 2 player guessing game
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018 Thomas Leathers & Contributors
@@ -359,6 +407,7 @@ prline GNU General Public License for more details.
 prline 
 prline You should have received a copy of the GNU General Public License
 prline along with Difference Cards. If not, see <http://www.gnu.org/licenses/>
+textcolor *+++---
 prline 
 prline PRESS A KEY TO RETURN TO MAIN MENU
 print >
@@ -366,11 +415,14 @@ keyprompt
 newline
 return
 label help
-prline Highway v1.0: A 1 or 2 player guessing game
+textcolor *+++--0
+newline
+prline Highway v1.1: A 1 or 2 player guessing game
 prline ----RULES----
 prline each player picks a 'mile marker' from 1 to 9.
 prline a random 'mile marker' is chosen, and the closest player to it wins.
 prline if each player is equal distance away the game ties.
+textcolor *+++---
 prline 
 prline PRESS A KEY TO RETURN TO MAIN MENU
 print >
@@ -379,4 +431,31 @@ keyprompt
 newline
 return
 
+#### Title banner related functions
 
+label skybox
+textcolor *+++---
+print  -  *    .   -   *  .  .   . - * -   -   . 
+gsub cleannew
+textcolor *+++--0
+print                                            
+gsub cleannew
+textcolor *+++-0+
+print                                            
+gsub cleannew
+textcolor *+++0-+
+print                                            
+gsub cleannew
+textcolor *++++-0
+print                                            
+gsub cleannew
+textcolor *++-+0-
+print                    .@@@.                   
+gsub cleannew
+
+return
+
+label cleannew
+textcolor *+++---
+newline
+return
