@@ -1,3 +1,7 @@
+key:
+	[ttycolor] : uses tty color support.
+	[nocurses] : CANNOT be used in curses frontend.
+
 ----Terminal----
 
 packtest2:
@@ -8,7 +12,7 @@ packtest2:
 
 packtest3:
 	Similar to packtest2, but with a basic example of custom ternary-packed-art
-	colors. colors are NOT supported by curses.
+	colors. colors are NOT supported by curses. [ttycolors]
 vscroll:
 	A massive 72x400 graphical scroller using Ternary-packed-art
 	Art and Code: Thomas Leathers
@@ -22,8 +26,14 @@ colortext:
 	
 	If you run this demo in the curses frontend, it will work, just without
 	the colors. so using it DOES NOT break compatibility with the curses
-	frontend.
-	
+	frontend. [ttycolor]
+
+colorpack:
+	uses the 27-color 3-trit RGB variant of the basic ternary-packed-art
+	system. [nocurses]
+
+----Plotter----
+
 plottest:
 	A basic example of SBTGA mode 30: plotter mode.
 	This vector-based mode, cannot be engaged in the curses frontend, for 
@@ -31,5 +41,5 @@ plottest:
 	mode 30 for its demonstration, then switches back to tty mode.
 	
 	note: using any SBTGA mode other than 0 (tty mode), DOES break
-	compatibility with the curses frontend.
+	compatibility with the curses frontend. [nocurses]
 	

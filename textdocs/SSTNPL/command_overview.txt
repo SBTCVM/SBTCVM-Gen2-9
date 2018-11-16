@@ -168,9 +168,11 @@ Command documentation:
 	textcolor [varname] : set text color (on frontends that support it) Can use Literals
 	packcolor [varname] : set ternary packed art color (on frontends that support it) Can use Literals
 	tpack [varname] : Print ternary packed art segment. Can use Literals
+	cpack [varname] : Print 27 COLOR ternary packed art segment. Can use Literals
 	mulpk [chunks] : specify multiple raw 9-trit ternary values, semicolon divided, for output.
 		mulpk +++++++++;++++++000
 	linepk [chunks] : same as mulpk, but appends a newline after the chunk sequence.
+	cmulpk, clinepk : Same as mulpk, and linepk respectively, but for use with 27 COLOR Ternary Packed Art.
 
 
 --Random

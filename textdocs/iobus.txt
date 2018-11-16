@@ -19,6 +19,8 @@ x :  m : asm varname  : description
 		NOT SUPPORTED BY CURSES FRONTEND.
 7 : [w]: io.packcolor : set Ternary Packed Art colors as 9 trit value. key: (+++000---) (key is showing corresponding pack-art trits)
 		NOT SUPPORTED BY CURSES FRONTEND.
+8 : [w]: io.cpack     : RGB packed art. 3 'pixels' specified as 3-trit RGB values.
+		NOT SUPPORTED BY CURSES FRONTEND.
 
 50: [b]: rand1.start  : set start of random 1 range.
 51: [b]: rand1.end    : set end of random 1 range.

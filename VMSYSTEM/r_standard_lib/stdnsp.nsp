@@ -13,6 +13,7 @@ vdi.cli.status;102
 rand3.get;58
 plot.x1;501
 io.decdump;3
+io.cpack;8
 rand2.start;53
 plot.x2;503
 vdi.cli.out;101

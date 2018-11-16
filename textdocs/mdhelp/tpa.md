@@ -4,6 +4,9 @@
 Ternary-packed art is a hardware-supported encoding scheme for rendering sets
 of 9 'pixel' values, encoded as 1 Nonet (data word) each, to the TTY.
 
+also see the 27-color variant: [Color Ternary-Packed art](ctpa.md)
+
+
 ## Why?
 
  - its 9-times smaller than (rectangular) text art of the same size.**(1)**

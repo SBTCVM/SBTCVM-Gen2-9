@@ -1,0 +1,18 @@
+var yn=0
+prline This demo is a test of 3-trit RGB color packart.
+prline If you are running this in the curses frontend, YOU WILL NOT SEE COLOR
+prline PACK ART!
+cpack *+--+--+--
+cmulpk +++---+++;-0--0--0-;+++---+++
+clinepk --0--0--0;-0--0--0-;+++---+++
+newline
+keyprompt
+
+
+asm include;colorpack+image.tas0
+
+print Press any key to exit.
+
+keyprompt
+newline
+stop

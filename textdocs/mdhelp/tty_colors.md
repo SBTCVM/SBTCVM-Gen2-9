@@ -15,11 +15,13 @@ at most, on each of those boundaries.
 The following assembly code will change the default colors to a bright blue (`-0+`)
 color for `+`, a dark cyan (`--0`) for `0` and black (`---`) for `-`
 
-SBTCVM ASM v3:
+**SBTCVM ASM v3:**
+
 	setreg1;-0+-00---
 	iowrite1;>io.packcolor
 
-SSTNPL:
+**SSTNPL:**
+
 	packcolor *-0+-00---
 
 ## Text color?

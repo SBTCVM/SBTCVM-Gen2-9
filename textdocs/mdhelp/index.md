@@ -21,3 +21,4 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 
 - [Ternary-packed art](tpa.md) - A built-in hardware encoding for simple inline 3-shade artwork in the TTY, at 9 pixels a Nonet (data word)
 - [TTY colors](tty_colors.md) - Documentation of the Enhanced Color features of the pygame frontend's TTY.
+- [Color Ternary-Packed art](ctpa.md) a 3-trit RGB (27-color), variant of Ternary-packed art. (not supported by curses!)

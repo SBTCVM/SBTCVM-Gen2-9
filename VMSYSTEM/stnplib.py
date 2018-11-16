@@ -421,7 +421,7 @@ class in_getchar:
 
 class in_mulpack:
 	def __init__(self):
-		self.keywords=["mulpk", "linepk"]
+		self.keywords=["mulpk", "linepk", "cmulpk", "clinepk"]
 	def p0(self, args, keyword, lineno):
 		if args=="":
 			return 1, keyword+": Line: " + str(lineno) + ": No data."
@@ -439,11 +439,15 @@ class in_mulpack:
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + keyword + "\n")
+		if keyword.startswith("c"):
+			destobj.write("fopset2;>io.cpack\n")
 		arglist=args.split(";")
 		for arg in arglist:
 			destobj.write("fopwri2;" + arg + "\n")
-		if keyword=="linepk":
+		if keyword=="linepk" or keyword=="clinepk":
 			destobj.write("fopwri1;:\\n\n")
+		if keyword.startswith("c"):
+			destobj.write("fopset2;>io.packart\n")
 		return
 
 
@@ -1297,6 +1301,7 @@ class mainloop:
 		in_intcommon1b(["textcolor"], "dataread1;>", "\niowrite1;>io.textcolor\n", "Set text colors"),
 		in_intcommon1b(["packcolor"], "dataread1;>", "\niowrite1;>io.packcolor\n", "Set ternary packed art colors"),
 		in_intcommon1b(["tpack"], "dataread1;>", "\niowrite1;>io.packart\n", "Draw ternary Packed art"),
+		in_intcommon1b(["cpack"], "dataread1;>", "\niowrite1;>io.cpack\n", "Draw COLOR ternary Packed art"),
 		in_mulpack(),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),

@@ -93,6 +93,7 @@ class uio:
 		#Enhanced TTY IO (colors, etc.)
 		ioref.setwritenotify(6, self.settextcol)#text fg/bg
 		ioref.setwritenotify(7, self.setpackcol)#3 packed art colors as 3, 3-trit RGB values.
+		ioref.setwritenotify(8, self.colorpack)#same format as above, but dump 3 raw pixels instead.
 		
 		ioref.setwritenotify(500, self.setgamode)
 		self.xttycharpos=0
@@ -100,6 +101,7 @@ class uio:
 		####TTY RENDERING
 		self.keyinbuff=[]
 		self.charcache={}
+		self.colorpackdict={}
 		self.backfill=monofont.render(" ", True, self.TTYbg, self.TTYbg).convert()
 		
 		self.gfxpakp=monofont.render(" ", True, (255, 255, 255), (255, 255, 255)).convert()
@@ -223,6 +225,12 @@ class uio:
 		self.gfxpakp=monofont.render(" ", True, self.pakpcol, self.pakpcol).convert()
 		self.gfxpak0=monofont.render(" ", True, self.pak0col, self.pak0col).convert()
 		self.gfxpakn=monofont.render(" ", True, self.pakncol, self.pakncol).convert()
+	def colorpack(self, addr, data):
+		colset=data.bttrunk(9)
+		#print(self.newcol)
+		self.ttybuff.append([30, getRGB27(colset[:3])])
+		self.ttybuff.append([30, getRGB27(colset[3:6])])
+		self.ttybuff.append([30, getRGB27(colset[6:])])
 	def ttyraw(self, string):
 		if self.xttycharpos==self.maxx:
 			self.xttycharpos=0
@@ -333,6 +341,13 @@ class uio:
 			chtx=monofont.render(char, True, self.textfg, self.textbg).convert()
 			self.charcache[char+self.colorkey]=chtx
 			return chtx
+	def char30(self, color):
+		if color in self.colorpackdict:
+			return self.colorpackdict[color]
+		else:
+			cpsurf=monofont.render(" ", True, color, color).convert()
+			self.colorpackdict[color]=cpsurf
+			return cpsurf
 	#GAMODE 0 (dumb tty) rendering engine.
 	def render_dumbtty(self):
 		dcount=0
@@ -364,7 +379,13 @@ class uio:
 					self.newcolor(char[1])
 				if char[0]==21:
 					self.newpackcolor(char[1])
-					
+				if char[0]==30:
+					uprect=self.screensurf.blit(self.char30(char[1]), (self.charx, self.chary))
+					if len(self.ttybuff)<4:
+						uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2+charwidth, self.chary), (self.charx+2+charwidth, self.chary+charheight), 2))
+						self.blinkflg=0
+						self.curxcnt=0
+					self.charx+=charwidth
 				
 			#newline handler
 			elif char=="\n":
