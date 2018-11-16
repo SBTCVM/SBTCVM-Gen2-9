@@ -12,7 +12,31 @@ Start SBTCVM XAS interactive shell:
 Boot into VDI shell (unfinished):     
 `./pyg_sbtcvm.py`
      
-     
+
+### where does SBTCVM search for applications and source code?
+In order _(non-bold text describes what applications & source code is kept there)_
+
+ - **vmsystem**: assembler standard libs.
+ - **vmsystem/roms**: system roms live here.
+ - **roms**: quite a lot of test troms.
+ - **apps**: Interactive trom applications.
+ - **demos**: a variety of demos, showing off SBTCVM's graphical capabilities.
+ - **vmuser**: your personal directory.
+
+Notes:
+
+ - Any directory within these, prefixed with **`r_`** Will have its contents in the
+path. i.e. **`r_standard_lib`** in vmsystem
+ - Most trom applications & demos use **`auto directories`**. where a directory name can 
+be used as an argument for a certain SBTCVM filetype, if it contains a file of that type 
+prefixed with **`auto_`**
+
+[XAS help](/textdocs/mdhelp/xas.md) has more information on working with directories.
+
+### where should i install 3rd party trom apps and assembler libraries?
+
+ - vmuser
+
 ### more information:
 - [SBTCVM Technical Glossary](/textdocs/mdhelp/glossary/glossary.md) A, markdown-based, Glossary of various technical terms used in SBTCVM.
 - [SBTCVM Help Index](/textdocs/mdhelp/index.md) A, markdown-based, set of help documents (main index)
