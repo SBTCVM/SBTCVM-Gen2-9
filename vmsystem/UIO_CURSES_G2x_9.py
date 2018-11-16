@@ -14,7 +14,7 @@ import time
 #a mono subset of proper text modes may not be out of the question.
 
 #currently, it uses 2 curses windows: a 2 line status area (statwin), with a tty area (ttywin) using the rest of the lines.
-#uiolog=open(os.path.join("CAP", "uio_curses.log"), "w")
+#uiolog=open(os.path.join("cap", "uio_curses.log"), "w")
 
 
 class uio:
@@ -32,7 +32,7 @@ class uio:
 		self.gfxpak0="-"
 		self.gfxpakn=" "
 		self.run=1
-		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
+		#self.ttylog=open(os.path.join("cap", ttylogname), "w")
 		#self.ttylogdata=""
 		self.ttylog=iofuncts.logit(ttylogname, 1024)
 		self.ttylog.write("frontend: Curses\nBegin UIO tty log:\n")

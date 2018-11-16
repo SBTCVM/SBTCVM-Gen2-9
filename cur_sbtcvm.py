@@ -1,15 +1,21 @@
 #!/usr/bin/env python
-import VMSYSTEM.libbaltcalc as libbaltcalc
-from VMSYSTEM.libbaltcalc import btint
-import VMSYSTEM.MEM_G2x_9
-import VMSYSTEM.CPU_G2x_9
-import VMSYSTEM.IO_G2x_9
-import VMSYSTEM.UIO_CURSES_G2x_9 as UIO
-import VMSYSTEM.COMMON_IO_G2x_9 as devcommon
-import VMSYSTEM.SBTVDI_IO_G2x_9 as vdi
+
+import os
+if not os.path.isdir("vmsystem"):
+	print("changing to script location...")
+	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+
+import vmsystem.libbaltcalc as libbaltcalc
+from vmsystem.libbaltcalc import btint
+import vmsystem.MEM_G2x_9
+import vmsystem.CPU_G2x_9
+import vmsystem.IO_G2x_9
+import vmsystem.UIO_CURSES_G2x_9 as UIO
+import vmsystem.COMMON_IO_G2x_9 as devcommon
+import vmsystem.SBTVDI_IO_G2x_9 as vdi
 import time
 import sys
-import os
 import curses
 import signal
 
@@ -108,11 +114,11 @@ else:
 		
 		print("SBTCVM Generation 2 9-trit VM, v2.1.0.alpha\n")
 		#initialize memory subsystem
-		memsys=VMSYSTEM.MEM_G2x_9.memory(romfile)
+		memsys=vmsystem.MEM_G2x_9.memory(romfile)
 		#initialize IO subsystem
-		iosys=VMSYSTEM.IO_G2x_9.io()
+		iosys=vmsystem.IO_G2x_9.io()
 		
-		cpusys=VMSYSTEM.CPU_G2x_9.cpu(memsys, iosys)
+		cpusys=vmsystem.CPU_G2x_9.cpu(memsys, iosys)
 		devcommon.factorydevs(iosys)
 		#init SBTVDI interface.
 		vdi.sbtvdi(iosys, cpusys, memsys)

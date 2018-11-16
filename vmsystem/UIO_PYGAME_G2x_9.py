@@ -11,7 +11,7 @@ import time
 #each frontend (tk, pygame, curses) will have a specific UIO module, as well as its own main executable script.
 #PYGAME FRONTEND
 
-#uiolog=open(os.path.join("CAP", "uio_curses.log"), "w")
+#uiolog=open(os.path.join("cap", "uio_curses.log"), "w")
 
 pygame.display.init()
 pygame.font.init()
@@ -70,7 +70,7 @@ class uio:
 		
 		
 		#load and set window icon.
-		self.picon=pygame.image.load(os.path.join(*["VMSYSTEM", "GFX", "icon32.png"]))
+		self.picon=pygame.image.load(os.path.join(*["vmsystem", "GFX", "icon32.png"]))
 		pygame.display.set_icon(self.picon)
 		
 		#Init screen for TTY output. basing size on font properties.
@@ -79,7 +79,7 @@ class uio:
 		####
 		self.fscreen=0
 		self.run=1
-		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
+		#self.ttylog=open(os.path.join("cap", ttylogname), "w")
 		#self.ttylogdata=""
 		self.ttylog=iofuncts.logit(ttylogname, 1024)
 		self.ttylog.write("frontend: Pygame\nBegin UIO tty log:\n")

@@ -1,10 +1,10 @@
 *.pyc
 *.pyo
 .~lock*
-VMUSER/*
-!VMUSER/info.txt
-CAP/*
-!CAP/dummy.txt
+vmuser/*
+!vmuser/info.txt
+cap/*
+!cap/dummy.txt
 
 plugins/*
 !plugins/romdump.xascmd

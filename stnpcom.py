@@ -1,10 +1,16 @@
 #!/usr/bin/env python
-import VMSYSTEM.libbaltcalc as libbaltcalc
-import sys
+
 import os
-import VMSYSTEM.iofuncts as iofuncts
-import VMSYSTEM.stnplib as stnplib
-#from VMSYSTEM.g2asmlib import mainloop
+if not os.path.isdir("vmsystem"):
+	print("changing to script location...")
+	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+
+import vmsystem.libbaltcalc as libbaltcalc
+import sys
+import vmsystem.iofuncts as iofuncts
+import vmsystem.stnplib as stnplib
+#from vmsystem.g2asmlib import mainloop
 
 
 

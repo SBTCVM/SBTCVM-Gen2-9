@@ -1,12 +1,18 @@
 #!/usr/bin/env python
-import VMSYSTEM.libbaltcalc as libbaltcalc
-from VMSYSTEM.libbaltcalc import btint
-import VMSYSTEM.libtextcon as tcon
+
+import os
+if not os.path.isdir("vmsystem"):
+	print("changing to script location...")
+	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+
+import vmsystem.libbaltcalc as libbaltcalc
+from vmsystem.libbaltcalc import btint
+import vmsystem.libtextcon as tcon
 import time
 import sys
-import os
-import VMSYSTEM.iofuncts as iofuncts
-import VMSYSTEM.g2common as g2com
+import vmsystem.iofuncts as iofuncts
+import vmsystem.g2common as g2com
 
 try:
 	import pygame

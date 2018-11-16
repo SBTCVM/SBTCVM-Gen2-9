@@ -11,7 +11,7 @@ class logit:
 	def __init__(self, logname, buffsize=60):
 		self.buff=""
 		self.fname=logname
-		self.logfile=open(os.path.join("CAP", logname), "w")
+		self.logfile=open(os.path.join("cap", logname), "w")
 		self.buffsize=buffsize
 	def write(self, data):
 		self.buff+=data
@@ -24,10 +24,10 @@ class logit:
 		self.writelog()
 		self.logfile.close()
 
-VMSYSROMS=os.path.join("VMSYSTEM", "ROMS")
+vmsysroms=os.path.join("vmsystem", "roms")
 reservedpaths=["cfg"]
 
-smartpaths=["VMSYSTEM", VMSYSROMS, "ROMS", "APPS", "DEMOS", "VMUSER"]
+smartpaths=["vmsystem", vmsysroms, "roms", "apps", "demos", "vmuser"]
 
 #handles r_* directories.
 def recur_dir(fnameg):
@@ -65,18 +65,18 @@ def loadtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 		if os.path.isfile(filenameg) and filenameg.lower().endswith(ext):
 			return (open(filenameg, "r"))
 		
-		elif os.path.isfile(os.path.join("VMSYSTEM", filenameg)):
-			return (open(os.path.join("VMSYSTEM", filenameg), "r"))
-		elif os.path.isfile(os.path.join(VMSYSROMS, filenameg)):
-			return (open(os.path.join(VMSYSROMS, filenameg), "r"))
-		elif os.path.isfile(os.path.join("ROMS", filenameg)):
-			return (open(os.path.join("ROMS", filenameg), "r"))
-		elif os.path.isfile(os.path.join("APPS", filenameg)):
-			return (open(os.path.join("APPS", filenameg), "r"))
-		elif os.path.isfile(os.path.join("DEMOS", filenameg)):
-			return (open(os.path.join("DEMOS", filenameg), "r"))
-		elif os.path.isfile(os.path.join("VMUSER", filenameg)):
-			return (open(os.path.join("VMUSER", filenameg), "r"))
+		elif os.path.isfile(os.path.join("vmsystem", filenameg)):
+			return (open(os.path.join("vmsystem", filenameg), "r"))
+		elif os.path.isfile(os.path.join(vmsysroms, filenameg)):
+			return (open(os.path.join(vmsysroms, filenameg), "r"))
+		elif os.path.isfile(os.path.join("roms", filenameg)):
+			return (open(os.path.join("roms", filenameg), "r"))
+		elif os.path.isfile(os.path.join("apps", filenameg)):
+			return (open(os.path.join("apps", filenameg), "r"))
+		elif os.path.isfile(os.path.join("demos", filenameg)):
+			return (open(os.path.join("demos", filenameg), "r"))
+		elif os.path.isfile(os.path.join("vmuser", filenameg)):
+			return (open(os.path.join("vmuser", filenameg), "r"))
 		recurret=recur_dir(filenameg)
 		if recurret!=None:
 			return (open(recurret, "r"))
@@ -96,18 +96,18 @@ def findtrom(fname, ext=".trom", exitonfail=1, exitmsg="ERROR: Nonexistant TROM!
 		if os.path.isfile(filenameg) and filenameg.lower().endswith(ext):
 			return (filenameg)
 		
-		elif os.path.isfile(os.path.join("VMSYSTEM", filenameg)):
-			return (os.path.join("VMSYSTEM", filenameg))
-		elif os.path.isfile(os.path.join(VMSYSROMS, filenameg)):
-			return (os.path.join(VMSYSROMS, filenameg))
-		elif os.path.isfile(os.path.join("ROMS", filenameg)):
-			return (os.path.join("ROMS", filenameg))
-		elif os.path.isfile(os.path.join("APPS", filenameg)):
-			return (os.path.join("APPS", filenameg))
-		elif os.path.isfile(os.path.join("DEMOS", filenameg)):
-			return (os.path.join("DEMOS", filenameg))
-		elif os.path.isfile(os.path.join("VMUSER", filenameg)):
-			return (os.path.join("VMUSER", filenameg))
+		elif os.path.isfile(os.path.join("vmsystem", filenameg)):
+			return (os.path.join("vmsystem", filenameg))
+		elif os.path.isfile(os.path.join(vmsysroms, filenameg)):
+			return (os.path.join(vmsysroms, filenameg))
+		elif os.path.isfile(os.path.join("roms", filenameg)):
+			return (os.path.join("roms", filenameg))
+		elif os.path.isfile(os.path.join("apps", filenameg)):
+			return (os.path.join("apps", filenameg))
+		elif os.path.isfile(os.path.join("demos", filenameg)):
+			return (os.path.join("demos", filenameg))
+		elif os.path.isfile(os.path.join("vmuser", filenameg)):
+			return (os.path.join("vmuser", filenameg))
 		
 		recurret=recur_dir(filenameg)
 		if recurret!=None:

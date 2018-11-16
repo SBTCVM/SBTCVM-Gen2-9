@@ -27,7 +27,7 @@ class uio:
 		self.mem=memref
 		self.io=ioref
 		self.run=1
-		#self.ttylog=open(os.path.join("CAP", ttylogname), "w")
+		#self.ttylog=open(os.path.join("cap", ttylogname), "w")
 		#self.ttylogdata=""
 		self.ttylog=iofuncts.logit(ttylogname, 1024)
 		self.ttylog.write("frontend: TK\nBegin UIO tty log:\n")

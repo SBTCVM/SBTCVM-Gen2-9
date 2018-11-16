@@ -55,7 +55,7 @@ helpdict={
 , "common" : 
 '''   exit: exit shell.
    print [arg]: print text
-   list/ls/dir [path]: list a path. i.e. 'ls APPS+gtt' would list APPS/gtt
+   list/ls/dir [path]: list a path. i.e. 'ls apps+gtt' would list apps/gtt
       Also accepts / and \ as path delineators. only shows files with
       relevant XAS commands. paths are CASE SENSITIVE.
    find [string]: Search filenames containing [string]. only shows files with
