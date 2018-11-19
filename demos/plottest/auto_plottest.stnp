@@ -4,41 +4,44 @@ prline press a key when you see white lines on a blue background.
 
 keyprompt
 
-a setreg1;>ga.mode.plotter
-a iowrite1;>ga.mode
 
-a setreg1;-0+-000++
-a iowrite1;>plot.fill
+gamode @30
 
 
-a setreg1;+++++++++
-a iowrite1;>plot.color
-a setreg1;10x-121
-a iowrite1;>plot.x1
-a iowrite1;>plot.y1
-a setreg1;10x121
-a iowrite1;>plot.x2
-a iowrite1;>plot.y2
-a iowrite1;>plot.line
+drawfill *-0+-000++
 
-a setreg1;10x33
-a iowrite1;>plot.y1
-a iowrite1;>plot.y2
-a iowrite1;>plot.line
 
-a setreg1;10x34
-a iowrite1;>plot.y1
-a iowrite1;>plot.y2
-a iowrite1;>plot.line
+drawcolor *+++++++++
 
-a setreg1;10x35
-a iowrite1;>plot.y1
-a iowrite1;>plot.y2
-a iowrite1;>plot.line
+
+
+drawx1 @-121
+drawy1 @-121
+
+drawx2 @121
+drawy2 @121
+
+drawline
+
+
+
+
+
+drawy1 @33
+drawy2 @33
+drawline
+
+drawy1 @34
+drawy2 @34
+drawline
+
+drawy1 @35
+drawy2 @35
+drawline
+
 keyprompt
 
-a setreg1;>ga.mode.tty
-a iowrite1;>ga.mode
+gamode @0
 
 prline Thank you. Press a key to exit.
 

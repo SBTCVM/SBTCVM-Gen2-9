@@ -381,6 +381,7 @@ class uio:
 					self.newpackcolor(char[1])
 				if char[0]==30:
 					uprect=self.screensurf.blit(self.char30(char[1]), (self.charx, self.chary))
+					uprects.append(uprect)
 					if len(self.ttybuff)<4:
 						uprects.append(pygame.draw.line(self.screensurf, self.textfg, (self.charx+2+charwidth, self.chary), (self.charx+2+charwidth, self.chary+charheight), 2))
 						self.blinkflg=0

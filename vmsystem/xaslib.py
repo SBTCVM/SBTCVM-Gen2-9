@@ -314,9 +314,11 @@ def xasshell():
 			listcmd(arg)
 		elif cmd in ["find"]:
 			findcmd(arg)
+		#.xascmd plugin commands.
 		if cmdvalid(cmd):
 			for cmdobj in xascmds:
 				if cmd==cmdobj.xcmd:
+					#TODO: non-python commands.
 					if cmdobj.ispython:
 						if cmdobj.takesfile and arg!=None:
 							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'\n")

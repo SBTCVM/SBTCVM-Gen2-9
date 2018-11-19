@@ -1,0 +1,54 @@
+var xbuff=0
+var ybuff=0
+var colbuff=0
+var kb=0
+var fillcolor=---------
+
+var fillflg=0
+
+drawx1 @0
+drawy1 @0
+
+
+gamode @30
+
+drawfill *---------
+
+label loop
+
+#helpful note: waitcy can only wait by 6 cycles at a time.
+#waitcy 12
+
+add fillflg,@1
+set fillflg
+if fillflg,@25 gsub filler
+if fillflg,@25 =fillflg @1
+
+rrange @-121,@121
+set xbuff
+rrange @-121,@121
+set ybuff
+rrange @-9841,@9841
+set colbuff
+
+
+drawx2 xbuff
+drawy2 ybuff
+drawcolor colbuff
+drawline
+
+getchar kb
+ifnot kb,@0 goto end
+goto loop
+
+label end
+#waitcy 19000
+stop
+
+
+label filler
+#add fillcolor,*00+00+00+
+#set fillcolor
+#ifnotless fillcolor,*000000000 =fillcolor *---------
+drawfill fillcolor
+return

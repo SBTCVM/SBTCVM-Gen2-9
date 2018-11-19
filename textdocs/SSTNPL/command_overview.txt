@@ -87,6 +87,7 @@ Command documentation:
 
 --System:
 	stop : Shutdown SBTCVM (this is how you quit a program in SBTCVM, when its loaded via a trom image.
+	waitcy [cycles] : wait for roughly the given number of cycles (numbers divisible by 6 are most accurate.)
 
 --Math: 
 	-----NOTE var1 and var2 can be Literals-----
@@ -102,13 +103,13 @@ Command documentation:
 
 --Logic and tritwise:
 	invert [varname] : invert the sign of variable [varname], in-place.
-	abs [varname] : get the absolute value of an integer variable or literal. use set to store result.
-	nabs [varname] : get the INVERTED absolute value of an integer variable or literal. use set to store result.
+	abs [varname]    : get the absolute value of an integer variable or literal. use set to store result.
+	nabs [varname]   : get the INVERTED absolute value of an integer variable or literal. use set to store result.
 
 --Gotos & conditionals:
 	label [name] : create a label with the name [name], for use with gotos.
-	goto [name] : goto label [name]
-	gsub [name] : goto label [name], but store next block (line) of code as return address.
+	goto [name]  : goto label [name]
+	gsub [name]  : goto label [name], but store next block (line) of code as return address.
 	return : return to most recent return address stored.
 	
 	-----NOTE FOR CONDITIONAL GOTOS: var1 var2 var3 and var5 can be Literals as well as variables.-----
@@ -122,14 +123,14 @@ Command documentation:
 	(that can be a literal))
 	
 	--2-argument conditions:
-		if : true if [var1]=[var2]
-		if not : true if [var1]!=[var2] (var1 not equal to var2)
-		ifmore : true if [var1]>[var2]
-		ifless : true if [var1]<[var2]
-		ifnotmore : true if [var1]<=[var2]
-		ifnotless : true if [var1]>=[var2]
+		if         : true if [var1]=[var2]
+		if not     : true if [var1]!=[var2] (var1 not equal to var2)
+		ifmore     : true if [var1]>[var2]
+		ifless     : true if [var1]<[var2]
+		ifnotmore  : true if [var1]<=[var2]
+		ifnotless  : true if [var1]>=[var2]
 	--3-argument conditions:
-		ifrange : true if [var1]<=[var3]<=[var2]
+		ifrange    : true if [var1]<=[var3]<=[var2]
 		ifnotrange : true if [var1]<=[var3]<=[var2]
 	
 	--modes:
@@ -158,21 +159,36 @@ Command documentation:
 	  
 
 --TTY output:
-	print [string] : print specified raw text.
-	prline [string] : print specified raw text, but append a newline.
-	newline : print newline
-	space : print space
-	dumpt [varname] : Dump integer variable [varname], to TTY in ternary form. Can use Literals
-	dumpd [varname] : Dump integer variable [varname], to TTY in signed decimal form. Can use Literals
-	chardump [varname] : Dump a variable to the TTY as a character. Can use Literals
+	print [string]      : print specified raw text.
+	prline [string]     : print specified raw text, but append a newline.
+	newline             : print newline
+	space               : print space
+	dumpt [varname]     : Dump integer variable [varname], to TTY in ternary form. Can use Literals
+	dumpd [varname]     : Dump integer variable [varname], to TTY in signed decimal form. Can use Literals
+	chardump [varname]  : Dump a variable to the TTY as a character. Can use Literals
 	textcolor [varname] : set text color (on frontends that support it) Can use Literals
 	packcolor [varname] : set ternary packed art color (on frontends that support it) Can use Literals
-	tpack [varname] : Print ternary packed art segment. Can use Literals
-	cpack [varname] : Print 27 COLOR ternary packed art segment. Can use Literals
-	mulpk [chunks] : specify multiple raw 9-trit ternary values, semicolon divided, for output.
+	tpack [varname]     : Print ternary packed art segment. Can use Literals
+	cpack [varname]     : Print 27 COLOR ternary packed art segment. Can use Literals
+	mulpk [chunks]      : specify multiple raw 9-trit ternary values, semicolon divided, for output.
 		mulpk +++++++++;++++++000
-	linepk [chunks] : same as mulpk, but appends a newline after the chunk sequence.
-	cmulpk, clinepk : Same as mulpk, and linepk respectively, but for use with 27 COLOR Ternary Packed Art.
+	linepk [chunks]     : same as mulpk, but appends a newline after the chunk sequence.
+	cmulpk, clinepk     : Same as mulpk, and linepk respectively, but for use with 27 COLOR Ternary Packed Art.
+
+--SBTGA:
+	gamode [variable] : switch to the mode specified by the given variable.
+		30: plotter, 0: standard TTY (default mode)
+
+--SBTGA plotter:
+	drawx1    [varname]: set plotter x1
+	drawy1    [varname]: set plotter y1
+	drawx2    [varname]: set plotter x2
+	drawy2    [varname]: set plotter y2
+	drawcolor [varname]: set plotter color (9-trit RGB)
+	drawline           : draw line from x1,y1, to x2,y2 using plotter color
+	drawfill  [varname]: fill plotter display with given (9-trit RGB) color
+	drawflock [varname]: instruct plotter to stop parsing items for the
+		current frame, rather than break at 30 items.
 
 
 --Random

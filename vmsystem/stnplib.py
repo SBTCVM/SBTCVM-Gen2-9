@@ -8,7 +8,7 @@ from . import libtextcon as tcon
 from . import g2asmlib
 #variable type constants
 nptype_int=2
-nptype_str=3
+nptype_str=3#not used
 nptype_label=4
 nptype_table=5
 
@@ -22,12 +22,14 @@ class npvar:
 	def __init__(self, vname, vdata, vtype=nptype_int):
 		self.vname=vname
 		self.vdata=vdata
-		#future proofing
 		self.vtype=vtype
 
 tritvalid="+0-pn"
 varvalid="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_1234567890"
 reservednames=[""]
+
+
+#variable creation statement
 class in_var:
 	def __init__(self):
 		self.keywords=["var"]
@@ -75,7 +77,7 @@ class in_var:
 		return
 
 
-
+#value command, (often used with set)
 class in_val:
 	def __init__(self):
 		self.keywords=["val"]
@@ -107,6 +109,8 @@ class in_val:
 			args=args.replace("@", "10x")
 		destobj.write("#val (used with set to change variable value during runtime.)\nsetreg1;" + args + "\n")
 		return
+
+#labels (i.e. for goto & gsub)
 class in_label:
 	def __init__(self):
 		self.keywords=["label"]
@@ -127,7 +131,7 @@ class in_label:
 		
 
 
-#used in tandem with tstr statements to create character tables.
+#used in tandem with tstr, prline, and/or tdat statements to create tables.
 class in_table:
 	def __init__(self):
 		self.keywords=["table"]
@@ -169,6 +173,7 @@ class in_table:
 		return
 		
 
+#wrapper for SBTCVM Assembly's debug marker.
 class in_marker:
 	def __init__(self):
 		self.keywords=["marker"]
@@ -184,7 +189,7 @@ class in_marker:
 		destobj.write("#marker\n" + "marker;" + args + "' .stnp line: '" + str(lineno) + "\n")
 		return
 
-
+#inline assembly
 class in_rawasm:
 	def __init__(self):
 		self.keywords=["a", "asm"]
@@ -199,6 +204,7 @@ class in_rawasm:
 		destobj.write("#___RAW ASSEMBLY CODE___\n#_______NOTE: this corresponds to SSTNPL source line #" + str(lineno) + "\n" + args + "#SSTNPL Source Line: '" + str(lineno) + "' \n")
 		return
 
+#common command class for basic integer-variable-driven commands.
 class in_intcommon1:
 	def __init__(self, keywords, prearg, postarg, comment):
 		self.keywords=keywords
@@ -250,6 +256,8 @@ class in_intcommon1b:
 		destobj.write("#" + self.comment + "\n" + self.prearg + args + self.postarg)
 		return
 
+
+#variable invert (in-place)
 class in_invert:
 	def __init__(self):
 		self.keywords=["invert"]
@@ -267,7 +275,7 @@ class in_invert:
 		destobj.write("#" + self.comment + "\ndataread1;>" + args + "\ninvert1\ndatawrite1;>" + args + "\n")
 		return
 
-
+#table read
 class in_tabr:
 	def __init__(self):
 		self.keywords=["tabr", "tabcd", "tabdd", "tabtd", "tabr2", "tabcd2", "tabdd2", "tabtd2"]
@@ -335,7 +343,7 @@ datawrite1;>tabr--adrbuff--''' + str(lineno) + '''
 			destobj.write("iowrite1;>io.tritdump\n")
 		return
 
-
+#table write
 class in_tabw:
 	def __init__(self):
 		self.keywords=["tabw", "tabw2"]
@@ -402,6 +410,7 @@ dataread1;>''' + datav + '''
 ''')
 		return
 
+#passive character get function.
 class in_getchar:
 	def __init__(self):
 		self.keywords=["getchar"]
@@ -419,6 +428,7 @@ class in_getchar:
 		destobj.write("#" + self.comment + "\nioread1;>io.ttyrd\ndatawrite1;>" + args + "\n")
 		return
 
+#static 3-color & 27-color multi-chunk packart macros
 class in_mulpack:
 	def __init__(self):
 		self.keywords=["mulpk", "linepk", "cmulpk", "clinepk"]
@@ -450,7 +460,7 @@ class in_mulpack:
 			destobj.write("fopset2;>io.packart\n")
 		return
 
-
+#basic goto/gsub implementation.
 class in_labelgoto:
 	def __init__(self):
 		self.keywords=["goto", "gsub"]
@@ -471,6 +481,7 @@ class in_labelgoto:
 			destobj.write("#goto \n" + "goto;>" + args +"--label" + "\n")
 		return
 
+#Conditional operations (WARNING: a bit complicated!)
 class in_condgoto:
 	def __init__(self, keywords, gotoop, condmode=0, gotoop2=None):
 		self.keywords=keywords
@@ -675,6 +686,7 @@ stop;''' + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(li
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		return
 
+#common 2-operator math class
 class in_int2opmath:
 	def __init__(self, keywords, instruct, comment):
 		self.keywords=keywords
@@ -716,7 +728,7 @@ class in_int2opmath:
 
 
 
-
+#random number implementation based upon SBTCVM psudo-random number generator 'rand1'.
 class in_rrange:
 	def __init__(self):
 		self.keywords=["rrange"]
@@ -757,7 +769,7 @@ class in_rrange:
 		destobj.write("#" + self.comment + "\ndataread1;>" + arg0 + "\ndataread2;>" + arg1 + "\niowrite1;>rand1.start\n" + "iowrite2;>rand1.end\n" + "ioread1;>rand1.get")
 		return
 
-
+#variable swap
 class in_int2opswap:
 	def __init__(self):
 		self.keywords=["swap"]
@@ -780,6 +792,7 @@ class in_int2opswap:
 		return
 	
 
+#variable copy
 class in_int2opcopy:
 	def __init__(self):
 		self.keywords=["copy"]
@@ -801,7 +814,7 @@ class in_int2opcopy:
 		destobj.write("#copy variables \ndataread1;>" + arg0 + "\ndatawrite1;>" + arg1 + "\n")
 		return
 
-
+#common no-argument command class
 class in_common0:
 	def __init__(self, keywords, xcode, comment):
 		self.keywords=keywords
@@ -818,7 +831,7 @@ class in_common0:
 		return
 		
 
-
+#Active equivalent to getchar. will only continue on a non-null character from TTY.
 class in_keyprompt:
 	def __init__(self):
 		self.keywords=["keyprompt"]
@@ -838,7 +851,7 @@ gotoif;>keyprompt--loop-""" + str(lineno) + """
 		return
 		
 
-
+#upwards 2-axis iterator
 class in_u2iter:
 	def __init__(self):
 		self.keywords=["u2iter"]
@@ -916,7 +929,7 @@ gotoifless;>u2iter-yloop-''' +  str(lineno) + '''
 gotoif;>u2iter-yloop-''' +  str(lineno) + '''
 ''')
 		return
-
+#downwards 2-axis iterator
 class in_d2iter:
 	def __init__(self):
 		self.keywords=["d2iter"]
@@ -997,7 +1010,7 @@ gotoif;>d2iter-yloop-''' +  str(lineno) + '''
 
 
 
-
+#upwards 1-axis iterator
 class in_uiter:
 	def __init__(self):
 		self.keywords=["uiter"]
@@ -1053,6 +1066,33 @@ gotoif;>uiter-loopback-''' +  str(lineno) + '''
 		return
 
 
+# basic cycle-based 'sleep-like' instruction.
+class in_waitcycle:
+	def __init__(self):
+		self.keywords=["waitcy"]
+	def p0(self, args, keyword, lineno):
+		try:
+			argint=int(args)
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid cycle count integer'" + args + "'"
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		argint=int(args)//6
+		destobj.write('''#Wait loop
+setreg1;0;waitcy-loopback-''' +  str(lineno) + '''
+setreg2;10x1
+add
+datawrite1;>waitcy-loopback-''' +  str(lineno) + '''
+setreg2;10x''' + str(argint) + '''
+gotoifless;>waitcy-loopback-''' +  str(lineno) + '''
+
+''')
+		return
+#downwards 1-axis iterator
 class in_diter:
 	def __init__(self):
 		self.keywords=["diter"]
@@ -1108,7 +1148,7 @@ gotoif;>diter-loopback-''' +  str(lineno) + '''
 ''')
 		return
 
-
+#print/prline statement.
 #also handles table string tstr syntax
 class in_print:
 	def __init__(self):
@@ -1137,7 +1177,7 @@ class in_print:
 		
 		return
 
-
+#generic data table syntax
 class in_tdat:
 	def __init__(self):
 		self.keywords=["tdat"]
@@ -1195,7 +1235,8 @@ class in_tdat:
 				destobj.write("null;" + arg + "\n")
 		
 		return
-
+# literal syntax detection. (used by literal-supporting command classes to
+# detect wether an integer variable name is actually a literal.)
 def isaliteral(arg):
 	if arg.startswith("@"):
 		return 1
@@ -1205,6 +1246,8 @@ def isaliteral(arg):
 		return 1
 	return 0
 
+#literal syntax checker. (literal-supporting command classes call this to check
+#syntax of literals.
 def literal_syntax(arg, keyword, lineno):
 	if arg.startswith("@"):
 		try:
@@ -1220,6 +1263,9 @@ def literal_syntax(arg, keyword, lineno):
 				return 1, keyword+": Line: " + str(lineno) + ": invalid ternary literal'" + arg + "'"
 	return None
 	
+#literal syntax parser engine.(used by literal-supporting command classes to
+#  parse literals into variable instances. (variable objects are returned to
+#  mainloop by the command classes.)
 def literal_do(arg):
 	if arg.startswith("@"):
 		return [npvar(arg, "10x" + arg[1:], vtype=nptype_int)]
@@ -1229,7 +1275,7 @@ def literal_do(arg):
 		return [npvar(arg, arg[1:], vtype=nptype_int)]
 		
 
-
+#header generator.
 def headinfo(filename, basename):
 	return '''#SSTNPL COMPILER ''' + stnpvers + '''
 #header
@@ -1240,6 +1286,7 @@ fopset2;>io.packart
 #stnp source file: (autogenerated from) "''' + filename + '''
 '''
 
+#main compiler routine.
 def compwrap(sourcepath):
 	##SSTNPL compile procedure function.
 	
@@ -1273,7 +1320,7 @@ def compwrap(sourcepath):
 	g2asmlib.assemble(destpath, syntaxonly=0, pfx=("g2asm:   "))
 	return
 
-
+#SSTNPL Compiler Engine class.
 class mainloop:
 	def __init__(self, srcobj, destpath, sourcepath, bpname):
 		self.filename=sourcepath
@@ -1284,6 +1331,8 @@ class mainloop:
 		self.valid_nvars=[]
 		self.tables={}
 		self.comped_nvars=[]
+		##############################
+		#master instruction list
 		self.instructs=[in_var(),
 		in_label(),
 		in_table(),
@@ -1294,6 +1343,7 @@ class mainloop:
 		in_diter(),
 		in_u2iter(),
 		in_d2iter(),
+		in_waitcycle(),
 		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
@@ -1303,6 +1353,15 @@ class mainloop:
 		in_intcommon1b(["tpack"], "dataread1;>", "\niowrite1;>io.packart\n", "Draw ternary Packed art"),
 		in_intcommon1b(["cpack"], "dataread1;>", "\niowrite1;>io.cpack\n", "Draw COLOR ternary Packed art"),
 		in_mulpack(),
+		in_intcommon1b(["gamode"], "dataread1;>", "\niowrite1;>ga.mode\n", "Set SBTGA mode"),
+		in_intcommon1b(["drawx1"], "dataread1;>", "\niowrite1;>plot.x1\n", "plotter x pos 1"),
+		in_intcommon1b(["drawy1"], "dataread1;>", "\niowrite1;>plot.y1\n", "plotter y pos 1"),
+		in_intcommon1b(["drawx2"], "dataread1;>", "\niowrite1;>plot.x2\n", "plotter x pos 2"),
+		in_intcommon1b(["drawy2"], "dataread1;>", "\niowrite1;>plot.y2\n", "plotter y pos 2"),
+		in_intcommon1b(["drawcolor"], "dataread1;>", "\niowrite1;>plot.color\n", "plotter draw line"),
+		in_common0(["drawline"], "iowrite1;>plot.line\n", "plotter draw line"),
+		in_intcommon1b(["drawfill"], "dataread1;>", "\niowrite1;>plot.fill\n", "plotter fill"),
+		in_intcommon1b(["drawfhalt"], "dataread1;>", "\niowrite1;>plot.fhalt\n", "plotter fhalt"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
 		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),
@@ -1344,8 +1403,10 @@ class mainloop:
 		in_common0(["stop"], "stop\n", "stop (shutdown vm)"),
 		in_common0(["clearcharbuff"], "iowrite1;>io.ttyrd", "Clear TTY input buffer"),
 		in_intcommon1b(["dumpd"], "dataread1;>", "\niowrite1;>io.decdump\n", "Dump (decimal)")]
+		##############################
 		self.bpname=bpname
 		self.labels=[]
+	#pre-variables syntax check pass
 	def p0(self):
 		self.srcobj.seek(0)
 		lineno=0
@@ -1366,6 +1427,7 @@ class mainloop:
 					if retval!=0:
 						return 1, errordesc
 		return 0, None
+	#variable parse & define pass.
 	def p1(self):
 		self.srcobj.seek(0)
 		lineno=0
@@ -1391,6 +1453,7 @@ class mainloop:
 							self.labels.extend([rvar.vname])
 						if rvar.vtype==nptype_table:
 							self.tables[rvar.vname]=rvar
+	#post-variable syntax check pass. (i.e. checking if variable exists.)
 	def p2(self):
 		self.srcobj.seek(0)
 		lineno=0
@@ -1411,8 +1474,10 @@ class mainloop:
 					if retval!=0:
 						return 1, errordesc
 		return 0, None
+	#SBTCVM assembly source code generator pass.
 	def p3(self):
 		self.outobj.write(headinfo(self.filename, self.bpname))
+		#each unique integer variable & literal gets 1 memory address at head of rom.
 		for rvar in self.nvars:
 			if rvar.vtype==nptype_int and rvar.vname not in self.comped_nvars:
 				self.outobj.write('null;' + rvar.vdata + ';' + rvar.vname + "\n")

@@ -34,6 +34,10 @@ colorpack:
 
 ----Plotter----
 
+burst:
+	A nice 'ray burst' demo based upon a similar demo for SBTCVM Mark 2 (Gen 1)
+	[nocurses]
+
 plottest:
 	A basic example of SBTGA mode 30: plotter mode.
 	This vector-based mode, cannot be engaged in the curses frontend, for 
