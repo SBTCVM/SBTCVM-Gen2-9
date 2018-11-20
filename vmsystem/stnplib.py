@@ -1360,6 +1360,8 @@ class mainloop:
 		in_intcommon1b(["drawy2"], "dataread1;>", "\niowrite1;>plot.y2\n", "plotter y pos 2"),
 		in_intcommon1b(["drawcolor"], "dataread1;>", "\niowrite1;>plot.color\n", "plotter draw line"),
 		in_common0(["drawline"], "iowrite1;>plot.line\n", "plotter draw line"),
+		in_common0(["drawgetbuff"], "ioread1;>plot.buffer\n", "plotter get buffer content length."),
+		in_common0(["drawflush"], "iowrite1;>plot.buffer\n", "plotter flush buffer."),
 		in_intcommon1b(["drawfill"], "dataread1;>", "\niowrite1;>plot.fill\n", "plotter fill"),
 		in_intcommon1b(["drawfhalt"], "dataread1;>", "\niowrite1;>plot.fhalt\n", "plotter fhalt"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),

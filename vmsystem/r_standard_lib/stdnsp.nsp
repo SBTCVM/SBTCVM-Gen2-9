@@ -2,6 +2,7 @@ rand2.end;54
 rand1.end;51
 io.packart;5
 io.packcolor;7
+plot.buffer;521
 ga.mode.tty;0
 ga.mode.plotter;30
 io.ttywr;1
@@ -28,7 +29,7 @@ rand2.get;55
 plot.fill;507
 rand3.end;57
 plot.line;506
-plot.fhalt;508
+plot.fhalt;520
 ga.mode;500
 plot.color;505
 rand4.end;60

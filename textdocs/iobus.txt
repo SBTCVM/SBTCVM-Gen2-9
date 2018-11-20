@@ -91,3 +91,5 @@ x :  m : asm varname  : description
 506: [w] plot.line  : draw line
 507: [w] plot.fill  : write a 9-trit RGB color to fill the display with.
 520: [w] plot.fhalt : instruct the plotter to wait until next frame.
+521: [b] plot.buffer: write: clear draw buffer. read: get number of items in
+		draw buffer. (keep at or below 30 for constant drawing.)

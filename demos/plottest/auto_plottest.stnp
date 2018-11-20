@@ -5,7 +5,18 @@ prline press a key when you see white lines on a blue background.
 keyprompt
 
 
-gamode @30
+var buff=0
+
+drawy1 @32#never drawn. see drawflush comment.
+drawy2 @30
+drawline
+
+#is your plotter app a tad TOO fast? changing screens? drawflush clears the
+#plotter's draw command buffer.
+drawflush
+
+
+
 
 
 drawfill *-0+-000++
@@ -24,9 +35,6 @@ drawy2 @121
 drawline
 
 
-
-
-
 drawy1 @33
 drawy2 @33
 drawline
@@ -38,6 +46,19 @@ drawline
 drawy1 @35
 drawy2 @35
 drawline
+
+#you can get how many operations are in the plotter's draw command buffer like
+#so:
+drawgetbuff
+set buff
+
+dumpd buff
+newline
+
+#this may be used for timing, although, 
+#using waitcy will give more consistent results.
+
+gamode @30
 
 keyprompt
 

@@ -61,5 +61,6 @@ v>plot.y2;10x504
 v>plot.color;10x505
 v>plot.line;10x506
 v>plot.fill;10x507
-v>plot.fhalt;10x508
+v>plot.fhalt;10x520
+v>plot.buffer;10x521
 

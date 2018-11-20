@@ -468,6 +468,12 @@ class PlotterEngine:
 		ioref.setwritenotify(506, self.line)
 		ioref.setwritenotify(507, self.fill)
 		ioref.setwritenotify(520, self.fhalt)
+		ioref.setwritenotify(521, self.flush)
+		ioref.setreadoverride(521, self.buffsize)
+	def flush(self, addr, data):
+		self.drawbuff=[]
+	def buffsize(self, addr, data):
+		return btint(len(self.drawbuff))
 	def dx1(self, addr, data):
 		self.x1=int(data)+121
 	def dx2(self, addr, data):
@@ -496,6 +502,7 @@ class PlotterEngine:
 		cnt=0
 		uprects=[]
 		fullup=0
+		surface.lock()
 		while len(self.drawbuff)>0 and cnt!=self.itemlimit:
 			cnt+=1
 			
@@ -507,6 +514,7 @@ class PlotterEngine:
 				fullup=1
 			if chunk[0]==1:
 				uprects.append(pygame.draw.line(surface, chunk[5], (int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag))))
+		surface.unlock()
 		if fullup:
 			pygame.display.flip()
 		else:
