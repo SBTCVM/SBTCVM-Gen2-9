@@ -52,8 +52,8 @@ def packart_maker(imagepath):
 				outf.write("fopwri2;" + buffx + "\n")
 				size+=1
 				buffx=""
-		if linex>=72:
-			print("WARNING: IMAGE BEYOND MAXIMUM TERNARY PACKED ART WIDTH \n ALLOWED BY PYGAME FRONTEND (72)")
+		if linex>=81:
+			print("WARNING: IMAGE BEYOND MAXIMUM TERNARY PACKED ART WIDTH \n ALLOWED BY PYGAME FRONTEND (81)")
 		while len(buffx)<9 and buffx!="":
 			buffx+="-"
 		if buffx!="":
@@ -94,8 +94,8 @@ def colart_maker(imagepath):
 				outf.write("fopwri2;" + buffx + "\n")
 				size+=1
 				buffx=""
-		if linex>=78:
-			print("WARNING: IMAGE BEYOND MAXIMUM TERNARY PACKED ART WIDTH \n ALLOWED BY PYGAME FRONTEND (78)")
+		if linex>=81:
+			print("WARNING: IMAGE BEYOND MAXIMUM TERNARY PACKED ART WIDTH \n ALLOWED BY PYGAME FRONTEND (81)")
 		while len(buffx)<9 and buffx!="":
 			buffx+="-"
 		if buffx!="":

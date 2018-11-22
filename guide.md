@@ -3,14 +3,20 @@
 Run a trom application in pygame frontend:      
 `./pyg_sbtcvm.py maze`
 
-Run a trom application in curses frontend:     
-`./cur_sbtcvm.py maze`
-
 Start SBTCVM XAS interactive shell:      
 `./xas.py`
      
 Boot into VDI shell (unfinished):     
 `./pyg_sbtcvm.py`
+
+
+Run a trom application in curses frontend:     
+`./cur_sbtcvm.py maze`
+
+_**Notice:**  curses frontend is somewhat buggy & incomplete. pygame frontend HIGHLY recommended._
+
+
+
      
 
 ### where does SBTCVM search for applications and source code?

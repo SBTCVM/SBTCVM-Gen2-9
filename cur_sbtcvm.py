@@ -113,6 +113,7 @@ else:
 	try:
 		
 		print("SBTCVM Generation 2 9-trit VM, v2.1.0.alpha\n")
+		print("Notice: somewhat buggy, incomplete. pygame frontend HIGHLY recommended.")
 		#initialize memory subsystem
 		memsys=vmsystem.MEM_G2x_9.memory(romfile)
 		#initialize IO subsystem

@@ -51,7 +51,7 @@ class uio:
 		self.pak0="-"
 		self.pakn=" "
 		self.maxy=25
-		self.maxx=80
+		self.maxx=81
 		self.curxcnt=0
 		self.blinkspeed=20
 		self.blinkflg=0
