@@ -19,6 +19,10 @@ vscroll:
 	
 	Meant partly as an example for anyone wanting a pixel-art challenge.
 
+colscroll:
+	A 27-color version of vscroll [ttycolor] [nocurses]
+
+
 colortext:
 	A demo of the pygame frontend's enhanced TTY color capacity:
 	27-color 3-trit RGB color, for BOTH foreground and background!

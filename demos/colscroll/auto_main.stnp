@@ -1,0 +1,20 @@
+var yn=0
+prline This demo is a MASSIVE 27x400 Color Ternary Packed art scroll.
+prline Currently, the pygame frontend is the ONLY FRONTEND ABLE TO SHOW THIS!
+prline Art & code: Thomas Leathers
+prline PRESS ANY KEY TO CONTINUE
+keyprompt
+
+
+label loop
+asm include;colscroll+image.tas0
+
+prline Again? [y]es or [n]o
+label prompt
+keyprompt
+set yn
+if yn,:y goto loop
+if yn,:Y goto loop
+if yn,:n stop
+if yn,:N stop
+goto prompt

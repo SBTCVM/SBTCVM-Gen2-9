@@ -25,7 +25,7 @@ vers=sys.version_info[0]
 if vers==3:
 	xrange=range
 
-def packart_maker(imagepath):
+def packart_maker(imagepath, notrailnew=0):
 	print("converting image...")
 	image=pygame.image.load(imagepath)
 	xsize=image.get_width()
@@ -59,7 +59,8 @@ def packart_maker(imagepath):
 		if buffx!="":
 			outf.write("fopwri2;" + buffx + "\n")
 			size+=1
-		outf.write("fopwri1;:\\n\n")
+		if coly<ysize-1 or notrailnew==0:
+			outf.write("fopwri1;:\\n\n")
 		size+=1
 		#print(coly)
 	outf.close()
@@ -67,7 +68,7 @@ def packart_maker(imagepath):
 	print(g2com.nonetformatted_smart(size))
 	return
 
-def colart_maker(imagepath):
+def colart_maker(imagepath, notrailnew=0):
 	print("converting image...")
 	image=pygame.image.load(imagepath)
 	xsize=image.get_width()
@@ -101,7 +102,8 @@ def colart_maker(imagepath):
 		if buffx!="":
 			outf.write("fopwri2;" + buffx + "\n")
 			size+=1
-		outf.write("fopwri1;:\\n\n")
+		if coly<ysize-1 or notrailnew==0:
+			outf.write("fopwri1;:\\n\n")
 		size+=1
 		#print(coly)
 	outf.write('fopset2;>io.packart\n')
@@ -122,10 +124,10 @@ if __name__=="__main__":
 		arg=None
 	if cmd in ["-h", "--help"]:
 		print('''SBTCVM Gen2-9 gfx conversion utility.
--p [image]  : convert an image into 3-color ternary-packed art, and place it in
-    a tas0 file.
--cp [image] : convert an image into 27-color ternary packed art, and place it
-    in a tas0 file.''')
+-p(n) [image]  : convert an image into 3-color ternary-packed art, and place it in
+    a tas0 file. append n for no trailing newline.
+-cp(n) [image] : convert an image into 27-color ternary packed art, and place it
+    in a tas0 file. append n for no trailing newline.''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2-9 gfx conversion utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -158,6 +160,13 @@ see readme.md for more information and licensing of media.
 	elif cmd in ["-cp"]:
 		print("Color Ternary-Packed art encoder.")
 		colart_maker(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1))
+	elif cmd in ["-pn"]:
+		print("Ternary-Packed art encoder.")
+		packart_maker(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
+		
+	elif cmd in ["-cpn"]:
+		print("Color Ternary-Packed art encoder.")
+		colart_maker(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
 		
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")
