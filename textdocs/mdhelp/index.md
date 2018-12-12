@@ -17,6 +17,9 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 - [XAS shell/script help](xas.md) - SBTCVM's integrated build script system and interactive shell.
 - [XAS shell/script command reference](xas_com.md)
 
+### Other Devices
+- [SBTCVM Mouse](mouse.md) - SBTCVM's official mouse device. (not supported by curses!)
+
 ### TTY help
 
 - [Ternary-packed art](tpa.md) - A built-in hardware encoding for simple inline 3-shade artwork in the TTY, at 9 pixels a Nonet (data word)

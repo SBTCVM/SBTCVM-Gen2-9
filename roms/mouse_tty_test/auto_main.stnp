@@ -1,0 +1,31 @@
+prline Mouse test (GA MODE 0 (TTY))
+
+prline right click to exit
+
+
+var btnbuff=0
+var xbuff=0
+var ybuff=0
+
+
+
+label main
+asm ioread1;>mouse.button
+set btnbuff
+if btnbuff,@0 goto main
+if btnbuff,@3 stop
+
+asm ioread1;>mouse.lockx
+set xbuff
+asm ioread1;>mouse.locky
+set ybuff
+
+print Mouse Event: ID: 
+dumpd btnbuff
+print , X: 
+dumpd xbuff
+print , Y: 
+dumpd ybuff
+newline
+
+goto main

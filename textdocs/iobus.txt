@@ -78,7 +78,23 @@ x :  m : asm varname  : description
 214: [w] sfx2.voice : (write 0-5) 
 215: [w] sfx2.pan   : (1=left, 0=center, -1=right)
 
+
 [TODO: map out music controller IO lines]
+
+### SBTCVM mouse
+300: [b] mouse.button  : (read to get next mouse button event, write to clear mouse event buffer.)
+301: [r] mouse.lockx   : get x position of last read mouse button event.
+302: [r] mouse.locky   : get y position of last read mouse button event.
+303: [r] mouse.realx   : get current x position of mouse.
+304: [r] mouse.realy   : get current y position of mouse.
+		button event values:
+			1/-1 , left mouse button
+			2/-2 , middle mouse button
+			3/-3 , right mouse button
+			4/-4 , scroll up
+			5/-5 , scroll down
+			0    , no events in queue
+		[negative button values are button release events]
 
 ### SBTGA system
 

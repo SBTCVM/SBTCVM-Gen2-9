@@ -11,7 +11,13 @@ v>vdi.cli.out;10x101
 v>vdi.cli.status;10x102
 
 
+#SBTCVM Mouse
 
+v>mouse.button;10x300
+v>mouse.lockx;10x301
+v>mouse.locky;10x302
+v>mouse.realx;10x303
+v>mouse.realy;10x304
 
 #IO
 v>io.ttywr;10x1

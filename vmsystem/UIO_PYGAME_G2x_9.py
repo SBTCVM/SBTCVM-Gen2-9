@@ -117,6 +117,7 @@ class uio:
 		self.shutdown=0
 		self.clock=pygame.time.Clock()
 		pygame.display.set_caption(romname + " - SBTCVM Gen2-9", romname + " - SBTCVM Gen2-9")
+		self.mousesys=MouseEngine(ioref, 243, 243, self.plotx, self.ploty, charwidth, charheight)
 	#input and display thread
 	def statup(self):
 		self.running=1
@@ -147,6 +148,16 @@ class uio:
 							self.keyinbuff.append(tcon.strtodat[keyinp])
 						if event.key==pygame.K_RETURN:
 							self.keyinbuff.append(1)
+				if event.type==pygame.MOUSEBUTTONDOWN:
+					if self.gamode==0:
+						self.mousesys.mousedown_ga0(event)
+					if self.gamode==30:
+						self.mousesys.mousedown_ga30(event)
+				if event.type==pygame.MOUSEBUTTONUP:
+					if self.gamode==0:
+						self.mousesys.mouseup_ga0(event)
+					if self.gamode==30:
+						self.mousesys.mouseup_ga30(event)
 				if event.type==pygame.QUIT:
 					self.cpu.exception("User Stop", -50, cancatch=0)
 			#if in gamode=0 (TTY mode), draw TTY output.
@@ -165,6 +176,7 @@ class uio:
 	def setgamode(self, addr, data):
 		self.newmode=int(data)
 	def dogamode(self, data):
+		
 		if self.gamode==30:
 			self.plotobj.disable()
 		
@@ -174,24 +186,28 @@ class uio:
 				self.screensurf=pygame.display.set_mode((charwidth*self.maxx, charheight*self.maxy), pygame.FULLSCREEN)
 				self.screensurf.fill(self.textbg)
 				pygame.display.flip()
+				self.mousesys.modechange(data)
 			if data==30:
 				self.gamode=30
 				self.screensurf=pygame.display.set_mode((self.plotx, self.ploty), pygame.FULLSCREEN)
 				self.plotobj.enable()
 				self.screensurf.fill((127, 127, 127))
 				pygame.display.flip()
+				self.mousesys.modechange(data)
 		else:
 			if data==0:
 				self.gamode=0
 				self.screensurf=pygame.display.set_mode((charwidth*self.maxx, charheight*self.maxy))
 				self.screensurf.fill(self.textbg)
 				pygame.display.flip()
+				self.mousesys.modechange(data)
 			if data==30:
 				self.gamode=30
 				self.screensurf=pygame.display.set_mode((self.plotx, self.ploty))
 				self.plotobj.enable()
 				self.screensurf.fill((127, 127, 127))
 				pygame.display.flip()
+				self.mousesys.modechange(data)
 	
 	#don't set colors yet, but add a special list code to TTY buffer.
 	def settextcol(self, addr, data):
@@ -441,6 +457,76 @@ class uio:
 		else:
 			pygame.display.update(uprects)
 
+class MouseEngine:
+	def __init__(self, ioref, plotx, ploty, plotrealx, plotrealy, TTYcharw, TTYcharh):
+		self.ioref=ioref
+		self.plotx=plotx
+		self.ploty=ploty
+		self.plotrealx=plotrealx
+		self.plotrealy=plotrealy
+		self.TTYcharw=TTYcharw
+		self.TTYcharh=TTYcharh
+		self.gamode=0
+		self.clickbuff=[]
+		self.lockx=0
+		self.locky=0
+		ioref.setreadoverride(300, self.getevent)
+		ioref.setwritenotify(300, self.bufferclear)
+		ioref.setreadoverride(301, self.getlockx)
+		ioref.setreadoverride(302, self.getlocky)
+		ioref.setreadoverride(303, self.getrealx)
+		ioref.setreadoverride(304, self.getrealy)
+	def mousedown_ga30(self, event):
+		posy=int(((event.pos[1]/float(self.plotrealy))*self.ploty)-121)
+		posx=int(((event.pos[0]/float(self.plotrealx))*self.plotx)-121)
+		button=event.button
+		self.clickbuff.append([button, posx, posy])
+		return
+	def mouseup_ga30(self, event):
+		posy=int(((event.pos[1]/float(self.plotrealy))*self.ploty)-121)
+		posx=int(((event.pos[0]/float(self.plotrealx))*self.plotx)-121)
+		button=-event.button
+		self.clickbuff.append([button, posx, posy])
+		return
+	def mousedown_ga0(self, event):
+		posx, posy=(event.pos[0]//self.TTYcharw, event.pos[1]//self.TTYcharh)
+		button=event.button
+		self.clickbuff.append([button, posx, posy])
+	def mouseup_ga0(self, event):
+		posx, posy=(event.pos[0]//self.TTYcharw, event.pos[1]//self.TTYcharh)
+		button=-event.button
+		self.clickbuff.append([button, posx, posy])
+	def modechange(self, gamode):
+		self.gamode=gamode
+		self.clickbuff=[]
+		
+	
+	###IOBUS CALLBACKS###
+	
+	def getevent(self, addr, data):
+		if len(self.clickbuff)>0:
+			button, self.lockx, self.locky = self.clickbuff.pop(0)
+		else:
+			button=0
+		return btint(button)
+	def bufferclear(self, addr, data):
+		self.clickbuff=[]
+	def getlockx(self, addr, data):
+		return btint(self.lockx)
+	def getlocky(self, addr, data):
+		return btint(self.locky)
+	def getrealx(self, addr, data):
+		mpos=pygame.mouse.get_pos()
+		if self.gamode==0:
+			return btint(mpos[0]//self.TTYcharw)
+		if self.gamode==30:
+			return btint(int(((mpos[0]/self.plotrealx)*self.plotx)-122))
+	def getrealy(self, addr, data):
+		mpos=pygame.mouse.get_pos()
+		if self.gamode==0:
+			return btint(mpos[1]//self.TTYcharh)
+		if self.gamode==30:
+			return btint(int(((mpos[1]/self.plotrealy)*self.ploty)-122))
 
 class PlotterEngine:
 	def __init__(self, ioref, xsize, ysize, realx, realy, itemlimit=30):
