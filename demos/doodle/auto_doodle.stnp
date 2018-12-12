@@ -1,0 +1,60 @@
+var lastx=0
+var lasty=0
+var cury=0
+var curx=0
+
+var btnbuff=0
+var xbuff=0
+var ybuff=0
+
+var drawflg=0
+
+prline simple interactive plotter+mouse draw demo
+
+prline right click to exit
+
+prline left click & hold to draw.
+
+prline press a key to begin
+
+keyprompt
+
+gamode @30
+
+drawfill *-0+-000++
+drawcolor *+++++++++
+
+label main
+asm ioread1;>mouse.button
+set btnbuff
+
+if drawflg,@1 gsub linedraw
+if btnbuff,@0 goto main
+if btnbuff,@3 stop
+
+asm ioread1;>mouse.realx
+set curx
+asm ioread1;>mouse.realy
+set cury
+copy curx,lastx
+copy cury,lasty
+
+ifmore btnbuff,@0 =drawflg @1
+ifless btnbuff,@0 =drawflg @0
+
+goto main
+
+
+label linedraw
+copy curx,lastx
+copy cury,lasty
+asm ioread1;>mouse.realx
+set curx
+asm ioread1;>mouse.realy
+set cury
+drawx1 lastx
+drawy1 lasty
+drawx2 curx
+drawy2 cury
+drawline
+return

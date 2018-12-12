@@ -476,6 +476,7 @@ class MouseEngine:
 		ioref.setreadoverride(302, self.getlocky)
 		ioref.setreadoverride(303, self.getrealx)
 		ioref.setreadoverride(304, self.getrealy)
+		self.clearbuff=0
 	def mousedown_ga30(self, event):
 		posy=int(((event.pos[1]/float(self.plotrealy))*self.ploty)-121)
 		posx=int(((event.pos[0]/float(self.plotrealx))*self.plotx)-121)
@@ -498,19 +499,22 @@ class MouseEngine:
 		self.clickbuff.append([button, posx, posy])
 	def modechange(self, gamode):
 		self.gamode=gamode
-		self.clickbuff=[]
+		self.clearbuff=1
 		
 	
 	###IOBUS CALLBACKS###
 	
 	def getevent(self, addr, data):
+		if self.clearbuff:
+			self.clearbuff=0
+			self.clickbuff=[]
 		if len(self.clickbuff)>0:
 			button, self.lockx, self.locky = self.clickbuff.pop(0)
 		else:
 			button=0
 		return btint(button)
 	def bufferclear(self, addr, data):
-		self.clickbuff=[]
+		self.clearbuff=1
 	def getlockx(self, addr, data):
 		return btint(self.lockx)
 	def getlocky(self, addr, data):
@@ -520,13 +524,13 @@ class MouseEngine:
 		if self.gamode==0:
 			return btint(mpos[0]//self.TTYcharw)
 		if self.gamode==30:
-			return btint(int(((mpos[0]/self.plotrealx)*self.plotx)-122))
+			return btint(int(((mpos[0]/float(self.plotrealx))*self.plotx)-121))
 	def getrealy(self, addr, data):
 		mpos=pygame.mouse.get_pos()
 		if self.gamode==0:
 			return btint(mpos[1]//self.TTYcharh)
 		if self.gamode==30:
-			return btint(int(((mpos[1]/self.plotrealy)*self.ploty)-122))
+			return btint(int(((mpos[1]/float(self.plotrealy))*self.ploty)-121))
 
 class PlotterEngine:
 	def __init__(self, ioref, xsize, ysize, realx, realy, itemlimit=30):
