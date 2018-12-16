@@ -32,7 +32,7 @@ For SBTCVM Gen2-9.
    help, -h, --help: this help
    -v, --version: assembler version
    -a, --about: about SBTCVM
-   -b, (tasmname): build SBTCVM tasm source file into rom at same location or run an xas script.
+   -b, (tasmname): build SBTCVM tasm source file into rom at same location.
    -s, --syntax (tasmname): run assembler up to final sanity checks, but don't write rom image.
    (tasmname): same as -b/--build''')
 	elif cmd in ['-v', '--version']:
@@ -60,7 +60,7 @@ see readme.md for more information and licensing of media.
   along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
   
   ''')
-	if cmd==None:
+	elif cmd==None:
 		print("Tip: Try g2-asm.py -h for help.")
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:
