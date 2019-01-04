@@ -11,7 +11,7 @@ If you need help, see [guide.md](/guide.md)
 SBTCVM gen2-9 ships with **fssynthlib.py**, a general-use waveform synthesis library from
 the FSSS synthesizer suite. You can find its readme in the [textdocs directory.](/textdocs/fssynthlib_README.md)
      
-Copyright (c) 2016-2018 Thomas Leathers and Contributors 
+Copyright (c) 2016-2019 Thomas Leathers and Contributors 
 
 
   SBTCVM Gen2 9-trit is free software: you can redistribute it and/or modify
