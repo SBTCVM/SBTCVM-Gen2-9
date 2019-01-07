@@ -21,7 +21,15 @@ var getd_negflg=0
 
 var promptcolor=0+0---
 
+var monitor_wri_buff=0
 
+
+#determine & set end of code area for monitor INSTRUCTION/DATA write safety.
+var WRITEPROTECT_END=0
+asm setreg1;>END_OF_WRITE_PROTECT
+set WRITEPROTECT_END
+
+var mem_stat_buff=0
 
 var inmode=@1
 var valbuff=0
@@ -36,7 +44,7 @@ var kb=0
 ####### CALCULATOR MAIN ROUTINE #######
 textcolor *+++--0
 prline clicalc: A ternary/decimal CLI calculator.
-prline Version 1.1
+prline Version 2.0
 prline press 'h' for help, and '?' for about info.
 textcolor *+++---
 gsub do_mode_decimal
@@ -70,6 +78,8 @@ if kb,:1 gsub do_mode_decimal
 if kb,:! gsub do_mode_decimal
 if kb,:2 gsub do_mode_ternary
 if kb,:@ gsub do_mode_ternary
+if kb,:p gsub monitor_main
+if kb,:P gsub monitor_main
 if kb,:q stop
 if kb,:Q stop
 
@@ -474,10 +484,10 @@ label about
 textcolor *+++--0
 newline
 prline --ABOUT--
-prline clicalc v1.1: A ternary/decimal CLI calculator
+prline clicalc v2.0: A ternary/decimal CLI calculator & memory monitor
 prline Part of SBTCVM Gen2-9
 prline 
-prline Copyright (c) 2018 Thomas Leathers & Contributors
+prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
 prline 
 prline clicalc is free software: you can redistribute it and/or modify
 prline it under the terms of the GNU General Public License as published by
@@ -503,7 +513,7 @@ return
 
 label help
 textcolor *+++--0
-prline clicalc v1.1: A ternary/decimal CLI calculator
+prline clicalc v2.0: A ternary/decimal CLI calculator & memory monitor
 prline COMMANDS:
 prline   a: add
 prline   s: subtract
@@ -517,6 +527,7 @@ prline   ?: about clicalc
 prline   q: quit clicalc
 prline   1: enter DECIMAL MODE (indicated by 'd>' prompt) (default)
 prline   2: enter TERNARY MODE (indicated by 't>' prompt)
+prline   p: Enter MEMORY MONITOR mode. (experimental) (prompt will contain 'Mem')
 prline WHEN ENTERING NUMBERS:
 prline [+,0,-]/[p,0,n] When in TERNARY MODE
 prline [0-9] as well as [-] at start for negatives, When in DECIMAL MODE
@@ -533,3 +544,228 @@ keyprompt
 newline
 return
 
+
+label monitor_help
+textcolor *+++--0
+prline clicalc v2.0: A ternary/decimal CLI calculator & memory monitor
+prline MONITOR COMMANDS:
+prline   p: return to calculator mode
+prline   o: read IO address                  q: quit clicalc
+prline   l: write IO address                 ?: about clicalc
+prline   i: read DATA address                h: help (this text)
+prline   k: write DATA address *             m: memory stats
+prline   u: read INSTRUCTION address   
+prline   j: write INSTRUCTION address *
+prline   1: enter DECIMAL MODE (indicated by 'dMem>' prompt) (default)
+prline   2: enter TERNARY MODE (indicated by 'tMem>' prompt)
+prline     * part of RAM is treated as READ ONLY. see 'memory stats' (m)
+prline WHEN ENTERING NUMBERS:
+prline [+,0,-]/[p,0,n] When in TERNARY MODE
+prline [0-9] as well as [-] at start for negatives, When in DECIMAL MODE
+prline [q,Q] quits clicalc.
+prline [BACKSPACE] remove last-entered digit.
+prline <input is limited to 9 trits <-9841 to 9841>>
+textcolor *+++---
+prline 
+prline PRESS A KEY TO RETURN TO MAIN PROMPT
+textcolor *0++---
+print ?>>>
+
+keyprompt
+newline
+return
+
+#### MEMORY MONITOR MAIN MENU ####
+label monitor_main
+textcolor *+++--0
+prline CliCalc Embedded Memory Monitor (experimental!)
+gsub memory_stats
+label monitor_loop
+textcolor *0++---
+chardump promptprefix
+print Mem>
+textcolor *+++---
+keyprompt
+set kb
+newline
+if kb,:1 gsub do_mode_decimal
+if kb,:! gsub do_mode_decimal
+if kb,:2 gsub do_mode_ternary
+if kb,:@ gsub do_mode_ternary
+if kb,:h gsub monitor_help
+if kb,:H gsub monitor_help
+if kb,:? gsub about
+if kb,:/ gsub about
+if kb,:p goto monitor_return
+if kb,:P goto monitor_return
+if kb,:o gsub m_io_read
+if kb,:O gsub m_io_read
+if kb,:l gsub m_io_write
+if kb,:L gsub m_io_write
+if kb,:i gsub m_data_read
+if kb,:I gsub m_data_read
+if kb,:k gsub m_data_write
+if kb,:K gsub m_data_write
+if kb,:u gsub m_inst_read
+if kb,:U gsub m_inst_read
+if kb,:j gsub m_inst_write
+if kb,:J gsub m_inst_write
+if kb,:m gsub memory_stats
+if kb,:M gsub memory_stats
+if kb,:q stop
+if kb,:Q stop
+
+goto monitor_loop
+
+
+label monitor_return
+prline Returning to Calculator...
+return
+
+
+#### IOBUS READ ####
+label m_io_read
+prline IOBUS READ
+prline Address?
+gsub get1num
+get v1buff
+asm datawrite1;>IOBUS_READ_MON
+asm ioread1;0;IOBUS_READ_MON
+set v1buff
+newline
+print Value: 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+return
+
+
+#note: IOBUS write has ZERO write protection! THIS IS INTENTIONAL!!!!
+
+#### IOBUS WRITE ####
+label m_io_write
+prline IOBUS WRITE
+prline Address?
+gsub get1num
+copy v1buff,monitor_wri_buff
+prline Value?
+gsub get1num
+get monitor_wri_buff
+get2 v1buff
+asm datawrite1;>IOBUS_WRITE_MON
+asm iowrite2;0;IOBUS_WRITE_MON
+newline
+prline done.
+return
+
+
+#### DATA READ ####
+label m_data_read
+prline DATA READ
+prline Address?
+gsub get1num
+get v1buff
+asm datawrite1;>DATA_READ_MON
+asm dataread1;0;DATA_READ_MON
+set v1buff
+newline
+print Value: 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+return
+
+
+#### DATA WRITE ####
+label m_data_write
+prline DATA WRITE
+prline Address?
+gsub get1num
+
+#sanity check
+ifnotmore v1buff,WRITEPROTECT_END goto write_sanity
+
+copy v1buff,monitor_wri_buff
+prline Value?
+gsub get1num
+get monitor_wri_buff
+get2 v1buff
+asm datawrite1;>DATA_WRITE_MON
+asm datawrite2;0;DATA_WRITE_MON
+newline
+prline done.
+return
+
+#### INST READ ####
+label m_inst_read
+prline INSTRUCTION READ
+prline Address?
+gsub get1num
+get v1buff
+asm datawrite1;>INST_READ_MON
+asm instread1;0;INST_READ_MON
+set v1buff
+newline
+print Value: 
+dumpt v1buff
+print  ( 
+dumpd v1buff
+prline  )
+return
+
+
+#### INST WRITE ####
+label m_inst_write
+prline INSTRUCTION WRITE
+prline Address?
+gsub get1num
+
+#sanity check
+ifnotmore v1buff,WRITEPROTECT_END goto write_sanity
+
+copy v1buff,monitor_wri_buff
+prline Value?
+gsub get1num
+get monitor_wri_buff
+get2 v1buff
+asm datawrite1;>INST_WRITE_MON
+asm instwrite2;0;INST_WRITE_MON
+newline
+prline done.
+return
+
+label write_sanity
+textcolor *+0----
+prline FAULT: the entered address is within clicalc's code memory range!
+textcolor *+++---
+return
+
+
+label memory_stats
+textcolor *+++---
+prline RAM STATS: (data/instruction writing) (IOBUS is NOT affected)
+textcolor *+00---
+print Protected memory zone: -9841 (---------) to 
+dumpd WRITEPROTECT_END
+print  (
+dumpt WRITEPROTECT_END
+print )
+newline
+textcolor *0+0---
+print  writable memory zone:
+add WRITEPROTECT_END,@1
+set mem_stat_buff
+dumpd mem_stat_buff
+print  (
+dumpt mem_stat_buff
+print )
+
+print  to  9841  (+++++++++)
+textcolor *+++---
+newline
+return
+
+
+asm null;;END_OF_WRITE_PROTECT

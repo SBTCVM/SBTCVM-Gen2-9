@@ -1,7 +1,7 @@
-# clicalc calculator
+# clicalc calculator & memory monitor
 [Troubleshooting Guide Index](troubleshoot.md)
-
-Known limitation-related issues of the **clicalc** calculator **TROM** found in **APPS**.
+# All modes
+Known limitation-related issues of the **clicalc** calculator & memory monitor **TROM** found in **APPS**.
 ### not reading decimal input right
 clicalc can only properly recognize numbers from -9841 to +9841. anything less
 than -9841 or greater than +9841 _WILL LEAD TO FAULTY INPUT!_
@@ -28,3 +28,12 @@ division is provided if you wish to use the remainder for something.
 Currently, SBTCVM Gen2-9 only is capable of working with 9-trit integers, 
 hence the lengthy response to faulty decimal input above, and ternary
 input being hard-limited to 9 trits.
+
+# Memory Monitor Mode
+
+### im seeing 'FAULT: the entered address is within clicalc's code memory range!'
+
+Well, clicalc's memory monitor sets aside the area of SBTCVM's RAM that its code resides in, as read-only.
+
+You may, however, write to any IOBUS address, as well as see the writable memory range of RAM via pressing **`m`** at the memory monitor prompt.
+
