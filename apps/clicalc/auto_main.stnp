@@ -47,7 +47,7 @@ var kb=0
 ####### CALCULATOR MAIN ROUTINE #######
 textcolor *+++--0
 prline clicalc: A ternary/decimal CLI calculator.
-prline Version 2.1
+prline Version 2.2
 prline press 'h' for help, and '?' for about info.
 textcolor *+++---
 gsub do_mode_decimal
@@ -488,7 +488,7 @@ label about
 textcolor *+++--0
 newline
 prline --ABOUT--
-prline clicalc v2.1: A ternary/decimal CLI calculator & memory monitor
+prline clicalc v2.2: A ternary/decimal CLI calculator & memory monitor
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -517,7 +517,7 @@ return
 
 label help
 textcolor *+++--0
-prline clicalc v2.1: A ternary/decimal CLI calculator & memory monitor
+prline clicalc v2.2: A ternary/decimal CLI calculator & memory monitor
 prline COMMANDS:
 prline   a: add
 prline   s: subtract
@@ -551,7 +551,7 @@ return
 
 label monitor_help
 textcolor *+++--0
-prline clicalc v2.1: A ternary/decimal CLI calculator & memory monitor
+prline clicalc v2.2: A ternary/decimal CLI calculator & memory monitor
 prline MONITOR COMMANDS:
 prline   p: return to calculator mode
 prline   o: read IO address                  q: quit clicalc
@@ -559,16 +559,12 @@ prline   l: write IO address                 ?: about clicalc
 prline   i: read DATA address                h: help (this text)
 prline   k: write DATA address *             m: memory stats
 prline   u: read INSTRUCTION address         d: view a range of RAM (data/inst)
-prline   j: write INSTRUCTION address *
+prline   j: write INSTRUCTION address *      f: view 24 words of RAM at once.
+newline
 prline   1: enter DECIMAL MODE (indicated by 'dMem>' prompt) (default)
 prline   2: enter TERNARY MODE (indicated by 'tMem>' prompt)
 prline     * part of RAM is treated as READ ONLY. see 'memory stats' (m)
-prline WHEN ENTERING NUMBERS:
-prline [+,0,-]/[p,0,n] When in TERNARY MODE
-prline [0-9] as well as [-] at start for negatives, When in DECIMAL MODE
-prline [q,Q] quits clicalc.
-prline [BACKSPACE] remove last-entered digit.
-prline <input is limited to 9 trits <-9841 to 9841>>
+prline See calculator prompt help for info on entering numbers
 textcolor *+++---
 prline 
 prline PRESS A KEY TO RETURN TO MAIN PROMPT
@@ -619,6 +615,8 @@ if kb,:m gsub memory_stats
 if kb,:M gsub memory_stats
 if kb,:d gsub m_rd_view
 if kb,:D gsub m_rd_view
+if kb,:f gsub m_rd_vscreen
+if kb,:F gsub m_rd_vscreen
 if kb,:q stop
 if kb,:Q stop
 
@@ -777,6 +775,21 @@ return
 
 
 
+#### RANGE DUMP SCREEN ####
+label m_rd_vscreen
+
+val 0
+set mon_dmp_stop
+
+prline range dump screen
+prline Start Address?
+gsub get1num
+copy v1buff,monitor_ran_buff
+add v1buff,@23
+set v1buff
+goto m_rd_view_loop
+
+
 
 
 
@@ -806,20 +819,25 @@ asm instread1;0;INST_RANGE_MON_S
 asm dataread2;0;INST_RANGE_MON_E
 set1 monitor_inst_buff
 set2 monitor_data_buff
-
+textcolor *+0+---
 print A:
 dumpd monitor_ran_buff
-print ,
+print , 
+textcolor *++0---
 dumpt monitor_inst_buff
 space
+textcolor *0++---
 dumpt monitor_data_buff
 space
+textcolor *++0---
 dumpd monitor_inst_buff
 space
+textcolor *0++---
 dumpd monitor_data_buff
 newline
 
-waitcy 288
+
+waitcy 336
 
 add monitor_ran_buff,@1
 set monitor_ran_buff
@@ -830,7 +848,9 @@ goto m_rd_view_loop
 
 label break
 newline
+textcolor *+0----
 prline ---KEYBOARD BREAK---
+textcolor *+++---
 newline
 return
 
