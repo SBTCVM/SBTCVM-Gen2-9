@@ -169,7 +169,7 @@ fopwri1;:n
 fopwri1;:\s
 fopwri1;:2
 fopwri1;:.
-fopwri1;:0
+fopwri1;:1
 fopwri1;:\n
 #prline
 fopwri1;:p
@@ -2194,7 +2194,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:2
 fopwri1;:.
-fopwri1;:0
+fopwri1;:1
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -3014,7 +3014,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:2
 fopwri1;:.
-fopwri1;:0
+fopwri1;:1
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -3750,7 +3750,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:2
 fopwri1;:.
-fopwri1;:0
+fopwri1;:1
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
