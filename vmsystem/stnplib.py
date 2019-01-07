@@ -1083,6 +1083,8 @@ class in_waitcycle:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		argint=int(args)//6
 		destobj.write('''#Wait loop
+setreg1;0
+datawrite1;>waitcy-loopback-''' +  str(lineno) + '''
 setreg1;0;waitcy-loopback-''' +  str(lineno) + '''
 setreg2;10x1
 add

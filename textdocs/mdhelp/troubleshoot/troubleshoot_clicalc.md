@@ -37,3 +37,8 @@ Well, clicalc's memory monitor sets aside the area of SBTCVM's RAM that its code
 
 You may, however, write to any IOBUS address, as well as see the writable memory range of RAM via pressing **`m`** at the memory monitor prompt.
 
+### memory range dumping is slow. even in SBTCVM's OS terminal output!
+
+This is done to keep the TTY in the pygame frontend from being overloaded. as SBTCVM's official TTY speed is only 600 character/second. This command is best used with smaller sections of memory...
+
+Please see: **romdump.py**, for a more robust tool.
