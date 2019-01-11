@@ -5,10 +5,10 @@
 name    | size     | short  | (alt 1) 
 :------:|:--------:|:------:|:----:
 trit    | 1 trit   | t1     | t
-triad   | 3 trits  | t3     | N/A
+triad   | 3 trits  | t3     | 
 tryte   | 6 trits  | t6     | T
-nonet   | 9 trits  | t9     | N/A
-ditryte | 12 trits | t12    | N/A
+nonet   | 9 trits  | t9     | N
+ditryte | 12 trits | t12    | dT
 
 **Note:** _In numbered shorthands (shorthands with the form **t(n)**),
 it is recommended that **(n)** be in superscript when possible._
@@ -27,6 +27,6 @@ in SBTCVM, this is _1000_ units rather than _1024_ in binary. eg.
 and didn't accomplish anything 1000 can't, so it was changed._
 
 ### measurement examples:    
-- SBTCVM has (3^9)*2 or 39366 t9's or 39.366 Kt9's (KiloNonets) of ram
-- A 12 trit SBTCVM would have (3^12)*2 or 1062882 t12's, 1062.882 Kt12's (KiloDiTrytes), or approx. 1.06 Mt12's (MegaDiTrytes) of ram.
+- SBTCVM has (3^9)*2 or 39366 N (nonets) or 39.366 KN (KiloNonets) of ram
+- A 12 trit SBTCVM would have (3^12)*2 or 1062882 dT, 1062.882 KdT (KiloDiTrytes), or approx. 1.06 GdT (MegaDiTrytes) of ram.
 
