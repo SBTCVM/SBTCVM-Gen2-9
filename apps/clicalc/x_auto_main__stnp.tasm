@@ -174,7 +174,7 @@ fopwri1;:n
 fopwri1;:\s
 fopwri1;:2
 fopwri1;:.
-fopwri1;:2
+fopwri1;:3
 fopwri1;:\n
 #prline
 fopwri1;:p
@@ -2199,7 +2199,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:2
 fopwri1;:.
-fopwri1;:2
+fopwri1;:3
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -3019,7 +3019,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:2
 fopwri1;:.
-fopwri1;:2
+fopwri1;:3
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -3755,7 +3755,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:2
 fopwri1;:.
-fopwri1;:2
+fopwri1;:3
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -4230,6 +4230,43 @@ fopwri1;:c
 fopwri1;:e
 fopwri1;:.
 fopwri1;:\n
+#prline
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:r
+fopwri1;:a
+fopwri1;:c
+fopwri1;:k
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:h
+fopwri1;:a
+fopwri1;:n
+fopwri1;:g
+fopwri1;:e
+fopwri1;:s
+fopwri1;:\s
+fopwri1;:o
+fopwri1;:n
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:n
+fopwri1;:\s
+fopwri1;:I
+fopwri1;:O
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:d
+fopwri1;:d
+fopwri1;:r
+fopwri1;:e
+fopwri1;:s
+fopwri1;:s
+fopwri1;:\n
 #print newline
 fopwri1;:\n
 #prline
@@ -4530,8 +4567,8 @@ fopwri1;:>
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-574
-gotoif;>keyprompt--loop-574
+ioread1;>io.ttyrd;keyprompt--loop-575
+gotoif;>keyprompt--loop-575
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -4592,10 +4629,10 @@ fopwri1;:!
 fopwri1;:)
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-582
+setreg1;>goto--jumper-583
 s1push1
 goto;>memory_stats--label
-null;;goto--jumper-582
+null;;goto--jumper-583
 #label
 null;;monitor_loop--label
 #Set text colors
@@ -4615,8 +4652,8 @@ iowrite1;>io.textcolor
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-588
-gotoif;>keyprompt--loop-588
+ioread1;>io.ttyrd;keyprompt--loop-589
+gotoif;>keyprompt--loop-589
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>kb
 #Dump (character)
@@ -4627,15 +4664,6 @@ fopwri1;:\n
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:1
-gotoif;>goto--branch-592
-goto;>goto--jumper-592
-setreg1;>goto--jumper-592;goto--branch-592
-s1push1
-goto;>do_mode_decimal--label
-null;;goto--jumper-592
-#conditional subroutine goto
-dataread1;>kb
-dataread2;>:!
 gotoif;>goto--branch-593
 goto;>goto--jumper-593
 setreg1;>goto--jumper-593;goto--branch-593
@@ -4644,16 +4672,16 @@ goto;>do_mode_decimal--label
 null;;goto--jumper-593
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:2
+dataread2;>:!
 gotoif;>goto--branch-594
 goto;>goto--jumper-594
 setreg1;>goto--jumper-594;goto--branch-594
 s1push1
-goto;>do_mode_ternary--label
+goto;>do_mode_decimal--label
 null;;goto--jumper-594
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:@
+dataread2;>:2
 gotoif;>goto--branch-595
 goto;>goto--jumper-595
 setreg1;>goto--jumper-595;goto--branch-595
@@ -4662,16 +4690,16 @@ goto;>do_mode_ternary--label
 null;;goto--jumper-595
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:h
+dataread2;>:@
 gotoif;>goto--branch-596
 goto;>goto--jumper-596
 setreg1;>goto--jumper-596;goto--branch-596
 s1push1
-goto;>monitor_help--label
+goto;>do_mode_ternary--label
 null;;goto--jumper-596
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:H
+dataread2;>:h
 gotoif;>goto--branch-597
 goto;>goto--jumper-597
 setreg1;>goto--jumper-597;goto--branch-597
@@ -4680,50 +4708,50 @@ goto;>monitor_help--label
 null;;goto--jumper-597
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:?
+dataread2;>:H
 gotoif;>goto--branch-598
 goto;>goto--jumper-598
 setreg1;>goto--jumper-598;goto--branch-598
 s1push1
-goto;>about--label
+goto;>monitor_help--label
 null;;goto--jumper-598
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:/
+dataread2;>:?
 gotoif;>goto--branch-599
 goto;>goto--jumper-599
 setreg1;>goto--jumper-599;goto--branch-599
 s1push1
 goto;>about--label
 null;;goto--jumper-599
-#conditional goto
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:p
+dataread2;>:/
 gotoif;>goto--branch-600
 goto;>goto--jumper-600
 setreg1;>goto--jumper-600;goto--branch-600
-goto;>monitor_return--label
+s1push1
+goto;>about--label
 null;;goto--jumper-600
 #conditional goto
 dataread1;>kb
-dataread2;>:P
+dataread2;>:p
 gotoif;>goto--branch-601
 goto;>goto--jumper-601
 setreg1;>goto--jumper-601;goto--branch-601
 goto;>monitor_return--label
 null;;goto--jumper-601
-#conditional subroutine goto
+#conditional goto
 dataread1;>kb
-dataread2;>:o
+dataread2;>:P
 gotoif;>goto--branch-602
 goto;>goto--jumper-602
 setreg1;>goto--jumper-602;goto--branch-602
-s1push1
-goto;>m_io_read--label
+goto;>monitor_return--label
 null;;goto--jumper-602
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:O
+dataread2;>:o
 gotoif;>goto--branch-603
 goto;>goto--jumper-603
 setreg1;>goto--jumper-603;goto--branch-603
@@ -4732,16 +4760,16 @@ goto;>m_io_read--label
 null;;goto--jumper-603
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:l
+dataread2;>:O
 gotoif;>goto--branch-604
 goto;>goto--jumper-604
 setreg1;>goto--jumper-604;goto--branch-604
 s1push1
-goto;>m_io_write--label
+goto;>m_io_read--label
 null;;goto--jumper-604
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:L
+dataread2;>:l
 gotoif;>goto--branch-605
 goto;>goto--jumper-605
 setreg1;>goto--jumper-605;goto--branch-605
@@ -4750,16 +4778,16 @@ goto;>m_io_write--label
 null;;goto--jumper-605
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:i
+dataread2;>:L
 gotoif;>goto--branch-606
 goto;>goto--jumper-606
 setreg1;>goto--jumper-606;goto--branch-606
 s1push1
-goto;>m_data_read--label
+goto;>m_io_write--label
 null;;goto--jumper-606
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:I
+dataread2;>:i
 gotoif;>goto--branch-607
 goto;>goto--jumper-607
 setreg1;>goto--jumper-607;goto--branch-607
@@ -4768,16 +4796,16 @@ goto;>m_data_read--label
 null;;goto--jumper-607
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:k
+dataread2;>:I
 gotoif;>goto--branch-608
 goto;>goto--jumper-608
 setreg1;>goto--jumper-608;goto--branch-608
 s1push1
-goto;>m_data_write--label
+goto;>m_data_read--label
 null;;goto--jumper-608
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:K
+dataread2;>:k
 gotoif;>goto--branch-609
 goto;>goto--jumper-609
 setreg1;>goto--jumper-609;goto--branch-609
@@ -4786,16 +4814,16 @@ goto;>m_data_write--label
 null;;goto--jumper-609
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:u
+dataread2;>:K
 gotoif;>goto--branch-610
 goto;>goto--jumper-610
 setreg1;>goto--jumper-610;goto--branch-610
 s1push1
-goto;>m_inst_read--label
+goto;>m_data_write--label
 null;;goto--jumper-610
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:U
+dataread2;>:u
 gotoif;>goto--branch-611
 goto;>goto--jumper-611
 setreg1;>goto--jumper-611;goto--branch-611
@@ -4804,16 +4832,16 @@ goto;>m_inst_read--label
 null;;goto--jumper-611
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:j
+dataread2;>:U
 gotoif;>goto--branch-612
 goto;>goto--jumper-612
 setreg1;>goto--jumper-612;goto--branch-612
 s1push1
-goto;>m_inst_write--label
+goto;>m_inst_read--label
 null;;goto--jumper-612
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:J
+dataread2;>:j
 gotoif;>goto--branch-613
 goto;>goto--jumper-613
 setreg1;>goto--jumper-613;goto--branch-613
@@ -4822,16 +4850,16 @@ goto;>m_inst_write--label
 null;;goto--jumper-613
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:m
+dataread2;>:J
 gotoif;>goto--branch-614
 goto;>goto--jumper-614
 setreg1;>goto--jumper-614;goto--branch-614
 s1push1
-goto;>memory_stats--label
+goto;>m_inst_write--label
 null;;goto--jumper-614
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:M
+dataread2;>:m
 gotoif;>goto--branch-615
 goto;>goto--jumper-615
 setreg1;>goto--jumper-615;goto--branch-615
@@ -4840,16 +4868,16 @@ goto;>memory_stats--label
 null;;goto--jumper-615
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:d
+dataread2;>:M
 gotoif;>goto--branch-616
 goto;>goto--jumper-616
 setreg1;>goto--jumper-616;goto--branch-616
 s1push1
-goto;>m_rd_view--label
+goto;>memory_stats--label
 null;;goto--jumper-616
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:D
+dataread2;>:d
 gotoif;>goto--branch-617
 goto;>goto--jumper-617
 setreg1;>goto--jumper-617;goto--branch-617
@@ -4858,38 +4886,65 @@ goto;>m_rd_view--label
 null;;goto--jumper-617
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:f
+dataread2;>:D
 gotoif;>goto--branch-618
 goto;>goto--jumper-618
 setreg1;>goto--jumper-618;goto--branch-618
 s1push1
-goto;>m_rd_vscreen--label
+goto;>m_rd_view--label
 null;;goto--jumper-618
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:F
+dataread2;>:f
 gotoif;>goto--branch-619
 goto;>goto--jumper-619
 setreg1;>goto--jumper-619;goto--branch-619
 s1push1
 goto;>m_rd_vscreen--label
 null;;goto--jumper-619
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:F
+gotoif;>goto--branch-620
+goto;>goto--jumper-620
+setreg1;>goto--jumper-620;goto--branch-620
+s1push1
+goto;>m_rd_vscreen--label
+null;;goto--jumper-620
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:s
+gotoif;>goto--branch-621
+goto;>goto--jumper-621
+setreg1;>goto--jumper-621;goto--branch-621
+s1push1
+goto;>m_io_adr_scan--label
+null;;goto--jumper-621
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:S
+gotoif;>goto--branch-622
+goto;>goto--jumper-622
+setreg1;>goto--jumper-622;goto--branch-622
+s1push1
+goto;>m_io_adr_scan--label
+null;;goto--jumper-622
 #conditional stop
 dataread1;>kb
 dataread2;>:q
-gotoif;>goto--branch-620
-goto;>goto--jumper-620
-stop;;goto--branch-620
+gotoif;>goto--branch-624
+goto;>goto--jumper-624
+stop;;goto--branch-624
 
-null;;goto--jumper-620
+null;;goto--jumper-624
 #conditional stop
 dataread1;>kb
 dataread2;>:Q
-gotoif;>goto--branch-621
-goto;>goto--jumper-621
-stop;;goto--branch-621
+gotoif;>goto--branch-625
+goto;>goto--jumper-625
+stop;;goto--branch-625
 
-null;;goto--jumper-621
+null;;goto--jumper-625
 #goto 
 goto;>monitor_loop--label
 #label
@@ -4950,18 +5005,18 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-635
+setreg1;>goto--jumper-639
 s1push1
 goto;>get1num--label
-null;;goto--jumper-635
+null;;goto--jumper-639
 #get(1) (may be used with set, or asm code)
 dataread1;>v1buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #637
-datawrite1;>IOBUS_READ_MON#SSTNPL Source Line: '637' 
+#_______NOTE: this corresponds to SSTNPL source line #641
+datawrite1;>IOBUS_READ_MON#SSTNPL Source Line: '641' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #638
-ioread1;0;IOBUS_READ_MON#SSTNPL Source Line: '638' 
+#_______NOTE: this corresponds to SSTNPL source line #642
+ioread1;0;IOBUS_READ_MON#SSTNPL Source Line: '642' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>v1buff
 #print newline
@@ -5017,10 +5072,10 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-655
+setreg1;>goto--jumper-659
 s1push1
 goto;>get1num--label
-null;;goto--jumper-655
+null;;goto--jumper-659
 #copy variables 
 dataread1;>v1buff
 datawrite1;>monitor_wri_buff
@@ -5033,20 +5088,20 @@ fopwri1;:e
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-658
+setreg1;>goto--jumper-662
 s1push1
 goto;>get1num--label
-null;;goto--jumper-658
+null;;goto--jumper-662
 #get(1) (may be used with set, or asm code)
 dataread1;>monitor_wri_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>v1buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #661
-datawrite1;>IOBUS_WRITE_MON#SSTNPL Source Line: '661' 
+#_______NOTE: this corresponds to SSTNPL source line #665
+datawrite1;>IOBUS_WRITE_MON#SSTNPL Source Line: '665' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #662
-iowrite2;0;IOBUS_WRITE_MON#SSTNPL Source Line: '662' 
+#_______NOTE: this corresponds to SSTNPL source line #666
+iowrite2;0;IOBUS_WRITE_MON#SSTNPL Source Line: '666' 
 #print newline
 fopwri1;:\n
 #prline
@@ -5083,18 +5138,18 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-672
+setreg1;>goto--jumper-676
 s1push1
 goto;>get1num--label
-null;;goto--jumper-672
+null;;goto--jumper-676
 #get(1) (may be used with set, or asm code)
 dataread1;>v1buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #674
-datawrite1;>DATA_READ_MON#SSTNPL Source Line: '674' 
+#_______NOTE: this corresponds to SSTNPL source line #678
+datawrite1;>DATA_READ_MON#SSTNPL Source Line: '678' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #675
-dataread1;0;DATA_READ_MON#SSTNPL Source Line: '675' 
+#_______NOTE: this corresponds to SSTNPL source line #679
+dataread1;0;DATA_READ_MON#SSTNPL Source Line: '679' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>v1buff
 #print newline
@@ -5149,18 +5204,18 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-690
+setreg1;>goto--jumper-694
 s1push1
 goto;>get1num--label
-null;;goto--jumper-690
+null;;goto--jumper-694
 #conditional goto
 dataread1;>v1buff
 dataread2;>WRITEPROTECT_END
-gotoifmore;>goto--jumper-693
-goto;>goto--branch-693
-setreg1;>goto--jumper-693;goto--branch-693
+gotoifmore;>goto--jumper-697
+goto;>goto--branch-697
+setreg1;>goto--jumper-697;goto--branch-697
 goto;>write_sanity--label
-null;;goto--jumper-693
+null;;goto--jumper-697
 #copy variables 
 dataread1;>v1buff
 datawrite1;>monitor_wri_buff
@@ -5173,20 +5228,20 @@ fopwri1;:e
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-697
+setreg1;>goto--jumper-701
 s1push1
 goto;>get1num--label
-null;;goto--jumper-697
+null;;goto--jumper-701
 #get(1) (may be used with set, or asm code)
 dataread1;>monitor_wri_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>v1buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #700
-datawrite1;>DATA_WRITE_MON#SSTNPL Source Line: '700' 
+#_______NOTE: this corresponds to SSTNPL source line #704
+datawrite1;>DATA_WRITE_MON#SSTNPL Source Line: '704' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #701
-datawrite2;0;DATA_WRITE_MON#SSTNPL Source Line: '701' 
+#_______NOTE: this corresponds to SSTNPL source line #705
+datawrite2;0;DATA_WRITE_MON#SSTNPL Source Line: '705' 
 #print newline
 fopwri1;:\n
 #prline
@@ -5230,18 +5285,18 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-710
+setreg1;>goto--jumper-714
 s1push1
 goto;>get1num--label
-null;;goto--jumper-710
+null;;goto--jumper-714
 #get(1) (may be used with set, or asm code)
 dataread1;>v1buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #712
-datawrite1;>INST_READ_MON#SSTNPL Source Line: '712' 
+#_______NOTE: this corresponds to SSTNPL source line #716
+datawrite1;>INST_READ_MON#SSTNPL Source Line: '716' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #713
-instread1;0;INST_READ_MON#SSTNPL Source Line: '713' 
+#_______NOTE: this corresponds to SSTNPL source line #717
+instread1;0;INST_READ_MON#SSTNPL Source Line: '717' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>v1buff
 #print newline
@@ -5303,18 +5358,18 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-728
+setreg1;>goto--jumper-732
 s1push1
 goto;>get1num--label
-null;;goto--jumper-728
+null;;goto--jumper-732
 #conditional goto
 dataread1;>v1buff
 dataread2;>WRITEPROTECT_END
-gotoifmore;>goto--jumper-731
-goto;>goto--branch-731
-setreg1;>goto--jumper-731;goto--branch-731
+gotoifmore;>goto--jumper-735
+goto;>goto--branch-735
+setreg1;>goto--jumper-735;goto--branch-735
 goto;>write_sanity--label
-null;;goto--jumper-731
+null;;goto--jumper-735
 #copy variables 
 dataread1;>v1buff
 datawrite1;>monitor_wri_buff
@@ -5327,20 +5382,20 @@ fopwri1;:e
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-735
+setreg1;>goto--jumper-739
 s1push1
 goto;>get1num--label
-null;;goto--jumper-735
+null;;goto--jumper-739
 #get(1) (may be used with set, or asm code)
 dataread1;>monitor_wri_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>v1buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #738
-datawrite1;>INST_WRITE_MON#SSTNPL Source Line: '738' 
+#_______NOTE: this corresponds to SSTNPL source line #742
+datawrite1;>INST_WRITE_MON#SSTNPL Source Line: '742' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #739
-instwrite2;0;INST_WRITE_MON#SSTNPL Source Line: '739' 
+#_______NOTE: this corresponds to SSTNPL source line #743
+instwrite2;0;INST_WRITE_MON#SSTNPL Source Line: '743' 
 #print newline
 fopwri1;:\n
 #prline
@@ -5635,6 +5690,102 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
+null;;m_io_adr_scan--label
+#val (used with set to change variable value during runtime.)
+setreg1;0
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>monitor_ran_buff
+#prline
+fopwri1;:I
+fopwri1;:O
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:d
+fopwri1;:d
+fopwri1;:r
+fopwri1;:e
+fopwri1;:s
+fopwri1;:s
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:c
+fopwri1;:a
+fopwri1;:n
+fopwri1;:\n
+#prline
+fopwri1;:A
+fopwri1;:d
+fopwri1;:d
+fopwri1;:r
+fopwri1;:e
+fopwri1;:s
+fopwri1;:s
+fopwri1;:?
+fopwri1;:\n
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-791
+s1push1
+goto;>get1num--label
+null;;goto--jumper-791
+#get(1) (may be used with set, or asm code)
+dataread1;>v1buff
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #796
+datawrite1;>IO_ADR_SCAN_X#SSTNPL Source Line: '796' 
+#label
+null;;m_io_adr_scan_loop--label
+#Wait loop
+setreg1;0
+datawrite1;>waitcy-loopback-802
+setreg1;0;waitcy-loopback-802
+setreg2;10x1
+add
+datawrite1;>waitcy-loopback-802
+setreg2;10x56
+gotoifless;>waitcy-loopback-802
+
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #805
+ioread1;0;IO_ADR_SCAN_X#SSTNPL Source Line: '805' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>v1buff
+#Get character from TTY input.
+ioread1;>io.ttyrd
+datawrite1;>kb
+#conditional goto
+dataread1;>kb
+dataread2;>@0
+gotoif;>goto--jumper-810
+goto;>goto--branch-810
+setreg1;>goto--jumper-810;goto--branch-810
+goto;>break--label
+null;;goto--jumper-810
+#conditional goto
+dataread1;>v1buff
+dataread2;>monitor_ran_buff
+gotoif;>goto--branch-813
+goto;>goto--jumper-813
+setreg1;>goto--jumper-813;goto--branch-813
+goto;>m_io_adr_scan_loop--label
+null;;goto--jumper-813
+#copy variables 
+dataread1;>v1buff
+datawrite1;>monitor_ran_buff
+#Dump (trits)
+dataread1;>v1buff
+iowrite1;>io.tritdump
+#print
+fopwri1;:\s
+fopwri1;:(
+#Dump (decimal)
+dataread1;>v1buff
+iowrite1;>io.decdump
+#prline
+fopwri1;:)
+fopwri1;:\n
+#goto 
+goto;>m_io_adr_scan_loop--label
+#label
 null;;m_rd_vscreen--label
 #val (used with set to change variable value during runtime.)
 setreg1;0
@@ -5676,10 +5827,10 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-786
+setreg1;>goto--jumper-839
 s1push1
 goto;>get1num--label
-null;;goto--jumper-786
+null;;goto--jumper-839
 #copy variables 
 dataread1;>v1buff
 datawrite1;>monitor_ran_buff
@@ -5731,10 +5882,10 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-804
+setreg1;>goto--jumper-857
 s1push1
 goto;>get1num--label
-null;;goto--jumper-804
+null;;goto--jumper-857
 #copy variables 
 dataread1;>v1buff
 datawrite1;>monitor_ran_buff
@@ -5753,10 +5904,10 @@ fopwri1;:s
 fopwri1;:?
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-807
+setreg1;>goto--jumper-860
 s1push1
 goto;>get1num--label
-null;;goto--jumper-807
+null;;goto--jumper-860
 #label
 null;;m_rd_view_loop--label
 #Get character from TTY input.
@@ -5765,25 +5916,25 @@ datawrite1;>kb
 #conditional goto
 dataread1;>kb
 dataread2;>@0
-gotoif;>goto--jumper-812
-goto;>goto--branch-812
-setreg1;>goto--jumper-812;goto--branch-812
+gotoif;>goto--jumper-865
+goto;>goto--branch-865
+setreg1;>goto--jumper-865;goto--branch-865
 goto;>break--label
-null;;goto--jumper-812
+null;;goto--jumper-865
 #get(1) (may be used with set, or asm code)
 dataread1;>monitor_ran_buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #816
-datawrite1;>INST_RANGE_MON_S#SSTNPL Source Line: '816' 
+#_______NOTE: this corresponds to SSTNPL source line #869
+datawrite1;>INST_RANGE_MON_S#SSTNPL Source Line: '869' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #817
-datawrite1;>INST_RANGE_MON_E#SSTNPL Source Line: '817' 
+#_______NOTE: this corresponds to SSTNPL source line #870
+datawrite1;>INST_RANGE_MON_E#SSTNPL Source Line: '870' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #818
-instread1;0;INST_RANGE_MON_S#SSTNPL Source Line: '818' 
+#_______NOTE: this corresponds to SSTNPL source line #871
+instread1;0;INST_RANGE_MON_S#SSTNPL Source Line: '871' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #819
-dataread2;0;INST_RANGE_MON_E#SSTNPL Source Line: '819' 
+#_______NOTE: this corresponds to SSTNPL source line #872
+dataread2;0;INST_RANGE_MON_E#SSTNPL Source Line: '872' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>monitor_inst_buff
 #set2 (used for asm, or get2)
@@ -5834,13 +5985,13 @@ iowrite1;>io.decdump
 fopwri1;:\n
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-840
-setreg1;0;waitcy-loopback-840
+datawrite1;>waitcy-loopback-893
+setreg1;0;waitcy-loopback-893
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-840
+datawrite1;>waitcy-loopback-893
 setreg2;10x56
-gotoifless;>waitcy-loopback-840
+gotoifless;>waitcy-loopback-893
 
 #add (2op math)
 dataread1;>monitor_ran_buff
@@ -5851,19 +6002,19 @@ datawrite1;>monitor_ran_buff
 #conditional return
 dataread1;>mon_dmp_stop
 dataread2;>@1
-gotoif;>goto--branch-844
-goto;>goto--jumper-844
-s1pop1;;goto--branch-844
+gotoif;>goto--branch-897
+goto;>goto--jumper-897
+s1pop1;;goto--branch-897
 gotoreg1
-null;;goto--jumper-844
+null;;goto--jumper-897
 #conditional set
 dataread1;>v1buff
 dataread2;>monitor_ran_buff
-gotoif;>goto--branch-845
-goto;>goto--jumper-845
-dataread1;>@1;goto--branch-845
+gotoif;>goto--branch-898
+goto;>goto--jumper-898
+dataread1;>@1;goto--branch-898
 datawrite1;>mon_dmp_stop
-null;;goto--jumper-845
+null;;goto--jumper-898
 #goto 
 goto;>m_rd_view_loop--label
 #label
@@ -5904,6 +6055,6 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #859
-null;;END_OF_WRITE_PROTECT#SSTNPL Source Line: '859' 
+#_______NOTE: this corresponds to SSTNPL source line #912
+null;;END_OF_WRITE_PROTECT#SSTNPL Source Line: '912' 
 #END OF FILE

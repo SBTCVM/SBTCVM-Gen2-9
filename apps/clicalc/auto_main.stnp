@@ -47,7 +47,7 @@ var kb=0
 ####### CALCULATOR MAIN ROUTINE #######
 textcolor *+++--0
 prline clicalc: A ternary/decimal CLI calculator.
-prline Version 2.2
+prline Version 2.3
 prline press 'h' for help, and '?' for about info.
 textcolor *+++---
 gsub do_mode_decimal
@@ -488,7 +488,7 @@ label about
 textcolor *+++--0
 newline
 prline --ABOUT--
-prline clicalc v2.2: A ternary/decimal CLI calculator & memory monitor
+prline clicalc v2.3: A ternary/decimal CLI calculator & memory monitor
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -517,7 +517,7 @@ return
 
 label help
 textcolor *+++--0
-prline clicalc v2.2: A ternary/decimal CLI calculator & memory monitor
+prline clicalc v2.3: A ternary/decimal CLI calculator & memory monitor
 prline COMMANDS:
 prline   a: add
 prline   s: subtract
@@ -551,7 +551,7 @@ return
 
 label monitor_help
 textcolor *+++--0
-prline clicalc v2.2: A ternary/decimal CLI calculator & memory monitor
+prline clicalc v2.3: A ternary/decimal CLI calculator & memory monitor
 prline MONITOR COMMANDS:
 prline   p: return to calculator mode
 prline   o: read IO address                  q: quit clicalc
@@ -560,6 +560,7 @@ prline   i: read DATA address                h: help (this text)
 prline   k: write DATA address *             m: memory stats
 prline   u: read INSTRUCTION address         d: view a range of RAM (data/inst)
 prline   j: write INSTRUCTION address *      f: view 24 words of RAM at once.
+prline   s: track changes on an IO address
 newline
 prline   1: enter DECIMAL MODE (indicated by 'dMem>' prompt) (default)
 prline   2: enter TERNARY MODE (indicated by 'tMem>' prompt)
@@ -617,6 +618,9 @@ if kb,:d gsub m_rd_view
 if kb,:D gsub m_rd_view
 if kb,:f gsub m_rd_vscreen
 if kb,:F gsub m_rd_vscreen
+if kb,:s gsub m_io_adr_scan
+if kb,:S gsub m_io_adr_scan
+
 if kb,:q stop
 if kb,:Q stop
 
@@ -772,6 +776,55 @@ print  to  9841  (+++++++++)
 textcolor *+++---
 newline
 return
+
+
+
+#### IO address scan ####
+label m_io_adr_scan
+val 0
+set monitor_ran_buff
+prline IO address scan
+
+
+#get address from user
+prline Address?
+gsub get1num
+
+
+#setup ioread operation in loop
+get v1buff
+asm datawrite1;>IO_ADR_SCAN_X
+
+# output & scanning loop
+
+label m_io_adr_scan_loop
+#delay (as to not flood TTY in event of constant changes)
+waitcy 336
+
+#get value
+asm ioread1;0;IO_ADR_SCAN_X
+set v1buff
+
+# keyboard break check
+getchar kb
+ifnot kb,@0 goto break
+
+#anti-duplicate code
+if v1buff,monitor_ran_buff goto m_io_adr_scan_loop
+copy v1buff,monitor_ran_buff
+
+#print code
+dumpt v1buff
+print  (
+dumpd v1buff
+prline )
+
+
+
+goto m_io_adr_scan_loop
+
+
+
 
 
 
