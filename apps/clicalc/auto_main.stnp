@@ -504,13 +504,11 @@ prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 prline GNU General Public License for more details.
 prline 
 prline You should have received a copy of the GNU General Public License
-prline along with clicalc. If not, see <http://www.gnu.org/licenses/>
-textcolor *+++---
-prline 
-prline PRESS A KEY TO RETURN TO MAIN PROMPT
+print along with clicalc. If not, see <http://www.gnu.org/licenses/>
+
+#ensure last output line is a 'print' statement, not a 'prline' statement!
+
 textcolor *0++---
-print ?>>>
-keyprompt
 newline
 return
 
@@ -537,14 +535,11 @@ prline [+,0,-]/[p,0,n] When in TERNARY MODE
 prline [0-9] as well as [-] at start for negatives, When in DECIMAL MODE
 prline [q,Q] quits clicalc.
 prline [BACKSPACE] remove last-entered digit.
-prline <input is limited to 9 trits <-9841 to 9841>>
-textcolor *+++---
-prline 
-prline PRESS A KEY TO RETURN TO MAIN PROMPT
-textcolor *0++---
-print ?>>>
+print <input is limited to 9 trits <-9841 to 9841>>
 
-keyprompt
+#ensure last output line is a 'print' statement, not a 'prline' statement!
+
+textcolor *0++---
 newline
 return
 
@@ -565,14 +560,11 @@ newline
 prline   1: enter DECIMAL MODE (indicated by 'dMem>' prompt) (default)
 prline   2: enter TERNARY MODE (indicated by 'tMem>' prompt)
 prline     * part of RAM is treated as READ ONLY. see 'memory stats' (m)
-prline See calculator prompt help for info on entering numbers
-textcolor *+++---
-prline 
-prline PRESS A KEY TO RETURN TO MAIN PROMPT
-textcolor *0++---
-print ?>>>
+print See calculator prompt help for info on entering numbers
 
-keyprompt
+#ensure last output line is a 'print' statement, not a 'prline' statement!
+
+textcolor *0++---
 newline
 return
 

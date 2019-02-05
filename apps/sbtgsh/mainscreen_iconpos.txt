@@ -1,0 +1,6 @@
+row 1:
+calc:  1 to 13 (X), 1 to 6 (Y)
+disk: 16 to 28 (X), 1 to 6 (Y)
+game: 31 to 43 (X), 1 to 6 (Y)
+help: 46 to 58 (X), 1 to 6 (Y)
+exit: 61 to 73 (X), 1 to 6 (Y)

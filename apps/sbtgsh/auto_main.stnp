@@ -1,0 +1,277 @@
+
+var btnbuff=0
+var xbuff=0
+var ybuff=0
+var main_actflg=@1
+var exitcode=0
+
+########## Main Loop ##########
+label main
+if main_actflg,@1 gsub mainscreen_draw
+if main_actflg,@1 =main_actflg @0
+
+label main_loop
+asm ioread1;>mouse.button
+set btnbuff
+
+ifnot btnbuff,@1 goto main_loop
+
+##### Main screen icon click parser #####
+
+#parse Y first!
+asm ioread1;>mouse.lockx
+set xbuff
+asm ioread1;>mouse.locky
+set ybuff
+
+### Row 1 ###
+
+ifnotrange @1,@6,ybuff goto row1_skip
+
+ifrange @1,@13,xbuff =main_actflg @1
+ifrange @1,@13,xbuff gsub not_implemented
+ifrange @16,@28,xbuff =main_actflg @1
+ifrange @16,@28,xbuff gsub VDI_shell
+ifrange @31,@43,xbuff =main_actflg @1
+ifrange @31,@43,xbuff gsub not_implemented
+ifrange @46,@58,xbuff =main_actflg @1
+ifrange @46,@58,xbuff gsub help
+ifrange @61,@73,xbuff =main_actflg @1
+ifrange @61,@73,xbuff stop
+
+label row1_skip
+
+### Row 2 ###
+
+ifnotrange @8,@13,ybuff goto row2_skip
+
+ifrange @1,@13,xbuff =main_actflg @1
+ifrange @1,@13,xbuff gsub not_implemented
+ifrange @16,@28,xbuff =main_actflg @1
+ifrange @16,@28,xbuff gsub nothing_here
+ifrange @31,@43,xbuff =main_actflg @1
+ifrange @31,@43,xbuff gsub nothing_here
+ifrange @46,@58,xbuff =main_actflg @1
+ifrange @46,@58,xbuff gsub nothing_here
+ifrange @61,@73,xbuff =main_actflg @1
+ifrange @61,@73,xbuff gsub nothing_here
+
+label row2_skip
+
+### Row 3 ###
+
+ifnotrange @15,@20,ybuff goto row3_skip
+
+ifrange @1,@13,xbuff =main_actflg @1
+ifrange @1,@13,xbuff gsub nothing_here
+ifrange @16,@28,xbuff =main_actflg @1
+ifrange @16,@28,xbuff gsub nothing_here
+ifrange @31,@43,xbuff =main_actflg @1
+ifrange @31,@43,xbuff gsub nothing_here
+ifrange @46,@58,xbuff =main_actflg @1
+ifrange @46,@58,xbuff gsub nothing_here
+ifrange @61,@73,xbuff =main_actflg @1
+ifrange @61,@73,xbuff gsub nothing_here
+
+label row3_skip
+
+
+goto main
+
+
+
+
+
+
+
+###### Helper routines ######
+
+label newline
+newline
+return
+
+label space
+space
+return
+
+label labelpad1
+uiter foo1,space,@1,@11
+return
+
+
+
+###### Main Menu Drawing Routine ######
+label mainscreen_draw
+textcolor *+++--0
+#prline SBTCVM Balanced Ternary Graphical SHell v0.1
+prline SBTGSH v0.1 - Main Menu
+
+textcolor *+++00+
+asm include;sbtgsh+capps.tas0
+textcolor *+++--0
+
+#label printing code
+space
+print Calc
+gsub labelpad1
+print Disk
+gsub labelpad1
+print Game
+gsub labelpad1
+print Help & About   
+
+print Exit
+newline
+
+textcolor *+++00+
+asm include;sbtgsh+capps2.tas0
+textcolor *+++--0
+
+#label printing code
+space
+print Ball
+gsub labelpad1
+print ____
+gsub labelpad1
+print ____
+gsub labelpad1
+print ____
+gsub labelpad1
+print ____
+newline
+
+textcolor *+++00+
+asm include;sbtgsh+capps3.tas0
+textcolor *+++--0
+
+#label printing code
+space
+print ____
+gsub labelpad1
+print ____
+gsub labelpad1
+print ____
+gsub labelpad1
+print ____
+gsub labelpad1
+print ____
+newline
+
+textcolor *---00+
+
+
+prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat.
+newline
+return
+
+
+
+###### Not Implemented Message ######
+
+label not_implemented
+textcolor *+++--0
+prline SBTGSH v0.1 - Whoops...
+textcolor *---00+
+prline This is not supported yet. sorry!
+prline Click anywhere to continue.
+uiter not_sup_fill,newline,@1,@21
+
+gsub click_wait
+
+return
+
+###### Blank icon message ######
+
+label nothing_here
+textcolor *+++--0
+prline SBTGSH v0.1 - Whoops...
+textcolor *---00+
+prline Nothing is assigned to this icon slot yet. sorry!
+prline Click anywhere to continue.
+uiter not_sup_fill,newline,@1,@21
+
+gsub click_wait
+
+return
+
+###### in-shell Help screen & About Screens ######
+
+
+#### Help ####
+label help
+textcolor *+++--0
+prline SBTGSH v0.1 - Help & About - Help
+textcolor *---00+
+prline Use the mouse to navigate the main menu.
+prline calc: -basic ternary calculator coming soon-
+prline Disk: open up the SBTVDI serial shell.
+prline Game: -some simple, mouse-based game coming soon-
+prline Help & About: This help screen, & about screen.
+prline Exit: Shutdown SBTCVM Session.
+prline Ball: - Simple 'crystal ball' Yes/No app coming soon-
+newline
+prline Click anywhere to continue to about screen.
+
+uiter not_sup_fill,newline,@1,@14
+
+gsub click_wait
+
+#### About ####
+textcolor *+++--0
+prline SBTGSH v0.1 - Help & About - About
+textcolor *---00+
+prline SBTCVM Balanced Ternary Graphical SHell - v0.1
+prline Part of SBTCVM Gen2-9
+prline 
+prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
+prline 
+prline SBTCVM SBTGSH is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline SBTCVM SBTGSH is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with SBTCVM SBTGSH. If not, see <http://www.gnu.org/licenses/>
+
+newline
+prline Click anywhere to return to main menu.
+
+
+uiter not_sup_fill,newline,@1,@4
+
+gsub click_wait
+return
+
+
+###### Generic Click event wait function ######
+
+label click_wait
+label click_wait_loop
+asm ioread1;>mouse.button
+set btnbuff
+ifnot btnbuff,@1 goto click_wait_loop
+return
+
+
+######vdi shell wrapper######
+label VDI_shell
+textcolor *+++--0
+prline SBTGSH v0.1 - SBTVDI Shell Wrapper
+textcolor *---00+
+prline Type 'return' to return to SBTGSH
+prline Type 'quit' to shutdown SBTCVM session.
+uiter not_sup_fill,newline,@1,@19
+
+
+textcolor *+++---
+asm include;vdishell.tas0
+asm dataread1;>vdiexitcode
+set exitcode
+if exitcode,@1 return
+if exitcode,@2 stop
+return

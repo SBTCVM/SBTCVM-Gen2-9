@@ -2,6 +2,7 @@ key:
 	[ttycolor]: uses tty color support.
 	[plotter]: uses SBTGA mode 30 (plotter mode)
 	[nocurses]: CANNOT be used in curses frontend.
+	[mouse]: Uses the SBTCVM mouse in some form or another.
 
 ----TOOLS----
 
@@ -10,6 +11,10 @@ clicalc:
 	of 9-trit integer: addition, multiplication, division, subtraction, 
 	inversion, absolute value, and modulo division. [ttycolor]
 
+sbtgsh:
+	SBTCVM Balanced Ternary Graphical SHell: A mouse-driven Graphical Shell
+	Designed for use with the pygame frontend's color TTY and Mouse emulation.
+	[ttycolor],[nocurses],[mouse]
 
 ----GAMES----
 
