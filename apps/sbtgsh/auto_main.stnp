@@ -199,7 +199,7 @@ newline
 textcolor *---00+
 
 
-prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat.
+prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat. | Input: Mouse
 newline
 asm iowrite1;>mouse.button
 return
@@ -699,8 +699,9 @@ textcolor *+++--0
 gsub hudsplash
 prline Crystal Ball - Answer
 textcolor *---00+
+gsub cry_ballicon
 prline The Spirits strongly think not.
-uiter not_sup_fill,newline,@1,@22
+uiter not_sup_fill,newline,@1,@17
 
 gsub click_wait
 return
@@ -711,8 +712,9 @@ textcolor *+++--0
 gsub hudsplash
 prline Crystal Ball - Answer
 textcolor *---00+
+gsub cry_ballicon
 prline Yes, indeed, I can see it!
-uiter not_sup_fill,newline,@1,@22
+uiter not_sup_fill,newline,@1,@17
 
 gsub click_wait
 return
@@ -723,8 +725,13 @@ textcolor *+++--0
 gsub hudsplash
 prline Crystal Ball - Answer
 textcolor *---00+
+gsub cry_ballicon
 prline The spirits do not respond. Try asking later...
-uiter not_sup_fill,newline,@1,@22
+uiter not_sup_fill,newline,@1,@17
 
 gsub click_wait
+return
+
+label cry_ballicon
+asm include;sbtgsh+ballicon.tas0
 return

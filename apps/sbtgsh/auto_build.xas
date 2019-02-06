@@ -3,6 +3,7 @@ gfxcon -cp sbtgsh+capps
 gfxcon -cp sbtgsh+capps2
 gfxcon -cp sbtgsh+capps3
 gfxcon -cp sbtgsh+ball
+gfxcon -cp sbtgsh+ballicon
 
 stnp sbtgsh
 

@@ -72,7 +72,7 @@ null;10x35;@35
 null;10x23;@23
 null;10x25;@25
 null;10x-1;@-1
-null;10x22;@22
+null;10x17;@17
 #label
 null;;main--label
 #conditional subroutine goto
@@ -954,6 +954,28 @@ fopwri1;:p
 fopwri1;:a
 fopwri1;:t
 fopwri1;:.
+fopwri1;:\s
+fopwri1;:\v
+fopwri1;:\s
+fopwri1;:I
+fopwri1;:n
+fopwri1;:p
+fopwri1;:u
+fopwri1;:t
+fopwri1;::
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:C
+fopwri1;:V
+fopwri1;:M
+fopwri1;:\s
+fopwri1;:M
+fopwri1;:o
+fopwri1;:u
+fopwri1;:s
+fopwri1;:e
 fopwri1;:\n
 #print newline
 fopwri1;:\n
@@ -4262,6 +4284,11 @@ fopwri1;:\n
 #Set text colors
 dataread1;>*---00+
 iowrite1;>io.textcolor
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-702
+s1push1
+goto;>cry_ballicon--label
+null;;goto--jumper-702
 #prline
 fopwri1;:T
 fopwri1;:h
@@ -4298,22 +4325,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-703;uiter-loopback-703
+setreg1;>uiter-retpos-704;uiter-loopback-704
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-703
+dataread1;>not_sup_fill;uiter-retpos-704
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
-dataread2;>@22
-gotoifless;>uiter-loopback-703
-gotoif;>uiter-loopback-703
+dataread2;>@17
+gotoifless;>uiter-loopback-704
+gotoif;>uiter-loopback-704
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-705
+setreg1;>goto--jumper-706
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-705
+null;;goto--jumper-706
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -4323,10 +4350,10 @@ null;;cry_yes--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-711
+setreg1;>goto--jumper-712
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-711
+null;;goto--jumper-712
 #prline
 fopwri1;:C
 fopwri1;:r
@@ -4353,6 +4380,11 @@ fopwri1;:\n
 #Set text colors
 dataread1;>*---00+
 iowrite1;>io.textcolor
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-715
+s1push1
+goto;>cry_ballicon--label
+null;;goto--jumper-715
 #prline
 fopwri1;:Y
 fopwri1;:e
@@ -4384,22 +4416,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-715;uiter-loopback-715
+setreg1;>uiter-retpos-717;uiter-loopback-717
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-715
+dataread1;>not_sup_fill;uiter-retpos-717
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
-dataread2;>@22
-gotoifless;>uiter-loopback-715
-gotoif;>uiter-loopback-715
+dataread2;>@17
+gotoifless;>uiter-loopback-717
+gotoif;>uiter-loopback-717
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-717
+setreg1;>goto--jumper-719
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-717
+null;;goto--jumper-719
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -4409,10 +4441,10 @@ null;;cry_unsure--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-723
+setreg1;>goto--jumper-725
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-723
+null;;goto--jumper-725
 #prline
 fopwri1;:C
 fopwri1;:r
@@ -4439,6 +4471,11 @@ fopwri1;:\n
 #Set text colors
 dataread1;>*---00+
 iowrite1;>io.textcolor
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-728
+s1push1
+goto;>cry_ballicon--label
+null;;goto--jumper-728
 #prline
 fopwri1;:T
 fopwri1;:h
@@ -4491,22 +4528,30 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-727;uiter-loopback-727
+setreg1;>uiter-retpos-730;uiter-loopback-730
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-727
+dataread1;>not_sup_fill;uiter-retpos-730
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
-dataread2;>@22
-gotoifless;>uiter-loopback-727
-gotoif;>uiter-loopback-727
+dataread2;>@17
+gotoifless;>uiter-loopback-730
+gotoif;>uiter-loopback-730
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-729
+setreg1;>goto--jumper-732
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-729
+null;;goto--jumper-732
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;cry_ballicon--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #736
+include;sbtgsh+ballicon.tas0#SSTNPL Source Line: '736' 
 #return from subroutine.
 s1pop1
 gotoreg1
