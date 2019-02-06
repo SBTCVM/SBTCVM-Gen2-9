@@ -606,8 +606,8 @@ goto;>goto--branch-''' + str(lineno)
 			if not label in labels:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant label'" + label + "'"
 		if arglist[1].startswith("="):
-			vnname=arglist[1][1:]
-			if vnname not in valid_nvars:
+			vname=arglist[1][1:]
+			if vname not in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant destination variable'" + vname + "'"
 			valname=arglist[2]
 			if valname not in valid_nvars:

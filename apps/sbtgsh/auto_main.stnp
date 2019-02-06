@@ -3,14 +3,18 @@ var btnbuff=0
 var xbuff=0
 var ybuff=0
 var main_actflg=@1
+var help_actflg=@1
 var exitcode=0
 
 ########## Main Loop ##########
 label main
+
 if main_actflg,@1 gsub mainscreen_draw
 if main_actflg,@1 =main_actflg @0
 
+
 label main_loop
+
 asm ioread1;>mouse.button
 set btnbuff
 
@@ -29,7 +33,7 @@ set ybuff
 ifnotrange @1,@6,ybuff goto row1_skip
 
 ifrange @1,@13,xbuff =main_actflg @1
-ifrange @1,@13,xbuff gsub not_implemented
+ifrange @1,@13,xbuff gsub calc_init
 ifrange @16,@28,xbuff =main_actflg @1
 ifrange @16,@28,xbuff gsub VDI_shell
 ifrange @31,@43,xbuff =main_actflg @1
@@ -98,13 +102,35 @@ label labelpad1
 uiter foo1,space,@1,@11
 return
 
+#### Hud splash ####
+
+label hudsplash
+textcolor *+++0--
+print S
+textcolor *+++00-
+print B
+textcolor *+++-0-
+print T
+textcolor *+++-00
+print C
+textcolor *+++--0
+print V
+textcolor *+++0-0
+print M
+textcolor *+++--0
+print   
+print SBTGSH v0.2 - 
+return
+
+
 
 
 ###### Main Menu Drawing Routine ######
 label mainscreen_draw
 textcolor *+++--0
-#prline SBTCVM Balanced Ternary Graphical SHell v0.1
-prline SBTGSH v0.1 - Main Menu
+
+gsub hudsplash
+prline Main Menu
 
 textcolor *+++00+
 asm include;sbtgsh+capps.tas0
@@ -162,6 +188,7 @@ textcolor *---00+
 
 prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat.
 newline
+asm iowrite1;>mouse.button
 return
 
 
@@ -170,7 +197,8 @@ return
 
 label not_implemented
 textcolor *+++--0
-prline SBTGSH v0.1 - Whoops...
+gsub hudsplash
+prline Whoops...
 textcolor *---00+
 prline This is not supported yet. sorry!
 prline Click anywhere to continue.
@@ -184,7 +212,8 @@ return
 
 label nothing_here
 textcolor *+++--0
-prline SBTGSH v0.1 - Whoops...
+gsub hudsplash
+prline Whoops...
 textcolor *---00+
 prline Nothing is assigned to this icon slot yet. sorry!
 prline Click anywhere to continue.
@@ -194,33 +223,80 @@ gsub click_wait
 
 return
 
-###### in-shell Help screen & About Screens ######
+###### in-shell Help system ######
 
 
-#### Help ####
+#### index ####
 label help
-textcolor *+++--0
-prline SBTGSH v0.1 - Help & About - Help
-textcolor *---00+
-prline Use the mouse to navigate the main menu.
-prline calc: -basic ternary calculator coming soon-
-prline Disk: open up the SBTVDI serial shell.
-prline Game: -some simple, mouse-based game coming soon-
-prline Help & About: This help screen, & about screen.
-prline Exit: Shutdown SBTCVM Session.
-prline Ball: - Simple 'crystal ball' Yes/No app coming soon-
-newline
-prline Click anywhere to continue to about screen.
 
-uiter not_sup_fill,newline,@1,@14
+val @1
+set help_actflg
+
+label help__loop
+ifnot @1,help_actflg goto help__skipdraw
+
+val @0
+set help_actflg
+
+textcolor *+++--0
+gsub hudsplash
+prline Help & About - Index
+
+prline --< Choose a Category >--
+textcolor *---++0
+prline RETURN TO MAIN MENU
+textcolor *---00+
+prline About
+textcolor *---0++
+prline Overview
+textcolor *---00+
+prline Calculator
+
+textcolor *---00+
+uiter not_sup_fill,newline,@1,@18
+
+asm iowrite1;>mouse.button
+
+label help__skipdraw
+
+asm ioread1;>mouse.button
+set btnbuff
+
+ifnot btnbuff,@1 goto help__skipdraw
+
+asm ioread1;>mouse.locky
+set ybuff
+
+if ybuff,@2 return
+
+if ybuff,@3 gsub help_about
+if ybuff,@3 =help_actflg @1
+
+if ybuff,@4 gsub help_overview
+if ybuff,@4 =help_actflg @1
+
+if ybuff,@5 gsub help_calc
+if ybuff,@5 =help_actflg @1
+goto help__loop
+
+
+
+
+
+
+
+uiter not_sup_fill,newline,@1,@21
 
 gsub click_wait
+return
 
 #### About ####
+label help_about
 textcolor *+++--0
-prline SBTGSH v0.1 - Help & About - About
+gsub hudsplash
+prline Help & About - About
 textcolor *---00+
-prline SBTCVM Balanced Ternary Graphical SHell - v0.1
+prline SBTCVM Balanced Ternary Graphical SHell - v0.2
 prline Part of SBTCVM Gen2-9
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -239,10 +315,54 @@ prline You should have received a copy of the GNU General Public License
 prline along with SBTCVM SBTGSH. If not, see <http://www.gnu.org/licenses/>
 
 newline
-prline Click anywhere to return to main menu.
+prline Click to return
 
 
 uiter not_sup_fill,newline,@1,@4
+
+gsub click_wait
+return
+
+#### overview ####
+label help_overview
+textcolor *+++--0
+gsub hudsplash
+prline Help & About - Overview
+textcolor *---00+
+prline Use your mouse to navigate the various menus and use the assorted programs.
+prline Curses frontend Not supported.
+newline
+prline Click to return
+
+
+uiter not_sup_fill,newline,@1,@19
+
+gsub click_wait
+return
+
+#### calculator ####
+label help_calc
+textcolor *+++--0
+gsub hudsplash
+prline Help & About - Calculator
+textcolor *---00+
+prline Operations are done using the value in 'buffer' and the value in 'entry'
+prline E.G. 'buffer' divided by 'entry'
+newline
+prline Use [ = ] to push number to buffer.
+newline
+prline [add],[sub],[div],and [mul] will all move the result to 'buffer' and 
+prline reset 'entry'
+newline
+prline [clr] clears 'entry'
+prline [rst] resets calculator
+prline [del] deletes last digit
+prline [off] exits calculator
+newline
+prline Click to return
+
+
+uiter not_sup_fill,newline,@1,@9
 
 gsub click_wait
 return
@@ -251,6 +371,7 @@ return
 ###### Generic Click event wait function ######
 
 label click_wait
+asm iowrite1;>mouse.button
 label click_wait_loop
 asm ioread1;>mouse.button
 set btnbuff
@@ -261,7 +382,8 @@ return
 ######vdi shell wrapper######
 label VDI_shell
 textcolor *+++--0
-prline SBTGSH v0.1 - SBTVDI Shell Wrapper
+gsub hudsplash
+prline SBTVDI Shell Wrapper
 textcolor *---00+
 prline Type 'return' to return to SBTGSH
 prline Type 'quit' to shutdown SBTCVM session.
@@ -275,3 +397,233 @@ set exitcode
 if exitcode,@1 return
 if exitcode,@2 stop
 return
+
+
+
+######Calculator######
+
+var calc_buffer=0
+var calc_entry=0
+var tritbuff=0
+var tritlen=0
+var calc_redrawflgx=0
+var calc_redrawflgy=0
+
+label calc_init
+val 0
+set calc_buffer
+set calc_entry
+set tritbuff
+set tritlen
+val @1
+set calc_redrawflgx
+set calc_redrawflgy
+
+label calc_loop
+
+ifnot calc_redrawflgx,@1 goto calc_inputloop
+ifnot calc_redrawflgy,@1 goto calc_inputloop
+
+textcolor *+++--0
+gsub hudsplash
+prline Calculator
+textcolor *---00+
+newline
+newline
+textcolor *---+++
+print [ + ][ 0 ][ - ][HELP]
+textcolor *---00+
+newline
+newline
+textcolor *---+++
+print [add][sub][mul]
+textcolor *---00+
+newline
+newline
+textcolor *---+++
+print [div][ = ]
+textcolor *+++0--
+print [off]
+textcolor *---00+
+newline
+newline
+textcolor *---++0
+print [del][rst][clr]
+textcolor *---00+
+
+newline
+newline
+prline Buffer:
+textcolor *+++---
+dumpt calc_buffer
+textcolor *---00+
+newline
+newline
+prline Entry:
+textcolor *+++---
+dumpt calc_entry
+textcolor *---00+
+newline
+uiter not_sup_fill,newline,@1,@8
+
+
+label calc_inputloop
+asm ioread1;>mouse.button
+set btnbuff
+
+ifnot btnbuff,@1 goto calc_inputloop
+
+##### Calculator button parser #####
+
+val 0
+set calc_redrawflgx
+set calc_redrawflgy
+
+#parse Y first!
+asm ioread1;>mouse.lockx
+set xbuff
+asm ioread1;>mouse.locky
+set ybuff
+
+ifnotrange @0,@4,xbuff goto calc_col1_skip
+val @1
+set calc_redrawflgx
+
+if ybuff,@3 =tritbuff *+
+if ybuff,@3 gsub calc_tritpush
+
+if ybuff,@5 gsub calc_add
+if ybuff,@7 gsub calc_div
+if ybuff,@9 gsub calc_tritpop
+
+label calc_col1_skip
+
+ifnotrange @5,@9,xbuff goto calc_col2_skip
+val @1
+set calc_redrawflgx
+
+if ybuff,@3 =tritbuff *0
+if ybuff,@3 gsub calc_tritpush
+if ybuff,@5 gsub calc_sub
+if ybuff,@7 gsub calc_entrytobuffer
+if ybuff,@9 gsub calc_cleanup
+
+label calc_col2_skip
+
+
+ifnotrange @10,@14,xbuff goto calc_col3_skip
+val @1
+set calc_redrawflgx
+
+if ybuff,@3 =tritbuff *-
+if ybuff,@3 gsub calc_tritpush
+if ybuff,@5 gsub calc_mul
+if ybuff,@7 gsub calc_cleanup
+if ybuff,@7 return
+if ybuff,@9 gsub calc_purgeentry
+
+label calc_col3_skip
+
+ifnotrange @15,@20,xbuff goto calc_col4_skip
+val @1
+set calc_redrawflgx
+if ybuff,@3 gsub help_calc
+
+label calc_col4_skip
+
+
+if @3,ybuff =calc_redrawflgy @1
+if @5,ybuff =calc_redrawflgy @1
+if @7,ybuff =calc_redrawflgy @1
+if @9,ybuff =calc_redrawflgy @1
+goto calc_loop
+
+
+
+label calc_tritpush
+if tritlen,@9 return
+get tritbuff
+push
+mul calc_entry,@3
+set calc_entry
+add calc_entry,tritbuff
+set calc_entry
+
+add tritlen,@1
+set tritlen
+return
+
+label calc_tritpop
+if tritlen,@0 return
+pop
+set tritbuff
+sub calc_entry,tritbuff
+set calc_entry
+div calc_entry,@3
+set calc_entry
+
+sub tritlen,@1
+set tritlen
+return
+
+label calc_cleanup
+gsub calc_purgeentry
+val 0
+set calc_buffer
+return
+
+label calc_purgeentry
+uiter calc_cleanloop,calc_tritpop,@0,@9
+val 0
+set calc_entry
+set tritlen
+set tritbuff
+return
+
+label calc_entrytobuffer
+get calc_entry
+set calc_buffer
+gsub calc_purgeentry
+return
+
+label calc_add
+add calc_buffer,calc_entry
+set calc_buffer
+gsub calc_purgeentry
+return
+
+label calc_sub
+sub calc_buffer,calc_entry
+set calc_buffer
+gsub calc_purgeentry
+return
+
+label calc_mul
+mul calc_buffer,calc_entry
+set calc_buffer
+gsub calc_purgeentry
+return
+
+label calc_div
+if calc_entry,@0 gsub calc_ERROR
+if calc_entry,@0 return
+div calc_buffer,calc_entry
+set calc_buffer
+gsub calc_purgeentry
+return
+
+
+#### divzero error message
+
+label calc_ERROR
+textcolor *+++--0
+gsub hudsplash
+prline Calculator - DIVIDE BY ZERO
+textcolor *---00+
+prline Not even in balanced ternary...
+prline ...Can you divide by zero.
+uiter not_sup_fill,newline,@1,@21
+
+gsub click_wait
+return
+
