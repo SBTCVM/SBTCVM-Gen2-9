@@ -3,8 +3,12 @@
 
 # VM Frontends
 
+(pygame frontend recommended)
+
 ### SBTCVM_G2_9.py: (CURSES)
 SBTCVM's virtual machine. (with curses frontend)
+
+_Note: Curses Frontend is **BUGGY**_
 
 This version must be run in a terminal! 
 
@@ -13,7 +17,8 @@ also, the curses frontend may lack certain features. i.e. graphics.
 ### PYG_SBTCVM.py: (PYGAME)
 SBTCVM's virtual machine. (with pygame frontend)
 
-Features an, 80-column by 25-line graphical TTY display, and launch-from-xas integration that isn't buggy.
+
+Features an, 80-column by 25-line color graphical TTY display, SBTGA Graphics, mouse, and launch-from-xas integration that isn't buggy.
 
 
 # Development

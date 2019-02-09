@@ -112,6 +112,71 @@ def colart_maker(imagepath, notrailnew=0):
 	print(g2com.nonetformatted_smart(size))
 	return
 
+def colart_maker_RLE(imagepath, notrailnew=0):
+	print("converting image...")
+	image=pygame.image.load(imagepath)
+	xsize=image.get_width()
+	ysize=image.get_height()
+	#print(image.get_height())
+	#print(ysize)
+	size=1
+	pbuff=None
+	bufflen=0
+	outf=open(imagepath.rsplit(".")[0]+".tas0", 'w')
+	outf.write('''#SBTCVM Gen2-9 GFXCON: ternary-packed art conversion. uses Run-length Encoding.
+#Needs to be decoded manually.
+#image file: ''' + imagepath + "\n"
+'''null;>.DATASIZE
+''')
+	for coly in xrange(0, ysize):
+		buffx=""
+		for linex in xrange(0, xsize):
+			pixcol = image.get_at((linex, coly))
+			for level in (pixcol[0], pixcol[1], pixcol[2]):
+				if level<85:
+					buffx+="-"
+				elif level<170:
+					buffx+="0"
+				else:
+					buffx+="+"
+			if len(buffx)==9:
+				if buffx==pbuff:
+					bufflen+=1
+					buffx=""
+				elif pbuff==None:
+					pbuff=buffx
+					buffx=""
+					size+=1
+					bufflen=0
+				else:
+					outf.write("raw;10x" + str(bufflen) + "," + pbuff + "\n")
+					pbuff=buffx
+					buffx=""
+					size+=1
+					bufflen=0
+				buffx=""
+		if linex>=81:
+			print("WARNING: IMAGE BEYOND MAXIMUM TERNARY PACKED ART WIDTH \n ALLOWED BY PYGAME FRONTEND (81)")
+		while len(buffx)<9 and buffx!="":
+			buffx+="-"
+			
+		outf.write("raw;10x" + str(bufflen) + "," + pbuff + "\n")
+		if buffx!="":
+			outf.write("raw;10x" + str(bufflen) + "," + buffx + "\n")
+		pbuff=None
+		size+=1
+		bufflen=0
+		if coly<ysize-1 or notrailnew==0:
+			outf.write("raw;-,0\n")
+		#print(coly)
+	outf.write("null;;.DATASIZE\n")
+	outf.close()
+	print("Done.")
+	print(g2com.nonetformatted_smart(size))
+	return
+
+
+
 
 if __name__=="__main__":
 	try:
@@ -167,6 +232,13 @@ see readme.md for more information and licensing of media.
 	elif cmd in ["-cpn"]:
 		print("Color Ternary-Packed art encoder.")
 		colart_maker(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
-		
+	
+	elif cmd in ["-cprle"]:
+		print("Color Ternary-Packed art encoder (RLE compressed).")
+		colart_maker_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1))
+	elif cmd in ["-cprlen"]:
+		print("Color Ternary-Packed art encoder (RLE compressed).")
+		colart_maker_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
+
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")

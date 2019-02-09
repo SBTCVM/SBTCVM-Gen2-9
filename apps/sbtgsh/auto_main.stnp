@@ -19,6 +19,12 @@ var main_actflg=@1
 var help_actflg=@1
 var exitcode=0
 
+#system icon palette
+var system_icon_colors=*+0-00+0--
+packcolor system_icon_colors
+
+
+
 ########## Main Loop ##########
 label main
 
@@ -213,9 +219,10 @@ textcolor *+++--0
 gsub hudsplash
 prline Whoops...
 textcolor *---00+
+gsub icon_message
 prline This is not supported yet. sorry!
 prline Click anywhere to continue.
-uiter not_sup_fill,newline,@1,@21
+uiter not_sup_fill,newline,@1,@17
 
 gsub click_wait
 
@@ -228,12 +235,23 @@ textcolor *+++--0
 gsub hudsplash
 prline Whoops...
 textcolor *---00+
+gsub icon_message
 prline Nothing is assigned to this icon slot yet. sorry!
 prline Click anywhere to continue.
-uiter not_sup_fill,newline,@1,@21
+uiter not_sup_fill,newline,@1,@17
 
 gsub click_wait
 
+return
+
+###### SYSTEM ICONS ######
+
+label icon_message
+asm include;sbtgsh+icon_message.tas0
+return
+
+label icon_no
+asm include;sbtgsh+icon_no.tas0
 return
 
 ###### in-shell Help system ######
@@ -633,9 +651,10 @@ textcolor *+++--0
 gsub hudsplash
 prline Calculator - DIVIDE BY ZERO
 textcolor *---00+
+gsub icon_no
 prline Not even in balanced ternary...
 prline ...Can you divide by zero.
-uiter not_sup_fill,newline,@1,@21
+uiter not_sup_fill,newline,@1,@17
 
 gsub click_wait
 return

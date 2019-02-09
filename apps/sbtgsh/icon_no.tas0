@@ -1,0 +1,14 @@
+#SBTCVM Gen2-9 GFXCON: ternary-packed art conversion.
+#image file: apps/sbtgsh/icon_no.png
+head-nspin=stdnsp
+fopset1;>io.ttywr
+fopset2;>io.packart
+fopwri2;-+++-+---
+fopwri1;:\n
+fopwri2;--++-+-+-
+fopwri1;:\n
+fopwri2;-+-+-+-+-
+fopwri1;:\n
+fopwri2;-++--+-+-
+fopwri1;:\n
+fopwri2;-+++-+---

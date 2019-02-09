@@ -37,6 +37,11 @@ colorpack:
 	uses the 27-color 3-trit RGB variant of the basic ternary-packed-art
 	system. [nocurses]
 
+comppack:
+	uses 27-color packart, but features a lossless compression algorithm 
+	(gfxcon -cprle)
+	Features example SSTNPL-based decoder algorithm.
+
 ----Plotter----
 
 burst:

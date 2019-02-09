@@ -28,5 +28,5 @@ and didn't accomplish anything 1000 can't, so it was changed._
 
 ### measurement examples:    
 - SBTCVM has (3^9)*2 or 39366 N (nonets) or 39.366 KN (KiloNonets) of ram
-- A 12 trit SBTCVM would have (3^12)*2 or 1062882 dT, 1062.882 KdT (KiloDiTrytes), or approx. 1.06 GdT (MegaDiTrytes) of ram.
+- A 12 trit SBTCVM would have (3^12)*2 or 1062882 dT, 1062.882 KdT (KiloDiTrytes), or approx. 1.06 MdT (MegaDiTrytes) of ram.
 

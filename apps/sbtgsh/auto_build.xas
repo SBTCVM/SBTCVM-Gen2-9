@@ -1,10 +1,21 @@
+#SBTGSH Build script
 
+#####Graphics Conversion
+#main menu
 gfxcon -cp sbtgsh+capps
 gfxcon -cp sbtgsh+capps2
 gfxcon -cp sbtgsh+capps3
+
+#crystal ball
 gfxcon -cp sbtgsh+ball
 gfxcon -cp sbtgsh+ballicon
 
+#System icons
+
+gfxcon -pn sbtgsh+icon_message
+gfxcon -pn sbtgsh+icon_no
+
+#####build main
 stnp sbtgsh
 
 

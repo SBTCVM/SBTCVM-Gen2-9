@@ -19,7 +19,7 @@ The 'VM' in SBTCVM referees to SBTCVM's virtual implementation of a balanced
 ternary computer.  Its written in python, so its not the fastest thing in the
 world (6.5KHz CPU), but it does have:
 
-- 19,683 words or, 36.01 Kt9 (KiloNonets [GLOSSARY](glossary/glossary_datameasure.md) ), of RAM
+- 19,683 words or, 39.366 KN (KiloNonets [GLOSSARY](glossary/glossary_datameasure.md) ), of RAM
 - an assembler
 - and SSTNPL, a nice higher-level language. (higher-level than the assembler at least.)
 

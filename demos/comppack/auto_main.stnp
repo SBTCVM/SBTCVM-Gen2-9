@@ -1,0 +1,109 @@
+
+############### CPRLE DECODER 
+var image_offset=0
+
+
+###IMPORTANT: set image_offset to start of compressed image data.
+###You may do this multiple times.
+asm setreg1;>image_offset_asm
+set image_offset
+
+
+###############
+
+
+
+prline This demo is a test of 3-trit RGB color packart using a basic 
+prline compression format. (CPRLE) [gfxcon -cprlen]
+newline
+keyprompt
+
+
+gsub RL_decode
+
+
+keyprompt
+newline
+gsub RL_decode
+
+keyprompt
+newline
+stop
+
+
+###############COPY THIS SECTION TO RE-USE CPRLE DECODER############
+
+############# SBTCVM GFXCON CPRLE COMPRESSION DECODER #############
+#Code By: Thomas Leathers
+#
+#
+
+var RL_pointer=0
+var RL_SIZE=0
+var RL_loopcount=0
+var RL_data=0
+label RL_decode
+
+
+
+val 0
+set RL_loopcount
+copy image_offset,RL_pointer
+
+get RL_pointer
+asm datawrite1;>RL_GET_SIZE
+asm dataread1;;RL_GET_SIZE
+set RL_SIZE
+sub RL_SIZE,@1
+set RL_SIZE
+
+add RL_pointer,@1
+set RL_pointer
+
+#iterate decoder loop over data
+uiter rl_iter,RL_decode_mainloop,RL_pointer,RL_SIZE
+
+
+return
+
+####get new datavalue####
+label RL_decode_mainloop
+
+# get new datavalue
+
+get rl_iter
+asm datawrite1;>RL_GET_DATA
+asm dataread1;;RL_GET_DATA
+set RL_data
+
+#get length of new datavalue
+
+get rl_iter
+asm datawrite1;>RL_GET_LEN
+asm instread1;;RL_GET_LEN
+set RL_loopcount
+
+#newline code
+if RL_loopcount,@-1 goto RL_newline
+
+#loop
+
+uiter RL_ilvar,RL_printlooop,@0,RL_loopcount
+return
+
+label RL_newline
+newline
+return
+
+label RL_printlooop
+get RL_data
+asm iowrite1;>io.cpack
+return
+
+################END OF CPRLE DECODER ROUTINES#########
+
+
+### IMAGE DATA
+### DO NOT EXECUTE!!!! instruction word used for length data.
+### Notice the label 'image_offset_asm' thats used above.
+asm include;comppack+image.tas0;image_offset_asm

@@ -34,3 +34,9 @@ packed art values. The difference is it outputs a newline automatically.
 
 You should check `colorpack` in `DEMOS`. it also has examples of
 SSTNPL's cmulpk and clinepk commands.
+
+# compression
+
+a compressed variant is available via gfxcon -cprle(n).
+
+Needs to be decoded via algorithm. `comppack` in `demos` features a basic decoder.

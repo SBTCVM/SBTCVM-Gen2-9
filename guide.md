@@ -6,6 +6,10 @@ Run a trom application in pygame frontend:
 Start SBTCVM XAS interactive shell:      
 `./xas.py`
      
+Start Graphical Shell (SBTGSH) _(PYGAME FRONTEND ONLY)_:    
+`./pyg_sbtcvm.py sbtgsh`
+
+
 Boot into VDI shell (unfinished):     
 `./pyg_sbtcvm.py`
 
