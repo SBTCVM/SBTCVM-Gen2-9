@@ -76,6 +76,7 @@ class uio:
 		#Init screen for TTY output. basing size on font properties.
 		self.screensurf=pygame.display.set_mode((charwidth*self.maxx, charheight*self.maxy))
 		self.gamode=0
+		self.ttywide=charwidth*self.maxx
 		####
 		self.fscreen=0
 		self.run=1
@@ -387,7 +388,17 @@ class uio:
 		while len(self.ttybuff)>0 and dcount!=30:
 			dcount+=1
 			char=self.ttybuff.pop(0)
-			
+			if self.charx>=self.ttywide and char!="\n":
+				if self.linebgfill==1:
+					self.linebgfill=0
+					pxrect=pygame.Rect(self.charx, self.chary, charwidth*self.maxx, charheight)
+					pygame.draw.rect(self.screensurf, self.TTYbg, pxrect, 0)
+					self.curcnt=self.blinkspeed
+				pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2)
+				self.screensurf.scroll(0, -charheight)
+				self.charx=0
+				pygame.draw.rect(self.screensurf, self.TTYbg, self.newline_rect, 0)
+				fulldraw=1
 			#list codes:
 			if isinstance(char, list):
 				#When list code 20 is detected, change colors using helper method.

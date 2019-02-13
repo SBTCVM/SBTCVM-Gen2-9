@@ -117,6 +117,10 @@ def colart_maker_RLE(imagepath, notrailnew=0):
 	image=pygame.image.load(imagepath)
 	xsize=image.get_width()
 	ysize=image.get_height()
+	if xsize>=79:
+		print("Using Full-TTY-width CPRLE Encoding")
+	else:
+		print("Image is narrower than TTY. using line-broken CPRLE.")
 	#print(image.get_height())
 	#print(ysize)
 	size=1
@@ -158,16 +162,21 @@ def colart_maker_RLE(imagepath, notrailnew=0):
 		if linex>=81:
 			print("WARNING: IMAGE BEYOND MAXIMUM TERNARY PACKED ART WIDTH \n ALLOWED BY PYGAME FRONTEND (81)")
 		while len(buffx)<9 and buffx!="":
-			buffx+="-"
+			buffx+="---"
+			linex+=1
+		if linex<80 or coly==ysize-1:
 			
-		outf.write("raw;10x" + str(bufflen) + "," + pbuff + "\n")
-		if buffx!="":
-			outf.write("raw;10x" + str(bufflen) + "," + buffx + "\n")
-		pbuff=None
-		size+=1
-		bufflen=0
-		if coly<ysize-1 or notrailnew==0:
+			outf.write("raw;10x" + str(bufflen) + "," + pbuff + "\n")
+			if buffx!="":
+				outf.write("raw;10x" + str(bufflen) + "," + buffx + "\n")
+			pbuff=None
+			size+=1
+			bufflen=0
+		if (coly<ysize-1) and linex<80:
 			outf.write("raw;-,0\n")
+		elif coly==ysize-1 and notrailnew==0:
+			outf.write("raw;-,0\n")
+		outf.write("###LINE DIV\n")
 		#print(coly)
 	outf.write("null;;.DATASIZE\n")
 	outf.close()

@@ -1,5 +1,5 @@
 
-############### CPRLE DECODER 
+############### CPRLE DECODER: image location variable.
 var image_offset=0
 
 
@@ -18,6 +18,9 @@ prline compression format. (CPRLE) [gfxcon -cprlen]
 newline
 keyprompt
 
+
+#after setting image_offset to the image location in memory, call RL_decode 
+#as a subroutine.
 
 gsub RL_decode
 
