@@ -15,8 +15,8 @@ nptype_table=5
 
 #SSTNPL compiler main routine library.
 
-stnpvers='v0.2.0'
-versint=(0, 2, 0)
+stnpvers='v0.2.1'
+versint=(0, 2, 1)
 
 class npvar:
 	def __init__(self, vname, vdata, vtype=nptype_int):
@@ -1415,6 +1415,7 @@ class mainloop:
 		self.srcobj.seek(0)
 		lineno=0
 		for line in self.srcobj:
+			line=line.lstrip()
 			lineno+=1
 			if line.endswith("\n"):
 				line=line[:-1]
@@ -1436,6 +1437,7 @@ class mainloop:
 		self.srcobj.seek(0)
 		lineno=0
 		for line in self.srcobj:
+			line=line.lstrip()
 			lineno+=1
 			if line.endswith("\n"):
 				line=line[:-1]
@@ -1462,6 +1464,7 @@ class mainloop:
 		self.srcobj.seek(0)
 		lineno=0
 		for line in self.srcobj:
+			line=line.lstrip()
 			lineno+=1
 			if line.endswith("\n"):
 				line=line[:-1]
@@ -1489,6 +1492,7 @@ class mainloop:
 		self.srcobj.seek(0)
 		lineno=0
 		for line in self.srcobj:
+			line=line.lstrip()
 			lineno+=1
 			if line.endswith("\n"):
 				line=line[:-1]

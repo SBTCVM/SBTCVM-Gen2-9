@@ -27,78 +27,77 @@ packcolor system_icon_colors
 
 ########## Main Loop ##########
 label main
-
-if main_actflg,@1 gsub mainscreen_draw
-if main_actflg,@1 =main_actflg @0
-
-
-label main_loop
-
-asm ioread1;>mouse.button
-set btnbuff
-
-ifnot btnbuff,@1 goto main_loop
-
-##### Main screen icon click parser #####
-
-#parse Y first!
-asm ioread1;>mouse.lockx
-set xbuff_main
-asm ioread1;>mouse.locky
-set ybuff_main
-
-### Row 1 ###
-
-ifnotrange @1,@6,ybuff_main goto row1_skip
-
-ifrange @1,@13,xbuff_main =main_actflg @1
-ifrange @1,@13,xbuff_main gsub calc_init
-ifrange @16,@28,xbuff_main =main_actflg @1
-ifrange @16,@28,xbuff_main gsub VDI_shell
-ifrange @31,@43,xbuff_main =main_actflg @1
-ifrange @31,@43,xbuff_main gsub not_implemented
-ifrange @46,@58,xbuff_main =main_actflg @1
-ifrange @46,@58,xbuff_main gsub help
-ifrange @61,@73,xbuff_main =main_actflg @1
-ifrange @61,@73,xbuff_main stop
-
-label row1_skip
-
-### Row 2 ###
-
-ifnotrange @8,@13,ybuff_main goto row2_skip
-
-ifrange @1,@13,xbuff_main =main_actflg @1
-ifrange @1,@13,xbuff_main gsub crystal_ball
-ifrange @16,@28,xbuff_main =main_actflg @1
-ifrange @16,@28,xbuff_main gsub nothing_here
-ifrange @31,@43,xbuff_main =main_actflg @1
-ifrange @31,@43,xbuff_main gsub nothing_here
-ifrange @46,@58,xbuff_main =main_actflg @1
-ifrange @46,@58,xbuff_main gsub nothing_here
-ifrange @61,@73,xbuff_main =main_actflg @1
-ifrange @61,@73,xbuff_main gsub nothing_here
-
-label row2_skip
-
-### Row 3 ###
-
-ifnotrange @15,@20,ybuff_main goto row3_skip
-
-ifrange @1,@13,xbuff_main =main_actflg @1
-ifrange @1,@13,xbuff_main gsub nothing_here
-ifrange @16,@28,xbuff_main =main_actflg @1
-ifrange @16,@28,xbuff_main gsub nothing_here
-ifrange @31,@43,xbuff_main =main_actflg @1
-ifrange @31,@43,xbuff_main gsub nothing_here
-ifrange @46,@58,xbuff_main =main_actflg @1
-ifrange @46,@58,xbuff_main gsub nothing_here
-ifrange @61,@73,xbuff_main =main_actflg @1
-ifrange @61,@73,xbuff_main gsub nothing_here
-
-label row3_skip
-
-asm iowrite1;>mouse.button
+	
+	if main_actflg,@1 gsub mainscreen_draw
+	if main_actflg,@1 =main_actflg @0
+	
+	label main_loop
+	
+		asm ioread1;>mouse.button
+		set btnbuff
+	
+	ifnot btnbuff,@1 goto main_loop
+	
+	##### Main screen icon click parser #####
+	
+	#parse Y first!
+	asm ioread1;>mouse.lockx
+	set xbuff_main
+	asm ioread1;>mouse.locky
+	set ybuff_main
+	
+	### Row 1 ###
+	
+	ifnotrange @1,@6,ybuff_main goto row1_skip
+	
+		ifrange @1,@13,xbuff_main =main_actflg @1
+		ifrange @1,@13,xbuff_main gsub calc_init
+		ifrange @16,@28,xbuff_main =main_actflg @1
+		ifrange @16,@28,xbuff_main gsub VDI_shell
+		ifrange @31,@43,xbuff_main =main_actflg @1
+		ifrange @31,@43,xbuff_main gsub not_implemented
+		ifrange @46,@58,xbuff_main =main_actflg @1
+		ifrange @46,@58,xbuff_main gsub help
+		ifrange @61,@73,xbuff_main =main_actflg @1
+		ifrange @61,@73,xbuff_main stop
+	
+	label row1_skip
+	
+	### Row 2 ###
+	
+	ifnotrange @8,@13,ybuff_main goto row2_skip
+	
+		ifrange @1,@13,xbuff_main =main_actflg @1
+		ifrange @1,@13,xbuff_main gsub crystal_ball
+		ifrange @16,@28,xbuff_main =main_actflg @1
+		ifrange @16,@28,xbuff_main gsub nothing_here
+		ifrange @31,@43,xbuff_main =main_actflg @1
+		ifrange @31,@43,xbuff_main gsub nothing_here
+		ifrange @46,@58,xbuff_main =main_actflg @1
+		ifrange @46,@58,xbuff_main gsub nothing_here
+		ifrange @61,@73,xbuff_main =main_actflg @1
+		ifrange @61,@73,xbuff_main gsub nothing_here
+	
+	label row2_skip
+	
+	### Row 3 ###
+	
+	ifnotrange @15,@20,ybuff_main goto row3_skip
+	
+		ifrange @1,@13,xbuff_main =main_actflg @1
+		ifrange @1,@13,xbuff_main gsub nothing_here
+		ifrange @16,@28,xbuff_main =main_actflg @1
+		ifrange @16,@28,xbuff_main gsub nothing_here
+		ifrange @31,@43,xbuff_main =main_actflg @1
+		ifrange @31,@43,xbuff_main gsub nothing_here
+		ifrange @46,@58,xbuff_main =main_actflg @1
+		ifrange @46,@58,xbuff_main gsub nothing_here
+		ifrange @61,@73,xbuff_main =main_actflg @1
+		ifrange @61,@73,xbuff_main gsub nothing_here
+	
+	label row3_skip
+	
+	asm iowrite1;>mouse.button
 goto main
 
 
@@ -110,35 +109,35 @@ goto main
 ###### Helper routines ######
 
 label newline
-newline
-return
+	newline
+	return
 
 label space
-space
-return
+	space
+	return
 
 label labelpad1
-uiter foo1,space,@1,@11
-return
+	uiter foo1,space,@1,@11
+	return
 
 #### Hud splash ####
 
 label hudsplash
-textcolor *+++0--
-print S
-textcolor *+++00-
-print B
-textcolor *+++-0-
-print T
-textcolor *+++-00
-print C
-textcolor *+++--0
-print V
-textcolor *+++0-0
-print M
-textcolor *+++--0
-print   
-print SBTGSH v0.3 - 
+	textcolor *+++0--
+	print S
+	textcolor *+++00-
+	print B
+	textcolor *+++-0-
+	print T
+	textcolor *+++-00
+	print C
+	textcolor *+++--0
+	print V
+	textcolor *+++0-0
+	print M
+	textcolor *+++--0
+	print   
+	print SBTGSH v0.3 - 
 return
 
 
@@ -146,68 +145,68 @@ return
 
 ###### Main Menu Drawing Routine ######
 label mainscreen_draw
-textcolor *+++--0
-
-gsub hudsplash
-prline Main Menu
-
-textcolor *+++00+
-asm include;sbtgsh+capps.tas0
-textcolor *+++--0
-
-#label printing code
-space
-print Calc
-gsub labelpad1
-print Disk
-gsub labelpad1
-print Game
-gsub labelpad1
-print Help & About   
-
-print Exit
-newline
-
-textcolor *+++00+
-asm include;sbtgsh+capps2.tas0
-textcolor *+++--0
-
-#label printing code
-space
-print Ball
-gsub labelpad1
-print ____
-gsub labelpad1
-print ____
-gsub labelpad1
-print ____
-gsub labelpad1
-print ____
-newline
-
-textcolor *+++00+
-asm include;sbtgsh+capps3.tas0
-textcolor *+++--0
-
-#label printing code
-space
-print ____
-gsub labelpad1
-print ____
-gsub labelpad1
-print ____
-gsub labelpad1
-print ____
-gsub labelpad1
-print ____
-newline
-
-textcolor *---00+
-
-
-prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat. | Input: Mouse
-newline
-asm iowrite1;>mouse.button
+	textcolor *+++--0
+	
+	gsub hudsplash
+	prline Main Menu
+	
+	textcolor *+++00+
+	asm include;sbtgsh+capps.tas0
+	textcolor *+++--0
+	
+	#label printing code
+	space
+	print Calc
+	gsub labelpad1
+	print Disk
+	gsub labelpad1
+	print Game
+	gsub labelpad1
+	print Help & About   
+	
+	print Exit
+	newline
+	
+	textcolor *+++00+
+	asm include;sbtgsh+capps2.tas0
+	textcolor *+++--0
+	
+	#label printing code
+	space
+	print Ball
+	gsub labelpad1
+	print ____
+	gsub labelpad1
+	print ____
+	gsub labelpad1
+	print ____
+	gsub labelpad1
+	print ____
+	newline
+	
+	textcolor *+++00+
+	asm include;sbtgsh+capps3.tas0
+	textcolor *+++--0
+	
+	#label printing code
+	space
+	print ____
+	gsub labelpad1
+	print ____
+	gsub labelpad1
+	print ____
+	gsub labelpad1
+	print ____
+	gsub labelpad1
+	print ____
+	newline
+	
+	textcolor *---00+
+	
+	
+	prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat. | Input: Mouse
+	newline
+	asm iowrite1;>mouse.button
 return
 
 
@@ -215,542 +214,540 @@ return
 ###### Not Implemented Message ######
 
 label not_implemented
-textcolor *+++--0
-gsub hudsplash
-prline Whoops...
-textcolor *---00+
-gsub icon_message
-prline This is not supported yet. sorry!
-prline Click anywhere to continue.
-uiter not_sup_fill,newline,@1,@17
-
-gsub click_wait
+	textcolor *+++--0
+	gsub hudsplash
+	prline Whoops...
+	textcolor *---00+
+	gsub icon_message
+	prline This is not supported yet. sorry!
+	prline Click anywhere to continue.
+	uiter not_sup_fill,newline,@1,@17
+	
+	gsub click_wait
 
 return
 
 ###### Blank icon message ######
 
 label nothing_here
-textcolor *+++--0
-gsub hudsplash
-prline Whoops...
-textcolor *---00+
-gsub icon_message
-prline Nothing is assigned to this icon slot yet. sorry!
-prline Click anywhere to continue.
-uiter not_sup_fill,newline,@1,@17
-
-gsub click_wait
+	textcolor *+++--0
+	gsub hudsplash
+	prline Whoops...
+	textcolor *---00+
+	gsub icon_message
+	prline Nothing is assigned to this icon slot yet. sorry!
+	prline Click anywhere to continue.
+	uiter not_sup_fill,newline,@1,@17
+	
+	gsub click_wait
 
 return
 
 ###### SYSTEM ICONS ######
 
 label icon_message
-asm include;sbtgsh+icon_message.tas0
-return
+	asm include;sbtgsh+icon_message.tas0
+	return
 
 label icon_no
-asm include;sbtgsh+icon_no.tas0
-return
+	asm include;sbtgsh+icon_no.tas0
+	return
 
 ###### in-shell Help system ######
 
 
 #### index ####
 label help
-
-val @1
-set help_actflg
-
-label help__loop
-ifnot @1,help_actflg goto help__skipdraw
-
-val @0
-set help_actflg
-
-textcolor *+++--0
-gsub hudsplash
-prline Help & About - Index
-
-prline --< Choose a Category >--
-textcolor *---++0
-prline RETURN TO MAIN MENU
-textcolor *---00+
-prline About
-textcolor *---0++
-prline Overview
-textcolor *---00+
-prline Calculator
-
-textcolor *---00+
-uiter not_sup_fill,newline,@1,@18
-
-asm iowrite1;>mouse.button
-
-label help__skipdraw
-
-asm ioread1;>mouse.button
-set btnbuff
-
-ifnot btnbuff,@1 goto help__skipdraw
-
-asm ioread1;>mouse.locky
-set ybuff_help
-
-if ybuff_help,@2 return
-
-if ybuff_help,@3 gsub help_about
-if ybuff_help,@3 =help_actflg @1
-
-if ybuff_help,@4 gsub help_overview
-if ybuff_help,@4 =help_actflg @1
-
-if ybuff_help,@5 gsub help_calc
-if ybuff_help,@5 =help_actflg @1
-goto help__loop
-
-
-
-
-
-
-
-uiter not_sup_fill,newline,@1,@21
-
-gsub click_wait
+	
+	val @1
+	set help_actflg
+	
+	label help__loop
+	ifnot @1,help_actflg goto help__skipdraw
+	
+	val @0
+	set help_actflg
+	
+	textcolor *+++--0
+	gsub hudsplash
+	prline Help & About - Index
+	
+	prline --< Choose a Category >--
+	textcolor *---++0
+	prline RETURN TO MAIN MENU
+	textcolor *---00+
+	prline About
+	textcolor *---0++
+	prline Overview
+	textcolor *---00+
+	prline Calculator
+	
+	textcolor *---00+
+	uiter not_sup_fill,newline,@1,@18
+	
+	asm iowrite1;>mouse.button
+	
+	label help__skipdraw
+	
+	asm ioread1;>mouse.button
+	set btnbuff
+	
+	ifnot btnbuff,@1 goto help__skipdraw
+	
+	asm ioread1;>mouse.locky
+	set ybuff_help
+	
+	if ybuff_help,@2 return
+	
+	if ybuff_help,@3 gsub help_about
+	if ybuff_help,@3 =help_actflg @1
+	
+	if ybuff_help,@4 gsub help_overview
+	if ybuff_help,@4 =help_actflg @1
+	
+	if ybuff_help,@5 gsub help_calc
+	if ybuff_help,@5 =help_actflg @1
+	goto help__loop
+	
+	
+	
+	
+	
+	
+	
+	uiter not_sup_fill,newline,@1,@21
+	
+	gsub click_wait
 return
 
 #### About ####
 label help_about
-textcolor *+++--0
-gsub hudsplash
-prline Help & About - About
-textcolor *---00+
-prline SBTCVM Balanced Ternary Graphical SHell - v0.3
-prline Part of SBTCVM Gen2-9
-prline 
-prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
-prline 
-prline SBTCVM SBTGSH is free software: you can redistribute it and/or modify
-prline it under the terms of the GNU General Public License as published by
-prline the Free Software Foundation, either version 3 of the License, or
-prline (at your option) any later version.
-prline 
-prline SBTCVM SBTGSH is distributed in the hope that it will be useful,
-prline but WITHOUT ANY WARRANTY; without even the implied warranty of
-prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-prline GNU General Public License for more details.
-prline 
-prline You should have received a copy of the GNU General Public License
-prline along with SBTCVM SBTGSH. If not, see <http://www.gnu.org/licenses/>
-
-newline
-prline Click to return
-
-
-uiter not_sup_fill,newline,@1,@4
-
-gsub click_wait
+	textcolor *+++--0
+	gsub hudsplash
+	prline Help & About - About
+	textcolor *---00+
+	prline SBTCVM Balanced Ternary Graphical SHell - v0.3
+	prline Part of SBTCVM Gen2-9
+	prline 
+	prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
+	prline 
+	prline SBTCVM SBTGSH is free software: you can redistribute it and/or modify
+	prline it under the terms of the GNU General Public License as published by
+	prline the Free Software Foundation, either version 3 of the License, or
+	prline (at your option) any later version.
+	prline 
+	prline SBTCVM SBTGSH is distributed in the hope that it will be useful,
+	prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+	prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	prline GNU General Public License for more details.
+	prline 
+	prline You should have received a copy of the GNU General Public License
+	prline along with SBTCVM SBTGSH. If not, see <http://www.gnu.org/licenses/>
+	
+	newline
+	prline Click to return
+	
+	
+	uiter not_sup_fill,newline,@1,@4
+	
+	gsub click_wait
 return
 
 #### overview ####
 label help_overview
-textcolor *+++--0
-gsub hudsplash
-prline Help & About - Overview
-textcolor *---00+
-prline Use your mouse to navigate the various menus and use the assorted programs.
-prline Curses frontend Not supported.
-newline
-prline Click to return
-
-
-uiter not_sup_fill,newline,@1,@19
-
-gsub click_wait
+	textcolor *+++--0
+	gsub hudsplash
+	prline Help & About - Overview
+	textcolor *---00+
+	prline Use your mouse to navigate the various menus and use the assorted programs.
+	prline Curses frontend Not supported.
+	newline
+	prline Click to return
+	
+	
+	uiter not_sup_fill,newline,@1,@19
+	
+	gsub click_wait
 return
 
 #### calculator ####
 label help_calc
-textcolor *+++--0
-gsub hudsplash
-prline Help & About - Calculator
-textcolor *---00+
-prline Operations are done using the value in 'buffer' and the value in 'entry'
-prline E.G. 'buffer' divided by 'entry'
-newline
-prline Use [ = ] to push number to buffer.
-newline
-prline [add],[sub],[div],and [mul] will all move the result to 'buffer' and 
-prline reset 'entry'
-newline
-prline [clr] clears 'entry'
-prline [rst] resets calculator
-prline [del] deletes last digit
-prline [off] exits calculator
-newline
-prline Click to return
-
-
-uiter not_sup_fill,newline,@1,@9
-
-gsub click_wait
+	textcolor *+++--0
+	gsub hudsplash
+	prline Help & About - Calculator
+	textcolor *---00+
+	prline Operations are done using the value in 'buffer' and the value in 'entry'
+	prline E.G. 'buffer' divided by 'entry'
+	newline
+	prline Use [ = ] to push number to buffer.
+	newline
+	prline [add],[sub],[div],and [mul] will all move the result to 'buffer' and 
+	prline reset 'entry'
+	newline
+	prline [clr] clears 'entry'
+	prline [rst] resets calculator
+	prline [del] deletes last digit
+	prline [off] exits calculator
+	newline
+	prline Click to return
+	
+	
+	uiter not_sup_fill,newline,@1,@9
+	
+	gsub click_wait
 return
 
 
 ###### Generic Click event wait function ######
 
 label click_wait
-asm iowrite1;>mouse.button
-label click_wait_loop
-asm ioread1;>mouse.button
-set btnbuff
-ifnot btnbuff,@1 goto click_wait_loop
+	asm iowrite1;>mouse.button
+	label click_wait_loop
+	asm ioread1;>mouse.button
+	set btnbuff
+	ifnot btnbuff,@1 goto click_wait_loop
 return
 
 
 ######vdi shell wrapper######
 label VDI_shell
-textcolor *+++--0
-gsub hudsplash
-prline SBTVDI Shell Wrapper
-textcolor *---00+
-prline Type 'return' to return to SBTGSH
-prline Type 'quit' to shutdown SBTCVM session.
-uiter not_sup_fill,newline,@1,@19
-
-
-textcolor *+++---
-asm include;vdishell.tas0
-asm dataread1;>vdiexitcode
-set exitcode
-if exitcode,@1 return
-if exitcode,@2 stop
+	textcolor *+++--0
+	gsub hudsplash
+	prline SBTVDI Shell Wrapper
+	textcolor *---00+
+	prline Type 'return' to return to SBTGSH
+	prline Type 'quit' to shutdown SBTCVM session.
+	uiter not_sup_fill,newline,@1,@19
+	
+	
+	textcolor *+++---
+	asm include;vdishell.tas0
+	asm dataread1;>vdiexitcode
+	set exitcode
+	if exitcode,@1 return
+	if exitcode,@2 stop
 return
 
 
 
 ######Calculator######
-
-var calc_buffer=0
-var calc_entry=0
-var tritbuff=0
-var tritlen=0
-var calc_redrawflgx=0
-var calc_redrawflgy=0
-
-label calc_init
-val 0
-set calc_buffer
-set calc_entry
-set tritbuff
-set tritlen
-val @1
-set calc_redrawflgx
-set calc_redrawflgy
-
-label calc_loop
-
-ifnot calc_redrawflgx,@1 goto calc_inputloop
-ifnot calc_redrawflgy,@1 goto calc_inputloop
-
-textcolor *+++--0
-gsub hudsplash
-prline Calculator
-textcolor *---00+
-newline
-newline
-textcolor *---+++
-print [ + ][ 0 ][ - ][HELP]
-textcolor *---00+
-newline
-newline
-textcolor *---+++
-print [add][sub][mul]
-textcolor *---00+
-newline
-newline
-textcolor *---+++
-print [div][ = ]
-textcolor *+++0--
-print [off]
-textcolor *---00+
-newline
-newline
-textcolor *---++0
-print [del][rst][clr]
-textcolor *---00+
-
-newline
-newline
-prline Buffer:
-textcolor *+++---
-dumpt calc_buffer
-textcolor *---00+
-newline
-newline
-prline Entry:
-textcolor *+++---
-dumpt calc_entry
-textcolor *---00+
-newline
-uiter not_sup_fill,newline,@1,@8
-
-
-label calc_inputloop
-asm ioread1;>mouse.button
-set btnbuff
-
-ifnot btnbuff,@1 goto calc_inputloop
-
-##### Calculator button parser #####
-
-val 0
-set calc_redrawflgx
-set calc_redrawflgy
-
-#parse Y first!
-asm ioread1;>mouse.lockx
-set xbuff_calc
-asm ioread1;>mouse.locky
-set ybuff_calc
-
-ifnotrange @0,@4,xbuff_calc goto calc_col1_skip
-val @1
-set calc_redrawflgx
-
-if ybuff_calc,@3 =tritbuff *+
-if ybuff_calc,@3 gsub calc_tritpush
-
-if ybuff_calc,@5 gsub calc_add
-if ybuff_calc,@7 gsub calc_div
-if ybuff_calc,@9 gsub calc_tritpop
-
-label calc_col1_skip
-
-ifnotrange @5,@9,xbuff_calc goto calc_col2_skip
-val @1
-set calc_redrawflgx
-
-if ybuff_calc,@3 =tritbuff *0
-if ybuff_calc,@3 gsub calc_tritpush
-if ybuff_calc,@5 gsub calc_sub
-if ybuff_calc,@7 gsub calc_entrytobuffer
-if ybuff_calc,@9 gsub calc_cleanup
-
-label calc_col2_skip
-
-
-ifnotrange @10,@14,xbuff_calc goto calc_col3_skip
-val @1
-set calc_redrawflgx
-
-if ybuff_calc,@3 =tritbuff *-
-if ybuff_calc,@3 gsub calc_tritpush
-if ybuff_calc,@5 gsub calc_mul
-if ybuff_calc,@7 gsub calc_cleanup
-if ybuff_calc,@7 return
-if ybuff_calc,@9 gsub calc_purgeentry
-
-label calc_col3_skip
-
-ifnotrange @15,@20,xbuff_calc goto calc_col4_skip
-val @1
-set calc_redrawflgx
-if ybuff_calc,@3 gsub help_calc
-
-label calc_col4_skip
-
-
-if @3,ybuff_calc =calc_redrawflgy @1
-if @5,ybuff_calc =calc_redrawflgy @1
-if @7,ybuff_calc =calc_redrawflgy @1
-if @9,ybuff_calc =calc_redrawflgy @1
-goto calc_loop
-
-
-
-label calc_tritpush
-if tritlen,@9 return
-get tritbuff
-push
-mul calc_entry,@3
-set calc_entry
-add calc_entry,tritbuff
-set calc_entry
-
-add tritlen,@1
-set tritlen
-return
-
-label calc_tritpop
-if tritlen,@0 return
-pop
-set tritbuff
-sub calc_entry,tritbuff
-set calc_entry
-div calc_entry,@3
-set calc_entry
-
-sub tritlen,@1
-set tritlen
-return
-
-label calc_cleanup
-gsub calc_purgeentry
-val 0
-set calc_buffer
-return
-
-label calc_purgeentry
-uiter calc_cleanloop,calc_tritpop,@0,@9
-val 0
-set calc_entry
-set tritlen
-set tritbuff
-return
-
-label calc_entrytobuffer
-get calc_entry
-set calc_buffer
-gsub calc_purgeentry
-return
-
-label calc_add
-add calc_buffer,calc_entry
-set calc_buffer
-gsub calc_purgeentry
-return
-
-label calc_sub
-sub calc_buffer,calc_entry
-set calc_buffer
-gsub calc_purgeentry
-return
-
-label calc_mul
-mul calc_buffer,calc_entry
-set calc_buffer
-gsub calc_purgeentry
-return
-
-label calc_div
-if calc_entry,@0 gsub calc_ERROR
-if calc_entry,@0 return
-div calc_buffer,calc_entry
-set calc_buffer
-gsub calc_purgeentry
-return
-
-
-#### divzero error message
-
-label calc_ERROR
-textcolor *+++--0
-gsub hudsplash
-prline Calculator - DIVIDE BY ZERO
-textcolor *---00+
-gsub icon_no
-prline Not even in balanced ternary...
-prline ...Can you divide by zero.
-uiter not_sup_fill,newline,@1,@17
-
-gsub click_wait
-return
+	
+	var calc_buffer=0
+	var calc_entry=0
+	var tritbuff=0
+	var tritlen=0
+	var calc_redrawflgx=0
+	var calc_redrawflgy=0
+	
+	label calc_init
+		val 0
+		set calc_buffer
+		set calc_entry
+		set tritbuff
+		set tritlen
+		val @1
+		set calc_redrawflgx
+		set calc_redrawflgy
+		
+	label calc_loop
+		
+		ifnot calc_redrawflgx,@1 goto calc_inputloop
+		ifnot calc_redrawflgy,@1 goto calc_inputloop
+		
+		textcolor *+++--0
+		gsub hudsplash
+		prline Calculator
+		textcolor *---00+
+		newline
+		newline
+		textcolor *---+++
+		print [ + ][ 0 ][ - ][HELP]
+		textcolor *---00+
+		newline
+		newline
+		textcolor *---+++
+		print [add][sub][mul]
+		textcolor *---00+
+		newline
+		newline
+		textcolor *---+++
+		print [div][ = ]
+		textcolor *+++0--
+		print [off]
+		textcolor *---00+
+		newline
+		newline
+		textcolor *---++0
+		print [del][rst][clr]
+		textcolor *---00+
+		
+		newline
+		newline
+		prline Buffer:
+		textcolor *+++---
+		dumpt calc_buffer
+		textcolor *---00+
+		newline
+		newline
+		prline Entry:
+		textcolor *+++---
+		dumpt calc_entry
+		textcolor *---00+
+		newline
+		uiter not_sup_fill,newline,@1,@8
+		
+		
+		label calc_inputloop
+			asm ioread1;>mouse.button
+			set btnbuff
+		ifnot btnbuff,@1 goto calc_inputloop
+		
+		##### Calculator button parser #####
+		
+		val 0
+		set calc_redrawflgx
+		set calc_redrawflgy
+		
+		#parse Y first!
+		asm ioread1;>mouse.lockx
+		set xbuff_calc
+		asm ioread1;>mouse.locky
+		set ybuff_calc
+		
+		ifnotrange @0,@4,xbuff_calc goto calc_col1_skip
+			val @1
+			set calc_redrawflgx
+			
+			if ybuff_calc,@3 =tritbuff *+
+			if ybuff_calc,@3 gsub calc_tritpush
+			
+			if ybuff_calc,@5 gsub calc_add
+			if ybuff_calc,@7 gsub calc_div
+			if ybuff_calc,@9 gsub calc_tritpop
+		
+		label calc_col1_skip
+		
+		ifnotrange @5,@9,xbuff_calc goto calc_col2_skip
+			val @1
+			set calc_redrawflgx
+			
+			if ybuff_calc,@3 =tritbuff *0
+			if ybuff_calc,@3 gsub calc_tritpush
+			if ybuff_calc,@5 gsub calc_sub
+			if ybuff_calc,@7 gsub calc_entrytobuffer
+			if ybuff_calc,@9 gsub calc_cleanup
+			
+		label calc_col2_skip
+		
+		
+		ifnotrange @10,@14,xbuff_calc goto calc_col3_skip
+			val @1
+			set calc_redrawflgx
+			
+			if ybuff_calc,@3 =tritbuff *-
+			if ybuff_calc,@3 gsub calc_tritpush
+			if ybuff_calc,@5 gsub calc_mul
+			if ybuff_calc,@7 gsub calc_cleanup
+			if ybuff_calc,@7 return
+			if ybuff_calc,@9 gsub calc_purgeentry
+			
+		label calc_col3_skip
+		
+		ifnotrange @15,@20,xbuff_calc goto calc_col4_skip
+			val @1
+			set calc_redrawflgx
+			if ybuff_calc,@3 gsub help_calc
+		
+		label calc_col4_skip
+		
+		
+		if @3,ybuff_calc =calc_redrawflgy @1
+		if @5,ybuff_calc =calc_redrawflgy @1
+		if @7,ybuff_calc =calc_redrawflgy @1
+		if @9,ybuff_calc =calc_redrawflgy @1
+		goto calc_loop
+	
+	
+	
+	label calc_tritpush
+		if tritlen,@9 return
+		get tritbuff
+		push
+		mul calc_entry,@3
+		set calc_entry
+		add calc_entry,tritbuff
+		set calc_entry
+		
+		add tritlen,@1
+		set tritlen
+	return
+	
+	label calc_tritpop
+		if tritlen,@0 return
+		pop
+		set tritbuff
+		sub calc_entry,tritbuff
+		set calc_entry
+		div calc_entry,@3
+		set calc_entry
+		
+		sub tritlen,@1
+		set tritlen
+	return
+	
+	label calc_cleanup
+		gsub calc_purgeentry
+		val 0
+		set calc_buffer
+		return
+		
+		label calc_purgeentry
+		uiter calc_cleanloop,calc_tritpop,@0,@9
+		val 0
+		set calc_entry
+		set tritlen
+		set tritbuff
+	return
+	
+	label calc_entrytobuffer
+		get calc_entry
+		set calc_buffer
+		gsub calc_purgeentry
+	return
+	
+	label calc_add
+		add calc_buffer,calc_entry
+		set calc_buffer
+		gsub calc_purgeentry
+	return
+	
+	label calc_sub
+		sub calc_buffer,calc_entry
+		set calc_buffer
+		gsub calc_purgeentry
+	return
+	
+	label calc_mul
+		mul calc_buffer,calc_entry
+		set calc_buffer
+		gsub calc_purgeentry
+	return
+	
+	label calc_div
+		if calc_entry,@0 gsub calc_ERROR
+		if calc_entry,@0 return
+		div calc_buffer,calc_entry
+		set calc_buffer
+		gsub calc_purgeentry
+	return
+	
+	
+	#### divzero error message
+	
+	label calc_ERROR
+		textcolor *+++--0
+		gsub hudsplash
+		prline Calculator - DIVIDE BY ZERO
+		textcolor *---00+
+		gsub icon_no
+		prline Not even in balanced ternary...
+		prline ...Can you divide by zero.
+		uiter not_sup_fill,newline,@1,@17
+		
+		gsub click_wait
+	return
 
 
 
 ###### Crystal Ball ######
-var crystal_random=0
-label crystal_ball
-
-asm iowrite1;>mouse.button
-
-#### Draw Main screen
-
-textcolor *+++--0
-gsub hudsplash
-prline Calculator - Crystal Ball
-textcolor *---00+
-prline Hello. Ask your Yes or No question, then click on my crystal ball!
-prline Click on the doorway to leave, if you must.
-
-asm include;sbtgsh+ball.tas0
-
-uiter not_sup_fill,newline,@1,@13
-
-#### input Parsing
-
-label cry_inputloop
-asm ioread1;>mouse.button
-set btnbuff
-
-ifnot btnbuff,@1 goto cry_inputloop
-
-#parse Y first!
-asm ioread1;>mouse.lockx
-set xbuff_cry
-asm ioread1;>mouse.locky
-set ybuff_cry
-
-ifnotrange @3,@10,ybuff_cry goto cry_inputloop
-ifnotrange @0,@35,xbuff_cry goto cry_inputloop
-ifrange @0,@23,xbuff_cry gsub cry_do_ball
-ifrange @25,@35,xbuff_cry return
-goto crystal_ball
-
-#### Get the awnser
-
-label cry_do_ball
-rrange @-1,@1
-set crystal_random
-
-if crystal_random,@1 gsub cry_yes
-if crystal_random,@0 gsub cry_unsure
-if crystal_random,@-1 gsub cry_no
-return
-
-### No routine
-
-label cry_no
-textcolor *+++--0
-gsub hudsplash
-prline Crystal Ball - Answer
-textcolor *---00+
-gsub cry_ballicon
-prline The Spirits strongly think not.
-uiter not_sup_fill,newline,@1,@17
-
-gsub click_wait
-return
-
-### Yes routine
-label cry_yes
-textcolor *+++--0
-gsub hudsplash
-prline Crystal Ball - Answer
-textcolor *---00+
-gsub cry_ballicon
-prline Yes, indeed, I can see it!
-uiter not_sup_fill,newline,@1,@17
-
-gsub click_wait
-return
-
-### unsure routine
-label cry_unsure
-textcolor *+++--0
-gsub hudsplash
-prline Crystal Ball - Answer
-textcolor *---00+
-gsub cry_ballicon
-prline The spirits do not respond. Try asking later...
-uiter not_sup_fill,newline,@1,@17
-
-gsub click_wait
-return
-
-label cry_ballicon
-asm include;sbtgsh+ballicon.tas0
-return
+	var crystal_random=0
+	label crystal_ball
+	
+		asm iowrite1;>mouse.button
+		
+		#### Draw Main screen
+		
+		textcolor *+++--0
+		gsub hudsplash
+		prline Calculator - Crystal Ball
+		textcolor *---00+
+		prline Hello. Ask your Yes or No question, then click on my crystal ball!
+		prline Click on the doorway to leave, if you must.
+		
+		asm include;sbtgsh+ball.tas0
+		
+		uiter not_sup_fill,newline,@1,@13
+		
+		#### input Parsing
+		
+		label cry_inputloop
+			asm ioread1;>mouse.button
+			set btnbuff
+		ifnot btnbuff,@1 goto cry_inputloop
+		
+		#parse Y first!
+		asm ioread1;>mouse.lockx
+		set xbuff_cry
+		asm ioread1;>mouse.locky
+		set ybuff_cry
+		
+		ifnotrange @3,@10,ybuff_cry goto cry_inputloop
+		ifnotrange @0,@35,xbuff_cry goto cry_inputloop
+		ifrange @0,@23,xbuff_cry gsub cry_do_ball
+		ifrange @25,@35,xbuff_cry return
+	goto crystal_ball
+	
+	#### Get the awnser
+	
+	label cry_do_ball
+		rrange @-1,@1
+		set crystal_random
+		
+		if crystal_random,@1 gsub cry_yes
+		if crystal_random,@0 gsub cry_unsure
+		if crystal_random,@-1 gsub cry_no
+	return
+	
+	### No routine
+	
+	label cry_no
+		textcolor *+++--0
+		gsub hudsplash
+		prline Crystal Ball - Answer
+		textcolor *---00+
+		gsub cry_ballicon
+		prline The Spirits strongly think not.
+		uiter not_sup_fill,newline,@1,@17
+		
+		gsub click_wait
+	return
+	
+	### Yes routine
+	label cry_yes
+		textcolor *+++--0
+		gsub hudsplash
+		prline Crystal Ball - Answer
+		textcolor *---00+
+		gsub cry_ballicon
+		prline Yes, indeed, I can see it!
+		uiter not_sup_fill,newline,@1,@17
+		
+		gsub click_wait
+	return
+	
+	### unsure routine
+	label cry_unsure
+		textcolor *+++--0
+		gsub hudsplash
+		prline Crystal Ball - Answer
+		textcolor *---00+
+		gsub cry_ballicon
+		prline The spirits do not respond. Try asking later...
+		uiter not_sup_fill,newline,@1,@17
+		
+		gsub click_wait
+	return
+	
+	label cry_ballicon
+		asm include;sbtgsh+ballicon.tas0
+	return

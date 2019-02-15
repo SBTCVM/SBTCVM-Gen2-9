@@ -1,5 +1,12 @@
 SSTNPL: SBTCVM Simplified Ternary Numeric Programming Language
 
+#basic syntax notes:
+
+### Whitespace:
+you may use spaces and/or tabs at the start of any line of code, at your leisure.
+Such whitespace will be ignored automatically.
+
+
 
 ####[nvalue] syntax for var and val:####
 Literal prefixes are also acceptable
