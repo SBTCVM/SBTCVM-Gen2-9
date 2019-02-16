@@ -1294,7 +1294,7 @@ dataread1;>tabstrc--outbuff--''' + str(lineno) + '''
 		
 		counter+=1
 		char=slist.pop(0)
-		print("Recursion: " + str(char) + " " + str(counter))
+		#print("Recursion: " + str(char) + " " + str(counter))
 		destobj.write('''#recursion
 ''')
 ####### If not first level, increment pointer.

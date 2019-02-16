@@ -13,18 +13,31 @@ prline type 'help' for commands
 #			load2
 
 
-########################
+############################################
 ##Entry Code Variables
+###READ THIS FOR SIZE OF INPUT
 var shell_entry_size=0
 #one less than shell_entry_size, for indexing
 var shell_entry_itersize=0
 
 
-var shell_entry_max=@80
 var shell_entry_buff=0
 var shell_entry_chbuff=0
-######################
+########CONFIGURATION OF INPUT CODE#########
 
+#####set this to @1 to enable 'purging of the input buffer' (see below).
+var shell_entry_clearbuffer=@0
+
+#####MAXIMUM INPUT SIZE IN CHARACTERS
+var shell_entry_max=@80
+
+############################################
+
+
+####about 'purging of the input buffer'
+#	this should ONLY be turned on, if remaining characters from past commands, 
+#	are causing issues, and the 'shell_entry_size' variable isn't enough to 
+#	prevent said issues, as THIS OPTION WILL SLOW DOWN THINGS NOTICEABLY.
 
 var cmdflg=0
 var validcom=0
@@ -137,6 +150,8 @@ label getentry_tobuff
 	sub shell_entry_size,@1
 	set shell_entry_itersize
 	uiter getentry_tobuff_iter,getentry_tobuff_loop,@0,shell_entry_itersize
+	if shell_entry_clearbuffer,@0 return
+	uiter getentry_pad_iter,getentry_pad,shell_entry_size,shell_entry_max
 	return
 
 label getentry_tobuff_loop
@@ -145,4 +160,8 @@ label getentry_tobuff_loop
 	tabw shell_entry_buffer,getentry_tobuff_iter,@0,shell_entry_buff
 return
 
-
+label getentry_pad
+	
+	tabw shell_entry_buffer,getentry_pad_iter,@0,@0
+	
+	return
