@@ -8,6 +8,7 @@ You can use this system for game level data, algorithms, and other sorts of thin
 
 #Table COMMANDS
 
+note: xpos,ypos both start at 0
 -
 tabr [name],[xpos],[ypos]
 set [var]
@@ -24,6 +25,21 @@ tabcd: print raw character
 tabdd: print data in decimal
 tabtd: print data in ternary
 
+
+##### tabstrc Table String Check #####
+
+tabstrc [tablename],[xoffset],[ypos],[string]
+set boolean_flag
+
+[xoffset] is where the first letter of [string] should be on the table's x axis.
+[ypos] is the same as table read/write operations. the table y position.
+[string] is the string to be tested for [STATIC]
+
+[xoffset] and [ypos] can be literals.
+
+use 'set' to store the returned boolean flag:
+	1: string IS at the given location in the table
+	0: string IS NOT at the given location in the table.
 
 ##### BASIC (SINGLE CELL) TABLES #####
 
@@ -46,7 +62,7 @@ As you can see, the table is built of tstr and tdat statements.
 
 tstr is handy for tables containing rows of only characters
 tdat is semicolon-divided and accepts the same data value syntaxes as var and val. (shown)
-
+tpad [size]: can be used to pad tables with zeros. handy for tables used as buffers.
 
 ##### MAKING FAST SELF-PRINTING TABLES #####
 	prline statements must use strings ONE LESS than actual table width.

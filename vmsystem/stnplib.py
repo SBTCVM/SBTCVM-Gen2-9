@@ -15,8 +15,8 @@ nptype_table=5
 
 #SSTNPL compiler main routine library.
 
-stnpvers='v0.2.1'
-versint=(0, 2, 1)
+stnpvers='v0.2.2'
+versint=(0, 2, 2)
 
 class npvar:
 	def __init__(self, vname, vdata, vtype=nptype_int):
@@ -1179,6 +1179,167 @@ class in_print:
 		
 		return
 
+
+class in_tpad:
+	def __init__(self):
+		self.keywords=["tpad"]
+		self.comment="Table Pad (tpad)"
+	def p0(self, args, keyword, lineno):
+		try:
+			intarg=int(args)
+			if intarg<1:
+				return 1, keyword+": Line: " + str(lineno) + ": tpad size must be 1 or higher!" + arg + "'"
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid tpad size integer'" + arg + "'"
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + keyword + "\n")
+		intarg=int(args)
+		#try python2 xrange, assume python 3 if NameError
+		try:
+			for f in xrange(0, intarg):
+				destobj.write("null;0\n")
+		except NameError:
+			for f in range(0, intarg):
+				destobj.write("null;0\n")
+		return
+
+class in_tabstrc:
+	def __init__(self):
+		self.keywords=["tabstrc"]
+		self.comment="table string check (for command checking.)"
+	def p0(self, args, keyword, lineno):
+		arglist=args.split(",")
+		if len(arglist)!=4:
+			return 1, keyword+": Line: " + str(lineno) + ": Please specify arguments as: '[table],[xoffset],[ypos],[string]'"
+		xoffset=arglist[1]
+		if isaliteral(xoffset):
+			xret=literal_syntax(xoffset, keyword, lineno)
+			if xret!=None:
+				return xret
+		ypos=arglist[2]
+		if isaliteral(ypos):
+			xret=literal_syntax(ypos, keyword, lineno)
+			if xret!=None:
+				return xret
+		if len(arglist[3])==0:
+			return 1, keyword+": Line: " + str(lineno) + ": string must not be zerosize!"
+
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		arglist=args.split(",")
+		xoffset=arglist[1]
+		ypos=arglist[2]
+		retlist=[]
+		if isaliteral(xoffset):
+			retlist.extend(literal_do(xoffset))
+		if isaliteral(ypos):
+			retlist.extend(literal_do(ypos))
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		arglist=args.split(",")
+		xoffset=arglist[1]
+		ypos=arglist[2]
+		tname=arglist[0]
+		if xoffset not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + xoffset + "'"
+		if ypos not in valid_nvars:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + ypos + "'"
+		if tname not in tables:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant table name '" + tname + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#######" + keyword + "\n")
+		arglist=args.split(",")
+		xoffset=arglist[1]
+		ypos=arglist[2]
+		tname=arglist[0]
+		tabvar=tables[tname]
+		stringx=arglist[3]
+		stringlist=[]
+		for x in stringx:
+			stringlist.append(x)
+		destobj.write('''#init
+setreg1;10x''' + str(tabvar.vdata[0]) + '''
+dataread2;>''' + ypos + '''
+mul
+dataread2;>''' + xoffset + '''
+add
+setreg2;10x1
+add
+setreg2;>''' + tname + '''--table
+add
+datawrite1;>tabstrc--adrbuff--''' + str(lineno) + '''
+null;;tabstrc--adrbuff--''' + str(lineno) + '''
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--''' + str(lineno) + '''
+null;;tabstrc--outbuff--''' + str(lineno) + '''
+#recursive_parser
+''')
+		#recursive_parser
+		counter=0
+		self.recursive_parse(stringlist, counter, lineno, destobj, first=1)
+		
+		destobj.write('''#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--''' + str(lineno) + '''
+''')
+		destobj.write("#######" + keyword + " END\n")
+		return
+	def recursive_parse(self, slist, counter, lineno, destobj, first=0):
+		
+		counter+=1
+		char=slist.pop(0)
+		print("Recursion: " + str(char) + " " + str(counter))
+		destobj.write('''#recursion
+''')
+####### If not first level, increment pointer.
+		if not first:
+			destobj.write('''#increment pointer
+dataread1;>tabstrc--adrbuff--''' + str(lineno) + '''
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--''' + str(lineno) + '''
+''')
+
+########Read value from table, run checks
+		destobj.write('''
+setreg1;>tabstrc--adrbuff--''' + str(lineno) + '''
+
+datawrite1;>tabstrc--recurs-tabbuff--''' + str(lineno) + '_' + str(counter) + '''
+dataread1;;tabstrc--recurs-tabbuff--''' + str(lineno) + '_' + str(counter) + '''
+datawrite1;>tabstrc--recurs-tabbuff_read--''' + str(lineno) + '_' + str(counter) + '''
+dataread1;;tabstrc--recurs-tabbuff_read--''' + str(lineno) + '_' + str(counter) + '''
+
+setreg2;:''' + char + '''
+
+
+gotoif;>tabstrc--recurs-checkyes--''' + str(lineno) + '_' + str(counter) + '''
+goto;>tabstrc--recurs-checkno--''' + str(lineno) + '_' + str(counter) + '''
+null;;tabstrc--recurs-checkyes--''' + str(lineno) + '_' + str(counter) + '''
+''')
+#######If list is now empty, set flag
+		if slist==[]:
+			destobj.write('''##set flag########
+setreg1;>tabstrc--outbuff--''' + str(lineno) + '''
+datawrite1;>tabstrc--recurs-flag--''' + str(lineno) + "_" + str(counter) + '''
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--''' + str(lineno) + "_" + str(counter) + '''
+''')
+#######if list isn't empty, keep recursively parsing.
+		else:
+			self.recursive_parse(slist, counter, lineno, destobj)
+####### SKip recursion endpoint
+		destobj.write('''#recursionskip endpoint
+null;;tabstrc--recurs-checkno--''' + str(lineno) + '_' + str(counter) + '''
+''')
+		return
+		
+
 #generic data table syntax
 class in_tdat:
 	def __init__(self):
@@ -1341,6 +1502,8 @@ class mainloop:
 		in_tabr(),
 		in_tabw(),
 		in_tdat(),
+		in_tpad(),
+		in_tabstrc(),
 		in_uiter(),
 		in_diter(),
 		in_u2iter(),

@@ -1,7 +1,23 @@
+
+
 key:
 	[ttycolor] : uses tty color support.
 	[mouse]    : uses the SBTCVM mouse device.
 	[nocurses] : CANNOT be used in curses frontend.
+
+----Technical----
+
+shelldemo:
+	Uses SSTNPLs tabstrc instruction, and some stack/table-based input code,
+	to create a command shell, complete with multi-character commands,
+	with no restrictions on command names, other than an 80-character limit,
+	and no cases as such:
+			load
+			load2
+		is invalid. instead, when a command has a suffixed variant, do this:
+			load1
+			load2
+
 
 ----Terminal----
 
