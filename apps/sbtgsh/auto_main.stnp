@@ -237,7 +237,7 @@ label nothing_here
 	gsub icon_message
 	prline Nothing is assigned to this icon slot yet. sorry!
 	prline Click anywhere to continue.
-	uiter not_sup_fill,newline,@1,@17
+	uiter nothing_here_fill,newline,@1,@17
 	
 	gsub click_wait
 

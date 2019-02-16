@@ -44,6 +44,7 @@ null;+++00+;*+++00+
 null;---00+;*---00+
 null;10x0;not_sup_fill
 null;10x17;@17
+null;10x0;nothing_here_fill
 null;---++0;*---++0
 null;---0++;*---0++
 null;10x18;@18
@@ -1208,14 +1209,14 @@ fopwri1;:.
 fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
-datawrite1;>not_sup_fill
+datawrite1;>nothing_here_fill
 setreg1;>uiter-retpos-240;uiter-loopback-240
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-240
+dataread1;>nothing_here_fill;uiter-retpos-240
 setreg2;10x1
 add
-datawrite1;>not_sup_fill
+datawrite1;>nothing_here_fill
 dataread2;>@17
 gotoifless;>uiter-loopback-240
 gotoif;>uiter-loopback-240

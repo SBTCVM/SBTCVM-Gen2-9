@@ -369,19 +369,25 @@ class cpu:
 	#pointer rollover code.
 	def pointeroll1(self):
 		if self.reg1.intval<-9841:
-			while self.reg1.intval<-9841:
-				self.reg1-=-9841
+			#while self.reg1.intval<-9841:
+			#	self.reg1-=-9841
+			self.reg1.changeval(self.reg1.bttrunk(9))
 		elif self.reg1.intval>9841:
-			while self.reg1.intval>9841:
-				self.reg1-=9841
+			#while self.reg1.intval>9841:
+			#	self.reg1-=9841
+			self.reg1.changeval(self.reg1.bttrunk(9))
+		
 		return
 	def pointeroll2(self):
 		if self.reg2.intval<-9841:
-			while self.reg2.intval<-9841:
-				self.reg2-=-9841
+			#while self.reg2.intval<-9841:
+			#	self.reg2-=-9841
+			self.reg2.intval=9841
+			self.reg2.changeval(self.reg2.bttrunk(9))
 		elif self.reg2.intval>9841:
-			while self.reg2.intval>9841:
-				self.reg2-=9841
+			#while self.reg2.intval>9841:
+			#	self.reg2-=9841
+			self.reg2.changeval(self.reg2.bttrunk(9))
 		return
 	
 	
