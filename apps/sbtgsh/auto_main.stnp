@@ -23,6 +23,10 @@ var exitcode=0
 var system_icon_colors=*+0-00+0--
 packcolor system_icon_colors
 
+################################
+#note to programmers the 'system shell' uses code from 'shelldemo' in 'demos'.
+#see that for such code instead.
+################################
 
 
 ########## Main Loop ##########
@@ -70,7 +74,7 @@ label main
 		ifrange @1,@13,xbuff_main =main_actflg @1
 		ifrange @1,@13,xbuff_main gsub crystal_ball
 		ifrange @16,@28,xbuff_main =main_actflg @1
-		ifrange @16,@28,xbuff_main gsub nothing_here
+		ifrange @16,@28,xbuff_main gsub sys_shell
 		ifrange @31,@43,xbuff_main =main_actflg @1
 		ifrange @31,@43,xbuff_main gsub nothing_here
 		ifrange @46,@58,xbuff_main =main_actflg @1
@@ -137,7 +141,7 @@ label hudsplash
 	print M
 	textcolor *+++--0
 	print   
-	print SBTGSH v0.3 - 
+	print SBTGSH v0.4 - 
 return
 
 
@@ -175,8 +179,8 @@ label mainscreen_draw
 	space
 	print Ball
 	gsub labelpad1
-	print ____
-	gsub labelpad1
+	print Shell          
+	
 	print ____
 	gsub labelpad1
 	print ____
@@ -326,7 +330,7 @@ label help_about
 	gsub hudsplash
 	prline Help & About - About
 	textcolor *---00+
-	prline SBTCVM Balanced Ternary Graphical SHell - v0.3
+	prline SBTCVM Balanced Ternary Graphical SHell - v0.4
 	prline Part of SBTCVM Gen2-9
 	prline 
 	prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -669,7 +673,7 @@ return
 		
 		textcolor *+++--0
 		gsub hudsplash
-		prline Calculator - Crystal Ball
+		prline Crystal Ball
 		textcolor *---00+
 		prline Hello. Ask your Yes or No question, then click on my crystal ball!
 		prline Click on the doorway to leave, if you must.
@@ -751,3 +755,198 @@ return
 	label cry_ballicon
 		asm include;sbtgsh+ballicon.tas0
 	return
+
+
+
+###### System Shell ######
+#uses input code from 'shelldemo'
+var sys_shell_validcom=0
+var sys_shell_cmdflg=0
+label sys_shell
+		textcolor *+++--0
+		gsub hudsplash
+		prline System Shell
+		textcolor *---00+
+		prline Type 'help' for help.
+		uiter not_sup_fill,newline,@1,@20
+		textcolor *+++---
+		newline
+	label sys_shell_loop
+	textcolor *+++---
+	prline SHELL READY:
+	textcolor *++0---
+	print >
+	textcolor *0++---
+	
+	#clear TTY input buffer
+	asm iowrite1;>io.ttyrd
+	
+	gsub getentry
+	textcolor *+++---
+	newline
+	
+	val 0
+	set sys_shell_validcom
+	
+	tabstrc shell_entry_buffer,@0,@0,help
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub sys_shell_help
+		
+	tabstrc shell_entry_buffer,@0,@0,ball
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub crystal_ball
+		
+	tabstrc shell_entry_buffer,@0,@0,calc
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub calc_init
+		
+	tabstrc shell_entry_buffer,@0,@0,uihelp
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub help
+	
+	tabstrc shell_entry_buffer,@0,@0,about
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub help_about
+	
+	tabstrc shell_entry_buffer,@0,@0,vdi
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub VDI_shell
+	
+	tabstrc shell_entry_buffer,@0,@0,exit
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 return
+		
+	tabstrc shell_entry_buffer,@0,@0,info
+		set sys_shell_cmdflg
+		if sys_shell_cmdflg,@1 gsub sys_shell_info
+	
+	
+
+	
+	
+	goto sys_shell_loop
+	return
+	####Help command
+	label sys_shell_help
+		textcolor *+++--0
+		prline --shell help--
+		prline help  : this text
+		prline info  : system info
+		prline ball  : crystal ball
+		prline calc  : calculator
+		prline uihelp: help system
+		prline vdi   : sbtvdi shell
+		prline exit  : exit shell
+		prline about : about
+		textcolor *+++---
+		newline
+	return
+	####info command
+	label sys_shell_info
+		textcolor *0++---
+		prline CPU: SBTCVM_G2x_9_r1 or compat.
+		prline GFX: SBTGA v2
+		prline MEM: 39.366 KN
+		textcolor *+++---
+	return
+
+
+
+
+####################################################
+#Input code from shelldemo technical demo program.
+
+
+############################################
+##Entry Code Variables
+###READ THIS FOR SIZE OF INPUT
+var shell_entry_size=0
+#one less than shell_entry_size, for indexing
+var shell_entry_itersize=0
+
+
+var shell_entry_buff=0
+var shell_entry_chbuff=0
+########CONFIGURATION OF INPUT CODE#########
+
+#####set this to @1 to enable 'purging of the input buffer' (see below).
+var shell_entry_clearbuffer=@0
+
+#####MAXIMUM INPUT SIZE IN CHARACTERS
+var shell_entry_max=@80
+
+############################################
+
+
+####################################
+###The following code is related to reading the commands 
+###and placing them in the table: 'shell_entry_buffer'
+
+#entry buffer
+table shell_entry_buffer,80,1
+tpad 80
+
+
+label getentry
+	val 0
+	set shell_entry_size
+	label getentry_loop
+		keyprompt
+		set shell_entry_chbuff
+		if shell_entry_size,@0 goto shell_entry_skipnewline
+		if shell_entry_chbuff,:\n gsub getentry_tobuff
+		if shell_entry_chbuff,:\n return
+		
+		label shell_entry_skipnewline
+		if shell_entry_chbuff,:\n goto getentry_loop
+		
+		if shell_entry_chbuff,:\x gsub getentry_backone
+		if shell_entry_chbuff,:\x goto getentry_loop
+		
+		
+		if shell_entry_size,shell_entry_max goto getentry_loop
+		chardump shell_entry_chbuff
+		add shell_entry_size,@1
+		set shell_entry_size
+		
+		get shell_entry_chbuff
+		push
+	goto getentry_loop
+
+
+label getentry_backone
+	if shell_entry_size,@0 return
+	chardump :\x
+	pop
+	sub shell_entry_size,@1
+	set shell_entry_size
+return
+
+
+label getentry_tobuff
+	stackrev
+	sub shell_entry_size,@1
+	set shell_entry_itersize
+	uiter getentry_tobuff_iter,getentry_tobuff_loop,@0,shell_entry_itersize
+	if shell_entry_clearbuffer,@0 return
+	uiter getentry_pad_iter,getentry_pad,shell_entry_size,shell_entry_max
+	return
+
+label getentry_tobuff_loop
+	pop
+	set shell_entry_buff
+	tabw shell_entry_buffer,getentry_tobuff_iter,@0,shell_entry_buff
+return
+
+label getentry_pad
+	
+	tabw shell_entry_buffer,getentry_pad_iter,@0,@0
+	
+	return
+
+
+
+
+
+
+

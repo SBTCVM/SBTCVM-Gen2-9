@@ -40,7 +40,7 @@ class uio:
 		ioref.setwritenotify(2, self.tritdump)
 		ioref.setwritenotify(3, self.decdump)
 		ioref.setreadoverride(4, self.ttyread)
-		ioref.setwritenotify(4, self.ttyread)
+		ioref.setwritenotify(4, self.ttyreadclearbuff)
 		ioref.setwritenotify(5, self.packart)
 		self.xttycharpos=0
 		self.maxy=self.ttywin.getmaxyx()[0]

@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.2.1
+#SSTNPL COMPILER v0.2.2
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -75,6 +75,20 @@ null;10x35;@35
 null;10x23;@23
 null;10x25;@25
 null;10x-1;@-1
+null;0;sys_shell_validcom
+null;0;sys_shell_cmdflg
+null;++0---;*++0---
+null;0++---;*0++---
+null;0;shell_entry_size
+null;0;shell_entry_itersize
+null;0;shell_entry_buff
+null;0;shell_entry_chbuff
+null;10x0;shell_entry_clearbuffer
+null;10x80;shell_entry_max
+null;:\n;:\n
+null;:\x;:\x
+null;10x0;getentry_tobuff_iter
+null;10x0;getentry_pad_iter
 #Set ternary packed art colors
 dataread1;>system_icon_colors
 iowrite1;>io.packcolor
@@ -83,125 +97,67 @@ null;;main--label
 #conditional subroutine goto
 dataread1;>main_actflg
 dataread2;>@1
-gotoif;>goto--branch-31
-goto;>goto--jumper-31
-setreg1;>goto--jumper-31;goto--branch-31
+gotoif;>goto--branch-35
+goto;>goto--jumper-35
+setreg1;>goto--jumper-35;goto--branch-35
 s1push1
 goto;>mainscreen_draw--label
-null;;goto--jumper-31
+null;;goto--jumper-35
 #conditional set
 dataread1;>main_actflg
 dataread2;>@1
-gotoif;>goto--branch-32
-goto;>goto--jumper-32
-dataread1;>@0;goto--branch-32
+gotoif;>goto--branch-36
+goto;>goto--jumper-36
+dataread1;>@0;goto--branch-36
 datawrite1;>main_actflg
-null;;goto--jumper-32
+null;;goto--jumper-36
 #label
 null;;main_loop--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #36
-ioread1;>mouse.button#SSTNPL Source Line: '36' 
+#_______NOTE: this corresponds to SSTNPL source line #40
+ioread1;>mouse.button#SSTNPL Source Line: '40' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #conditional goto
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--jumper-39
-goto;>goto--branch-39
-setreg1;>goto--jumper-39;goto--branch-39
+gotoif;>goto--jumper-43
+goto;>goto--branch-43
+setreg1;>goto--jumper-43;goto--branch-43
 goto;>main_loop--label
-null;;goto--jumper-39
+null;;goto--jumper-43
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #44
-ioread1;>mouse.lockx#SSTNPL Source Line: '44' 
+#_______NOTE: this corresponds to SSTNPL source line #48
+ioread1;>mouse.lockx#SSTNPL Source Line: '48' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>xbuff_main
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #46
-ioread1;>mouse.locky#SSTNPL Source Line: '46' 
+#_______NOTE: this corresponds to SSTNPL source line #50
+ioread1;>mouse.locky#SSTNPL Source Line: '50' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff_main
 #conditional goto
 dataread1;>ybuff_main
 dataread2;>@1
-gotoifmore;>goto--halfstep-51
-gotoif;>goto--halfstep-51
-goto;>goto--branch-51
-dataread1;>ybuff_main;goto--halfstep-51
-dataread2;>@6
-gotoifless;>goto--jumper-51
-gotoif;>goto--jumper-51
-goto;>goto--branch-51
-setreg1;>goto--jumper-51;goto--branch-51
-goto;>row1_skip--label
-null;;goto--jumper-51
-#conditional set
-dataread1;>xbuff_main
-dataread2;>@1
-gotoifmore;>goto--halfstep-53
-gotoif;>goto--halfstep-53
-goto;>goto--jumper-53
-dataread1;>xbuff_main;goto--halfstep-53
-dataread2;>@13
-gotoifless;>goto--branch-53
-gotoif;>goto--branch-53
-goto;>goto--jumper-53
-dataread1;>@1;goto--branch-53
-datawrite1;>main_actflg
-null;;goto--jumper-53
-#conditional subroutine goto
-dataread1;>xbuff_main
-dataread2;>@1
-gotoifmore;>goto--halfstep-54
-gotoif;>goto--halfstep-54
-goto;>goto--jumper-54
-dataread1;>xbuff_main;goto--halfstep-54
-dataread2;>@13
-gotoifless;>goto--branch-54
-gotoif;>goto--branch-54
-goto;>goto--jumper-54
-setreg1;>goto--jumper-54;goto--branch-54
-s1push1
-goto;>calc_init--label
-null;;goto--jumper-54
-#conditional set
-dataread1;>xbuff_main
-dataread2;>@16
 gotoifmore;>goto--halfstep-55
 gotoif;>goto--halfstep-55
-goto;>goto--jumper-55
-dataread1;>xbuff_main;goto--halfstep-55
-dataread2;>@28
-gotoifless;>goto--branch-55
-gotoif;>goto--branch-55
-goto;>goto--jumper-55
-dataread1;>@1;goto--branch-55
-datawrite1;>main_actflg
+goto;>goto--branch-55
+dataread1;>ybuff_main;goto--halfstep-55
+dataread2;>@6
+gotoifless;>goto--jumper-55
+gotoif;>goto--jumper-55
+goto;>goto--branch-55
+setreg1;>goto--jumper-55;goto--branch-55
+goto;>row1_skip--label
 null;;goto--jumper-55
-#conditional subroutine goto
-dataread1;>xbuff_main
-dataread2;>@16
-gotoifmore;>goto--halfstep-56
-gotoif;>goto--halfstep-56
-goto;>goto--jumper-56
-dataread1;>xbuff_main;goto--halfstep-56
-dataread2;>@28
-gotoifless;>goto--branch-56
-gotoif;>goto--branch-56
-goto;>goto--jumper-56
-setreg1;>goto--jumper-56;goto--branch-56
-s1push1
-goto;>VDI_shell--label
-null;;goto--jumper-56
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@31
+dataread2;>@1
 gotoifmore;>goto--halfstep-57
 gotoif;>goto--halfstep-57
 goto;>goto--jumper-57
 dataread1;>xbuff_main;goto--halfstep-57
-dataread2;>@43
+dataread2;>@13
 gotoifless;>goto--branch-57
 gotoif;>goto--branch-57
 goto;>goto--jumper-57
@@ -210,27 +166,27 @@ datawrite1;>main_actflg
 null;;goto--jumper-57
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@31
+dataread2;>@1
 gotoifmore;>goto--halfstep-58
 gotoif;>goto--halfstep-58
 goto;>goto--jumper-58
 dataread1;>xbuff_main;goto--halfstep-58
-dataread2;>@43
+dataread2;>@13
 gotoifless;>goto--branch-58
 gotoif;>goto--branch-58
 goto;>goto--jumper-58
 setreg1;>goto--jumper-58;goto--branch-58
 s1push1
-goto;>not_implemented--label
+goto;>calc_init--label
 null;;goto--jumper-58
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@46
+dataread2;>@16
 gotoifmore;>goto--halfstep-59
 gotoif;>goto--halfstep-59
 goto;>goto--jumper-59
 dataread1;>xbuff_main;goto--halfstep-59
-dataread2;>@58
+dataread2;>@28
 gotoifless;>goto--branch-59
 gotoif;>goto--branch-59
 goto;>goto--jumper-59
@@ -239,129 +195,129 @@ datawrite1;>main_actflg
 null;;goto--jumper-59
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@46
+dataread2;>@16
 gotoifmore;>goto--halfstep-60
 gotoif;>goto--halfstep-60
 goto;>goto--jumper-60
 dataread1;>xbuff_main;goto--halfstep-60
-dataread2;>@58
+dataread2;>@28
 gotoifless;>goto--branch-60
 gotoif;>goto--branch-60
 goto;>goto--jumper-60
 setreg1;>goto--jumper-60;goto--branch-60
 s1push1
-goto;>help--label
+goto;>VDI_shell--label
 null;;goto--jumper-60
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@61
+dataread2;>@31
 gotoifmore;>goto--halfstep-61
 gotoif;>goto--halfstep-61
 goto;>goto--jumper-61
 dataread1;>xbuff_main;goto--halfstep-61
-dataread2;>@73
+dataread2;>@43
 gotoifless;>goto--branch-61
 gotoif;>goto--branch-61
 goto;>goto--jumper-61
 dataread1;>@1;goto--branch-61
 datawrite1;>main_actflg
 null;;goto--jumper-61
-#conditional stop
+#conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@61
+dataread2;>@31
 gotoifmore;>goto--halfstep-62
 gotoif;>goto--halfstep-62
 goto;>goto--jumper-62
 dataread1;>xbuff_main;goto--halfstep-62
-dataread2;>@73
+dataread2;>@43
 gotoifless;>goto--branch-62
 gotoif;>goto--branch-62
 goto;>goto--jumper-62
-stop;;goto--branch-62
-
+setreg1;>goto--jumper-62;goto--branch-62
+s1push1
+goto;>not_implemented--label
 null;;goto--jumper-62
+#conditional set
+dataread1;>xbuff_main
+dataread2;>@46
+gotoifmore;>goto--halfstep-63
+gotoif;>goto--halfstep-63
+goto;>goto--jumper-63
+dataread1;>xbuff_main;goto--halfstep-63
+dataread2;>@58
+gotoifless;>goto--branch-63
+gotoif;>goto--branch-63
+goto;>goto--jumper-63
+dataread1;>@1;goto--branch-63
+datawrite1;>main_actflg
+null;;goto--jumper-63
+#conditional subroutine goto
+dataread1;>xbuff_main
+dataread2;>@46
+gotoifmore;>goto--halfstep-64
+gotoif;>goto--halfstep-64
+goto;>goto--jumper-64
+dataread1;>xbuff_main;goto--halfstep-64
+dataread2;>@58
+gotoifless;>goto--branch-64
+gotoif;>goto--branch-64
+goto;>goto--jumper-64
+setreg1;>goto--jumper-64;goto--branch-64
+s1push1
+goto;>help--label
+null;;goto--jumper-64
+#conditional set
+dataread1;>xbuff_main
+dataread2;>@61
+gotoifmore;>goto--halfstep-65
+gotoif;>goto--halfstep-65
+goto;>goto--jumper-65
+dataread1;>xbuff_main;goto--halfstep-65
+dataread2;>@73
+gotoifless;>goto--branch-65
+gotoif;>goto--branch-65
+goto;>goto--jumper-65
+dataread1;>@1;goto--branch-65
+datawrite1;>main_actflg
+null;;goto--jumper-65
+#conditional stop
+dataread1;>xbuff_main
+dataread2;>@61
+gotoifmore;>goto--halfstep-66
+gotoif;>goto--halfstep-66
+goto;>goto--jumper-66
+dataread1;>xbuff_main;goto--halfstep-66
+dataread2;>@73
+gotoifless;>goto--branch-66
+gotoif;>goto--branch-66
+goto;>goto--jumper-66
+stop;;goto--branch-66
+
+null;;goto--jumper-66
 #label
 null;;row1_skip--label
 #conditional goto
 dataread1;>ybuff_main
 dataread2;>@8
-gotoifmore;>goto--halfstep-68
-gotoif;>goto--halfstep-68
-goto;>goto--branch-68
-dataread1;>ybuff_main;goto--halfstep-68
-dataread2;>@13
-gotoifless;>goto--jumper-68
-gotoif;>goto--jumper-68
-goto;>goto--branch-68
-setreg1;>goto--jumper-68;goto--branch-68
-goto;>row2_skip--label
-null;;goto--jumper-68
-#conditional set
-dataread1;>xbuff_main
-dataread2;>@1
-gotoifmore;>goto--halfstep-70
-gotoif;>goto--halfstep-70
-goto;>goto--jumper-70
-dataread1;>xbuff_main;goto--halfstep-70
-dataread2;>@13
-gotoifless;>goto--branch-70
-gotoif;>goto--branch-70
-goto;>goto--jumper-70
-dataread1;>@1;goto--branch-70
-datawrite1;>main_actflg
-null;;goto--jumper-70
-#conditional subroutine goto
-dataread1;>xbuff_main
-dataread2;>@1
-gotoifmore;>goto--halfstep-71
-gotoif;>goto--halfstep-71
-goto;>goto--jumper-71
-dataread1;>xbuff_main;goto--halfstep-71
-dataread2;>@13
-gotoifless;>goto--branch-71
-gotoif;>goto--branch-71
-goto;>goto--jumper-71
-setreg1;>goto--jumper-71;goto--branch-71
-s1push1
-goto;>crystal_ball--label
-null;;goto--jumper-71
-#conditional set
-dataread1;>xbuff_main
-dataread2;>@16
 gotoifmore;>goto--halfstep-72
 gotoif;>goto--halfstep-72
-goto;>goto--jumper-72
-dataread1;>xbuff_main;goto--halfstep-72
-dataread2;>@28
-gotoifless;>goto--branch-72
-gotoif;>goto--branch-72
-goto;>goto--jumper-72
-dataread1;>@1;goto--branch-72
-datawrite1;>main_actflg
+goto;>goto--branch-72
+dataread1;>ybuff_main;goto--halfstep-72
+dataread2;>@13
+gotoifless;>goto--jumper-72
+gotoif;>goto--jumper-72
+goto;>goto--branch-72
+setreg1;>goto--jumper-72;goto--branch-72
+goto;>row2_skip--label
 null;;goto--jumper-72
-#conditional subroutine goto
-dataread1;>xbuff_main
-dataread2;>@16
-gotoifmore;>goto--halfstep-73
-gotoif;>goto--halfstep-73
-goto;>goto--jumper-73
-dataread1;>xbuff_main;goto--halfstep-73
-dataread2;>@28
-gotoifless;>goto--branch-73
-gotoif;>goto--branch-73
-goto;>goto--jumper-73
-setreg1;>goto--jumper-73;goto--branch-73
-s1push1
-goto;>nothing_here--label
-null;;goto--jumper-73
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@31
+dataread2;>@1
 gotoifmore;>goto--halfstep-74
 gotoif;>goto--halfstep-74
 goto;>goto--jumper-74
 dataread1;>xbuff_main;goto--halfstep-74
-dataread2;>@43
+dataread2;>@13
 gotoifless;>goto--branch-74
 gotoif;>goto--branch-74
 goto;>goto--jumper-74
@@ -370,27 +326,27 @@ datawrite1;>main_actflg
 null;;goto--jumper-74
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@31
+dataread2;>@1
 gotoifmore;>goto--halfstep-75
 gotoif;>goto--halfstep-75
 goto;>goto--jumper-75
 dataread1;>xbuff_main;goto--halfstep-75
-dataread2;>@43
+dataread2;>@13
 gotoifless;>goto--branch-75
 gotoif;>goto--branch-75
 goto;>goto--jumper-75
 setreg1;>goto--jumper-75;goto--branch-75
 s1push1
-goto;>nothing_here--label
+goto;>crystal_ball--label
 null;;goto--jumper-75
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@46
+dataread2;>@16
 gotoifmore;>goto--halfstep-76
 gotoif;>goto--halfstep-76
 goto;>goto--jumper-76
 dataread1;>xbuff_main;goto--halfstep-76
-dataread2;>@58
+dataread2;>@28
 gotoifless;>goto--branch-76
 gotoif;>goto--branch-76
 goto;>goto--jumper-76
@@ -399,27 +355,27 @@ datawrite1;>main_actflg
 null;;goto--jumper-76
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@46
+dataread2;>@16
 gotoifmore;>goto--halfstep-77
 gotoif;>goto--halfstep-77
 goto;>goto--jumper-77
 dataread1;>xbuff_main;goto--halfstep-77
-dataread2;>@58
+dataread2;>@28
 gotoifless;>goto--branch-77
 gotoif;>goto--branch-77
 goto;>goto--jumper-77
 setreg1;>goto--jumper-77;goto--branch-77
 s1push1
-goto;>nothing_here--label
+goto;>sys_shell--label
 null;;goto--jumper-77
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@61
+dataread2;>@31
 gotoifmore;>goto--halfstep-78
 gotoif;>goto--halfstep-78
 goto;>goto--jumper-78
 dataread1;>xbuff_main;goto--halfstep-78
-dataread2;>@73
+dataread2;>@43
 gotoifless;>goto--branch-78
 gotoif;>goto--branch-78
 goto;>goto--jumper-78
@@ -428,12 +384,12 @@ datawrite1;>main_actflg
 null;;goto--jumper-78
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@61
+dataread2;>@31
 gotoifmore;>goto--halfstep-79
 gotoif;>goto--halfstep-79
 goto;>goto--jumper-79
 dataread1;>xbuff_main;goto--halfstep-79
-dataread2;>@73
+dataread2;>@43
 gotoifless;>goto--branch-79
 gotoif;>goto--branch-79
 goto;>goto--jumper-79
@@ -441,88 +397,88 @@ setreg1;>goto--jumper-79;goto--branch-79
 s1push1
 goto;>nothing_here--label
 null;;goto--jumper-79
+#conditional set
+dataread1;>xbuff_main
+dataread2;>@46
+gotoifmore;>goto--halfstep-80
+gotoif;>goto--halfstep-80
+goto;>goto--jumper-80
+dataread1;>xbuff_main;goto--halfstep-80
+dataread2;>@58
+gotoifless;>goto--branch-80
+gotoif;>goto--branch-80
+goto;>goto--jumper-80
+dataread1;>@1;goto--branch-80
+datawrite1;>main_actflg
+null;;goto--jumper-80
+#conditional subroutine goto
+dataread1;>xbuff_main
+dataread2;>@46
+gotoifmore;>goto--halfstep-81
+gotoif;>goto--halfstep-81
+goto;>goto--jumper-81
+dataread1;>xbuff_main;goto--halfstep-81
+dataread2;>@58
+gotoifless;>goto--branch-81
+gotoif;>goto--branch-81
+goto;>goto--jumper-81
+setreg1;>goto--jumper-81;goto--branch-81
+s1push1
+goto;>nothing_here--label
+null;;goto--jumper-81
+#conditional set
+dataread1;>xbuff_main
+dataread2;>@61
+gotoifmore;>goto--halfstep-82
+gotoif;>goto--halfstep-82
+goto;>goto--jumper-82
+dataread1;>xbuff_main;goto--halfstep-82
+dataread2;>@73
+gotoifless;>goto--branch-82
+gotoif;>goto--branch-82
+goto;>goto--jumper-82
+dataread1;>@1;goto--branch-82
+datawrite1;>main_actflg
+null;;goto--jumper-82
+#conditional subroutine goto
+dataread1;>xbuff_main
+dataread2;>@61
+gotoifmore;>goto--halfstep-83
+gotoif;>goto--halfstep-83
+goto;>goto--jumper-83
+dataread1;>xbuff_main;goto--halfstep-83
+dataread2;>@73
+gotoifless;>goto--branch-83
+gotoif;>goto--branch-83
+goto;>goto--jumper-83
+setreg1;>goto--jumper-83;goto--branch-83
+s1push1
+goto;>nothing_here--label
+null;;goto--jumper-83
 #label
 null;;row2_skip--label
 #conditional goto
 dataread1;>ybuff_main
 dataread2;>@15
-gotoifmore;>goto--halfstep-85
-gotoif;>goto--halfstep-85
-goto;>goto--branch-85
-dataread1;>ybuff_main;goto--halfstep-85
-dataread2;>@20
-gotoifless;>goto--jumper-85
-gotoif;>goto--jumper-85
-goto;>goto--branch-85
-setreg1;>goto--jumper-85;goto--branch-85
-goto;>row3_skip--label
-null;;goto--jumper-85
-#conditional set
-dataread1;>xbuff_main
-dataread2;>@1
-gotoifmore;>goto--halfstep-87
-gotoif;>goto--halfstep-87
-goto;>goto--jumper-87
-dataread1;>xbuff_main;goto--halfstep-87
-dataread2;>@13
-gotoifless;>goto--branch-87
-gotoif;>goto--branch-87
-goto;>goto--jumper-87
-dataread1;>@1;goto--branch-87
-datawrite1;>main_actflg
-null;;goto--jumper-87
-#conditional subroutine goto
-dataread1;>xbuff_main
-dataread2;>@1
-gotoifmore;>goto--halfstep-88
-gotoif;>goto--halfstep-88
-goto;>goto--jumper-88
-dataread1;>xbuff_main;goto--halfstep-88
-dataread2;>@13
-gotoifless;>goto--branch-88
-gotoif;>goto--branch-88
-goto;>goto--jumper-88
-setreg1;>goto--jumper-88;goto--branch-88
-s1push1
-goto;>nothing_here--label
-null;;goto--jumper-88
-#conditional set
-dataread1;>xbuff_main
-dataread2;>@16
 gotoifmore;>goto--halfstep-89
 gotoif;>goto--halfstep-89
-goto;>goto--jumper-89
-dataread1;>xbuff_main;goto--halfstep-89
-dataread2;>@28
-gotoifless;>goto--branch-89
-gotoif;>goto--branch-89
-goto;>goto--jumper-89
-dataread1;>@1;goto--branch-89
-datawrite1;>main_actflg
+goto;>goto--branch-89
+dataread1;>ybuff_main;goto--halfstep-89
+dataread2;>@20
+gotoifless;>goto--jumper-89
+gotoif;>goto--jumper-89
+goto;>goto--branch-89
+setreg1;>goto--jumper-89;goto--branch-89
+goto;>row3_skip--label
 null;;goto--jumper-89
-#conditional subroutine goto
-dataread1;>xbuff_main
-dataread2;>@16
-gotoifmore;>goto--halfstep-90
-gotoif;>goto--halfstep-90
-goto;>goto--jumper-90
-dataread1;>xbuff_main;goto--halfstep-90
-dataread2;>@28
-gotoifless;>goto--branch-90
-gotoif;>goto--branch-90
-goto;>goto--jumper-90
-setreg1;>goto--jumper-90;goto--branch-90
-s1push1
-goto;>nothing_here--label
-null;;goto--jumper-90
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@31
+dataread2;>@1
 gotoifmore;>goto--halfstep-91
 gotoif;>goto--halfstep-91
 goto;>goto--jumper-91
 dataread1;>xbuff_main;goto--halfstep-91
-dataread2;>@43
+dataread2;>@13
 gotoifless;>goto--branch-91
 gotoif;>goto--branch-91
 goto;>goto--jumper-91
@@ -531,12 +487,12 @@ datawrite1;>main_actflg
 null;;goto--jumper-91
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@31
+dataread2;>@1
 gotoifmore;>goto--halfstep-92
 gotoif;>goto--halfstep-92
 goto;>goto--jumper-92
 dataread1;>xbuff_main;goto--halfstep-92
-dataread2;>@43
+dataread2;>@13
 gotoifless;>goto--branch-92
 gotoif;>goto--branch-92
 goto;>goto--jumper-92
@@ -546,12 +502,12 @@ goto;>nothing_here--label
 null;;goto--jumper-92
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@46
+dataread2;>@16
 gotoifmore;>goto--halfstep-93
 gotoif;>goto--halfstep-93
 goto;>goto--jumper-93
 dataread1;>xbuff_main;goto--halfstep-93
-dataread2;>@58
+dataread2;>@28
 gotoifless;>goto--branch-93
 gotoif;>goto--branch-93
 goto;>goto--jumper-93
@@ -560,12 +516,12 @@ datawrite1;>main_actflg
 null;;goto--jumper-93
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@46
+dataread2;>@16
 gotoifmore;>goto--halfstep-94
 gotoif;>goto--halfstep-94
 goto;>goto--jumper-94
 dataread1;>xbuff_main;goto--halfstep-94
-dataread2;>@58
+dataread2;>@28
 gotoifless;>goto--branch-94
 gotoif;>goto--branch-94
 goto;>goto--jumper-94
@@ -575,12 +531,12 @@ goto;>nothing_here--label
 null;;goto--jumper-94
 #conditional set
 dataread1;>xbuff_main
-dataread2;>@61
+dataread2;>@31
 gotoifmore;>goto--halfstep-95
 gotoif;>goto--halfstep-95
 goto;>goto--jumper-95
 dataread1;>xbuff_main;goto--halfstep-95
-dataread2;>@73
+dataread2;>@43
 gotoifless;>goto--branch-95
 gotoif;>goto--branch-95
 goto;>goto--jumper-95
@@ -589,12 +545,12 @@ datawrite1;>main_actflg
 null;;goto--jumper-95
 #conditional subroutine goto
 dataread1;>xbuff_main
-dataread2;>@61
+dataread2;>@31
 gotoifmore;>goto--halfstep-96
 gotoif;>goto--halfstep-96
 goto;>goto--jumper-96
 dataread1;>xbuff_main;goto--halfstep-96
-dataread2;>@73
+dataread2;>@43
 gotoifless;>goto--branch-96
 gotoif;>goto--branch-96
 goto;>goto--jumper-96
@@ -602,11 +558,69 @@ setreg1;>goto--jumper-96;goto--branch-96
 s1push1
 goto;>nothing_here--label
 null;;goto--jumper-96
+#conditional set
+dataread1;>xbuff_main
+dataread2;>@46
+gotoifmore;>goto--halfstep-97
+gotoif;>goto--halfstep-97
+goto;>goto--jumper-97
+dataread1;>xbuff_main;goto--halfstep-97
+dataread2;>@58
+gotoifless;>goto--branch-97
+gotoif;>goto--branch-97
+goto;>goto--jumper-97
+dataread1;>@1;goto--branch-97
+datawrite1;>main_actflg
+null;;goto--jumper-97
+#conditional subroutine goto
+dataread1;>xbuff_main
+dataread2;>@46
+gotoifmore;>goto--halfstep-98
+gotoif;>goto--halfstep-98
+goto;>goto--jumper-98
+dataread1;>xbuff_main;goto--halfstep-98
+dataread2;>@58
+gotoifless;>goto--branch-98
+gotoif;>goto--branch-98
+goto;>goto--jumper-98
+setreg1;>goto--jumper-98;goto--branch-98
+s1push1
+goto;>nothing_here--label
+null;;goto--jumper-98
+#conditional set
+dataread1;>xbuff_main
+dataread2;>@61
+gotoifmore;>goto--halfstep-99
+gotoif;>goto--halfstep-99
+goto;>goto--jumper-99
+dataread1;>xbuff_main;goto--halfstep-99
+dataread2;>@73
+gotoifless;>goto--branch-99
+gotoif;>goto--branch-99
+goto;>goto--jumper-99
+dataread1;>@1;goto--branch-99
+datawrite1;>main_actflg
+null;;goto--jumper-99
+#conditional subroutine goto
+dataread1;>xbuff_main
+dataread2;>@61
+gotoifmore;>goto--halfstep-100
+gotoif;>goto--halfstep-100
+goto;>goto--jumper-100
+dataread1;>xbuff_main;goto--halfstep-100
+dataread2;>@73
+gotoifless;>goto--branch-100
+gotoif;>goto--branch-100
+goto;>goto--jumper-100
+setreg1;>goto--jumper-100;goto--branch-100
+s1push1
+goto;>nothing_here--label
+null;;goto--jumper-100
 #label
 null;;row3_skip--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #100
-iowrite1;>mouse.button#SSTNPL Source Line: '100' 
+#_______NOTE: this corresponds to SSTNPL source line #104
+iowrite1;>mouse.button#SSTNPL Source Line: '104' 
 #goto 
 goto;>main--label
 #label
@@ -628,16 +642,16 @@ null;;labelpad1--label
 #Upward range iterator
 dataread1;>@1
 datawrite1;>foo1
-setreg1;>uiter-retpos-120;uiter-loopback-120
+setreg1;>uiter-retpos-124;uiter-loopback-124
 s1push1
 goto;>space--label
-dataread1;>foo1;uiter-retpos-120
+dataread1;>foo1;uiter-retpos-124
 setreg2;10x1
 add
 datawrite1;>foo1
 dataread2;>@11
-gotoifless;>uiter-loopback-120
-gotoif;>uiter-loopback-120
+gotoifless;>uiter-loopback-124
+gotoif;>uiter-loopback-124
 
 #return from subroutine.
 s1pop1
@@ -691,7 +705,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:0
 fopwri1;:.
-fopwri1;:3
+fopwri1;:4
 fopwri1;:\s
 fopwri1;:-
 fopwri1;:\s
@@ -704,10 +718,10 @@ null;;mainscreen_draw--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-150
+setreg1;>goto--jumper-154
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-150
+null;;goto--jumper-154
 #prline
 fopwri1;:M
 fopwri1;:a
@@ -723,8 +737,8 @@ fopwri1;:\n
 dataread1;>*+++00+
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #154
-include;sbtgsh+capps.tas0#SSTNPL Source Line: '154' 
+#_______NOTE: this corresponds to SSTNPL source line #158
+include;sbtgsh+capps.tas0#SSTNPL Source Line: '158' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
@@ -736,30 +750,30 @@ fopwri1;:a
 fopwri1;:l
 fopwri1;:c
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-160
+setreg1;>goto--jumper-164
 s1push1
 goto;>labelpad1--label
-null;;goto--jumper-160
+null;;goto--jumper-164
 #print
 fopwri1;:D
 fopwri1;:i
 fopwri1;:s
 fopwri1;:k
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-162
+setreg1;>goto--jumper-166
 s1push1
 goto;>labelpad1--label
-null;;goto--jumper-162
+null;;goto--jumper-166
 #print
 fopwri1;:G
 fopwri1;:a
 fopwri1;:m
 fopwri1;:e
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-164
+setreg1;>goto--jumper-168
 s1push1
 goto;>labelpad1--label
-null;;goto--jumper-164
+null;;goto--jumper-168
 #print
 fopwri1;:H
 fopwri1;:e
@@ -787,8 +801,8 @@ fopwri1;:\n
 dataread1;>*+++00+
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #171
-include;sbtgsh+capps2.tas0#SSTNPL Source Line: '171' 
+#_______NOTE: this corresponds to SSTNPL source line #175
+include;sbtgsh+capps2.tas0#SSTNPL Source Line: '175' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
@@ -800,40 +814,46 @@ fopwri1;:a
 fopwri1;:l
 fopwri1;:l
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-177
-s1push1
-goto;>labelpad1--label
-null;;goto--jumper-177
-#print
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-179
-s1push1
-goto;>labelpad1--label
-null;;goto--jumper-179
-#print
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-#goto (extra code stores away return address.)
 setreg1;>goto--jumper-181
 s1push1
 goto;>labelpad1--label
 null;;goto--jumper-181
 #print
+fopwri1;:S
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+#print
 fopwri1;:_
 fopwri1;:_
 fopwri1;:_
 fopwri1;:_
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-183
+setreg1;>goto--jumper-185
 s1push1
 goto;>labelpad1--label
-null;;goto--jumper-183
+null;;goto--jumper-185
+#print
+fopwri1;:_
+fopwri1;:_
+fopwri1;:_
+fopwri1;:_
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-187
+s1push1
+goto;>labelpad1--label
+null;;goto--jumper-187
 #print
 fopwri1;:_
 fopwri1;:_
@@ -845,33 +865,13 @@ fopwri1;:\n
 dataread1;>*+++00+
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #188
-include;sbtgsh+capps3.tas0#SSTNPL Source Line: '188' 
+#_______NOTE: this corresponds to SSTNPL source line #192
+include;sbtgsh+capps3.tas0#SSTNPL Source Line: '192' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #print space
 fopwri1;:\s
-#print
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-194
-s1push1
-goto;>labelpad1--label
-null;;goto--jumper-194
-#print
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-fopwri1;:_
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-196
-s1push1
-goto;>labelpad1--label
-null;;goto--jumper-196
 #print
 fopwri1;:_
 fopwri1;:_
@@ -892,6 +892,26 @@ setreg1;>goto--jumper-200
 s1push1
 goto;>labelpad1--label
 null;;goto--jumper-200
+#print
+fopwri1;:_
+fopwri1;:_
+fopwri1;:_
+fopwri1;:_
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-202
+s1push1
+goto;>labelpad1--label
+null;;goto--jumper-202
+#print
+fopwri1;:_
+fopwri1;:_
+fopwri1;:_
+fopwri1;:_
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-204
+s1push1
+goto;>labelpad1--label
+null;;goto--jumper-204
 #print
 fopwri1;:_
 fopwri1;:_
@@ -978,8 +998,8 @@ fopwri1;:\n
 #print newline
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #209
-iowrite1;>mouse.button#SSTNPL Source Line: '209' 
+#_______NOTE: this corresponds to SSTNPL source line #213
+iowrite1;>mouse.button#SSTNPL Source Line: '213' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -989,10 +1009,10 @@ null;;not_implemented--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-218
+setreg1;>goto--jumper-222
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-218
+null;;goto--jumper-222
 #prline
 fopwri1;:W
 fopwri1;:h
@@ -1008,10 +1028,10 @@ fopwri1;:\n
 dataread1;>*---00+
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-221
+setreg1;>goto--jumper-225
 s1push1
 goto;>icon_message--label
-null;;goto--jumper-221
+null;;goto--jumper-225
 #prline
 fopwri1;:T
 fopwri1;:h
@@ -1079,22 +1099,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-224;uiter-loopback-224
+setreg1;>uiter-retpos-228;uiter-loopback-228
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-224
+dataread1;>not_sup_fill;uiter-retpos-228
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@17
-gotoifless;>uiter-loopback-224
-gotoif;>uiter-loopback-224
+gotoifless;>uiter-loopback-228
+gotoif;>uiter-loopback-228
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-226
+setreg1;>goto--jumper-230
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-226
+null;;goto--jumper-230
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1104,10 +1124,10 @@ null;;nothing_here--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-234
+setreg1;>goto--jumper-238
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-234
+null;;goto--jumper-238
 #prline
 fopwri1;:W
 fopwri1;:h
@@ -1123,10 +1143,10 @@ fopwri1;:\n
 dataread1;>*---00+
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-237
+setreg1;>goto--jumper-241
 s1push1
 goto;>icon_message--label
-null;;goto--jumper-237
+null;;goto--jumper-241
 #prline
 fopwri1;:N
 fopwri1;:o
@@ -1210,38 +1230,38 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>nothing_here_fill
-setreg1;>uiter-retpos-240;uiter-loopback-240
+setreg1;>uiter-retpos-244;uiter-loopback-244
 s1push1
 goto;>newline--label
-dataread1;>nothing_here_fill;uiter-retpos-240
+dataread1;>nothing_here_fill;uiter-retpos-244
 setreg2;10x1
 add
 datawrite1;>nothing_here_fill
 dataread2;>@17
-gotoifless;>uiter-loopback-240
-gotoif;>uiter-loopback-240
+gotoifless;>uiter-loopback-244
+gotoif;>uiter-loopback-244
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-242
+setreg1;>goto--jumper-246
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-242
+null;;goto--jumper-246
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;icon_message--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #249
-include;sbtgsh+icon_message.tas0#SSTNPL Source Line: '249' 
+#_______NOTE: this corresponds to SSTNPL source line #253
+include;sbtgsh+icon_message.tas0#SSTNPL Source Line: '253' 
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;icon_no--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #253
-include;sbtgsh+icon_no.tas0#SSTNPL Source Line: '253' 
+#_______NOTE: this corresponds to SSTNPL source line #257
+include;sbtgsh+icon_no.tas0#SSTNPL Source Line: '257' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1256,11 +1276,11 @@ null;;help__loop--label
 #conditional goto
 dataread1;>@1
 dataread2;>help_actflg
-gotoif;>goto--jumper-266
-goto;>goto--branch-266
-setreg1;>goto--jumper-266;goto--branch-266
+gotoif;>goto--jumper-270
+goto;>goto--branch-270
+setreg1;>goto--jumper-270;goto--branch-270
 goto;>help__skipdraw--label
-null;;goto--jumper-266
+null;;goto--jumper-270
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1269,10 +1289,10 @@ datawrite1;>help_actflg
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-272
+setreg1;>goto--jumper-276
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-272
+null;;goto--jumper-276
 #prline
 fopwri1;:H
 fopwri1;:e
@@ -1390,120 +1410,120 @@ iowrite1;>io.textcolor
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-286;uiter-loopback-286
+setreg1;>uiter-retpos-290;uiter-loopback-290
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-286
+dataread1;>not_sup_fill;uiter-retpos-290
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@18
-gotoifless;>uiter-loopback-286
-gotoif;>uiter-loopback-286
+gotoifless;>uiter-loopback-290
+gotoif;>uiter-loopback-290
 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #288
-iowrite1;>mouse.button#SSTNPL Source Line: '288' 
+#_______NOTE: this corresponds to SSTNPL source line #292
+iowrite1;>mouse.button#SSTNPL Source Line: '292' 
 #label
 null;;help__skipdraw--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #292
-ioread1;>mouse.button#SSTNPL Source Line: '292' 
+#_______NOTE: this corresponds to SSTNPL source line #296
+ioread1;>mouse.button#SSTNPL Source Line: '296' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #conditional goto
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--jumper-295
-goto;>goto--branch-295
-setreg1;>goto--jumper-295;goto--branch-295
+gotoif;>goto--jumper-299
+goto;>goto--branch-299
+setreg1;>goto--jumper-299;goto--branch-299
 goto;>help__skipdraw--label
-null;;goto--jumper-295
+null;;goto--jumper-299
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #297
-ioread1;>mouse.locky#SSTNPL Source Line: '297' 
+#_______NOTE: this corresponds to SSTNPL source line #301
+ioread1;>mouse.locky#SSTNPL Source Line: '301' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff_help
 #conditional return
 dataread1;>ybuff_help
 dataread2;>@2
-gotoif;>goto--branch-300
-goto;>goto--jumper-300
-s1pop1;;goto--branch-300
+gotoif;>goto--branch-304
+goto;>goto--jumper-304
+s1pop1;;goto--branch-304
 gotoreg1
-null;;goto--jumper-300
+null;;goto--jumper-304
 #conditional subroutine goto
 dataread1;>ybuff_help
 dataread2;>@3
-gotoif;>goto--branch-302
-goto;>goto--jumper-302
-setreg1;>goto--jumper-302;goto--branch-302
-s1push1
-goto;>help_about--label
-null;;goto--jumper-302
-#conditional set
-dataread1;>ybuff_help
-dataread2;>@3
-gotoif;>goto--branch-303
-goto;>goto--jumper-303
-dataread1;>@1;goto--branch-303
-datawrite1;>help_actflg
-null;;goto--jumper-303
-#conditional subroutine goto
-dataread1;>ybuff_help
-dataread2;>@4
-gotoif;>goto--branch-305
-goto;>goto--jumper-305
-setreg1;>goto--jumper-305;goto--branch-305
-s1push1
-goto;>help_overview--label
-null;;goto--jumper-305
-#conditional set
-dataread1;>ybuff_help
-dataread2;>@4
 gotoif;>goto--branch-306
 goto;>goto--jumper-306
-dataread1;>@1;goto--branch-306
-datawrite1;>help_actflg
+setreg1;>goto--jumper-306;goto--branch-306
+s1push1
+goto;>help_about--label
 null;;goto--jumper-306
+#conditional set
+dataread1;>ybuff_help
+dataread2;>@3
+gotoif;>goto--branch-307
+goto;>goto--jumper-307
+dataread1;>@1;goto--branch-307
+datawrite1;>help_actflg
+null;;goto--jumper-307
+#conditional subroutine goto
+dataread1;>ybuff_help
+dataread2;>@4
+gotoif;>goto--branch-309
+goto;>goto--jumper-309
+setreg1;>goto--jumper-309;goto--branch-309
+s1push1
+goto;>help_overview--label
+null;;goto--jumper-309
+#conditional set
+dataread1;>ybuff_help
+dataread2;>@4
+gotoif;>goto--branch-310
+goto;>goto--jumper-310
+dataread1;>@1;goto--branch-310
+datawrite1;>help_actflg
+null;;goto--jumper-310
 #conditional subroutine goto
 dataread1;>ybuff_help
 dataread2;>@5
-gotoif;>goto--branch-308
-goto;>goto--jumper-308
-setreg1;>goto--jumper-308;goto--branch-308
+gotoif;>goto--branch-312
+goto;>goto--jumper-312
+setreg1;>goto--jumper-312;goto--branch-312
 s1push1
 goto;>help_calc--label
-null;;goto--jumper-308
+null;;goto--jumper-312
 #conditional set
 dataread1;>ybuff_help
 dataread2;>@5
-gotoif;>goto--branch-309
-goto;>goto--jumper-309
-dataread1;>@1;goto--branch-309
+gotoif;>goto--branch-313
+goto;>goto--jumper-313
+dataread1;>@1;goto--branch-313
 datawrite1;>help_actflg
-null;;goto--jumper-309
+null;;goto--jumper-313
 #goto 
 goto;>help__loop--label
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-318;uiter-loopback-318
+setreg1;>uiter-retpos-322;uiter-loopback-322
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-318
+dataread1;>not_sup_fill;uiter-retpos-322
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@21
-gotoifless;>uiter-loopback-318
-gotoif;>uiter-loopback-318
+gotoifless;>uiter-loopback-322
+gotoif;>uiter-loopback-322
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-320
+setreg1;>goto--jumper-324
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-320
+null;;goto--jumper-324
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1513,10 +1533,10 @@ null;;help_about--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-326
+setreg1;>goto--jumper-330
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-326
+null;;goto--jumper-330
 #prline
 fopwri1;:H
 fopwri1;:e
@@ -1588,7 +1608,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:0
 fopwri1;:.
-fopwri1;:3
+fopwri1;:4
 fopwri1;:\n
 #prline
 fopwri1;:P
@@ -2319,22 +2339,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-351;uiter-loopback-351
+setreg1;>uiter-retpos-355;uiter-loopback-355
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-351
+dataread1;>not_sup_fill;uiter-retpos-355
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@4
-gotoifless;>uiter-loopback-351
-gotoif;>uiter-loopback-351
+gotoifless;>uiter-loopback-355
+gotoif;>uiter-loopback-355
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-353
+setreg1;>goto--jumper-357
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-353
+null;;goto--jumper-357
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -2344,10 +2364,10 @@ null;;help_overview--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-359
+setreg1;>goto--jumper-363
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-359
+null;;goto--jumper-363
 #prline
 fopwri1;:H
 fopwri1;:e
@@ -2507,22 +2527,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-368;uiter-loopback-368
+setreg1;>uiter-retpos-372;uiter-loopback-372
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-368
+dataread1;>not_sup_fill;uiter-retpos-372
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@19
-gotoifless;>uiter-loopback-368
-gotoif;>uiter-loopback-368
+gotoifless;>uiter-loopback-372
+gotoif;>uiter-loopback-372
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-370
+setreg1;>goto--jumper-374
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-370
+null;;goto--jumper-374
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -2532,10 +2552,10 @@ null;;help_calc--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-376
+setreg1;>goto--jumper-380
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-376
+null;;goto--jumper-380
 #prline
 fopwri1;:H
 fopwri1;:e
@@ -2922,45 +2942,45 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-395;uiter-loopback-395
+setreg1;>uiter-retpos-399;uiter-loopback-399
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-395
+dataread1;>not_sup_fill;uiter-retpos-399
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@9
-gotoifless;>uiter-loopback-395
-gotoif;>uiter-loopback-395
+gotoifless;>uiter-loopback-399
+gotoif;>uiter-loopback-399
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-397
+setreg1;>goto--jumper-401
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-397
+null;;goto--jumper-401
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;click_wait--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #404
-iowrite1;>mouse.button#SSTNPL Source Line: '404' 
+#_______NOTE: this corresponds to SSTNPL source line #408
+iowrite1;>mouse.button#SSTNPL Source Line: '408' 
 #label
 null;;click_wait_loop--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #406
-ioread1;>mouse.button#SSTNPL Source Line: '406' 
+#_______NOTE: this corresponds to SSTNPL source line #410
+ioread1;>mouse.button#SSTNPL Source Line: '410' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #conditional goto
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--jumper-408
-goto;>goto--branch-408
-setreg1;>goto--jumper-408;goto--branch-408
+gotoif;>goto--jumper-412
+goto;>goto--branch-412
+setreg1;>goto--jumper-412;goto--branch-412
 goto;>click_wait_loop--label
-null;;goto--jumper-408
+null;;goto--jumper-412
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -2970,10 +2990,10 @@ null;;VDI_shell--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-415
+setreg1;>goto--jumper-419
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-415
+null;;goto--jumper-419
 #prline
 fopwri1;:S
 fopwri1;:B
@@ -3078,44 +3098,44 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-420;uiter-loopback-420
+setreg1;>uiter-retpos-424;uiter-loopback-424
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-420
+dataread1;>not_sup_fill;uiter-retpos-424
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@19
-gotoifless;>uiter-loopback-420
-gotoif;>uiter-loopback-420
+gotoifless;>uiter-loopback-424
+gotoif;>uiter-loopback-424
 
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #424
-include;vdishell.tas0#SSTNPL Source Line: '424' 
+#_______NOTE: this corresponds to SSTNPL source line #428
+include;vdishell.tas0#SSTNPL Source Line: '428' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #425
-dataread1;>vdiexitcode#SSTNPL Source Line: '425' 
+#_______NOTE: this corresponds to SSTNPL source line #429
+dataread1;>vdiexitcode#SSTNPL Source Line: '429' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>exitcode
 #conditional return
 dataread1;>exitcode
 dataread2;>@1
-gotoif;>goto--branch-427
-goto;>goto--jumper-427
-s1pop1;;goto--branch-427
+gotoif;>goto--branch-431
+goto;>goto--jumper-431
+s1pop1;;goto--branch-431
 gotoreg1
-null;;goto--jumper-427
+null;;goto--jumper-431
 #conditional stop
 dataread1;>exitcode
 dataread2;>@2
-gotoif;>goto--branch-428
-goto;>goto--jumper-428
-stop;;goto--branch-428
+gotoif;>goto--branch-432
+goto;>goto--jumper-432
+stop;;goto--branch-432
 
-null;;goto--jumper-428
+null;;goto--jumper-432
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -3142,27 +3162,27 @@ null;;calc_loop--label
 #conditional goto
 dataread1;>calc_redrawflgx
 dataread2;>@1
-gotoif;>goto--jumper-454
-goto;>goto--branch-454
-setreg1;>goto--jumper-454;goto--branch-454
+gotoif;>goto--jumper-458
+goto;>goto--branch-458
+setreg1;>goto--jumper-458;goto--branch-458
 goto;>calc_inputloop--label
-null;;goto--jumper-454
+null;;goto--jumper-458
 #conditional goto
 dataread1;>calc_redrawflgy
 dataread2;>@1
-gotoif;>goto--jumper-455
-goto;>goto--branch-455
-setreg1;>goto--jumper-455;goto--branch-455
+gotoif;>goto--jumper-459
+goto;>goto--branch-459
+setreg1;>goto--jumper-459;goto--branch-459
 goto;>calc_inputloop--label
-null;;goto--jumper-455
+null;;goto--jumper-459
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-458
+setreg1;>goto--jumper-462
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-458
+null;;goto--jumper-462
 #prline
 fopwri1;:C
 fopwri1;:a
@@ -3340,32 +3360,32 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-497;uiter-loopback-497
+setreg1;>uiter-retpos-501;uiter-loopback-501
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-497
+dataread1;>not_sup_fill;uiter-retpos-501
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@8
-gotoifless;>uiter-loopback-497
-gotoif;>uiter-loopback-497
+gotoifless;>uiter-loopback-501
+gotoif;>uiter-loopback-501
 
 #label
 null;;calc_inputloop--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #501
-ioread1;>mouse.button#SSTNPL Source Line: '501' 
+#_______NOTE: this corresponds to SSTNPL source line #505
+ioread1;>mouse.button#SSTNPL Source Line: '505' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #conditional goto
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--jumper-503
-goto;>goto--branch-503
-setreg1;>goto--jumper-503;goto--branch-503
+gotoif;>goto--jumper-507
+goto;>goto--branch-507
+setreg1;>goto--jumper-507;goto--branch-507
 goto;>calc_inputloop--label
-null;;goto--jumper-503
+null;;goto--jumper-507
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
@@ -3373,29 +3393,29 @@ datawrite1;>calc_redrawflgx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>calc_redrawflgy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #512
-ioread1;>mouse.lockx#SSTNPL Source Line: '512' 
+#_______NOTE: this corresponds to SSTNPL source line #516
+ioread1;>mouse.lockx#SSTNPL Source Line: '516' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>xbuff_calc
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #514
-ioread1;>mouse.locky#SSTNPL Source Line: '514' 
+#_______NOTE: this corresponds to SSTNPL source line #518
+ioread1;>mouse.locky#SSTNPL Source Line: '518' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff_calc
 #conditional goto
 dataread1;>xbuff_calc
 dataread2;>@0
-gotoifmore;>goto--halfstep-517
-gotoif;>goto--halfstep-517
-goto;>goto--branch-517
-dataread1;>xbuff_calc;goto--halfstep-517
+gotoifmore;>goto--halfstep-521
+gotoif;>goto--halfstep-521
+goto;>goto--branch-521
+dataread1;>xbuff_calc;goto--halfstep-521
 dataread2;>@4
-gotoifless;>goto--jumper-517
-gotoif;>goto--jumper-517
-goto;>goto--branch-517
-setreg1;>goto--jumper-517;goto--branch-517
+gotoifless;>goto--jumper-521
+gotoif;>goto--jumper-521
+goto;>goto--branch-521
+setreg1;>goto--jumper-521;goto--branch-521
 goto;>calc_col1_skip--label
-null;;goto--jumper-517
+null;;goto--jumper-521
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -3403,63 +3423,63 @@ datawrite1;>calc_redrawflgx
 #conditional set
 dataread1;>ybuff_calc
 dataread2;>@3
-gotoif;>goto--branch-521
-goto;>goto--jumper-521
-dataread1;>*+;goto--branch-521
-datawrite1;>tritbuff
-null;;goto--jumper-521
-#conditional subroutine goto
-dataread1;>ybuff_calc
-dataread2;>@3
-gotoif;>goto--branch-522
-goto;>goto--jumper-522
-setreg1;>goto--jumper-522;goto--branch-522
-s1push1
-goto;>calc_tritpush--label
-null;;goto--jumper-522
-#conditional subroutine goto
-dataread1;>ybuff_calc
-dataread2;>@5
-gotoif;>goto--branch-524
-goto;>goto--jumper-524
-setreg1;>goto--jumper-524;goto--branch-524
-s1push1
-goto;>calc_add--label
-null;;goto--jumper-524
-#conditional subroutine goto
-dataread1;>ybuff_calc
-dataread2;>@7
 gotoif;>goto--branch-525
 goto;>goto--jumper-525
-setreg1;>goto--jumper-525;goto--branch-525
-s1push1
-goto;>calc_div--label
+dataread1;>*+;goto--branch-525
+datawrite1;>tritbuff
 null;;goto--jumper-525
 #conditional subroutine goto
 dataread1;>ybuff_calc
-dataread2;>@9
+dataread2;>@3
 gotoif;>goto--branch-526
 goto;>goto--jumper-526
 setreg1;>goto--jumper-526;goto--branch-526
 s1push1
-goto;>calc_tritpop--label
+goto;>calc_tritpush--label
 null;;goto--jumper-526
+#conditional subroutine goto
+dataread1;>ybuff_calc
+dataread2;>@5
+gotoif;>goto--branch-528
+goto;>goto--jumper-528
+setreg1;>goto--jumper-528;goto--branch-528
+s1push1
+goto;>calc_add--label
+null;;goto--jumper-528
+#conditional subroutine goto
+dataread1;>ybuff_calc
+dataread2;>@7
+gotoif;>goto--branch-529
+goto;>goto--jumper-529
+setreg1;>goto--jumper-529;goto--branch-529
+s1push1
+goto;>calc_div--label
+null;;goto--jumper-529
+#conditional subroutine goto
+dataread1;>ybuff_calc
+dataread2;>@9
+gotoif;>goto--branch-530
+goto;>goto--jumper-530
+setreg1;>goto--jumper-530;goto--branch-530
+s1push1
+goto;>calc_tritpop--label
+null;;goto--jumper-530
 #label
 null;;calc_col1_skip--label
 #conditional goto
 dataread1;>xbuff_calc
 dataread2;>@5
-gotoifmore;>goto--halfstep-530
-gotoif;>goto--halfstep-530
-goto;>goto--branch-530
-dataread1;>xbuff_calc;goto--halfstep-530
+gotoifmore;>goto--halfstep-534
+gotoif;>goto--halfstep-534
+goto;>goto--branch-534
+dataread1;>xbuff_calc;goto--halfstep-534
 dataread2;>@9
-gotoifless;>goto--jumper-530
-gotoif;>goto--jumper-530
-goto;>goto--branch-530
-setreg1;>goto--jumper-530;goto--branch-530
+gotoifless;>goto--jumper-534
+gotoif;>goto--jumper-534
+goto;>goto--branch-534
+setreg1;>goto--jumper-534;goto--branch-534
 goto;>calc_col2_skip--label
-null;;goto--jumper-530
+null;;goto--jumper-534
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -3467,63 +3487,63 @@ datawrite1;>calc_redrawflgx
 #conditional set
 dataread1;>ybuff_calc
 dataread2;>@3
-gotoif;>goto--branch-534
-goto;>goto--jumper-534
-dataread1;>*0;goto--branch-534
+gotoif;>goto--branch-538
+goto;>goto--jumper-538
+dataread1;>*0;goto--branch-538
 datawrite1;>tritbuff
-null;;goto--jumper-534
+null;;goto--jumper-538
 #conditional subroutine goto
 dataread1;>ybuff_calc
 dataread2;>@3
-gotoif;>goto--branch-535
-goto;>goto--jumper-535
-setreg1;>goto--jumper-535;goto--branch-535
+gotoif;>goto--branch-539
+goto;>goto--jumper-539
+setreg1;>goto--jumper-539;goto--branch-539
 s1push1
 goto;>calc_tritpush--label
-null;;goto--jumper-535
+null;;goto--jumper-539
 #conditional subroutine goto
 dataread1;>ybuff_calc
 dataread2;>@5
-gotoif;>goto--branch-536
-goto;>goto--jumper-536
-setreg1;>goto--jumper-536;goto--branch-536
+gotoif;>goto--branch-540
+goto;>goto--jumper-540
+setreg1;>goto--jumper-540;goto--branch-540
 s1push1
 goto;>calc_sub--label
-null;;goto--jumper-536
+null;;goto--jumper-540
 #conditional subroutine goto
 dataread1;>ybuff_calc
 dataread2;>@7
-gotoif;>goto--branch-537
-goto;>goto--jumper-537
-setreg1;>goto--jumper-537;goto--branch-537
+gotoif;>goto--branch-541
+goto;>goto--jumper-541
+setreg1;>goto--jumper-541;goto--branch-541
 s1push1
 goto;>calc_entrytobuffer--label
-null;;goto--jumper-537
+null;;goto--jumper-541
 #conditional subroutine goto
 dataread1;>ybuff_calc
 dataread2;>@9
-gotoif;>goto--branch-538
-goto;>goto--jumper-538
-setreg1;>goto--jumper-538;goto--branch-538
+gotoif;>goto--branch-542
+goto;>goto--jumper-542
+setreg1;>goto--jumper-542;goto--branch-542
 s1push1
 goto;>calc_cleanup--label
-null;;goto--jumper-538
+null;;goto--jumper-542
 #label
 null;;calc_col2_skip--label
 #conditional goto
 dataread1;>xbuff_calc
 dataread2;>@10
-gotoifmore;>goto--halfstep-543
-gotoif;>goto--halfstep-543
-goto;>goto--branch-543
-dataread1;>xbuff_calc;goto--halfstep-543
+gotoifmore;>goto--halfstep-547
+gotoif;>goto--halfstep-547
+goto;>goto--branch-547
+dataread1;>xbuff_calc;goto--halfstep-547
 dataread2;>@14
-gotoifless;>goto--jumper-543
-gotoif;>goto--jumper-543
-goto;>goto--branch-543
-setreg1;>goto--jumper-543;goto--branch-543
+gotoifless;>goto--jumper-547
+gotoif;>goto--jumper-547
+goto;>goto--branch-547
+setreg1;>goto--jumper-547;goto--branch-547
 goto;>calc_col3_skip--label
-null;;goto--jumper-543
+null;;goto--jumper-547
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -3531,71 +3551,71 @@ datawrite1;>calc_redrawflgx
 #conditional set
 dataread1;>ybuff_calc
 dataread2;>@3
-gotoif;>goto--branch-547
-goto;>goto--jumper-547
-dataread1;>*-;goto--branch-547
-datawrite1;>tritbuff
-null;;goto--jumper-547
-#conditional subroutine goto
-dataread1;>ybuff_calc
-dataread2;>@3
-gotoif;>goto--branch-548
-goto;>goto--jumper-548
-setreg1;>goto--jumper-548;goto--branch-548
-s1push1
-goto;>calc_tritpush--label
-null;;goto--jumper-548
-#conditional subroutine goto
-dataread1;>ybuff_calc
-dataread2;>@5
-gotoif;>goto--branch-549
-goto;>goto--jumper-549
-setreg1;>goto--jumper-549;goto--branch-549
-s1push1
-goto;>calc_mul--label
-null;;goto--jumper-549
-#conditional subroutine goto
-dataread1;>ybuff_calc
-dataread2;>@7
-gotoif;>goto--branch-550
-goto;>goto--jumper-550
-setreg1;>goto--jumper-550;goto--branch-550
-s1push1
-goto;>calc_cleanup--label
-null;;goto--jumper-550
-#conditional return
-dataread1;>ybuff_calc
-dataread2;>@7
 gotoif;>goto--branch-551
 goto;>goto--jumper-551
-s1pop1;;goto--branch-551
-gotoreg1
+dataread1;>*-;goto--branch-551
+datawrite1;>tritbuff
 null;;goto--jumper-551
 #conditional subroutine goto
 dataread1;>ybuff_calc
-dataread2;>@9
+dataread2;>@3
 gotoif;>goto--branch-552
 goto;>goto--jumper-552
 setreg1;>goto--jumper-552;goto--branch-552
 s1push1
-goto;>calc_purgeentry--label
+goto;>calc_tritpush--label
 null;;goto--jumper-552
+#conditional subroutine goto
+dataread1;>ybuff_calc
+dataread2;>@5
+gotoif;>goto--branch-553
+goto;>goto--jumper-553
+setreg1;>goto--jumper-553;goto--branch-553
+s1push1
+goto;>calc_mul--label
+null;;goto--jumper-553
+#conditional subroutine goto
+dataread1;>ybuff_calc
+dataread2;>@7
+gotoif;>goto--branch-554
+goto;>goto--jumper-554
+setreg1;>goto--jumper-554;goto--branch-554
+s1push1
+goto;>calc_cleanup--label
+null;;goto--jumper-554
+#conditional return
+dataread1;>ybuff_calc
+dataread2;>@7
+gotoif;>goto--branch-555
+goto;>goto--jumper-555
+s1pop1;;goto--branch-555
+gotoreg1
+null;;goto--jumper-555
+#conditional subroutine goto
+dataread1;>ybuff_calc
+dataread2;>@9
+gotoif;>goto--branch-556
+goto;>goto--jumper-556
+setreg1;>goto--jumper-556;goto--branch-556
+s1push1
+goto;>calc_purgeentry--label
+null;;goto--jumper-556
 #label
 null;;calc_col3_skip--label
 #conditional goto
 dataread1;>xbuff_calc
 dataread2;>@15
-gotoifmore;>goto--halfstep-556
-gotoif;>goto--halfstep-556
-goto;>goto--branch-556
-dataread1;>xbuff_calc;goto--halfstep-556
+gotoifmore;>goto--halfstep-560
+gotoif;>goto--halfstep-560
+goto;>goto--branch-560
+dataread1;>xbuff_calc;goto--halfstep-560
 dataread2;>@20
-gotoifless;>goto--jumper-556
-gotoif;>goto--jumper-556
-goto;>goto--branch-556
-setreg1;>goto--jumper-556;goto--branch-556
+gotoifless;>goto--jumper-560
+gotoif;>goto--jumper-560
+goto;>goto--branch-560
+setreg1;>goto--jumper-560;goto--branch-560
 goto;>calc_col4_skip--label
-null;;goto--jumper-556
+null;;goto--jumper-560
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -3603,46 +3623,46 @@ datawrite1;>calc_redrawflgx
 #conditional subroutine goto
 dataread1;>ybuff_calc
 dataread2;>@3
-gotoif;>goto--branch-559
-goto;>goto--jumper-559
-setreg1;>goto--jumper-559;goto--branch-559
+gotoif;>goto--branch-563
+goto;>goto--jumper-563
+setreg1;>goto--jumper-563;goto--branch-563
 s1push1
 goto;>help_calc--label
-null;;goto--jumper-559
+null;;goto--jumper-563
 #label
 null;;calc_col4_skip--label
 #conditional set
 dataread1;>@3
 dataread2;>ybuff_calc
-gotoif;>goto--branch-564
-goto;>goto--jumper-564
-dataread1;>@1;goto--branch-564
+gotoif;>goto--branch-568
+goto;>goto--jumper-568
+dataread1;>@1;goto--branch-568
 datawrite1;>calc_redrawflgy
-null;;goto--jumper-564
+null;;goto--jumper-568
 #conditional set
 dataread1;>@5
 dataread2;>ybuff_calc
-gotoif;>goto--branch-565
-goto;>goto--jumper-565
-dataread1;>@1;goto--branch-565
+gotoif;>goto--branch-569
+goto;>goto--jumper-569
+dataread1;>@1;goto--branch-569
 datawrite1;>calc_redrawflgy
-null;;goto--jumper-565
+null;;goto--jumper-569
 #conditional set
 dataread1;>@7
 dataread2;>ybuff_calc
-gotoif;>goto--branch-566
-goto;>goto--jumper-566
-dataread1;>@1;goto--branch-566
+gotoif;>goto--branch-570
+goto;>goto--jumper-570
+dataread1;>@1;goto--branch-570
 datawrite1;>calc_redrawflgy
-null;;goto--jumper-566
+null;;goto--jumper-570
 #conditional set
 dataread1;>@9
 dataread2;>ybuff_calc
-gotoif;>goto--branch-567
-goto;>goto--jumper-567
-dataread1;>@1;goto--branch-567
+gotoif;>goto--branch-571
+goto;>goto--jumper-571
+dataread1;>@1;goto--branch-571
 datawrite1;>calc_redrawflgy
-null;;goto--jumper-567
+null;;goto--jumper-571
 #goto 
 goto;>calc_loop--label
 #label
@@ -3650,11 +3670,11 @@ null;;calc_tritpush--label
 #conditional return
 dataread1;>tritlen
 dataread2;>@9
-gotoif;>goto--branch-573
-goto;>goto--jumper-573
-s1pop1;;goto--branch-573
+gotoif;>goto--branch-577
+goto;>goto--jumper-577
+s1pop1;;goto--branch-577
 gotoreg1
-null;;goto--jumper-573
+null;;goto--jumper-577
 #get(1) (may be used with set, or asm code)
 dataread1;>tritbuff
 #stack push (uses stack 2)
@@ -3685,11 +3705,11 @@ null;;calc_tritpop--label
 #conditional return
 dataread1;>tritlen
 dataread2;>@0
-gotoif;>goto--branch-586
-goto;>goto--jumper-586
-s1pop1;;goto--branch-586
+gotoif;>goto--branch-590
+goto;>goto--jumper-590
+s1pop1;;goto--branch-590
 gotoreg1
-null;;goto--jumper-586
+null;;goto--jumper-590
 #stack pop (uses stack 2)
 s2pop1
 #set(1) (used after 2-op math, asm code, or get)
@@ -3718,10 +3738,10 @@ gotoreg1
 #label
 null;;calc_cleanup--label
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-599
+setreg1;>goto--jumper-603
 s1push1
 goto;>calc_purgeentry--label
-null;;goto--jumper-599
+null;;goto--jumper-603
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
@@ -3734,16 +3754,16 @@ null;;calc_purgeentry--label
 #Upward range iterator
 dataread1;>@0
 datawrite1;>calc_cleanloop
-setreg1;>uiter-retpos-605;uiter-loopback-605
+setreg1;>uiter-retpos-609;uiter-loopback-609
 s1push1
 goto;>calc_tritpop--label
-dataread1;>calc_cleanloop;uiter-retpos-605
+dataread1;>calc_cleanloop;uiter-retpos-609
 setreg2;10x1
 add
 datawrite1;>calc_cleanloop
 dataread2;>@9
-gotoifless;>uiter-loopback-605
-gotoif;>uiter-loopback-605
+gotoifless;>uiter-loopback-609
+gotoif;>uiter-loopback-609
 
 #val (used with set to change variable value during runtime.)
 setreg1;0
@@ -3763,10 +3783,10 @@ dataread1;>calc_entry
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>calc_buffer
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-615
+setreg1;>goto--jumper-619
 s1push1
 goto;>calc_purgeentry--label
-null;;goto--jumper-615
+null;;goto--jumper-619
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -3779,10 +3799,10 @@ add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>calc_buffer
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-621
+setreg1;>goto--jumper-625
 s1push1
 goto;>calc_purgeentry--label
-null;;goto--jumper-621
+null;;goto--jumper-625
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -3795,10 +3815,10 @@ sub
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>calc_buffer
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-627
+setreg1;>goto--jumper-631
 s1push1
 goto;>calc_purgeentry--label
-null;;goto--jumper-627
+null;;goto--jumper-631
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -3811,10 +3831,10 @@ mul
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>calc_buffer
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-633
+setreg1;>goto--jumper-637
 s1push1
 goto;>calc_purgeentry--label
-null;;goto--jumper-633
+null;;goto--jumper-637
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -3823,20 +3843,20 @@ null;;calc_div--label
 #conditional subroutine goto
 dataread1;>calc_entry
 dataread2;>@0
-gotoif;>goto--branch-637
-goto;>goto--jumper-637
-setreg1;>goto--jumper-637;goto--branch-637
+gotoif;>goto--branch-641
+goto;>goto--jumper-641
+setreg1;>goto--jumper-641;goto--branch-641
 s1push1
 goto;>calc_ERROR--label
-null;;goto--jumper-637
+null;;goto--jumper-641
 #conditional return
 dataread1;>calc_entry
 dataread2;>@0
-gotoif;>goto--branch-638
-goto;>goto--jumper-638
-s1pop1;;goto--branch-638
+gotoif;>goto--branch-642
+goto;>goto--jumper-642
+s1pop1;;goto--branch-642
 gotoreg1
-null;;goto--jumper-638
+null;;goto--jumper-642
 #divide (2op math)
 dataread1;>calc_buffer
 dataread2;>calc_entry
@@ -3844,10 +3864,10 @@ div
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>calc_buffer
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-641
+setreg1;>goto--jumper-645
 s1push1
 goto;>calc_purgeentry--label
-null;;goto--jumper-641
+null;;goto--jumper-645
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -3857,10 +3877,10 @@ null;;calc_ERROR--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-649
+setreg1;>goto--jumper-653
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-649
+null;;goto--jumper-653
 #prline
 fopwri1;:C
 fopwri1;:a
@@ -3894,10 +3914,10 @@ fopwri1;:\n
 dataread1;>*---00+
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-652
+setreg1;>goto--jumper-656
 s1push1
 goto;>icon_no--label
-null;;goto--jumper-652
+null;;goto--jumper-656
 #prline
 fopwri1;:N
 fopwri1;:o
@@ -3962,52 +3982,39 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-655;uiter-loopback-655
+setreg1;>uiter-retpos-659;uiter-loopback-659
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-655
+dataread1;>not_sup_fill;uiter-retpos-659
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@17
-gotoifless;>uiter-loopback-655
-gotoif;>uiter-loopback-655
+gotoifless;>uiter-loopback-659
+gotoif;>uiter-loopback-659
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-657
+setreg1;>goto--jumper-661
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-657
+null;;goto--jumper-661
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;crystal_ball--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #666
-iowrite1;>mouse.button#SSTNPL Source Line: '666' 
+#_______NOTE: this corresponds to SSTNPL source line #670
+iowrite1;>mouse.button#SSTNPL Source Line: '670' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-671
+setreg1;>goto--jumper-675
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-671
+null;;goto--jumper-675
 #prline
-fopwri1;:C
-fopwri1;:a
-fopwri1;:l
-fopwri1;:c
-fopwri1;:u
-fopwri1;:l
-fopwri1;:a
-fopwri1;:t
-fopwri1;:o
-fopwri1;:r
-fopwri1;:\s
-fopwri1;:-
-fopwri1;:\s
 fopwri1;:C
 fopwri1;:r
 fopwri1;:y
@@ -4138,104 +4145,104 @@ fopwri1;:t
 fopwri1;:.
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #677
-include;sbtgsh+ball.tas0#SSTNPL Source Line: '677' 
+#_______NOTE: this corresponds to SSTNPL source line #681
+include;sbtgsh+ball.tas0#SSTNPL Source Line: '681' 
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-679;uiter-loopback-679
+setreg1;>uiter-retpos-683;uiter-loopback-683
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-679
+dataread1;>not_sup_fill;uiter-retpos-683
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@13
-gotoifless;>uiter-loopback-679
-gotoif;>uiter-loopback-679
+gotoifless;>uiter-loopback-683
+gotoif;>uiter-loopback-683
 
 #label
 null;;cry_inputloop--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #684
-ioread1;>mouse.button#SSTNPL Source Line: '684' 
+#_______NOTE: this corresponds to SSTNPL source line #688
+ioread1;>mouse.button#SSTNPL Source Line: '688' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #conditional goto
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--jumper-686
-goto;>goto--branch-686
-setreg1;>goto--jumper-686;goto--branch-686
+gotoif;>goto--jumper-690
+goto;>goto--branch-690
+setreg1;>goto--jumper-690;goto--branch-690
 goto;>cry_inputloop--label
-null;;goto--jumper-686
+null;;goto--jumper-690
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #689
-ioread1;>mouse.lockx#SSTNPL Source Line: '689' 
+#_______NOTE: this corresponds to SSTNPL source line #693
+ioread1;>mouse.lockx#SSTNPL Source Line: '693' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>xbuff_cry
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #691
-ioread1;>mouse.locky#SSTNPL Source Line: '691' 
+#_______NOTE: this corresponds to SSTNPL source line #695
+ioread1;>mouse.locky#SSTNPL Source Line: '695' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff_cry
 #conditional goto
 dataread1;>ybuff_cry
 dataread2;>@3
-gotoifmore;>goto--halfstep-694
-gotoif;>goto--halfstep-694
-goto;>goto--branch-694
-dataread1;>ybuff_cry;goto--halfstep-694
+gotoifmore;>goto--halfstep-698
+gotoif;>goto--halfstep-698
+goto;>goto--branch-698
+dataread1;>ybuff_cry;goto--halfstep-698
 dataread2;>@10
-gotoifless;>goto--jumper-694
-gotoif;>goto--jumper-694
-goto;>goto--branch-694
-setreg1;>goto--jumper-694;goto--branch-694
+gotoifless;>goto--jumper-698
+gotoif;>goto--jumper-698
+goto;>goto--branch-698
+setreg1;>goto--jumper-698;goto--branch-698
 goto;>cry_inputloop--label
-null;;goto--jumper-694
+null;;goto--jumper-698
 #conditional goto
 dataread1;>xbuff_cry
 dataread2;>@0
-gotoifmore;>goto--halfstep-695
-gotoif;>goto--halfstep-695
-goto;>goto--branch-695
-dataread1;>xbuff_cry;goto--halfstep-695
+gotoifmore;>goto--halfstep-699
+gotoif;>goto--halfstep-699
+goto;>goto--branch-699
+dataread1;>xbuff_cry;goto--halfstep-699
 dataread2;>@35
-gotoifless;>goto--jumper-695
-gotoif;>goto--jumper-695
-goto;>goto--branch-695
-setreg1;>goto--jumper-695;goto--branch-695
+gotoifless;>goto--jumper-699
+gotoif;>goto--jumper-699
+goto;>goto--branch-699
+setreg1;>goto--jumper-699;goto--branch-699
 goto;>cry_inputloop--label
-null;;goto--jumper-695
+null;;goto--jumper-699
 #conditional subroutine goto
 dataread1;>xbuff_cry
 dataread2;>@0
-gotoifmore;>goto--halfstep-696
-gotoif;>goto--halfstep-696
-goto;>goto--jumper-696
-dataread1;>xbuff_cry;goto--halfstep-696
+gotoifmore;>goto--halfstep-700
+gotoif;>goto--halfstep-700
+goto;>goto--jumper-700
+dataread1;>xbuff_cry;goto--halfstep-700
 dataread2;>@23
-gotoifless;>goto--branch-696
-gotoif;>goto--branch-696
-goto;>goto--jumper-696
-setreg1;>goto--jumper-696;goto--branch-696
+gotoifless;>goto--branch-700
+gotoif;>goto--branch-700
+goto;>goto--jumper-700
+setreg1;>goto--jumper-700;goto--branch-700
 s1push1
 goto;>cry_do_ball--label
-null;;goto--jumper-696
+null;;goto--jumper-700
 #conditional return
 dataread1;>xbuff_cry
 dataread2;>@25
-gotoifmore;>goto--halfstep-697
-gotoif;>goto--halfstep-697
-goto;>goto--jumper-697
-dataread1;>xbuff_cry;goto--halfstep-697
+gotoifmore;>goto--halfstep-701
+gotoif;>goto--halfstep-701
+goto;>goto--jumper-701
+dataread1;>xbuff_cry;goto--halfstep-701
 dataread2;>@35
-gotoifless;>goto--branch-697
-gotoif;>goto--branch-697
-goto;>goto--jumper-697
-s1pop1;;goto--branch-697
+gotoifless;>goto--branch-701
+gotoif;>goto--branch-701
+goto;>goto--jumper-701
+s1pop1;;goto--branch-701
 gotoreg1
-null;;goto--jumper-697
+null;;goto--jumper-701
 #goto 
 goto;>crystal_ball--label
 #label
@@ -4250,30 +4257,30 @@ datawrite1;>crystal_random
 #conditional subroutine goto
 dataread1;>crystal_random
 dataread2;>@1
-gotoif;>goto--branch-706
-goto;>goto--jumper-706
-setreg1;>goto--jumper-706;goto--branch-706
+gotoif;>goto--branch-710
+goto;>goto--jumper-710
+setreg1;>goto--jumper-710;goto--branch-710
 s1push1
 goto;>cry_yes--label
-null;;goto--jumper-706
+null;;goto--jumper-710
 #conditional subroutine goto
 dataread1;>crystal_random
 dataread2;>@0
-gotoif;>goto--branch-707
-goto;>goto--jumper-707
-setreg1;>goto--jumper-707;goto--branch-707
+gotoif;>goto--branch-711
+goto;>goto--jumper-711
+setreg1;>goto--jumper-711;goto--branch-711
 s1push1
 goto;>cry_unsure--label
-null;;goto--jumper-707
+null;;goto--jumper-711
 #conditional subroutine goto
 dataread1;>crystal_random
 dataread2;>@-1
-gotoif;>goto--branch-708
-goto;>goto--jumper-708
-setreg1;>goto--jumper-708;goto--branch-708
+gotoif;>goto--branch-712
+goto;>goto--jumper-712
+setreg1;>goto--jumper-712;goto--branch-712
 s1push1
 goto;>cry_no--label
-null;;goto--jumper-708
+null;;goto--jumper-712
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -4283,10 +4290,10 @@ null;;cry_no--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-715
+setreg1;>goto--jumper-719
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-715
+null;;goto--jumper-719
 #prline
 fopwri1;:C
 fopwri1;:r
@@ -4314,10 +4321,10 @@ fopwri1;:\n
 dataread1;>*---00+
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-718
+setreg1;>goto--jumper-722
 s1push1
 goto;>cry_ballicon--label
-null;;goto--jumper-718
+null;;goto--jumper-722
 #prline
 fopwri1;:T
 fopwri1;:h
@@ -4354,22 +4361,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-720;uiter-loopback-720
+setreg1;>uiter-retpos-724;uiter-loopback-724
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-720
+dataread1;>not_sup_fill;uiter-retpos-724
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@17
-gotoifless;>uiter-loopback-720
-gotoif;>uiter-loopback-720
+gotoifless;>uiter-loopback-724
+gotoif;>uiter-loopback-724
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-722
+setreg1;>goto--jumper-726
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-722
+null;;goto--jumper-726
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -4379,10 +4386,10 @@ null;;cry_yes--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-728
+setreg1;>goto--jumper-732
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-728
+null;;goto--jumper-732
 #prline
 fopwri1;:C
 fopwri1;:r
@@ -4410,10 +4417,10 @@ fopwri1;:\n
 dataread1;>*---00+
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-731
+setreg1;>goto--jumper-735
 s1push1
 goto;>cry_ballicon--label
-null;;goto--jumper-731
+null;;goto--jumper-735
 #prline
 fopwri1;:Y
 fopwri1;:e
@@ -4445,22 +4452,22 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-733;uiter-loopback-733
+setreg1;>uiter-retpos-737;uiter-loopback-737
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-733
+dataread1;>not_sup_fill;uiter-retpos-737
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@17
-gotoifless;>uiter-loopback-733
-gotoif;>uiter-loopback-733
+gotoifless;>uiter-loopback-737
+gotoif;>uiter-loopback-737
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-735
+setreg1;>goto--jumper-739
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-735
+null;;goto--jumper-739
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -4470,10 +4477,10 @@ null;;cry_unsure--label
 dataread1;>*+++--0
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-741
+setreg1;>goto--jumper-745
 s1push1
 goto;>hudsplash--label
-null;;goto--jumper-741
+null;;goto--jumper-745
 #prline
 fopwri1;:C
 fopwri1;:r
@@ -4501,10 +4508,10 @@ fopwri1;:\n
 dataread1;>*---00+
 iowrite1;>io.textcolor
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-744
+setreg1;>goto--jumper-748
 s1push1
 goto;>cry_ballicon--label
-null;;goto--jumper-744
+null;;goto--jumper-748
 #prline
 fopwri1;:T
 fopwri1;:h
@@ -4557,30 +4564,1701 @@ fopwri1;:\n
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
-setreg1;>uiter-retpos-746;uiter-loopback-746
+setreg1;>uiter-retpos-750;uiter-loopback-750
 s1push1
 goto;>newline--label
-dataread1;>not_sup_fill;uiter-retpos-746
+dataread1;>not_sup_fill;uiter-retpos-750
 setreg2;10x1
 add
 datawrite1;>not_sup_fill
 dataread2;>@17
-gotoifless;>uiter-loopback-746
-gotoif;>uiter-loopback-746
+gotoifless;>uiter-loopback-750
+gotoif;>uiter-loopback-750
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-748
+setreg1;>goto--jumper-752
 s1push1
 goto;>click_wait--label
-null;;goto--jumper-748
+null;;goto--jumper-752
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;cry_ballicon--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #752
-include;sbtgsh+ballicon.tas0#SSTNPL Source Line: '752' 
+#_______NOTE: this corresponds to SSTNPL source line #756
+include;sbtgsh+ballicon.tas0#SSTNPL Source Line: '756' 
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;sys_shell--label
+#Set text colors
+dataread1;>*+++--0
+iowrite1;>io.textcolor
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-767
+s1push1
+goto;>hudsplash--label
+null;;goto--jumper-767
+#prline
+fopwri1;:S
+fopwri1;:y
+fopwri1;:s
+fopwri1;:t
+fopwri1;:e
+fopwri1;:m
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\n
+#Set text colors
+dataread1;>*---00+
+iowrite1;>io.textcolor
+#prline
+fopwri1;:T
+fopwri1;:y
+fopwri1;:p
+fopwri1;:e
+fopwri1;:\s
+fopwri1;:'
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:p
+fopwri1;:'
+fopwri1;:\s
+fopwri1;:f
+fopwri1;:o
+fopwri1;:r
+fopwri1;:\s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:p
+fopwri1;:.
+fopwri1;:\n
+#Upward range iterator
+dataread1;>@1
+datawrite1;>not_sup_fill
+setreg1;>uiter-retpos-771;uiter-loopback-771
+s1push1
+goto;>newline--label
+dataread1;>not_sup_fill;uiter-retpos-771
+setreg2;10x1
+add
+datawrite1;>not_sup_fill
+dataread2;>@20
+gotoifless;>uiter-loopback-771
+gotoif;>uiter-loopback-771
+
+#Set text colors
+dataread1;>*+++---
+iowrite1;>io.textcolor
+#print newline
+fopwri1;:\n
+#label
+null;;sys_shell_loop--label
+#Set text colors
+dataread1;>*+++---
+iowrite1;>io.textcolor
+#prline
+fopwri1;:S
+fopwri1;:H
+fopwri1;:E
+fopwri1;:L
+fopwri1;:L
+fopwri1;:\s
+fopwri1;:R
+fopwri1;:E
+fopwri1;:A
+fopwri1;:D
+fopwri1;:Y
+fopwri1;::
+fopwri1;:\n
+#Set text colors
+dataread1;>*++0---
+iowrite1;>io.textcolor
+#print
+fopwri1;:>
+#Set text colors
+dataread1;>*0++---
+iowrite1;>io.textcolor
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #782
+iowrite1;>io.ttyrd#SSTNPL Source Line: '782' 
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-784
+s1push1
+goto;>getentry--label
+null;;goto--jumper-784
+#Set text colors
+dataread1;>*+++---
+iowrite1;>io.textcolor
+#print newline
+fopwri1;:\n
+#val (used with set to change variable value during runtime.)
+setreg1;0
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_validcom
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--791
+null;;tabstrc--adrbuff--791
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--791
+null;;tabstrc--outbuff--791
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--791
+
+datawrite1;>tabstrc--recurs-tabbuff--791_1
+dataread1;;tabstrc--recurs-tabbuff--791_1
+datawrite1;>tabstrc--recurs-tabbuff_read--791_1
+dataread1;;tabstrc--recurs-tabbuff_read--791_1
+
+setreg2;:h
+
+
+gotoif;>tabstrc--recurs-checkyes--791_1
+goto;>tabstrc--recurs-checkno--791_1
+null;;tabstrc--recurs-checkyes--791_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--791
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--791
+
+setreg1;>tabstrc--adrbuff--791
+
+datawrite1;>tabstrc--recurs-tabbuff--791_2
+dataread1;;tabstrc--recurs-tabbuff--791_2
+datawrite1;>tabstrc--recurs-tabbuff_read--791_2
+dataread1;;tabstrc--recurs-tabbuff_read--791_2
+
+setreg2;:e
+
+
+gotoif;>tabstrc--recurs-checkyes--791_2
+goto;>tabstrc--recurs-checkno--791_2
+null;;tabstrc--recurs-checkyes--791_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--791
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--791
+
+setreg1;>tabstrc--adrbuff--791
+
+datawrite1;>tabstrc--recurs-tabbuff--791_3
+dataread1;;tabstrc--recurs-tabbuff--791_3
+datawrite1;>tabstrc--recurs-tabbuff_read--791_3
+dataread1;;tabstrc--recurs-tabbuff_read--791_3
+
+setreg2;:l
+
+
+gotoif;>tabstrc--recurs-checkyes--791_3
+goto;>tabstrc--recurs-checkno--791_3
+null;;tabstrc--recurs-checkyes--791_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--791
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--791
+
+setreg1;>tabstrc--adrbuff--791
+
+datawrite1;>tabstrc--recurs-tabbuff--791_4
+dataread1;;tabstrc--recurs-tabbuff--791_4
+datawrite1;>tabstrc--recurs-tabbuff_read--791_4
+dataread1;;tabstrc--recurs-tabbuff_read--791_4
+
+setreg2;:p
+
+
+gotoif;>tabstrc--recurs-checkyes--791_4
+goto;>tabstrc--recurs-checkno--791_4
+null;;tabstrc--recurs-checkyes--791_4
+##set flag########
+setreg1;>tabstrc--outbuff--791
+datawrite1;>tabstrc--recurs-flag--791_4
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--791_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--791_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--791_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--791_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--791_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--791
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-793
+goto;>goto--jumper-793
+setreg1;>goto--jumper-793;goto--branch-793
+s1push1
+goto;>sys_shell_help--label
+null;;goto--jumper-793
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--795
+null;;tabstrc--adrbuff--795
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--795
+null;;tabstrc--outbuff--795
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--795
+
+datawrite1;>tabstrc--recurs-tabbuff--795_1
+dataread1;;tabstrc--recurs-tabbuff--795_1
+datawrite1;>tabstrc--recurs-tabbuff_read--795_1
+dataread1;;tabstrc--recurs-tabbuff_read--795_1
+
+setreg2;:b
+
+
+gotoif;>tabstrc--recurs-checkyes--795_1
+goto;>tabstrc--recurs-checkno--795_1
+null;;tabstrc--recurs-checkyes--795_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--795
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--795
+
+setreg1;>tabstrc--adrbuff--795
+
+datawrite1;>tabstrc--recurs-tabbuff--795_2
+dataread1;;tabstrc--recurs-tabbuff--795_2
+datawrite1;>tabstrc--recurs-tabbuff_read--795_2
+dataread1;;tabstrc--recurs-tabbuff_read--795_2
+
+setreg2;:a
+
+
+gotoif;>tabstrc--recurs-checkyes--795_2
+goto;>tabstrc--recurs-checkno--795_2
+null;;tabstrc--recurs-checkyes--795_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--795
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--795
+
+setreg1;>tabstrc--adrbuff--795
+
+datawrite1;>tabstrc--recurs-tabbuff--795_3
+dataread1;;tabstrc--recurs-tabbuff--795_3
+datawrite1;>tabstrc--recurs-tabbuff_read--795_3
+dataread1;;tabstrc--recurs-tabbuff_read--795_3
+
+setreg2;:l
+
+
+gotoif;>tabstrc--recurs-checkyes--795_3
+goto;>tabstrc--recurs-checkno--795_3
+null;;tabstrc--recurs-checkyes--795_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--795
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--795
+
+setreg1;>tabstrc--adrbuff--795
+
+datawrite1;>tabstrc--recurs-tabbuff--795_4
+dataread1;;tabstrc--recurs-tabbuff--795_4
+datawrite1;>tabstrc--recurs-tabbuff_read--795_4
+dataread1;;tabstrc--recurs-tabbuff_read--795_4
+
+setreg2;:l
+
+
+gotoif;>tabstrc--recurs-checkyes--795_4
+goto;>tabstrc--recurs-checkno--795_4
+null;;tabstrc--recurs-checkyes--795_4
+##set flag########
+setreg1;>tabstrc--outbuff--795
+datawrite1;>tabstrc--recurs-flag--795_4
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--795_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--795_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--795_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--795_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--795_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--795
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-797
+goto;>goto--jumper-797
+setreg1;>goto--jumper-797;goto--branch-797
+s1push1
+goto;>crystal_ball--label
+null;;goto--jumper-797
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--799
+null;;tabstrc--adrbuff--799
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--799
+null;;tabstrc--outbuff--799
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--799
+
+datawrite1;>tabstrc--recurs-tabbuff--799_1
+dataread1;;tabstrc--recurs-tabbuff--799_1
+datawrite1;>tabstrc--recurs-tabbuff_read--799_1
+dataread1;;tabstrc--recurs-tabbuff_read--799_1
+
+setreg2;:c
+
+
+gotoif;>tabstrc--recurs-checkyes--799_1
+goto;>tabstrc--recurs-checkno--799_1
+null;;tabstrc--recurs-checkyes--799_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--799
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--799
+
+setreg1;>tabstrc--adrbuff--799
+
+datawrite1;>tabstrc--recurs-tabbuff--799_2
+dataread1;;tabstrc--recurs-tabbuff--799_2
+datawrite1;>tabstrc--recurs-tabbuff_read--799_2
+dataread1;;tabstrc--recurs-tabbuff_read--799_2
+
+setreg2;:a
+
+
+gotoif;>tabstrc--recurs-checkyes--799_2
+goto;>tabstrc--recurs-checkno--799_2
+null;;tabstrc--recurs-checkyes--799_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--799
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--799
+
+setreg1;>tabstrc--adrbuff--799
+
+datawrite1;>tabstrc--recurs-tabbuff--799_3
+dataread1;;tabstrc--recurs-tabbuff--799_3
+datawrite1;>tabstrc--recurs-tabbuff_read--799_3
+dataread1;;tabstrc--recurs-tabbuff_read--799_3
+
+setreg2;:l
+
+
+gotoif;>tabstrc--recurs-checkyes--799_3
+goto;>tabstrc--recurs-checkno--799_3
+null;;tabstrc--recurs-checkyes--799_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--799
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--799
+
+setreg1;>tabstrc--adrbuff--799
+
+datawrite1;>tabstrc--recurs-tabbuff--799_4
+dataread1;;tabstrc--recurs-tabbuff--799_4
+datawrite1;>tabstrc--recurs-tabbuff_read--799_4
+dataread1;;tabstrc--recurs-tabbuff_read--799_4
+
+setreg2;:c
+
+
+gotoif;>tabstrc--recurs-checkyes--799_4
+goto;>tabstrc--recurs-checkno--799_4
+null;;tabstrc--recurs-checkyes--799_4
+##set flag########
+setreg1;>tabstrc--outbuff--799
+datawrite1;>tabstrc--recurs-flag--799_4
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--799_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--799_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--799_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--799_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--799_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--799
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-801
+goto;>goto--jumper-801
+setreg1;>goto--jumper-801;goto--branch-801
+s1push1
+goto;>calc_init--label
+null;;goto--jumper-801
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--803
+null;;tabstrc--adrbuff--803
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--803
+null;;tabstrc--outbuff--803
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--803
+
+datawrite1;>tabstrc--recurs-tabbuff--803_1
+dataread1;;tabstrc--recurs-tabbuff--803_1
+datawrite1;>tabstrc--recurs-tabbuff_read--803_1
+dataread1;;tabstrc--recurs-tabbuff_read--803_1
+
+setreg2;:u
+
+
+gotoif;>tabstrc--recurs-checkyes--803_1
+goto;>tabstrc--recurs-checkno--803_1
+null;;tabstrc--recurs-checkyes--803_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--803
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--803
+
+setreg1;>tabstrc--adrbuff--803
+
+datawrite1;>tabstrc--recurs-tabbuff--803_2
+dataread1;;tabstrc--recurs-tabbuff--803_2
+datawrite1;>tabstrc--recurs-tabbuff_read--803_2
+dataread1;;tabstrc--recurs-tabbuff_read--803_2
+
+setreg2;:i
+
+
+gotoif;>tabstrc--recurs-checkyes--803_2
+goto;>tabstrc--recurs-checkno--803_2
+null;;tabstrc--recurs-checkyes--803_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--803
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--803
+
+setreg1;>tabstrc--adrbuff--803
+
+datawrite1;>tabstrc--recurs-tabbuff--803_3
+dataread1;;tabstrc--recurs-tabbuff--803_3
+datawrite1;>tabstrc--recurs-tabbuff_read--803_3
+dataread1;;tabstrc--recurs-tabbuff_read--803_3
+
+setreg2;:h
+
+
+gotoif;>tabstrc--recurs-checkyes--803_3
+goto;>tabstrc--recurs-checkno--803_3
+null;;tabstrc--recurs-checkyes--803_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--803
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--803
+
+setreg1;>tabstrc--adrbuff--803
+
+datawrite1;>tabstrc--recurs-tabbuff--803_4
+dataread1;;tabstrc--recurs-tabbuff--803_4
+datawrite1;>tabstrc--recurs-tabbuff_read--803_4
+dataread1;;tabstrc--recurs-tabbuff_read--803_4
+
+setreg2;:e
+
+
+gotoif;>tabstrc--recurs-checkyes--803_4
+goto;>tabstrc--recurs-checkno--803_4
+null;;tabstrc--recurs-checkyes--803_4
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--803
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--803
+
+setreg1;>tabstrc--adrbuff--803
+
+datawrite1;>tabstrc--recurs-tabbuff--803_5
+dataread1;;tabstrc--recurs-tabbuff--803_5
+datawrite1;>tabstrc--recurs-tabbuff_read--803_5
+dataread1;;tabstrc--recurs-tabbuff_read--803_5
+
+setreg2;:l
+
+
+gotoif;>tabstrc--recurs-checkyes--803_5
+goto;>tabstrc--recurs-checkno--803_5
+null;;tabstrc--recurs-checkyes--803_5
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--803
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--803
+
+setreg1;>tabstrc--adrbuff--803
+
+datawrite1;>tabstrc--recurs-tabbuff--803_6
+dataread1;;tabstrc--recurs-tabbuff--803_6
+datawrite1;>tabstrc--recurs-tabbuff_read--803_6
+dataread1;;tabstrc--recurs-tabbuff_read--803_6
+
+setreg2;:p
+
+
+gotoif;>tabstrc--recurs-checkyes--803_6
+goto;>tabstrc--recurs-checkno--803_6
+null;;tabstrc--recurs-checkyes--803_6
+##set flag########
+setreg1;>tabstrc--outbuff--803
+datawrite1;>tabstrc--recurs-flag--803_6
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--803_6
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--803_6
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--803_5
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--803_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--803_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--803_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--803_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--803
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-805
+goto;>goto--jumper-805
+setreg1;>goto--jumper-805;goto--branch-805
+s1push1
+goto;>help--label
+null;;goto--jumper-805
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--807
+null;;tabstrc--adrbuff--807
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--807
+null;;tabstrc--outbuff--807
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--807
+
+datawrite1;>tabstrc--recurs-tabbuff--807_1
+dataread1;;tabstrc--recurs-tabbuff--807_1
+datawrite1;>tabstrc--recurs-tabbuff_read--807_1
+dataread1;;tabstrc--recurs-tabbuff_read--807_1
+
+setreg2;:a
+
+
+gotoif;>tabstrc--recurs-checkyes--807_1
+goto;>tabstrc--recurs-checkno--807_1
+null;;tabstrc--recurs-checkyes--807_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--807
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--807
+
+setreg1;>tabstrc--adrbuff--807
+
+datawrite1;>tabstrc--recurs-tabbuff--807_2
+dataread1;;tabstrc--recurs-tabbuff--807_2
+datawrite1;>tabstrc--recurs-tabbuff_read--807_2
+dataread1;;tabstrc--recurs-tabbuff_read--807_2
+
+setreg2;:b
+
+
+gotoif;>tabstrc--recurs-checkyes--807_2
+goto;>tabstrc--recurs-checkno--807_2
+null;;tabstrc--recurs-checkyes--807_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--807
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--807
+
+setreg1;>tabstrc--adrbuff--807
+
+datawrite1;>tabstrc--recurs-tabbuff--807_3
+dataread1;;tabstrc--recurs-tabbuff--807_3
+datawrite1;>tabstrc--recurs-tabbuff_read--807_3
+dataread1;;tabstrc--recurs-tabbuff_read--807_3
+
+setreg2;:o
+
+
+gotoif;>tabstrc--recurs-checkyes--807_3
+goto;>tabstrc--recurs-checkno--807_3
+null;;tabstrc--recurs-checkyes--807_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--807
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--807
+
+setreg1;>tabstrc--adrbuff--807
+
+datawrite1;>tabstrc--recurs-tabbuff--807_4
+dataread1;;tabstrc--recurs-tabbuff--807_4
+datawrite1;>tabstrc--recurs-tabbuff_read--807_4
+dataread1;;tabstrc--recurs-tabbuff_read--807_4
+
+setreg2;:u
+
+
+gotoif;>tabstrc--recurs-checkyes--807_4
+goto;>tabstrc--recurs-checkno--807_4
+null;;tabstrc--recurs-checkyes--807_4
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--807
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--807
+
+setreg1;>tabstrc--adrbuff--807
+
+datawrite1;>tabstrc--recurs-tabbuff--807_5
+dataread1;;tabstrc--recurs-tabbuff--807_5
+datawrite1;>tabstrc--recurs-tabbuff_read--807_5
+dataread1;;tabstrc--recurs-tabbuff_read--807_5
+
+setreg2;:t
+
+
+gotoif;>tabstrc--recurs-checkyes--807_5
+goto;>tabstrc--recurs-checkno--807_5
+null;;tabstrc--recurs-checkyes--807_5
+##set flag########
+setreg1;>tabstrc--outbuff--807
+datawrite1;>tabstrc--recurs-flag--807_5
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--807_5
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--807_5
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--807_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--807_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--807_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--807_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--807
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-809
+goto;>goto--jumper-809
+setreg1;>goto--jumper-809;goto--branch-809
+s1push1
+goto;>help_about--label
+null;;goto--jumper-809
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--811
+null;;tabstrc--adrbuff--811
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--811
+null;;tabstrc--outbuff--811
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--811
+
+datawrite1;>tabstrc--recurs-tabbuff--811_1
+dataread1;;tabstrc--recurs-tabbuff--811_1
+datawrite1;>tabstrc--recurs-tabbuff_read--811_1
+dataread1;;tabstrc--recurs-tabbuff_read--811_1
+
+setreg2;:v
+
+
+gotoif;>tabstrc--recurs-checkyes--811_1
+goto;>tabstrc--recurs-checkno--811_1
+null;;tabstrc--recurs-checkyes--811_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--811
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--811
+
+setreg1;>tabstrc--adrbuff--811
+
+datawrite1;>tabstrc--recurs-tabbuff--811_2
+dataread1;;tabstrc--recurs-tabbuff--811_2
+datawrite1;>tabstrc--recurs-tabbuff_read--811_2
+dataread1;;tabstrc--recurs-tabbuff_read--811_2
+
+setreg2;:d
+
+
+gotoif;>tabstrc--recurs-checkyes--811_2
+goto;>tabstrc--recurs-checkno--811_2
+null;;tabstrc--recurs-checkyes--811_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--811
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--811
+
+setreg1;>tabstrc--adrbuff--811
+
+datawrite1;>tabstrc--recurs-tabbuff--811_3
+dataread1;;tabstrc--recurs-tabbuff--811_3
+datawrite1;>tabstrc--recurs-tabbuff_read--811_3
+dataread1;;tabstrc--recurs-tabbuff_read--811_3
+
+setreg2;:i
+
+
+gotoif;>tabstrc--recurs-checkyes--811_3
+goto;>tabstrc--recurs-checkno--811_3
+null;;tabstrc--recurs-checkyes--811_3
+##set flag########
+setreg1;>tabstrc--outbuff--811
+datawrite1;>tabstrc--recurs-flag--811_3
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--811_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--811_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--811_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--811_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--811
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-813
+goto;>goto--jumper-813
+setreg1;>goto--jumper-813;goto--branch-813
+s1push1
+goto;>VDI_shell--label
+null;;goto--jumper-813
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--815
+null;;tabstrc--adrbuff--815
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--815
+null;;tabstrc--outbuff--815
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--815
+
+datawrite1;>tabstrc--recurs-tabbuff--815_1
+dataread1;;tabstrc--recurs-tabbuff--815_1
+datawrite1;>tabstrc--recurs-tabbuff_read--815_1
+dataread1;;tabstrc--recurs-tabbuff_read--815_1
+
+setreg2;:e
+
+
+gotoif;>tabstrc--recurs-checkyes--815_1
+goto;>tabstrc--recurs-checkno--815_1
+null;;tabstrc--recurs-checkyes--815_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--815
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--815
+
+setreg1;>tabstrc--adrbuff--815
+
+datawrite1;>tabstrc--recurs-tabbuff--815_2
+dataread1;;tabstrc--recurs-tabbuff--815_2
+datawrite1;>tabstrc--recurs-tabbuff_read--815_2
+dataread1;;tabstrc--recurs-tabbuff_read--815_2
+
+setreg2;:x
+
+
+gotoif;>tabstrc--recurs-checkyes--815_2
+goto;>tabstrc--recurs-checkno--815_2
+null;;tabstrc--recurs-checkyes--815_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--815
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--815
+
+setreg1;>tabstrc--adrbuff--815
+
+datawrite1;>tabstrc--recurs-tabbuff--815_3
+dataread1;;tabstrc--recurs-tabbuff--815_3
+datawrite1;>tabstrc--recurs-tabbuff_read--815_3
+dataread1;;tabstrc--recurs-tabbuff_read--815_3
+
+setreg2;:i
+
+
+gotoif;>tabstrc--recurs-checkyes--815_3
+goto;>tabstrc--recurs-checkno--815_3
+null;;tabstrc--recurs-checkyes--815_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--815
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--815
+
+setreg1;>tabstrc--adrbuff--815
+
+datawrite1;>tabstrc--recurs-tabbuff--815_4
+dataread1;;tabstrc--recurs-tabbuff--815_4
+datawrite1;>tabstrc--recurs-tabbuff_read--815_4
+dataread1;;tabstrc--recurs-tabbuff_read--815_4
+
+setreg2;:t
+
+
+gotoif;>tabstrc--recurs-checkyes--815_4
+goto;>tabstrc--recurs-checkno--815_4
+null;;tabstrc--recurs-checkyes--815_4
+##set flag########
+setreg1;>tabstrc--outbuff--815
+datawrite1;>tabstrc--recurs-flag--815_4
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--815_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--815_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--815_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--815_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--815_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--815
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional return
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-817
+goto;>goto--jumper-817
+s1pop1;;goto--branch-817
+gotoreg1
+null;;goto--jumper-817
+#######tabstrc
+#init
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>@0
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabstrc--adrbuff--819
+null;;tabstrc--adrbuff--819
+#reset output buffer to 0
+setreg1;0
+datawrite1;>tabstrc--outbuff--819
+null;;tabstrc--outbuff--819
+#recursive_parser
+#recursion
+
+setreg1;>tabstrc--adrbuff--819
+
+datawrite1;>tabstrc--recurs-tabbuff--819_1
+dataread1;;tabstrc--recurs-tabbuff--819_1
+datawrite1;>tabstrc--recurs-tabbuff_read--819_1
+dataread1;;tabstrc--recurs-tabbuff_read--819_1
+
+setreg2;:i
+
+
+gotoif;>tabstrc--recurs-checkyes--819_1
+goto;>tabstrc--recurs-checkno--819_1
+null;;tabstrc--recurs-checkyes--819_1
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--819
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--819
+
+setreg1;>tabstrc--adrbuff--819
+
+datawrite1;>tabstrc--recurs-tabbuff--819_2
+dataread1;;tabstrc--recurs-tabbuff--819_2
+datawrite1;>tabstrc--recurs-tabbuff_read--819_2
+dataread1;;tabstrc--recurs-tabbuff_read--819_2
+
+setreg2;:n
+
+
+gotoif;>tabstrc--recurs-checkyes--819_2
+goto;>tabstrc--recurs-checkno--819_2
+null;;tabstrc--recurs-checkyes--819_2
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--819
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--819
+
+setreg1;>tabstrc--adrbuff--819
+
+datawrite1;>tabstrc--recurs-tabbuff--819_3
+dataread1;;tabstrc--recurs-tabbuff--819_3
+datawrite1;>tabstrc--recurs-tabbuff_read--819_3
+dataread1;;tabstrc--recurs-tabbuff_read--819_3
+
+setreg2;:f
+
+
+gotoif;>tabstrc--recurs-checkyes--819_3
+goto;>tabstrc--recurs-checkno--819_3
+null;;tabstrc--recurs-checkyes--819_3
+#recursion
+#increment pointer
+dataread1;>tabstrc--adrbuff--819
+setreg2;+
+add
+datawrite1;>tabstrc--adrbuff--819
+
+setreg1;>tabstrc--adrbuff--819
+
+datawrite1;>tabstrc--recurs-tabbuff--819_4
+dataread1;;tabstrc--recurs-tabbuff--819_4
+datawrite1;>tabstrc--recurs-tabbuff_read--819_4
+dataread1;;tabstrc--recurs-tabbuff_read--819_4
+
+setreg2;:o
+
+
+gotoif;>tabstrc--recurs-checkyes--819_4
+goto;>tabstrc--recurs-checkno--819_4
+null;;tabstrc--recurs-checkyes--819_4
+##set flag########
+setreg1;>tabstrc--outbuff--819
+datawrite1;>tabstrc--recurs-flag--819_4
+setreg1;+
+datawrite1;;tabstrc--recurs-flag--819_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--819_4
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--819_3
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--819_2
+#recursionskip endpoint
+null;;tabstrc--recurs-checkno--819_1
+#read output to register 1 for 'set' to use.
+dataread1;>tabstrc--outbuff--819
+#######tabstrc END
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>sys_shell_cmdflg
+#conditional subroutine goto
+dataread1;>sys_shell_cmdflg
+dataread2;>@1
+gotoif;>goto--branch-821
+goto;>goto--jumper-821
+setreg1;>goto--jumper-821;goto--branch-821
+s1push1
+goto;>sys_shell_info--label
+null;;goto--jumper-821
+#goto 
+goto;>sys_shell_loop--label
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;sys_shell_help--label
+#Set text colors
+dataread1;>*+++--0
+iowrite1;>io.textcolor
+#prline
+fopwri1;:-
+fopwri1;:-
+fopwri1;:s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:p
+fopwri1;:-
+fopwri1;:-
+fopwri1;:\n
+#prline
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:p
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:h
+fopwri1;:i
+fopwri1;:s
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:e
+fopwri1;:x
+fopwri1;:t
+fopwri1;:\n
+#prline
+fopwri1;:i
+fopwri1;:n
+fopwri1;:f
+fopwri1;:o
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:y
+fopwri1;:s
+fopwri1;:t
+fopwri1;:e
+fopwri1;:m
+fopwri1;:\s
+fopwri1;:i
+fopwri1;:n
+fopwri1;:f
+fopwri1;:o
+fopwri1;:\n
+#prline
+fopwri1;:b
+fopwri1;:a
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:r
+fopwri1;:y
+fopwri1;:s
+fopwri1;:t
+fopwri1;:a
+fopwri1;:l
+fopwri1;:\s
+fopwri1;:b
+fopwri1;:a
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\n
+#prline
+fopwri1;:c
+fopwri1;:a
+fopwri1;:l
+fopwri1;:c
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:a
+fopwri1;:l
+fopwri1;:c
+fopwri1;:u
+fopwri1;:l
+fopwri1;:a
+fopwri1;:t
+fopwri1;:o
+fopwri1;:r
+fopwri1;:\n
+#prline
+fopwri1;:u
+fopwri1;:i
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:p
+fopwri1;::
+fopwri1;:\s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:p
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:y
+fopwri1;:s
+fopwri1;:t
+fopwri1;:e
+fopwri1;:m
+fopwri1;:\n
+#prline
+fopwri1;:v
+fopwri1;:d
+fopwri1;:i
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:b
+fopwri1;:t
+fopwri1;:v
+fopwri1;:d
+fopwri1;:i
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\n
+#prline
+fopwri1;:e
+fopwri1;:x
+fopwri1;:i
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:e
+fopwri1;:x
+fopwri1;:i
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\n
+#prline
+fopwri1;:a
+fopwri1;:b
+fopwri1;:o
+fopwri1;:u
+fopwri1;:t
+fopwri1;:\s
+fopwri1;::
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:b
+fopwri1;:o
+fopwri1;:u
+fopwri1;:t
+fopwri1;:\n
+#Set text colors
+dataread1;>*+++---
+iowrite1;>io.textcolor
+#print newline
+fopwri1;:\n
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;sys_shell_info--label
+#Set text colors
+dataread1;>*0++---
+iowrite1;>io.textcolor
+#prline
+fopwri1;:C
+fopwri1;:P
+fopwri1;:U
+fopwri1;::
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:C
+fopwri1;:V
+fopwri1;:M
+fopwri1;:_
+fopwri1;:G
+fopwri1;:2
+fopwri1;:x
+fopwri1;:_
+fopwri1;:9
+fopwri1;:_
+fopwri1;:r
+fopwri1;:1
+fopwri1;:\s
+fopwri1;:o
+fopwri1;:r
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:o
+fopwri1;:m
+fopwri1;:p
+fopwri1;:a
+fopwri1;:t
+fopwri1;:.
+fopwri1;:\n
+#prline
+fopwri1;:G
+fopwri1;:F
+fopwri1;:X
+fopwri1;::
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:G
+fopwri1;:A
+fopwri1;:\s
+fopwri1;:v
+fopwri1;:2
+fopwri1;:\n
+#prline
+fopwri1;:M
+fopwri1;:E
+fopwri1;:M
+fopwri1;::
+fopwri1;:\s
+fopwri1;:3
+fopwri1;:9
+fopwri1;:.
+fopwri1;:3
+fopwri1;:6
+fopwri1;:6
+fopwri1;:\s
+fopwri1;:K
+fopwri1;:N
+fopwri1;:\n
+#Set text colors
+dataread1;>*+++---
+iowrite1;>io.textcolor
+#return from subroutine.
+s1pop1
+gotoreg1
+#table width=80, height=1
+null;;shell_entry_buffer--table
+#tpad
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+null;0
+#label
+null;;getentry--label
+#val (used with set to change variable value during runtime.)
+setreg1;0
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_size
+#label
+null;;getentry_loop--label
+#keprompt: prompt for single keypress, continue only when keypress is received.
+setreg2;0
+iowrite1;>io.ttyrd
+ioread1;>io.ttyrd;keyprompt--loop-894
+gotoif;>keyprompt--loop-894
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_chbuff
+#conditional goto
+dataread1;>shell_entry_size
+dataread2;>@0
+gotoif;>goto--branch-896
+goto;>goto--jumper-896
+setreg1;>goto--jumper-896;goto--branch-896
+goto;>shell_entry_skipnewline--label
+null;;goto--jumper-896
+#conditional subroutine goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\n
+gotoif;>goto--branch-897
+goto;>goto--jumper-897
+setreg1;>goto--jumper-897;goto--branch-897
+s1push1
+goto;>getentry_tobuff--label
+null;;goto--jumper-897
+#conditional return
+dataread1;>shell_entry_chbuff
+dataread2;>:\n
+gotoif;>goto--branch-898
+goto;>goto--jumper-898
+s1pop1;;goto--branch-898
+gotoreg1
+null;;goto--jumper-898
+#label
+null;;shell_entry_skipnewline--label
+#conditional goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\n
+gotoif;>goto--branch-901
+goto;>goto--jumper-901
+setreg1;>goto--jumper-901;goto--branch-901
+goto;>getentry_loop--label
+null;;goto--jumper-901
+#conditional subroutine goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\x
+gotoif;>goto--branch-903
+goto;>goto--jumper-903
+setreg1;>goto--jumper-903;goto--branch-903
+s1push1
+goto;>getentry_backone--label
+null;;goto--jumper-903
+#conditional goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\x
+gotoif;>goto--branch-904
+goto;>goto--jumper-904
+setreg1;>goto--jumper-904;goto--branch-904
+goto;>getentry_loop--label
+null;;goto--jumper-904
+#conditional goto
+dataread1;>shell_entry_size
+dataread2;>shell_entry_max
+gotoif;>goto--branch-907
+goto;>goto--jumper-907
+setreg1;>goto--jumper-907;goto--branch-907
+goto;>getentry_loop--label
+null;;goto--jumper-907
+#Dump (character)
+dataread1;>shell_entry_chbuff
+iowrite1;>io.ttywr
+#add (2op math)
+dataread1;>shell_entry_size
+dataread2;>@1
+add
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_size
+#get(1) (may be used with set, or asm code)
+dataread1;>shell_entry_chbuff
+#stack push (uses stack 2)
+s2push1
+#goto 
+goto;>getentry_loop--label
+#label
+null;;getentry_backone--label
+#conditional return
+dataread1;>shell_entry_size
+dataread2;>@0
+gotoif;>goto--branch-918
+goto;>goto--jumper-918
+s1pop1;;goto--branch-918
+gotoreg1
+null;;goto--jumper-918
+#Dump (character)
+dataread1;>:\x
+iowrite1;>io.ttywr
+#stack pop (uses stack 2)
+s2pop1
+#subtract (2op math)
+dataread1;>shell_entry_size
+dataread2;>@1
+sub
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_size
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;getentry_tobuff--label
+#stack reverse (uses stack 2)
+s2reverse
+#subtract (2op math)
+dataread1;>shell_entry_size
+dataread2;>@1
+sub
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_itersize
+#Upward range iterator
+dataread1;>@0
+datawrite1;>getentry_tobuff_iter
+setreg1;>uiter-retpos-930;uiter-loopback-930
+s1push1
+goto;>getentry_tobuff_loop--label
+dataread1;>getentry_tobuff_iter;uiter-retpos-930
+setreg2;10x1
+add
+datawrite1;>getentry_tobuff_iter
+dataread2;>shell_entry_itersize
+gotoifless;>uiter-loopback-930
+gotoif;>uiter-loopback-930
+
+#conditional return
+dataread1;>shell_entry_clearbuffer
+dataread2;>@0
+gotoif;>goto--branch-931
+goto;>goto--jumper-931
+s1pop1;;goto--branch-931
+gotoreg1
+null;;goto--jumper-931
+#Upward range iterator
+dataread1;>shell_entry_size
+datawrite1;>getentry_pad_iter
+setreg1;>uiter-retpos-932;uiter-loopback-932
+s1push1
+goto;>getentry_pad--label
+dataread1;>getentry_pad_iter;uiter-retpos-932
+setreg2;10x1
+add
+datawrite1;>getentry_pad_iter
+dataread2;>shell_entry_max
+gotoifless;>uiter-loopback-932
+gotoif;>uiter-loopback-932
+
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;getentry_tobuff_loop--label
+#stack pop (uses stack 2)
+s2pop1
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_buff
+#SSTNPL table write instruction.
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>getentry_tobuff_iter
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabw--adrbuff--938
+dataread1;>shell_entry_buff
+datawrite1;;tabw--adrbuff--938
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;getentry_pad--label
+#SSTNPL table write instruction.
+setreg1;10x80
+dataread2;>@0
+mul
+dataread2;>getentry_pad_iter
+add
+setreg2;10x1
+add
+setreg2;>shell_entry_buffer--table
+add
+datawrite1;>tabw--adrbuff--943
+dataread1;>@0
+datawrite1;;tabw--adrbuff--943
 #return from subroutine.
 s1pop1
 gotoreg1
