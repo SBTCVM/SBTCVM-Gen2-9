@@ -21,11 +21,12 @@ var shell_entry_size=0
 var shell_entry_itersize=0
 
 
+var shell_entry_zeroit=0
 var shell_entry_buff=0
 var shell_entry_chbuff=0
 ########CONFIGURATION OF INPUT CODE#########
 
-#####set this to @1 to enable 'purging of the input buffer' (see below).
+#####set this to @1 to enable 'purging of the input buffer'
 var shell_entry_clearbuffer=@0
 
 #####MAXIMUM INPUT SIZE IN CHARACTERS
@@ -38,6 +39,8 @@ var shell_entry_max=@80
 #	this should ONLY be turned on, if remaining characters from past commands, 
 #	are causing issues, and the 'shell_entry_size' variable isn't enough to 
 #	prevent said issues, as THIS OPTION WILL SLOW DOWN THINGS NOTICEABLY.
+#	regardless of this setting, the next character following the last string
+#	will be zeroed.
 
 var cmdflg=0
 var validcom=0
@@ -105,8 +108,9 @@ return
 ###and placing them in the table: 'shell_entry_buffer'
 
 #entry buffer
-table shell_entry_buffer,80,1
-tpad 80
+#Table is purposely 5 entries longer than max size.
+table shell_entry_buffer,85,1
+tpad 85
 
 
 label getentry
@@ -149,10 +153,14 @@ label getentry_tobuff
 	stackrev
 	sub shell_entry_size,@1
 	set shell_entry_itersize
+	add shell_entry_size,@1
+	set shell_entry_zeroit
 	uiter getentry_tobuff_iter,getentry_tobuff_loop,@0,shell_entry_itersize
+	uiter getentry_pad_iter,getentry_pad,shell_entry_size,shell_entry_zeroit
 	if shell_entry_clearbuffer,@0 return
-	uiter getentry_pad_iter,getentry_pad,shell_entry_size,shell_entry_max
+	uiter getentry_pad_iter,getentry_pad,shell_entry_zeroit,shell_entry_max
 	return
+
 
 label getentry_tobuff_loop
 	pop

@@ -81,6 +81,7 @@ null;++0---;*++0---
 null;0++---;*0++---
 null;0;shell_entry_size
 null;0;shell_entry_itersize
+null;0;shell_entry_zeroit
 null;0;shell_entry_buff
 null;0;shell_entry_chbuff
 null;10x0;shell_entry_clearbuffer
@@ -4706,7 +4707,7 @@ setreg1;0
 datawrite1;>sys_shell_validcom
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -4826,7 +4827,7 @@ goto;>sys_shell_help--label
 null;;goto--jumper-793
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -4946,7 +4947,7 @@ goto;>crystal_ball--label
 null;;goto--jumper-797
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -5066,7 +5067,7 @@ goto;>calc_init--label
 null;;goto--jumper-801
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -5230,7 +5231,7 @@ goto;>help--label
 null;;goto--jumper-805
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -5372,7 +5373,7 @@ goto;>help_about--label
 null;;goto--jumper-809
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -5470,7 +5471,7 @@ goto;>VDI_shell--label
 null;;goto--jumper-813
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -5589,7 +5590,7 @@ gotoreg1
 null;;goto--jumper-817
 #######tabstrc
 #init
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>@0
@@ -5976,9 +5977,14 @@ iowrite1;>io.textcolor
 #return from subroutine.
 s1pop1
 gotoreg1
-#table width=80, height=1
+#table width=85, height=1
 null;;shell_entry_buffer--table
 #tpad
+null;0
+null;0
+null;0
+null;0
+null;0
 null;0
 null;0
 null;0
@@ -6070,70 +6076,70 @@ null;;getentry_loop--label
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-894
-gotoif;>keyprompt--loop-894
+ioread1;>io.ttyrd;keyprompt--loop-896
+gotoif;>keyprompt--loop-896
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>shell_entry_chbuff
 #conditional goto
 dataread1;>shell_entry_size
 dataread2;>@0
-gotoif;>goto--branch-896
-goto;>goto--jumper-896
-setreg1;>goto--jumper-896;goto--branch-896
+gotoif;>goto--branch-898
+goto;>goto--jumper-898
+setreg1;>goto--jumper-898;goto--branch-898
 goto;>shell_entry_skipnewline--label
-null;;goto--jumper-896
+null;;goto--jumper-898
 #conditional subroutine goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
-gotoif;>goto--branch-897
-goto;>goto--jumper-897
-setreg1;>goto--jumper-897;goto--branch-897
+gotoif;>goto--branch-899
+goto;>goto--jumper-899
+setreg1;>goto--jumper-899;goto--branch-899
 s1push1
 goto;>getentry_tobuff--label
-null;;goto--jumper-897
+null;;goto--jumper-899
 #conditional return
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
-gotoif;>goto--branch-898
-goto;>goto--jumper-898
-s1pop1;;goto--branch-898
+gotoif;>goto--branch-900
+goto;>goto--jumper-900
+s1pop1;;goto--branch-900
 gotoreg1
-null;;goto--jumper-898
+null;;goto--jumper-900
 #label
 null;;shell_entry_skipnewline--label
 #conditional goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
-gotoif;>goto--branch-901
-goto;>goto--jumper-901
-setreg1;>goto--jumper-901;goto--branch-901
-goto;>getentry_loop--label
-null;;goto--jumper-901
-#conditional subroutine goto
-dataread1;>shell_entry_chbuff
-dataread2;>:\x
 gotoif;>goto--branch-903
 goto;>goto--jumper-903
 setreg1;>goto--jumper-903;goto--branch-903
+goto;>getentry_loop--label
+null;;goto--jumper-903
+#conditional subroutine goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\x
+gotoif;>goto--branch-905
+goto;>goto--jumper-905
+setreg1;>goto--jumper-905;goto--branch-905
 s1push1
 goto;>getentry_backone--label
-null;;goto--jumper-903
+null;;goto--jumper-905
 #conditional goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\x
-gotoif;>goto--branch-904
-goto;>goto--jumper-904
-setreg1;>goto--jumper-904;goto--branch-904
+gotoif;>goto--branch-906
+goto;>goto--jumper-906
+setreg1;>goto--jumper-906;goto--branch-906
 goto;>getentry_loop--label
-null;;goto--jumper-904
+null;;goto--jumper-906
 #conditional goto
 dataread1;>shell_entry_size
 dataread2;>shell_entry_max
-gotoif;>goto--branch-907
-goto;>goto--jumper-907
-setreg1;>goto--jumper-907;goto--branch-907
+gotoif;>goto--branch-909
+goto;>goto--jumper-909
+setreg1;>goto--jumper-909;goto--branch-909
 goto;>getentry_loop--label
-null;;goto--jumper-907
+null;;goto--jumper-909
 #Dump (character)
 dataread1;>shell_entry_chbuff
 iowrite1;>io.ttywr
@@ -6154,11 +6160,11 @@ null;;getentry_backone--label
 #conditional return
 dataread1;>shell_entry_size
 dataread2;>@0
-gotoif;>goto--branch-918
-goto;>goto--jumper-918
-s1pop1;;goto--branch-918
+gotoif;>goto--branch-920
+goto;>goto--jumper-920
+s1pop1;;goto--branch-920
 gotoreg1
-null;;goto--jumper-918
+null;;goto--jumper-920
 #Dump (character)
 dataread1;>:\x
 iowrite1;>io.ttywr
@@ -6183,41 +6189,61 @@ dataread2;>@1
 sub
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>shell_entry_itersize
+#add (2op math)
+dataread1;>shell_entry_size
+dataread2;>@1
+add
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>shell_entry_zeroit
 #Upward range iterator
 dataread1;>@0
 datawrite1;>getentry_tobuff_iter
-setreg1;>uiter-retpos-930;uiter-loopback-930
+setreg1;>uiter-retpos-934;uiter-loopback-934
 s1push1
 goto;>getentry_tobuff_loop--label
-dataread1;>getentry_tobuff_iter;uiter-retpos-930
+dataread1;>getentry_tobuff_iter;uiter-retpos-934
 setreg2;10x1
 add
 datawrite1;>getentry_tobuff_iter
 dataread2;>shell_entry_itersize
-gotoifless;>uiter-loopback-930
-gotoif;>uiter-loopback-930
+gotoifless;>uiter-loopback-934
+gotoif;>uiter-loopback-934
+
+#Upward range iterator
+dataread1;>shell_entry_size
+datawrite1;>getentry_pad_iter
+setreg1;>uiter-retpos-935;uiter-loopback-935
+s1push1
+goto;>getentry_pad--label
+dataread1;>getentry_pad_iter;uiter-retpos-935
+setreg2;10x1
+add
+datawrite1;>getentry_pad_iter
+dataread2;>shell_entry_zeroit
+gotoifless;>uiter-loopback-935
+gotoif;>uiter-loopback-935
 
 #conditional return
 dataread1;>shell_entry_clearbuffer
 dataread2;>@0
-gotoif;>goto--branch-931
-goto;>goto--jumper-931
-s1pop1;;goto--branch-931
+gotoif;>goto--branch-936
+goto;>goto--jumper-936
+s1pop1;;goto--branch-936
 gotoreg1
-null;;goto--jumper-931
+null;;goto--jumper-936
 #Upward range iterator
-dataread1;>shell_entry_size
+dataread1;>shell_entry_zeroit
 datawrite1;>getentry_pad_iter
-setreg1;>uiter-retpos-932;uiter-loopback-932
+setreg1;>uiter-retpos-937;uiter-loopback-937
 s1push1
 goto;>getentry_pad--label
-dataread1;>getentry_pad_iter;uiter-retpos-932
+dataread1;>getentry_pad_iter;uiter-retpos-937
 setreg2;10x1
 add
 datawrite1;>getentry_pad_iter
 dataread2;>shell_entry_max
-gotoifless;>uiter-loopback-932
-gotoif;>uiter-loopback-932
+gotoifless;>uiter-loopback-937
+gotoif;>uiter-loopback-937
 
 #return from subroutine.
 s1pop1
@@ -6229,7 +6255,7 @@ s2pop1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>shell_entry_buff
 #SSTNPL table write instruction.
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>getentry_tobuff_iter
@@ -6238,16 +6264,16 @@ setreg2;10x1
 add
 setreg2;>shell_entry_buffer--table
 add
-datawrite1;>tabw--adrbuff--938
+datawrite1;>tabw--adrbuff--943
 dataread1;>shell_entry_buff
-datawrite1;;tabw--adrbuff--938
+datawrite1;;tabw--adrbuff--943
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;getentry_pad--label
 #SSTNPL table write instruction.
-setreg1;10x80
+setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>getentry_pad_iter
@@ -6256,9 +6282,9 @@ setreg2;10x1
 add
 setreg2;>shell_entry_buffer--table
 add
-datawrite1;>tabw--adrbuff--943
+datawrite1;>tabw--adrbuff--948
 dataread1;>@0
-datawrite1;;tabw--adrbuff--943
+datawrite1;;tabw--adrbuff--948
 #return from subroutine.
 s1pop1
 gotoreg1
