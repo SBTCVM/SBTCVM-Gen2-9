@@ -1,0 +1,4 @@
+#here we have an assembler tas0 module.
+null;10x15
+#this variable is called 'bob' to us. but the main program has its own 'bob'...
+v>bob;10x1

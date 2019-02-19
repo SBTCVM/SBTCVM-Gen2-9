@@ -313,6 +313,65 @@ class includetas0:
 		tas0main.p3()
 		return tas0main.datainstlist
 
+class includetas0_as:
+	def __init__(self):
+		self.keywords=["includeas"]
+		self.prefixes=[]
+		self.nsp=0
+		self.tas0list={}
+	def p0(self, datafull, keyword, lineno):
+		if datafull==None:
+			return 1, keyword+": Line: " + str(lineno) + ": requires tas0 filename as argument!"
+		try:
+			filed, name = datafull.split(",")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": requires [tas0 filename],[name] as arguments!"
+		if name=="":
+			return 1, keyword+": Line: " + str(lineno) + ": missing/blank include name!"
+		#load tas0 file.
+		tas0fobj=iofuncts.loadtrom(filed, ext=".tas0", exitonfail=0, dirauto=1)
+		if tas0fobj==None:
+			return 1, keyword+": Line: " + str(lineno) + ": Unable to load tas0 file!"
+		#init mainloop
+		tas0main=mainloop(tas0fobj, ".", "foobar", pfx="--t0: '" + filed + "' line: '" + str(lineno) + "'\n    :")
+		#enable internal-only mode: tas0
+		tas0main.mode="tas0"
+		#run headloader
+		tas0main.headload()
+		#pass 0
+		if tas0main.p0():
+			return 1, keyword+": Line: " + str(lineno) + ": tas0 pass 0: Syntax Error!"
+		#store tas0 in dict by name.
+		self.tas0list[filed + str(lineno)]=tas0main
+		return 0, None
+	#return length in words of memory. needed here for goto refrence label parsing!
+	def p1(self, data, keyword, lineno, addr, gotos):
+		filed, name = data.split(",")
+		tas0main=self.tas0list[filed + str(lineno)]
+		#set address start to current main addr for proper handling of tas0 adresses.
+		tas0main.addrstart=addr
+		retval=tas0main.p1()
+		#print(retval-addr)
+		
+		newnames={}
+		for v in tas0main.nspdict:
+			newnames[name + "." + v]=tas0main.nspdict[v]
+		return retval-addr, newnames
+	#second syntax check pass:
+	def p2(self, datafull, keyword, gotos, lineno):
+		filed, name = datafull.split(",")
+		tas0main=self.tas0list[filed + str(lineno)]
+		if tas0main.p2():
+			return 1, keyword+": Line: " + str(lineno) + ": tas0 pass 2: Syntax Error!"
+		return 0, None
+	#should return two signed ints or btint objects.
+	def p3(self, data, keyword, gotos, lineno):
+		filed, name = data.split(",")
+		tas0main=self.tas0list[filed + str(lineno)]
+		tas0main.p3()
+		return tas0main.datainstlist
+
+
 class nspacevar:
 	def __init__(self):
 		self.keywords=[]
@@ -463,6 +522,7 @@ class mainloop:
 		instruct(["exclear"], 103),
 		instruct(["exceptcode"], 104),
 		includetas0(),
+		includetas0_as(),
 		nspacevar(),
 		marker()]
 		

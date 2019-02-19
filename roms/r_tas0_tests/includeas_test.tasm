@@ -1,0 +1,24 @@
+head-nspin=stdnsp
+
+#explanation:
+
+#     This is an example of using named namespaces for tas0 modules via the 
+#  'includeas' statement. This lets you have, say, a variable called 'bob' in
+#  both main and in a module, and have both be accessible in main.
+
+#includeas hides all included vars behind the prefix given ('sam' in this example)
+includeas;includeas_test_sub.tas0,sam
+
+#to prove a point.
+v>bob;10x2
+
+#when you run this program, it should dump 'sam.bob's value (1)
+#and then the local 'bob's value: (2)
+
+#dump 'sam.bob' from module.
+setreg1;>sam.bob
+iowrite1;>io.decdump
+
+#dump local 'bob'
+setreg1;>bob
+iowrite1;>io.decdump

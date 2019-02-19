@@ -12,8 +12,8 @@ import vmsystem.iofuncts as iofuncts
 import vmsystem.g2asmlib as g2asmlib
 from vmsystem.g2asmlib import mainloop
 #common vars:
-asmvers='v3.0.0'
-versint=(3, 0, 0)
+asmvers='v3.1.0'
+versint=(3, 1, 0)
 
 
 
