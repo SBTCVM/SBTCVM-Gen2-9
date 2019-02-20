@@ -22,6 +22,7 @@ vdi.cli.out;101
 rand3.start;56
 vdi.cli.in;100
 plot.y2;504
+plot.height;510
 io.ttyrd;4
 io.tritdump;2
 io.textcolor;6
@@ -32,9 +33,11 @@ rand3.end;57
 mouse.realx;303
 mouse.realy;304
 plot.line;506
+plot.width;509
 plot.fhalt;520
 ga.mode;500
 mouse.locky;302
 mouse.lockx;301
 plot.color;505
+plot.rect;508
 rand4.end;60

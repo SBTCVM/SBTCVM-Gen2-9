@@ -191,8 +191,11 @@ Command documentation:
 	drawy1    [varname]: set plotter y1
 	drawx2    [varname]: set plotter x2
 	drawy2    [varname]: set plotter y2
+	drawwdith  [varname]: set plotter width register
+	drawheight  [varname]: set plotter height register
 	drawcolor [varname]: set plotter color (9-trit RGB)
 	drawline           : draw line from x1,y1, to x2,y2 using plotter color
+	drawrect           : draw rect at x1,y1 using plotter width/height registers for size.
 	drawfill  [varname]: fill plotter display with given (9-trit RGB) color
 	drawflock [varname]: instruct plotter to stop parsing items for the
 		current frame, rather than break at 30 items.

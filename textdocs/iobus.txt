@@ -104,8 +104,11 @@ x :  m : asm varname  : description
 503: [w] plot.x2    : set plotter x2 position register
 504: [w] plot.y2    : set plotter y2 position register
 505: [w] plot.color : set plotter 9-trit RGB color register
-506: [w] plot.line  : draw line
+506: [w] plot.line  : draw line from x1,y1 to x2,y2
 507: [w] plot.fill  : write a 9-trit RGB color to fill the display with.
+508: [w] plot.rect  : draw rectangle at x1,y1 using width and height registers for size.
+509: [w] plot.width : set width register (rects)
+510: [w] plot.height: set height register (rects)
 520: [w] plot.fhalt : instruct the plotter to wait until next frame.
 521: [b] plot.buffer: write: clear draw buffer. read: get number of items in
 		draw buffer. (keep at or below 30 for constant drawing.)

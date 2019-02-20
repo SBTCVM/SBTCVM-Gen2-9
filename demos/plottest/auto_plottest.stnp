@@ -22,6 +22,15 @@ drawflush
 drawfill *-0+-000++
 
 
+drawx1 @-121
+drawy1 @-121
+
+drawwidth @121
+drawheight @121
+
+drawcolor *00+000000
+drawrect
+
 drawcolor *+++++++++
 
 
@@ -46,6 +55,7 @@ drawline
 drawy1 @35
 drawy2 @35
 drawline
+
 
 #you can get how many operations are in the plotter's draw command buffer like
 #so:
