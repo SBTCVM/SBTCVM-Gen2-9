@@ -36,8 +36,10 @@ if __name__=="__main__":
    help, -h, --help: this help
    -v, --version: stnp compiler version
    -a, --about: about SBTCVM
-   -c [sourcefile], --compile [sourcefile]: Compile source file into a tasm file,
-      then run the assembler on it automatically, if successful.
+   -c [sourcefile], --compile [sourcefile]: Compile source file into a tasm 
+      file, then run the assembler on it automatically, if successful.
+   -m [sourcefile], --module [sourcefile]: Compile source file into an SSTNPL 
+      module.
    [sourcefile]: same as -c
    Note: if source is example.stnp, tasm file will be example__stnp.tasm. rom
    will be example.trom''')
@@ -69,10 +71,16 @@ see readme.md for more information and licensing of media.
 	elif cmd == None:
 		print("Tip: Try stnpcom.py -h for help.")
 	else:
-		if cmd in ['-c', '--compile']:
+		if cmd in ['-m', '--module']:
 			argx=arg
+			pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP", dirauto=1)
+			stnplib.modcomp(pathx)
 		else:
-			argx=cmd
-		pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP", dirauto=1)
-		stnplib.compwrap(pathx)
+			
+			if cmd in ['-c', '--compile']:
+				argx=arg
+			else:
+				argx=cmd
+			pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP", dirauto=1)
+			stnplib.compwrap(pathx)
 		

@@ -1,0 +1,33 @@
+var bob=@2
+
+
+#test of SSTNPL modules.
+	prline HELLO FROM MAIN FILE
+	
+	
+	#first dump 'bob' from module, then dump local 'bob'
+	#prline 1, then 2 should show.
+		dumpd module1.bob
+		dumpd bob
+		newline
+
+	#test subroutines.
+		gsub module1.test1
+		gsub module1.test2
+
+	keyprompt
+	stop
+
+#SSTNPL modules should be placed outside of program path if they contain
+#subroutines. (this one does)
+
+#ALWAYS SPECIFY BASENAME SHARED BY THE '.tas0' AND '.stnpmfs' files.
+(WITHOUT EITHER EXTENSION)
+
+#syntax:
+#include [basename] as [varspace name]
+#
+#[varspace name] refers to the string prepended to all variables from the module.
+#i.e. module1.bob, module1.test2
+
+include stnpmod_test+module_example as module1

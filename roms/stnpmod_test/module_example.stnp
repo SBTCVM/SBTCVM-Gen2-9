@@ -1,0 +1,16 @@
+#this is an example module.
+var bob=@1
+
+
+
+
+label test1
+prline HELLO FROM MODULE
+return
+
+label test2
+table mytable,4,3
+prline ABC
+prline 123
+prline XYZ
+return

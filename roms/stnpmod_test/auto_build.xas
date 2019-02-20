@@ -1,0 +1,2 @@
+stnp --module stnpmod_test+module_example.stnp
+stnp stnpmod_test

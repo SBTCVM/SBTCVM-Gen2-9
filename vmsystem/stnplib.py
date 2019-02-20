@@ -6,6 +6,7 @@ import sys
 #from subprocess import call
 from . import libtextcon as tcon
 from . import g2asmlib
+from . import iofuncts
 #variable type constants
 nptype_int=2
 nptype_str=3#not used
@@ -15,14 +16,15 @@ nptype_table=5
 
 #SSTNPL compiler main routine library.
 
-stnpvers='v0.2.2'
-versint=(0, 2, 2)
+stnpvers='v0.3.0'
+versint=(0, 3, 0)
 
 class npvar:
-	def __init__(self, vname, vdata, vtype=nptype_int):
+	def __init__(self, vname, vdata, vtype=nptype_int, frommodule=0):
 		self.vname=vname
 		self.vdata=vdata
 		self.vtype=vtype
+		self.frommodule=frommodule
 
 tritvalid="+0-pn"
 varvalid="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_1234567890"
@@ -74,6 +76,86 @@ class in_var:
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		return
+
+
+
+class in_include:
+	def __init__(self):
+		self.keywords=["include"]
+		self.varspacenames=[]
+	def p0(self, args, keyword, lineno):
+		
+		#basic check
+		try:
+			basename, foo, varprefix = args.split(" ")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": must specify 'include [modulename] as [varspace name]"
+		print("MODULE LOAD: PRESCAN: LINE " + str(lineno) + ": " + basename + " as " + varprefix)
+		#varspace name checks
+		if varprefix=="":
+			return 1, keyword+": Line: " + str(lineno) + ": varspace name MUST NOT BE BLANK"
+		if varprefix in self.varspacenames:
+			return 1, keyword+": Line: " + str(lineno) + ": varspace name '" + varprefix + "' already used. DUPLICATES NOT ALLOWED."
+		for char in varprefix:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in varspace name! '" + char + "'"
+				
+		self.varspacenames.extend([varprefix])
+		#file existence checks:
+		if iofuncts.findtrom(basename, ext=".tas0", exitonfail=0, dirauto=1)==None:
+			return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': UNABLE TO FIND MODULE's '*.tas0' ASSEMBLER MODULE FILE."
+		if iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)==None:
+			return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': UNABLE TO FIND MODULE's '*.stmpmfs' VARIABLE MANIFEST FILE."
+		
+		#check manifest file for errors/corrupted data during first error check pass.
+		fname=iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)
+		fileobj=open(fname, "r")
+		for f in fileobj:
+			f=f.replace("\n", "")
+			if ";" in f:
+				try:
+					flist=f.split(";")
+					if flist[0]=="int9":
+						npvar(flist[1], flist[2], vtype=nptype_int)
+					if flist[0]=="label":
+						npvar(flist[1], None, vtype=nptype_label)
+					if flist[0]=="table":
+						try:
+							npvar(flist[1], [int(flist[2]), int(flist[3])], vtype=nptype_table)
+						except ValueError:
+							return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': MALFORMED TABLE SIZE FIELD IN MANIFEST\n    '" + f + "'"
+				except IndexError:
+					return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': MALFORMED DATAFIELD IN MANIFEST\n    '" + f + "'"
+		fileobj.close()
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		basename, foo, varprefix = args.split(" ")
+		varlist=[]
+		print("MODULE LOAD: MANIFEST: LINE " + str(lineno) + ": " + basename + " as " + varprefix)
+		fname=iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)
+		fileobj=open(fname, "r")
+		for f in fileobj:
+			f=f.replace("\n", "")
+			if ";" in f:
+				flist=f.split(";")
+				if flist[0]=="int9":
+					varlist.extend([npvar(varprefix + "." + flist[1], flist[2], vtype=nptype_int, frommodule=1)])
+				if flist[0]=="label":
+					varlist.extend([npvar(varprefix + "." + flist[1], None, vtype=nptype_label, frommodule=1)])
+				if flist[0]=="table":
+					varlist.extend([npvar(varprefix + "." + flist[1], [flist[2], flist[3]], vtype=nptype_table, frommodule=1)])
+		fileobj.close()
+		
+		return varlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		basename, foo, varprefix = args.split(" ")
+		print("MODULE LOAD: TAS0: LINE " + str(lineno) + ": " + basename + " as " + varprefix)
+		destobj.write('#module include: line ' + str(lineno) + ": " + basename + " as " + varprefix + "\n")
+		destobj.write('includeas;' + basename + "," + varprefix + "\n")
+		
 		return
 
 
@@ -1463,7 +1545,7 @@ def compwrap(sourcepath):
 		asmname="x_" + asmname
 	destpath=os.path.join(bpdir, asmname + "__stnp.tasm")
 	sourcefile=open(sourcepath, 'r')
-	print("SSTNPL COMPILER STARTUP:")
+	print("SSTNPL: MAIN COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
 	print("Pass 0: first syntax check")
 	mainret=mainl.p0()
@@ -1483,6 +1565,40 @@ def compwrap(sourcepath):
 	g2asmlib.assemble(destpath, syntaxonly=0, pfx=("g2asm:   "))
 	return
 
+#module compiler routine
+def modcomp(sourcepath):
+	##SSTNPL compile procedure function.
+	
+	basepath=sourcepath.rsplit(".", 1)[0]
+	bpdir=os.path.dirname(basepath)
+	bpname=os.path.basename(basepath)
+	asmname=bpname
+	
+	#open source file and init mainloop class
+	#if asmname.startswith("auto_"):
+	#	asmname="x_" + asmname
+	destpath=os.path.join(bpdir, asmname + ".tas0")
+	mfspath=os.path.join(bpdir, asmname + ".stnpmfs")
+	
+	sourcefile=open(sourcepath, 'r')
+	print("SSTNPL: MODULE COMPILER STARTUP:")
+	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
+	print("Pass 0: first syntax check")
+	mainret=mainl.p0()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
+	print("Pass 1: variable pass")
+	mainl.p1()
+	print("Pass 2: second syntax check (with variables)")
+	mainret=mainl.p2()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
+	print("Pass 3: compile pass")
+	mainl.p3()
+	print("Pass 4: Generate SSTNPL variable Manifest...")
+	mainl.mfs(mfspath)
+	return
+
 #SSTNPL Compiler Engine class.
 class mainloop:
 	def __init__(self, srcobj, destpath, sourcepath, bpname):
@@ -1497,6 +1613,7 @@ class mainloop:
 		##############################
 		#master instruction list
 		self.instructs=[in_var(),
+		in_include(),
 		in_label(),
 		in_table(),
 		in_tabr(),
@@ -1649,7 +1766,7 @@ class mainloop:
 		self.outobj.write(headinfo(self.filename, self.bpname))
 		#each unique integer variable & literal gets 1 memory address at head of rom.
 		for rvar in self.nvars:
-			if rvar.vtype==nptype_int and rvar.vname not in self.comped_nvars:
+			if rvar.vtype==nptype_int and rvar.vname not in self.comped_nvars and rvar.frommodule==0:
 				self.outobj.write('null;' + rvar.vdata + ';' + rvar.vname + "\n")
 				self.comped_nvars.extend([rvar.vname])
 		self.srcobj.seek(0)
@@ -1672,5 +1789,15 @@ class mainloop:
 					
 		self.outobj.write("#END OF FILE\n")
 		self.outobj.close()
-	
+	def mfs(self, mfsfilename):
+		mfsfile=open(mfsfilename, "w")
+		for f in self.nvars:
+			mfsfile.write('int9;' + f.vname + ";" + f.vdata + "\n")
+		for f in self.labels:
+			mfsfile.write('label;' + f + "\n")
+		for f in self.tables:
+			rvar=self.tables[f]
+			mfsfile.write('table;' + f + ";" + str(rvar.vdata[0]) + ";" + str(rvar.vdata[1]) + "\n")
+		mfsfile.close()
+			
 	
