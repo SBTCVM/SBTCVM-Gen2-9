@@ -112,17 +112,19 @@ def fileinfo(filen, pathx, sublist=0):
 	else:
 		prfx=""
 	if filen.lower().endswith(".trom"):
-		print(prfx + "   Rom Image   : " + pathx)
+		print(prfx + "   SBTCVM Rom Image      : " + pathx)
 	elif filen.lower().endswith(".tasm"):
-		print(prfx + "   Assembly    : " + pathx)
+		print(prfx + "   Assembler source file : " + pathx)
 	elif filen.lower().endswith(".tas0"):
-		print(prfx + "   tas0 library: " + pathx)
+		print(prfx + "   Assembler tas0 Module : " + pathx)
 	elif filen.lower().endswith(".stnp"):
-		print(prfx + "   SSTNPL      : " + pathx)
+		print(prfx + "   SSTNPL Source code    : " + pathx)
+	elif filen.lower().endswith(".stnpmfs"):
+		print(prfx + "   SSTNPL Module Manifest: " + pathx)
 	elif filen.lower().endswith(".xas"):
-		print(prfx + "   XAS script  : " + pathx)
+		print(prfx + "   XAS build script      : " + pathx)
 	elif filen.lower().endswith(".nsp"):
-		print(prfx + "   NSP library : " + pathx)
+		print(prfx + "   Assembler NSP library : " + pathx)
 
 #shell input function
 def getinput():

@@ -1,0 +1,56 @@
+#SSTNPL modules
+
+SSTNPL features a statically compiled module system.
+the following is some brief documentation on its usage.
+
+#### compiling modules.
+
+in order to use an *.stnp file as a module, you need to compile it via 
+stnpcom.py's module option:
+
+via xas shell/xas script:
+
+	stnp --module [modulename]
+	stnp -m [modulename]
+
+
+#### Including modules:
+
+
+modules, besides letting you separate code sections, also
+separates variables ('labels' and 'tables' as well, not just integers.)
+
+like so:
+
+	main
+		include [some module] as bob
+			var sam=@1
+	var sam=@2
+
+the module is specifed via its **basename**. 
+
+**DO NOT** specify EITHER OF THE .tas0 OR .stnpmfs extensions. otherwise 
+SSTNPL's compiler WILL NOT be able to load both the .stnpmfs and .tas0 files 
+and will throw an error.
+
+USE:
+
+	include comprompt as cp
+
+DO NOT USE:
+	include comprompt.tas0 as cp
+	include comprompt.stnpmfs as cp
+BOTH OF THOSE WILL CAUSE AN ERROR!
+
+notice the two variables called 'sam'.
+
+the one under 'main' can be refrenced as 'sam' directly, but not the other:
+
+	dumpd sam
+
+the 'sam' in the module included as 'bob', can be accessed as such:
+
+	dumpd bob.sam
+
+the effect is that both these variables are completely unique. this also stems
+to labels, AND tables.

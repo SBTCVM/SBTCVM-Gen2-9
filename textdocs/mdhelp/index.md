@@ -7,6 +7,7 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 - [Troubleshooting Guide (index)](troubleshoot/troubleshoot.md) (read this BEFORE submitting bug reports!!!!!!!)
 - [Welcome](welcome.md)
 - [Programs](programs.md)
+- [Standard library components](standardlib.md)
 
 ### Frontends
 
