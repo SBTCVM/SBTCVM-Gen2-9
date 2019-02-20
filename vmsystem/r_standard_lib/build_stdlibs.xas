@@ -2,6 +2,9 @@ print;---Standard library rebuild script.---
 
 #standard library master build script.
 
+print;SSTNPL modules
+stnp --module comprompt.stnp
+stnp --module cprle.stnp
 
 
 #Standard namespace library

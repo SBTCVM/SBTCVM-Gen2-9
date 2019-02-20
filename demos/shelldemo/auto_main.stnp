@@ -1,8 +1,12 @@
+#THIS DEMO USES THE 'comprompt' module.
+#(include statement at end of this file)
+
+
 prline This is a basic multi-character-command shell demo.
 prline type 'help' for commands
 
 
-#Uses SSTNPLs tabstrc instruction, and some stack/table-based input code,
+#Uses SSTNPLs tabstrc instruction, and the comprompt module
 #	to create a command shell, complete with multi-character commands,
 #	with no restrictions on command names, other than an 80-character limit,
 #	and no cases as such:
@@ -13,27 +17,14 @@ prline type 'help' for commands
 #			load2
 
 
-############################################
-##Entry Code Variables
-###READ THIS FOR SIZE OF INPUT
-var shell_entry_size=0
-#one less than shell_entry_size, for indexing
-var shell_entry_itersize=0
 
+#set comprompt max input size to 70
+val @70
+set cp.max
 
-var shell_entry_zeroit=0
-var shell_entry_buff=0
-var shell_entry_chbuff=0
-########CONFIGURATION OF INPUT CODE#########
-
-#####set this to @1 to enable 'purging of the input buffer'
-var shell_entry_clearbuffer=@0
-
-#####MAXIMUM INPUT SIZE IN CHARACTERS
-var shell_entry_max=@80
-
-############################################
-
+#set comprompt buffer-full-purge to off. (set to @1 to enable)
+val @0
+set cp.clearbuffer
 
 ####about 'purging of the input buffer'
 #	this should ONLY be turned on, if remaining characters from past commands, 
@@ -48,8 +39,9 @@ var validcom=0
 label main
 	textcolor *0++---
 	print >
-	#read value via specialized input read function
-	gsub getentry
+	#read value via comprompt's specialized input read function
+	gsub cp.getentry
+	
 	textcolor *+++---
 	newline
 	#use specialized SSTNPL table-string matcher to check for command.
@@ -62,17 +54,17 @@ label main
 	val 0
 	set validcom
 	
-	tabstrc shell_entry_buffer,@0,@0,help
+	tabstrc cp.buffer,@0,@0,help
 		set cmdflg
 		if cmdflg,@1 =validcom @1
 		if cmdflg,@1 gsub help
 	
-	tabstrc shell_entry_buffer,@0,@0,hello
+	tabstrc cp.buffer,@0,@0,hello
 		set cmdflg
 		if cmdflg,@1 =validcom @1
 		if cmdflg,@1 gsub hello
 	
-	tabstrc shell_entry_buffer,@0,@0,quit
+	tabstrc cp.buffer,@0,@0,quit
 		set cmdflg
 		if cmdflg,@1 =validcom @1
 		if cmdflg,@1 stop
@@ -82,94 +74,25 @@ label main
 goto main
 
 label invalid
-prline Unknown command
+	prline Unknown command
 return
 
 #hello command
 label hello
-prline And a good day to you, user. :D
+	prline And a good day to you, user. :D
 return
 
 #help command
 label help
-textcolor *+++--0
-prline command Help:
-prline help: this text
-prline hello: print a greeting message.
-prline quit: quit.
-textcolor *+++---
-newline
+	textcolor *+++--0
+	prline command Help:
+	prline help: this text
+	prline hello: print a greeting message.
+	prline quit: quit.
+	textcolor *+++---
+	newline
 return
 
+#place comprompt include statement at END of file, OUTSIDE of normal code.
+include comprompt as cp
 
-
-####################################
-###The following code is related to reading the commands 
-###and placing them in the table: 'shell_entry_buffer'
-
-#entry buffer
-#Table is purposely 5 entries longer than max size.
-table shell_entry_buffer,85,1
-tpad 85
-
-
-label getentry
-	val 0
-	set shell_entry_size
-	label getentry_loop
-		keyprompt
-		set shell_entry_chbuff
-		if shell_entry_size,@0 goto shell_entry_skipnewline
-		if shell_entry_chbuff,:\n gsub getentry_tobuff
-		if shell_entry_chbuff,:\n return
-		
-		label shell_entry_skipnewline
-		if shell_entry_chbuff,:\n goto getentry_loop
-		
-		if shell_entry_chbuff,:\x gsub getentry_backone
-		if shell_entry_chbuff,:\x goto getentry_loop
-		
-		
-		if shell_entry_size,shell_entry_max goto getentry_loop
-		chardump shell_entry_chbuff
-		add shell_entry_size,@1
-		set shell_entry_size
-		
-		get shell_entry_chbuff
-		push
-	goto getentry_loop
-
-
-label getentry_backone
-	if shell_entry_size,@0 return
-	chardump :\x
-	pop
-	sub shell_entry_size,@1
-	set shell_entry_size
-return
-
-
-label getentry_tobuff
-	stackrev
-	sub shell_entry_size,@1
-	set shell_entry_itersize
-	add shell_entry_size,@1
-	set shell_entry_zeroit
-	uiter getentry_tobuff_iter,getentry_tobuff_loop,@0,shell_entry_itersize
-	uiter getentry_pad_iter,getentry_pad,shell_entry_size,shell_entry_zeroit
-	if shell_entry_clearbuffer,@0 return
-	uiter getentry_pad_iter,getentry_pad,shell_entry_zeroit,shell_entry_max
-	return
-
-
-label getentry_tobuff_loop
-	pop
-	set shell_entry_buff
-	tabw shell_entry_buffer,getentry_tobuff_iter,@0,shell_entry_buff
-return
-
-label getentry_pad
-	
-	tabw shell_entry_buffer,getentry_pad_iter,@0,@0
-	
-	return
