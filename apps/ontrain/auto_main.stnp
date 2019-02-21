@@ -118,7 +118,7 @@ label pregame
 	
 	drawx1 @-121
 	drawy1 @-121
-	drawwidth @30
+	drawwidth @90
 	drawheight @5
 	
 	
@@ -127,7 +127,7 @@ label pregame
 	
 	drawx1 @26
 	drawy1 @-121
-	drawwidth @30
+	drawwidth @90
 	drawheight @5
 	
 	
@@ -149,8 +149,8 @@ label pregame
 		
 		if player_side,train_side gsub train_point
 		ifnot player_side,train_side gsub player_point
-		ifnotless player_score,@30 goto player_win
-		ifnotless train_score,@30 goto player_lose
+		ifnotless player_score,@90 goto player_win
+		ifnotless train_score,@90 goto player_lose
 	goto primaryloop
 
 #railroad track draw routine
@@ -213,7 +213,7 @@ label player_lose
 # add to player score
 label player_point
 
-	add player_score,@1
+	add player_score,@3
 	set player_score
 	drawx1 @26
 	drawy1 @-121
@@ -228,7 +228,7 @@ return
 #add to train hits score
 label train_point
 
-	add train_score,@5
+	add train_score,@15
 	set train_score
 	drawx1 @-121
 	drawy1 @-121

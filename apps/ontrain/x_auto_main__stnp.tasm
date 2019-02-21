@@ -42,6 +42,7 @@ null;:\p;:\p
 null;10x30;@30
 null;----++---;*----++---
 null;10x-121;@-121
+null;10x90;@90
 null;10x5;@5
 null;--+--+--+;*--+--+--+
 null;10x26;@26
@@ -57,7 +58,9 @@ null;10x-18;@-18
 null;10x18;@18
 null;10x-7;@-7
 null;10x7;@7
+null;10x3;@3
 null;--+--++++;*--+--++++
+null;10x15;@15
 null;10x-20;@-20
 null;+--+--+--;*+--+--+--
 null;10x-16;@-16
@@ -426,7 +429,7 @@ iowrite1;>plot.x1
 dataread1;>@-121
 iowrite1;>plot.y1
 #plotter width
-dataread1;>@30
+dataread1;>@90
 iowrite1;>plot.width
 #plotter height
 dataread1;>@5
@@ -443,7 +446,7 @@ iowrite1;>plot.x1
 dataread1;>@-121
 iowrite1;>plot.y1
 #plotter width
-dataread1;>@30
+dataread1;>@90
 iowrite1;>plot.width
 #plotter height
 dataread1;>@5
@@ -511,7 +514,7 @@ goto;>player_point--label
 null;;goto--jumper-151
 #conditional goto
 dataread1;>player_score
-dataread2;>@30
+dataread2;>@90
 gotoifless;>goto--jumper-152
 goto;>goto--branch-152
 setreg1;>goto--jumper-152;goto--branch-152
@@ -519,7 +522,7 @@ goto;>player_win--label
 null;;goto--jumper-152
 #conditional goto
 dataread1;>train_score
-dataread2;>@30
+dataread2;>@90
 gotoifless;>goto--jumper-153
 goto;>goto--branch-153
 setreg1;>goto--jumper-153;goto--branch-153
@@ -678,7 +681,7 @@ gotoreg1
 null;;player_point--label
 #add (2op math)
 dataread1;>player_score
-dataread2;>@1
+dataread2;>@3
 add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>player_score
@@ -706,7 +709,7 @@ gotoreg1
 null;;train_point--label
 #add (2op math)
 dataread1;>train_score
-dataread2;>@5
+dataread2;>@15
 add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>train_score
