@@ -1,0 +1,370 @@
+var train_pos=@-140
+var train_side=@0
+
+var player_side=@0
+
+var train_score=0
+var player_score=0
+
+var car_height=@30
+var car_width=@8
+
+var train_height=@30
+var train_width=@15
+
+var playclick=0
+
+var player_pos=@90
+
+var collidepos=0
+
+
+var slow=@1
+var medium=@2
+var fast=@3
+var turbo=@4
+var speed=@3
+
+#determine point at which train would hit player.
+sub player_pos,car_height
+set collidepos
+
+
+var kb=0
+
+
+
+
+label main
+asm include;ontrain+title.tas0
+prline Oncoming Trains - v1.0
+prline MAIN MENU:
+prline a: About   1: slow    3: fast
+prline r: rules   2: medium  4: turbo
+print q: quit    s: story
+keyprompt
+set kb
+newline
+
+if kb,:q stop
+if kb,:Q stop
+
+if kb,:a gsub about
+if kb,:A gsub about
+
+if kb,:r gsub rules
+if kb,:R gsub rules
+
+if kb,:s gsub story
+if kb,:S gsub story
+
+if kb,:1 gsub slowg
+if kb,:! gsub slowg
+
+if kb,:4 gsub turbog
+if kb,:$ gsub turbog
+
+if kb,:2 gsub mediumg
+if kb,:@ gsub mediumg
+
+if kb,:3 gsub fastg
+if kb,:\p gsub fastg
+
+goto main
+
+
+label slowg
+copy slow,speed
+gsub pregame
+return
+
+label turbog
+copy turbo,speed
+gsub pregame
+return
+
+label mediumg
+copy medium,speed
+gsub pregame
+return
+
+label fastg
+copy fast,speed
+gsub pregame
+return
+
+label pregame
+	gamode @30
+	val 0
+	set train_score
+	set player_score
+	set train_side
+	set player_side
+	
+	
+	
+	drawfill *----++---
+	
+	drawx1 @-121
+	drawy1 @-121
+	drawwidth @30
+	drawheight @5
+	
+	
+	drawcolor *--+--+--+
+	drawrect
+	
+	drawx1 @26
+	drawy1 @-121
+	drawwidth @30
+	drawheight @5
+	
+	
+	drawcolor *--+--+-++
+	drawrect
+	
+	gsub track_draw
+	
+	waitcy 6000
+	label primaryloop
+		
+		gsub track_draw
+		
+		val @-140
+		set train_pos
+		rrange @0,@1
+		set train_side
+		gsub gameloop
+		
+		if player_side,train_side gsub train_point
+		ifnot player_side,train_side gsub player_point
+		ifnotless player_score,@30 goto player_win
+		ifnotless train_score,@30 goto player_lose
+	goto primaryloop
+
+
+label track_draw
+	drawx1 @-25
+	drawy1 @-121
+	drawwidth @50
+	drawheight @243
+	
+	
+	drawcolor *--+--+--+
+	drawrect
+	
+	drawcolor *+++++++++
+	
+	drawy1 @-121
+	drawy2 @121
+	
+	
+	drawx1 @-18
+	drawx2 @-18
+	drawline
+	
+	drawx1 @18
+	drawx2 @18
+	drawline
+	
+	drawx1 @-7
+	drawx2 @-7
+	drawline
+	
+	drawx1 @7
+	drawx2 @7
+	drawline
+	
+	if player_side,@0 gsub playcar_left
+	if player_side,@1 gsub playcar_right
+	
+return
+
+label player_win
+	gamode @0
+	newline
+	asm include;ontrain+win.tas0
+	print YOU WIN! :D
+	keyprompt
+	newline
+	return
+
+label player_lose
+	gamode @0
+	newline
+	asm include;ontrain+gameover.tas0
+	print YOU LOSE! >:)
+	keyprompt
+	newline
+	return
+
+label player_point
+
+	add player_score,@1
+	set player_score
+	drawx1 @26
+	drawy1 @-121
+	drawwidth player_score
+	drawheight @5
+	
+	
+	drawcolor *--+--++++
+	drawrect
+return
+
+label train_point
+
+	add train_score,@5
+	set train_score
+	drawx1 @-121
+	drawy1 @-121
+	drawwidth train_score
+	drawheight @5
+	
+	
+	drawcolor *+++++++++
+	drawrect
+return
+
+label gameloop
+	add train_pos,speed
+	set train_pos
+	
+	
+	asm ioread1;>mouse.button
+	set playclick
+	
+	if playclick,@1 gsub playertoggle
+	
+	
+	
+	
+	waitcy 18
+	if train_side,@0 gsub train_left
+	if train_side,@1 gsub train_right
+	
+	
+	
+	#dumpd train_pos
+	#newline
+	ifnotless train_pos,collidepos return
+goto gameloop
+
+
+
+label train_left
+	drawx1 @-20
+	drawy1 train_pos
+	drawwidth train_width
+	drawheight train_height
+	drawcolor *+--+--+--
+	drawrect
+return
+
+label train_right
+	drawx1 @5
+	drawy1 train_pos
+	drawwidth train_width
+	drawheight train_height
+	drawcolor *+--+--+--
+	drawrect
+return
+
+
+label playcar_left
+	drawx1 @-16
+	drawy1 player_pos
+	drawwidth car_width
+	drawheight car_height
+	drawcolor *---000+++
+	drawrect
+	drawx1 @8
+	drawcolor *--+--+--+
+	drawrect
+return
+
+label playcar_right
+	drawx1 @8
+	drawy1 player_pos
+	drawwidth car_width
+	drawheight car_height
+	drawcolor *---000+++
+	drawrect
+	drawx1 @-16
+	drawcolor *--+--+--+
+	drawrect
+return
+
+
+label playertoggle
+if player_side,@0 goto playertoggle_skip
+if player_side,@1 =player_side @0
+gsub playcar_left
+return
+label playertoggle_skip
+if player_side,@0 =player_side @1
+gsub playcar_right
+return
+
+label about
+textcolor *+++--0
+newline
+prline --ABOUT--
+prline Oncoming Trains - v1.0 - A graphical 'oncoming obstacle' game.
+prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
+prline 
+prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
+prline 
+prline Oncoming Trains is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline Oncoming Trains is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+prline along with Oncoming Trains. If not, see <http://www.gnu.org/licenses/>
+textcolor *+++---
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+keyprompt
+newline
+return
+
+label rules
+textcolor *+++--0
+newline
+prline --RULES--
+prline You are trying to escape the city by driving on a railroad line. 
+prline One problem: Its actively used!
+newline
+prline player must pass all 30 trains, while being hit by less than 6.
+newline
+prline use your mouse to leftclick to change tracks. difficulty changes speed.
+newline
+prline Good Luck!
+textcolor *+++---
+prline 
+prline PRESS A KEY TO RETURN TO MAIN MENU
+print >
+keyprompt
+newline
+return
+
+label story
+asm include;ontrain+story.tas0
+prline You are a spy trying to escape the enemy city with crucial information.
+prline You take a rail line thats supposed to be abandoned, but the enemy was
+prline expecting this and is sending 30 trains your way!
+newline
+prline Can the spy escape the city? Can he save the day?
+textcolor *++----
+print or will he be hit by the Oncoming Trains?
+textcolor *+++---
+keyprompt
+newline
+return

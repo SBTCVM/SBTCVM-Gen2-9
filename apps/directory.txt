@@ -18,6 +18,12 @@ sbtgsh:
 
 ----GAMES----
 
+ontrain:
+	Oncoming Trains: SBTCVM's first true graphical video game. A simple
+	object-avoid type game featuring a spy vs 30 oncoming trains.
+	features 4 speed options.
+	[ttycolor],[mouse],[plotter],[nocurses]
+
 gtt:
 	Guess That trit: a classic number guessing game from all the way back
 	in the Gen 1 era.
