@@ -1,97 +1,108 @@
-var train_pos=@-140
-var train_side=@0
 
-var player_side=@0
 
-var train_score=0
-var player_score=0
-
+#car dimensions
 var car_height=@30
 var car_width=@8
 
+#train dimensions (height is not important, as the train is 'dragged' 
+#    across the screen to create a stripe)
 var train_height=@30
 var train_width=@15
 
 var playclick=0
 
+
+
+
+#player position variable. (also used with train_height to set collidepos)
 var player_pos=@90
 
 var collidepos=0
 
 
+#determine point at which train would hit player.
+sub player_pos,train_height
+set collidepos
+
+
+
+#speed configuration (controls train speed for each difficulty setting)
 var slow=@1
 var medium=@2
 var fast=@3
 var turbo=@4
+
+
+##### SET ELSEWHERE IN CODE
 var speed=@3
-
-#determine point at which train would hit player.
-sub player_pos,car_height
-set collidepos
-
-
 var kb=0
-
-
+var train_pos=@-140
+var train_side=@0
+var player_side=@0
+var train_score=0
+var player_score=0
+#####
 
 
 label main
-asm include;ontrain+title.tas0
-prline Oncoming Trains - v1.0
-prline MAIN MENU:
-prline a: About   1: slow    3: fast
-prline r: rules   2: medium  4: turbo
-print q: quit    s: story
-keyprompt
-set kb
-newline
-
-if kb,:q stop
-if kb,:Q stop
-
-if kb,:a gsub about
-if kb,:A gsub about
-
-if kb,:r gsub rules
-if kb,:R gsub rules
-
-if kb,:s gsub story
-if kb,:S gsub story
-
-if kb,:1 gsub slowg
-if kb,:! gsub slowg
-
-if kb,:4 gsub turbog
-if kb,:$ gsub turbog
-
-if kb,:2 gsub mediumg
-if kb,:@ gsub mediumg
-
-if kb,:3 gsub fastg
-if kb,:\p gsub fastg
-
+	asm include;ontrain+title.tas0
+	prline Oncoming Trains - v1.0
+	prline MAIN MENU:
+	prline a: About   1: slow    3: fast
+	prline r: rules   2: medium  4: turbo
+	print q: quit    s: story
+	keyprompt
+	set kb
+		newline
+		
+		if kb,:q stop
+		if kb,:Q stop
+		
+		if kb,:a gsub about
+		if kb,:A gsub about
+		
+		if kb,:r gsub rules
+		if kb,:R gsub rules
+		
+		if kb,:s gsub story
+		if kb,:S gsub story
+		
+		if kb,:1 gsub slowg
+		if kb,:! gsub slowg
+		
+		if kb,:4 gsub turbog
+		if kb,:$ gsub turbog
+		
+		if kb,:2 gsub mediumg
+		if kb,:@ gsub mediumg
+		
+		if kb,:3 gsub fastg
+		if kb,:\p gsub fastg
+	
 goto main
 
 
 label slowg
-copy slow,speed
-gsub pregame
+	copy slow,speed
+	gsub pregame
 return
 
 label turbog
-copy turbo,speed
-gsub pregame
+	copy turbo,speed
+	gsub pregame
 return
 
 label mediumg
-copy medium,speed
-gsub pregame
+	copy medium,speed
+	gsub pregame
 return
 
 label fastg
-copy fast,speed
-gsub pregame
+	copy fast,speed
+	gsub pregame
 return
+
+#main game loop
 
 label pregame
 	gamode @30
@@ -142,7 +153,7 @@ label pregame
 		ifnotless train_score,@30 goto player_lose
 	goto primaryloop
 
-
+#railroad track draw routine
 label track_draw
 	drawx1 @-25
 	drawy1 @-121
@@ -179,7 +190,7 @@ label track_draw
 	if player_side,@1 gsub playcar_right
 	
 return
-
+#### win & lose screen
 label player_win
 	gamode @0
 	newline
@@ -198,6 +209,8 @@ label player_lose
 	newline
 	return
 
+
+# add to player score
 label player_point
 
 	add player_score,@1
@@ -212,6 +225,7 @@ label player_point
 	drawrect
 return
 
+#add to train hits score
 label train_point
 
 	add train_score,@5
@@ -226,6 +240,8 @@ label train_point
 	drawrect
 return
 
+
+#primary game round code (in the sense that each train is a round)
 label gameloop
 	add train_pos,speed
 	set train_pos
@@ -251,7 +267,7 @@ label gameloop
 goto gameloop
 
 
-
+#draw train on left track
 label train_left
 	drawx1 @-20
 	drawy1 train_pos
@@ -261,6 +277,7 @@ label train_left
 	drawrect
 return
 
+#draw train on right track
 label train_right
 	drawx1 @5
 	drawy1 train_pos
@@ -270,7 +287,7 @@ label train_right
 	drawrect
 return
 
-
+#draw player car on left track, and cover up old position.
 label playcar_left
 	drawx1 @-16
 	drawy1 player_pos
@@ -283,6 +300,7 @@ label playcar_left
 	drawrect
 return
 
+#draw player car on right track, and cover up old position.
 label playcar_right
 	drawx1 @8
 	drawy1 player_pos
@@ -295,16 +313,20 @@ label playcar_right
 	drawrect
 return
 
-
+## Player position toggle
 label playertoggle
-if player_side,@0 goto playertoggle_skip
-if player_side,@1 =player_side @0
-gsub playcar_left
+	if player_side,@0 goto playertoggle_skip
+		if player_side,@1 =player_side @0
+		gsub playcar_left
+	return
+	label playertoggle_skip
+		if player_side,@0 =player_side @1
+		gsub playcar_right
 return
-label playertoggle_skip
-if player_side,@0 =player_side @1
-gsub playcar_right
-return
+
+
+
+#about, rules, and story screens below.
 
 label about
 textcolor *+++--0
