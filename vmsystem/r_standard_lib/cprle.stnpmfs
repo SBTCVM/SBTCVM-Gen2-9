@@ -10,13 +10,6 @@ int9;@-1;10x-1
 int9;RL_ilvar;10x0
 int9;@0;10x0
 label;decode
-label;datawrite1;>RL_GET_SIZE
-label;dataread1;;RL_GET_SIZE
 label;RL_decode_mainloop
-label;datawrite1;>RL_GET_DATA
-label;dataread1;;RL_GET_DATA
-label;datawrite1;>RL_GET_LEN
-label;instread1;;RL_GET_LEN
 label;RL_newline
 label;RL_printlooop
-label;iowrite1;>io.cpack

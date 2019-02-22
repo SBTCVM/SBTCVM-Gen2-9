@@ -279,7 +279,7 @@ class in_rawasm:
 		print("Embedded assembly code at line: '" + str(lineno) + "': " + args)
 		return 0, None
 	def p1(self, args, keyword, lineno):
-		return [npvar(args, None, vtype=nptype_label)]
+		return []
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
