@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.2.0
+#SSTNPL COMPILER v0.3.0
 #header
 head-rname=auto_burst
 head-nspin=stdnsp
@@ -11,10 +11,14 @@ null;0;colbuff
 null;0;kb
 null;---------;fillcolor
 null;0;fillflg
+null;0;pointflg
 null;10x0;@0
+null;0;xbuff2
+null;0;ybuff2
 null;10x30;@30
 null;---------;*---------
 null;10x1;@1
+null;10x250;@250
 null;10x25;@25
 null;10x-121;@-121
 null;10x121;@121
@@ -40,23 +44,46 @@ dataread2;>@1
 add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>fillflg
+#add (2op math)
+dataread1;>pointflg
+dataread2;>@1
+add
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pointflg
 #conditional subroutine goto
 dataread1;>fillflg
-dataread2;>@25
-gotoif;>goto--branch-24
-goto;>goto--jumper-24
-setreg1;>goto--jumper-24;goto--branch-24
+dataread2;>@250
+gotoif;>goto--branch-31
+goto;>goto--jumper-31
+setreg1;>goto--jumper-31;goto--branch-31
 s1push1
 goto;>filler--label
-null;;goto--jumper-24
+null;;goto--jumper-31
 #conditional set
 dataread1;>fillflg
-dataread2;>@25
-gotoif;>goto--branch-25
-goto;>goto--jumper-25
-dataread1;>@1;goto--branch-25
+dataread2;>@250
+gotoif;>goto--branch-32
+goto;>goto--jumper-32
+dataread1;>@1;goto--branch-32
 datawrite1;>fillflg
-null;;goto--jumper-25
+null;;goto--jumper-32
+#conditional subroutine goto
+dataread1;>pointflg
+dataread2;>@25
+gotoif;>goto--branch-33
+goto;>goto--jumper-33
+setreg1;>goto--jumper-33;goto--branch-33
+s1push1
+goto;>randpoint--label
+null;;goto--jumper-33
+#conditional set
+dataread1;>pointflg
+dataread2;>@25
+gotoif;>goto--branch-34
+goto;>goto--jumper-34
+dataread1;>@1;goto--branch-34
+datawrite1;>pointflg
+null;;goto--jumper-34
 #Random ranged number
 dataread1;>@-121
 dataread2;>@121
@@ -95,17 +122,42 @@ datawrite1;>kb
 #conditional goto
 dataread1;>kb
 dataread2;>@0
-gotoif;>goto--jumper-41
-goto;>goto--branch-41
-setreg1;>goto--jumper-41;goto--branch-41
+gotoif;>goto--jumper-50
+goto;>goto--branch-50
+setreg1;>goto--jumper-50;goto--branch-50
 goto;>end--label
-null;;goto--jumper-41
+null;;goto--jumper-50
 #goto 
 goto;>loop--label
 #label
 null;;end--label
 #stop (shutdown vm)
 stop
+#label
+null;;randpoint--label
+#Random ranged number
+dataread1;>@-121
+dataread2;>@121
+iowrite1;>rand1.start
+iowrite2;>rand1.end
+ioread1;>rand1.get#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>xbuff2
+#Random ranged number
+dataread1;>@-121
+dataread2;>@121
+iowrite1;>rand1.start
+iowrite2;>rand1.end
+ioread1;>rand1.get#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>ybuff2
+#plotter x pos 1
+dataread1;>xbuff2
+iowrite1;>plot.x1
+#plotter y pos 1
+dataread1;>ybuff2
+iowrite1;>plot.y1
+#return from subroutine.
+s1pop1
+gotoreg1
 #label
 null;;filler--label
 #plotter fill

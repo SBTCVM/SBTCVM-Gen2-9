@@ -5,9 +5,14 @@ var kb=0
 var fillcolor=---------
 
 var fillflg=0
+var pointflg=0
 
 drawx1 @0
 drawy1 @0
+
+
+var xbuff2=0
+var ybuff2=0
 
 
 gamode @30
@@ -21,8 +26,12 @@ label loop
 
 add fillflg,@1
 set fillflg
-if fillflg,@25 gsub filler
-if fillflg,@25 =fillflg @1
+add pointflg,@1
+set pointflg
+if fillflg,@250 gsub filler
+if fillflg,@250 =fillflg @1
+if pointflg,@25 gsub randpoint
+if pointflg,@25 =pointflg @1
 
 rrange @-121,@121
 set xbuff
@@ -46,9 +55,15 @@ label end
 stop
 
 
+label randpoint
+	rrange @-121,@121
+	set xbuff2
+	rrange @-121,@121
+	set ybuff2
+	drawx1 xbuff2
+	drawy1 ybuff2
+return
+
 label filler
-#add fillcolor,*00+00+00+
-#set fillcolor
-#ifnotless fillcolor,*000000000 =fillcolor *---------
-drawfill fillcolor
+	drawfill fillcolor
 return

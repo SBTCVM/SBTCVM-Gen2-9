@@ -2,4 +2,5 @@ gfxcon -cp ontrain+title
 gfxcon -cp ontrain+gameover
 gfxcon -cp ontrain+win
 gfxcon -cp ontrain+story
+gfxcon -cp ontrain+rules
 stnp ontrain

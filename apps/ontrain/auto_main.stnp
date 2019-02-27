@@ -3,11 +3,13 @@
 #car dimensions
 var car_height=@30
 var car_width=@8
+var car_window_width=@6
 
 #train dimensions (height is not important, as the train is 'dragged' 
 #    across the screen to create a stripe)
-var train_height=@30
+var train_height=@10
 var train_width=@15
+var train_width_gleam=@4
 
 var playclick=0
 
@@ -17,6 +19,10 @@ var playclick=0
 #player position variable. (also used with train_height to set collidepos)
 var player_pos=@90
 
+var player_window_f=@100
+var player_window_b=@110
+var car_window_height_f=@2
+var car_window_height_b=@4
 var collidepos=0
 
 
@@ -46,7 +52,7 @@ var player_score=0
 
 label main
 	asm include;ontrain+title.tas0
-	prline Oncoming Trains - v1.0
+	prline Oncoming Trains - v1.5
 	prline MAIN MENU:
 	prline a: About   1: slow    3: fast
 	prline r: rules   2: medium  4: turbo
@@ -114,26 +120,49 @@ label pregame
 	
 	
 	
-	drawfill *----++---
-	
-	drawx1 @-121
-	drawy1 @-121
-	drawwidth @90
-	drawheight @5
+	drawfill *---0++---
 	
 	
-	drawcolor *--+--+--+
-	drawrect
+	#trees
+		drawx1 @-121
+		drawy1 @-121
+		drawwidth @60
+		drawheight @243
+		drawcolor *----0+---
+		drawrect
 	
-	drawx1 @26
-	drawy1 @-121
-	drawwidth @90
-	drawheight @5
+	#sand
+		drawx1 @60
+		drawy1 @-121
+		drawwidth @70
+		drawheight @243
+		drawcolor *++++++000
+		drawrect
+	
+	#sea
+		drawx1 @85
+		drawy1 @-121
+		drawwidth @70
+		drawheight @243
+		drawcolor *0000+++++
+		drawrect
 	
 	
-	drawcolor *--+--+-++
-	drawrect
-	
+	#hudbars
+		drawx1 @-121
+		drawy1 @-121
+		drawwidth @90
+		drawheight @5
+		drawcolor *--+--+--+
+		drawrect
+		
+		drawx1 @26
+		drawy1 @-121
+		drawwidth @90
+		drawheight @5
+		drawcolor *--+--+-++
+		drawrect
+		
 	gsub track_draw
 	
 	waitcy 6000
@@ -273,7 +302,11 @@ label train_left
 	drawy1 train_pos
 	drawwidth train_width
 	drawheight train_height
-	drawcolor *+--+--+--
+	drawcolor *+0-+0-+0-
+	drawrect
+	
+	drawwidth train_width_gleam
+	drawcolor *+++++++++
 	drawrect
 return
 
@@ -283,7 +316,11 @@ label train_right
 	drawy1 train_pos
 	drawwidth train_width
 	drawheight train_height
-	drawcolor *+--+--+--
+	drawcolor *+0-+0-+0-
+	drawrect
+	
+	drawwidth train_width_gleam
+	drawcolor *+++++++++
 	drawrect
 return
 
@@ -295,9 +332,26 @@ label playcar_left
 	drawheight car_height
 	drawcolor *---000+++
 	drawrect
-	drawx1 @8
-	drawcolor *--+--+--+
-	drawrect
+	
+	#cover up old position
+		drawx1 @8
+		drawcolor *--+--+--+
+		drawrect
+	
+	#Car windows
+		drawx1 @-15
+		drawwidth car_window_width
+		drawcolor *------000
+		
+		#front window
+			drawy1 player_window_f
+			drawheight car_window_height_f
+			drawrect
+		
+		#rear window
+			drawy1 player_window_b
+			drawheight car_window_height_b
+			drawrect
 return
 
 #draw player car on right track, and cover up old position.
@@ -308,9 +362,26 @@ label playcar_right
 	drawheight car_height
 	drawcolor *---000+++
 	drawrect
-	drawx1 @-16
-	drawcolor *--+--+--+
-	drawrect
+	
+	#cover up old position
+		drawx1 @-16
+		drawcolor *--+--+--+
+		drawrect
+	
+	#Car windows
+		drawx1 @9
+		drawwidth car_window_width
+		drawcolor *-------00
+		
+		#front window
+			drawy1 player_window_f
+			drawheight car_window_height_f
+			drawrect
+		
+		#rear window
+			drawy1 player_window_b
+			drawheight car_window_height_b
+			drawrect
 return
 
 ## Player position toggle
@@ -332,7 +403,7 @@ label about
 textcolor *+++--0
 newline
 prline --ABOUT--
-prline Oncoming Trains - v1.0 - A graphical 'oncoming obstacle' game.
+prline Oncoming Trains - v1.5 - A graphical 'oncoming obstacle' game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -358,21 +429,15 @@ newline
 return
 
 label rules
-textcolor *+++--0
-newline
-prline --RULES--
+asm include;ontrain+rules.tas0
 prline You are trying to escape the city by driving on a railroad line. 
 prline One problem: Its actively used!
 newline
 prline player must pass all 30 trains, while being hit by less than 6.
-newline
 prline use your mouse to leftclick to change tracks. difficulty changes speed.
-newline
-prline Good Luck!
+textcolor *++----
+print Good Luck!
 textcolor *+++---
-prline 
-prline PRESS A KEY TO RETURN TO MAIN MENU
-print >
 keyprompt
 newline
 return
