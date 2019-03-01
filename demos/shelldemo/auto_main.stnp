@@ -16,6 +16,10 @@ prline type 'help' for commands
 #			load1
 #			load2
 
+#helpful comprompt variables:
+
+#size: i.e. cp.size: the length of the input buffer.
+#itersize: i.e. cp.itersize: one less than 'size' (for indexing)
 
 
 #set comprompt max input size to 70
@@ -28,7 +32,7 @@ set cp.clearbuffer
 
 ####about 'purging of the input buffer'
 #	this should ONLY be turned on, if remaining characters from past commands, 
-#	are causing issues, and the 'shell_entry_size' variable isn't enough to 
+#	are causing issues, and the 'size' variable isn't enough to 
 #	prevent said issues, as THIS OPTION WILL SLOW DOWN THINGS NOTICEABLY.
 #	regardless of this setting, the next character following the last string
 #	will be zeroed.

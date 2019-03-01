@@ -371,7 +371,7 @@ label playcar_right
 	#Car windows
 		drawx1 @9
 		drawwidth car_window_width
-		drawcolor *-------00
+		drawcolor *------000
 		
 		#front window
 			drawy1 player_window_f

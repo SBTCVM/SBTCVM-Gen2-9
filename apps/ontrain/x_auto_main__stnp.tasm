@@ -81,7 +81,6 @@ null;10x8;@8
 null;10x-15;@-15
 null;------000;*------000
 null;10x9;@9
-null;-------00;*-------00
 null;+++--0;*+++--0
 null;+++---;*+++---
 null;++----;*++----
@@ -1009,7 +1008,7 @@ iowrite1;>plot.x1
 dataread1;>car_window_width
 iowrite1;>plot.width
 #plotter draw line
-dataread1;>*-------00
+dataread1;>*------000
 iowrite1;>plot.color
 #plotter y pos 1
 dataread1;>player_window_f
