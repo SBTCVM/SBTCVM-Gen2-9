@@ -3,7 +3,7 @@ import os
 if not os.path.isdir("vmsystem"):
 	print("changing to script location...")
 	os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
+import vmsystem.tdisk1lib as td1
 
 import vmsystem.libbaltcalc as libbaltcalc
 from vmsystem.libbaltcalc import btint
