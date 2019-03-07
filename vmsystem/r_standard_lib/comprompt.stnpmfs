@@ -1,5 +1,5 @@
-int9;shell_entry_size;0
-int9;shell_entry_itersize;0
+int9;size;0
+int9;itersize;0
 int9;shell_entry_zeroit;0
 int9;shell_entry_buff;0
 int9;shell_entry_chbuff;0

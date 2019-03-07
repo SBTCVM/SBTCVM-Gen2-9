@@ -3,6 +3,16 @@ key:
 	[plotter]: uses SBTGA mode 30 (plotter mode)
 	[nocurses]: CANNOT be used in curses frontend.
 	[mouse]: Uses the SBTCVM mouse in some form or another.
+	[unfinished]: Incomplete/unstable. often, these are prominent prototypes, 
+			for important applications/software.
+
+----Special----
+dos:
+	SBTCVM-DOS: a VERY early prototype of a crude disk operating system,
+	intended to eventually provide a less-complicated interface to SBTCVM's
+	as yet incomplete disk emulation. expect sawdust & bugs. [unfinished][ttycolor]
+
+
 
 ----TOOLS----
 

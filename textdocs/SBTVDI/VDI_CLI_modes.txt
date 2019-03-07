@@ -1,2 +1,3 @@
 0: standard mode
+1: program mode. meant for using SBTVDI commands from a Command Shell. i.e. via a 'vdi' command.
 (other modes to be determined.)

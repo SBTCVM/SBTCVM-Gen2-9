@@ -26,23 +26,26 @@ class sbtvdi:
 		iosys.setwritenotify(102, self.clireset)
 		iosys.setreadoverride(101, self.clipipe_output)
 		iosys.setreadoverride(102, self.clistatus)
-
+		self.prm=0
 	def outstr(self, outx):
 		for x in outx:
 			self.outbuff.append(tcon.strtodat[x])
 	def clipipe_input(self, addr, data):
 		if data==1:
-			self.outbuff.append(1)
+			if not self.prm:
+				self.outbuff.append(1)
 			self.cmdparse(tcon.datlisttostr(self.cmdbuff))
 			self.cmdbuff=[]
 		elif data==2:
 			if len(self.cmdbuff)>0:
 				self.cmdbuff.pop(-1)
-				self.outbuff.append(2)
+				if not self.prm:
+					self.outbuff.append(2)
 		else:
 			if data.intval in tcon.dattostr:
 				self.cmdbuff.append(data.intval)
-				self.outbuff.append(data.intval)
+				if not self.prm:
+					self.outbuff.append(data.intval)
 	def clipipe_output(self, addr, data):
 		if len(self.outbuff)>0:
 			return btint(self.outbuff.pop(0))
@@ -52,21 +55,35 @@ class sbtvdi:
 		return btint(self.status)
 	#should be called by application before using shell.
 	def clireset(self, addr, data):
+		if data==1:
+			self.prm=1
+		else:
+			self.prm=0
 		self.cmdbuff=[]
 		self.outbuff=[]
-		self.outstr("\nSBTVDI CLI Shell: rev: 1.0\n>")
+		if not self.prm==1:
+			self.outstr("\nSBTVDI Serial Console: rev: 1.1\n>")
 		self.status=0
-	def cmdparse(self, cmd):
-		if cmd=='return':
+	def cmdparse(self, cmdstr):
+		cmdlist=cmdstr.split(" ", 1)
+		cmd=cmdlist[0]
+		if cmd=='return' and self.prm==0:
 			self.status=1
-		if cmd=='quit':
+		elif cmd=='quit' and self.prm==0:
 			self.status=2
-		if cmd=='help':
-			self.outstr('''SBTVDI CLI Shell command help:
+		elif cmd=='help':
+			if self.prm==1:
+				self.outstr('''SBTVDI Serial Console (mode 1) commands:
+help   : this text
+''')
+			else:
+				self.outstr('''SBTVDI Serial Console (mode 0) commands:
 help   : this text
 return : request to return to application
-quit   : request to quit.
+quit   : request to quit
 ''')
+		else:
+			self.outstr("ERROR: '" + cmd + "' is not valid/available in this mode!\n")
 		
-		
-		self.outstr('>')
+		if self.prm==0:
+			self.outstr('>')
