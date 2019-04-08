@@ -60,6 +60,11 @@ comppack:
 
 ----Plotter----
 
+tritmap:
+	A 243x243 PLRLE tritmap example. (a basic 9-trit RGB, per-line
+	run-length compression scheme.) uses the 'plrle' SSTNPL module,
+	and 'gfxcon -plrle'
+	
 burst:
 	A nice 'ray burst' demo based upon a similar demo for SBTCVM Mark 2 (Gen 1)
 	[nocurses]

@@ -17,17 +17,15 @@ The second line should match the number of files in the tdsk1 image. this **IS**
 
 
 ## File size:
-The TDSK1 specification could support files up to 531441 words long (1,062,882) Nonets, **TECHNICALLY.**
-though its recommended to keep disk files at a reasonable size.
-
-Applications will need to obviously fit within SBTCVM's 9-trit memory (19,683 words, OR 39,366 Nonets
+The TDSK1 specification supports files up to 19,683 Words long. (OR 39,366 Nonets)
 
 ## File count:
-a TDSK1 image may have no more than 9841 files.
+a TDSK1 image may have no more than 243 files.
 
 ## Seeking within files:
-The files are seeked using a 12-trit integer. split into 2 Nonets:
+The files are seeked using a 9-trit integer.
+Reverse indexing is not available.
 
-- Bank (3-trits)
-- bankline (9-trits)
-
+## misc:
+Max amount of raw file data: 9.5MegaNonets
+Rough Disk size: ~50MB max. (WILL BE SMALLER IN MOST CASES!)

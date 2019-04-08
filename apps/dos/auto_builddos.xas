@@ -1,0 +1,17 @@
+gfxcon -cp dos+bigsplash
+
+#build command as a module as well. (needed by startup trom)
+stnp --module dos+command.stnp
+
+print disk builder (UNFINISHED DRAFT)
+stnp dos+command.stnp
+
+print build startup trom
+stnp dos
+
+
+print Build tdsk1 disk image
+#See auto_dos.diskmap
+diskedit --new dos
+
+print done.

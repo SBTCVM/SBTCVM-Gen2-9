@@ -8,8 +8,8 @@ import os
 import sys
 
 #limitation constants:
-fsizemax=531441
-fcountmax=9841
+fsizemax=19683
+fcountmax=243
 
 
 class disk:
@@ -25,6 +25,8 @@ class disk:
 		else:
 			return 1
 
+def ramdisk():
+	return disk("SBTVDI Ramdisk", {}, ramdisk=1)
 
 
 def loaddisk(filename, readonly=0):
@@ -46,7 +48,7 @@ def loaddisk(filename, readonly=0):
 			return "Disk reports a file count '" + str(filecount) + "' that is lower than actual number of files '" + str(len(diskdat)-1) + "'"
 		
 		if len(diskdat)-1>fcountmax:
-			return "Disk contains more than 9841 files: '" + str(len(diskdat)-1) + "'"
+			return "Disk contains more than 243 files: '" + str(len(diskdat)-1) + "'"
 		filedict={}
 		
 		for diskfile in diskdat[1:]:
@@ -57,7 +59,7 @@ def loaddisk(filename, readonly=0):
 				if linecount==0:
 					dfile=line
 					if len(diskfile.split("\n"))>fsizemax:
-						return "File '" + dfile + "': Is beyond 1062882 Nonets! '" + str(len(diskfile.split("\n"))*2) + "'"
+						return "File '" + dfile + "': Is beyond 39366 Nonets! '" + str(len(diskfile.split("\n"))*2) + "'"
 				elif line=="":
 					pass
 				else:

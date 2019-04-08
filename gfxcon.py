@@ -186,6 +186,64 @@ def colart_maker_RLE(imagepath, notrailnew=0):
 
 
 
+def plot_RLE(imagepath):
+	print("converting image into PLRLE plotter image format...")
+	image=pygame.image.load(imagepath)
+	xsize=image.get_width()
+	ysize=image.get_height()
+	
+	#print(image.get_height())
+	#print(ysize)
+	size=1
+	pbuff=None
+	bufflen=0
+	outf=open(imagepath.rsplit(".")[0]+".tas0", 'w')
+	outf.write('''#SBTCVM Gen2-9 GFXCON: run-length encoded tritmap
+#Needs to be decoded manually.
+#image file: ''' + imagepath + "\n"
+'''null;>.DATASIZE
+''')
+	for coly in xrange(0, ysize):
+		buffx=""
+		for linex in xrange(0, xsize):
+			pixcol = image.get_at((linex, coly))
+			buffx=bin8totrit3(pixcol[0])+bin8totrit3(pixcol[1])+bin8totrit3(pixcol[2])
+			if buffx==pbuff:
+				bufflen+=1
+				buffx=""
+			elif pbuff==None:
+				pbuff=buffx
+				buffx=""
+				size+=1
+				bufflen=0
+			else:
+				outf.write("raw;10x" + str(bufflen) + "," + pbuff + "\n")
+				pbuff=buffx
+				buffx=""
+				size+=1
+				bufflen=0
+		if pbuff!=None:
+			outf.write("raw;10x" + str(bufflen) + "," + pbuff + "\n")
+		pbuff=None
+		buffx=""
+		size+=1
+		bufflen=0
+		outf.write("raw;-,0\n")
+		outf.write("###LINE DIV\n")
+		#print(coly)
+	outf.write("null;;.DATASIZE\n")
+	outf.close()
+	print("Done.")
+	print(g2com.nonetformatted_smart(size))
+	return
+
+def bin8totrit3(level):
+	#print(level)
+	xtemp=btint(int(level/9.44444444)-13)
+	#print(xtemp.intval)
+	xtemp.changeval(xtemp.dectrunk(3))
+	return xtemp.bttrunk(3)
+	
 
 if __name__=="__main__":
 	try:
@@ -198,10 +256,14 @@ if __name__=="__main__":
 		arg=None
 	if cmd in ["-h", "--help"]:
 		print('''SBTCVM Gen2-9 gfx conversion utility.
--p(n) [image]  : convert an image into 3-color ternary-packed art, and place it in
-    a tas0 file. append n for no trailing newline.
--cp(n) [image] : convert an image into 27-color ternary packed art, and place it
-    in a tas0 file. append n for no trailing newline.''')
+-p(n) [image]     : convert an image into 3-color ternary-packed art,
+	and place it in a tas0 file. append n for no trailing newline.
+-cp(n) [image]    : convert an image into 27-color ternary packed art, 
+	and place it in a tas0 file. append n for no trailing newline.
+-cprle(n) [image] : convert an image into 27-color cprle compressed
+	packed art image data.
+-plrle(n) [image] : convert an image into 9-trit (PLRLE format) rle compressed
+	tritmap image.''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2-9 gfx conversion utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -248,6 +310,8 @@ see readme.md for more information and licensing of media.
 	elif cmd in ["-cprlen"]:
 		print("Color Ternary-Packed art encoder (RLE compressed).")
 		colart_maker_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
-
+	elif cmd in ["-plrle"]:
+		print("RLE-encoded 9-trit RGB tritmap.")
+		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1))
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")

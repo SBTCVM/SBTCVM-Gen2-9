@@ -1,0 +1,29 @@
+
+
+
+prline This demo will show a run-length compressed, 9-trit RGB tritmap image.
+prline The image, test.png in the tritmap directory, was encoded
+prline using the -plrle option of gfxcon, and is being decoded by the
+prline plrle decoder sstnpl module, from the standard library.
+prline WILL NOT WORK IN CURSES FRONTEND.
+newline
+prline press a key to continue.
+keyprompt
+
+gamode @30
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+keyprompt
+
+stop
+
+
+
+
+
+include plrle as pl
+asm include;tritmap+test.tas0;image_offset1

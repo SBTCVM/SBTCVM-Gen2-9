@@ -65,6 +65,10 @@ helpdict={
    asm [tasm source file]: SBTCVM assembler. See stnp -h for help.
    stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
       Language (SSTNPL) See stnp -h for help.'''
+, "tools" : 
+'''   diskedit: SBTCVM disk image editor. see diskedit -h for help.
+  gfxcon: SBTCVM GFX Conversion Utility. converts graphics to SBTCVM's
+          native formats. see gfxcon -h for help.'''
 , "vm" : 
 '''   run/runp [trom image]: run the VM with pygame frontend.
    runc [trom image]: run the VM with curses frontend. 
@@ -121,6 +125,10 @@ def fileinfo(filen, pathx, sublist=0):
 		print(prfx + "   SSTNPL Source code    : " + pathx)
 	elif filen.lower().endswith(".stnpmfs"):
 		print(prfx + "   SSTNPL Module Manifest: " + pathx)
+	elif filen.lower().endswith(".diskmap"):
+		print(prfx + "   Diskedit Disk Filelist: " + pathx)
+	elif filen.lower().endswith(".tdsk1"):
+		print(prfx + "   Ternary Disk Image v1 : " + pathx)
 	elif filen.lower().endswith(".xas"):
 		print(prfx + "   XAS build script      : " + pathx)
 	elif filen.lower().endswith(".nsp"):

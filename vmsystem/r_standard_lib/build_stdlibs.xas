@@ -5,7 +5,7 @@ print;---Standard library rebuild script.---
 print;SSTNPL modules
 stnp --module comprompt.stnp
 stnp --module cprle.stnp
-
+stnp --module plrle.stnp
 
 #Standard namespace library
 print;standard namespace library

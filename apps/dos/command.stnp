@@ -1,0 +1,243 @@
+########## SBTCVM-DOS - Command Interpreter ########## 
+label startup
+	
+	gsub version
+	textcolor *+++---
+	prline Type '?' for help.
+	prline READY.
+	
+	##setup command prompt library##
+		val @70
+		set cp.max
+		
+		val @0
+		set cp.clearbuffer
+goto main
+
+##variables##
+var cmdflg=0
+var validflg=0
+var drive=:A
+
+label main
+	textcolor *0+0---
+	chardump drive
+	print :\>
+	textcolor *+++---
+	gsub cp.getentry
+	
+	newline
+	val 0
+	set cmdflg
+	set validflg
+	tabstrc cp.buffer,@0,@0,?
+		set cmdflg
+		if cmdflg,@1 gsub help
+		if cmdflg,@1 =validflg @1
+	tabstrc cp.buffer,@0,@0,about
+		set cmdflg
+		if cmdflg,@1 gsub about
+		if cmdflg,@1 =validflg @1
+	tabstrc cp.buffer,@0,@0,vdi
+		set cmdflg
+		if cmdflg,@1 gsub vdi
+		if cmdflg,@1 =validflg @1
+	tabstrc cp.buffer,@0,@0,drives
+		set cmdflg
+		if cmdflg,@1 gsub drives
+		if cmdflg,@1 =validflg @1
+	tabstrc cp.buffer,@0,@0,ver
+		set cmdflg
+		if cmdflg,@1 gsub version
+		if cmdflg,@1 =validflg @1
+	tabstrc cp.buffer,@0,@0,shutdown
+		set cmdflg
+		if cmdflg,@1 gsub shutdown
+		if cmdflg,@1 =validflg @1
+	####DRIVE SELECT/RUN####
+		#A
+			tabstrc cp.buffer,@0,@0,a:
+				set cmdflg
+				if cmdflg,@1 gsub driveA
+				if cmdflg,@1 =validflg @1
+			tabstrc cp.buffer,@0,@0,A:
+				set cmdflg
+				if cmdflg,@1 gsub driveA
+				if cmdflg,@1 =validflg @1
+		#B
+			tabstrc cp.buffer,@0,@0,b:
+				set cmdflg
+				if cmdflg,@1 gsub driveB
+				if cmdflg,@1 =validflg @1
+			tabstrc cp.buffer,@0,@0,B:
+				set cmdflg
+				if cmdflg,@1 gsub driveB
+				if cmdflg,@1 =validflg @1
+		#R (RAMDISK)
+			tabstrc cp.buffer,@0,@0,r:
+				set cmdflg
+				if cmdflg,@1 gsub driveR
+				if cmdflg,@1 =validflg @1
+			tabstrc cp.buffer,@0,@0,R:
+				set cmdflg
+				if cmdflg,@1 gsub driveR
+				if cmdflg,@1 =validflg @1
+		
+	if validflg,@0 gsub invalid
+goto main
+
+
+### DRIVE SELECT/RUN SUBROUTINES ###
+label driveA
+val :A
+set drive
+ifless cp.size,@3 return
+prline PROGRUN NOT IMPLEMENTED
+return
+
+label driveB
+val :B
+set drive
+ifless cp.size,@3 return
+prline PROGRUN NOT IMPLEMENTED
+return
+
+label driveR
+val :R
+set drive
+ifless cp.size,@3 return
+prline PROGRUN NOT IMPLEMENTED
+return
+
+var invalid_charcheck=0
+label invalid
+	textcolor *++0---
+	ifless cp.size,@2 goto invalid_command
+	
+		tabr cp.buffer,@1,@0
+		set invalid_charcheck
+		ifnot invalid_charcheck,:: goto invalid_command
+			prline Drive Not Valid. see 'drives' command.
+			return
+
+	label invalid_command
+		prline PROGRUN NOT IMPLEMENTED
+		return
+
+label version
+gsub splash
+textcolor *0++---
+prline  Command Interpreter v2
+return
+
+var vdi_vdioutput_buffer=0
+##VDI command processor##
+label vdi
+	####ensure VDI serial is in mode 1####
+		val @1
+		asm iowrite1;>vdi.cli.status
+	####Write output from shell input buffer (cp.buffer) to VDI serial input.####
+	uiter vdi_iter,vdi_buffiter,@4,cp.itersize
+	val :\n
+	asm iowrite1;>vdi.cli.in
+	
+	####stream output from VDI serial output, to Serial TTY####
+		label vdi_outloop
+			asm ioread1;>vdi.cli.out
+			set vdi_vdioutput_buffer
+			
+			if vdi_vdioutput_buffer,@0 return
+			chardump vdi_vdioutput_buffer
+		goto vdi_outloop
+
+#TODO: Dump disk labels too via SBTVDI
+label drives
+prline A: 9.5MN (TDSK1) floppy
+prline B: 9.5MN (TDSK1) floppy
+prline R: 9.5MN Hardware Ramdisk
+return
+
+##VDI output write subroutine.##
+	label vdi_buffiter
+		tabr cp.buffer,vdi_iter,@0
+		asm iowrite1;>vdi.cli.in
+	return
+
+
+## '?' help command.##
+	label help
+		textcolor *+++--0
+		prline vdi [cmd] : Pass commands directly to SBTVDI Serial Console. see: 'vdi help'
+		prline ?         : This text.
+		prline *:        : select drive (currently only 'A:', 'B:', 'R:') case-insensitive.
+		prline drives    : list drive information
+		prline ver       : Print Version
+		prline about     : About SBTCVM-DOS
+		print shutdown  : Shutdown SBTCVM-DOS
+		textcolor *0+0---
+		newline
+	return
+
+##About Subroutine##
+	label about
+		textcolor *+++--0
+		newline
+		prline --ABOUT--
+		gsub splash
+		textcolor *+++--0
+		prline  v0.1 (SBTCVM Disk Operating System)
+		prline Part of SBTCVM Gen2-9
+		prline 
+		prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
+		prline 
+		prline SBTCVM-DOS is free software: you can redistribute it and/or modify
+		prline it under the terms of the GNU General Public License as published by
+		prline the Free Software Foundation, either version 3 of the License, or
+		prline (at your option) any later version.
+		prline 
+		prline SBTCVM-DOS is distributed in the hope that it will be useful,
+		prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+		prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+		prline GNU General Public License for more details.
+		prline 
+		prline You should have received a copy of the GNU General Public License
+		print along with SBTCVM-DOS. If not, see <http://www.gnu.org/licenses/>
+		
+		#ensure last output line is a 'print' statement, not a 'prline' statement!
+		
+		textcolor *0+0---
+		newline
+	return
+
+label splash
+	textcolor *+++0--
+	print S
+	textcolor *+++00-
+	print B
+	textcolor *+++-0-
+	print T
+	textcolor *+++-00
+	print C
+	textcolor *+++--0
+	print V
+	textcolor *+++0-0
+	print M
+	textcolor *+++---
+	print -
+	textcolor *0++---
+	print DOS
+	textcolor *+++---
+return
+
+
+##Shutdown routine##
+label shutdown
+	gsub splash
+	prline  is shutting down...
+	prline done.
+stop
+
+
+
+
+include comprompt as cp

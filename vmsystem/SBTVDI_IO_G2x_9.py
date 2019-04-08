@@ -6,21 +6,99 @@ from . import libtextcon as tcon
 import os
 import sys
 import random
-
+import vmsystem.tdisk1lib as td1
 
 class vdi_filebuff:
-	def __init__(self, iosys, cpusys, memsys):
+	def __init__(self, iosys, cpusys, memsys, offset, disks):
+		self.iosys=iosys
+		self.cpusys=cpusys
+		self.memsys=memsys
+		self.offset=offset
+		self.filename=""
+		self.openfile=None
+		self.disks=disks
+		self.diskindex=0
+		self.fileseek=0
+		self.fileopen=0
+		self.selecteddisk=self.disks[self.diskindex]
 		return
+	def write_char(self, addr, data):#w
+		self.filename=self.filename+tcon.dattostr[int(data)]
+	def filename_reset(self, addr, data):#w
+		self.filename=""
+	def filename_exists(self, addr, data):#r
+		return btint((self.filename in self.selecteddisk.filedict))
+	def file_close(self, addr, data):#w
+		self.openfile=None
+		self.fileopen=0
+	def file_open(self, addr, data):#r
+		if self.filename in self.selecteddisk.filedict:
+			self.openfile=self.selecteddisk.filedict[self.filename]
+			self.fileopen=1
+			return btint(1)
+		return btint(0)
+	def is_open(self, addr, data):#r
+		return btint(self.fileopen)
+	def disk_set(self, addr, data):#w
+		data=int(data)
+		if data in disks:
+			self.diskindex=data
+			self.selecteddisk=self.disks[self.diskindex]
+	def disk_get(self, addr, data):#r
+		return btint(self.diskindex)
+	def seek_set(self, addr, data):#r
+		if self.openfile==None:
+			return btint(1)
+		newseek=data+9841
+		if newseek+1>len(self.openfile):
+			return btint(1)
+		self.fileseek=newseek
+		return btint(0)
+	def seek_get(self, addr, data):#r
+		return btint(self.fileseek)
+	def seek_inc(self, addr, data):#r
+		if self.openfile==None:
+			return btint(1)
+		newseek=self.fileseek+1
+		if newseek+1>len(self.openfile):
+			return btint(1)
+		self.fileseek=newseek
+		return btint(0)
+	def seek_dec(self, addr, data):#r
+		if self.openfile==None:
+			return btint(1)
+		newseek=self.fileseek-1
+		if newseek<0:
+			return btint(1)
+		self.fileseek=newseek
+		return btint(0)
+	def read_inst(self, addr, data):#r
+		if self.openfile!=None:
+			return self.openfile[self.seek][0]
+	def read_data(self, addr, data):#r
+		if self.openfile!=None:
+			return self.openfile[self.seek][1]
+	def write_data(self, addr, data):#w
+		if self.openfile!=None:
+			self.openfile[self.seek][1].changeval(data)
+	def write_inst(self, addr, data):#w
+		if self.openfile!=None:
+			self.openfile[self.seek][0].changeval(data)
+	def resetload(self, addr, data):#w
+		#TODO: resetload sbtvdi callback & cpu soft-reset
+		return
+	
 #SBTCVM Balanced Ternary Virtual Disk Interface
 #DRAFT. 
 class sbtvdi:
-	def __init__(self, iosys, cpusys, memsys):
+	def __init__(self, iosys, cpusys, memsys, diska=None, diskb=None, bootfromdisk=0):
 		self.iosys=iosys
 		self.cpusys=cpusys
 		self.memsys=memsys
 		self.cmdbuff=[]
 		self.outbuff=[]
 		self.status=0
+		self.disks={0: diska, 1: diskb, 2: td1.ramdisk()}
 		#CLI IO lines:
 		iosys.setwritenotify(100, self.clipipe_input)
 		iosys.setwritenotify(102, self.clireset)

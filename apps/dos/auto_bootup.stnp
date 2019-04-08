@@ -1,0 +1,16 @@
+##########SBTCVM-DOS - Bootup TROM ########## 
+
+
+gsub bigsplash
+textcolor *++0---
+prline v0.1.1 [ALPHA]
+prline booting into Command Interpreter...
+goto dcom.startup
+
+
+##block-art splash text.##
+label bigsplash
+	asm include;dos+bigsplash.tas0
+return
+
+include dos+command as dcom
