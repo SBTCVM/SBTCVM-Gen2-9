@@ -186,7 +186,7 @@ def colart_maker_RLE(imagepath, notrailnew=0):
 
 
 
-def plot_RLE(imagepath):
+def plot_RLE(imagepath, lineinterpol=0):
 	print("converting image into PLRLE plotter image format...")
 	image=pygame.image.load(imagepath)
 	xsize=image.get_width()
@@ -207,7 +207,13 @@ def plot_RLE(imagepath):
 		buffx=""
 		for linex in xrange(0, xsize):
 			pixcol = image.get_at((linex, coly))
-			buffx=bin8totrit3(pixcol[0])+bin8totrit3(pixcol[1])+bin8totrit3(pixcol[2])
+			if lineinterpol==0:
+				buffx=bin8totrit3(pixcol[0])+bin8totrit3(pixcol[1])+bin8totrit3(pixcol[2])
+			else:
+				if coly % 2:
+					buffx=bin8totrit3(pixcol[0]-5)+bin8totrit3(pixcol[1]-5)+bin8totrit3(pixcol[2]-5)
+				else:
+					buffx=bin8totrit3(pixcol[0])+bin8totrit3(pixcol[1])+bin8totrit3(pixcol[2])
 			if buffx==pbuff:
 				bufflen+=1
 				buffx=""
@@ -238,12 +244,15 @@ def plot_RLE(imagepath):
 	return
 
 def bin8totrit3(level):
+	if level<0:
+		level=0
+	if level>255:
+		level=255
 	#print(level)
 	xtemp=btint(int(level/9.44444444)-13)
 	#print(xtemp.intval)
 	xtemp.changeval(xtemp.dectrunk(3))
 	return xtemp.bttrunk(3)
-	
 
 if __name__=="__main__":
 	try:
@@ -262,8 +271,8 @@ if __name__=="__main__":
 	and place it in a tas0 file. append n for no trailing newline.
 -cprle(n) [image] : convert an image into 27-color cprle compressed
 	packed art image data.
--plrle(n) [image] : convert an image into 9-trit (PLRLE format) rle compressed
-	tritmap image.''')
+-plrle(i) [image] : convert an image into 9-trit (PLRLE format) rle compressed
+	tritmap image. append i for line-based striped interpolation.''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2-9 gfx conversion utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -313,5 +322,9 @@ see readme.md for more information and licensing of media.
 	elif cmd in ["-plrle"]:
 		print("RLE-encoded 9-trit RGB tritmap.")
 		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1))
+	elif cmd in ["-plrlei"]:
+		print("RLE-encoded 9-trit RGB tritmap. (line interpolated)")
+		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
+
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")

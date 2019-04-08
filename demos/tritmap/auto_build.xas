@@ -1,2 +1,3 @@
 gfxcon -plrle tritmap+test
+gfxcon -plrlei tritmap+test_copy
 stnp tritmap
