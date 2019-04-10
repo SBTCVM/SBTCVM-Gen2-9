@@ -28,6 +28,10 @@ set px
 get posy
 set py
 
+drawy1 posy
+drawx1 posx
+
+
 add pixx,@1
 set draw_pixx
 add pixy,@1
@@ -93,11 +97,16 @@ return
 
 var RL_BARWIDE=0
 var RL_BARWIDEDRAW=0
+var RL_loopcount_add1=0
 label RL_printBAR
-mul RL_loopcount,pixx
+
+add RL_loopcount,@1
+set RL_loopcount_add1
+mul RL_loopcount_add1,pixx
 set RL_BARWIDE
-add RL_BARWIDE,@1
-set RL_BARWIDE
+
+#add RL_BARWIDE,@1
+#set RL_BARWIDE
 add RL_BARWIDE,@1
 set RL_BARWIDEDRAW
 drawwidth RL_BARWIDEDRAW

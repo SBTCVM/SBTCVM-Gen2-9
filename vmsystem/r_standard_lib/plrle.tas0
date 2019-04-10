@@ -23,6 +23,7 @@ null;10x0;rl_iter
 null;10x-1;@-1
 null;0;RL_BARWIDE
 null;0;RL_BARWIDEDRAW
+null;0;RL_loopcount_add1
 #label
 null;;decode--label
 #get(1) (may be used with set, or asm code)
@@ -33,6 +34,12 @@ datawrite1;>px
 dataread1;>posy
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>py
+#plotter y pos 1
+dataread1;>posy
+iowrite1;>plot.y1
+#plotter x pos 1
+dataread1;>posx
+iowrite1;>plot.x1
 #add (2op math)
 dataread1;>pixx
 dataread2;>@1
@@ -61,11 +68,11 @@ datawrite1;>RL_pointer
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #44
-datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '44' 
+#_______NOTE: this corresponds to SSTNPL source line #48
+datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '48' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #45
-dataread1;;RL_GET_SIZE#SSTNPL Source Line: '45' 
+#_______NOTE: this corresponds to SSTNPL source line #49
+dataread1;;RL_GET_SIZE#SSTNPL Source Line: '49' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_SIZE
 #subtract (2op math)
@@ -83,16 +90,16 @@ datawrite1;>RL_pointer
 #Upward range iterator
 dataread1;>RL_pointer
 datawrite1;>rl_iter
-setreg1;>uiter-retpos-54;uiter-loopback-54
+setreg1;>uiter-retpos-58;uiter-loopback-58
 s1push1
 goto;>RL_decode_mainloop--label
-dataread1;>rl_iter;uiter-retpos-54
+dataread1;>rl_iter;uiter-retpos-58
 setreg2;10x1
 add
 datawrite1;>rl_iter
 dataread2;>RL_SIZE
-gotoifless;>uiter-loopback-54
-gotoif;>uiter-loopback-54
+gotoifless;>uiter-loopback-58
+gotoif;>uiter-loopback-58
 
 #return from subroutine.
 s1pop1
@@ -102,39 +109,39 @@ null;;RL_decode_mainloop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #65
-datawrite1;>RL_GET_DATA#SSTNPL Source Line: '65' 
+#_______NOTE: this corresponds to SSTNPL source line #69
+datawrite1;>RL_GET_DATA#SSTNPL Source Line: '69' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #66
-dataread1;;RL_GET_DATA#SSTNPL Source Line: '66' 
+#_______NOTE: this corresponds to SSTNPL source line #70
+dataread1;;RL_GET_DATA#SSTNPL Source Line: '70' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_data
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #72
-datawrite1;>RL_GET_LEN#SSTNPL Source Line: '72' 
+#_______NOTE: this corresponds to SSTNPL source line #76
+datawrite1;>RL_GET_LEN#SSTNPL Source Line: '76' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #73
-instread1;;RL_GET_LEN#SSTNPL Source Line: '73' 
+#_______NOTE: this corresponds to SSTNPL source line #77
+instread1;;RL_GET_LEN#SSTNPL Source Line: '77' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_loopcount
 #conditional goto
 dataread1;>RL_loopcount
 dataread2;>@-1
-gotoif;>goto--branch-77
-goto;>goto--jumper-77
-setreg1;>goto--jumper-77;goto--branch-77
+gotoif;>goto--branch-81
+goto;>goto--jumper-81
+setreg1;>goto--jumper-81;goto--branch-81
 goto;>RL_newline--label
-null;;goto--jumper-77
+null;;goto--jumper-81
 #plotter draw line
 dataread1;>RL_data
 iowrite1;>plot.color
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-82
+setreg1;>goto--jumper-86
 s1push1
 goto;>RL_printBAR--label
-null;;goto--jumper-82
+null;;goto--jumper-86
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -161,16 +168,16 @@ s1pop1
 gotoreg1
 #label
 null;;RL_printBAR--label
-#multiply (2op math)
-dataread1;>RL_loopcount
-dataread2;>pixx
-mul
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>RL_BARWIDE
 #add (2op math)
-dataread1;>RL_BARWIDE
+dataread1;>RL_loopcount
 dataread2;>@1
 add
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>RL_loopcount_add1
+#multiply (2op math)
+dataread1;>RL_loopcount_add1
+dataread2;>pixx
+mul
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_BARWIDE
 #add (2op math)

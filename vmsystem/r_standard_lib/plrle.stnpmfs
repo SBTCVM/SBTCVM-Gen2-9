@@ -19,6 +19,7 @@ int9;rl_iter;10x0
 int9;@-1;10x-1
 int9;RL_BARWIDE;0
 int9;RL_BARWIDEDRAW;0
+int9;RL_loopcount_add1;0
 int9;@1;10x1
 int9;@1;10x1
 label;decode
