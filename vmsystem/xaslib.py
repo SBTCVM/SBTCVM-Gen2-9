@@ -67,8 +67,8 @@ helpdict={
       Language (SSTNPL) See stnp -h for help.'''
 , "tools" : 
 '''   diskedit: SBTCVM disk image editor. see diskedit -h for help.
-  gfxcon: SBTCVM GFX Conversion Utility. converts graphics to SBTCVM's
-          native formats. see gfxcon -h for help.'''
+   gfxcon: SBTCVM GFX Conversion Utility. converts graphics to SBTCVM's
+           native formats. see gfxcon -h for help.'''
 , "vm" : 
 '''   run/runp [trom image]: run the VM with pygame frontend.
    runc [trom image]: run the VM with curses frontend. 
