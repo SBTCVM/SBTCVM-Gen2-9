@@ -1,0 +1,4 @@
+Curses VM
+{runc
+[trom image]: run the VM with curses frontend. [BROKEN]
+[MAY MESS UP TERMINAL UPON CTRL+C]

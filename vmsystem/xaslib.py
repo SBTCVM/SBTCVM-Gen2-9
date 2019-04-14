@@ -24,8 +24,12 @@ class xascmd:
 		self.ispython=ispython
 print("loading xas plugins...")
 
+helpitems={}
+helplist=[]
+helpshort=[]
+
 plugpath=os.path.join(".", "plugins")
-for plugin in os.listdir(plugpath):
+for plugin in sorted(os.listdir(plugpath)):
 	if plugin.lower().endswith(".xascmd"):
 		plugfile=open(os.path.join(plugpath, plugin), 'r')
 		for line in plugfile:
@@ -39,51 +43,41 @@ for plugin in os.listdir(plugpath):
 					xascmds.extend([xascmd(xcmd, execstr, ispython, takesfile)])
 				except IndexError:
 					continue
+	if plugin.lower().endswith(".xashelp"):
+		plugfile=open(os.path.join(plugpath, plugin), 'r')
+		plugglob=""
+		for line in plugfile:
+			plugglob=plugglob+line
+		firstline, plugglob=plugglob.split("\n", 1)
+		helplist.append(firstline)
+		helpshort.append("--" + firstline)
+		helpbloc=plugglob.split("{")
+		try:
+			helpbloc.remove('')
+		except ValueError:
+			continue
+		shhelpch=""
+		for helpchunk in helpbloc:
+			chsplit=helpchunk.split("\n")
+			hkeys=chsplit[0].split(",")
+			contents=chsplit[1:]
+			contents.remove('')
+			if contents==[] or hkeys==[""]:
+				print(chsplit)
+			for hkey in hkeys:
+				helpitems[hkey]=contents
+			helplist.append("  " + ",".join(hkeys).ljust(5) + " : " + contents[0])
+			if shhelpch=="":
+				shhelpch=(shhelpch + ",".join(hkeys))
+			else:
+				shhelpch=(shhelpch + "," + ",".join(hkeys))
+		helpshort.append("    " + shhelpch)
 print("plugins loaded.")
 
 
 verinfo="SBTCVM XAS Shell " + xasvers + "\nPart Of SBTCVM Gen 2-9"
 
 
-helpdict={
-"help" :
-'''  How to use help:
-   help list: list categories.
-   help [category]: show category
-   help all: show all categories.
-   help/help help: this text.'''
-, "common" : 
-'''   exit: exit shell.
-   print [arg]: print text
-   list/ls/dir [path]: list a path. i.e. 'ls apps+gtt' would list apps/gtt
-      Also accepts / and \ as path delineators. only shows files with
-      relevant XAS commands. paths are CASE SENSITIVE.
-   find [string]: Search filenames containing [string]. only shows files with
-      relevant XAS commands.'''
-, "build" : 
-'''   xas: run xas script
-   asm [tasm source file]: SBTCVM assembler. See stnp -h for help.
-   stnp [stnp source file]: SBTCVM Simplified Ternary Numeric Programming
-      Language (SSTNPL) See stnp -h for help.'''
-, "tools" : 
-'''   diskedit: SBTCVM disk image editor. see diskedit -h for help.
-   gfxcon: SBTCVM GFX Conversion Utility. converts graphics to SBTCVM's
-           native formats. see gfxcon -h for help.'''
-, "vm" : 
-'''   run/runp [trom image]: run the VM with pygame frontend.
-   runc [trom image]: run the VM with curses frontend. 
-      [RUNC IS BROKEN PLEASE RUN VM DIRECTLY via SBTCVM_G2_9.py
-      or use another frontend.]'''
-, "dump" : 
-'''   dump: direct access to romdump.py utility. see dump -h for help.
- -MACROS:
-   trominfo [trom image]: get some basic info on a trom. i.e. size.
-   dumpnp [trom image]: Dump TROM image
-   vdump(np) [trom image]: Dump TROM image in verbose format (romdump.py -r)
-   sdump [trom image]: Dump strings from TROM image.
-   t0dump/t1dump [trom image] Dump raw character data from
-      data/instruction words respectvely'''
-}
 
 
 abouttext='''SBTCVM eXtensible Assembly Script (XAS) v2
@@ -279,40 +273,18 @@ def xasshell():
 					print(shellwelcome)
 			else:
 				print("XAS ERROR: no argument after command: xas. Line: '" + str(lineno) + "'")	
-		#elif cmd=="asm":
-			#if arg!=None:
-				#pathx=iofuncts.findtrom(arg, ext=".tasm", exitonfail=0, exitmsg="XAS ERROR: source file: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
-				#if pathx==None:
-					#print("XAS ERROR: Assembly source file '" + arg + "' not found!")
-				#else:
-					#print("assemble: '" + arg + "'")
-					
-					#if g2asmlib.assemble(pathx, 0, "  ", exitonerr=0):
-						#print("Assembler returned an error.\n")
-					#else:
-						#print("Done.\n")
-					#print(shellwelcome)
-			#else:
-				#print("XAS ERROR: no argument after command: asm. Line: '" + str(lineno) + "'")
 		elif cmd=="print":
 			print(arg)
 		elif cmd=="help":
-			
-			if arg==None or arg=="":
-				hlparg="list"
+			if arg==None:
+				for line in helpshort:
+					print(line)
+			elif arg=="all":
+				for command in helplist:
+					print(command)
 			else:
-				hlparg=arg.lower()
-			if hlparg=="all":
-				for hsection in helpdict:
-					print("--" + hsection + "--\n" + helpdict[hsection])
-			elif hlparg=="list":
-				print("Help Sections: (use 'help [section]' to view. or 'help all' for all.)")
-				for hsection in helpdict:
-					print("   " + hsection)
-			elif hlparg in helpdict:
-				print("--" + hlparg + "--\n" + helpdict[hlparg])
-			else:
-				print("XAS ERROR: Cannot find help section: " + hlparg)
+				if arg in helpitems:
+					print(arg + ": " + "\n".join(helpitems[arg]))
 				
 		elif cmd=="about":
 			print(abouttext)

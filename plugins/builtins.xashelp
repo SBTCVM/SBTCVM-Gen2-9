@@ -1,0 +1,13 @@
+Builtin Commands
+{help
+[command]: get help on commands. see 'help help'.
+help all: show list of commands with one-line short descriptions.
+typing only 'help' will list all commands. sorted by category.
+{exit
+Exit XAS shell
+{print
+[arg]: print text
+{list,ls,dir
+[directory]: show listing of directory. use '+' instead of '/' or '\'
+{find
+[string]: search for filenames containing [string].

@@ -1,0 +1,17 @@
+Romdump TROM dumping & debug utility
+{dump
+Direct access to romdump.py. see 'dump -h' for usage.
+{trominfo
+[trom image]: get some basic info on a trom. i.e. size.
+{dumpnp
+[trom image]: Dump TROM image
+{vdump
+[trom image]: Dump TROM image in verbose format (romdump.py -r)
+{vdumpnp
+[trom image]: Dump TROM image in verbose format (romdump.py -rnp)
+{sdump
+[trom image]: Dump strings from TROM image.
+{t0dump
+[trom image] Dump raw character data from data words.
+{t1dump
+[trom image] Dump raw character data from instruction words.

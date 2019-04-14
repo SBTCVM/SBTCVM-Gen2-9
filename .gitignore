@@ -13,3 +13,9 @@ plugins/*
 !plugins/vmpygame.xascmd
 !plugins/vmcurses.xascmd
 !plugins/gfxcon.xascmd
+!plugins/build.xashelp
+!plugins/builtins.xashelp
+!plugins/romdump.xashelp
+!plugins/tools.xashelp
+!plugins/vmcurses.xashelp
+!plugins/vmpygame.xashelp

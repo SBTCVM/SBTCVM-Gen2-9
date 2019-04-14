@@ -1,0 +1,9 @@
+Compilers & XAS
+{xas
+[script]: run an xas script from the shell/another xas script.
+{asm,g2asm
+runs assembler. Type 'asm -h' for usage.
+{stnp,sstnpl
+runs SSTNPL compiler. Type 'stnp -h' for usage.
+{stbx,stbxpl
+runs STBXPL compiler. Type 'stbx -h' for usage.
