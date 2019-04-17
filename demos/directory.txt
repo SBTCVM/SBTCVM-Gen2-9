@@ -4,6 +4,7 @@ key:
 	[ttycolor] : uses tty color support.
 	[mouse]    : uses the SBTCVM mouse device.
 	[nocurses] : CANNOT be used in curses frontend.
+	[sound]    : uses the SBTCVM sound chip (requires pygame. works in all frontends)
 
 ----Technical----
 
@@ -18,6 +19,10 @@ shelldemo:
 			load1
 			load2
 
+----Sound----
+
+sounddemo:
+	a basic automated test/example for SBTCVM's sound chip. [sound]
 
 ----Terminal----
 
@@ -56,14 +61,14 @@ colorpack:
 comppack:
 	uses 27-color packart, but features a lossless compression algorithm 
 	(gfxcon -cprle)
-	Features example SSTNPL-based decoder algorithm.
+	Features example SSTNPL-based decoder algorithm. [nocurses]
 
 ----Plotter----
 
 tritmap:
 	A 243x243 PLRLE tritmap example. (a basic 9-trit RGB, per-line
 	run-length compression scheme.) uses the 'plrle' SSTNPL module,
-	and 'gfxcon -plrle'
+	and 'gfxcon -plrle' [nocurses]
 	
 burst:
 	A nice 'ray burst' demo based upon a similar demo for SBTCVM Mark 2 (Gen 1)

@@ -20,6 +20,7 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 
 ### Other Devices
 - [SBTCVM Mouse](mouse.md) - SBTCVM's official mouse device. (not supported by curses!)
+- [SBTCVM Sound Chip (SBTSND-1000)](sound.md) - SBTCVM's sound chip. (works in all frontends when pygame is installed.)
 
 ### TTY help
 

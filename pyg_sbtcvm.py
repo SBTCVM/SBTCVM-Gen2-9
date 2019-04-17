@@ -12,6 +12,7 @@ import vmsystem.IO_G2x_9
 import vmsystem.UIO_PYGAME_G2x_9 as UIO
 import vmsystem.COMMON_IO_G2x_9 as devcommon
 import vmsystem.SBTVDI_IO_G2x_9 as vdi
+import vmsystem.SND_G2x_9 as snd
 import time
 import sys
 
@@ -109,6 +110,8 @@ else:
 	vdi.sbtvdi(iosys, cpusys, memsys)
 	progrun=1
 	
+	#start sound system
+	snd.initsnd(iosys)
 	#uio startup
 	uiosys = UIO.uio(cpusys, memsys, iosys, romfile)
 	uiosys.ttyraw("SBTCVM Pygame frontend. SBTCVM Gen2-9 v2.1.0")

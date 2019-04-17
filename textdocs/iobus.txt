@@ -62,22 +62,50 @@ x :  m : asm varname  : description
 
 ### NOT FINISHED. THE VM DOES NOT LOAD THIS MODULE YET!
 
-#SFX channel 1
-200: [w] sfx1.play  : (write fadetime in ms)
-201: [w] sfx1.stop  : (write fadetime in ms)
-202: [w] sfx1.pulse : (write 0-10)
-203: [w] sfx1.vol   : (write 0-10)
-204: [w] sfx1.voice : (write 0-5) 
-205: [w] sfx1.pan   : (1=left, 0=center, -1=right)
+#SND channel 1
+200: [w] snd.1.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+201: [w] snd.1.vol : set volume. 0 through 10
+202: [w] snd.1.pan : -1=right, 1=left, 0=center
+203: [w] snd.1.pulse : set pulse (waves 3 and 4) 0 through 10
+204: [w] snd.1.freq : set frequency in Hertz.
+205: [w] snd.1.play : write to start channel
+206: [w] snd.1.stop : write to stop channel
 
-#SFX channel 2
-210: [w] sfx2.play  : (write fadetime in ms)
-211: [w] sfx2.stop  : (write fadetime in ms)
-212: [w] sfx2.pulse : (write 0-10)
-213: [w] sfx2.vol   : (write 0-10)
-214: [w] sfx2.voice : (write 0-5) 
-215: [w] sfx2.pan   : (1=left, 0=center, -1=right)
 
+
+
+
+#SND channel 2
+210: [w] snd.2.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+211: [w] snd.2.vol : set volume. 0 through 10
+212: [w] snd.2.pan : -1=right, 1=left, 0=center
+213: [w] snd.2.pulse : set pulse (waves 3 and 4) 0 through 10
+214: [w] snd.2.freq : set frequency in Hertz.
+215: [w] snd.2.play : write to start channel
+216: [w] snd.2.stop : write to stop channel
+
+
+
+
+#SND channel 3
+220: [w] snd.3.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+221: [w] snd.3.vol : set volume. 0 through 10
+222: [w] snd.3.pan : -1=right, 1=left, 0=center
+223: [w] snd.3.pulse : set pulse (waves 3 and 4) 0 through 10
+224: [w] snd.3.freq : set frequency in Hertz.
+225: [w] snd.3.play : write to start channel
+226: [w] snd.3.stop : write to stop channel
+
+
+
+#SND channel 4
+230: [w] snd.4.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+231: [w] snd.4.vol : set volume. 0 through 10
+232: [w] snd.4.pan : -1=right, 1=left, 0=center
+233: [w] snd.4.pulse : set pulse (waves 3 and 4) 0 through 10
+234: [w] snd.4.freq : set frequency in Hertz.
+235: [w] snd.4.play : write to start channel
+236: [w] snd.4.stop : write to stop channel
 
 [TODO: map out music controller IO lines]
 
@@ -112,3 +140,5 @@ x :  m : asm varname  : description
 520: [w] plot.fhalt : instruct the plotter to wait until next frame.
 521: [b] plot.buffer: write: clear draw buffer. read: get number of items in
 		draw buffer. (keep at or below 30 for constant drawing.)
+
+

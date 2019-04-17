@@ -14,6 +14,7 @@ import vmsystem.IO_G2x_9
 import vmsystem.UIO_CURSES_G2x_9 as UIO
 import vmsystem.COMMON_IO_G2x_9 as devcommon
 import vmsystem.SBTVDI_IO_G2x_9 as vdi
+import vmsystem.SND_G2x_9 as snd
 import time
 import sys
 import curses
@@ -125,6 +126,8 @@ else:
 		vdi.sbtvdi(iosys, cpusys, memsys)
 		progrun=1
 		
+		#start sound system
+		snd.initsnd(iosys)
 		#curses startup
 		mainscr=curses.initscr()
 		curses.noecho()

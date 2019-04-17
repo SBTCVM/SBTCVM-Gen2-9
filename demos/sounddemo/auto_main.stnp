@@ -1,0 +1,138 @@
+#
+#DEMO OF SBTCVM's 4-voice sound chip.
+
+#############notes##############
+#-DO NOT: try any CPU-trickery. emulation uses sample-based synthesis 
+#    IT IS NOT REALTIME!
+#-changing pulse,frequency and voice will regenerate the waveform for each
+#    control-register write.
+#-synthesis is preformed by 'fssynthlib.py'. you can find its readme in 
+#    'textdocs'.
+#-panning and volume is independent of waveform synthesis.
+#-The noise sample is precomputed by fssynthlib at VM start time.
+#-if you want to make external tools, i.e. a chiptune tracker, you might
+#    try using fssynthlib.
+
+
+#BASIC WAVEFORM TEST
+val @220
+asm iowrite1;>snd.1.freq
+prline basic wave test...
+prline in order: (square, triangle, saw, pulse, pulse-triangle, noise)
+uiter waveiter,looptest,@0,@5
+
+#SQUARE-PULSE
+prline Square Pulse test....
+val @3
+asm iowrite1;>snd.1.wave
+
+uiter pulseiter,pulsetest,@0,@10
+
+
+#SQUARE-TRIANGLE
+prline triangle Pulse test....
+val @4
+asm iowrite1;>snd.1.wave
+
+uiter pulseiter,pulsetest,@0,@10
+
+
+waitcy 6000
+
+
+#STEREO PAN
+prline Stereo Pan test...
+val @2
+asm iowrite1;>snd.1.wave
+val @220
+asm iowrite1;>snd.1.freq
+uiter paniter,pantest,@-1,@1
+
+
+waitcy 6000
+
+#POLYPHONIC TEST
+prline Chord Test... (using all 4 voices)
+
+val @1
+
+asm iowrite1;>snd.1.wave
+asm iowrite1;>snd.2.wave
+asm iowrite1;>snd.3.wave
+asm iowrite1;>snd.4.wave
+
+val @110
+asm iowrite1;>snd.1.freq
+val @220
+asm iowrite1;>snd.2.freq
+val @440
+asm iowrite1;>snd.3.freq
+val @880
+asm iowrite1;>snd.4.freq
+
+asm iowrite1;>snd.1.play
+waitcy 6000
+
+asm iowrite1;>snd.2.play
+waitcy 6000
+
+asm iowrite1;>snd.3.play
+waitcy 6000
+
+
+asm iowrite1;>snd.4.play
+waitcy 6000
+
+
+asm iowrite1;>snd.1.stop
+asm iowrite1;>snd.2.stop
+asm iowrite1;>snd.3.stop
+asm iowrite1;>snd.4.stop
+
+
+
+
+
+
+prline DONE.
+keyprompt
+stop
+
+
+label pulsetest
+get pulseiter
+asm iowrite1;>snd.1.pulse
+
+
+asm iowrite1;>snd.1.play
+
+waitcy 6500
+
+asm iowrite1;>snd.1.stop
+return
+
+
+
+label pantest
+get paniter
+asm iowrite1;>snd.1.pan
+
+asm iowrite1;>snd.1.play
+
+waitcy 6500
+
+asm iowrite1;>snd.1.stop
+return
+
+label looptest
+
+get waveiter
+asm iowrite1;>snd.1.wave
+
+
+asm iowrite1;>snd.1.play
+
+waitcy 6500
+
+asm iowrite1;>snd.1.stop
+return
