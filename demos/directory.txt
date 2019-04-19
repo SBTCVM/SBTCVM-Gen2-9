@@ -23,6 +23,10 @@ shelldemo:
 
 sounddemo:
 	a basic automated test/example for SBTCVM's sound chip. [sound]
+musicdemo:
+	A demo of SBTCVM SIMPLE MUSIC ENGINE or 'musicengine' SSTNPL module.
+	Features a loop of 3-note chords, that demos several different
+	waveform/pan/pulse configurations. [sound]
 
 ----Terminal----
 
