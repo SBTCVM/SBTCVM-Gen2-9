@@ -1,0 +1,214 @@
+
+
+############# SBTCVM SIMPLE MUSIC ENGINE #############
+#Code By: Thomas Leathers
+#
+#
+var offset=0
+var pointer=0
+var timer=0
+var cmdbuff=0
+var datbuff=0
+var returnbuff=0
+
+label init
+copy offset,pointer
+val 0
+set timer
+
+return
+
+
+label cycle
+#use conditional GOTO here to make timersub return directly to program.
+ifnot timer,@0 goto timersub
+get pointer
+asm datawrite1;>pointdat
+asm dataread1;;pointdat
+set datbuff
+
+get pointer
+asm datawrite1;>pointinst
+asm instread1;;pointinst
+set cmdbuff
+
+add pointer,@1
+set pointer
+	#dumpd datbuff
+	if cmdbuff,@1 gsub play1
+	if cmdbuff,@2 gsub play2
+	if cmdbuff,@3 gsub play3
+	if cmdbuff,@4 gsub play4
+	if cmdbuff,@-1 gsub stop1
+	if cmdbuff,@-2 gsub stop2
+	if cmdbuff,@-3 gsub stop3
+	if cmdbuff,@-4 gsub stop4
+	if cmdbuff,@101 gsub pulse1
+	if cmdbuff,@102 gsub pulse2
+	if cmdbuff,@103 gsub pulse3
+	if cmdbuff,@104 gsub pulse4
+	if cmdbuff,@111 gsub pan1
+	if cmdbuff,@112 gsub pan2
+	if cmdbuff,@113 gsub pan3
+	if cmdbuff,@114 gsub pan4
+	if cmdbuff,@121 gsub vol1
+	if cmdbuff,@122 gsub vol2
+	if cmdbuff,@123 gsub vol3
+	if cmdbuff,@124 gsub vol4
+	if cmdbuff,@131 gsub wave1
+	if cmdbuff,@132 gsub wave2
+	if cmdbuff,@133 gsub wave3
+	if cmdbuff,@134 gsub wave4
+	
+	if cmdbuff,@0 gsub settimer
+	if cmdbuff,@10 gsub hardjump
+	if cmdbuff,@11 gsub subjump
+	if cmdbuff,@12 gsub subreturn
+return
+
+label timersub
+sub timer,@1
+set timer
+return
+
+
+label wave1
+get datbuff
+asm iowrite1;>snd.1.wave
+return
+
+label wave2
+get datbuff
+asm iowrite1;>snd.2.wave
+return
+
+label wave3
+get datbuff
+asm iowrite1;>snd.3.wave
+return
+
+label wave4
+get datbuff
+asm iowrite1;>snd.4.wave
+return
+
+
+label vol1
+get datbuff
+asm iowrite1;>snd.1.vol
+return
+
+label vol2
+get datbuff
+asm iowrite1;>snd.2.vol
+return
+
+label vol3
+get datbuff
+asm iowrite1;>snd.3.vol
+return
+
+label vol4
+get datbuff
+asm iowrite1;>snd.4.vol
+return
+
+
+label pan1
+get datbuff
+asm iowrite1;>snd.1.pan
+return
+
+label pan2
+get datbuff
+asm iowrite1;>snd.2.pan
+return
+
+label pan3
+get datbuff
+asm iowrite1;>snd.3.pan
+return
+
+label pan4
+get datbuff
+asm iowrite1;>snd.4.pan
+return
+
+label pulse1
+get datbuff
+asm iowrite1;>snd.1.pulse
+return
+
+
+label pulse2
+get datbuff
+asm iowrite1;>snd.2.pulse
+return
+
+label pulse3
+get datbuff
+asm iowrite1;>snd.3.pulse
+return
+
+label pulse4
+get datbuff
+asm iowrite1;>snd.4.pulse
+return
+
+
+label settimer
+	copy datbuff,timer
+return
+
+label hardjump
+	copy datbuff,pointer
+return
+
+label subjump
+	copy pointer,returnbuff
+	copy datbuff,pointer
+return
+
+label subreturn
+	copy returnbuff,pointer
+return
+
+label play1
+get datbuff
+asm iowrite1;>snd.1.freq
+asm iowrite1;>snd.1.play
+return
+
+label play2
+get datbuff
+asm iowrite1;>snd.2.freq
+asm iowrite1;>snd.2.play
+return
+
+label play3
+get datbuff
+asm iowrite1;>snd.3.freq
+asm iowrite1;>snd.3.play
+return
+
+label play4
+get datbuff
+asm iowrite1;>snd.4.freq
+asm iowrite1;>snd.4.play
+return
+
+label stop1
+asm iowrite1;>snd.1.stop
+return
+
+label stop2
+asm iowrite1;>snd.2.stop
+return
+
+label stop3
+asm iowrite1;>snd.3.stop
+return
+
+label stop4
+asm iowrite1;>snd.4.stop
+return

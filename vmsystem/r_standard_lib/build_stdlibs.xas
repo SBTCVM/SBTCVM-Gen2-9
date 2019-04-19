@@ -6,10 +6,13 @@ print;SSTNPL modules
 stnp --module comprompt.stnp
 stnp --module cprle.stnp
 stnp --module plrle.stnp
+stnp --module musicengine.stnp
 
 #Standard namespace library
 print;standard namespace library
 asm;stdnsp
 
+#musicengine command namespace
+asm;musnsp
 
 print;rebuild complete.

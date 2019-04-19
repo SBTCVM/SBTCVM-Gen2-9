@@ -1,0 +1,278 @@
+########IMPORTANT########
+##THIS provides asm namespace vars for command names.
+##tracker programmerss should include this line in any generated
+##tas0 files, if they wish to use these.
+
+asm head-nspin=musicengine
+
+#########################
+
+var ch=0
+
+asm setreg1;>music0
+set mus.offset
+gsub mus.init
+
+
+asm include;musicdemo+splash.tas0
+label loop
+gsub mus.cycle
+getchar ch
+ifnot ch,@0 stop
+goto loop
+
+### NOTES ###
+
+#-'wait' times are measured in calls to mus.cycle. thus you WILL need to
+#    adjust these as a program uses more or less cycles between calls to
+#    mus.cycle
+
+
+#obviously we need to include the music engine...
+include musicengine as mus
+
+##### Music data begins here #####
+
+####wait constants####
+asm v>wholenote;10x150
+asm v>halfnote;10x75
+
+####pattern 'sheet'####
+a raw;>mus.gsub,>setvols1;music0
+a raw;>mus.gsub,>setwaves1
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern1
+
+a raw;>mus.gsub,>setwaves2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern1
+
+a raw;>mus.gsub,>setwaves3
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern1
+
+a raw;>mus.gsub,>setwaves4
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern1
+
+a raw;>mus.gsub,>panleft
+a raw;>mus.gsub,>setwaves2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern1
+
+a raw;>mus.gsub,>panright
+a raw;>mus.gsub,>setwaves2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern2
+a raw;>mus.gsub,>pattern0
+a raw;>mus.gsub,>pattern1
+
+a raw;>mus.gsub,>pancenter
+a raw;>mus.goto,>music0
+
+
+#######param setters######
+####PAN####
+#panleft
+a raw;>mus.pan1,>pan.left;panleft
+a raw;>mus.pan2,>pan.left
+a raw;>mus.pan3,>pan.left
+a raw;>mus.pan4,>pan.left
+a raw;>mus.return,10x0
+
+#panright
+a raw;>mus.pan1,>pan.right;panright
+a raw;>mus.pan2,>pan.right
+a raw;>mus.pan3,>pan.right
+a raw;>mus.pan4,>pan.right
+a raw;>mus.return,10x0
+
+#pancenter
+a raw;>mus.pan1,>pan.center;pancenter
+a raw;>mus.pan2,>pan.center
+a raw;>mus.pan3,>pan.center
+a raw;>mus.pan4,>pan.center
+a raw;>mus.return,10x0
+
+####VOLUME####
+#setvols1
+a raw;>mus.vol1,10x5;setvols1
+a raw;>mus.vol2,10x5
+a raw;>mus.vol3,10x5
+a raw;>mus.vol4,10x5
+a raw;>mus.return,10x0
+
+####WAVEFORM#####
+
+#setwaves1
+a raw;>mus.wave1,>wave.square;setwaves1
+a raw;>mus.wave2,>wave.square
+a raw;>mus.wave3,>wave.square
+a raw;>mus.wave4,>wave.square
+a raw;>mus.return,10x0
+
+#setwaves2
+a raw;>mus.wave1,>wave.saw;setwaves2
+a raw;>mus.wave2,>wave.saw
+a raw;>mus.wave3,>wave.saw
+a raw;>mus.wave4,>wave.saw
+a raw;>mus.return,10x0
+
+#setwaves3
+a raw;>mus.wave1,>wave.tri;setwaves3
+a raw;>mus.wave2,>wave.tri
+a raw;>mus.wave3,>wave.tri
+a raw;>mus.wave4,>wave.tri
+a raw;>mus.return,10x0
+
+#setwaves4
+a raw;>mus.wave1,>wave.pulse;setwaves4
+a raw;>mus.wave2,>wave.pulse
+a raw;>mus.wave3,>wave.pulse
+a raw;>mus.wave4,>wave.pulse
+a raw;>mus.pulse1,10x1
+a raw;>mus.pulse2,10x1
+a raw;>mus.pulse3,10x1
+a raw;>mus.pulse4,10x1
+a raw;>mus.return,10x0
+
+
+
+
+####PATTERN 0####
+###chord 1
+a raw;>mus.play1,10x165;pattern0
+a raw;>mus.play2,10x196
+a raw;>mus.play3,10x262
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop3,10x0
+
+###chord 2
+a raw;>mus.play1,10x175
+a raw;>mus.play2,10x220
+a raw;>mus.play4,10x262
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop4,10x0
+
+###chord 3
+a raw;>mus.play1,10x196
+a raw;>mus.play2,10x247
+a raw;>mus.play3,10x292
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop3,10x0
+a raw;>mus.return,10x0
+
+
+
+
+
+
+####PATTERN 1####
+
+###chord 3
+a raw;>mus.play1,10x196;pattern1
+a raw;>mus.play2,10x247
+a raw;>mus.play3,10x292
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop3,10x0
+
+###chord 2
+a raw;>mus.play1,10x175
+a raw;>mus.play2,10x220
+a raw;>mus.play4,10x262
+
+a raw;>mus.wait,>halfnote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop4,10x0
+###chord 2
+a raw;>mus.play1,10x175
+a raw;>mus.play2,10x220
+a raw;>mus.play4,10x330
+
+a raw;>mus.wait,>halfnote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop4,10x0
+
+###chord 1
+a raw;>mus.play1,10x165
+a raw;>mus.play2,10x196
+a raw;>mus.play3,10x262
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop3,10x0
+a raw;>mus.return,10x0
+
+
+
+####PATTERN 2####
+###chord 1
+a raw;>mus.play1,10x165;pattern2
+a raw;>mus.play2,10x196
+a raw;>mus.play3,10x262
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop3,10x0
+
+###chord 2
+a raw;>mus.play1,10x175
+a raw;>mus.play2,10x220
+a raw;>mus.play4,10x262
+
+a raw;>mus.wait,>halfnote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop4,10x0
+
+###chord 2
+a raw;>mus.play1,10x175
+a raw;>mus.play2,10x220
+a raw;>mus.play4,10x330
+
+a raw;>mus.wait,>halfnote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop4,10x0
+
+
+###chord 3
+a raw;>mus.play1,10x196
+a raw;>mus.play2,10x247
+a raw;>mus.play3,10x292
+
+a raw;>mus.wait,>wholenote
+a raw;>mus.stop1,10x0
+a raw;>mus.stop2,10x0
+a raw;>mus.stop3,10x0
+a raw;>mus.return,10x0
+
+
+
+

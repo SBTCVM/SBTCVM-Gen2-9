@@ -3,6 +3,13 @@
 
 Troubleshooting guide for common VM problems and limitations.
 
+# Q: I tried musicdemo or sounddemo but didn't hear anything!
+
+# A: currently, while all frontends enable the sound emulation,
+the sound emulation requires pygame. even when you aren't using
+the pygame frontend. Also, ensure your Operating System hasn't
+muted the program in some way.
+
 # Q: Why does the pygame frontend have a slower TTY?
 Its 600 Characters per second. (CPS) (30 characters max per frame, at 30 FPS)
 

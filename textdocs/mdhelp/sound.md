@@ -12,7 +12,8 @@
 - per-channel volume.
 
 ## examples:
-see 'sounddemo' in 'demos' for a set of basic tests/example code.
+- see 'sounddemo' in 'demos' for a set of basic tests/example code.
+- see 'musicdemo' in 'demos' for a demo of SBTCVM's musicengine SSTNPL module.
 
 ## Technical Notes:
 
