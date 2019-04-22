@@ -1,0 +1,70 @@
+
+
+asm setreg1;>tdmusic0.main
+set mus.offset
+gsub mus.init
+
+
+newline
+newline
+newline
+newline
+prline TERNARY DREAMS
+prline A 2 KiloNonet demo for SBTCVM Gen2-9
+prline Code: Thomas Leathers
+prline GFX: Thomas Leathers
+prline Music: Thomas Leathers
+newline
+prline press a key
+keyprompt
+
+gamode @30
+
+
+label start
+### 40x40 title art ###
+#val @5
+#set pl.pixx
+#set pl.pixy
+
+#asm setreg1;>image_offset0
+#set pl.offset
+#gsub pl.decode
+
+#waitcy 32000
+#waitcy 32000
+
+
+
+
+
+gsub drop.pre_init
+uiter iter1,droploop,@-200,@650
+
+gsub bands.pre_init
+uiter iter1,bandsloop,@-200,@650
+
+
+
+goto start
+
+keyprompt
+stop
+
+#include plrle as pl
+include musicengine as mus
+include ternarydreams+drop as drop
+include ternarydreams+bands as bands
+#asm include;ternarydreams+title.tas0;image_offset0
+asm includeas;ternarydreams+tdmusic0.tas0,tdmusic0
+
+label droploop
+gsub mus.cycle
+gsub drop.cycle_run
+return
+
+label bandsloop
+gsub mus.cycle
+gsub bands.cycle_run
+return
+

@@ -83,12 +83,15 @@ class chipchan_pyg:
 		self.freq=data
 		self.samup=1
 	def play(self, data):
+		#fix weird upstrem volume reset bug.
+		self.channel.stop()
+		self.updatevol()
 		if self.samup:
 			self.gensample()
 		self.channel.play(self.sample, loops = -1)
+		
 	def stop(self, data):
 		self.channel.stop()
-		self.updatevol()
 	def gensample(self):
 		if self.voice==0:
 			self.sample=pygame.mixer.Sound(fssynthlib.makesquare(self.freq))

@@ -1,0 +1,95 @@
+#gamode @30
+#gsub runtest
+#stop
+
+
+var y1=@0
+var debug_buffsize=0
+var colortimer=0
+
+var bgcolor=*----00---
+#var bgcolor=*+++++++++
+var fxcolor=*+++++++++
+var dir=@7
+
+label pre_init
+drawx1 @-121
+drawx2 @121
+drawfill bgcolor
+return
+
+
+label cycle_run
+gsub mainloop
+return
+
+
+#label run
+#	
+#	uiter iter1,mainloop,@-700,@759
+#	drawfill *000000000
+#return
+#
+#label runtest
+#	drawx1 @-121
+#	drawx2 @121
+#	drawfill bgcolor
+#	label testloop
+#		gsub mainloop
+#	goto testloop
+#return
+
+
+
+label mainloop
+
+gsub debug1
+	
+drawcolor fxcolor
+	drawy1 y1
+	invert y1
+	drawy2 y1
+	invert y1
+	drawline
+
+add y1,dir
+set y1
+#add colortimer,@1
+#set colortimer
+#if colortimer,@3 gsub colorinc
+#if colortimer,@3 =colortimer @0
+#ifless fxcolor,@9084 gsub colorinc
+gsub colorinc
+
+
+#waitcy 15
+ifnotrange @-221,@221,y1 gsub changedir
+return
+
+label changedir
+	invert dir
+	rrange @-9841,@9841
+	set fxcolor
+return
+
+
+label colorinc
+add fxcolor,*00+00+00+
+set fxcolor
+
+
+return
+
+
+label debug1
+#debug
+asm ioread1;>plot.buffer
+set debug_buffsize
+ifmore debug_buffsize,@4 gsub debug1_print
+return
+
+label debug1_print
+dumpd debug_buffsize
+newline
+waitcy 100
+return

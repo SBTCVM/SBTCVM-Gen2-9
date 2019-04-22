@@ -1,0 +1,90 @@
+
+#gamode @30
+#gsub run
+#stop
+
+#
+var velx=@-5
+var vely=@3
+var floorlevel=@110
+var floorlevel_draw=@115
+var xpos=@0
+var ypos=@110
+var debug_buffsize=0
+var hitvelocity_y=@-20
+
+#label run
+#drawwidth @5
+#drawheight @5
+#drawx1 xpos
+#drawy1 ypos
+#drawfill *0000++000
+#uiter iter1,main,@-200,@650
+#drawfill *000000000
+#return
+
+label pre_init
+drawwidth @5
+drawheight @5
+drawx1 xpos
+drawy1 ypos
+drawfill *0000++000
+return
+
+label cycle_run
+gsub main
+return
+
+
+var trailcolor=*000+++000
+label main
+
+
+waitcy 10
+
+rrange *000++0000,*000+++000
+set trailcolor
+
+
+drawcolor trailcolor
+drawrect 
+
+drawx1 xpos
+drawy1 ypos
+
+add ypos,vely
+set ypos
+sub vely,@-1
+set vely
+add xpos,velx
+set xpos
+ifless xpos,@-121 =xpos @121
+ifmore xpos,@121 =xpos @-121
+
+
+
+
+ifnotless ypos,floorlevel =vely hitvelocity_y
+
+
+drawcolor *+++++++++
+drawrect
+gsub debug1
+
+
+return
+
+
+label debug1
+#debug
+asm ioread1;>plot.buffer
+set debug_buffsize
+ifmore debug_buffsize,@4 gsub debug1_print
+return
+
+label debug1_print
+dumpd debug_buffsize
+newline
+waitcy 100
+return
+

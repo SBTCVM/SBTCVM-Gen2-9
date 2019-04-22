@@ -19,6 +19,12 @@ shelldemo:
 			load1
 			load2
 
+
+----'demoscene-style demos'----
+ternarydreams:
+	This is a short, 2 KiloNonet (1000 word) SBTCVM plotter demo.
+	features music.[sound][nocurses]
+
 ----Sound----
 
 sounddemo:

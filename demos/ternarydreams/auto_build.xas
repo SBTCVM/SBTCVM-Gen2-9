@@ -1,0 +1,8 @@
+#gfxcon -plrle ternarydreams+19683colors.png
+#gfxcon -plrlei ternarydreams+title.png
+#gfxcon -plrle ternarydreams+sbtcvm.png
+#gfxcon -plrle ternarydreams+cpu.png
+#gfxcon -plrle ternarydreams+base3.png
+stnp --module ternarydreams+drop.stnp
+stnp --module ternarydreams+bands.stnp
+stnp ternarydreams
