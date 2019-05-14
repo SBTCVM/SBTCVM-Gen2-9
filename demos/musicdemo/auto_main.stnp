@@ -7,6 +7,9 @@ asm head-nspin=musicengine
 
 #########################
 
+packcolor *--0-0++++
+textcolor *00+00+00+
+
 var ch=0
 
 asm setreg1;>music0

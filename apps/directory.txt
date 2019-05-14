@@ -5,6 +5,7 @@ key:
 	[mouse]: Uses the SBTCVM mouse in some form or another.
 	[unfinished]: Incomplete/unstable. often, these are prominent prototypes, 
 			for important applications/software.
+	[sound]: features sounds/music via SBTCVM's 4-voice sound chip. [requires pygame, works in curses IF PYGAME IS INSTALLED]
 
 ----Special----
 dos:
@@ -21,10 +22,12 @@ clicalc:
 	of 9-trit integer: addition, multiplication, division, subtraction, 
 	inversion, absolute value, and modulo division. [ttycolor]
 
+----GUI/TUI----
+
 sbtgsh:
 	SBTCVM Balanced Ternary Graphical SHell: A mouse-driven Graphical Shell
 	Designed for use with the pygame frontend's color TTY and Mouse emulation.
-	[ttycolor],[nocurses],[mouse]
+	[ttycolor],[nocurses],[mouse],[sound]
 
 ----GAMES----
 

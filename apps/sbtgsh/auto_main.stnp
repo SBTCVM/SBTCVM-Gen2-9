@@ -36,11 +36,12 @@ set cp.max
 val @0
 set cp.clearbuffer
 
-
+waitcy 1000
 ########## Main Loop ##########
 label main
 	
 	if main_actflg,@1 gsub mainscreen_draw
+	if main_actflg,@1 gsub menutune
 	if main_actflg,@1 =main_actflg @0
 	
 	label main_loop
@@ -149,7 +150,7 @@ label hudsplash
 	print M
 	textcolor *+++--0
 	print   
-	print SBTGSH v0.4 - 
+	print SBTGSH v0.5 - 
 return
 
 
@@ -219,6 +220,40 @@ label mainscreen_draw
 	prline RAM: 39.366 KiloNonets | CPU: SBTCVM_G2x_9_r1 or compat. | Input: Mouse
 	newline
 	asm iowrite1;>mouse.button
+	
+return
+
+
+###### BEEP ######
+
+label beep
+val 0
+asm iowrite1;>snd.1.wave
+val @230
+asm iowrite1;>snd.1.freq
+val 0
+asm iowrite1;>snd.1.play
+waitcy 4000
+val 0
+asm iowrite1;>snd.1.stop
+return
+
+###### Menu Tune ######
+label menutune
+val 0
+asm iowrite1;>snd.1.wave
+val @220
+asm iowrite1;>snd.1.freq
+val 0
+asm iowrite1;>snd.1.play
+waitcy 2000
+val @330
+asm iowrite1;>snd.1.freq
+val 0
+asm iowrite1;>snd.1.play
+waitcy 2000
+val 0
+asm iowrite1;>snd.1.stop
 return
 
 
@@ -232,9 +267,10 @@ label not_implemented
 	textcolor *---00+
 	gsub icon_message
 	prline This is not supported yet. sorry!
+	
 	prline Click anywhere to continue.
 	uiter not_sup_fill,newline,@1,@17
-	
+	gsub beep
 	gsub click_wait
 
 return
@@ -248,9 +284,10 @@ label nothing_here
 	textcolor *---00+
 	gsub icon_message
 	prline Nothing is assigned to this icon slot yet. sorry!
+	
 	prline Click anywhere to continue.
 	uiter nothing_here_fill,newline,@1,@17
-	
+	gsub beep
 	gsub click_wait
 
 return
@@ -338,7 +375,7 @@ label help_about
 	gsub hudsplash
 	prline Help & About - About
 	textcolor *---00+
-	prline SBTCVM Balanced Ternary Graphical SHell - v0.4
+	prline SBTCVM Balanced Ternary Graphical SHell - v0.5
 	prline Part of SBTCVM Gen2-9
 	prline 
 	prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -664,8 +701,10 @@ return
 		gsub icon_no
 		prline Not even in balanced ternary...
 		prline ...Can you divide by zero.
-		uiter not_sup_fill,newline,@1,@17
 		
+		prline click anywhere to continue.
+		uiter not_sup_fill,newline,@1,@17
+		gsub beep
 		gsub click_wait
 	return
 
@@ -673,6 +712,7 @@ return
 
 ###### Crystal Ball ######
 	var crystal_random=0
+	var thunderflag=0
 	label crystal_ball
 	
 		asm iowrite1;>mouse.button
@@ -695,6 +735,10 @@ return
 		label cry_inputloop
 			asm ioread1;>mouse.button
 			set btnbuff
+			#####THUNDER CHANCE#####
+			rrange @1,@70
+			set thunderflag
+			if thunderflag,@1 gsub cry_thunder
 		ifnot btnbuff,@1 goto cry_inputloop
 		
 		#parse Y first!
@@ -730,7 +774,7 @@ return
 		gsub cry_ballicon
 		prline The Spirits strongly think not.
 		uiter not_sup_fill,newline,@1,@17
-		
+		gsub cry_tune2
 		gsub click_wait
 	return
 	
@@ -743,7 +787,7 @@ return
 		gsub cry_ballicon
 		prline Yes, indeed, I can see it!
 		uiter not_sup_fill,newline,@1,@17
-		
+		gsub cry_tune3
 		gsub click_wait
 	return
 	
@@ -756,16 +800,137 @@ return
 		gsub cry_ballicon
 		prline The spirits do not respond. Try asking later...
 		uiter not_sup_fill,newline,@1,@17
-		
+		gsub cry_tune1
 		gsub click_wait
 	return
 	
 	label cry_ballicon
 		asm include;sbtgsh+ballicon.tas0
 	return
-
-
-
+	#Maybe
+	label cry_tune1
+		val 0
+		asm iowrite1;>snd.1.wave
+		val @74
+		asm iowrite1;>snd.1.freq
+		val 0
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		
+		val @92
+		asm iowrite1;>snd.1.freq
+		val 0
+		asm iowrite1;>snd.1.play
+		waitcy 10000
+		val 0
+		asm iowrite1;>snd.1.stop
+		return
+	#No
+	label cry_tune2
+		val 0
+		asm iowrite1;>snd.1.wave
+		val @74
+		asm iowrite1;>snd.1.freq
+		val 0
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		
+		val @69
+		asm iowrite1;>snd.1.freq
+		val 0
+		asm iowrite1;>snd.1.play
+		waitcy 10000
+		val 0
+		asm iowrite1;>snd.1.stop
+		return
+	#yes
+	label cry_tune3
+		val 0
+		asm iowrite1;>snd.1.wave
+		val @92
+		asm iowrite1;>snd.1.freq
+		val 0
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		asm iowrite1;>snd.1.play
+		waitcy 1500
+		asm iowrite1;>snd.1.stop
+		waitcy 1500
+		
+		val @139
+		asm iowrite1;>snd.1.freq
+		val 0
+		asm iowrite1;>snd.1.play
+		waitcy 10000
+		val 0
+		asm iowrite1;>snd.1.stop
+		return
+	label cry_thunder
+		val @5
+		asm iowrite1;>snd.1.wave
+		rrange @-1,@1
+		asm iowrite1;>snd.1.pan
+		asm iowrite1;>snd.1.play
+		waitcy 500
+		val @9
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @8
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @7
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @6
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @5
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @4
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @3
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @2
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		val @1
+		asm iowrite1;>snd.1.vol
+		waitcy 500
+		asm iowrite1;>snd.1.stop
+		val @10
+		asm iowrite1;>snd.1.vol
+		val 0
+		asm iowrite1;>snd.1.pan
+		return
 ###### System Shell ######
 #uses input code from 'shelldemo'
 var sys_shell_validcom=0
