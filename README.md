@@ -1,12 +1,51 @@
-## SBTCVM Gen2 9-trit      
+# SBTCVM Gen2-9
 Simple Balanced Ternary Computer Virtual Machine     
      
 v2.1.0.alpha    
+
+**Need Help? [See our Getting started guide](/guide.md)**
+
+[SBTCVM Project blog](https://sbtcvm.blogspot.com/)
+
+
+## What is SBTCVM?
+
+Ever wonder what computers other than the boring-old binary would be like? Well, look no further!
+SBTCVM, a python-written VM, simulates the little-known base number called Balanced Ternary!
+
+What is balanced ternary? well, it has "0" and "+1", just like binary, 
+but added into the mix is a "-1"! Yes, this means EVERY number is signed. 
+
+Intrigued? Well, as
+SBTCVM is Free & Open Source Software, and comes with a ready-to-use
+set of compilers and development tools, Getting started with balanced 
+ternary with SBTCVM, should prove a fun challenge!
+
+## Features:
+- bundled ternary software. including demos, games and utilities.
+- 4 channel sound chip
+- 6.5Khz, 9-trit CPU
+- 39.388 KiloNonets of system RAM
+- pygame frontend features color graphics.
+- multiple specialized programming languages with integrated compilers. (SSTNPL, SBTCVM assembly)
+- Suite of development tools and utilities.
+- cross-platform interactive shell and build system. (xas.py)
      
-If you need help, see [guide.md](/guide.md)
 
-[Project blog](https://sbtcvm.blogspot.com/)
 
+
+
+
+### Dependencies:
+Pygame __2.7__ OR __3__.
+
+**Sound (powered by FSSynthlib):** pygame
+
+**Curses VM:** curses
+
+**Pygame VM:** pygame _**(needs truetype font and PNG support!)**_
+
+## Code Licensing
 
 SBTCVM gen2-9 ships with **fssynthlib.py**, a general-use waveform synthesis library from
 the FSSS synthesizer suite. You can find its readme in the [textdocs directory.](/textdocs/fssynthlib_README.md)

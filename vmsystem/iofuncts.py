@@ -50,6 +50,13 @@ def auto_dir(fnameg, ext):
 					fpath=os.path.join(dirpath, filex)
 					if os.path.isfile(fpath):
 						return fpath
+	#check for direct paths (for future XAS script improvments)
+	if os.path.isdir(fnameg):
+		for filex in os.listdir(fnameg):
+			if filex.lower().startswith("auto_") and filex.lower().endswith(ext):
+				fpath=os.path.join(fnameg, filex)
+				if os.path.isfile(fpath):
+					return fpath
 	return None
 
 #trom loader. also used for other file types.

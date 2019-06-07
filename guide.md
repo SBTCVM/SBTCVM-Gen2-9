@@ -1,5 +1,7 @@
 # Quick start guide
 
+
+
 Run a trom application in pygame frontend:      
 `./pyg_sbtcvm.py maze`
 
@@ -20,8 +22,6 @@ Run a trom application in curses frontend:
 _**Notice:**  curses frontend is somewhat buggy & incomplete. pygame frontend HIGHLY recommended._
 
 
-
-     
 
 ### where does SBTCVM search for applications and source code?
 In order _(non-bold text describes what applications & source code is kept there)_
