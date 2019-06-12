@@ -56,8 +56,9 @@ algorithms, you may find the assembler better suited.
 When used, the SSTNPL compiler will automatically run the assembler for you.
 
 ### romdump.py: [XAS command: dump]
-A nifty SBTCVM trom dump utility with 2 formatting modes and 2 trit
-representations. akin to unix/linux 'hexdump' command.
+An advanced debug tool. works with TROMS and VDI disk files.
+works as an equivalent to 'hexdump' and 'strings', as well as other
+features. such as disk filelist viewing.
 
 ### gfxcon.py: [XAS command: gfxcon]
 Assorted graphics conversion functions. 
