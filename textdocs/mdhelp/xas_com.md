@@ -18,8 +18,8 @@ exit|NONE|exit script/shell
 commad | arguments | description
 :----------:|:--------------:|:-----------:|
 help|(category)|view help category
-help|all|view all help categories
-help|list|view a list of help categories.
+help|NONE|view list of commands
+help|command|get help on command.
 ls/list/dir|(path)|list SBTCVM-relevant files in (path)
 find|(string)|find filenames containing (string) and list them. **(1)**
 ver/version/info|NONE|print version information
@@ -35,8 +35,9 @@ In that case, use the '+' path provided.
 _Note: This is **NOT** the same as your system's path!_
 
 
-
-
+## VM:
+run/runp| (same as pyg_sbtcvm.py) | run SBTCVM's Pygame VM Frontend
+runc| (same as cur_sbtcvm.py) | run SBTCVM's Curses VM Frontend
 
 ## Build
 

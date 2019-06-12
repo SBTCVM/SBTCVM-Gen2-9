@@ -5,12 +5,28 @@ from . import libtextcon as tcon
 btint=libbaltcalc.btint
 import os
 import sys
-from subprocess import call
+#from subprocess import call
+from subprocess import Popen
+
+def call(*openargs):
+	try:
+		sub=Popen(*openargs)
+		sub.wait()
+	except KeyboardInterrupt:
+		callINTwait(sub)
+	return sub.returncode
+	
+
+def callINTwait(sub):
+	try:
+		sub.wait()
+	except KeyboardInterrupt:
+		callINTwait(sub)
 tritvalid="+0-pn"
 #SBTCVM assembly v3 main routine library.
 
 xascmds=[]
-
+import time
 xasvers='v2.0.0'
 versint=(2, 0, 0)
 
@@ -321,16 +337,16 @@ def xasshell():
 	print(ppx + "xas finished. exiting...")
 
 def cmdvalid(cmd):
-	if cmd=="runc":
-		print('''!!!!!!! WARNING !!!!!!!
-runc currently has a bug where terminal sessions are
-broken after terminating the vm with Ctrl+C
-PLEASE RUN SBTCVM_G2_9.py DIRECTLY!!!!!!! Press enter to return to prompt.
-If your testing this, please enter 'yes' then press enter.''')
-		if getsubinput("Are you sure?>")=="yes":
-			return 1
-		else:
-			return 0
+	#if cmd=="runc":
+		#print('''!!!!!!! WARNING !!!!!!!
+#runc currently has a bug where terminal sessions are
+#broken after terminating the vm with Ctrl+C
+#PLEASE RUN cur_sbtcvm.py DIRECTLY!!!!!!! Press enter to return to prompt.
+#If your testing this, please enter 'yes' then press enter.''')
+		#if getsubinput("Are you sure?>")=="yes":
+			#return 1
+		#else:
+			#return 0
 	return 1
 	
 

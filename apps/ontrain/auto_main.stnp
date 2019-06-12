@@ -389,11 +389,11 @@ label playertoggle
 	if player_side,@0 goto playertoggle_skip
 		if player_side,@1 =player_side @0
 		gsub playcar_left
-	return
+		return
 	label playertoggle_skip
 		if player_side,@0 =player_side @1
 		gsub playcar_right
-return
+		return
 
 
 
