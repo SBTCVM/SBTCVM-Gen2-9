@@ -62,6 +62,8 @@ see readme.md for more information and licensing of media.
   ''')
 	elif cmd==None:
 		print("Tip: Try g2-asm.py -h for help.")
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try g2-asm.py -h for help.") 
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:
 			argx=arg

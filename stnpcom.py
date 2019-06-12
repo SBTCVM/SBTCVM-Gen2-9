@@ -70,6 +70,8 @@ see readme.md for more information and licensing of media.
   ''')
 	elif cmd == None:
 		print("Tip: Try stnpcom.py -h for help.")
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try stnpcom.py -h for help.") 
 	else:
 		if cmd in ['-m', '--module']:
 			argx=arg

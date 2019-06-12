@@ -328,3 +328,5 @@ see readme.md for more information and licensing of media.
 
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try gfxcon.py -h for help.") 

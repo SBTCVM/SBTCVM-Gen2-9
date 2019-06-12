@@ -16,7 +16,7 @@ _requires pygame (truetype font and PNG support **REQUIRED**)_
 SBTCVM's virtual machine. (with pygame frontend)
 
 
-Features an, 80-column by 25-line color graphical TTY display, SBTGA Graphics, mouse, and launch-from-xas integration that isn't buggy.
+Features an, 81-column by 25-line color graphical TTY display, SBTGA Graphics, mouse, and launch-from-xas integration that isn't buggy.
 
 
 ### CUR_SBTCVM.py: (CURSES) [XAS command: runc]
@@ -25,6 +25,8 @@ SBTCVM's virtual machine. (with curses frontend)
 _Note: Curses Frontend is **BUGGY**_
 
 Note: XAS-related CTRL+C bug has been fixed.
+
+note: recommended to use terminal thats 81 columns or wider.
 
 also, the curses frontend may lack certain features. i.e. graphics.
 

@@ -74,11 +74,15 @@ if __name__=="__main__":
 		print('''SBTVDI Disk Image Edit Utility v1.0''')
 		print('''Help:
 	--new [*.diskmap] - Build a new disk from a diskmap file. ''')
-	if cmd=="--new":
+	elif cmd=="--new":
 		if arg==None:
 			sys.exit("Please specify a diskmap to construct disk image with.")
 		diskmappath=iofuncts.findtrom(arg, ext=".diskmap", exitonfail=1, exitmsg="diskmap file was not found.", dirauto=1)
 		print("Found diskmap: '" + diskmappath + "'")
 		from_diskmap(diskmappath)
+	elif cmd==None:
+		print("try diskedit.py -h for help.")
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try diskedit.py -h for help.") 
 	#todo: --update: replace files specified in diskmap
 	#todo: file import/export, text file support for diskmap files.

@@ -102,6 +102,9 @@ else:
 			slowspeed=1/(targspeed*1000.0)
 		except ValueError:
 			sys.exit("Error. please specify slow delay as float or int.")
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try cur_sbtcvm.py -h for help.")
+		sys.exit()
 	else:
 		romfile=cmd
 	if slow==1:

@@ -63,6 +63,8 @@ see readme.md for more information and licensing of media.
 		xaslib.xasshell()
 	elif cmd==None:
 		xaslib.xasshell()
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try xas.py -h for help.") 
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:
 			argx=arg

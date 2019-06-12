@@ -265,7 +265,7 @@ def rominfo(arg, dirauto=1):
 					print("----VDI FileType: TXE:  Ternary Executable. [RAW G2-9 format]")
 				else:
 					print("----VDI FileType: (?):  Unknown extention.")
-				print("File Size:" + g2com.nonetformatted_smart(len(dsk.files[diskfilename])))
+				print("File Size: " + g2com.nonetformatted_smart(len(dsk.files[diskfilename])))
 				print("--------")
 		else:
 			if fname.lower().endswith(".tdsk1"):
@@ -330,8 +330,8 @@ if __name__=="__main__":
    -f2 [trom/diskfile]: same as -f, but try to find interlaced strings instead of normal
       ones.
    -d [trom/diskfile]: dump contents of trom to standard output in +0- form.
-      instructions and data colums separated by two spaces. "  "
-      a third column containing the address in signed decmimal
+      instructions and data columns separated by two spaces. "  "
+      a third column containing the address in signed decimal
       is separated via a vertical bar "|"
    -r [trom/diskfile]: same as -d, but also prints chars & decimal values and labels
       address column
@@ -345,7 +345,7 @@ if __name__=="__main__":
       special characters)
    [trom/diskfile]: (with no options) same as -d
    >>> Specifying a start and end address (in signed decimal, space-separated)
-      after the rom name enables ranged mode. In this mode, only the range given
+      after the trom/diskfle name enables ranged mode. In this mode, only the range given
       is used. does NOT apply to: -h, -v, -a, and -i
    >>> -f and -f2 will ignore strings less than 2 characters long.
 ''')
@@ -397,5 +397,7 @@ see readme.md for more information and licensing of media.
 		romdumpver(InputFileLoader(arg, dirauto=1), start, end, n0p=1)
 	elif cmd == None:
 		print("Tip: try romdump.py -h for help.")
+	elif cmd.startswith("-"):
+		print("Unknown option: '" + cmd + "' try romdump.py -h for help.") 
 	else:
 		romdump(InputFileLoader(cmd, dirauto=1), start, end)
