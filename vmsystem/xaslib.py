@@ -27,8 +27,8 @@ tritvalid="+0-pn"
 
 xascmds=[]
 import time
-xasvers='v2.0.0'
-versint=(2, 0, 0)
+xasvers='v2.1.0'
+versint=(2, 1, 0)
 
 shellwelcome="\n---SBTCVM XAS shell " + xasvers + ". Ready.---"
 
@@ -118,39 +118,65 @@ see readme.md for more information and licensing of media.
   You should have received a copy of the GNU General Public License
   along with SBTCVM Gen2-9. If not, see <http://www.gnu.org/licenses/>
   
-  '''
+'''
+  
+  
+ 
+ftype_descs_verbose={"trom": "SBTCVM Ternary ROM",
+"tasm": "SBTCVM assembly source code.",
+"tas0": "SBTCVM assembly loadable module.",
+"nsp": "SBTCVM assembly compile-time viariable library.",
+"stnp": "SSTNPL source code.",
+"stnpmfs": "SSTNPL module manifest.",
+"diskmap": "Diskedit disk description map.",
+"tdsk1": "Format 1 SBTVDI disk image.",
+"xas": "XAS portable build script."}
+
+#these descriptions should be all the same width.
+ftype_descs_fixed={
+   "trom": "SBTCVM Ternary ROM      : ",
+   "tasm": "SBTCVM-ASM source file  : ",
+   "tas0": "SBTCVM-ASM tas0 Module  : ",
+    "nsp": "SBTCVM-ASM variable lib : ",
+   "stnp": "SSTNPL Source code      : ",
+"stnpmfs": "SSTNPL Module Manifest  : ",
+"diskmap": "Diskedit disk blueprints: ",
+  "tdsk1": "Disk image (format 1)   : ",
+    "xas": "XAS build script        : "}
+    
+ftype_descs_fixed_short={
+   "trom": "trom    : ",
+   "tasm": "tasm    : ",
+   "tas0": "tasm    : ",
+    "nsp": "nsp     : ",
+   "stnp": "stnp    : ",
+"stnpmfs": "stnpmfs : ",
+"diskmap": "diskmap : ",
+  "tdsk1": "tdsk1   : ",
+    "xas": "xas     : "}
+ 
 #generic fileinfo printer (used by find and list)
 def fileinfo(filen, pathx, sublist=0):
 	if sublist:
 		prfx="    "
 	else:
-		prfx=""
-	if filen.lower().endswith(".trom"):
-		print(prfx + "   SBTCVM Rom Image      : " + pathx)
-	elif filen.lower().endswith(".tasm"):
-		print(prfx + "   Assembler source file : " + pathx)
-	elif filen.lower().endswith(".tas0"):
-		print(prfx + "   Assembler tas0 Module : " + pathx)
-	elif filen.lower().endswith(".stnp"):
-		print(prfx + "   SSTNPL Source code    : " + pathx)
-	elif filen.lower().endswith(".stnpmfs"):
-		print(prfx + "   SSTNPL Module Manifest: " + pathx)
-	elif filen.lower().endswith(".diskmap"):
-		print(prfx + "   Diskedit Disk Filelist: " + pathx)
-	elif filen.lower().endswith(".tdsk1"):
-		print(prfx + "   Ternary Disk Image v1 : " + pathx)
-	elif filen.lower().endswith(".xas"):
-		print(prfx + "   XAS build script      : " + pathx)
-	elif filen.lower().endswith(".nsp"):
-		print(prfx + "   Assembler NSP library : " + pathx)
+		prfx=" "
+		
+	for ext in ftype_descs_fixed_short:
+		if filen.lower().endswith("."+ext):
+			print(prfx + ftype_descs_fixed_short[ext] + pathx)
+			return
+	return
+
+autodirexts=["trom", "nsp", "stnp", "xas", "tdsk1", "diskmap", "stnpmfs", "tas0", "tasm"]
 
 #shell input function
 def getinput():
 	try:
 		try:
-			return raw_input('>')
+			return raw_input('XAS>')
 		except NameError:
-			return input('>')
+			return input('XAS>')
 	except KeyboardInterrupt:
 		print("Keyboard Interrupt. Exiting.")
 		return 'exit'
@@ -174,7 +200,7 @@ def matcherprint(filen, search, pathx, dirshow=0, sublist=0):
 		prfx=""
 	if dirshow:
 		if search.lower() in filen.lower():
-			print(prfx + "   Directory   : " + pathx)
+			print(prfx + " -DIR-   : " + pathx)
 			return 1
 	else:
 		if search.lower() in filen.lower():
@@ -197,13 +223,18 @@ def findcmd(search):
 					for filesub in os.listdir(joinedpath):
 						matcherprint(filesub, search, filesub)
 				else:
+					autodstr=""
 					for filesub in os.listdir(joinedpath):
 						#Detect SBTCVM smart app directories.
 						if filesub.startswith("auto_") and search.lower() in filen.lower():
-							fileinfo(filesub, filen, sublist=1)
+							if "." in filesub:
+								filesub_ext=filesub.split(".")[1].lower()
+								if filesub_ext in autodirexts:
+									autodstr=(autodstr+filesub_ext.upper()+", ")
 						else:
-							matcherprint(filesub, search,  filen + "+" + filesub)
-							
+							matcherprint(filesub, search,  filen + "+" + filesub, sublist=1)
+					if autodstr!="":
+						print("  >autodir: " + autodstr)
 				
 			elif os.path.isfile(joinedpath):
 				matcherprint(filen, search, filen)
@@ -220,12 +251,19 @@ def showlisting(realpath, pathdesc):
 			#	print("Other      : " + filen)
 		elif os.path.isdir(os.path.join(realpath, filen)):
 			if not filen.startswith("."):
-				print("   Directory   : " + filen)
+				print(" -DIR-   : " + filen)
 				#Detect SBTCVM smart app directories.
-				if pathdesc in iofuncts.smartpaths:
-					for filesub in os.listdir(os.path.join(realpath, filen)):
-						if filesub.startswith("auto_"):
-							fileinfo(filesub, filen, sublist=1)
+				#if pathdesc in iofuncts.smartpaths:
+				
+				autodstr=""
+				for filesub in os.listdir(os.path.join(realpath, filen)):
+					if filesub.startswith("auto_"):
+						if "." in filesub:
+							filesub_ext=filesub.split(".")[1].lower()
+							if filesub_ext in autodirexts:
+								autodstr=(autodstr+filesub_ext.upper()+", ")
+				if autodstr!="":
+					print("      autodir: " + autodstr)
 #list: directory listing command.
 def listcmd(path):
 	if path==None or path.startswith("."):
@@ -253,10 +291,39 @@ def listcmd(path):
 				showlisting(os.path.join(smartd, realpath), smartd.replace("\\", "+").replace("/", "+") + "+" + pathdesc)
 				return
 	print("XAS ERROR: path not found.")
+
+##Debug variables.
+shelldebug_plugcmdid=False
+#Debug command. (Intended to help debug interactive mode as it becomes more advanced.)
+def debugcmd(arg):
+	global shelldebug_plugcmdid
+	if arg=="options":
+		print("""DEBUG COMMANDS: (BOOL options accept 1/true/on and 0/false/off)
+    plugcmdid [BOOL]: Plugin Command Identifiers
+    status: print XAS shell status""")
+	arglist=arg.split(" ")
+	try:
+		dcmd=arglist[0]
+		darg=arglist[1]
+	except IndexError:
+		dcmd=arglist[0]
+		darg=None
+	if dcmd=="plugcmdid":
+		if darg=="1" or darg.lower()=="true" or darg.lower()=="on":
+			shelldebug_plugcmdid=True
+		elif darg=="0" or darg.lower()=="false" or darg.lower()=="off":
+			shelldebug_plugcmdid=False
+		elif darg==None:
+			print("please specify 'debug plugcmdid [1/0]'")
+			return
+	if dcmd=="status":
+		print("--DEBUG OPTIONS--")
+		print("plugcmdid: " + str(shelldebug_plugcmdid))
 		
 
 #interactive interpreter
 def xasshell():
+	global shelldebug
 	print(shellwelcome)
 	try:
 		import readline
@@ -275,6 +342,11 @@ def xasshell():
 		else:
 			cmd=line
 			arg=None
+		if cmd=="debug":
+			if arg==None:
+				print("Please see 'debug options' for XAS debug commands.")
+			else:
+				debugcmd(arg)
 		if cmd=="xas":
 			if arg!=None:
 				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=0, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
@@ -318,22 +390,20 @@ def xasshell():
 				if cmd==cmdobj.xcmd:
 					#TODO: non-python commands.
 					if cmdobj.ispython:
+						if shelldebug_plugcmdid:
+							print("command plugin (is python script)")
 						if cmdobj.takesfile and arg!=None:
-							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'\n")
-							try:
-								if call(['python']+cmdobj.execstr.split(" ")+arg.split(" "))!=0:
-									print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
-							except KeyboardInterrupt:
-								pass
-							print(shellwelcome)
+							if shelldebug_plugcmdid:
+								print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "' file argument: '" + arg + "'\n-------------")
+							if call(['python']+cmdobj.execstr.split(" ")+arg.split(" "))!=0:
+								print("XAS ERROR: plugin command error! cmd:'" + cmd + "'")
+							#print(shellwelcome)
 						else:
-							print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'\n")
-							try:
-								if call(['python']+cmdobj.execstr.split(" "))!=0:
-									print("XAS ERROR: plugin command error! cmd:'" + cmd + "' Line: '" + str(lineno) + "'")
-							except KeyboardInterrupt:
-								pass
-							print(shellwelcome)
+							if shelldebug_plugcmdid:
+								print("plugin cmd: '" + cmd + "' exec: '" + cmdobj.execstr + "'\n-------------")
+							if call(['python']+cmdobj.execstr.split(" "))!=0:
+								print("XAS ERROR: plugin command error! cmd:'" + cmd + "'")
+							#print(shellwelcome)
 	print(ppx + "xas finished. exiting...")
 
 def cmdvalid(cmd):

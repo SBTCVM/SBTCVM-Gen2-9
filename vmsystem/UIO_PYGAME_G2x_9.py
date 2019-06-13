@@ -333,7 +333,7 @@ class uio:
 			if self.xttycharpos==self.maxx:
 				
 				self.xttycharpos=0
-				self.ttybuff.append("\n")
+				#self.ttybuff.append("\n")
 				print("")
 				self.ttylog.write("\n")
 			#self.ttywin.addch(self.maxy-1, self.xttycharpos, tcon.dattostr[data.intval])
