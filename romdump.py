@@ -41,6 +41,8 @@ def DiskLoader(arg, filearg):
 		sys.exit("Cannot find file '" + diskfile + "' In tdsk1 image: '" + filearg)
 
 def InputFileLoader(arg, dirauto=1):
+	if arg==None:
+		sys.exit("ERROR: no file specified.")
 	filearg=arg.split("^")[0]
 	fname=iofuncts.findtrom(filearg, dirauto=dirauto, exitonfail=0)
 	if fname!=None and "^" not in arg:
@@ -245,6 +247,8 @@ def romdumpver(fileobj, start, end, n0p=0):
 			print(pstring)
 
 def rominfo(arg, dirauto=1):
+	if arg==None:
+		sys.exit("ERROR: no file specified.")
 	filearg=arg.split("^")[0]
 	fname=iofuncts.findtrom(filearg, dirauto=dirauto, exitonfail=0)
 	if fname!=None and "^" not in arg:
