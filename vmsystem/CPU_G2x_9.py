@@ -50,6 +50,33 @@ class cpu:
 		self.exceptcode=0
 		self.exceptflg=0
 		self.critfault=None
+	def softreset(self):
+		#soft CPU core RESET
+		self.execpoint=btint(libbaltcalc.mni(9))-1
+		self.reg1=btint(0)
+		self.reg2=btint(0)
+		
+		self.fop1=btint(0)
+		self.fop2=btint(0)
+		self.fop3=btint(0)
+		
+		self.dataval=btint(0)
+		self.instval=btint(0)
+		self.intercaught={}
+		self.intstack=[]
+		self.stack1=[]
+		self.stack2=[]
+		self.stack3=[]
+		self.stack4=[]
+		self.stack5=[]
+		self.stack6=[]
+		self.exintreturns=[]
+		self.exints=[]
+		self.normintreturns=[]
+		self.normints=[]
+		self.exceptcode=0
+		self.exceptflg=0
+		self.critfault=None
 	def cycle(self):
 		if self.execpoint.intval>9841:
 			if self.exception("Exec Pointer Overrun", -3, cancatch=0):

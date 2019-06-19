@@ -2,3 +2,19 @@
 1: return to program. (user request)
 2: quit VM (user request)
 
+
+#ERROR CODES (to check for any errors, check if status is negative integer.
+-1: rstld: driveID not decimal integer.
+-2: rstld: bad argument count error.
+-3: rstld: filename not found.
+-4: rstld: invalid drive index number.
+-5: rstld: drive not ready. (i.e. no disk inserted)
+
+
+-20: dmnt0: no or too many arguments.
+-21: dmnt0: disk image not found.
+-22: dmnt0: generic TDSK1 read error.
+
+-40: dmnt1: no or too many arguments.
+-41: dmnt1: disk image not found.
+-42: dmnt1: generic TDSK1 read error.

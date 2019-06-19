@@ -285,6 +285,8 @@ def rominfo(arg, dirauto=1):
 					disksize+=len(dsk.files[filex])
 				print("Disk size (virtual): " + g2com.nonetformatted_smart(disksize))
 				print("--------")
+	else:
+		sys.exit("ERROR: Cant find TDSK1 image.")
 	
 	
 

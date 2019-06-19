@@ -510,6 +510,24 @@ class in_getchar:
 		destobj.write("#" + self.comment + "\nioread1;>io.ttyrd\ndatawrite1;>" + args + "\n")
 		return
 
+class in_vdistat:
+	def __init__(self):
+		self.keywords=["vdistat"]
+		self.comment="Get vdi status"
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		if args in valid_nvars:
+			return 0, None
+		else:
+			return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + self.comment + "\nioread1;>vdi.cli.status\ndatawrite1;>" + args + "\n")
+		return
+
+
 #static 3-color & 27-color multi-chunk packart macros
 class in_mulpack:
 	def __init__(self):
@@ -1236,7 +1254,7 @@ gotoif;>diter-loopback-''' +  str(lineno) + '''
 #also handles table string tstr syntax
 class in_print:
 	def __init__(self):
-		self.keywords=["print", "prline", "tstr"]
+		self.keywords=["print", "prline", "tstr", "vdi"]
 		self.comment="print"
 	def p0(self, args, keyword, lineno):
 		for char in args:
@@ -1249,16 +1267,18 @@ class in_print:
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + keyword + "\n")
-		
+		if keyword=="vdi":
+			destobj.write("fopset1;>vdi.cli.in\n")
 			
 		for char in args:
 			if keyword=="tstr":
 				destobj.write("null;:" + tcon.chartoasmchar[char] + "\n")
 			else:
 				destobj.write("fopwri1;:" + tcon.chartoasmchar[char] + "\n")
-		if keyword=="prline":
+		if keyword=="prline" or keyword=="vdi":
 			destobj.write("fopwri1;:\\n\n")
-		
+		if keyword=="vdi":
+			destobj.write("fopset1;>io.ttywr\n")
 		return
 
 
@@ -1627,6 +1647,7 @@ class mainloop:
 		in_d2iter(),
 		in_waitcycle(),
 		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
+		in_intcommon1b(["vdimode"], "dataread1;>", "\niowrite1;>vdi.cli.status\n", "vdi mode set"),
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
 		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),#set,get
@@ -1676,6 +1697,7 @@ class mainloop:
 		in_print(),
 		in_rawasm(),
 		in_getchar(),
+		in_vdistat(),
 		in_condgoto(["if"], "gotoif", condmode=0),#conditionals
 		in_condgoto(["ifmore"], "gotoifmore", condmode=0),
 		in_condgoto(["ifless"], "gotoifless", condmode=0),

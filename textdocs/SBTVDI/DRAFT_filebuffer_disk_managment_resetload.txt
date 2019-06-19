@@ -1,0 +1,43 @@
+### NEW SBTVDI PLAN
+# as much operations are handled via VDI Serial comamnds ONLY, as reasonable.
+# Some commands will have IO-register inputs and outputs. (fileIO for example)
+# resetload is now a VDI command that accepts: rstload [diskindex] [filename]
+# filebuffers will assign/report filenames and such via VDI Serial.
+
+
+
+Filebuffer examples: (concept. not final)
+
+
+	fp0 name help.txt
+	fp0 exist
+		-> true/false (CLI out)
+		-> 1/0 (register out)\?????\
+	fp0 name
+		-> print name(+newline) (CLI out)
+
+
+
+Resetload:
+
+	rstld [disk index ID] [filename]
+	rstld 0 command.txe
+	rstld 1 command.txe
+	rstld -1 command.txe
+		(search all disks for file named command.txe and reset-load it.)
+	cpyren [src disk index ID] [src filename] [dest disk index ID] [dest filename]
+	cpyren 0 command.txe 2 command.txe
+	ren [src disk index ID] [old filename] [new filename]
+	cpy [src disk index ID] [dest disk index ID] [filename
+	d0ld diskimage
+	d1ld diskimage
+	lsf [disk index ID] (list files)
+
+
+implementation plan: 
+	-get basic dist booting and rstld working.
+	-get SBTCVM-DOS booting correctly from disk.
+	-start work on file operations and filebuffers
+		-???
+	-test test test!!!!
+	-add useful utilities to SBTCVM-DOS

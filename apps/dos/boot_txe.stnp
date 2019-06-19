@@ -1,0 +1,17 @@
+##########SBTCVM-DOS - Bootup routine ########## 
+
+
+gsub bigsplash
+textcolor *++0---
+prline SBTCVM-DOS v0.1.1 [ALPHA]
+prline load Command Interpreter...
+
+vdimode @1
+vdi rstld -1 command.txe
+stop
+
+##block-art splash text.##
+label bigsplash
+	asm include;dos+bigsplash.tas0
+return
+

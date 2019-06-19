@@ -1,7 +1,6 @@
 gfxcon -cp dos+bigsplash
 
-#build command as a module as well. (needed by startup trom)
-stnp --module dos+command.stnp
+stnp dos+boot_txe.stnp
 
 print disk builder (UNFINISHED DRAFT)
 stnp dos+command.stnp

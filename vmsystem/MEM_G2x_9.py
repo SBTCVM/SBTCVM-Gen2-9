@@ -37,3 +37,14 @@ class memory:
 		(self.INSTDICT[int(addr)]).changeval(value)
 	def setdata(self, addr, value):
 		(self.DATDICT[int(addr)]).changeval(value)
+	def resetload_helper(self, filelisting):
+		linecnt=libbaltcalc.mni(9)
+		for rmline in filelisting:
+			self.INSTDICT[linecnt]=btint(int(rmline[0]))
+			self.DATDICT[linecnt]=btint(int(rmline[1]))
+			linecnt += 1
+		#pad memory map to max size if not already maxxed.
+		while linecnt<=libbaltcalc.mpi(9):
+			self.INSTDICT[linecnt]=btint(0)
+			self.DATDICT[linecnt]=btint(0)
+			linecnt += 1
