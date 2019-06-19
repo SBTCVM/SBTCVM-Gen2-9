@@ -35,8 +35,8 @@ Resetload:
 
 
 implementation plan: 
-	-get basic dist booting and rstld working.
-	-get SBTCVM-DOS booting correctly from disk.
+	-get basic dist booting and rstld working. [mostly done. cant boot disk from XAS shell yet]
+	-get SBTCVM-DOS booting correctly from disk. [done.]
 	-start work on file operations and filebuffers
 		-???
 	-test test test!!!!

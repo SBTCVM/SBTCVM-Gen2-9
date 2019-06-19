@@ -13,5 +13,8 @@ SBTCVM Balanced Ternary Virtual Disk Interface
 ## VDI
 Short for SBTVDI (see above)
 
+## VDI serial
+SBTVDI serial command interface.
+
 ## SBTGA
 SBTCVM Balanced Ternary Graphics Adapter

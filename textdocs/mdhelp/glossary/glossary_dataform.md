@@ -11,6 +11,15 @@ SBTCVM's memory image format. can be run via:
 Where 'maze' is an example of a trom name.      
 `romdump.py` can be used to view their contents in a hexdump-style fashion.
 
+## TDSK1
+
+SBTCVM's ternary floppy disk image format.
+`romdump.py` and `diskedit.py` are relevant here.
+
+## TXE
+
+A full-memory 'raw' executable format used on SBTCVM SBTVDI disk drives, notably in SBTCVM-DOS.
+
 ## CPRLE
 
 A Run-length compressed variant of 27-color pack-art. requires a dedicated
