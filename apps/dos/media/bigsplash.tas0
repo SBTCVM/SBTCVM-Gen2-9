@@ -1,5 +1,5 @@
 #SBTCVM Gen2-9 GFXCON: ternary-packed art conversion.
-#image file: apps/dos/bigsplash.png
+#image file: apps/dos/media/bigsplash.png
 head-nspin=stdnsp
 fopset1;>io.ttywr
 fopset2;>io.cpack

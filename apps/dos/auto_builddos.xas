@@ -1,9 +1,9 @@
-gfxcon -cp dos+bigsplash
+gfxcon -cp dos+media+bigsplash
+print build boot.txe
+stnp dos+boot+boot_txe.stnp
 
-stnp dos+boot_txe.stnp
-
-print disk builder (UNFINISHED DRAFT)
-stnp dos+command.stnp
+print build command.txe
+stnp dos+command+command.stnp
 
 print build startup trom
 stnp dos

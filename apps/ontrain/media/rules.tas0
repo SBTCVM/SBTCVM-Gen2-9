@@ -1,5 +1,5 @@
 #SBTCVM Gen2-9 GFXCON: ternary-packed art conversion.
-#image file: apps/ontrain/rules.png
+#image file: apps/ontrain/media/rules.png
 head-nspin=stdnsp
 fopset1;>io.ttywr
 fopset2;>io.cpack

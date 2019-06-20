@@ -94,7 +94,7 @@ datawrite1;>collidepos
 null;;main--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #54
-include;ontrain+title.tas0#SSTNPL Source Line: '54' 
+include;ontrain+media+title.tas0#SSTNPL Source Line: '54' 
 #prline
 fopwri1;:O
 fopwri1;:n
@@ -686,7 +686,7 @@ iowrite1;>ga.mode
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #226
-include;ontrain+win.tas0#SSTNPL Source Line: '226' 
+include;ontrain+media+win.tas0#SSTNPL Source Line: '226' 
 #print
 fopwri1;:Y
 fopwri1;:O
@@ -718,7 +718,7 @@ iowrite1;>ga.mode
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #235
-include;ontrain+gameover.tas0#SSTNPL Source Line: '235' 
+include;ontrain+media+gameover.tas0#SSTNPL Source Line: '235' 
 #print
 fopwri1;:Y
 fopwri1;:O
@@ -1956,7 +1956,7 @@ gotoreg1
 null;;rules--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #432
-include;ontrain+rules.tas0#SSTNPL Source Line: '432' 
+include;ontrain+media+rules.tas0#SSTNPL Source Line: '432' 
 #prline
 fopwri1;:Y
 fopwri1;:o
@@ -2228,7 +2228,7 @@ gotoreg1
 null;;story--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #446
-include;ontrain+story.tas0#SSTNPL Source Line: '446' 
+include;ontrain+media+story.tas0#SSTNPL Source Line: '446' 
 #prline
 fopwri1;:Y
 fopwri1;:o

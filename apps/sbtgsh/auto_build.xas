@@ -2,18 +2,18 @@
 
 #####Graphics Conversion
 #main menu
-gfxcon -cp sbtgsh+capps
-gfxcon -cp sbtgsh+capps2
-gfxcon -cp sbtgsh+capps3
+gfxcon -cp sbtgsh+media+capps
+gfxcon -cp sbtgsh+media+capps2
+gfxcon -cp sbtgsh+media+capps3
 
 #crystal ball
-gfxcon -cp sbtgsh+ball
-gfxcon -cp sbtgsh+ballicon
+gfxcon -cp sbtgsh+media+ball
+gfxcon -cp sbtgsh+media+ballicon
 
 #System icons
 
-gfxcon -pn sbtgsh+icon_message
-gfxcon -pn sbtgsh+icon_no
+gfxcon -pn sbtgsh+media+icon_message
+gfxcon -pn sbtgsh+media+icon_no
 
 #####build main
 stnp sbtgsh

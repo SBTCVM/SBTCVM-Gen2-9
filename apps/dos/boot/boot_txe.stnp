@@ -12,6 +12,6 @@ stop
 
 ##block-art splash text.##
 label bigsplash
-	asm include;dos+bigsplash.tas0
+	asm include;dos+media+bigsplash.tas0
 return
 

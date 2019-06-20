@@ -51,7 +51,7 @@ var player_score=0
 
 
 label main
-	asm include;ontrain+title.tas0
+	asm include;ontrain+media+title.tas0
 	prline Oncoming Trains - v1.5
 	prline MAIN MENU:
 	prline a: About   1: slow    3: fast
@@ -223,7 +223,7 @@ return
 label player_win
 	gamode @0
 	newline
-	asm include;ontrain+win.tas0
+	asm include;ontrain+media+win.tas0
 	print YOU WIN! :D
 	keyprompt
 	newline
@@ -232,7 +232,7 @@ label player_win
 label player_lose
 	gamode @0
 	newline
-	asm include;ontrain+gameover.tas0
+	asm include;ontrain+media+gameover.tas0
 	print YOU LOSE! >:)
 	keyprompt
 	newline
@@ -429,7 +429,7 @@ newline
 return
 
 label rules
-asm include;ontrain+rules.tas0
+asm include;ontrain+media+rules.tas0
 prline You are trying to escape the city by driving on a railroad line. 
 prline One problem: Its actively used!
 newline
@@ -443,7 +443,7 @@ newline
 return
 
 label story
-asm include;ontrain+story.tas0
+asm include;ontrain+media+story.tas0
 prline You are a spy trying to escape the enemy city with crucial information.
 prline You take a rail line thats supposed to be abandoned, but the enemy was
 prline expecting this and is sending 30 trains your way!

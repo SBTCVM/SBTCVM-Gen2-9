@@ -1,6 +1,6 @@
-gfxcon -cp ontrain+title
-gfxcon -cp ontrain+gameover
-gfxcon -cp ontrain+win
-gfxcon -cp ontrain+story
-gfxcon -cp ontrain+rules
+gfxcon -cp ontrain+media+title
+gfxcon -cp ontrain+media+gameover
+gfxcon -cp ontrain+media+win
+gfxcon -cp ontrain+media+story
+gfxcon -cp ontrain+media+rules
 stnp ontrain

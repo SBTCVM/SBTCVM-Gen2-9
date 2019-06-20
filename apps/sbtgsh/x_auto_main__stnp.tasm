@@ -757,7 +757,7 @@ dataread1;>*+++00+
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #167
-include;sbtgsh+capps.tas0#SSTNPL Source Line: '167' 
+include;sbtgsh+media+capps.tas0#SSTNPL Source Line: '167' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
@@ -821,7 +821,7 @@ dataread1;>*+++00+
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #184
-include;sbtgsh+capps2.tas0#SSTNPL Source Line: '184' 
+include;sbtgsh+media+capps2.tas0#SSTNPL Source Line: '184' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
@@ -885,7 +885,7 @@ dataread1;>*+++00+
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #201
-include;sbtgsh+capps3.tas0#SSTNPL Source Line: '201' 
+include;sbtgsh+media+capps3.tas0#SSTNPL Source Line: '201' 
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
@@ -1372,7 +1372,7 @@ gotoreg1
 null;;icon_message--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #298
-include;sbtgsh+icon_message.tas0#SSTNPL Source Line: '298' 
+include;sbtgsh+media+icon_message.tas0#SSTNPL Source Line: '298' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1380,7 +1380,7 @@ gotoreg1
 null;;icon_no--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #302
-include;sbtgsh+icon_no.tas0#SSTNPL Source Line: '302' 
+include;sbtgsh+media+icon_no.tas0#SSTNPL Source Line: '302' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -4299,7 +4299,7 @@ fopwri1;:.
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #729
-include;sbtgsh+ball.tas0#SSTNPL Source Line: '729' 
+include;sbtgsh+media+ball.tas0#SSTNPL Source Line: '729' 
 #Upward range iterator
 dataread1;>@1
 datawrite1;>not_sup_fill
@@ -4771,7 +4771,7 @@ gotoreg1
 null;;cry_ballicon--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #808
-include;sbtgsh+ballicon.tas0#SSTNPL Source Line: '808' 
+include;sbtgsh+media+ballicon.tas0#SSTNPL Source Line: '808' 
 #return from subroutine.
 s1pop1
 gotoreg1

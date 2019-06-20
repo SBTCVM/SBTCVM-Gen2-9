@@ -164,7 +164,7 @@ label mainscreen_draw
 	prline Main Menu
 	
 	textcolor *+++00+
-	asm include;sbtgsh+capps.tas0
+	asm include;sbtgsh+media+capps.tas0
 	textcolor *+++--0
 	
 	#label printing code
@@ -181,7 +181,7 @@ label mainscreen_draw
 	newline
 	
 	textcolor *+++00+
-	asm include;sbtgsh+capps2.tas0
+	asm include;sbtgsh+media+capps2.tas0
 	textcolor *+++--0
 	
 	#label printing code
@@ -198,7 +198,7 @@ label mainscreen_draw
 	newline
 	
 	textcolor *+++00+
-	asm include;sbtgsh+capps3.tas0
+	asm include;sbtgsh+media+capps3.tas0
 	textcolor *+++--0
 	
 	#label printing code
@@ -295,11 +295,11 @@ return
 ###### SYSTEM ICONS ######
 
 label icon_message
-	asm include;sbtgsh+icon_message.tas0
+	asm include;sbtgsh+media+icon_message.tas0
 	return
 
 label icon_no
-	asm include;sbtgsh+icon_no.tas0
+	asm include;sbtgsh+media+icon_no.tas0
 	return
 
 ###### in-shell Help system ######
@@ -726,7 +726,7 @@ return
 		prline Hello. Ask your Yes or No question, then click on my crystal ball!
 		prline Click on the doorway to leave, if you must.
 		
-		asm include;sbtgsh+ball.tas0
+		asm include;sbtgsh+media+ball.tas0
 		
 		uiter not_sup_fill,newline,@1,@13
 		
@@ -805,7 +805,7 @@ return
 	return
 	
 	label cry_ballicon
-		asm include;sbtgsh+ballicon.tas0
+		asm include;sbtgsh+media+ballicon.tas0
 	return
 	#Maybe
 	label cry_tune1
