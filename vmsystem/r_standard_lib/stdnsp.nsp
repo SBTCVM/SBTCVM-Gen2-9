@@ -28,7 +28,7 @@ plot.x1;501
 snd.1.vol;201
 snd.1.pan;202
 snd.3.vol;221
-io.decdump;3
+rand2.get;55
 io.cpack;8
 rand2.start;53
 snd.2.play;215
@@ -43,6 +43,7 @@ snd.4.wave;230
 vdi.cli.out;101
 rand3.start;56
 vdi.cli.in;100
+io.ttycolor;9
 plot.y2;504
 plot.height;510
 io.ttyrd;4
@@ -51,7 +52,7 @@ io.textcolor;6
 snd.1.wave;200
 io.packart;5
 snd.4.stop;236
-rand2.get;55
+io.decdump;3
 plot.fill;507
 rand3.end;57
 mouse.realx;303

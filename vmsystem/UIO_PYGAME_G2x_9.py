@@ -95,7 +95,7 @@ class uio:
 		ioref.setwritenotify(6, self.settextcol)#text fg/bg
 		ioref.setwritenotify(7, self.setpackcol)#3 packed art colors as 3, 3-trit RGB values.
 		ioref.setwritenotify(8, self.colorpack)#same format as above, but dump 3 raw pixels instead.
-		
+		ioref.setreadoverride(9, self.ttycolor)
 		ioref.setwritenotify(500, self.setgamode)
 		self.xttycharpos=0
 		
@@ -281,6 +281,8 @@ class uio:
 			self.xttycharpos += 1
 			self.ttybuff.append(buffval)
 			sys.stdout.write(pval)
+	def ttycolor(self, addr, data):
+		return btint(1)
 	def tritdump(self, addr, data):
 		datstr=data.bttrunk(9)
 		for xnumchar in datstr:

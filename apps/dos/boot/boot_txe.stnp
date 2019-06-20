@@ -1,7 +1,13 @@
 ##########SBTCVM-DOS - Bootup routine ########## 
+var has_tty_color=0
+
+asm ioread1;>io.ttycolor
+set has_tty_color
 
 
-gsub bigsplash
+
+if has_tty_color,@1 gsub bigsplash
+if has_tty_color,@0 gsub bigsplash_curses
 textcolor *++0---
 prline SBTCVM-DOS v0.1.1 [ALPHA]
 prline load Command Interpreter...
@@ -15,3 +21,7 @@ label bigsplash
 	asm include;dos+media+bigsplash.tas0
 return
 
+##block-art splash text.##
+label bigsplash_curses
+	asm include;dos+media+bigsplash_curses.tas0
+return

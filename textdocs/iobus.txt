@@ -21,6 +21,8 @@ x :  m : asm varname  : description
 		NOT SUPPORTED BY CURSES FRONTEND.
 8 : [w]: io.cpack     : RGB packed art. 3 'pixels' specified as 3-trit RGB values.
 		NOT SUPPORTED BY CURSES FRONTEND.
+9 : [r]: io.ttycolor  : returns 1 if supported, 0 if not.
+
 
 50: [b]: rand1.start  : set start of random 1 range.
 51: [b]: rand1.end    : set end of random 1 range.
@@ -125,7 +127,6 @@ x :  m : asm varname  : description
 		[negative button values are button release events]
 
 ### SBTGA system
-
 500: [w] ga.mode    : set SBTGA mode (ignored by curses frontend)
 501: [w] plot.x1    : set plotter x1 position register
 502: [w] plot.y1    : set plotter y1 position register

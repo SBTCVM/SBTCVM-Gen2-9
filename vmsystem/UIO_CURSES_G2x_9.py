@@ -42,6 +42,8 @@ class uio:
 		ioref.setreadoverride(4, self.ttyread)
 		ioref.setwritenotify(4, self.ttyreadclearbuff)
 		ioref.setwritenotify(5, self.packart)
+		ioref.setreadoverride(9, self.ttycolor)
+		
 		self.xttycharpos=0
 		self.maxy=self.ttywin.getmaxyx()[0]
 		self.maxx=self.ttywin.getmaxyx()[1]
@@ -69,6 +71,8 @@ class uio:
 				continue
 		self.running=0
 		return
+	def ttycolor(self, addr, data):
+		return btint(0)
 	def ttyraw(self, string):
 		if self.xttycharpos==self.maxx:
 			self.xttycharpos=0

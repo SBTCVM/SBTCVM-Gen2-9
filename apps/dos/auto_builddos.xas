@@ -1,4 +1,5 @@
 gfxcon -cp dos+media+bigsplash
+gfxcon -p dos+media+bigsplash_curses
 print build boot.txe
 stnp dos+boot+boot_txe.stnp
 
