@@ -92,11 +92,16 @@ dataread2;>train_height
 sub
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>collidepos
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-52
+s1push1
+goto;>musicinit--label
+null;;goto--jumper-52
 #label
 null;;main--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #54
-include;ontrain+media+title.tas0#SSTNPL Source Line: '54' 
+#_______NOTE: this corresponds to SSTNPL source line #56
+include;ontrain+media+title.tas0#SSTNPL Source Line: '56' 
 #prline
 fopwri1;:O
 fopwri1;:n
@@ -119,7 +124,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:1
 fopwri1;:.
-fopwri1;:5
+fopwri1;:7
 fopwri1;:\n
 #prline
 fopwri1;:M
@@ -216,43 +221,32 @@ fopwri1;:t
 fopwri1;:o
 fopwri1;:r
 fopwri1;:y
-#keprompt: prompt for single keypress, continue only when keypress is received.
-setreg2;0
-iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-60
-gotoif;>keyprompt--loop-60
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>kb
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-62
+s1push1
+goto;>musicprompt--label
+null;;goto--jumper-62
 #print newline
 fopwri1;:\n
 #conditional stop
 dataread1;>kb
 dataread2;>:q
-gotoif;>goto--branch-64
-goto;>goto--jumper-64
-stop;;goto--branch-64
-
-null;;goto--jumper-64
-#conditional stop
-dataread1;>kb
-dataread2;>:Q
 gotoif;>goto--branch-65
 goto;>goto--jumper-65
 stop;;goto--branch-65
 
 null;;goto--jumper-65
+#conditional stop
+dataread1;>kb
+dataread2;>:Q
+gotoif;>goto--branch-66
+goto;>goto--jumper-66
+stop;;goto--branch-66
+
+null;;goto--jumper-66
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:a
-gotoif;>goto--branch-67
-goto;>goto--jumper-67
-setreg1;>goto--jumper-67;goto--branch-67
-s1push1
-goto;>about--label
-null;;goto--jumper-67
-#conditional subroutine goto
-dataread1;>kb
-dataread2;>:A
 gotoif;>goto--branch-68
 goto;>goto--jumper-68
 setreg1;>goto--jumper-68;goto--branch-68
@@ -261,16 +255,16 @@ goto;>about--label
 null;;goto--jumper-68
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:r
-gotoif;>goto--branch-70
-goto;>goto--jumper-70
-setreg1;>goto--jumper-70;goto--branch-70
+dataread2;>:A
+gotoif;>goto--branch-69
+goto;>goto--jumper-69
+setreg1;>goto--jumper-69;goto--branch-69
 s1push1
-goto;>rules--label
-null;;goto--jumper-70
+goto;>about--label
+null;;goto--jumper-69
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:R
+dataread2;>:r
 gotoif;>goto--branch-71
 goto;>goto--jumper-71
 setreg1;>goto--jumper-71;goto--branch-71
@@ -279,16 +273,16 @@ goto;>rules--label
 null;;goto--jumper-71
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:s
-gotoif;>goto--branch-73
-goto;>goto--jumper-73
-setreg1;>goto--jumper-73;goto--branch-73
+dataread2;>:R
+gotoif;>goto--branch-72
+goto;>goto--jumper-72
+setreg1;>goto--jumper-72;goto--branch-72
 s1push1
-goto;>story--label
-null;;goto--jumper-73
+goto;>rules--label
+null;;goto--jumper-72
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:S
+dataread2;>:s
 gotoif;>goto--branch-74
 goto;>goto--jumper-74
 setreg1;>goto--jumper-74;goto--branch-74
@@ -297,16 +291,16 @@ goto;>story--label
 null;;goto--jumper-74
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:1
-gotoif;>goto--branch-76
-goto;>goto--jumper-76
-setreg1;>goto--jumper-76;goto--branch-76
+dataread2;>:S
+gotoif;>goto--branch-75
+goto;>goto--jumper-75
+setreg1;>goto--jumper-75;goto--branch-75
 s1push1
-goto;>slowg--label
-null;;goto--jumper-76
+goto;>story--label
+null;;goto--jumper-75
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:!
+dataread2;>:1
 gotoif;>goto--branch-77
 goto;>goto--jumper-77
 setreg1;>goto--jumper-77;goto--branch-77
@@ -315,16 +309,16 @@ goto;>slowg--label
 null;;goto--jumper-77
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:4
-gotoif;>goto--branch-79
-goto;>goto--jumper-79
-setreg1;>goto--jumper-79;goto--branch-79
+dataread2;>:!
+gotoif;>goto--branch-78
+goto;>goto--jumper-78
+setreg1;>goto--jumper-78;goto--branch-78
 s1push1
-goto;>turbog--label
-null;;goto--jumper-79
+goto;>slowg--label
+null;;goto--jumper-78
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:$
+dataread2;>:4
 gotoif;>goto--branch-80
 goto;>goto--jumper-80
 setreg1;>goto--jumper-80;goto--branch-80
@@ -333,16 +327,16 @@ goto;>turbog--label
 null;;goto--jumper-80
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:2
-gotoif;>goto--branch-82
-goto;>goto--jumper-82
-setreg1;>goto--jumper-82;goto--branch-82
+dataread2;>:$
+gotoif;>goto--branch-81
+goto;>goto--jumper-81
+setreg1;>goto--jumper-81;goto--branch-81
 s1push1
-goto;>mediumg--label
-null;;goto--jumper-82
+goto;>turbog--label
+null;;goto--jumper-81
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:@
+dataread2;>:2
 gotoif;>goto--branch-83
 goto;>goto--jumper-83
 setreg1;>goto--jumper-83;goto--branch-83
@@ -351,73 +345,102 @@ goto;>mediumg--label
 null;;goto--jumper-83
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:3
-gotoif;>goto--branch-85
-goto;>goto--jumper-85
-setreg1;>goto--jumper-85;goto--branch-85
+dataread2;>:@
+gotoif;>goto--branch-84
+goto;>goto--jumper-84
+setreg1;>goto--jumper-84;goto--branch-84
 s1push1
-goto;>fastg--label
-null;;goto--jumper-85
+goto;>mediumg--label
+null;;goto--jumper-84
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:\p
+dataread2;>:3
 gotoif;>goto--branch-86
 goto;>goto--jumper-86
 setreg1;>goto--jumper-86;goto--branch-86
 s1push1
 goto;>fastg--label
 null;;goto--jumper-86
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:\p
+gotoif;>goto--branch-87
+goto;>goto--jumper-87
+setreg1;>goto--jumper-87;goto--branch-87
+s1push1
+goto;>fastg--label
+null;;goto--jumper-87
 #goto 
 goto;>main--label
 #label
 null;;slowg--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-93
+s1push1
+goto;>musicstop--label
+null;;goto--jumper-93
 #copy variables 
 dataread1;>slow
 datawrite1;>speed
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-93
+setreg1;>goto--jumper-95
 s1push1
 goto;>pregame--label
-null;;goto--jumper-93
+null;;goto--jumper-95
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;turbog--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-100
+s1push1
+goto;>musicstop--label
+null;;goto--jumper-100
 #copy variables 
 dataread1;>turbo
 datawrite1;>speed
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-98
+setreg1;>goto--jumper-102
 s1push1
 goto;>pregame--label
-null;;goto--jumper-98
+null;;goto--jumper-102
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;mediumg--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-107
+s1push1
+goto;>musicstop--label
+null;;goto--jumper-107
 #copy variables 
 dataread1;>medium
 datawrite1;>speed
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-103
+setreg1;>goto--jumper-109
 s1push1
 goto;>pregame--label
-null;;goto--jumper-103
+null;;goto--jumper-109
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;fastg--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-114
+s1push1
+goto;>musicstop--label
+null;;goto--jumper-114
 #copy variables 
 dataread1;>fast
 datawrite1;>speed
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-108
+setreg1;>goto--jumper-116
 s1push1
 goto;>pregame--label
-null;;goto--jumper-108
+null;;goto--jumper-116
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -525,30 +548,30 @@ iowrite1;>plot.color
 #plotter draw rect
 iowrite1;>plot.rect
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-168
+setreg1;>goto--jumper-177
 s1push1
 goto;>track_draw--label
-null;;goto--jumper-168
+null;;goto--jumper-177
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-170
-setreg1;0;waitcy-loopback-170
+datawrite1;>waitcy-loopback-179
+setreg1;0;waitcy-loopback-179
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-170
+datawrite1;>waitcy-loopback-179
 setreg2;10x1000
-gotoifless;>waitcy-loopback-170
+gotoifless;>waitcy-loopback-179
 
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #172
-iowrite1;>snd.2.wave#SSTNPL Source Line: '172' 
+#_______NOTE: this corresponds to SSTNPL source line #181
+iowrite1;>snd.2.wave#SSTNPL Source Line: '181' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x4
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #174
-iowrite1;>snd.2.vol#SSTNPL Source Line: '174' 
+#_______NOTE: this corresponds to SSTNPL source line #183
+iowrite1;>snd.2.vol#SSTNPL Source Line: '183' 
 #label
 null;;primaryloop--label
 #multiply (2op math)
@@ -562,13 +585,13 @@ dataread1;>trainsoundfreq
 dataread2;>@220
 add
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #181
-iowrite1;>snd.2.freq#SSTNPL Source Line: '181' 
+#_______NOTE: this corresponds to SSTNPL source line #190
+iowrite1;>snd.2.freq#SSTNPL Source Line: '190' 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-183
+setreg1;>goto--jumper-192
 s1push1
 goto;>track_draw--label
-null;;goto--jumper-183
+null;;goto--jumper-192
 #val (used with set to change variable value during runtime.)
 setreg1;10x-140
 #set(1) (used after 2-op math, asm code, or get)
@@ -583,81 +606,81 @@ datawrite1;>train_side
 #conditional subroutine goto
 dataread1;>train_side
 dataread2;>@0
-gotoif;>goto--branch-190
-goto;>goto--jumper-190
-setreg1;>goto--jumper-190;goto--branch-190
-s1push1
-goto;>soundleft2--label
-null;;goto--jumper-190
-#conditional subroutine goto
-dataread1;>train_side
-dataread2;>@1
-gotoif;>goto--branch-191
-goto;>goto--jumper-191
-setreg1;>goto--jumper-191;goto--branch-191
-s1push1
-goto;>soundright2--label
-null;;goto--jumper-191
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #193
-iowrite1;>snd.2.play#SSTNPL Source Line: '193' 
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-194
-s1push1
-goto;>gameloop--label
-null;;goto--jumper-194
-#conditional subroutine goto
-dataread1;>player_side
-dataread2;>train_side
-gotoif;>goto--branch-196
-goto;>goto--jumper-196
-setreg1;>goto--jumper-196;goto--branch-196
-s1push1
-goto;>sndcrash--label
-null;;goto--jumper-196
-#conditional subroutine goto
-dataread1;>player_side
-dataread2;>train_side
-gotoif;>goto--jumper-197
-goto;>goto--branch-197
-setreg1;>goto--jumper-197;goto--branch-197
-s1push1
-goto;>snddodge--label
-null;;goto--jumper-197
-#conditional subroutine goto
-dataread1;>player_side
-dataread2;>train_side
 gotoif;>goto--branch-199
 goto;>goto--jumper-199
 setreg1;>goto--jumper-199;goto--branch-199
 s1push1
-goto;>train_point--label
+goto;>soundleft2--label
 null;;goto--jumper-199
+#conditional subroutine goto
+dataread1;>train_side
+dataread2;>@1
+gotoif;>goto--branch-200
+goto;>goto--jumper-200
+setreg1;>goto--jumper-200;goto--branch-200
+s1push1
+goto;>soundright2--label
+null;;goto--jumper-200
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #202
+iowrite1;>snd.2.play#SSTNPL Source Line: '202' 
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-203
+s1push1
+goto;>gameloop--label
+null;;goto--jumper-203
 #conditional subroutine goto
 dataread1;>player_side
 dataread2;>train_side
-gotoif;>goto--jumper-200
-goto;>goto--branch-200
-setreg1;>goto--jumper-200;goto--branch-200
+gotoif;>goto--branch-205
+goto;>goto--jumper-205
+setreg1;>goto--jumper-205;goto--branch-205
+s1push1
+goto;>sndcrash--label
+null;;goto--jumper-205
+#conditional subroutine goto
+dataread1;>player_side
+dataread2;>train_side
+gotoif;>goto--jumper-206
+goto;>goto--branch-206
+setreg1;>goto--jumper-206;goto--branch-206
+s1push1
+goto;>snddodge--label
+null;;goto--jumper-206
+#conditional subroutine goto
+dataread1;>player_side
+dataread2;>train_side
+gotoif;>goto--branch-208
+goto;>goto--jumper-208
+setreg1;>goto--jumper-208;goto--branch-208
+s1push1
+goto;>train_point--label
+null;;goto--jumper-208
+#conditional subroutine goto
+dataread1;>player_side
+dataread2;>train_side
+gotoif;>goto--jumper-209
+goto;>goto--branch-209
+setreg1;>goto--jumper-209;goto--branch-209
 s1push1
 goto;>player_point--label
-null;;goto--jumper-200
+null;;goto--jumper-209
 #conditional goto
 dataread1;>player_score
 dataread2;>@90
-gotoifless;>goto--jumper-202
-goto;>goto--branch-202
-setreg1;>goto--jumper-202;goto--branch-202
+gotoifless;>goto--jumper-211
+goto;>goto--branch-211
+setreg1;>goto--jumper-211;goto--branch-211
 goto;>player_win--label
-null;;goto--jumper-202
+null;;goto--jumper-211
 #conditional goto
 dataread1;>train_score
 dataread2;>@90
-gotoifless;>goto--jumper-203
-goto;>goto--branch-203
-setreg1;>goto--jumper-203;goto--branch-203
+gotoifless;>goto--jumper-212
+goto;>goto--branch-212
+setreg1;>goto--jumper-212;goto--branch-212
 goto;>player_lose--label
-null;;goto--jumper-203
+null;;goto--jumper-212
 #goto 
 goto;>primaryloop--label
 #label
@@ -665,8 +688,8 @@ null;;soundleft2--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #208
-iowrite1;>snd.2.pan#SSTNPL Source Line: '208' 
+#_______NOTE: this corresponds to SSTNPL source line #217
+iowrite1;>snd.2.pan#SSTNPL Source Line: '217' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -675,8 +698,8 @@ null;;soundright2--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x-1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #213
-iowrite1;>snd.2.pan#SSTNPL Source Line: '213' 
+#_______NOTE: this corresponds to SSTNPL source line #222
+iowrite1;>snd.2.pan#SSTNPL Source Line: '222' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -743,37 +766,37 @@ iowrite1;>plot.line
 #conditional subroutine goto
 dataread1;>player_side
 dataread2;>@0
-gotoif;>goto--branch-250
-goto;>goto--jumper-250
-setreg1;>goto--jumper-250;goto--branch-250
+gotoif;>goto--branch-259
+goto;>goto--jumper-259
+setreg1;>goto--jumper-259;goto--branch-259
 s1push1
 goto;>playcar_left--label
-null;;goto--jumper-250
+null;;goto--jumper-259
 #conditional subroutine goto
 dataread1;>player_side
 dataread2;>@1
-gotoif;>goto--branch-251
-goto;>goto--jumper-251
-setreg1;>goto--jumper-251;goto--branch-251
+gotoif;>goto--branch-260
+goto;>goto--jumper-260
+setreg1;>goto--jumper-260;goto--branch-260
 s1push1
 goto;>playcar_right--label
-null;;goto--jumper-251
+null;;goto--jumper-260
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;player_win--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #256
-iowrite1;>snd.2.stop#SSTNPL Source Line: '256' 
+#_______NOTE: this corresponds to SSTNPL source line #265
+iowrite1;>snd.2.stop#SSTNPL Source Line: '265' 
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
 #print newline
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #259
-include;ontrain+media+win.tas0#SSTNPL Source Line: '259' 
+#_______NOTE: this corresponds to SSTNPL source line #268
+include;ontrain+media+win.tas0#SSTNPL Source Line: '268' 
 #print
 fopwri1;:Y
 fopwri1;:O
@@ -786,11 +809,16 @@ fopwri1;:!
 fopwri1;:\s
 fopwri1;::
 fopwri1;:D
-#keprompt: prompt for single keypress, continue only when keypress is received.
-setreg2;0
-iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-261
-gotoif;>keyprompt--loop-261
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-270
+s1push1
+goto;>musicinit--label
+null;;goto--jumper-270
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-271
+s1push1
+goto;>musicprompt--label
+null;;goto--jumper-271
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -799,16 +827,16 @@ gotoreg1
 #label
 null;;player_lose--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #266
-iowrite1;>snd.2.stop#SSTNPL Source Line: '266' 
+#_______NOTE: this corresponds to SSTNPL source line #276
+iowrite1;>snd.2.stop#SSTNPL Source Line: '276' 
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
 #print newline
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #269
-include;ontrain+media+gameover.tas0#SSTNPL Source Line: '269' 
+#_______NOTE: this corresponds to SSTNPL source line #279
+include;ontrain+media+gameover.tas0#SSTNPL Source Line: '279' 
 #print
 fopwri1;:Y
 fopwri1;:O
@@ -823,11 +851,16 @@ fopwri1;:\s
 fopwri1;:>
 fopwri1;::
 fopwri1;:)
-#keprompt: prompt for single keypress, continue only when keypress is received.
-setreg2;0
-iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-271
-gotoif;>keyprompt--loop-271
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-281
+s1push1
+goto;>musicinit--label
+null;;goto--jumper-281
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-282
+s1push1
+goto;>musicprompt--label
+null;;goto--jumper-282
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -898,55 +931,55 @@ add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>train_pos
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #313
-ioread1;>mouse.button#SSTNPL Source Line: '313' 
+#_______NOTE: this corresponds to SSTNPL source line #324
+ioread1;>mouse.button#SSTNPL Source Line: '324' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>playclick
 #conditional subroutine goto
 dataread1;>playclick
 dataread2;>@1
-gotoif;>goto--branch-316
-goto;>goto--jumper-316
-setreg1;>goto--jumper-316;goto--branch-316
+gotoif;>goto--branch-327
+goto;>goto--jumper-327
+setreg1;>goto--jumper-327;goto--branch-327
 s1push1
 goto;>playertoggle--label
-null;;goto--jumper-316
+null;;goto--jumper-327
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-321
-setreg1;0;waitcy-loopback-321
+datawrite1;>waitcy-loopback-332
+setreg1;0;waitcy-loopback-332
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-321
+datawrite1;>waitcy-loopback-332
 setreg2;10x3
-gotoifless;>waitcy-loopback-321
+gotoifless;>waitcy-loopback-332
 
 #conditional subroutine goto
 dataread1;>train_side
 dataread2;>@0
-gotoif;>goto--branch-322
-goto;>goto--jumper-322
-setreg1;>goto--jumper-322;goto--branch-322
+gotoif;>goto--branch-333
+goto;>goto--jumper-333
+setreg1;>goto--jumper-333;goto--branch-333
 s1push1
 goto;>train_left--label
-null;;goto--jumper-322
+null;;goto--jumper-333
 #conditional subroutine goto
 dataread1;>train_side
 dataread2;>@1
-gotoif;>goto--branch-323
-goto;>goto--jumper-323
-setreg1;>goto--jumper-323;goto--branch-323
+gotoif;>goto--branch-334
+goto;>goto--jumper-334
+setreg1;>goto--jumper-334;goto--branch-334
 s1push1
 goto;>train_right--label
-null;;goto--jumper-323
+null;;goto--jumper-334
 #conditional return
 dataread1;>train_pos
 dataread2;>collidepos
-gotoifless;>goto--jumper-329
-goto;>goto--branch-329
-s1pop1;;goto--branch-329
+gotoifless;>goto--jumper-340
+goto;>goto--branch-340
+s1pop1;;goto--branch-340
 gotoreg1
-null;;goto--jumper-329
+null;;goto--jumper-340
 #goto 
 goto;>gameloop--label
 #label
@@ -1124,24 +1157,24 @@ null;;playertoggle--label
 #conditional goto
 dataread1;>player_side
 dataread2;>@0
-gotoif;>goto--branch-423
-goto;>goto--jumper-423
-setreg1;>goto--jumper-423;goto--branch-423
+gotoif;>goto--branch-434
+goto;>goto--jumper-434
+setreg1;>goto--jumper-434;goto--branch-434
 goto;>playertoggle_skip--label
-null;;goto--jumper-423
+null;;goto--jumper-434
 #conditional set
 dataread1;>player_side
 dataread2;>@1
-gotoif;>goto--branch-424
-goto;>goto--jumper-424
-dataread1;>@0;goto--branch-424
+gotoif;>goto--branch-435
+goto;>goto--jumper-435
+dataread1;>@0;goto--branch-435
 datawrite1;>player_side
-null;;goto--jumper-424
+null;;goto--jumper-435
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-425
+setreg1;>goto--jumper-436
 s1push1
 goto;>playcar_left--label
-null;;goto--jumper-425
+null;;goto--jumper-436
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1150,16 +1183,16 @@ null;;playertoggle_skip--label
 #conditional set
 dataread1;>player_side
 dataread2;>@0
-gotoif;>goto--branch-428
-goto;>goto--jumper-428
-dataread1;>@1;goto--branch-428
+gotoif;>goto--branch-439
+goto;>goto--jumper-439
+dataread1;>@1;goto--branch-439
 datawrite1;>player_side
-null;;goto--jumper-428
+null;;goto--jumper-439
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-429
+setreg1;>goto--jumper-440
 s1push1
 goto;>playcar_right--label
-null;;goto--jumper-429
+null;;goto--jumper-440
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1168,52 +1201,52 @@ null;;snddodge--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x5
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #435
-iowrite1;>snd.1.vol#SSTNPL Source Line: '435' 
+#_______NOTE: this corresponds to SSTNPL source line #446
+iowrite1;>snd.1.vol#SSTNPL Source Line: '446' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #437
-iowrite1;>snd.1.wave#SSTNPL Source Line: '437' 
+#_______NOTE: this corresponds to SSTNPL source line #448
+iowrite1;>snd.1.wave#SSTNPL Source Line: '448' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x240
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #439
-iowrite1;>snd.1.freq#SSTNPL Source Line: '439' 
+#_______NOTE: this corresponds to SSTNPL source line #450
+iowrite1;>snd.1.freq#SSTNPL Source Line: '450' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #440
-iowrite1;>snd.1.play#SSTNPL Source Line: '440' 
+#_______NOTE: this corresponds to SSTNPL source line #451
+iowrite1;>snd.1.play#SSTNPL Source Line: '451' 
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-441
-setreg1;0;waitcy-loopback-441
+datawrite1;>waitcy-loopback-452
+setreg1;0;waitcy-loopback-452
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-441
+datawrite1;>waitcy-loopback-452
 setreg2;10x150
-gotoifless;>waitcy-loopback-441
+gotoifless;>waitcy-loopback-452
 
 #val (used with set to change variable value during runtime.)
 setreg1;10x440
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #443
-iowrite1;>snd.1.freq#SSTNPL Source Line: '443' 
+#_______NOTE: this corresponds to SSTNPL source line #454
+iowrite1;>snd.1.freq#SSTNPL Source Line: '454' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #444
-iowrite1;>snd.1.play#SSTNPL Source Line: '444' 
+#_______NOTE: this corresponds to SSTNPL source line #455
+iowrite1;>snd.1.play#SSTNPL Source Line: '455' 
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-445
-setreg1;0;waitcy-loopback-445
+datawrite1;>waitcy-loopback-456
+setreg1;0;waitcy-loopback-456
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-445
+datawrite1;>waitcy-loopback-456
 setreg2;10x150
-gotoifless;>waitcy-loopback-445
+gotoifless;>waitcy-loopback-456
 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #446
-iowrite1;>snd.1.stop#SSTNPL Source Line: '446' 
+#_______NOTE: this corresponds to SSTNPL source line #457
+iowrite1;>snd.1.stop#SSTNPL Source Line: '457' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1222,34 +1255,34 @@ null;;sndcrash--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x5
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #452
-iowrite1;>snd.1.vol#SSTNPL Source Line: '452' 
+#_______NOTE: this corresponds to SSTNPL source line #463
+iowrite1;>snd.1.vol#SSTNPL Source Line: '463' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x5
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #454
-iowrite1;>snd.1.wave#SSTNPL Source Line: '454' 
+#_______NOTE: this corresponds to SSTNPL source line #465
+iowrite1;>snd.1.wave#SSTNPL Source Line: '465' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x440
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #456
-iowrite1;>snd.1.freq#SSTNPL Source Line: '456' 
+#_______NOTE: this corresponds to SSTNPL source line #467
+iowrite1;>snd.1.freq#SSTNPL Source Line: '467' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #457
-iowrite1;>snd.1.play#SSTNPL Source Line: '457' 
+#_______NOTE: this corresponds to SSTNPL source line #468
+iowrite1;>snd.1.play#SSTNPL Source Line: '468' 
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-458
-setreg1;0;waitcy-loopback-458
+datawrite1;>waitcy-loopback-469
+setreg1;0;waitcy-loopback-469
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-458
+datawrite1;>waitcy-loopback-469
 setreg2;10x300
-gotoifless;>waitcy-loopback-458
+gotoifless;>waitcy-loopback-469
 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #459
-iowrite1;>snd.1.stop#SSTNPL Source Line: '459' 
+#_______NOTE: this corresponds to SSTNPL source line #470
+iowrite1;>snd.1.stop#SSTNPL Source Line: '470' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -1293,7 +1326,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:1
 fopwri1;:.
-fopwri1;:5
+fopwri1;:7
 fopwri1;:\s
 fopwri1;:-
 fopwri1;:\s
@@ -2122,11 +2155,11 @@ fopwri1;:U
 fopwri1;:\n
 #print
 fopwri1;:>
-#keprompt: prompt for single keypress, continue only when keypress is received.
-setreg2;0
-iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-490
-gotoif;>keyprompt--loop-490
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-501
+s1push1
+goto;>musicprompt--label
+null;;goto--jumper-501
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -2135,8 +2168,8 @@ gotoreg1
 #label
 null;;rules--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #495
-include;ontrain+media+rules.tas0#SSTNPL Source Line: '495' 
+#_______NOTE: this corresponds to SSTNPL source line #506
+include;ontrain+media+rules.tas0#SSTNPL Source Line: '506' 
 #prline
 fopwri1;:Y
 fopwri1;:o
@@ -2394,11 +2427,11 @@ fopwri1;:!
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
-#keprompt: prompt for single keypress, continue only when keypress is received.
-setreg2;0
-iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-504
-gotoif;>keyprompt--loop-504
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-515
+s1push1
+goto;>musicprompt--label
+null;;goto--jumper-515
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -2407,8 +2440,8 @@ gotoreg1
 #label
 null;;story--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #509
-include;ontrain+media+story.tas0#SSTNPL Source Line: '509' 
+#_______NOTE: this corresponds to SSTNPL source line #520
+include;ontrain+media+story.tas0#SSTNPL Source Line: '520' 
 #prline
 fopwri1;:Y
 fopwri1;:o
@@ -2706,14 +2739,67 @@ fopwri1;:?
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
-#keprompt: prompt for single keypress, continue only when keypress is received.
-setreg2;0
-iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-518
-gotoif;>keyprompt--loop-518
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-529
+s1push1
+goto;>musicprompt--label
+null;;goto--jumper-529
 #print newline
 fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
+#label
+null;;musicstop--label
+#val (used with set to change variable value during runtime.)
+setreg1;0
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #536
+iowrite1;>snd.1.stop#SSTNPL Source Line: '536' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #537
+iowrite1;>snd.2.stop#SSTNPL Source Line: '537' 
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;musicinit--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #541
+setreg1;>xsong0.main#SSTNPL Source Line: '541' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>mus.offset
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-543
+s1push1
+goto;>mus.init--label
+null;;goto--jumper-543
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;musicprompt--label
+#Get character from TTY input.
+ioread1;>io.ttyrd
+datawrite1;>kb
+#conditional return
+dataread1;>kb
+dataread2;>@0
+gotoif;>goto--jumper-548
+goto;>goto--branch-548
+s1pop1;;goto--branch-548
+gotoreg1
+null;;goto--jumper-548
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-549
+s1push1
+goto;>mus.cycle--label
+null;;goto--jumper-549
+#goto 
+goto;>musicprompt--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #553
+includeas;ontrain+music+title.tas0,xsong0#SSTNPL Source Line: '553' 
+#module include: line 554: musicengine as mus
+includeas;musicengine,mus
 #END OF FILE

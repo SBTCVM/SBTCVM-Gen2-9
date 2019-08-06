@@ -49,17 +49,18 @@ var train_score=0
 var player_score=0
 #####
 
-
+gsub musicinit
 label main
+	
+	
 	asm include;ontrain+media+title.tas0
-	prline Oncoming Trains - v1.6
+	prline Oncoming Trains - v1.7
 	prline MAIN MENU:
 	prline a: About   1: slow    3: fast
 	prline r: rules   2: medium  4: turbo
 	print q: quit    s: story
-	keyprompt
-	set kb
-		newline
+	gsub musicprompt
+	newline
 		
 		if kb,:q stop
 		if kb,:Q stop
@@ -89,23 +90,31 @@ goto main
 
 
 label slowg
+	gsub musicstop
 	copy slow,speed
 	gsub pregame
+	
 return
 
 label turbog
+	gsub musicstop
 	copy turbo,speed
 	gsub pregame
+	
 return
 
 label mediumg
+	gsub musicstop
 	copy medium,speed
 	gsub pregame
+	
 return
 
 label fastg
+	gsub musicstop
 	copy fast,speed
 	gsub pregame
+	
 return
 
 #main game loop
@@ -258,7 +267,8 @@ label player_win
 	newline
 	asm include;ontrain+media+win.tas0
 	print YOU WIN! :D
-	keyprompt
+	gsub musicinit
+	gsub musicprompt
 	newline
 	return
 
@@ -268,7 +278,8 @@ label player_lose
 	newline
 	asm include;ontrain+media+gameover.tas0
 	print YOU LOSE! >:)
-	keyprompt
+	gsub musicinit
+	gsub musicprompt
 	newline
 	return
 
@@ -466,7 +477,7 @@ label about
 textcolor *+++--0
 newline
 prline --ABOUT--
-prline Oncoming Trains - v1.6 - A graphical 'oncoming obstacle' game.
+prline Oncoming Trains - v1.7 - A graphical 'oncoming obstacle' game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
@@ -487,7 +498,7 @@ textcolor *+++---
 prline 
 prline PRESS A KEY TO RETURN TO MAIN MENU
 print >
-keyprompt
+gsub musicprompt
 newline
 return
 
@@ -501,7 +512,7 @@ prline use your mouse to leftclick to change tracks. difficulty changes speed.
 textcolor *++----
 print Good Luck!
 textcolor *+++---
-keyprompt
+gsub musicprompt
 newline
 return
 
@@ -515,6 +526,29 @@ prline Can the spy escape the city? Can he save the day?
 textcolor *++----
 print or will he be hit by the Oncoming Trains?
 textcolor *+++---
-keyprompt
+gsub musicprompt
 newline
 return
+
+
+label musicstop
+val 0
+asm iowrite1;>snd.1.stop
+asm iowrite1;>snd.2.stop
+return
+
+label musicinit
+	asm setreg1;>xsong0.main
+	set mus.offset
+	gsub mus.init
+return
+
+label musicprompt
+	getchar kb
+	ifnot kb,@0 return
+	gsub mus.cycle
+goto musicprompt
+
+
+asm includeas;ontrain+music+title.tas0,xsong0
+include musicengine as mus
