@@ -39,7 +39,7 @@ ontrain:
 
 gtt:
 	Guess That trit: a classic number guessing game from all the way back
-	in the Gen 1 era.
+	in the Gen 1 era. [ttycolor],[sound]
 highway:
 	Highway: a 1 or 2 player number guessing game themed after a road
 	race of sorts. [ttycolor]

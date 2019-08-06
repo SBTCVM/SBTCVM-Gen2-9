@@ -3,158 +3,194 @@
 #rewritten for SBTCVM Gen2-9, by Thomas Leathers
 var score=0
 var count=0
-var countinc=+
 var guess=0
 
-var wrong=+
-var right=++
 
-var randstart=-
-var randend=+
+
 var randbuff=0
 
 var chval=0
 
-#keymapping
-var poschar=:=
-var poschar2=:+
-var negchar=:-
-var negchar2=:_
-var gndchar=:0
-var gndchar2=:)
-
-var quitchar=:q
-var quitchar2=:Q
-
-var helpchar=:h
-var helpchar2=:H
-
-var aboutchar=:a
-var aboutchar2=:A
-
-
+textcolor *---++0---
 prline Hey everyone and welcome back to:
-prline GUESS!.. THAT!.. TRIT!
+prline GUESS!
+gsub startbeep
+prline THAT!
+gsub startbeep
+prline TRIT!
+gsub startbeep
 
+prline Version 2.1
+textcolor *---+++---
 gsub printscore
 
 label main
-getchar chval
-
-##guess entry
-if poschar,chval gsub pos
-if poschar2,chval gsub pos
-
-if negchar,chval gsub neg
-if negchar2,chval gsub neg
-
-if gndchar,chval gsub gnd
-if gndchar2,chval gsub gnd
-
-##Other options.
-
-if helpchar,chval gsub help
-if helpchar2,chval gsub help
-
-if aboutchar,chval gsub about
-if aboutchar2,chval gsub about
-
-if quitchar,chval gsub quit
-if quitchar2,chval gsub quit
+	prline enter your guess: (press 'h' for help.)
+	textcolor *---+0----
+	
+	print >?
+	
+	textcolor *---+++---
+	
+	
+	keyprompt
+	set chval
+	newline
+	
+	##guess entry
+	if :+,chval gsub pos
+	if :=,chval gsub pos
+	
+	if :-,chval gsub neg
+	if :_,chval gsub neg
+	
+	if :0,chval gsub gnd
+	if :),chval gsub gnd
+	
+	##Other options.
+	
+	if :s,chval gsub printscore
+	if :S,chval gsub printscore
+	
+	if :h,chval gsub help
+	if :H,chval gsub help
+	
+	if :a,chval gsub about
+	if :A,chval gsub about
+	
+	if :q,chval gsub quit
+	if :Q,chval gsub quit
 
 goto main
 
 
 #####Positive guess subroutine
-label pos
-val +
-set guess
-gsub doscore
+	label pos
+	val +
+	set guess
+	gsub doscore
 return
 
 
 #####Negative guess subroutine
-label neg
-val -
-set guess
-gsub doscore
+	label neg
+	val -
+	set guess
+	gsub doscore
 return
 
 
 #####Ground guess subroutine
-label gnd
-val 0
-set guess
-gsub doscore
+	label gnd
+	val 0
+	set guess
+	gsub doscore
 return
 
 #####score calculator
 
 label doscore
-#get random number
-rrange randstart,randend
-set randbuff
-#check if correct, if so jump to scoreadd section, else do score-sub section.
-if randbuff,guess goto scoreadd
-##wrong answer score code
-sub score,wrong
-set score
-add count,countinc
-set count
-prline wrong.
-gsub printscore
-return
+	#get random number
+	rrange @-1,@1
+	set randbuff
+	#check if correct, if so jump to scoreadd section, else do score-sub section.
+	if randbuff,guess goto scoreadd
+		##wrong answer score code
+		sub score,@1
+		set score
+		add count,@1
+		set count
+		textcolor *---+00---
+		prline wrong.
+		textcolor *---+++---
+		gsub loosebeep
+		gsub printscore
+		return
 
-##correct answer score code
-label scoreadd
-add score,right
-set score
-add count,countinc
-set count
-prline Correct!
-gsub printscore
-return
+	##correct answer score code
+	label scoreadd
+		add score,@1
+		set score
+		add count,@1
+		set count
+		textcolor *---0+0---
+		prline Correct!
+		textcolor *---+++---
+		gsub winbeep
+		gsub printscore
+		return
 
 
 #####score printer:
 label printscore
-print your score: 
-dumpd score
-newline
-print out of    : 
-dumpd count
-newline
-newline
-prline enter your guess: (press 'h' for help.)
-return
+	textcolor *---0++---
+	print your score: 
+	dumpd score
+	newline
+	print out of    : 
+	dumpd count
+	newline
+	textcolor *---+++---
+	return
 
 #####exit routine
 label quit
-newline
-prline ----------------
-newline
-prline Final score:
-print your score: 
-dumpd score
-newline
-print out of    : 
-dumpd count
-newline
-newline
-prline Press any key to exit.
-keyprompt
-prline Goodbye!
-stop
+	newline
+	prline ----------------
+	newline
+	prline Final score:
+	gsub printscore
+	prline Press any key to exit.
+	keyprompt
+	prline Goodbye!
+	stop
 
+###### SOUND ROUTINES ######
+
+label startbeep
+	val @0
+	asm iowrite1;>snd.1.wave
+	val @5
+	asm iowrite1;>snd.1.vol
+	val @360
+	asm iowrite1;>snd.1.freq
+	asm iowrite1;>snd.1.play
+	waitcy 1400
+	asm iowrite1;>snd.1.stop
+	waitcy 2800
+	return
+
+label winbeep
+	val @0
+	asm iowrite1;>snd.1.wave
+	val @5
+	asm iowrite1;>snd.1.vol
+	val @440
+	asm iowrite1;>snd.1.freq
+	asm iowrite1;>snd.1.play
+	waitcy 1400
+	asm iowrite1;>snd.1.stop
+	return
+
+label loosebeep
+	val @0
+	asm iowrite1;>snd.1.wave
+	val @5
+	asm iowrite1;>snd.1.vol
+	val @110
+	asm iowrite1;>snd.1.freq
+	asm iowrite1;>snd.1.play
+	waitcy 1400
+	asm iowrite1;>snd.1.stop
+	return
 #####-----about subroutine-----
 label about
-
-
+textcolor *---+++--0
 prline --ABOUT--
-prline Guess That Trit v2.0
+prline Guess That Trit v2.1
 prline Part of SBTCVM Gen2-9
 prline 
-prline Copyright (c) 2017-2018 Thomas Leathers & Contributors
+prline Copyright (c) 2017-2019 Thomas Leathers & Contributors
 prline 
 prline Guess That Trit is free software: you can redistribute it and/or modify
 prline it under the terms of the GNU General Public License as published by
@@ -168,14 +204,17 @@ prline GNU General Public License for more details.
 prline 
 prline You should have received a copy of the GNU General Public License
 prline along with Guess That Trit. If not, see <http://www.gnu.org/licenses/>
+textcolor *---+++---
 prline 
+
 return
 
 #####-----help subroutine-----
 label help
+textcolor *---+++--0
 prline --RULES--
 prline As you repeatedly guess randomly chosen trits:
-prline Your score raises by 3 points on a right guess.
+prline Your score raises by 1 point for each right guess.
 prline Your score lowers by 1 point for each wrong guess.
 prline Both your score and your total number of guesses
 prline is tracked.  Happy Guessing!
@@ -186,6 +225,8 @@ prline 0 Guess the next number will be ground (zero)
 prline - Guess the next number will be negative
 prline h Print this help text.
 prline a about Guess That Trit
+prline s print current score
 prline q quit Guess That Trit (and get final score ;) )
+textcolor *---+++---
 prline 
 return
