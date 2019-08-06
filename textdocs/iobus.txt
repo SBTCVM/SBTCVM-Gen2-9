@@ -62,7 +62,6 @@ x :  m : asm varname  : description
 #NOTE: the SBTSND-200 sound chip is only emulated when a valid backend is available.
 #currently this is limited to pygame.
 
-### NOT FINISHED. THE VM DOES NOT LOAD THIS MODULE YET!
 
 #SND channel 1
 200: [w] snd.1.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
@@ -109,7 +108,6 @@ x :  m : asm varname  : description
 235: [w] snd.4.play : write to start channel
 236: [w] snd.4.stop : write to stop channel
 
-[TODO: map out music controller IO lines]
 
 ### SBTCVM mouse
 300: [b] mouse.button  : (read to get next mouse button event, write to clear mouse event buffer.)

@@ -52,7 +52,7 @@ var player_score=0
 
 label main
 	asm include;ontrain+media+title.tas0
-	prline Oncoming Trains - v1.5
+	prline Oncoming Trains - v1.6
 	prline MAIN MENU:
 	prline a: About   1: slow    3: fast
 	prline r: rules   2: medium  4: turbo
@@ -110,6 +110,8 @@ return
 
 #main game loop
 
+var trainsoundfreq=0
+
 label pregame
 	gamode @30
 	val 0
@@ -166,7 +168,17 @@ label pregame
 	gsub track_draw
 	
 	waitcy 6000
+	val @1
+	asm iowrite1;>snd.2.wave
+	val @4
+	asm iowrite1;>snd.2.vol
+	
 	label primaryloop
+		#trainsound pitch
+		mul train_score,@8
+		set trainsoundfreq
+		add trainsoundfreq,@220
+		asm iowrite1;>snd.2.freq
 		
 		gsub track_draw
 		
@@ -174,13 +186,33 @@ label pregame
 		set train_pos
 		rrange @0,@1
 		set train_side
+		#play trainsound on side train will show on
+		if train_side,@0 gsub soundleft2
+		if train_side,@1 gsub soundright2
+		
+		asm iowrite1;>snd.2.play
 		gsub gameloop
+		
+		if player_side,train_side gsub sndcrash
+		ifnot player_side,train_side gsub snddodge
 		
 		if player_side,train_side gsub train_point
 		ifnot player_side,train_side gsub player_point
+		
 		ifnotless player_score,@90 goto player_win
 		ifnotless train_score,@90 goto player_lose
 	goto primaryloop
+
+label soundleft2
+val @1
+asm iowrite1;>snd.2.pan
+return
+
+label soundright2
+val @-1
+asm iowrite1;>snd.2.pan
+return
+
 
 #railroad track draw routine
 label track_draw
@@ -221,6 +253,7 @@ label track_draw
 return
 #### win & lose screen
 label player_win
+	asm iowrite1;>snd.2.stop
 	gamode @0
 	newline
 	asm include;ontrain+media+win.tas0
@@ -230,6 +263,7 @@ label player_win
 	return
 
 label player_lose
+	asm iowrite1;>snd.2.stop
 	gamode @0
 	newline
 	asm include;ontrain+media+gameover.tas0
@@ -395,6 +429,35 @@ label playertoggle
 		gsub playcar_right
 		return
 
+#dodge sound
+label snddodge
+val @5
+asm iowrite1;>snd.1.vol
+val @1
+asm iowrite1;>snd.1.wave
+val @240
+asm iowrite1;>snd.1.freq
+asm iowrite1;>snd.1.play
+waitcy 900
+val @440
+asm iowrite1;>snd.1.freq
+asm iowrite1;>snd.1.play
+waitcy 900
+asm iowrite1;>snd.1.stop
+return
+
+#fail to dodge sound
+label sndcrash
+val @5
+asm iowrite1;>snd.1.vol
+val @5
+asm iowrite1;>snd.1.wave
+val @440
+asm iowrite1;>snd.1.freq
+asm iowrite1;>snd.1.play
+waitcy 1800
+asm iowrite1;>snd.1.stop
+return
 
 
 #about, rules, and story screens below.
@@ -403,7 +466,7 @@ label about
 textcolor *+++--0
 newline
 prline --ABOUT--
-prline Oncoming Trains - v1.5 - A graphical 'oncoming obstacle' game.
+prline Oncoming Trains - v1.6 - A graphical 'oncoming obstacle' game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors

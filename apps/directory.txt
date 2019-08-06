@@ -35,7 +35,7 @@ ontrain:
 	Oncoming Trains: SBTCVM's first true graphical video game. A simple
 	object-avoid type game featuring a spy vs 30 oncoming trains.
 	features 4 speed options.
-	[ttycolor],[mouse],[plotter],[nocurses]
+	[ttycolor],[mouse],[plotter],[nocurses],[sound]
 
 gtt:
 	Guess That trit: a classic number guessing game from all the way back
