@@ -30,20 +30,55 @@ ternary with SBTCVM, should prove a fun challenge!
 - multiple specialized programming languages with integrated compilers. (SSTNPL, SBTCVM assembly)
 - Suite of development tools and utilities.
 - cross-platform interactive shell and build system. (xas.py)
-     
-
-
-
-
 
 ### Dependencies:
-Pygame __2.7__ OR __3__.
+Python __2.7__ OR __3__.
 
-**Sound (powered by FSSynthlib):** pygame
+**Sound (all frontends) (powered by FSSynthlib):** pygame
 
-**Curses VM:** curses
+**gfxcon.py:** pygame (used to process images)
 
-**Pygame VM:** pygame _**(needs truetype font and PNG support!)**_
+**Curses VM frontend:** curses
+
+**Pygame VM frontend:** pygame _**(needs truetype font and PNG support!)**_
+
+## Install instructions:
+
+1. Ensure python is installed.
+2. Ensure pygame and curses are installed for your system's default python installation.
+3. keep downloaded files in a place you can easily access.
+4. **DO NOT** try to move/change the default directory structure!
+5. proceed to the [Getting started guide](/guide.md)
+
+
+## Filing bug reports
+
+**SBTCVM _Should in theory_ work in any Operating system with  python (2.7 or 3), pygame, and curses.**     
+If it does not, or you have hit some other sort of bug, please file a bug report stating your 
+
+ - python version
+ - pygame version
+ - Operating system
+ - along with a description of the problem.
+
+ 
+**Note:** please consult the [Troubleshooting guide](/textdocs/mdhelp/troubleshoot/troubleshoot.md)
+ BEFORE filing a bug report!
+
+
+at the [SBTCVM Gen2-9 issue tracker on github.](https://github.com/SBTCVM/SBTCVM-Gen2-9/issues)
+_Please try and read though existing issues to see if its a known bug._
+
+## notes for linux software packagers:
+
+- **SBTCVM** is **SINGLE USER**
+- The official name of this specific version of the SBTCVM Suite is: `SBTCVM Gen2-9`
+- The user needs access to the `vmuser` directory.
+- any desktop entries should include one that starts the **XAS shell** (run `xas.py` with no arguments) in a terminal emulator.
+- the python executables & utilities **ARE NOT** designed to be used from arbitrary directories. further they will all change their working directory to their location automatically.
+- the official, current, SBTCVM icon can be found in `vmsystem/GFX`
+
+
 
 ## Code Licensing
 
