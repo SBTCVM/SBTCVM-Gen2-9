@@ -1,9 +1,12 @@
 # SBTCVM Standard Library
 [help index](index.md)
 
+Here you will find an overview of the various sorts of libraries and
+modules that encompass the SBTCVM standard library.
+
 ## SSTNPL modules (.stnpmfs & .tas0)
 
-#### comprompt
+### comprompt
 This is a standard command prompt routine shared by several SSTNPL-based 
 programs that need multi-character command line interfaces.
 
@@ -11,17 +14,43 @@ see _shelldemo_ in _demos_ for a good example.
 
 Other notable uses include the **system shell** in **sbtgsh**.
 
-#### cprle
+### cprle
 This is a standard decoder for gfxcon's color packart compression method.
 
 see _comppack_ in _demos_ for a good example.
 
+### plrle
+This is a standard decoder for gfxcon's compressed tritmap format. (uses SBTGA plotter mode (mode 30))
+
+see _tritmap_ in _demos_ for a good example.
+
+### musicengine
+
+music playback routine Module for SBTCVM's 4-channel sound chip.
+
+see _musicdemo_ and _ternarydreams_ in _demos_ for good examples.
+
+_ternarydreams_ and _ontrain_ both contain examples of separate music data stored in tas0 files.
+
+Also see counterpart `musnsp.nsp` library for assembler namespace constants for music control code data.
+
 ## Assembler modules (.tas0)
 
-#### vdishell
+### vdishell
 Standard wrapper routine for the as-yet-unfinished SBTVDI disk system
 serial shell.
 
 see _VDIBOOT_ in _vmsystem/roms_ for a good example.
 
+Also note some programs use VDI commands/make them available using the SBTVDI serial shell's program mode.
+
 ## Assembler namespace files (.nsp)
+
+### stdnsp
+The standard assembler namespace library
+
+Contains constants for ALL used IOBus addresses. used by nearly every program. including SSTNPL-compiled programs.
+
+### musnsp
+
+Contains music control codes and such for musicengine music data files.
