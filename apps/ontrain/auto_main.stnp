@@ -37,6 +37,8 @@ var slow=@1
 var medium=@2
 var fast=@3
 var turbo=@4
+var ultra=@5
+var crazy=@6
 
 
 ##### SET ELSEWHERE IN CODE
@@ -54,10 +56,10 @@ label main
 	
 	
 	asm include;ontrain+media+title.tas0
-	prline Oncoming Trains - v1.7
+	prline Oncoming Trains - v1.8
 	prline MAIN MENU:
-	prline a: About   1: slow    3: fast
-	prline r: rules   2: medium  4: turbo
+	prline a: About   1: slow    3: fast  5: ultra
+	prline r: rules   2: medium  4: turbo 6: crazy
 	print q: quit    s: story
 	gsub musicprompt
 	newline
@@ -80,6 +82,12 @@ label main
 		if kb,:4 gsub turbog
 		if kb,:$ gsub turbog
 		
+		if kb,:5 gsub ultrag
+		if kb,:% gsub ultrag
+		
+		if kb,:6 gsub crazyg
+		if kb,:^ gsub crazyg
+		
 		if kb,:2 gsub mediumg
 		if kb,:@ gsub mediumg
 		
@@ -89,7 +97,17 @@ label main
 goto main
 
 
+
+
+
 label slowg
+	asm include;ontrain+media+slow.tas0
+	print This'll be easy! [Press space to start! Press q to go back.]
+	label sprmpt1
+		gsub musicprompt
+		if kb,:q return
+		if kb,:Q return
+		ifnot kb,:\s goto sprmpt1
 	gsub musicstop
 	copy slow,speed
 	gsub pregame
@@ -97,6 +115,13 @@ label slowg
 return
 
 label turbog
+	asm include;ontrain+media+turbo.tas0
+	print This might be a bit complicated... [Press space to start! Press q to go back.]
+	label sprmpt2
+		gsub musicprompt
+		if kb,:q return
+		if kb,:Q return
+		ifnot kb,:\s goto sprmpt2
 	gsub musicstop
 	copy turbo,speed
 	gsub pregame
@@ -104,13 +129,55 @@ label turbog
 return
 
 label mediumg
+	asm include;ontrain+media+medium.tas0
+	print Ok... not too bad... [Press space to start! Press q to go back.]
+	label sprmpt3
+		gsub musicprompt
+		if kb,:q return
+		if kb,:Q return
+		ifnot kb,:\s goto sprmpt3
 	gsub musicstop
 	copy medium,speed
 	gsub pregame
 	
 return
 
+label ultrag
+	asm include;ontrain+media+ultra.tas0
+	print I hope i get hazard pay for this... [Press space to start! Press q to go back.]
+	label sprmpt4
+		gsub musicprompt
+		if kb,:q return
+		if kb,:Q return
+		ifnot kb,:\s goto sprmpt4
+	gsub musicstop
+	copy ultra,speed
+	gsub pregame
+	
+return
+
+label crazyg
+	asm include;ontrain+media+crazy.tas0
+	print Uh-oh... [Press space to start! Press q to go back.]
+	label sprmpt5
+		gsub musicprompt
+		if kb,:q return
+		if kb,:Q return
+		ifnot kb,:\s goto sprmpt5
+	gsub musicstop
+	copy crazy,speed
+	gsub pregame
+	
+return
+
 label fastg
+	asm include;ontrain+media+fast.tas0
+	print I can do this. I just need to focus... [Press space to start! Press q to go back.]
+	label sprmpt6
+		gsub musicprompt
+		if kb,:q return
+		if kb,:Q return
+		ifnot kb,:\s goto sprmpt6
 	gsub musicstop
 	copy fast,speed
 	gsub pregame
@@ -262,12 +329,15 @@ label track_draw
 return
 #### win & lose screen
 label player_win
+	
 	asm iowrite1;>snd.2.stop
 	gamode @0
 	newline
 	asm include;ontrain+media+win.tas0
 	print YOU WIN! :D
 	gsub musicinit
+	#clear input buffer
+	asm iowrite1;>io.ttyrd
 	gsub musicprompt
 	newline
 	return
@@ -279,6 +349,8 @@ label player_lose
 	asm include;ontrain+media+gameover.tas0
 	print YOU LOSE! >:)
 	gsub musicinit
+	#clear input buffer
+	asm iowrite1;>io.ttyrd
 	gsub musicprompt
 	newline
 	return
@@ -323,13 +395,13 @@ label gameloop
 	
 	asm ioread1;>mouse.button
 	set playclick
-	
 	if playclick,@1 gsub playertoggle
+	getchar playclick
+	if playclick,:\s gsub playertoggle
 	
 	
 	
-	
-	waitcy 18
+	waitcy 12
 	if train_side,@0 gsub train_left
 	if train_side,@1 gsub train_right
 	
@@ -474,11 +546,13 @@ return
 #about, rules, and story screens below.
 
 label about
+
 textcolor *+++--0
-newline
-prline --ABOUT--
-prline Oncoming Trains - v1.7 - A graphical 'oncoming obstacle' game.
+asm include;ontrain+media+about.tas0
+prline Oncoming Trains - v1.8 - A graphical 'oncoming obstacle' game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
+prline 
+prline Written in SSTNPL - Uses the SBTCVM musicengine SSTNPL module.
 prline 
 prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
 prline 
@@ -495,20 +569,18 @@ prline
 prline You should have received a copy of the GNU General Public License
 prline along with Oncoming Trains. If not, see <http://www.gnu.org/licenses/>
 textcolor *+++---
-prline 
-prline PRESS A KEY TO RETURN TO MAIN MENU
-print >
+print PRESS A KEY TO RETURN TO MAIN MENU.
 gsub musicprompt
 newline
 return
 
 label rules
 asm include;ontrain+media+rules.tas0
-prline You are trying to escape the city by driving on a railroad line. 
+prline You and Agent 9841 are trying to escape the city by driving on a railroad line.
 prline One problem: Its actively used!
 newline
 prline player must pass all 30 trains, while being hit by less than 6.
-prline use your mouse to leftclick to change tracks. difficulty changes speed.
+prline leftclick on mouse, or press spacebar to change tracks. difficulty sets speed.
 textcolor *++----
 print Good Luck!
 textcolor *+++---
@@ -518,9 +590,13 @@ return
 
 label story
 asm include;ontrain+media+story.tas0
-prline You are a spy trying to escape the enemy city with crucial information.
-prline You take a rail line thats supposed to be abandoned, but the enemy was
-prline expecting this and is sending 30 trains your way!
+#prline You are a spy trying to escape the enemy city with crucial information.
+#prline You take a rail line thats supposed to be abandoned, but the enemy was
+#prline expecting this and is sending 30 trains your way!
+
+prline I'm Agent 9841, I have discovered crucial enemy information, and I need help!
+prline The enemy has sent no less than 30 trains my way, and this thing can't drive
+prline through the grass fast enough to evade a snail... So, er... A little help?!?
 newline
 prline Can the spy escape the city? Can he save the day?
 textcolor *++----

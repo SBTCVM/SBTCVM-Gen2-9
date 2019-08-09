@@ -3,4 +3,11 @@ gfxcon -cp ontrain+media+gameover
 gfxcon -cp ontrain+media+win
 gfxcon -cp ontrain+media+story
 gfxcon -cp ontrain+media+rules
+gfxcon -cp ontrain+media+slow
+gfxcon -cp ontrain+media+medium
+gfxcon -cp ontrain+media+fast
+gfxcon -cp ontrain+media+turbo
+gfxcon -cp ontrain+media+ultra
+gfxcon -cp ontrain+media+crazy
+gfxcon -cp ontrain+media+about
 stnp ontrain

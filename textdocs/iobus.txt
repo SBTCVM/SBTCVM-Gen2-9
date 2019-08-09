@@ -12,7 +12,7 @@ x :  m : asm varname  : description
 1 : [w]: io.ttywr     : TTY (terminal) write
 2 : [w]: io.tritdump  : trit dump
 3 : [w]: io.decdump   : decimal dump
-4 : [r]: io.ttyrd     : TTY (terminal) read (buffered, returns null upon empty buffer)
+4 : [b]: io.ttyrd     : TTY (terminal) read (buffered, returns null upon empty buffer, write to clear buffer.)
 5 : [w]: io.packart   : 3-shade, trit-encoded terminal art mechanism. output quality varies with frontend.
 6 : [w]: io.textcolor : set text color as 6 trit value. key: (fffbbb) where fff is 
 		foreground and bbb is background. 3-trit RGB values. 
