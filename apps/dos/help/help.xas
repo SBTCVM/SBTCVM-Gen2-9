@@ -1,0 +1,4 @@
+stnp dos+help+help.stnp
+stnp dos+help+overview.stnp
+diskedit --appendfile dos dos+help+help.trom help.txe trom
+diskedit --appendfile dos dos+help+overview.trom help_overview.hlp trom

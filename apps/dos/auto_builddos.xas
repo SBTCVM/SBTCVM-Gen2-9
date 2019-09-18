@@ -10,8 +10,16 @@ print build startup trom
 stnp dos
 
 
+
+
+
+
 print Build tdsk1 disk image
 #See auto_dos.diskmap
 diskedit --new dos
+
+print build help system & append help to disk...
+xas dos+help+help.xas
+
 
 print done.

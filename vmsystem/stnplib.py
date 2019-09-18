@@ -1254,7 +1254,7 @@ gotoif;>diter-loopback-''' +  str(lineno) + '''
 #also handles table string tstr syntax
 class in_print:
 	def __init__(self):
-		self.keywords=["print", "prline", "tstr", "vdi"]
+		self.keywords=["print", "prline", "tstr", "vdi", "vdin"]
 		self.comment="print"
 	def p0(self, args, keyword, lineno):
 		for char in args:
@@ -1267,7 +1267,7 @@ class in_print:
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("#" + keyword + "\n")
-		if keyword=="vdi":
+		if keyword=="vdi" or keyword=="vdin":
 			destobj.write("fopset1;>vdi.cli.in\n")
 			
 		for char in args:
@@ -1277,7 +1277,7 @@ class in_print:
 				destobj.write("fopwri1;:" + tcon.chartoasmchar[char] + "\n")
 		if keyword=="prline" or keyword=="vdi":
 			destobj.write("fopwri1;:\\n\n")
-		if keyword=="vdi":
+		if keyword=="vdi" or keyword=="vdin":
 			destobj.write("fopset1;>io.ttywr\n")
 		return
 

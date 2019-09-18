@@ -202,6 +202,7 @@ Command documentation:
 
 --VDI (DISK SYSTEM) see 'SBTVDI' directory in 'textdocs' for more details.
 	vdi [string]     : send a command to VDI serial
+	vdin [string]    : send a command to VDI serial (with no appended newline, for more complex command building)
 	vdistat [varname]: get VDI serial status.
 	vdimode [mode]   : set VDI serial mode/init vdi serial.
 
