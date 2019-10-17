@@ -130,7 +130,9 @@ return
 label inv
 prline INVERT:
 gsub get1num
-invert v1buff
+#invert v1buff#DEPRECIATED
+inv v1buff
+set v1buff
 print result is: 
 dumpt v1buff
 print  ( 
@@ -452,7 +454,9 @@ return
 ####invert number if negative flag set, then return
 label getd_negdo
 if getd_negflg,@0 return
-invert getd_val
+#invert getd_val#DEPRECIATED
+inv getd_val
+set getd_val
 return
 
 

@@ -4,6 +4,7 @@ textcolor *+++---
 prline SBTCVM DOS is a disk-based psudo-operating-system for SBTCVM...
 prline (needs more info)
 prline PRESS ANY KEY TO RETURN
-keyprompt
-vdi rstld -1 help.txe
-stop
+
+	keyprompt
+	vdi rstld -1 help.txe
+	stop

@@ -340,10 +340,12 @@ class in_intcommon1b:
 
 
 #variable invert (in-place)
+#NOTICE: DEPRECIATED
 class in_invert:
 	def __init__(self):
 		self.keywords=["invert"]
-		self.comment="invert a variable."
+		self.comment="invert a variable. WARNING: DEPRECIATED"
+		print("DEPRECIATION WARNING: 'invert' is depreciated. use 'inv' (with 'set' to store result), instead.")
 	def p0(self, args, keyword, lineno):
 		return 0, None
 	def p1(self, args, keyword, lineno):
@@ -1649,6 +1651,7 @@ class mainloop:
 		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
 		in_intcommon1b(["vdimode"], "dataread1;>", "\niowrite1;>vdi.cli.status\n", "vdi mode set"),
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
+		in_intcommon1b(["inv"], "dataread1;>", "\ninvert1\n", "Get signwise/tritwise inversion of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
 		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),#set,get
 		in_intcommon1b(["textcolor"], "dataread1;>", "\niowrite1;>io.textcolor\n", "Set text colors"),

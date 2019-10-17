@@ -109,7 +109,8 @@ Command documentation:
 		set2 quotient
 
 --Logic and tritwise:
-	invert [varname] : invert the sign of variable [varname], in-place.
+	invert [varname] : invert the sign of variable [varname], in-place. [DEPRECIATED]
+	inv [varname]    : invert the sign of an integer variable or literal. use set to store the result.
 	abs [varname]    : get the absolute value of an integer variable or literal. use set to store result.
 	nabs [varname]   : get the INVERTED absolute value of an integer variable or literal. use set to store result.
 

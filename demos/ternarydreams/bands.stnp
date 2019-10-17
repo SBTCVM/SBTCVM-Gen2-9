@@ -47,9 +47,11 @@ gsub debug1
 	
 drawcolor fxcolor
 	drawy1 y1
-	invert y1
+	inv y1
+	set y1
 	drawy2 y1
-	invert y1
+	inv y1
+	set y1
 	drawline
 
 add y1,dir
@@ -67,7 +69,8 @@ ifnotrange @-221,@221,y1 gsub changedir
 return
 
 label changedir
-	invert dir
+	inv dir
+	set dir
 	rrange @-9841,@9841
 	set fxcolor
 return

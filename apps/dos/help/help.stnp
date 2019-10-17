@@ -1,28 +1,29 @@
 var kb=0
-textcolor *+00---
-newline
-prline ---LOADING SBTCVM HELP BROWSER---
-newline
-textcolor *+++--0
-prline SBTCVM HELP - INDEX
-textcolor *+++---
-prline q: return to DOS
-prline 1: overview
+
+	textcolor *+00---
+	newline
+	prline ---SBTCVM HELP BROWSER---
+	newline
+	textcolor *+++--0
+		prline SBTCVM HELP - INDEX
+	textcolor *+++---
+	prline q: return to DOS
+	prline 1: overview
 
 label loop
-keyprompt
-set kb
-if kb,:1 goto overview
-if kb,:q goto return_dos
-if kb,:Q goto return_dos
+	keyprompt
+	set kb
+		if kb,:1 goto overview
+		if kb,:q goto return_dos
+		if kb,:Q goto return_dos
 goto loop
 
 
 label overview
-vdi rstld -1 help_overview.hlp
+	vdi rstld -1 help_overview.hlp
 stop
 
 
 label return_dos
-vdi rstld -1 command.txe
+	vdi rstld -1 command.txe
 stop
