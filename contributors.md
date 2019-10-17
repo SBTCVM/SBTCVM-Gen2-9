@@ -1,4 +1,4 @@
-#Development Team:        
+# Development Team:        
         
 Lead Developer:        
   Thomas Leathers        
@@ -30,7 +30,7 @@ Testing:
   eekee        
   Thomas Leathers        
         
-##Former teammembers:
-Wyatt Huckaby (former webmaster)
+## Former teammembers:
+Wyatt Huckaby (former webmaster)        
 
-##Below is a list of other contributors that have helped with SBTCVM Gen2-9:        
+## Below is a list of other contributors that have helped with SBTCVM Gen2-9:        
