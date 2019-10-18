@@ -1,4 +1,4 @@
-#Overview of SSTNPL's tables:
+# Overview of SSTNPL's tables:
 
 SSTNPL provides a capable 2-axis data table system.
 
@@ -6,7 +6,7 @@ You can use this system for game level data, algorithms, and other sorts of thin
 
 
 
-#Table COMMANDS
+# Table COMMANDS
 
 note: xpos,ypos both start at 0
 -

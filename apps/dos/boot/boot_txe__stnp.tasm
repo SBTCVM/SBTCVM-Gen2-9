@@ -14,6 +14,8 @@ null;++0---;*++0---
 ioread1;>io.ttycolor#SSTNPL Source Line: '4' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>has_tty_color
+#print newline
+fopwri1;:\n
 #conditional subroutine goto
 dataread1;>has_tty_color
 dataread2;>@1

@@ -1,4 +1,4 @@
-#SSTNPL modules
+# SSTNPL modules
 
 SSTNPL features a statically compiled module system.
 the following is some brief documentation on its usage.
@@ -17,16 +17,6 @@ via xas shell/xas script:
 #### Including modules:
 
 
-modules, besides letting you separate code sections, also
-separates variables ('labels' and 'tables' as well, not just integers.)
-
-like so:
-
-	main
-		include [some module] as bob
-			var sam=@1
-	var sam=@2
-
 the module is specifed via its **basename**. 
 
 **DO NOT** specify EITHER OF THE .tas0 OR .stnpmfs extensions. otherwise 
@@ -41,6 +31,20 @@ DO NOT USE:
 	include comprompt.tas0 as cp
 	include comprompt.stnpmfs as cp
 BOTH OF THOSE WILL CAUSE AN ERROR!
+
+#### module namespaces:
+
+modules, contain unique namespaces for each "as *" label they are imported as.
+
+###### EXAMPLE:
+main contains:
+
+	var sam=@1
+	include bob as bob
+
+bob: contains:
+
+	var sam=@2
 
 notice the two variables called 'sam'.
 

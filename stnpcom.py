@@ -70,7 +70,7 @@ see readme.md for more information and licensing of media.
   ''')
 	elif cmd == None:
 		print("Tip: Try stnpcom.py -h for help.")
-	elif cmd.startswith("-"):
+	elif cmd.startswith("-") and cmd not in ['-m', '--module', '-c', '--compile']:
 		print("Unknown option: '" + cmd + "' try stnpcom.py -h for help.") 
 	else:
 		if cmd in ['-m', '--module']:
@@ -85,4 +85,4 @@ see readme.md for more information and licensing of media.
 				argx=cmd
 			pathx=iofuncts.findtrom(argx, ext=".stnp", exitonfail=1, exitmsg="stnp file was not found. STOP", dirauto=1)
 			stnplib.compwrap(pathx)
-		
+	

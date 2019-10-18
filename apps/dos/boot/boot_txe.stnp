@@ -4,7 +4,7 @@ var has_tty_color=0
 asm ioread1;>io.ttycolor
 set has_tty_color
 
-
+newline
 
 if has_tty_color,@1 gsub bigsplash
 if has_tty_color,@0 gsub bigsplash_curses

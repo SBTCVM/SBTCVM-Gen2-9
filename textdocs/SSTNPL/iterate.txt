@@ -1,10 +1,10 @@
-#SSTNPL iterator commands:
+# SSTNPL iterator commands:
 
 
 
 
 
-#overview:
+# overview:
 
 SSTNPL provides several ways to look subroutines. iterators do so for given ranges.
 
@@ -21,11 +21,11 @@ diter counts from START DOWN TO END, and needs END to be less than START
 
 
 
-#START and END can either be integer variables, or Literals
+# START and END can either be integer variables, or Literals
 
-#SUBROUTINE is the associated label of the subroutine to be looped.
+# SUBROUTINE is the associated label of the subroutine to be looped.
 
-#NAME is a unique variable name (NO VAR STATEMENT REQUIRED)
+# NAME is a unique variable name (NO VAR STATEMENT REQUIRED)
 	NAME is used to provide the subroutine with an easy way of getting the
 	iterator's state.
     DO NOT WRITE TO THIS VARIABLE
@@ -36,8 +36,8 @@ diter counts from START DOWN TO END, and needs END to be less than START
 (handy for working with tables!)
 
 
-u2iter [namex],[namey],[subroutine,[startx],[endx],[starty],[endy]
-d2iter [namex],[namey],[subroutine,[startx],[endx],[starty],[endy]
+u2iter [namex],[namey],[subroutine],[startx],[endx],[starty],[endy]
+d2iter [namex],[namey],[subroutine],[startx],[endx],[starty],[endy]
 
 Don't let the 7 arguments scare you!
 

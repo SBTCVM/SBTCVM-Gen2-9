@@ -345,8 +345,9 @@ class in_invert:
 	def __init__(self):
 		self.keywords=["invert"]
 		self.comment="invert a variable. WARNING: DEPRECIATED"
-		print("DEPRECIATION WARNING: 'invert' is depreciated. use 'inv' (with 'set' to store result), instead.")
+		
 	def p0(self, args, keyword, lineno):
+		print("DEPRECIATION WARNING: 'invert' is depreciated. use 'inv' (with 'set' to store result), instead.")
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []

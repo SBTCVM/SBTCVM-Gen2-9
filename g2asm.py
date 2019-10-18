@@ -61,9 +61,9 @@ see readme.md for more information and licensing of media.
   
   ''')
 	elif cmd==None:
-		print("Tip: Try g2-asm.py -h for help.")
-	elif cmd.startswith("-"):
-		print("Unknown option: '" + cmd + "' try g2-asm.py -h for help.") 
+		print("Tip: Try g2-asm.py -h for help.") 
+	elif cmd.startswith("-") and cmd not in ['-b', '--build', '-s', '--syntax']:
+		print("Unknown option: '" + cmd + "' try g2-asm.py -h for help.")
 	else:
 		if cmd in ['-b', '--build', '-s', '--syntax']:
 			argx=arg
@@ -75,6 +75,6 @@ see readme.md for more information and licensing of media.
 			syntaxonly=0
 		pathx=iofuncts.findtrom(argx, ext=".tasm", exitonfail=1, exitmsg="source file was not found. STOP", dirauto=1)
 		g2asmlib.assemble(pathx, syntaxonly)
-			
+	
 		
 	

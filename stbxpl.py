@@ -65,7 +65,7 @@ see readme.md for more information and licensing of media.
   ''')
 	elif cmd == None:
 		print("Tip: Try stbxpl.py -h for help.")
-	elif cmd.startswith("-"):
+	elif cmd.startswith("-") and cmd not in ['-c', '--compile']:
 		print("Unknown option: '" + cmd + "' try stbxpl.py -h for help.") 
 	else:
 		if cmd in ['-c', '--compile']:

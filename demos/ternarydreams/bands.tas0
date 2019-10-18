@@ -56,16 +56,18 @@ iowrite1;>plot.color
 #plotter y pos 1
 dataread1;>y1
 iowrite1;>plot.y1
-#invert a variable.
+#Get signwise/tritwise inversion of var
 dataread1;>y1
 invert1
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>y1
 #plotter y pos 2
 dataread1;>y1
 iowrite1;>plot.y2
-#invert a variable.
+#Get signwise/tritwise inversion of var
 dataread1;>y1
 invert1
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>y1
 #plotter draw line
 iowrite1;>plot.line
@@ -76,33 +78,34 @@ add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>y1
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-62
+setreg1;>goto--jumper-64
 s1push1
 goto;>colorinc--label
-null;;goto--jumper-62
+null;;goto--jumper-64
 #conditional subroutine goto
 dataread1;>y1
 dataread2;>@-221
-gotoifmore;>goto--halfstep-66
-gotoif;>goto--halfstep-66
-goto;>goto--branch-66
-dataread1;>y1;goto--halfstep-66
+gotoifmore;>goto--halfstep-68
+gotoif;>goto--halfstep-68
+goto;>goto--branch-68
+dataread1;>y1;goto--halfstep-68
 dataread2;>@221
-gotoifless;>goto--jumper-66
-gotoif;>goto--jumper-66
-goto;>goto--branch-66
-setreg1;>goto--jumper-66;goto--branch-66
+gotoifless;>goto--jumper-68
+gotoif;>goto--jumper-68
+goto;>goto--branch-68
+setreg1;>goto--jumper-68;goto--branch-68
 s1push1
 goto;>changedir--label
-null;;goto--jumper-66
+null;;goto--jumper-68
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;changedir--label
-#invert a variable.
+#Get signwise/tritwise inversion of var
 dataread1;>dir
 invert1
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>dir
 #Random ranged number
 dataread1;>@-9841
@@ -128,19 +131,19 @@ gotoreg1
 #label
 null;;debug1--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #86
-ioread1;>plot.buffer#SSTNPL Source Line: '86' 
+#_______NOTE: this corresponds to SSTNPL source line #89
+ioread1;>plot.buffer#SSTNPL Source Line: '89' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>debug_buffsize
 #conditional subroutine goto
 dataread1;>debug_buffsize
 dataread2;>@4
-gotoifmore;>goto--branch-88
-goto;>goto--jumper-88
-setreg1;>goto--jumper-88;goto--branch-88
+gotoifmore;>goto--branch-91
+goto;>goto--jumper-91
+setreg1;>goto--jumper-91;goto--branch-91
 s1push1
 goto;>debug1_print--label
-null;;goto--jumper-88
+null;;goto--jumper-91
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -153,13 +156,13 @@ iowrite1;>io.decdump
 fopwri1;:\n
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-94
-setreg1;0;waitcy-loopback-94
+datawrite1;>waitcy-loopback-97
+setreg1;0;waitcy-loopback-97
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-94
+datawrite1;>waitcy-loopback-97
 setreg2;10x16
-gotoifless;>waitcy-loopback-94
+gotoifless;>waitcy-loopback-97
 
 #return from subroutine.
 s1pop1
