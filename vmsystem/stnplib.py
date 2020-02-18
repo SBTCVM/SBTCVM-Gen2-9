@@ -1654,7 +1654,7 @@ class mainloop:
 		in_intcommon1b(["abs"], "dataread1;>", "\nabs1\n", "Get abs of var"),
 		in_intcommon1b(["inv"], "dataread1;>", "\ninvert1\n", "Get signwise/tritwise inversion of var"),
 		in_intcommon1b(["nabs"], "dataread1;>", "\nnabs1\n", "Get inverted abs of var"),
-		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),#set,get
+		in_intcommon1b(["chardump"], "dataread1;>", "\niowrite1;>io.ttywr\n", "Dump (character)"),
 		in_intcommon1b(["textcolor"], "dataread1;>", "\niowrite1;>io.textcolor\n", "Set text colors"),
 		in_intcommon1b(["packcolor"], "dataread1;>", "\niowrite1;>io.packcolor\n", "Set ternary packed art colors"),
 		in_intcommon1b(["tpack"], "dataread1;>", "\niowrite1;>io.packart\n", "Draw ternary Packed art"),

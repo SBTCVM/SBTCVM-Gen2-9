@@ -258,8 +258,8 @@ def rominfo(arg, dirauto=1):
 			print("path: " + filearg)
 			g2com.standardsizeprint(g2com.gettromsize(fobj))
 			print("--------")
-	fname=iofuncts.findtrom(filearg, dirauto=dirauto, exitonfail=0, ext=".tdsk1")
-	if fname!=None:
+	fname2=iofuncts.findtrom(filearg, dirauto=dirauto, exitonfail=0, ext=".tdsk1")
+	if fname2!=None:
 		if "^" in arg:
 			diskfilename=arg.split("^")[1]
 			dsk=td1.loaddisk(filearg, readonly=1)
@@ -272,7 +272,7 @@ def rominfo(arg, dirauto=1):
 				print("File Size: " + g2com.nonetformatted_smart(len(dsk.files[diskfilename])))
 				print("--------")
 		else:
-			if fname.lower().endswith(".tdsk1"):
+			if fname2.lower().endswith(".tdsk1"):
 				dsk=td1.loaddisk(filearg, readonly=1)
 				print("----FileType: TDSK1: Format 1 SBTVDI disk image.")
 				print("path: " + filearg)
@@ -286,7 +286,8 @@ def rominfo(arg, dirauto=1):
 				print("Disk size (virtual): " + g2com.nonetformatted_smart(disksize))
 				print("--------")
 	else:
-		sys.exit("ERROR: Cant find TDSK1 image.")
+		if fname==None:
+			sys.exit("ERROR: Cant find TDSK1/TROM image.")
 	
 	
 

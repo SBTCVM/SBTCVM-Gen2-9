@@ -15,7 +15,7 @@ virtual implementation. I won't bore you with a history lesson here,
 but do look it up if your interested, its quite interesting.
 
 ### so what does SBTCVM do exactly?
-The 'VM' in SBTCVM referees to SBTCVM's virtual implementation of a balanced
+The 'VM' in SBTCVM refers to SBTCVM's virtual implementation of a balanced
 ternary computer.  Its written in python, so its not the fastest thing in the
 world (6.5KHz CPU), but it does have:
 

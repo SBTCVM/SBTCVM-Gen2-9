@@ -90,7 +90,7 @@ def savedisk(diskobj):
 	if diskobj.ro:
 		raise ValueError("Disk Object is set read only!")
 	if diskobj.rd:
-		raise ValueError("Disk Object is a ramdisk. It contains filename to save to.")
+		raise ValueError("Disk Object is a ramdisk. It contains no filename to save to.")
 	if diskobj.fname==None:
 		raise ValueError("Disk Object has 'None' for the filename. This is ONLY permitted for ramdisks!")
 	#build tdsk1 datastructure

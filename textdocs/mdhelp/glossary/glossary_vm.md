@@ -6,7 +6,7 @@ Terms related to the VM, and the backend that makes it work.
 A Status message indicating an exit, paired with a status code and a short
 description of the exit condition. i.e. divide by zero.
 
-## VMSYSTEM
+## vmsystem
 This is where SBTCVM's backend code, standard library, and system-related TROMs are kept.
 
 ## libbaltcalc

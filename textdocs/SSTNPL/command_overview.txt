@@ -87,6 +87,7 @@ Command documentation:
 		like:
 			peek
 			set [varname]
+	stackrev: Reverse order of items in stack.
 
 
 --Debugging:
@@ -213,3 +214,4 @@ Command documentation:
 --TTY input:
 	getchar [var] : Gets a character from the TTY input buffer and puts it in [var] returns 0/null on empty buffer.
 	keyprompt : Wait in a loop until a keystroke is detected, then continue. use set to store result.
+	clearcharbuff : Clear TTY input buffer.

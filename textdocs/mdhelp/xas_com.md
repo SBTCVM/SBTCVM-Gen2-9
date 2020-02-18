@@ -36,8 +36,10 @@ _Note: This is **NOT** the same as your system's path!_
 
 
 ## VM:
-run/runp| (same as pyg_sbtcvm.py) | run SBTCVM's Pygame VM Frontend
-runc| (same as cur_sbtcvm.py) | run SBTCVM's Curses VM Frontend
+commad | arguments | description
+:----------:|:--------------:|:-----------:|
+run/runp | (same as pyg_sbtcvm.py) | run SBTCVM's Pygame VM Frontend
+runc | (same as cur_sbtcvm.py) | run SBTCVM's Curses VM Frontend
 
 ## Build
 

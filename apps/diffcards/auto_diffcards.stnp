@@ -1,280 +1,311 @@
 ##deck ranges
 #short
-var shortstart=10x1
-var shortend=10x40
-var shortbuff=10x0
+var shortstart=@1
+var shortend=@40
+var shortbuff=@0
 #long
-var longstart=10x21
-var longend=10x60
-var longbuff=10x0
+var longstart=@21
+var longend=@60
+var longbuff=@0
 ##
-var p1card=10x0
-var p2card=10x0
+var p1card=@0
+var p2card=@0
 
-var overshoot=10x29
-var undershoot=10x-29
-
+var overshoot=@29
+var undershoot=@-29
 
 var ssbuff=0
 var chval=0
 
-#menu keys
-var 1player1=:1
-var 1player2=:!
-var 2player1=:2
-var 2player2=:@
-var khelp1=:h
-var khelp2=:H
-var kquit1=:q
-var kquit2=:Q
-var kabout1=:a
-var kabout2=:A
 
-
-#player Controls:
-#player1
-var p1short1=:z
-var p1short2=:Z
-var p1long1=:x
-var p1long2=:X
-
-#player2
-var p2short1=:n
-var p2short2=:N
-var p2long1=:m
-var p2long2=:M
 
 ########### SPLASH #############
-prline DIFFERENCE CARDS
-prline
-prline     ___      ___      _____ ____  __    ___    ___
-prline    /---\  / /---     /---- /---/ /--\  /---\  /
-prline   /    / / /__      /     /___/ /___/ /    / /___
-prline  /    / / /--      /     /---/ /\--- /    /  ---/
-prline /____/ / /   *    /____ /   / /  \  /____/ ____/
-prline _______________________________________________
-prline -----------------------------------------------
+textcolor *--+---
+prline     _      ___  ___  ___  _    ___  _      ___  ___    ___ ___  _    _    ___
+prline    /-\  / /--  /--  /--  /-\  /--  /|   / /--  /--    /-- /--/ /-\  /-\  /--
+textcolor *-0+---
+prline   /  / / /__  /__  /__  /__/ /__  / |  / /    /__    /   /__/ /__/ /  / /__
+textcolor *-++---
+prline  /  / / /--  /--  /--  /\-- /--  /  | / /    /--    /   /--/ /\-- /  /  --/
+textcolor *0++---
+prline /__/ / /    /    /__  /  \ /__  /   |/ /__  /__    /__ /  / /  \ /__/ ___/
+textcolor *+++---
+prline ________________________________________________________________________
+textcolor *++00--
+print ------------------------------------------------------------------------
+textcolor *0++--0
+print v1.1
+textcolor *+++---
+newline
+
 prline a 2-player 'numbered card' game.
+textcolor *+0----
 prline PRESS A KEY.
-print >
+print >?
+textcolor *+++---
 keyprompt
 newline
 
 ########## MENU & DOC SCREENS ############
 label menu
-prline
-prline Main Menu:
-prline [h]: rules.
-prline [a]: about info.
-prline [q]: quit.
-prline [2]: start 2 player game.
-prline >
-
-label menuloop
-getchar chval
-
-##guess entry
-if 2player2,chval goto 2player
-if 2player1,chval goto 2player
-
-if khelp1,chval gsub help
-if khelp2,chval gsub help
-
-if kabout1,chval gsub about
-if kabout2,chval gsub about
-
-if kquit1,chval gsub quit
-if kquit2,chval gsub quit
-
-goto menuloop
+	prline
+	textcolor *++00--
+	print ---------MAIN MENU---------
+	textcolor *+++---
+	newline
+	prline [h]: rules.
+	prline [a]: about info.
+	prline [q]: quit.
+	prline [2]: start 2 player game.
+	textcolor *+0----
+	prline >?
+	textcolor *+++---
+	label menuloop
+		getchar chval
+		
+		##guess entry
+		if :2,chval goto 2player
+		if :@,chval goto 2player
+		
+		if :h,chval goto help
+		if :H,chval goto help
+		
+		if :a,chval goto about
+		if :A,chval goto about
+		
+		if :q,chval goto quit
+		if :Q,chval goto quit
+		
+	
+	goto menuloop
 
 
 label help
-newline
-newline
-newline
-prline --RULES--
-prline Each Player takes a card from either the 'short' or 'long' decks.
-prline 
-prline short is: random from 1 to 40
-prline 
-prline long is: random from 21 to 60
-prline 
-prline differences of 30 and more go to the higher card
-prline otherwise it goes to the lower card. 
-prline be careful what you choose!
-prline 
-prline PRESS A KEY TO RETURN TO MAIN MENU
-print >
-keyprompt
-newline
+	textcolor *++00--
+	print ---------RULES---------
+	textcolor *+++---
+	newline
+	prline Each Player takes a card from either the 'short' or 'long' decks.
+	prline 
+	prline short is: random from 1 to 40
+	prline 
+	prline long is: random from 21 to 60
+	prline 
+	prline differences of 30 and more go to the higher card
+	prline otherwise it goes to the lower card. 
+	prline be careful what you choose!
+	textcolor *+0----
+	prline 
+	prline PRESS A KEY TO RETURN TO MAIN MENU
+	print >
+	keyprompt
+	textcolor *+++---
+	newline
 goto menu
 
 label about
-newline
-newline
-newline
-prline --ABOUT--
-prline Difference Cards v1.0
-prline Part of SBTCVM Gen2-9
-prline 
-prline Copyright (c) 2018 Thomas Leathers & Contributors
-prline 
-prline Difference Cards is free software: you can redistribute it and/or modify
-prline it under the terms of the GNU General Public License as published by
-prline the Free Software Foundation, either version 3 of the License, or
-prline (at your option) any later version.
-prline 
-prline Difference Cards is distributed in the hope that it will be useful,
-prline but WITHOUT ANY WARRANTY; without even the implied warranty of
-prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-prline GNU General Public License for more details.
-prline 
-prline You should have received a copy of the GNU General Public License
-prline along with Difference Cards. If not, see <http://www.gnu.org/licenses/>
-prline 
-prline PRESS A KEY TO RETURN TO MAIN MENU
-print >
-keyprompt
-newline
+	textcolor *++00--
+	print ---------ABOUT---------
+	textcolor *+++---
+	newline
+	prline Difference Cards v1.1
+	prline Part of SBTCVM Gen2-9
+	prline 
+	prline Copyright (c) 2018-2020 Thomas Leathers & Contributors
+	prline 
+	prline Difference Cards is free software: you can redistribute it and/or modify
+	prline it under the terms of the GNU General Public License as published by
+	prline the Free Software Foundation, either version 3 of the License, or
+	prline (at your option) any later version.
+	prline 
+	prline Difference Cards is distributed in the hope that it will be useful,
+	prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+	prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	prline GNU General Public License for more details.
+	prline 
+	prline You should have received a copy of the GNU General Public License
+	prline along with Difference Cards. If not, see <http://www.gnu.org/licenses/>
+	textcolor *+0----
+	prline 
+	prline PRESS A KEY TO RETURN TO MAIN MENU
+	print >
+	keyprompt
+	textcolor *+++---
+	newline
 goto menu
 
 
 label quit
-prline Goodbye!
-stop
+	textcolor *0++---
+	prline Goodbye!
+	stop
 
 
 ########### 2 PLAYER MODE ###########
 
 
 label 2player
-newline
-prline ----------GAME START----------
-prline 2 player mode:
-
-####PLAYER 1####
-
-prline PLAYER 1: [z]=short [x]=long
-print > 
-label P1
-getchar chval
-
-##guess entry
-if p1short1,chval goto p1short
-if p1short2,chval goto p1short
-
-if p1long1,chval goto p1long
-if p1long2,chval goto p1long
-goto P1
+	newline
+	textcolor *++00--
+	
+	print ----------GAME START----------
+	
+	textcolor *+++---
+	newline
+	prline 2 player mode:
+	
+	####PLAYER 1####
+	textcolor *+0----
+	prline PLAYER 1: [z]=short [x]=long
+	print > 
+	textcolor *+++---
+	label P1loop
+	getchar chval
+	
+	##guess entry
+	if :z,chval goto p1short
+	if :Z,chval goto p1short
+	
+	if :x,chval goto p1long
+	if :X,chval goto p1long
+	goto P1loop
 
 
 
 ####PLAYER 2####
-label P2
-prline PLAYER 2: [n]=short [m]=long
-print > 
-label P2loop
-getchar chval
-if p2short1,chval goto p2short
-if p2short2,chval goto p2short
-
-if p2long1,chval goto p2long
-if p2long2,chval goto p2long
-goto P2loop
+	label P2
+	textcolor *+-0---
+	prline PLAYER 2: [n]=short [m]=long
+	print > 
+	textcolor *+++---
+	label P2loop
+	getchar chval
+	if :n,chval goto p2short
+	if :N,chval goto p2short
+	
+	if :m,chval goto p2long
+	if :M,chval goto p2long
+	goto P2loop
 
 ####SCORING CODE####
 
 label score2
-prline ----------SCORE----------
-#get diff
-sub p1card,p2card
-set ssbuff
-#check if overshot.
-ifmore ssbuff,overshoot goto morewin
-ifless ssbuff,undershoot goto morewin
-
-#DIFF UNDER 30
-prline diff under 30. lower wins:
-ifmore p1card,p2card goto p2win
-ifless p1card,p2card goto p1win
-goto tie
-
-
-#OVERSHOT
-label morewin
-prline OVERSHOT! higher wins:
-ifmore p1card,p2card goto p1win
-ifless p1card,p2card goto p2win
-goto tie
+	textcolor *++00--
+	print ----------SCORE----------
+	textcolor *+++---
+	newline
+	#get diff
+	sub p1card,p2card
+	set ssbuff
+	#check if overshot.
+	ifmore ssbuff,overshoot goto morewin
+	ifless ssbuff,undershoot goto morewin
+	
+	#DIFF UNDER 30
+		prline diff under 30. lower wins:
+		ifmore p1card,p2card goto p2win
+		ifless p1card,p2card goto p1win
+		goto tie
+	
+	
+	#OVERSHOT
+	label morewin
+		prline OVERSHOT! higher wins:
+		ifmore p1card,p2card goto p1win
+		ifless p1card,p2card goto p2win
+		goto tie
 
 #PLAYER 1 WIN
-label p1win
-prline player 1 WINS!
-print player 1: 
-dumpd p1card
-newline
-print player 2: 
-dumpd p2card
-newline
-prline ----------GAME OVER----------
-newline
-goto menu
+	label p1win
+	#prline player 1 WINS!
+	print player 1: 
+	dumpd p1card
+	newline
+	print player 2: 
+	dumpd p2card
+	newline
+	textcolor *++00--
+	print ----------GAME OVER----------
+	textcolor *+++---
+	newline
+	textcolor *+0----
+	prline  _      _       _  _                        _
+	prline |_| |  |_| |_| |_ |_| _ /|    | | | | |\ | |_  |
+	prline |   |_ | |  |  |_ |\    _|_   |_|_| | | \|  _| .
+	textcolor *+++---
+	newline
+	goto menu
 
 #PLAYER 2 WIN
-label p2win
-prline player 2 WINS!
-print player 1: 
-dumpd p1card
-newline
-print player 2: 
-dumpd p2card
-newline
-prline ----------GAME OVER----------
-newline
-goto menu
+	label p2win
+	#prline player 2 WINS!
+	print player 1: 
+	dumpd p1card
+	newline
+	print player 2: 
+	dumpd p2card
+	newline
+	textcolor *++00--
+	print ----------GAME OVER----------
+	textcolor *+++---
+	newline
+	textcolor *+-0---
+	prline  _      _       _  _     _                  _
+	prline |_| |  |_| |_| |_ |_| _  _|   | | | | |\ | |_  |
+	prline |   |_ | |  |  |_ |\    |_    |_|_| | | \|  _| .
+	textcolor *+++---
+	newline
+	goto menu
 
 #TIE
-label tie
-prline Its a TIE!
-print player 1: 
-dumpd p1card
-newline
-print player 2: 
-dumpd p2card
-newline
-prline ----------GAME OVER----------
-newline
-goto menu
+	label tie
+	#prline Its a TIE!
+	print player 1: 
+	dumpd p1card
+	newline
+	print player 2: 
+	dumpd p2card
+	newline
+	textcolor *++00--
+	print ----------GAME OVER----------
+	textcolor *+++---
+	newline
+	textcolor *-0+---
+	prline _____    __
+	prline   |   | |__
+	prline   |   | |__
+	textcolor *+++---
+	newline
+	goto menu
 
 
 ### hardcoded return location subroutines.
 
 label p1short
-rrange shortstart,shortend
-set p1card
-prline Player 1 chose short
-goto P2
+	rrange shortstart,shortend
+	set p1card
+	prline Player 1 chose short
+	goto P2
 
 label p1long
-rrange longstart,longend
-set p1card
-prline Player 1 chose long
-goto P2
+	rrange longstart,longend
+	set p1card
+	prline Player 1 chose long
+	goto P2
 
 
 
 label p2short
-rrange shortstart,shortend
-set p2card
-prline Player 2 chose short
-goto score2
+	rrange shortstart,shortend
+	set p2card
+	prline Player 2 chose short
+	goto score2
 
 label p2long
-rrange longstart,longend
-set p2card
-prline Player 2 chose long
-goto score2
+	rrange longstart,longend
+	set p2card
+	prline Player 2 chose long
+	goto score2
 
 
 #######SINGLEPLAYER########

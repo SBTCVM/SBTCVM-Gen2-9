@@ -21,7 +21,14 @@ SBTCVM is Free & Open Source Software, and comes with a ready-to-use
 set of compilers and development tools, Getting started with balanced 
 ternary with SBTCVM, should prove a fun challenge!
 
+## Screenshots:
+
+!['highway' TROM screenshot](/textdocs/screenshots/highway1.png)
+!['clicalc' TROM's memory monitor](/textdocs/screenshots/monitor1.png)
+!['ontrain' TROM: Oncoming Trains game](/textdocs/screenshots/ontrain1.png)
+
 ## Features:
+
 - bundled ternary software. including demos, games and utilities.
 - 4 channel sound chip
 - 6.5Khz, 9-trit CPU
@@ -31,7 +38,8 @@ ternary with SBTCVM, should prove a fun challenge!
 - Suite of development tools and utilities.
 - cross-platform interactive shell and build system. (xas.py)
 
-### Dependencies:
+## Dependencies:
+
 Python __2.7__ OR __3__.
 
 **Sound (all frontends) (powered by FSSynthlib):** pygame
@@ -85,7 +93,7 @@ _Please try and read though existing issues to see if its a known bug._
 SBTCVM gen2-9 ships with **fssynthlib.py**, a general-use waveform synthesis library from
 the FSSS synthesizer suite. You can find its readme in the [textdocs directory.](/textdocs/fssynthlib_README.md)
      
-Copyright (c) 2016-2019 Thomas Leathers and Contributors 
+Copyright (c) 2016-2020 Thomas Leathers and Contributors 
 
 
   SBTCVM Gen2 9-trit is free software: you can redistribute it and/or modify
@@ -112,4 +120,4 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 Image and other media content created by, (unless otherwise noted below) Thomas Leathers.
 
 SBTCVM's Stylized text logo and SBTCVM's 3 eyed, 3 eared mascot were created by Thomas Leathers.
-Copyright (c) 2018 Thomas Leathers and Contributors.
+Copyright (c) 2018-2020 Thomas Leathers and Contributors.

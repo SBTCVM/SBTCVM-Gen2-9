@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.2.0
+#SSTNPL COMPILER v0.3.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -278,7 +278,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:1
 fopwri1;:.
-fopwri1;:1
+fopwri1;:2
 fopwri1;:-
 fopwri1;:-
 fopwri1;:-
@@ -2355,11 +2355,11 @@ datawrite1;>tcnt
 #conditional goto
 dataread1;>tcnt
 dataread2;>tend
-gotoif;>goto--branch-380
-goto;>goto--jumper-380
-setreg1;>goto--jumper-380;goto--branch-380
+gotoif;>goto--branch-383
+goto;>goto--jumper-383
+setreg1;>goto--jumper-383;goto--branch-383
 goto;>trace_end--label
-null;;goto--jumper-380
+null;;goto--jumper-383
 #goto 
 goto;>trace--label
 #label
@@ -2403,7 +2403,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:1
 fopwri1;:.
-fopwri1;:1
+fopwri1;:2
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -2480,6 +2480,11 @@ fopwri1;:2
 fopwri1;:0
 fopwri1;:1
 fopwri1;:8
+fopwri1;:-
+fopwri1;:2
+fopwri1;:0
+fopwri1;:2
+fopwri1;:0
 fopwri1;:\s
 fopwri1;:T
 fopwri1;:h
@@ -3184,8 +3189,8 @@ fopwri1;:>
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-414
-gotoif;>keyprompt--loop-414
+ioread1;>io.ttyrd;keyprompt--loop-418
+gotoif;>keyprompt--loop-418
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -3210,7 +3215,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:1
 fopwri1;:.
-fopwri1;:1
+fopwri1;:2
 fopwri1;::
 fopwri1;:\s
 fopwri1;:A
@@ -3259,7 +3264,7 @@ fopwri1;:-
 fopwri1;:-
 fopwri1;:\n
 #prline
-fopwri1;:e
+fopwri1;:E
 fopwri1;:a
 fopwri1;:c
 fopwri1;:h
@@ -3307,7 +3312,7 @@ fopwri1;:9
 fopwri1;:.
 fopwri1;:\n
 #prline
-fopwri1;:a
+fopwri1;:A
 fopwri1;:\s
 fopwri1;:r
 fopwri1;:a
@@ -3377,7 +3382,7 @@ fopwri1;:s
 fopwri1;:.
 fopwri1;:\n
 #prline
-fopwri1;:i
+fopwri1;:I
 fopwri1;:f
 fopwri1;:\s
 fopwri1;:e
@@ -3414,6 +3419,7 @@ fopwri1;:a
 fopwri1;:w
 fopwri1;:a
 fopwri1;:y
+fopwri1;:,
 fopwri1;:\s
 fopwri1;:t
 fopwri1;:h
@@ -3429,6 +3435,19 @@ fopwri1;:i
 fopwri1;:e
 fopwri1;:s
 fopwri1;:.
+fopwri1;:\n
+#print newline
+fopwri1;:\n
+#prline
+fopwri1;:H
+fopwri1;:a
+fopwri1;:v
+fopwri1;:e
+fopwri1;:\s
+fopwri1;:F
+fopwri1;:u
+fopwri1;:n
+fopwri1;:!
 fopwri1;:\n
 #Set text colors
 dataread1;>*+++---
@@ -3476,8 +3495,8 @@ fopwri1;:>
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-430
-gotoif;>keyprompt--loop-430
+ioread1;>io.ttyrd;keyprompt--loop-436
+gotoif;>keyprompt--loop-436
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -3532,11 +3551,16 @@ fopwri1;:\s
 fopwri1;:\s
 fopwri1;:.
 fopwri1;:\s
+fopwri1;:\s
+fopwri1;:*
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:-
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-439
+setreg1;>goto--jumper-445
 s1push1
 goto;>cleannew--label
-null;;goto--jumper-439
+null;;goto--jumper-445
 #Set text colors
 dataread1;>*+++--0
 iowrite1;>io.textcolor
@@ -3545,106 +3569,6 @@ fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-442
-s1push1
-goto;>cleannew--label
-null;;goto--jumper-442
-#Set text colors
-dataread1;>*+++-0+
-iowrite1;>io.textcolor
-#print
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-fopwri1;:\s
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-445
-s1push1
-goto;>cleannew--label
-null;;goto--jumper-445
-#Set text colors
-dataread1;>*+++0-+
-iowrite1;>io.textcolor
-#print
 fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
@@ -3694,9 +3618,12 @@ s1push1
 goto;>cleannew--label
 null;;goto--jumper-448
 #Set text colors
-dataread1;>*++++-0
+dataread1;>*+++-0+
 iowrite1;>io.textcolor
 #print
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
@@ -3746,6 +3673,113 @@ s1push1
 goto;>cleannew--label
 null;;goto--jumper-451
 #Set text colors
+dataread1;>*+++0-+
+iowrite1;>io.textcolor
+#print
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-454
+s1push1
+goto;>cleannew--label
+null;;goto--jumper-454
+#Set text colors
+dataread1;>*++++-0
+iowrite1;>io.textcolor
+#print
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-457
+s1push1
+goto;>cleannew--label
+null;;goto--jumper-457
+#Set text colors
 dataread1;>*++-+0-
 iowrite1;>io.textcolor
 #print
@@ -3793,10 +3827,10 @@ fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-454
+setreg1;>goto--jumper-460
 s1push1
 goto;>cleannew--label
-null;;goto--jumper-454
+null;;goto--jumper-460
 #return from subroutine.
 s1pop1
 gotoreg1
