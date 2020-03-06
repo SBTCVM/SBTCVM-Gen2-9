@@ -118,7 +118,10 @@ class chipchan_pyg:
 
 try:
 	import pygame
-	import fssynthlib
+	try:
+		from . import fssynthlib
+	except ValueError:
+		import fssynthlib
 	pygame.mixer.init(frequency=mixrate, size=-16, channels=2)
 	fssynthlib.init(mixrate)
 	backend=1

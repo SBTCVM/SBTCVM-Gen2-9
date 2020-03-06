@@ -13,6 +13,11 @@ mixrate=22050
 verlst=[1, 1, 0]
 verstr="v1.1.0"
 
+try:
+	xrange(0, 1)
+except NameError:
+	xrange=range
+
 
 def init(mixerrate):
 	global mixrate
