@@ -12,6 +12,7 @@ nptype_int=2
 nptype_str=3#not used
 nptype_label=4
 nptype_table=5
+nptype_const=6
 
 
 #SSTNPL compiler main routine library.
@@ -30,6 +31,12 @@ tritvalid="+0-pn"
 varvalid="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_1234567890"
 reservednames=[""]
 
+builtin_constants={"true": "10x1", "false": "10x0"}
+constants=dict(builtin_constants)
+localconstants={}
+def set_const(name, value):
+	constants[name]=value
+	localconstants[name]=value
 
 #variable creation statement
 class in_var:
@@ -80,11 +87,59 @@ class in_var:
 
 
 
+class in_const:
+	def __init__(self):
+		self.keywords=["const"]
+	def p_const(self, args, keyword, lineno):
+		argsplit=args.split("=", 1)
+		
+		if len(argsplit)!=2:
+			return 1, "must specify varname=valiue! '" + str(lineno) + "'"
+		data=argsplit[1]
+		name=argsplit[0]
+		for char in name:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in constant name! '" + char + "'"
+		if data.replace("@", "10x").startswith("10x"):
+			try:
+				int(data.replace("@", "10x")[3:])
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
+		#this syntax will make this var equal the encoding data of the specified character.
+		elif data.startswith(":"):
+			if len(data)<2:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify character"
+		else:
+			if len(data.replace("*", ""))>9:
+				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
+			for char in data.replace("*", ""):
+				
+				if char not in tritvalid:
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in ternary data string!"
+		
+		if data.startswith("*"):
+			data=data.replace("*", "")
+		if data.startswith("@"):
+			data=data.replace("@", "10x")
+		return 0, [npvar(name, data, vtype=nptype_const)]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		return
+
+
+
 class in_include:
 	def __init__(self):
 		self.keywords=["include"]
 		self.varspacenames=[]
 	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p_const(self, args, keyword, lineno):
 		
 		#basic check
 		try:
@@ -111,6 +166,7 @@ class in_include:
 		#check manifest file for errors/corrupted data during first error check pass.
 		fname=iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)
 		fileobj=open(fname, "r")
+		varlist=[]
 		for f in fileobj:
 			f=f.replace("\n", "")
 			if ";" in f:
@@ -118,6 +174,9 @@ class in_include:
 					flist=f.split(";")
 					if flist[0]=="int9":
 						npvar(flist[1], flist[2], vtype=nptype_int)
+					if flist[0]=="const":
+						varlist.extend([npvar(varprefix + "." + flist[1], flist[2], vtype=nptype_const, frommodule=1)])
+
 					if flist[0]=="label":
 						npvar(flist[1], None, vtype=nptype_label)
 					if flist[0]=="table":
@@ -128,7 +187,7 @@ class in_include:
 				except IndexError:
 					return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': MALFORMED DATAFIELD IN MANIFEST\n    '" + f + "'"
 		fileobj.close()
-		return 0, None
+		return 0, varlist
 	def p1(self, args, keyword, lineno):
 		basename, foo, varprefix = args.split(" ")
 		varlist=[]
@@ -141,6 +200,8 @@ class in_include:
 				flist=f.split(";")
 				if flist[0]=="int9":
 					varlist.extend([npvar(varprefix + "." + flist[1], flist[2], vtype=nptype_int, frommodule=1)])
+				#if flist[0]=="const":
+				#	varlist.extend([npvar(varprefix + "." + flist[1], flist[2], vtype=nptype_const, frommodule=1)])
 				if flist[0]=="label":
 					varlist.extend([npvar(varprefix + "." + flist[1], None, vtype=nptype_label, frommodule=1)])
 				if flist[0]=="table":
@@ -1512,11 +1573,17 @@ def isaliteral(arg):
 		return 1
 	if arg.startswith("*"):
 		return 1
+	if arg.startswith("$"):
+		return 1
 	return 0
 
 #literal syntax checker. (literal-supporting command classes call this to check
 #syntax of literals.
 def literal_syntax(arg, keyword, lineno):
+	if arg.startswith("$"):
+		if arg[1:] not in constants:
+			print(constants)
+			return 1, keyword+": Line: " + str(lineno) + ": constant: '" + arg + "' not valid builtin/declared constant"
 	if arg.startswith("@"):
 		try:
 			int(arg[1:])
@@ -1541,6 +1608,8 @@ def literal_do(arg):
 		return [npvar(arg, ":" + arg[1:], vtype=nptype_int)]
 	if arg.startswith("*"):
 		return [npvar(arg, arg[1:], vtype=nptype_int)]
+	if arg.startswith("$"):
+		return [npvar(arg, constants[arg[1:]], vtype=nptype_int)]
 		
 
 #header generator.
@@ -1570,6 +1639,10 @@ def compwrap(sourcepath):
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL: MAIN COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
+	print("Pass C: constants syntax check")
+	mainret=mainl.p_const()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
 	print("Pass 0: first syntax check")
 	mainret=mainl.p0()
 	if mainret[0]==1:
@@ -1606,6 +1679,10 @@ def modcomp(sourcepath):
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL: MODULE COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
+	print("Pass C: constants syntax check")
+	mainret=mainl.p_const()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
 	print("Pass 0: first syntax check")
 	mainret=mainl.p0()
 	if mainret[0]==1:
@@ -1632,6 +1709,7 @@ class mainloop:
 		self.nvars=[]
 		self.valid_nvars=[]
 		self.tables={}
+		self.localconstants=[]
 		self.comped_nvars=[]
 		##############################
 		#master instruction list
@@ -1696,6 +1774,7 @@ class mainloop:
 		in_rrange(),
 		in_keyprompt(),
 		in_val(),
+		in_const(),
 		in_marker(),
 		in_invert(),
 		in_print(),
@@ -1740,6 +1819,36 @@ class mainloop:
 					retval, errordesc = inst.p0(data, keyword, lineno)
 					if retval!=0:
 						return 1, errordesc
+		return 0, None
+	#constant syntax prepass (used instead of pass 0 for in_include & in_const)
+	def p_const(self):
+		self.srcobj.seek(0)
+		lineno=0
+		for line in self.srcobj:
+			line=line.lstrip()
+			lineno+=1
+			if line.endswith("\n"):
+				line=line[:-1]
+			if '#' in line:
+				line=line.rsplit("#", 1)[0]
+			try:
+				keyword, data = line.split(" ", 1)
+			except ValueError:
+				keyword = line
+				data=""
+			for inst in self.instructs:
+				if keyword in inst.keywords:
+					try:
+						retval, errordesc = inst.p_const(data, keyword, lineno)
+						if retval!=0:
+							return 1, errordesc
+						else:
+							if errordesc!=None:
+								for f in errordesc:
+									if f.vtype==nptype_const:
+										set_const(f.vname, f.vdata)
+					except AttributeError:
+						pass
 		return 0, None
 	#variable parse & define pass.
 	def p1(self):
@@ -1827,6 +1936,8 @@ class mainloop:
 		for f in self.tables:
 			rvar=self.tables[f]
 			mfsfile.write('table;' + f + ";" + str(rvar.vdata[0]) + ";" + str(rvar.vdata[1]) + "\n")
+		for f in localconstants:
+			mfsfile.write('const;' + f + ";" + localconstants[f] + "\n")
 		mfsfile.close()
 			
 	

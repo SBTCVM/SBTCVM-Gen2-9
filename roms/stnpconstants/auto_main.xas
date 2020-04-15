@@ -1,0 +1,2 @@
+stnp --module stnpconstants+modtest.stnp
+stnp stnpconstants

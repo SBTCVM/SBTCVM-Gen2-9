@@ -8,7 +8,7 @@ Such whitespace will be ignored automatically.
 
 
 
-#### [nvalue] syntax for var and val:####
+#### [nvalue] syntax for var, const, and val:####
 Literal prefixes are also acceptable
 So feel free to use them if its less confusing to you.
 
@@ -16,36 +16,54 @@ for decimal values prepend '10x' or '@' i.e.
 	var somevar=10x-15
 	var somevar=10x54
 	var somevar=@54
+	const someconst=@2
+	
 for characters prepend ':' i.e.
 	var somevar=:x
+	const someconst=:x
 
 for ternary values, no prefix is needed. you may use the '*' prefix though.:
 	var somevar=+-0+0
 	var somevar=pn0p0
 	var somevar=*pn0p0
+	const someconst=*pn0p0
 
 
 Literals:
-
-Certain instructions allow use of Literals:
-
-Decimal
-add @20,@-4
-
-Ternary
-add *+-,*++
-
-Character:
-if :a,:a, goto somthing
-
+	
+	Certain instructions allow use of Literals:
+	
+	Decimal
+		add @20,@-4
+	
+	Ternary
+		add *+-,*++
+	
+	Character:
+		if :a,:a, goto somthing
+	
+	Constants:
+		if somebool,$true goto somthing
+	
+		--Constants Note: non-builtin constants are imported from modules just like ints, labels, & tables, e.g.
+			dumpd $m.myconstant
+			include mymodule as m
+		
+		-- Builtin constants:
+			$true   (1)
+			$false  (0)
 
 A note on literals: literals still use a word of memory,
 	and just ease working with static values in some cases.
+
+Note that constants only use a word of memory if they are actually used as a literal.
 
 
 
 Command documentation:
 
+--Constants
+	const [constname]=[nvalue] : create a constant called [constname], with the value [nvalue].
 
 --Tables:
 	[see tables.txt]

@@ -1,0 +1,11 @@
+#test program for STNP constants system....
+const myconstant=10x243
+dumpd $true
+dumpd $false
+dumpd $myconstant
+dumpd $mt.bob
+dumpd $mt.sam
+keyprompt
+
+stop
+include stnpconstants+modtest as mt
