@@ -22,7 +22,7 @@ label info
 	val @1
 	set pl.pixx
 	set pl.pixy
-	val @62
+	val @72
 	set pl.posy
 	asm setreg1;>IMAGE_credits
 	set pl.offset

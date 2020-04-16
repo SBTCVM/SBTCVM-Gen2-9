@@ -48,7 +48,7 @@ datawrite1;>pl.pixx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.pixy
 #val (used with set to change variable value during runtime.)
-setreg1;10x62
+setreg1;10x72
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
