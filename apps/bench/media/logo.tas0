@@ -1,0 +1,41 @@
+#SBTCVM Gen2-9 GFXCON: run-length encoded tritmap
+#Needs to be decoded manually.
+#image file: apps/bench/media/logo.png
+null;>.DATASIZE
+raw;10x8,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x8,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x1,0-+-+0-+0
+raw;10x0,---0-+0-+
+raw;10x2,+0++0++0+
+raw;10x0,---0-+0-+
+raw;10x1,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x1,0-+-+0-+0
+raw;10x4,+0++0++0+
+raw;10x1,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x1,0-+-+0-+0
+raw;10x4,+0++0++0+
+raw;10x1,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x1,0-+-+0-+0
+raw;10x0,---0-+0-+
+raw;10x2,+0++0++0+
+raw;10x0,---0-+0-+
+raw;10x1,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x8,0-+-+0-+0
+raw;-,0
+###LINE DIV
+raw;10x8,-+0------
+raw;-,0
+###LINE DIV
+null;;.DATASIZE

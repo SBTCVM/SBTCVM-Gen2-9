@@ -25,9 +25,15 @@ clicalc:
 ----GUI/TUI----
 
 sbtgsh:
-	SBTCVM Balanced Ternary Graphical SHell: A mouse-driven Graphical Shell
+	SBTCVM Balanced Ternary Graphical SHell: A mouse-driven TUI Shell
 	Designed for use with the pygame frontend's color TTY and Mouse emulation.
 	[ttycolor],[nocurses],[mouse],[sound]
+
+bench:
+	SBTCVM BENCH: A single-tasking, mouse-driven GUI 'Desktop' running
+	in SBTCVM's Plotter mode. makes heavy use of SBTVDI. can launch into
+	SBTCVM-DOS automatically.
+	[plotter],[nocurses],[mouse]
 
 ----GAMES----
 

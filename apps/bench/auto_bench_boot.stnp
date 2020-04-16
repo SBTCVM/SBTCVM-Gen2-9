@@ -1,0 +1,21 @@
+##########SBTCVM BENCH - Bootup TROM ########## 
+var vdistat=0
+
+
+###STARTUP
+	prline init SBTVDI serial
+		vdimode @1
+	prline Mount disk
+		vdi dmnt0 bench
+	prline reset-load boot.txe
+	vdi rstld 0 boot.txe
+
+vdistat vdistat
+
+prline If you see this, it didn't work!
+
+dumpd vdistat
+newline
+prline press a key
+keyprompt
+stop

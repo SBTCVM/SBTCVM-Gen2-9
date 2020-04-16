@@ -150,7 +150,8 @@ quit   : request to quit
 ''')
 			self.outstr('''dmnt0 [disk image]: Mount SBTVDI disk image to drive index 0
 dmnt1 [disk image]: Mount SBTVDI disk image to drive index 1
-rstld [drive index] [filename] : load and run full-memory prorgams from disk.
+rstld [drive index] [filename] : load and run full-memory programs from disk.
+list [drive index] [pattern] : list files on disk, optionally filter by filename part. e.g. extension.
 ''')
 		elif cmd=="dmnt0" or cmd=="dmnt1":
 			if cmd=="dmnt0":
@@ -193,11 +194,53 @@ rstld [drive index] [filename] : load and run full-memory prorgams from disk.
 				except ValueError:
 					self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
 					self.status=-1
+		elif cmd=="list":
+			if not len(cmdlist_as)>=2:
+				self.outstr("ERROR: specify 'list [diskid] (optional pattern)'!\n")
+				self.status=-2
+			try:
+				if len(cmdlist_as)==2:
+					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+						self.filelist(int(cmdlist_as[1]), None)
+				else:
+					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+						self.filelist(int(cmdlist_as[1]), cmdlist_as[2])
+			except ValueError:
+				self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
+				self.status=-1
+			
+				
 		else:
 			self.outstr("ERROR: '" + cmd + "' is not valid/available in this mode!\n")
 		
 		if self.prm==0:
 			self.outstr('>')
+	def filelist(self, diskid, pattern):
+		for did in self.disks:
+			if diskid==did or diskid==-1:
+				if self.disks[did]==None:
+					if diskid!=-1:
+						self.outstr("ERROR:  drive index '" + str(diskid) + "' Not ready/no disk inserted.\n")
+						self.status=-5
+						return
+				else:
+					for filename in self.disks[did].files:
+						if pattern==None:
+							if diskid==-1:
+								self.outstr(str(did) + "/" + filename + "\n")
+							else:
+								self.outstr(filename + "\n")
+						else:
+							if pattern in filename:
+								if diskid==-1:
+									self.outstr(str(did) + "/" + filename + "\n")
+								else:
+									self.outstr(filename + "\n")
+		if diskid not in self.disks and diskid!=-1:
+			self.outstr("ERROR:  drive index '" + str(diskid) + "' does not exist.\n")
+			self.status=-4
+			return
+
 	def resetload_getfile(self, diskid, filename):
 		for did in self.disks:
 			if diskid==did or diskid==-1:

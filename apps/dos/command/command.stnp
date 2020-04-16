@@ -50,6 +50,10 @@ label main
 		set cmdflg
 		if cmdflg,@1 gsub version
 		if cmdflg,@1 =validflg @1
+	tabstrc cp.buffer,@0,@0,dir
+		set cmdflg
+		if cmdflg,@1 gsub directory_list
+		if cmdflg,@1 =validflg @1
 	tabstrc cp.buffer,@0,@0,shutdown
 		set cmdflg
 		if cmdflg,@1 gsub shutdown
@@ -141,6 +145,42 @@ label driveR
 return
 return
 
+label directory_list
+	if drive,:R gsub directory_list_R
+	if drive,:B gsub directory_list_B
+	if drive,:A gsub directory_list_A
+return
+
+label directory_list_A
+	print Files on Drive A | 
+	uiter run_iter,pattern_print_char,@4,cp.itersize
+	newline
+	vdin list 0 
+	uiter run_iter,run_send_char,@4,cp.itersize
+	vdi 
+	gsub vdi_outloop
+return
+
+label directory_list_B
+	print Files on Drive B | 
+	uiter run_iter,pattern_print_char,@4,cp.itersize
+	newline
+	vdin list 1 
+	uiter run_iter,run_send_char,@4,cp.itersize
+	vdi 
+	gsub vdi_outloop
+return
+
+label directory_list_R
+	print Files on Drive R | 
+	uiter run_iter,pattern_print_char,@4,cp.itersize
+	newline
+	vdin list 2 
+	uiter run_iter,run_send_char,@4,cp.itersize
+	vdi 
+	gsub vdi_outloop
+return
+
 var invalid_charcheck=0
 label invalid
 	textcolor *++0---
@@ -169,10 +209,11 @@ label invalid
 label run_send_char
 	tabr cp.buffer,run_iter,@0
 	asm iowrite1;>vdi.cli.in
-	chdump :3
 return
 
-
+label pattern_print_char
+	tabcd cp.buffer,run_iter,@0
+return
 
 label version
 gsub splash
@@ -217,16 +258,22 @@ return
 	return
 
 
+
+
 ## '?' help command.##
 	label help
 		textcolor *+++--0
-		prline vdi [cmd] : Pass commands directly to SBTVDI Serial Console. see: 'vdi help'
-		prline ?         : This text.
-		prline *:        : select drive (currently only 'A:', 'B:', 'R:') case-insensitive.
-		prline drives    : list drive information
-		prline ver       : Print Version
-		prline about     : About SBTCVM-DOS
-		print shutdown  : Shutdown SBTCVM-DOS
+		prline vdi [cmd]    : Pass commands directly to SBTVDI Serial Console. see: 'vdi help'
+		prline ?            : This text.
+		prline *:           : select drive (currently only 'A:', 'B:', 'R:') case-insensitive.
+		prline drives       : list drive information
+		prline ver          : Print Version
+		prline about        : About SBTCVM-DOS
+		prline dir <string> : list files on CURRENT drive. optionally specify string filename
+		prline                  must contain.
+		prline <exec>       : search all disks for <exec>.txe, reset-load first match.
+		prline *:\<exec>    : run <exec>.txe on drive (*) e.g. A:\boot for boot.txe on A:
+		print shutdown     : Shutdown SBTCVM-DOS
 		textcolor *0+0---
 		newline
 	return

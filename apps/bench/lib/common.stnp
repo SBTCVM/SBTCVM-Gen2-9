@@ -1,0 +1,48 @@
+#SBTCVM DESK common functions
+
+const DESK_MAIN_VERS=:0
+const DESK_SUB_VERS=:1
+const DESK_MIN_VERS=:0
+
+const COLOR_desktop=000000+++
+const COLOR_hud=+++++++++
+const COLOR_hudshadow1=+00+00+00
+
+label ui_base_draw
+	drawfill $COLOR_desktop
+	
+	drawcolor $COLOR_hud
+		drawx1 @-121
+		drawy1 @-121
+		drawwidth @243
+		drawheight @22
+		drawrect
+	drawcolor $COLOR_hudshadow1
+		drawy1 @-99
+		drawheight @3
+		drawrect
+	val @3
+		set pl.pixx
+		set pl.pixy
+		
+		val @-120
+		set pl.posx
+		set pl.posy
+		asm setreg1;>ICON_logo
+		set pl.offset
+		gsub pl.decode
+		
+return
+
+
+label print_version
+chardump :v
+chardump $DESK_MAIN_VERS
+chardump :.
+chardump $DESK_SUB_VERS
+chardump :.
+chardump $DESK_MIN_VERS
+return
+
+include plrle as pl
+asm include;bench+media+logo.tas0;ICON_logo

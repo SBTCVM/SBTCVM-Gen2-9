@@ -1,0 +1,6 @@
+print SBTCVM DISKMAP build script
+xas bench+media+media.xas
+stnp --module bench+lib+common.stnp
+stnp bench
+xas bench+bench+bench.xas
+diskedit --new bench

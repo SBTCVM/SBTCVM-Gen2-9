@@ -1,0 +1,43 @@
+var xbuff=0
+var ybuff=0
+var actflg=@1
+var btnbuff=0
+
+
+label info
+	gsub common.ui_base_draw
+	val @3
+	set pl.pixx
+	set pl.pixy
+	
+	val @-90
+	set pl.posy
+	val @-120
+	set pl.posx
+	
+	asm setreg1;>IMAGE_info
+	set pl.offset
+	gsub pl.decode
+	
+	val @1
+	set pl.pixx
+	set pl.pixy
+	val @62
+	set pl.posy
+	asm setreg1;>IMAGE_credits
+	set pl.offset
+	gsub pl.decode
+	label info_loop
+	
+		asm ioread1;>mouse.button
+		set btnbuff
+		
+	ifnot btnbuff,@1 goto info_loop
+prline Starting desktop.app...
+vdi rstld -1 desktop.app
+prline ERROR! desktop.app not found!
+stop
+include plrle as pl
+include bench+lib+common as common
+asm include;bench+media+credits1.tas0;IMAGE_credits
+asm include;bench+media+image_info.tas0;IMAGE_info

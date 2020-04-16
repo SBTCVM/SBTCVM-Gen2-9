@@ -1,0 +1,97 @@
+
+
+
+#gsub draw_desktop
+
+var xbuff=0
+var ybuff=0
+var actflg=@1
+var btnbuff=0
+
+
+label main
+	
+	if actflg,@1 gsub draw_desktop
+	if actflg,@1 =actflg @0
+	
+	label main_loop
+	
+		asm ioread1;>mouse.button
+		set btnbuff
+	
+	ifnot btnbuff,@1 goto main_loop
+	
+	##### Main screen icon click parser #####
+	
+	asm ioread1;>mouse.lockx
+	set xbuff
+	asm ioread1;>mouse.locky
+	set ybuff
+	ifnotrange @-90,@-63,ybuff goto row1_skip
+	
+		#ifrange @-120,@-93,xbuff =actflg @1
+		ifrange @-120,@-93,xbuff gsub info
+	
+	label row1_skip
+	ifnotrange @-58,@-27,ybuff goto row2_skip
+	
+		#ifrange @-120,@-93,xbuff =actflg @1
+		ifrange @-120,@-93,xbuff gsub dos
+	
+	label row2_skip
+goto main
+
+
+
+
+label info
+prline Starting info.app...
+vdi rstld -1 info.app
+prline ERROR! info.app not found!
+return
+
+label dos
+prline Starting dos.app...
+vdi rstld -1 dos.app
+prline ERROR! dos.app not found!
+return
+
+label draw_desktop
+gamode @30
+
+
+
+gsub common.ui_base_draw
+
+val @3
+set pl.pixx
+set pl.pixy
+
+val @-120
+set pl.posx
+set pl.posy
+
+#vertical spacing: start+(3*9)+5
+
+#info
+val @-90
+set pl.posy
+asm setreg1;>ICON_info
+set pl.offset
+gsub pl.decode
+
+#dos
+val @-58
+set pl.posy
+asm setreg1;>ICON_dos
+set pl.offset
+gsub pl.decode
+return
+
+
+
+
+include bench+lib+common as common
+include plrle as pl
+asm include;bench+media+info.tas0;ICON_info
+asm include;bench+media+dos.tas0;ICON_dos

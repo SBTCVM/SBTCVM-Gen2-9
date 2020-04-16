@@ -1,0 +1,6 @@
+gfxcon -plrle bench+media+logo.png
+gfxcon -plrle bench+media+info.png
+gfxcon -plrle bench+media+dos.png
+
+gfxcon -plrlei bench+media+image_info.png
+gfxcon -plrle bench+media+credits1.png
