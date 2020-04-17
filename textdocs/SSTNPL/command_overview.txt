@@ -71,6 +71,9 @@ Command documentation:
 --Iterators:
 	[see iterate.txt]
 
+--Double-Ended Hardware Buffers:
+	[see hardware_buffers.txt]
+
 --Variables:
 	var [varname]=[nvalue]  : create a integer variable called [varname], with the value [nvalue].
 	
