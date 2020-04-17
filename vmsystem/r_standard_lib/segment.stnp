@@ -1,0 +1,464 @@
+#################################
+#RENDERING PARAMS
+#initial Coordinates
+var posx=0
+var posy=0
+
+#character size
+#THESE ARE DOUBLED
+var height=@8
+var width=@4
+
+#should be more than double height
+var vert_space=@20
+#should be more than double width
+var hori_space=@10
+
+var color_on=@9841
+var color_off=@0
+
+#################################
+
+var color=0
+var current_x=0
+var offset=0
+var boolt=0
+var segx1=0
+var segy1=0
+var segx2=0
+var segy2=0
+var b_tmp=0
+
+label init_pos
+	get posx
+	set current_x
+return
+
+label output
+	brdhead1
+	set b_tmp
+	
+	val 0
+	set offset
+	#A-Z
+	if b_tmp,@0 return
+	if b_tmp,@1 gsub newline
+	if b_tmp,@1 goto output
+	if b_tmp,:\s =offset @1
+	if b_tmp,:A =offset @2
+	if b_tmp,:a =offset @2
+	if b_tmp,:B =offset @3
+	if b_tmp,:b =offset @3
+	if b_tmp,:C =offset @4
+	if b_tmp,:c =offset @4
+	if b_tmp,:D =offset @5
+	if b_tmp,:d =offset @5
+	if b_tmp,:E =offset @6
+	if b_tmp,:e =offset @6
+	if b_tmp,:F =offset @7
+	if b_tmp,:f =offset @7
+	if b_tmp,:G =offset @8
+	if b_tmp,:g =offset @8
+	if b_tmp,:H =offset @9
+	if b_tmp,:h =offset @9
+	if b_tmp,:I =offset @10
+	if b_tmp,:i =offset @10
+	if b_tmp,:J =offset @11
+	if b_tmp,:j =offset @11
+	if b_tmp,:K =offset @12
+	if b_tmp,:k =offset @12
+	if b_tmp,:L =offset @13
+	if b_tmp,:l =offset @13
+	if b_tmp,:M =offset @14
+	if b_tmp,:m =offset @14
+	if b_tmp,:N =offset @15
+	if b_tmp,:n =offset @15
+	if b_tmp,:O =offset @16
+	if b_tmp,:o =offset @16
+	if b_tmp,:P =offset @17
+	if b_tmp,:p =offset @17
+	if b_tmp,:Q =offset @18
+	if b_tmp,:q =offset @18
+	if b_tmp,:R =offset @19
+	if b_tmp,:r =offset @19
+	if b_tmp,:S =offset @20
+	if b_tmp,:s =offset @20
+	if b_tmp,:T =offset @21
+	if b_tmp,:t =offset @21
+	if b_tmp,:U =offset @22
+	if b_tmp,:u =offset @22
+	if b_tmp,:V =offset @23
+	if b_tmp,:v =offset @23
+	if b_tmp,:W =offset @24
+	if b_tmp,:w =offset @24
+	if b_tmp,:X =offset @25
+	if b_tmp,:x =offset @25
+	if b_tmp,:Y =offset @26
+	if b_tmp,:y =offset @26
+	if b_tmp,:Z =offset @27
+	if b_tmp,:z =offset @27
+	#0-9
+	if b_tmp,:0 =offset @28
+	if b_tmp,:1 =offset @29
+	if b_tmp,:2 =offset @30
+	if b_tmp,:3 =offset @31
+	if b_tmp,:4 =offset @32
+	if b_tmp,:5 =offset @33
+	if b_tmp,:6 =offset @34
+	if b_tmp,:7 =offset @35
+	if b_tmp,:8 =offset @36
+	if b_tmp,:9 =offset @37
+	#SYMBOLS
+	if b_tmp,:? =offset @38
+	if b_tmp,:+ =offset @39
+	if b_tmp,:- =offset @40
+	if b_tmp,:_ =offset @41
+	if b_tmp,:< =offset @42
+	if b_tmp,:> =offset @43
+	if b_tmp,:" =offset @44
+	if b_tmp,:' =offset @45
+	if b_tmp,:$ =offset @46
+	if b_tmp,:% =offset @47
+	if b_tmp,:\v =offset @48#vertical bar
+	if b_tmp,:/ =offset @49
+	if b_tmp,:\b =offset @50#backslash
+	if b_tmp,:= =offset @51
+	if b_tmp,:. =offset @52
+	if b_tmp,:\m =offset @53#comma
+	
+	
+	gsub segment_draw
+	add current_x,hori_space
+	set current_x
+goto output
+
+table seg_data,16,54
+#key 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+tdat +;+;+;+;+;+;+;+;+;+;+;+;+;+;+;+#TEST
+tdat 0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0#space
+tdat +;+;+;+;+;+;0;0;0;0;0;+;0;0;0;+#A
+tdat +;+;+;+;0;+;+;+;0;0;+;+;0;0;0;+#B
+tdat +;+;+;+;0;0;+;+;0;0;0;0;0;0;0;0#C
+tdat +;0;0;0;+;+;+;+;0;0;0;+;0;0;0;+#D
+tdat +;+;+;+;0;0;+;+;0;0;0;0;0;0;0;+#E
+tdat +;+;+;+;0;0;0;0;0;0;0;0;0;0;0;+#F
+tdat +;+;+;+;0;+;+;+;0;0;0;+;0;0;0;0#G
+tdat +;+;0;0;+;+;0;0;0;0;0;+;0;0;0;+#H
+tdat 0;0;+;+;0;0;+;+;0;+;0;0;0;+;0;0#I
+tdat 0;0;+;+;0;0;0;0;0;+;0;0;0;0;+;0#J
+tdat +;+;0;0;0;0;0;0;0;0;+;0;+;0;0;+#K
+tdat +;+;0;0;0;0;+;+;0;0;0;0;0;0;0;0#L
+tdat +;+;0;0;+;+;0;0;+;0;+;0;0;0;0;0#M
+tdat +;+;0;0;+;+;0;0;+;0;0;0;+;0;0;0#N
+tdat +;+;+;+;+;+;+;+;0;0;0;0;0;0;0;0#O
+tdat +;+;+;+;+;0;0;0;0;0;0;+;0;0;0;+#P
+tdat +;+;+;+;+;+;+;+;0;0;0;0;+;0;0;0#Q
+tdat +;+;+;+;+;0;0;0;0;0;0;+;+;0;0;+#R
+tdat 0;+;+;+;0;+;+;+;0;0;0;+;0;0;0;+#S
+tdat 0;0;+;+;0;0;0;0;0;+;0;0;0;+;0;0#T
+tdat +;+;0;0;+;+;+;+;0;0;0;0;0;0;0;0#U
+tdat +;+;0;0;0;0;0;0;0;0;+;0;0;0;+;0#V
+tdat +;+;0;0;+;+;0;0;0;0;0;0;+;0;+;0#W
+tdat 0;0;0;0;0;0;0;0;+;0;+;0;+;0;+;0#X
+tdat 0;0;0;0;0;0;0;0;+;0;+;0;0;+;0;0#Y
+tdat 0;0;+;+;0;0;+;+;0;0;+;0;0;0;+;0#Z
+tdat +;+;+;+;+;+;+;+;0;0;+;0;0;0;+;0#0
+tdat 0;0;+;0;0;0;0;0;0;+;0;0;0;+;0;0#1
+tdat 0;0;+;+;+;0;+;+;0;0;0;+;0;0;+;0#2
+tdat 0;0;+;+;+;+;+;+;0;0;0;+;0;0;0;0#3
+tdat 0;+;0;0;+;+;0;0;0;0;0;+;0;0;0;+#4
+tdat 0;0;+;+;0;+;+;+;+;0;0;+;0;0;0;0#5
+tdat +;+;+;+;0;+;+;+;0;0;0;+;0;0;0;+#6
+tdat 0;0;+;+;0;0;0;0;0;0;+;0;0;0;+;0#7
+tdat +;+;+;+;+;+;+;+;0;0;0;+;0;0;0;+#8
+tdat 0;+;+;+;+;+;+;+;0;0;0;+;0;0;0;+#9
+tdat +;0;+;+;+;0;0;0;0;0;0;+;0;0;0;+#?
+tdat 0;0;0;0;0;0;0;0;0;+;0;+;0;+;0;+#+
+tdat 0;0;0;0;0;0;0;0;0;0;0;+;0;0;0;+#-
+tdat 0;0;0;0;0;0;+;+;0;0;0;0;0;0;0;0#_
+tdat 0;0;0;0;0;0;0;0;0;0;+;0;+;0;0;0#<
+tdat 0;0;0;0;0;0;0;0;+;0;0;0;0;0;+;0#>
+tdat 0;0;0;0;+;0;0;0;0;+;0;0;0;0;0;0#"
+tdat 0;0;0;0;+;0;0;0;0;0;0;0;0;0;0;0#'
+tdat 0;+;+;+;0;+;+;+;0;+;0;+;0;+;0;+#$
+tdat 0;+;+;0;0;+;+;0;0;+;+;+;0;+;+;+#%
+tdat 0;0;0;0;0;0;0;0;0;+;0;0;0;+;0;0#|
+tdat 0;0;0;0;0;0;0;0;0;0;+;0;0;0;+;0#/
+tdat 0;0;0;0;0;0;0;0;+;0;0;0;+;0;0;0#\
+tdat 0;0;0;0;0;0;+;+;0;0;0;+;0;0;0;+#=
+tdat 0;0;0;0;0;0;0;0;0;0;0;0;0;+;0;0#.
+tdat 0;0;0;0;0;0;0;0;0;0;0;0;0;0;+;0#,
+
+#key 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+
+
+
+
+label newline
+	get posx
+	set current_x
+	add posy,vert_space
+	set posy
+return
+
+
+label segment_draw
+##0
+	tabr seg_data,@0,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @0
+	set segx1
+	val @1
+	set segy1
+	val @0
+	set segx2
+	val @2
+	set segy2
+	gsub segment_single
+##1
+	tabr seg_data,@1,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @0
+	set segx1
+	val @0
+	set segy1
+	val @0
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##2
+	tabr seg_data,@2,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @0
+	set segx1
+	val @0
+	set segy1
+	val @1
+	set segx2
+	val @0
+	set segy2
+	gsub segment_single
+##3
+	tabr seg_data,@3,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @1
+	set segx1
+	val @0
+	set segy1
+	val @2
+	set segx2
+	val @0
+	set segy2
+	gsub segment_single
+##4
+	tabr seg_data,@4,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @2
+	set segx1
+	val @0
+	set segy1
+	val @2
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##5
+	tabr seg_data,@5,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @2
+	set segx1
+	val @1
+	set segy1
+	val @2
+	set segx2
+	val @2
+	set segy2
+	gsub segment_single
+##6
+	tabr seg_data,@6,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @2
+	set segx1
+	val @2
+	set segy1
+	val @1
+	set segx2
+	val @2
+	set segy2
+	gsub segment_single
+##7
+	tabr seg_data,@7,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @1
+	set segx1
+	val @2
+	set segy1
+	val @0
+	set segx2
+	val @2
+	set segy2
+	gsub segment_single
+##8
+	tabr seg_data,@8,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @0
+	set segx1
+	val @0
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##9
+	tabr seg_data,@9,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @1
+	set segx1
+	val @0
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##10
+	tabr seg_data,@10,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @2
+	set segx1
+	val @0
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##11
+	tabr seg_data,@11,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @2
+	set segx1
+	val @1
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##12
+	tabr seg_data,@12,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @2
+	set segx1
+	val @2
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##13
+	tabr seg_data,@13,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @1
+	set segx1
+	val @2
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##14
+	tabr seg_data,@14,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @0
+	set segx1
+	val @2
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+##15
+	tabr seg_data,@15,offset
+	set boolt
+	if boolt,$true =color color_on
+	if boolt,$false =color color_off
+	val @0
+	set segx1
+	val @1
+	set segy1
+	val @1
+	set segx2
+	val @1
+	set segy2
+	gsub segment_single
+
+
+
+return
+
+label segment_single
+	mul segx1,width
+	set segx1
+	add segx1,current_x
+	set segx1
+	
+	mul segy1,height
+	set segy1
+	add segy1,posy
+	set segy1
+	
+	mul segx2,width
+	set segx2
+	add segx2,current_x
+	set segx2
+	
+	mul segy2,height
+	set segy2
+	add segy2,posy
+	set segy2
+	
+	
+	drawx1 segx1
+	drawx2 segx2
+	drawy1 segy1
+	drawy2 segy2
+	drawcolor color
+	drawline
+return
+

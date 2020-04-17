@@ -141,3 +141,27 @@ x :  m : asm varname  : description
 		draw buffer. (keep at or below 30 for constant drawing.)
 
 
+#bi-directional buffers (read.head & read.tail return 0 when buffer is empty)
+700: [w] buffer.1.write.head : write value to top of buffer
+701: [w] buffer.1.write.tail : write value to bottom of buffer
+702: [r] buffer.1.read.head  : read value off top of buffer
+703: [r] buffer.1.read.tail  : read value off bottom of buffer
+704: [w] buffer.1.reset      : reset buffer
+
+710: [w] buffer.2.write.head : write value to top of buffer
+711: [w] buffer.2.write.tail : write value to bottom of buffer
+712: [r] buffer.2.read.head  : read value off top of buffer
+713: [r] buffer.2.read.tail  : read value off bottom of buffer
+714: [w] buffer.2.reset      : reset buffer
+
+720: [w] buffer.3.write.head : write value to top of buffer
+721: [w] buffer.3.write.tail : write value to bottom of buffer
+722: [r] buffer.3.read.head  : read value off top of buffer
+723: [r] buffer.3.read.tail  : read value off bottom of buffer
+724: [w] buffer.3.reset      : reset buffer
+
+730: [w] buffer.4.write.head : write value to top of buffer
+731: [w] buffer.4.write.tail : write value to bottom of buffer
+732: [r] buffer.4.read.head  : read value off top of buffer
+733: [r] buffer.4.read.tail  : read value off bottom of buffer
+734: [w] buffer.4.reset      : reset buffer

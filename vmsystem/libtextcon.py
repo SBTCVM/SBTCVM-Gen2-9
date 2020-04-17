@@ -48,7 +48,7 @@ chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
 
 
 #normal characters that require escaping.
-asmchar_special={"|": "\\v", ";": "\\c", "\\": "\\b", " ": "\\s", "#": "\\p"}
+asmchar_special={"|": "\\v", ";": "\\c", "\\": "\\b", " ": "\\s", "#": "\\p", ",": "\\m"}
 
 # Special bank #1 (0-??)
 #Special case chars (currently newline, backspace, and NULL. all three have fixed positions in datastructure.)

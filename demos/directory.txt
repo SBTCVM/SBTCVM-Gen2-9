@@ -80,6 +80,13 @@ tritmap:
 	run-length compression scheme.) uses the 'plrle' SSTNPL module,
 	and 'gfxcon -plrle' [nocurses]
 	
+plottertext:
+	Example/test program for the 'segment' SSTNPL Module
+	a 53-symbol vector text renderer. (A-Z, 0-9, plus some symbols.)
+	features automatic newline support for drawing multiline text.
+	a bit slow, but scalable. the module is on the slightly larger side!
+	[nocurses]
+
 burst:
 	A nice 'ray burst' demo based upon a similar demo for SBTCVM Mark 2 (Gen 1)
 	[nocurses]

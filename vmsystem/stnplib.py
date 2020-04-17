@@ -1345,6 +1345,31 @@ class in_print:
 			destobj.write("fopset1;>io.ttywr\n")
 		return
 
+#used by 
+class in_str_out:
+	def __init__(self, keywords, ioaddr, newl=1):
+		self.keywords=keywords
+		self.newl=newl
+		self.io=ioaddr
+	def p0(self, args, keyword, lineno):
+		for char in args:
+			if char not in tcon.normal_char_list:
+				return 1, keyword+": Line: " + str(lineno) + ": invalid character'" + char + "'"
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#" + keyword + "\n")
+		destobj.write("fopset1;" + self.io + "\n")
+		
+		for char in args:
+			destobj.write("fopwri1;:" + tcon.chartoasmchar[char] + "\n")
+		if self.newl:
+			destobj.write("fopwri1;:\\n\n")
+		destobj.write("fopset1;>io.ttywr\n")
+		return
 
 class in_tpad:
 	def __init__(self):
@@ -1699,6 +1724,18 @@ def modcomp(sourcepath):
 	mainl.mfs(mfspath)
 	return
 
+
+def DO_buffer(num):
+	return [in_common0(["brdhead" + num], "ioread1;>buffer." + num + ".read.head\n", "buffer " + num + " head read"),
+	in_common0(["brdtail" + num], "ioread1;>buffer." + num + ".read.tail\n", "buffer " + num + " tail read"),
+	in_common0(["breset" + num], "iowrite1;>buffer." + num + ".reset\n", "buffer " + num + " reset"),
+	in_intcommon1b(["bwrhead" + num], "dataread1;>", "\niowrite1;>buffer." + num + ".write.head\n", "buffer " + num + " head write"),
+	in_intcommon1b(["bwrtail" + num], "dataread1;>", "\niowrite1;>buffer." + num + ".write.tail\n", "buffer " + num + " tail write"),
+	in_str_out(["bprinthead" + num], ">buffer." + num + ".write.head", newl=True),
+	in_str_out(["bprinttail" + num], ">buffer." + num + ".write.tail", newl=True),
+	in_str_out(["bprinthead" + num + "n"], ">buffer." + num + ".write.head", newl=False),
+	in_str_out(["bprinttail" + num + "n"], ">buffer." + num + ".write.tail", newl=False)]
+
 #SSTNPL Compiler Engine class.
 class mainloop:
 	def __init__(self, srcobj, destpath, sourcepath, bpname):
@@ -1798,6 +1835,10 @@ class mainloop:
 		##############################
 		self.bpname=bpname
 		self.labels=[]
+		
+		#run iterative instruction setups:
+		for f in ["1", "2", "3", "4"]:
+			self.instructs.extend(DO_buffer(f))
 	#pre-variables syntax check pass
 	def p0(self):
 		self.srcobj.seek(0)

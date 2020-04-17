@@ -1,0 +1,85 @@
+
+var tempvar=0
+
+bwrhead1 @1
+bwrhead1 @1
+
+bwrtail1 @7
+
+
+brdhead1
+set tempvar
+prline SBTCVM buffertest2: SSTNPL Integration. should be 1
+dumpd tempvar
+newline
+newline
+
+brdtail1
+set tempvar
+prline should be 7
+dumpd tempvar
+newline
+newline
+
+breset1
+########################
+prline buffer print 'Dave' to head, & 'Sam' to tail, read out from head.
+
+bprinthead1n Dave
+bprinttail1n Sam
+
+gsub head_readout
+
+newline
+newline
+########################
+prline Again, only read out from tail.
+
+bprinthead1n Dave
+bprinttail1n Sam
+
+gsub tail_readout
+
+newline
+newline
+########################
+prline read out from head again. only use newline-adding buffer print instructions... 
+
+bprinthead1 Dave
+bprinttail1 Sam
+
+gsub head_readout
+
+newline
+newline
+########################
+prline read out as TAIL again. use newline-adding print instructions, but
+prline print BOTH Sam & dave as TAIL
+
+bprinttail1 Dave
+bprinttail1 Sam
+
+gsub tail_readout
+
+newline
+newline
+
+########################
+
+prline Tests have finished. Press a key to quit.
+keyprompt
+stop
+
+label head_readout
+	brdhead1
+	set tempvar
+	if tempvar,@0 return
+	chardump tempvar
+goto head_readout
+
+label tail_readout
+	brdtail1
+	set tempvar
+	if tempvar,@0 return
+	chardump tempvar
+goto tail_readout

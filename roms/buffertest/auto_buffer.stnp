@@ -1,0 +1,51 @@
+
+
+
+
+var valuebuffer=0
+
+#write.head is done twice as sanity check for read.tail!
+val @1
+asm iowrite1;>buffer.1.write.head
+asm iowrite1;>buffer.1.write.head
+val @7
+asm iowrite1;>buffer.1.write.tail
+
+################ 
+asm ioread1;>buffer.1.read.head
+set valuebuffer
+
+newline
+newline
+
+prline should be 1
+dumpd valuebuffer
+#######
+asm ioread1;>buffer.1.read.tail
+set valuebuffer
+
+newline
+newline
+
+prline should be 7
+dumpd valuebuffer
+
+#################
+val @7
+asm iowrite1;>buffer.1.write.tail
+
+asm iowrite1;>buffer.1.reset
+##########
+asm ioread1;>buffer.1.read.tail
+set valuebuffer
+
+newline
+newline
+
+prline should be 0, not 7, as buffer was told to reset!
+dumpd valuebuffer
+
+newline
+prline press key to exit
+keyprompt
+stop

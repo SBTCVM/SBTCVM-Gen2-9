@@ -7,6 +7,7 @@ stnp --module comprompt.stnp
 stnp --module cprle.stnp
 stnp --module plrle.stnp
 stnp --module musicengine.stnp
+stnp --module segment.stnp
 
 #Standard namespace library
 print;standard namespace library
