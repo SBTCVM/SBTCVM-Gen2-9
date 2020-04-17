@@ -22,13 +22,19 @@ def getmonofont(fontsize):
 	global monofont
 	fontlist = pygame.font.get_fonts()
 	for f in ["mono", "monospace", "monofont"]:
-		if f in fontlist:
-			monofont = pygame.font.SysFont(f, fontsize)
-			return
+		try:
+			if f in fontlist:
+				monofont = pygame.font.SysFont(f, fontsize)
+				return
+		except TypeError:
+			print("PYGAME FRONTEND: NoneType type in fontlist!")
 	for font in fontlist:
-		if "mono" in font:
-			monofont = pygame.font.SysFont(font, fontsize)
-			return
+		try:
+			if "mono" in font:
+				monofont = pygame.font.SysFont(font, fontsize)
+				return
+		except TypeError:
+			print("PYGAME FRONTEND: NoneType type in fontlist!")
 	print("PYGAME FRONTEND: WARNING: Unable to detect monospace font!\nTTY MAY NOT RENDER CORRECTLY.")
 	monofont = pygame.font.SysFont(None, fontsize)
 	return
