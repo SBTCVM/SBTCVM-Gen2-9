@@ -10,6 +10,7 @@ null;:0;$common.DESK_MAIN_VERS
 null;:.;:.
 null;:1;$common.DESK_SUB_VERS
 null;:1;$common.DESK_MIN_VERS
+null;10x-9841;@-9841
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-5
 s1push1
@@ -629,12 +630,8 @@ null;;refresh--label
 setreg1;+++0++0++
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.color_on
-#val (used with set to change variable value during runtime.)
-setreg1;10x-9841
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>seg.color_off
 #plotter fill
-dataread1;>seg.color_off
+dataread1;>@-9841
 iowrite1;>plot.fill
 #buffer 1 reset
 iowrite1;>buffer.1.reset
@@ -645,15 +642,15 @@ datawrite1;>seg.posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-86
+setreg1;>goto--jumper-84
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-86
+null;;goto--jumper-84
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 90: bench+lib+common as common
+#module include: line 88: bench+lib+common as common
 includeas;bench+lib+common,common
-#module include: line 91: segment as seg
+#module include: line 89: segment as seg
 includeas;segment,seg
 #END OF FILE

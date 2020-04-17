@@ -15,10 +15,6 @@ iowrite1;>ga.mode
 setreg1;0++0+++++
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.color_on
-#val (used with set to change variable value during runtime.)
-setreg1;10x-9841
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>seg.color_off
 #plotter fill
 dataread1;>*--+--+--+
 iowrite1;>plot.fill
@@ -29,10 +25,10 @@ datawrite1;>seg.posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-23
+setreg1;>goto--jumper-21
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-23
+null;;goto--jumper-21
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:u
@@ -151,10 +147,10 @@ fopwri1;:.
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-35
+setreg1;>goto--jumper-33
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-35
+null;;goto--jumper-33
 #label
 null;;main--label
 #Get character from TTY input.
@@ -164,19 +160,19 @@ datawrite1;>kb
 dataread1;>kb
 iowrite1;>buffer.1.write.tail
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-42
+setreg1;>goto--jumper-40
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-42
+null;;goto--jumper-40
 #goto 
 goto;>main--label
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-47
-gotoif;>keyprompt--loop-47
+ioread1;>io.ttyrd;keyprompt--loop-45
+gotoif;>keyprompt--loop-45
 #stop (shutdown vm)
 stop
-#module include: line 50: segment as seg
+#module include: line 48: segment as seg
 includeas;segment,seg
 #END OF FILE

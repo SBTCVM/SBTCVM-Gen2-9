@@ -15,11 +15,13 @@ var vert_space=@20
 var hori_space=@10
 
 var color_on=@9841
+
+
+#NO LONGER USED
 var color_off=@0
 
 #################################
 
-var color=0
 var current_x=0
 var offset=0
 var boolt=0
@@ -237,8 +239,7 @@ label segment_draw
 ##0
 	tabr seg_data,@0,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_1
 	val @0
 	set segx1
 	val @1
@@ -248,11 +249,11 @@ label segment_draw
 	val @2
 	set segy2
 	gsub segment_single
+label seg_1
 ##1
 	tabr seg_data,@1,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_2
 	val @0
 	set segx1
 	val @0
@@ -262,11 +263,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_2
 ##2
 	tabr seg_data,@2,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_3
 	val @0
 	set segx1
 	val @0
@@ -276,11 +277,11 @@ label segment_draw
 	val @0
 	set segy2
 	gsub segment_single
+label seg_3
 ##3
 	tabr seg_data,@3,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_4
 	val @1
 	set segx1
 	val @0
@@ -290,11 +291,11 @@ label segment_draw
 	val @0
 	set segy2
 	gsub segment_single
+label seg_4
 ##4
 	tabr seg_data,@4,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_5
 	val @2
 	set segx1
 	val @0
@@ -304,11 +305,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_5
 ##5
 	tabr seg_data,@5,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_6
 	val @2
 	set segx1
 	val @1
@@ -318,11 +319,11 @@ label segment_draw
 	val @2
 	set segy2
 	gsub segment_single
+label seg_6
 ##6
 	tabr seg_data,@6,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_7
 	val @2
 	set segx1
 	val @2
@@ -332,11 +333,11 @@ label segment_draw
 	val @2
 	set segy2
 	gsub segment_single
+label seg_7
 ##7
 	tabr seg_data,@7,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_8
 	val @1
 	set segx1
 	val @2
@@ -346,11 +347,11 @@ label segment_draw
 	val @2
 	set segy2
 	gsub segment_single
+label seg_8
 ##8
 	tabr seg_data,@8,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_9
 	val @0
 	set segx1
 	val @0
@@ -360,11 +361,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_9
 ##9
 	tabr seg_data,@9,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_10
 	val @1
 	set segx1
 	val @0
@@ -374,11 +375,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_10
 ##10
 	tabr seg_data,@10,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_11
 	val @2
 	set segx1
 	val @0
@@ -388,11 +389,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_11
 ##11
 	tabr seg_data,@11,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_12
 	val @2
 	set segx1
 	val @1
@@ -402,11 +403,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_12
 ##12
 	tabr seg_data,@12,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_13
 	val @2
 	set segx1
 	val @2
@@ -416,11 +417,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_13
 ##13
 	tabr seg_data,@13,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_14
 	val @1
 	set segx1
 	val @2
@@ -430,11 +431,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_14
 ##14
 	tabr seg_data,@14,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false goto seg_15
 	val @0
 	set segx1
 	val @2
@@ -444,11 +445,11 @@ label segment_draw
 	val @1
 	set segy2
 	gsub segment_single
+label seg_15
 ##15
 	tabr seg_data,@15,offset
 	set boolt
-	if boolt,$true =color color_on
-	if boolt,$false =color color_off
+	if boolt,$false return
 	val @0
 	set segx1
 	val @1
@@ -489,7 +490,7 @@ label segment_single
 	drawx2 segx2
 	drawy1 segy1
 	drawy2 segy2
-	drawcolor color
+	drawcolor color_on
 	drawline
 return
 

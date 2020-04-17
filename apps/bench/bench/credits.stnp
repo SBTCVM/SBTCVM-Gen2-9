@@ -70,10 +70,8 @@ stop
 label refresh
 val *+++0++0++
 set seg.color_on
-val @-9841
-set seg.color_off
 
-drawfill seg.color_off
+drawfill @-9841
 
 #ensure buffer is empty
 breset1

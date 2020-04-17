@@ -5,8 +5,6 @@ gamode @30
 #set colors
 val *0++0+++++
 set seg.color_on
-val @-9841
-set seg.color_off
 
 #make screen very dark grey
 drawfill *--+--+--+
