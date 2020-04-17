@@ -1,0 +1,92 @@
+### credits.app ###
+
+
+
+gsub refresh
+
+
+
+bprinttail1n SBTCVM BENCH 
+bwrtail1 :v
+bwrtail1 $common.DESK_MAIN_VERS
+bwrtail1 :.
+bwrtail1 $common.DESK_SUB_VERS
+bwrtail1 :.
+bwrtail1 $common.DESK_MIN_VERS
+bprinttail1 
+bprinttail1 ---
+bprinttail1 - Code + Artwork
+bprinttail1 Thomas Leathers
+gsub seg.output
+
+waitcy 30000
+gsub refresh
+
+bprinttail1 'segment' module
+bprinttail1 
+bprinttail1 is displaying this text.
+bprinttail1 
+bprinttail1 - Painstakingly coded by
+bprinttail1 Thomas Leathers
+gsub seg.output
+
+waitcy 30000
+gsub refresh
+
+bprinttail1 'plrle' module
+bprinttail1 ---
+bprinttail1 decodes images in bench.
+bprinttail1 
+bprinttail1 - coded by
+bprinttail1 Thomas Leathers
+gsub seg.output
+
+waitcy 30000
+
+gsub refresh
+
+bprinttail1 End Of Credits
+bprinttail1 ---
+bprinttail1 - Bench was written in
+bprinttail1 SSTNPL
+bprinttail1 - Bench was written for
+bprinttail1 SBTCVM Gen 2-9
+bprinttail1 
+bprinttail1 Thanks For trying
+bprinttail1 SBTCVM BENCH
+bprinttail1 
+bprinttail1            +0-
+gsub seg.output
+
+waitcy 30000
+gsub refresh
+
+prline Starting desktop.app...
+vdi rstld -1 desktop.app
+prline ERROR! desktop.app not found!
+stop
+
+
+label refresh
+val *+++0++0++
+set seg.color_on
+val @-9841
+set seg.color_off
+
+drawfill seg.color_off
+
+#ensure buffer is empty
+breset1
+
+#set position
+val @-119
+set seg.posx
+set seg.posy
+## must call init_pos for first line to be at correct X position! ##
+gsub seg.init_pos
+return
+
+
+include bench+lib+common as common
+include segment as seg
+

@@ -4,3 +4,4 @@ gfxcon -plrle bench+media+dos.png
 
 gfxcon -plrlei bench+media+image_info.png
 gfxcon -plrle bench+media+credits1.png
+gfxcon -plrle bench+media+credits_icn.png

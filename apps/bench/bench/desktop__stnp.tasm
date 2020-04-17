@@ -16,7 +16,8 @@ null;10x-63;@-63
 null;10x-120;@-120
 null;10x-93;@-93
 null;10x-58;@-58
-null;10x-27;@-27
+null;10x-32;@-32
+null;10x-26;@-26
 null;10x30;@30
 #label
 null;;main--label
@@ -100,7 +101,7 @@ gotoifmore;>goto--halfstep-36
 gotoif;>goto--halfstep-36
 goto;>goto--branch-36
 dataread1;>ybuff;goto--halfstep-36
-dataread2;>@-27
+dataread2;>@-32
 gotoifless;>goto--jumper-36
 gotoif;>goto--jumper-36
 goto;>goto--branch-36
@@ -124,6 +125,37 @@ goto;>dos--label
 null;;goto--jumper-39
 #label
 null;;row2_skip--label
+#conditional goto
+dataread1;>ybuff
+dataread2;>@-26
+gotoifmore;>goto--halfstep-42
+gotoif;>goto--halfstep-42
+goto;>goto--branch-42
+dataread1;>ybuff;goto--halfstep-42
+dataread2;>@1
+gotoifless;>goto--jumper-42
+gotoif;>goto--jumper-42
+goto;>goto--branch-42
+setreg1;>goto--jumper-42;goto--branch-42
+goto;>row3_skip--label
+null;;goto--jumper-42
+#conditional subroutine goto
+dataread1;>xbuff
+dataread2;>@-120
+gotoifmore;>goto--halfstep-45
+gotoif;>goto--halfstep-45
+goto;>goto--jumper-45
+dataread1;>xbuff;goto--halfstep-45
+dataread2;>@-93
+gotoifless;>goto--branch-45
+gotoif;>goto--branch-45
+goto;>goto--jumper-45
+setreg1;>goto--jumper-45;goto--branch-45
+s1push1
+goto;>credits--label
+null;;goto--jumper-45
+#label
+null;;row3_skip--label
 #goto 
 goto;>main--label
 #label
@@ -276,15 +308,100 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
+null;;credits--label
+#prline
+fopwri1;:S
+fopwri1;:t
+fopwri1;:a
+fopwri1;:r
+fopwri1;:t
+fopwri1;:i
+fopwri1;:n
+fopwri1;:g
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:r
+fopwri1;:e
+fopwri1;:d
+fopwri1;:i
+fopwri1;:t
+fopwri1;:s
+fopwri1;:.
+fopwri1;:a
+fopwri1;:p
+fopwri1;:p
+fopwri1;:.
+fopwri1;:.
+fopwri1;:.
+fopwri1;:\n
+#vdi
+fopset1;>vdi.cli.in
+fopwri1;:r
+fopwri1;:s
+fopwri1;:t
+fopwri1;:l
+fopwri1;:d
+fopwri1;:\s
+fopwri1;:-
+fopwri1;:1
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:r
+fopwri1;:e
+fopwri1;:d
+fopwri1;:i
+fopwri1;:t
+fopwri1;:s
+fopwri1;:.
+fopwri1;:a
+fopwri1;:p
+fopwri1;:p
+fopwri1;:\n
+fopset1;>io.ttywr
+#prline
+fopwri1;:E
+fopwri1;:R
+fopwri1;:R
+fopwri1;:O
+fopwri1;:R
+fopwri1;:!
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:r
+fopwri1;:e
+fopwri1;:d
+fopwri1;:i
+fopwri1;:t
+fopwri1;:s
+fopwri1;:.
+fopwri1;:a
+fopwri1;:p
+fopwri1;:p
+fopwri1;:\s
+fopwri1;:n
+fopwri1;:o
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:f
+fopwri1;:o
+fopwri1;:u
+fopwri1;:n
+fopwri1;:d
+fopwri1;:!
+fopwri1;:\n
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
 null;;draw_desktop--label
 #Set SBTGA mode
 dataread1;>@30
 iowrite1;>ga.mode
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-64
+setreg1;>goto--jumper-76
 s1push1
 goto;>common.ui_base_draw--label
-null;;goto--jumper-64
+null;;goto--jumper-76
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -302,40 +419,57 @@ setreg1;10x-90
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #79
-setreg1;>ICON_info#SSTNPL Source Line: '79' 
+#_______NOTE: this corresponds to SSTNPL source line #91
+setreg1;>ICON_info#SSTNPL Source Line: '91' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-81
+setreg1;>goto--jumper-93
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-81
+null;;goto--jumper-93
 #val (used with set to change variable value during runtime.)
 setreg1;10x-58
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #86
-setreg1;>ICON_dos#SSTNPL Source Line: '86' 
+#_______NOTE: this corresponds to SSTNPL source line #98
+setreg1;>ICON_dos#SSTNPL Source Line: '98' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-88
+setreg1;>goto--jumper-100
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-88
+null;;goto--jumper-100
+#val (used with set to change variable value during runtime.)
+setreg1;10x-26
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.posy
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #104
+setreg1;>ICON_credits#SSTNPL Source Line: '104' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-106
+s1push1
+goto;>pl.decode--label
+null;;goto--jumper-106
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 94: bench+lib+common as common
+#module include: line 111: bench+lib+common as common
 includeas;bench+lib+common,common
-#module include: line 95: plrle as pl
+#module include: line 112: plrle as pl
 includeas;plrle,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #96
-include;bench+media+info.tas0;ICON_info#SSTNPL Source Line: '96' 
+#_______NOTE: this corresponds to SSTNPL source line #113
+include;bench+media+info.tas0;ICON_info#SSTNPL Source Line: '113' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #97
-include;bench+media+dos.tas0;ICON_dos#SSTNPL Source Line: '97' 
+#_______NOTE: this corresponds to SSTNPL source line #114
+include;bench+media+dos.tas0;ICON_dos#SSTNPL Source Line: '114' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #115
+include;bench+media+credits_icn.tas0;ICON_credits#SSTNPL Source Line: '115' 
 #END OF FILE

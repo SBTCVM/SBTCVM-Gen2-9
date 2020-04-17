@@ -2,7 +2,7 @@
 
 const DESK_MAIN_VERS=:0
 const DESK_SUB_VERS=:1
-const DESK_MIN_VERS=:0
+const DESK_MIN_VERS=:1
 
 const COLOR_desktop=000000+++
 const COLOR_hud=+++++++++
@@ -43,6 +43,15 @@ chardump $DESK_SUB_VERS
 chardump :.
 chardump $DESK_MIN_VERS
 return
+
+var btnbuff=0
+
+label mouse_wait
+	asm ioread1;>mouse.button
+	set btnbuff
+	ifnot btnbuff,@1 goto mouse_wait
+return
+	
 
 include plrle as pl
 asm include;bench+media+logo.tas0;ICON_logo

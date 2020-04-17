@@ -9,7 +9,6 @@ null;0;xbuff
 null;0;ybuff
 null;10x1;actflg
 null;0;btnbuff
-null;10x1;@1
 #label
 null;;info--label
 #goto (extra code stores away return address.)
@@ -61,21 +60,11 @@ setreg1;>goto--jumper-29
 s1push1
 goto;>pl.decode--label
 null;;goto--jumper-29
-#label
-null;;info_loop--label
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #32
-ioread1;>mouse.button#SSTNPL Source Line: '32' 
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>btnbuff
-#conditional goto
-dataread1;>btnbuff
-dataread2;>@1
-gotoif;>goto--jumper-35
-goto;>goto--branch-35
-setreg1;>goto--jumper-35;goto--branch-35
-goto;>info_loop--label
-null;;goto--jumper-35
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-30
+s1push1
+goto;>common.mouse_wait--label
+null;;goto--jumper-30
 #prline
 fopwri1;:S
 fopwri1;:t
@@ -158,14 +147,14 @@ fopwri1;:!
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 40: plrle as pl
+#module include: line 37: plrle as pl
 includeas;plrle,pl
-#module include: line 41: bench+lib+common as common
+#module include: line 38: bench+lib+common as common
 includeas;bench+lib+common,common
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #42
-include;bench+media+credits1.tas0;IMAGE_credits#SSTNPL Source Line: '42' 
+#_______NOTE: this corresponds to SSTNPL source line #39
+include;bench+media+credits1.tas0;IMAGE_credits#SSTNPL Source Line: '39' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #43
-include;bench+media+image_info.tas0;IMAGE_info#SSTNPL Source Line: '43' 
+#_______NOTE: this corresponds to SSTNPL source line #40
+include;bench+media+image_info.tas0;IMAGE_info#SSTNPL Source Line: '40' 
 #END OF FILE

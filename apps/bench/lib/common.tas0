@@ -17,7 +17,9 @@ null;:v;:v
 null;:0;$DESK_MAIN_VERS
 null;:.;:.
 null;:1;$DESK_SUB_VERS
-null;:0;$DESK_MIN_VERS
+null;:1;$DESK_MIN_VERS
+null;0;btnbuff
+null;10x1;@1
 #label
 null;;ui_base_draw--label
 #plotter fill
@@ -99,9 +101,27 @@ iowrite1;>io.ttywr
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 47: plrle as pl
+#label
+null;;mouse_wait--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #50
+ioread1;>mouse.button#SSTNPL Source Line: '50' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>btnbuff
+#conditional goto
+dataread1;>btnbuff
+dataread2;>@1
+gotoif;>goto--jumper-52
+goto;>goto--branch-52
+setreg1;>goto--jumper-52;goto--branch-52
+goto;>mouse_wait--label
+null;;goto--jumper-52
+#return from subroutine.
+s1pop1
+gotoreg1
+#module include: line 56: plrle as pl
 includeas;plrle,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #48
-include;bench+media+logo.tas0;ICON_logo#SSTNPL Source Line: '48' 
+#_______NOTE: this corresponds to SSTNPL source line #57
+include;bench+media+logo.tas0;ICON_logo#SSTNPL Source Line: '57' 
 #END OF FILE
