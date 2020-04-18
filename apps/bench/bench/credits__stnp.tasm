@@ -10,7 +10,11 @@ null;:0;$common.DESK_MAIN_VERS
 null;:.;:.
 null;:1;$common.DESK_SUB_VERS
 null;:1;$common.DESK_MIN_VERS
-null;10x-9841;@-9841
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-4
+s1push1
+goto;>scene_1--label
+null;;goto--jumper-4
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-5
 s1push1
@@ -118,8 +122,13 @@ gotoifless;>waitcy-loopback-22
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-23
 s1push1
-goto;>refresh--label
+goto;>scene_2--label
 null;;goto--jumper-23
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-24
+s1push1
+goto;>refresh--label
+null;;goto--jumper-24
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:'
@@ -224,25 +233,30 @@ fopwri1;:s
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-31
+setreg1;>goto--jumper-32
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-31
+null;;goto--jumper-32
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-33
-setreg1;0;waitcy-loopback-33
+datawrite1;>waitcy-loopback-34
+setreg1;0;waitcy-loopback-34
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-33
+datawrite1;>waitcy-loopback-34
 setreg2;10x5000
-gotoifless;>waitcy-loopback-33
+gotoifless;>waitcy-loopback-34
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-34
+setreg1;>goto--jumper-35
+s1push1
+goto;>scene_3--label
+null;;goto--jumper-35
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-36
 s1push1
 goto;>refresh--label
-null;;goto--jumper-34
+null;;goto--jumper-36
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:'
@@ -270,29 +284,30 @@ fopwri1;:\n
 fopset1;>io.ttywr
 #bprinttail1
 fopset1;>buffer.1.write.tail
-fopwri1;:d
-fopwri1;:e
-fopwri1;:c
-fopwri1;:o
-fopwri1;:d
-fopwri1;:e
-fopwri1;:s
-fopwri1;:\s
 fopwri1;:i
-fopwri1;:m
-fopwri1;:a
-fopwri1;:g
-fopwri1;:e
 fopwri1;:s
 fopwri1;:\s
+fopwri1;:d
+fopwri1;:r
+fopwri1;:a
+fopwri1;:w
 fopwri1;:i
 fopwri1;:n
+fopwri1;:g
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:h
+fopwri1;:e
 fopwri1;:\s
 fopwri1;:b
-fopwri1;:e
-fopwri1;:n
+fopwri1;:a
 fopwri1;:c
-fopwri1;:h
+fopwri1;:k
+fopwri1;:r
+fopwri1;:o
+fopwri1;:u
+fopwri1;:n
+fopwri1;:d
 fopwri1;:.
 fopwri1;:\n
 fopset1;>io.ttywr
@@ -334,25 +349,30 @@ fopwri1;:s
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-42
+setreg1;>goto--jumper-44
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-42
+null;;goto--jumper-44
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-44
-setreg1;0;waitcy-loopback-44
+datawrite1;>waitcy-loopback-46
+setreg1;0;waitcy-loopback-46
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-44
+datawrite1;>waitcy-loopback-46
 setreg2;10x5000
-gotoifless;>waitcy-loopback-44
+gotoifless;>waitcy-loopback-46
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-46
+setreg1;>goto--jumper-47
+s1push1
+goto;>scene_4--label
+null;;goto--jumper-47
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-48
 s1push1
 goto;>refresh--label
-null;;goto--jumper-46
+null;;goto--jumper-48
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:E
@@ -523,25 +543,20 @@ fopwri1;:-
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-59
+setreg1;>goto--jumper-61
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-59
+null;;goto--jumper-61
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-61
-setreg1;0;waitcy-loopback-61
+datawrite1;>waitcy-loopback-63
+setreg1;0;waitcy-loopback-63
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-61
+datawrite1;>waitcy-loopback-63
 setreg2;10x5000
-gotoifless;>waitcy-loopback-61
+gotoifless;>waitcy-loopback-63
 
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-62
-s1push1
-goto;>refresh--label
-null;;goto--jumper-62
 #prline
 fopwri1;:S
 fopwri1;:t
@@ -627,12 +642,26 @@ stop
 #label
 null;;refresh--label
 #val (used with set to change variable value during runtime.)
-setreg1;+++0++0++
+setreg1;+++++++++
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.color_on
-#plotter fill
-dataread1;>@-9841
-iowrite1;>plot.fill
+#val (used with set to change variable value during runtime.)
+setreg1;10x27
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.pixx
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.pixy
+#val (used with set to change variable value during runtime.)
+setreg1;10x-121
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.posy
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.posx
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-85
+s1push1
+goto;>pl.decode--label
+null;;goto--jumper-85
 #buffer 1 reset
 iowrite1;>buffer.1.reset
 #val (used with set to change variable value during runtime.)
@@ -642,15 +671,69 @@ datawrite1;>seg.posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-84
+setreg1;>goto--jumper-95
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-84
+null;;goto--jumper-95
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 88: bench+lib+common as common
+#label
+null;;scene_1--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #100
+setreg1;>IMG_BG_1#SSTNPL Source Line: '100' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;scene_2--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #105
+setreg1;>IMG_BG_2#SSTNPL Source Line: '105' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;scene_3--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #110
+setreg1;>IMG_BG_3#SSTNPL Source Line: '110' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;scene_4--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #115
+setreg1;>IMG_BG_4#SSTNPL Source Line: '115' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#return from subroutine.
+s1pop1
+gotoreg1
+#module include: line 118: bench+lib+common as common
 includeas;bench+lib+common,common
-#module include: line 89: segment as seg
+#module include: line 119: segment as seg
 includeas;segment,seg
+#module include: line 120: plrle as pl
+includeas;plrle,pl
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #121
+include;bench+media+credits_bg.tas0;IMG_BG_1#SSTNPL Source Line: '121' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #122
+include;bench+media+credits_bg_2.tas0;IMG_BG_2#SSTNPL Source Line: '122' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #123
+include;bench+media+credits_bg_3.tas0;IMG_BG_3#SSTNPL Source Line: '123' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #124
+include;bench+media+credits_bg_4.tas0;IMG_BG_4#SSTNPL Source Line: '124' 
 #END OF FILE
