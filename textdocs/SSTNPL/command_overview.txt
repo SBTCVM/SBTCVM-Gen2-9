@@ -154,14 +154,14 @@ Command documentation:
 	
 	--2-argument conditions:
 		if         : true if [var1]=[var2]
-		if not     : true if [var1]!=[var2] (var1 not equal to var2)
+		ifnot     : true if [var1]!=[var2] (var1 not equal to var2)
 		ifmore     : true if [var1]>[var2]
 		ifless     : true if [var1]<[var2]
 		ifnotmore  : true if [var1]<=[var2]
 		ifnotless  : true if [var1]>=[var2]
 	--3-argument conditions:
 		ifrange    : true if [var1]<=[var3]<=[var2]
-		ifnotrange : true if [var1]<=[var3]<=[var2]
+		ifnotrange : false if [var1]<=[var3]<=[var2]
 	
 	--modes:
 		goto : ordinary goto.
