@@ -76,7 +76,7 @@ class uio:
 		
 		
 		#load and set window icon.
-		self.picon=pygame.image.load(os.path.join(*["vmsystem", "GFX", "icon32.png"]))
+		self.picon=pygame.image.load(os.path.join(*["vmsystem", "GFX", "icon64.png"]))
 		pygame.display.set_icon(self.picon)
 		
 		#Init screen for TTY output. basing size on font properties.
@@ -354,6 +354,7 @@ class uio:
 			
 	def powoff(self):
 		#write last of TTY log and close.
+		self.ttylog.close()
 		self.run=0
 		while self.running:
 			time.sleep(0.1)
