@@ -1,0 +1,33 @@
+prline PLRLE-Encoded Tritmap with PLRLE's basic transparency support.
+prline press a key to begin.
+keyprompt
+
+
+gamode @30
+
+#color-key to be treated as TRANSPARENT (note: needs to be exact!)
+val @-9841
+set pl.transkey
+
+#enable PLRLE color-key transparancy (OFF BY DEFAULT!)
+val @1
+set pl.do_trans
+
+### PLEASE NOTE: due to inaccuracies in SBTGA's Plotter mode, and 
+#     PLRLE's compensation for this, edges along transparent regions of an image
+#     WILL be slightly more jagged, as the 'errors' are not drawn over due to
+#     the nature of transparency.
+
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+keyprompt
+
+stop
+
+
+include plrle as pl
+asm include;tritmap2+image.tas0;image_offset1

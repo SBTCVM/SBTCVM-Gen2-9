@@ -3,6 +3,8 @@ int9;pixx;10x1
 int9;pixy;10x1
 int9;posx;10x-121
 int9;posy;10x-121
+int9;do_trans;10x0
+int9;transkey;10x0
 int9;RL_pointer;0
 int9;RL_SIZE;0
 int9;RL_loopcount;0
@@ -21,8 +23,11 @@ int9;RL_BARWIDE;0
 int9;RL_BARWIDEDRAW;0
 int9;RL_loopcount_add1;0
 int9;@1;10x1
+int9;@0;10x0
 int9;@1;10x1
 label;decode
 label;RL_decode_mainloop
 label;RL_newline
 label;RL_printBAR
+label;no_trans
+label;yes_trans

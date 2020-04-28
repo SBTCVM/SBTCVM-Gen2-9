@@ -8,6 +8,9 @@ var pixy=@1
 var posx=@-121
 var posy=@-121
 
+var do_trans=@0
+var transkey=@0
+
 ############# SBTCVM GFXCON PLRLE COMPRESSION DECODER #############
 #Code By: Thomas Leathers
 #
@@ -62,58 +65,65 @@ return
 
 ####get new datavalue####
 label RL_decode_mainloop
-
-# get new datavalue
-
-get rl_iter
-asm datawrite1;>RL_GET_DATA
-asm dataread1;;RL_GET_DATA
-set RL_data
-
-#get length of new datavalue
-
-get rl_iter
-asm datawrite1;>RL_GET_LEN
-asm instread1;;RL_GET_LEN
-set RL_loopcount
-
-#newline code
-if RL_loopcount,@-1 goto RL_newline
-
-#loop
-drawcolor RL_data
-#uiter RL_ilvar,RL_printlooop,@0,RL_loopcount
-gsub RL_printBAR
-return
-
-label RL_newline
-add py,pixy
-set py
-drawy1 py
-get posx
-set px
-drawx1 px
-return
-
-var RL_BARWIDE=0
-var RL_BARWIDEDRAW=0
-var RL_loopcount_add1=0
-label RL_printBAR
-
-add RL_loopcount,@1
-set RL_loopcount_add1
-mul RL_loopcount_add1,pixx
-set RL_BARWIDE
-
-#add RL_BARWIDE,@1
-#set RL_BARWIDE
-add RL_BARWIDE,@1
-set RL_BARWIDEDRAW
-drawwidth RL_BARWIDEDRAW
-drawrect
-add RL_BARWIDE,px
-set px
-drawx1 px
+	
+	# get new datavalue
+	
+	get rl_iter
+	asm datawrite1;>RL_GET_DATA
+	asm dataread1;;RL_GET_DATA
+	set RL_data
+	
+	#get length of new datavalue
+	
+	get rl_iter
+	asm datawrite1;>RL_GET_LEN
+	asm instread1;;RL_GET_LEN
+	set RL_loopcount
+	
+	#newline code
+	if RL_loopcount,@-1 goto RL_newline
+	
+	#loop
+	drawcolor RL_data
+	#uiter RL_ilvar,RL_printlooop,@0,RL_loopcount
+	gsub RL_printBAR
+	return
+	
+	label RL_newline
+	add py,pixy
+	set py
+	drawy1 py
+	get posx
+	set px
+	drawx1 px
+	return
+	
+	var RL_BARWIDE=0
+	var RL_BARWIDEDRAW=0
+	var RL_loopcount_add1=0
+	label RL_printBAR
+	
+	add RL_loopcount,@1
+	set RL_loopcount_add1
+	mul RL_loopcount_add1,pixx
+	set RL_BARWIDE
+	
+	#add RL_BARWIDE,@1
+	#set RL_BARWIDE
+	
+	#transparency code
+		if do_trans,@0 goto no_trans
+		if RL_data,transkey goto yes_trans
+	
+	label no_trans
+		add RL_BARWIDE,@1
+		set RL_BARWIDEDRAW
+		drawwidth RL_BARWIDEDRAW
+		drawrect
+	label yes_trans
+	add RL_BARWIDE,px
+	set px
+	drawx1 px
 return
 
 ################END OF CPRLE DECODER ROUTINES#########

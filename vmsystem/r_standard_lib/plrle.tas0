@@ -10,6 +10,8 @@ null;10x1;pixx
 null;10x1;pixy
 null;10x-121;posx
 null;10x-121;posy
+null;10x0;do_trans
+null;10x0;transkey
 null;0;RL_pointer
 null;0;RL_SIZE
 null;0;RL_loopcount
@@ -24,6 +26,7 @@ null;10x-1;@-1
 null;0;RL_BARWIDE
 null;0;RL_BARWIDEDRAW
 null;0;RL_loopcount_add1
+null;10x0;@0
 #label
 null;;decode--label
 #get(1) (may be used with set, or asm code)
@@ -68,11 +71,11 @@ datawrite1;>RL_pointer
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #48
-datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '48' 
+#_______NOTE: this corresponds to SSTNPL source line #51
+datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '51' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #49
-dataread1;;RL_GET_SIZE#SSTNPL Source Line: '49' 
+#_______NOTE: this corresponds to SSTNPL source line #52
+dataread1;;RL_GET_SIZE#SSTNPL Source Line: '52' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_SIZE
 #subtract (2op math)
@@ -90,16 +93,16 @@ datawrite1;>RL_pointer
 #Upward range iterator
 dataread1;>RL_pointer
 datawrite1;>rl_iter
-setreg1;>uiter-retpos-58;uiter-loopback-58
+setreg1;>uiter-retpos-61;uiter-loopback-61
 s1push1
 goto;>RL_decode_mainloop--label
-dataread1;>rl_iter;uiter-retpos-58
+dataread1;>rl_iter;uiter-retpos-61
 setreg2;10x1
 add
 datawrite1;>rl_iter
 dataread2;>RL_SIZE
-gotoifless;>uiter-loopback-58
-gotoif;>uiter-loopback-58
+gotoifless;>uiter-loopback-61
+gotoif;>uiter-loopback-61
 
 #return from subroutine.
 s1pop1
@@ -109,39 +112,39 @@ null;;RL_decode_mainloop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #69
-datawrite1;>RL_GET_DATA#SSTNPL Source Line: '69' 
+#_______NOTE: this corresponds to SSTNPL source line #72
+datawrite1;>RL_GET_DATA#SSTNPL Source Line: '72' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #70
-dataread1;;RL_GET_DATA#SSTNPL Source Line: '70' 
+#_______NOTE: this corresponds to SSTNPL source line #73
+dataread1;;RL_GET_DATA#SSTNPL Source Line: '73' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_data
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #76
-datawrite1;>RL_GET_LEN#SSTNPL Source Line: '76' 
+#_______NOTE: this corresponds to SSTNPL source line #79
+datawrite1;>RL_GET_LEN#SSTNPL Source Line: '79' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #77
-instread1;;RL_GET_LEN#SSTNPL Source Line: '77' 
+#_______NOTE: this corresponds to SSTNPL source line #80
+instread1;;RL_GET_LEN#SSTNPL Source Line: '80' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_loopcount
 #conditional goto
 dataread1;>RL_loopcount
 dataread2;>@-1
-gotoif;>goto--branch-81
-goto;>goto--jumper-81
-setreg1;>goto--jumper-81;goto--branch-81
+gotoif;>goto--branch-84
+goto;>goto--jumper-84
+setreg1;>goto--jumper-84;goto--branch-84
 goto;>RL_newline--label
-null;;goto--jumper-81
+null;;goto--jumper-84
 #plotter draw line
 dataread1;>RL_data
 iowrite1;>plot.color
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-86
+setreg1;>goto--jumper-89
 s1push1
 goto;>RL_printBAR--label
-null;;goto--jumper-86
+null;;goto--jumper-89
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -180,6 +183,24 @@ dataread2;>pixx
 mul
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_BARWIDE
+#conditional goto
+dataread1;>do_trans
+dataread2;>@0
+gotoif;>goto--branch-115
+goto;>goto--jumper-115
+setreg1;>goto--jumper-115;goto--branch-115
+goto;>no_trans--label
+null;;goto--jumper-115
+#conditional goto
+dataread1;>RL_data
+dataread2;>transkey
+gotoif;>goto--branch-116
+goto;>goto--jumper-116
+setreg1;>goto--jumper-116;goto--branch-116
+goto;>yes_trans--label
+null;;goto--jumper-116
+#label
+null;;no_trans--label
 #add (2op math)
 dataread1;>RL_BARWIDE
 dataread2;>@1
@@ -191,6 +212,8 @@ dataread1;>RL_BARWIDEDRAW
 iowrite1;>plot.width
 #plotter draw rect
 iowrite1;>plot.rect
+#label
+null;;yes_trans--label
 #add (2op math)
 dataread1;>RL_BARWIDE
 dataread2;>px
