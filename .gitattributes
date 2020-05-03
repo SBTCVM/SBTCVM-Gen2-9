@@ -1,3 +1,5 @@
-*.trom linguist-generated=true
-*.tdsk1 linguist-generated=true
-*__stnp.tasm linguist-generated=true
+*.trom linguist-generated
+*.tdsk1 linguist-generated
+*__stnp.tasm linguist-generated
+*.stnpmfs linguist-generated
+*.nsp linguist-generated
