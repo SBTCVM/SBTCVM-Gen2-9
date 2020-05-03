@@ -2507,13 +2507,13 @@ fopwri1;:'
 fopwri1;:A
 fopwri1;::
 fopwri1;:'
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:'
 fopwri1;:B
 fopwri1;::
 fopwri1;:'
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:'
 fopwri1;:R
@@ -2800,7 +2800,7 @@ fopwri1;:.
 fopwri1;:t
 fopwri1;:x
 fopwri1;:e
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:r
 fopwri1;:e
@@ -3259,7 +3259,7 @@ fopwri1;:t
 fopwri1;:i
 fopwri1;:o
 fopwri1;:n
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:e
 fopwri1;:i
@@ -3292,7 +3292,7 @@ fopwri1;:e
 fopwri1;:n
 fopwri1;:s
 fopwri1;:e
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:o
 fopwri1;:r
@@ -3397,7 +3397,7 @@ fopwri1;:e
 fopwri1;:f
 fopwri1;:u
 fopwri1;:l
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\n
 #prline
 fopwri1;:b
@@ -3670,7 +3670,7 @@ fopwri1;:\s
 fopwri1;:n
 fopwri1;:o
 fopwri1;:t
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:s
 fopwri1;:e

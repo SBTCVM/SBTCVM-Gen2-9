@@ -1664,6 +1664,11 @@ def compwrap(sourcepath):
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL: MAIN COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
+	
+	print("Pass V: Parser Validation")
+	mainret=mainl.p_parsevalid()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
 	print("Pass C: constants syntax check")
 	mainret=mainl.p_const()
 	if mainret[0]==1:
@@ -1704,6 +1709,11 @@ def modcomp(sourcepath):
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL: MODULE COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
+	print("Pass V: Parser Validation")
+	mainret=mainl.p_parsevalid()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
+	
 	print("Pass C: constants syntax check")
 	mainret=mainl.p_const()
 	if mainret[0]==1:
@@ -1839,6 +1849,34 @@ class mainloop:
 		#run iterative instruction setups:
 		for f in ["1", "2", "3", "4"]:
 			self.instructs.extend(DO_buffer(f))
+			
+		self.valid_instructs=[]
+		for inst in self.instructs:
+			self.valid_instructs.extend(inst.keywords)
+	#parser validation pass
+	def p_parsevalid(self):
+		self.srcobj.seek(0)
+		lineno=0
+		for line in self.srcobj:
+			line=line.lstrip()
+			lineno+=1
+			if line.endswith("\n"):
+				line=line[:-1]
+			if '#' in line:
+				line=line.rsplit("#", 1)[0]
+			try:
+				keyword, data = line.split(" ", 1)
+			except ValueError:
+				keyword = line
+				data=""
+			if keyword not in self.valid_instructs:
+				if keyword=="":
+					pass
+				elif keyword.startswith("#"):
+					pass
+				else:
+					return 1, "Parser Error! (line " + str(lineno) + ") : '" + keyword + "' is not a valid SSTNPL keyword!"
+		return 0, None
 	#pre-variables syntax check pass
 	def p0(self):
 		self.srcobj.seek(0)
@@ -1861,6 +1899,7 @@ class mainloop:
 					if retval!=0:
 						return 1, errordesc
 		return 0, None
+	
 	#constant syntax prepass (used instead of pass 0 for in_include & in_const)
 	def p_const(self):
 		self.srcobj.seek(0)
