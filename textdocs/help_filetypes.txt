@@ -5,19 +5,24 @@ Help on SBTCVM-specific filetypes and certain special files:
  >>> source code & related: <<<
 *.tasm: normal SBTCVM assembly source code file.
 *.stnp: SBTCVM Simplified Ternary Numeric Programming Language (SSTNPL) source code.
+*.stnpmfs: SSTNPL module variable manifest file: When paired with a
+     tas0 file, it makes up the resultant code of a compiled SSTNPL module
+     (via the SSTNPL compiler's --module option.)
 *.trom: SBTCVM VM memory image. (a common way of loading programs into the VM)
 *.tas0: SBTCVM assembly library file. assembled automatically when imported.
+     Also used as part of the basis of SSTNPL's module system.
 *.nsp : SBTCVM assembly namespace library. Used for sharing 
      tasm-sourcefile-specific namespaces with other tasm source files.
      must be assembled manually, or as a separate XAS script command.
-*.xas : SBTCVM assembly script. Used for automating multi-file program builds.
-     Not limited to assembler.
+*.xas : SBTCVM eXstensible assembler script. Used for automating multi-file program builds.
+     Not limited to assembler. running xas.py with no arguments
+     enters the interactive XAS shell.
 
 
 
  >>> plugin files: <<<
 *.xascmd: a file containing one or more external xas script commands.
-
+*.xashelp: interactive help data for external XAS commands.
 
 ---- Special files ----
 

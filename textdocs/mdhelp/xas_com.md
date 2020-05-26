@@ -6,7 +6,7 @@
 [Main XAS help](xas.md) (NEW USERS: read main XAS help first!)
 ## Basics
 
-commad | arguments | description
+command | arguments | description
 :----------:|:--------------:|:-----------:|
 xas|(xas script)|Run an xas script.
 print|(string)|print text to standard output.
@@ -15,11 +15,11 @@ exit|NONE|exit script/shell
 
 ## Interactive mode only
 
-commad | arguments | description
+command | arguments | description
 :----------:|:--------------:|:-----------:|
-help|(category)|view help category
+help|<command>|view help for a command
 help|NONE|view list of commands
-help|command|get help on command.
+help|all| list all commands, sorted by category.
 ls/list/dir|(path)|list SBTCVM-relevant files in (path)
 find|(string)|find filenames containing (string) and list them. **(1)**
 ver/version/info|NONE|print version information
@@ -36,7 +36,7 @@ _Note: This is **NOT** the same as your system's path!_
 
 
 ## VM:
-commad | arguments | description
+command | arguments | description
 :----------:|:--------------:|:-----------:|
 run/runp | (same as pyg_sbtcvm.py) | run SBTCVM's Pygame VM Frontend
 runc | (same as cur_sbtcvm.py) | run SBTCVM's Curses VM Frontend
@@ -44,7 +44,7 @@ runc | (same as cur_sbtcvm.py) | run SBTCVM's Curses VM Frontend
 ## Build
 
 
-commad | arguments | description
+command | arguments | description
 :----------:|:--------------:|:-----------:|
 asm| (same as g2asm.py) | run assembler
 stnp| (same as stnpcom.py) | run SSTNPL compiler
@@ -57,7 +57,7 @@ dump|(same as romdump.py)|TROM dump utility
 
 
 ### Romdump Macors
-commad | arguments | description
+command | arguments | description
 :----------:|:--------------:|:-----------:|
 trominfo|(trom image)|get some basic info on a trom. i.e. size.
 dumpnp|(trom image)| Dump TROM image (n0p syntax)

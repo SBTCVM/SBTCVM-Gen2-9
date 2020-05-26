@@ -6,13 +6,19 @@ modules that encompass the SBTCVM standard library.
 
 ## SSTNPL modules (.stnpmfs & .tas0)
 
+### segment
+This module is used to render vector text on the SBTGA plotter. (mode 30)
+
+see _plottertext_ in _demos_ for a good example.
+
+
 ### comprompt
 This is a standard command prompt routine shared by several SSTNPL-based 
 programs that need multi-character command line interfaces.
 
 see _shelldemo_ in _demos_ for a good example.
 
-Other notable uses include the **system shell** in **sbtgsh**.
+Other notable uses include the **system shell** in **sbtgsh** and SBTCVM-DOS's **command shell**.
 
 ### cprle
 This is a standard decoder for gfxcon's color packart compression method.
