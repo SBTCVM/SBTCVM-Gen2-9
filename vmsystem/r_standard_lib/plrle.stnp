@@ -26,40 +26,40 @@ var px=0
 var py=0
 
 label decode
-get posx
-set px
-get posy
-set py
-
-drawy1 posy
-drawx1 posx
-
-
-add pixx,@1
-set draw_pixx
-add pixy,@1
-set draw_pixy
-
-drawwidth draw_pixx
-drawheight draw_pixy
-
-val 0
-set RL_loopcount
-copy offset,RL_pointer
-
-get RL_pointer
-asm datawrite1;>RL_GET_SIZE
-asm dataread1;;RL_GET_SIZE
-set RL_SIZE
-sub RL_SIZE,@1
-set RL_SIZE
-
-add RL_pointer,@1
-set RL_pointer
-
-#iterate decoder loop over data
-uiter rl_iter,RL_decode_mainloop,RL_pointer,RL_SIZE
-
+	get posx
+	set px
+	get posy
+	set py
+	
+	drawy1 posy
+	drawx1 posx
+	
+	
+	add pixx,@1
+	set draw_pixx
+	add pixy,@1
+	set draw_pixy
+	
+	drawwidth draw_pixx
+	drawheight draw_pixy
+	
+	val 0
+	set RL_loopcount
+	copy offset,RL_pointer
+	
+	get RL_pointer
+	asm datawrite1;>RL_GET_SIZE
+	asm dataread1;;RL_GET_SIZE
+	set RL_SIZE
+	sub RL_SIZE,@1
+	set RL_SIZE
+	
+	add RL_pointer,@1
+	set RL_pointer
+	
+	#iterate decoder loop over data
+	uiter rl_iter,RL_decode_mainloop,RL_pointer,RL_SIZE
+	
 
 return
 
@@ -88,28 +88,27 @@ label RL_decode_mainloop
 	#uiter RL_ilvar,RL_printlooop,@0,RL_loopcount
 	gsub RL_printBAR
 	return
-	
-	label RL_newline
+
+label RL_newline
 	add py,pixy
 	set py
 	drawy1 py
 	get posx
 	set px
 	drawx1 px
-	return
-	
-	var RL_BARWIDE=0
-	var RL_BARWIDEDRAW=0
-	var RL_loopcount_add1=0
-	label RL_printBAR
-	
+return
+
+var RL_BARWIDE=0
+var RL_BARWIDEDRAW=0
+var RL_loopcount_add1=0
+
+label RL_printBAR
+
 	add RL_loopcount,@1
 	set RL_loopcount_add1
 	mul RL_loopcount_add1,pixx
 	set RL_BARWIDE
 	
-	#add RL_BARWIDE,@1
-	#set RL_BARWIDE
 	
 	#transparency code
 		if do_trans,@0 goto no_trans

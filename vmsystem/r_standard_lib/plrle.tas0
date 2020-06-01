@@ -186,19 +186,19 @@ datawrite1;>RL_BARWIDE
 #conditional goto
 dataread1;>do_trans
 dataread2;>@0
-gotoif;>goto--branch-115
-goto;>goto--jumper-115
-setreg1;>goto--jumper-115;goto--branch-115
+gotoif;>goto--branch-114
+goto;>goto--jumper-114
+setreg1;>goto--jumper-114;goto--branch-114
 goto;>no_trans--label
-null;;goto--jumper-115
+null;;goto--jumper-114
 #conditional goto
 dataread1;>RL_data
 dataread2;>transkey
-gotoif;>goto--branch-116
-goto;>goto--jumper-116
-setreg1;>goto--jumper-116;goto--branch-116
+gotoif;>goto--branch-115
+goto;>goto--jumper-115
+setreg1;>goto--jumper-115;goto--branch-115
 goto;>yes_trans--label
-null;;goto--jumper-116
+null;;goto--jumper-115
 #label
 null;;no_trans--label
 #add (2op math)
