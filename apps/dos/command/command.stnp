@@ -125,7 +125,7 @@ label driveB
 		
 		gsub vdi_outloop
 return
-return
+
 
 label driveR
 	val :R
@@ -143,7 +143,7 @@ label driveR
 		
 		gsub vdi_outloop
 return
-return
+
 
 label directory_list
 	if drive,:R gsub directory_list_R
@@ -180,7 +180,7 @@ label directory_list_R
 	vdi 
 	gsub vdi_outloop
 return
-
+var driveref=:0
 var invalid_charcheck=0
 label invalid
 	textcolor *++0---
@@ -193,11 +193,18 @@ label invalid
 			return
 
 	label run_command
-		#prline PROGRUN NOT IMPLEMENTED
-		#vdin rstld -1 
-		#uiter run_iter,run_send_char,@0,cp.itersize
-		#vdi #send newline
+		#try current drive FIRST
+		vdin rstld 
+			if drive,:A =driveref :0
+			if drive,:B =driveref :1
+			if drive,:R =driveref :2
+			get driveref
+			asm iowrite1;>vdi.cli.in
+			vdin  #print space
+		uiter run_iter,run_send_char,@0,cp.itersize
+		vdi .txe#send newline
 		
+		#if does not load, try ALL drives...
 		vdin rstld -1 
 		uiter run_iter,run_send_char,@0,cp.itersize
 		vdi .txe#send newline
@@ -211,14 +218,15 @@ label run_send_char
 	asm iowrite1;>vdi.cli.in
 return
 
+
 label pattern_print_char
 	tabcd cp.buffer,run_iter,@0
 return
 
 label version
-gsub splash
-textcolor *0++---
-prline  Command Interpreter v2
+	gsub splash
+	textcolor *0++---
+	prline  Command Interpreter v2
 return
 
 var vdi_vdioutput_buffer=0
@@ -246,9 +254,9 @@ label vdi_outloop
 
 #TODO: Dump disk labels too via SBTVDI
 label drives
-prline A: 9.5MN (TDSK1) floppy
-prline B: 9.5MN (TDSK1) floppy
-prline R: 9.5MN Hardware Ramdisk
+	prline A: 9.5MN (TDSK1) floppy
+	prline B: 9.5MN (TDSK1) floppy
+	prline R: 9.5MN Hardware Ramdisk
 return
 
 ##VDI output write subroutine.##
@@ -271,7 +279,8 @@ return
 		prline about        : About SBTCVM-DOS
 		prline dir <string> : list files on CURRENT drive. optionally specify string filename
 		prline                  must contain.
-		prline <exec>       : search all disks for <exec>.txe, reset-load first match.
+		prline <exec>       : search current disk, then all disks, for <exec>.txe, reset-load
+		prline                  first match.
 		prline *:\<exec>    : run <exec>.txe on drive (*) e.g. A:\boot for boot.txe on A:
 		print shutdown     : Shutdown SBTCVM-DOS
 		textcolor *0+0---
