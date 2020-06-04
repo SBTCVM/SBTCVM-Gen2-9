@@ -1,10 +1,10 @@
 ########## SBTCVM-DOS - Command Interpreter ########## 
 label startup
 	
-	gsub version
+	#gsub version
 	textcolor *+++---
-	prline Type '?' for help.
-	prline READY.
+	prline Type '?' for help. READY.
+	#prline READY.
 	vdimode @1
 	##setup command prompt library##
 		val @70
@@ -18,6 +18,9 @@ goto main
 var cmdflg=0
 var validflg=0
 var drive=:A
+
+#reset Hardware buffer 2
+breset2
 
 label main
 	textcolor *0+0---
@@ -97,13 +100,14 @@ label driveA
 	set drive
 	ifless cp.size,@3 return
 	#prline PROGRUN NOT IMPLEMENTED
-	vdin rstld 0 
-		uiter run_iter,run_send_char,@3,cp.itersize
-		vdi #send newline
+	#vdin rstld 0 
+		#uiter run_iter,run_send_char,@3,cp.itersize
+		#vdi #send newline
 		
 		#gsub vdi_outloop
 	vdin rstld 0 
-		uiter run_iter,run_send_char,@3,cp.itersize
+		gsub run_send_setup
+		uiter run_iter,run_send_char_exec,@3,cp.itersize
 		vdi .txe#send newline+.txe
 		
 		gsub vdi_outloop
@@ -120,7 +124,8 @@ label driveB
 	#	
 	#	#gsub vdi_outloop
 	vdin rstld 1 
-		uiter run_iter,run_send_char,@3,cp.itersize
+		gsub run_send_setup
+		uiter run_iter,run_send_char_exec,@3,cp.itersize
 		vdi .txe#send newline+.txe
 		
 		gsub vdi_outloop
@@ -138,7 +143,8 @@ label driveR
 	#	
 	#	#gsub vdi_outloop
 	vdin rstld 2 
-		uiter run_iter,run_send_char,@3,cp.itersize
+		gsub run_send_setup
+		uiter run_iter,run_send_char_exec,@3,cp.itersize
 		vdi .txe#send newline+.txe
 		
 		gsub vdi_outloop
@@ -201,23 +207,47 @@ label invalid
 			get driveref
 			asm iowrite1;>vdi.cli.in
 			vdin  #print space
-		uiter run_iter,run_send_char,@0,cp.itersize
+		gsub run_send_setup
+		uiter run_iter,run_send_char_exec,@0,cp.itersize
 		vdi .txe#send newline
 		
 		#if does not load, try ALL drives...
 		vdin rstld -1 
-		uiter run_iter,run_send_char,@0,cp.itersize
+		gsub run_send_setup
+		uiter run_iter,run_send_char_exec,@0,cp.itersize
 		vdi .txe#send newline
 		
 		gsub vdi_outloop
 		return
 
 #get character from iterator var, write to VDI serial INPUT
+var run_s_tmp=0
+var run_tobuffer_flg=0
+
+label run_send_setup
+val @0
+set run_tobuffer_flg
+return
+
+label run_send_char_exec
+	tabr cp.buffer,run_iter,@0
+	set run_s_tmp
+	if run_tobuffer_flg,@1 goto run_send_doredir
+	if run_s_tmp,:\s =run_tobuffer_flg @1
+	if run_s_tmp,:\s return
+	
+	get run_s_tmp
+		asm iowrite1;>vdi.cli.in
+		return
+	label run_send_doredir
+		bwrhead2 run_s_tmp
+return
+
+
 label run_send_char
 	tabr cp.buffer,run_iter,@0
 	asm iowrite1;>vdi.cli.in
-return
-
+	return
 
 label pattern_print_char
 	tabcd cp.buffer,run_iter,@0

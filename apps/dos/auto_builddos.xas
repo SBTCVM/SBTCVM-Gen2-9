@@ -6,6 +6,10 @@ stnp dos+boot+boot_txe.stnp
 print build command.txe
 stnp dos+command+command.stnp
 
+print build test programs...
+stnp dos+testcliargs+testcliargs.stnp
+
+
 print build startup trom
 stnp dos
 

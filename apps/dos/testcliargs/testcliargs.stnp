@@ -1,0 +1,15 @@
+ 
+prline it appears you entered:
+
+var tempvar=0
+
+label tail_readout
+	brdtail2
+	set tempvar
+	if tempvar,@0 goto end
+	chardump tempvar
+goto tail_readout
+
+label end
+newline
+vdi rstld -1 command.txe
