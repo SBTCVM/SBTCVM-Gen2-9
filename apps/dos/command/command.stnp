@@ -12,6 +12,7 @@ label startup
 		
 		val @0
 		set cp.clearbuffer
+	breset2
 goto main
 
 ##variables##
@@ -20,7 +21,7 @@ var validflg=0
 var drive=:A
 
 #reset Hardware buffer 2
-breset2
+
 
 label main
 	textcolor *0+0---
