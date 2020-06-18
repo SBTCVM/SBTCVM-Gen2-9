@@ -100,12 +100,6 @@ label driveA
 	val :A
 	set drive
 	ifless cp.size,@3 return
-	#prline PROGRUN NOT IMPLEMENTED
-	#vdin rstld 0 
-		#uiter run_iter,run_send_char,@3,cp.itersize
-		#vdi #send newline
-		
-		#gsub vdi_outloop
 	vdin rstld 0 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
@@ -118,12 +112,6 @@ label driveB
 	val :B
 	set drive
 	ifless cp.size,@3 return
-	#prline PROGRUN NOT IMPLEMENTED
-	#vdin rstld 1 
-	#	uiter run_iter,run_send_char,@3,cp.itersize
-	#	vdi #send newline
-	#	
-	#	#gsub vdi_outloop
 	vdin rstld 1 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
@@ -137,12 +125,6 @@ label driveR
 	val :R
 	set drive
 	ifless cp.size,@3 return
-	#prline PROGRUN NOT IMPLEMENTED
-	#vdin rstld 2 
-	#	uiter run_iter,run_send_char,@3,cp.itersize
-	#	vdi #send newline
-	#	
-	#	#gsub vdi_outloop
 	vdin rstld 2 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize

@@ -5,7 +5,7 @@
 SSTNPL features integration with SBTCVM's 4 generic Double-Ended Buffers.
  - string input is provided for code that manipulates text.
  - raw value commands also available.
- - brd* (read) commands return 1 when the Hardware buffer is empty.
+ - brd* (read) commands return 0 when the Hardware buffer is empty.
 
 # TODO: add examples & more info to this document!
 
