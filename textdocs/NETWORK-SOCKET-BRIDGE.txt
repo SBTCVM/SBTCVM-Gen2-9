@@ -1,0 +1,38 @@
+SBTCVM Network Socket Bridge
+
+SBTSOCK
+
+
+modes of operation: 
+	-MODE 0: SBTCVM BTserial Socket (sbtsoc) (insecure variant)
+	-MODE 1: ASCII-to-BTT2 dynamically translated socket
+	-MODE 10: SBTCVM BTserial Socket Secure (sbtsocs) (Via SSL Tunneling) [later]
+
+
+control scheme:
+
+SBTSOCK Control serial (similar to SBTVDI Serial)
+
+commands:
+
+	mode [number] set socket mode
+	connect [hostname]:[port]
+	listmodes [show supported socket modes]
+	help [general help]
+	timeout [milliseconds]
+
+
+register plan:
+R: control serial read
+W: control serial write
+
+W: socket Send
+R: socket Receive
+R: socket ReceiveBufferSize
+R: serial ConnectedStatus: 0 for not connected, 1 for connected
+R: serial ConnectionError: 0 for no error, any other number means there was an error.
+
+------SBTSOC Protocol Details------
+
+
+
