@@ -105,11 +105,12 @@ else:
 		targtime=1/(targspeed*1000.0)
 	print("SBTCVM Generation 2 9-trit VM, v2.1.0.alpha\n")
 	
-	
+	windowprefix=romfile
 	diska=None
 	diskfile=iofuncts.findtrom(romfile, ext=".tdsk1", exitonfail=0, dirauto=1)
 	if diskfile!=None:
 		retval=td1.loaddisk(diskfile, readonly=0)
+		windowprefix=retval.label
 		if not isinstance(retval, str):
 			diska=retval
 			romfile='VDIBOOT'
@@ -128,7 +129,7 @@ else:
 	#start sound system
 	snd.initsnd(iosys)
 	#uio startup
-	uiosys = UIO.uio(cpusys, memsys, iosys, romfile)
+	uiosys = UIO.uio(cpusys, memsys, iosys, windowprefix)
 	uiosys.ttyraw("SBTCVM Pygame frontend. SBTCVM Gen2-9 v2.1.0")
 	uiosys.ttyraw("ready.")
 	dispthr=Thread(target = uiosys.statup, args = [])
