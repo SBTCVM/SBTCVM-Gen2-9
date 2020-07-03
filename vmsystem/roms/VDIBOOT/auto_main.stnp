@@ -1,7 +1,5 @@
+prline SBTCVM-SBTVDI BIOS v0.1
 
-textcolor *0++--0
-
-prline booting into SBTVDI Shell...
 prline  ^^^^^^^^^^^^^^^
 prline <+-------------+>
 prline <|      x      |>
@@ -13,6 +11,17 @@ prline <| \  ._|_.  / |>
 prline <|__|       |__|>
 prline <+Mni-------inM+>
 prline  vvvvvvvvvvvvvvv   SBTCVM Gen 2-9
+
+prline trying to boot drive 0...
+vdimode @1
+vdi rstld 0 boot.txe
+prline unsuccessful... booting into SBTVDI Shell mode...
+
+
+
+textcolor *0++--0
+
+prline booting into SBTVDI Shell...
 
 
 textcolor *+++---

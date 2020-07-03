@@ -9,9 +9,9 @@ stnp dos+command+command.stnp
 print build test programs...
 stnp dos+testcliargs+testcliargs.stnp
 
-
-print build startup trom
-stnp dos
+##DEPRECIATED disks are now directly bootable.
+#print build startup trom
+#stnp dos
 
 
 

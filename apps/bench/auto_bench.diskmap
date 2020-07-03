@@ -1,5 +1,5 @@
 SBTCVM Bench v0.1
-trom;bench+bench+desktop.trom;desktop.app
+trom;bench+bench+desktop2.trom;desktop.app
 trom;bench+bench+boot.trom;boot.txe
 trom;bench+bench+boot.trom;bench.txe
 trom;bench+bench+info.trom;info.app

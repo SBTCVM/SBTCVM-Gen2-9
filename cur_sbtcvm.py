@@ -15,6 +15,8 @@ import vmsystem.UIO_CURSES_G2x_9 as UIO
 import vmsystem.COMMON_IO_G2x_9 as devcommon
 import vmsystem.SBTVDI_IO_G2x_9 as vdi
 import vmsystem.SND_G2x_9 as snd
+import vmsystem.tdisk1lib as td1
+import vmsystem.iofuncts as iofuncts
 import time
 import sys
 import curses
@@ -50,11 +52,11 @@ if cmd in ['help', '-h', '--help']:
    help, -h, --help: this help.
    -v, --version: VM version
    -a, --about: about SBTCVM
-   [trom], -r [trom], --run [trom]: launch SBTCVM with the selected TROM image 
+   [trom/tdsk1], -r [trom/tdsk1], --run [trom/tdsk1]: launch SBTCVM with the selected TROM/tdsk1 (disk) image
       loaded into memory.
-   -s [trom] {CPU speed in Hz}, --slow [trom] {CPU speed in Hz}:
+   -s [trom/tdsk1] {CPU speed in Hz}, --slow [trom/tdsk1] {CPU speed in Hz}:
       -s overrides the default CPU clock speed. You may specify a float/int Hz value
-      (after the trom filename). defaults to 2Hz''')
+      (after the trom/tdsk1 filename). defaults to 2Hz''')
 elif cmd in ["-a", "--about"]:
 	print('''SBTCVM Gen2-9 virtual machine. curses frontend.
 v2.1.0.alpha
@@ -118,6 +120,16 @@ else:
 		
 		print("SBTCVM Generation 2 9-trit VM, v2.1.0.alpha\n")
 		print("Notice: somewhat buggy, incomplete. pygame frontend HIGHLY recommended.")
+		
+		diska=None
+		diskfile=iofuncts.findtrom(romfile, ext=".tdsk1", exitonfail=0, dirauto=1)
+		if diskfile!=None:
+			retval=td1.loaddisk(diskfile, readonly=0)
+			if not isinstance(retval, str):
+				diska=retval
+				romfile='VDIBOOT'
+			
+		
 		#initialize memory subsystem
 		memsys=vmsystem.MEM_G2x_9.memory(romfile)
 		#initialize IO subsystem
@@ -126,7 +138,7 @@ else:
 		cpusys=vmsystem.CPU_G2x_9.cpu(memsys, iosys)
 		devcommon.factorydevs(iosys)
 		#init SBTVDI interface.
-		vdi.sbtvdi(iosys, cpusys, memsys)
+		vdi.sbtvdi(iosys, cpusys, memsys, diska=diska)
 		progrun=1
 		
 		#start sound system
