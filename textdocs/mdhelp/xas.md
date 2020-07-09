@@ -73,5 +73,17 @@ Whats going on here, is the directory contains a file of that type, prefixed wit
 i.e.
 **`auto_main.trom`**
 
+## XAS-script-specific features:
 
+### script location shorthand
+
+	print %xwd%
+	stnp %xwd%+somthing.stnp
+
+`%xwd%` is a XAS-script-specific shorthand that automatically fills in 
+the current XAS script's location in its place.
+
+it can definately help larger projects.
+
+it is _NOT SUPPORTED_  **_ANYWHERE_** ELSE!
 

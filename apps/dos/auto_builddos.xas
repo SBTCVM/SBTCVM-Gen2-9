@@ -1,13 +1,12 @@
 gfxcon -cp dos+media+bigsplash
 gfxcon -p dos+media+bigsplash_curses
 print build boot.txe
-stnp dos+boot+boot_txe.stnp
+stnp %xwd%+boot+boot_txe.stnp
 
 print build command.txe
-stnp dos+command+command.stnp
+stnp %xwd%+command+command.stnp
 
-print build test programs...
-stnp dos+testcliargs+testcliargs.stnp
+
 
 ##DEPRECIATED disks are now directly bootable.
 #print build startup trom
@@ -22,8 +21,10 @@ print Build tdsk1 disk image
 #See auto_dos.diskmap
 diskedit --new dos
 
-print build help system & append help to disk...
-xas dos+help+help.xas
+print build tools.
+xas %xwd%+tools
 
+print build test programs...
+xas %xwd%+tests
 
 print done.

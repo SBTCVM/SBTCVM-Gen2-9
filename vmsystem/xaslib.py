@@ -342,6 +342,7 @@ def xasshell():
 		else:
 			cmd=line
 			arg=None
+		
 		if cmd=="debug":
 			if arg==None:
 				print("Please see 'debug options' for XAS debug commands.")
@@ -424,6 +425,7 @@ def cmdvalid(cmd):
 def xasparse(scrpath, syntaxonly=0, printprefix=""):
 	ppx=printprefix
 	xasfile=open(scrpath, 'r')
+	srcdir=os.path.dirname(scrpath)
 	print(ppx + "SBTCVM Assembly Script (XAS) v1")
 	print(ppx + "running: '" + scrpath + "'\n")
 	lineno=1
@@ -440,6 +442,10 @@ def xasparse(scrpath, syntaxonly=0, printprefix=""):
 		else:
 			cmd=line
 			arg=None
+		
+		if arg!=None:
+			if '%xwd%' in arg:
+				arg=arg.replace('%xwd%', srcdir)
 		if cmd=="xas":
 			if arg!=None:
 				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=0, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "' in: '" + scrpath + "'", dirauto=1)
