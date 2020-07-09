@@ -1,2 +1,2 @@
-stnp %xwd%+echo.stnp
-diskedit --appendfile dos %xwd%+echo.trom echo.txe trom
+stnp %xwd%/echo.stnp
+diskedit --appendfile dos %xwd%/echo.trom echo.txe trom

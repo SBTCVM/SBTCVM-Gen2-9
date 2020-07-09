@@ -1,4 +1,4 @@
-stnp %xwd%+help.stnp
-stnp %xwd%+overview.stnp
-diskedit --appendfile dos %xwd%+help.trom help.txe trom
-diskedit --appendfile dos %xwd%+overview.trom help_overview.hlp trom
+stnp %xwd%/help.stnp
+stnp %xwd%/overview.stnp
+diskedit --appendfile dos %xwd%/help.trom help.txe trom
+diskedit --appendfile dos %xwd%/overview.trom help_overview.hlp trom

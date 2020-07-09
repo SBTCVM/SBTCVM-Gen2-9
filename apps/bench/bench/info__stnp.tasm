@@ -149,12 +149,12 @@ fopwri1;:\n
 stop
 #module include: line 37: plrle as pl
 includeas;plrle,pl
-#module include: line 38: bench+lib+common as common
-includeas;bench+lib+common,common
+#module include: line 38: bench/lib/common as common
+includeas;bench/lib/common,common
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #39
-include;bench+media+credits1.tas0;IMAGE_credits#SSTNPL Source Line: '39' 
+include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '39' 
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #40
-include;bench+media+image_info.tas0;IMAGE_info#SSTNPL Source Line: '40' 
+include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '40' 
 #END OF FILE

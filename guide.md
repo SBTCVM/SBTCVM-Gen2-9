@@ -14,6 +14,9 @@ Start TUI Shell (SBTGSH) _(PYGAME FRONTEND ONLY)_:
 Start GUI 'desktop' (SBTCVM BENCH) _(PYGAME FRONTEND ONLY)_:    
 `./pyg_sbtcvm.py bench`
 
+Start SBTCVM DOS:    
+`./pyg_sbtcvm.py dos`
+
 Boot into VDI shell (unfinished):     
 `./pyg_sbtcvm.py`
 

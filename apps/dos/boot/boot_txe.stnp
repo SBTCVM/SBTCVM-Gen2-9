@@ -18,10 +18,10 @@ stop
 
 ##block-art splash text.##
 label bigsplash
-	asm include;dos+media+bigsplash.tas0
+	asm include;dos/media/bigsplash.tas0
 return
 
 ##block-art splash text.##
 label bigsplash_curses
-	asm include;dos+media+bigsplash_curses.tas0
+	asm include;dos/media/bigsplash_curses.tas0
 return

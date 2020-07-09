@@ -1,11 +1,11 @@
-gfxcon -plrle bench+media+logo.png
-gfxcon -plrle bench+media+info.png
-gfxcon -plrle bench+media+dos.png
+gfxcon -plrle %xwd%/logo.png
+gfxcon -plrle %xwd%/info.png
+gfxcon -plrle %xwd%/dos.png
 
-gfxcon -plrlei bench+media+image_info.png
-gfxcon -plrle bench+media+credits1.png
-gfxcon -plrle bench+media+credits_icn.png
-gfxcon -plrle bench+media+credits_bg.png
-gfxcon -plrle bench+media+credits_bg_2.png
-gfxcon -plrle bench+media+credits_bg_3.png
-gfxcon -plrle bench+media+credits_bg_4.png
+gfxcon -plrlei %xwd%/image_info.png
+gfxcon -plrle %xwd%/credits1.png
+gfxcon -plrle %xwd%/credits_icn.png
+gfxcon -plrle %xwd%/credits_bg.png
+gfxcon -plrle %xwd%/credits_bg_2.png
+gfxcon -plrle %xwd%/credits_bg_3.png
+gfxcon -plrle %xwd%/credits_bg_4.png

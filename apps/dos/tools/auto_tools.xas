@@ -1,8 +1,8 @@
 print build tools & append tools to disk...
-xas %xwd%+help
+xas %xwd%/help
 
 
 #not yet written
-#xas %xwd%+splash
+#xas %xwd%/splash
 
-xas %xwd%+echo
+xas %xwd%/echo

@@ -35,6 +35,6 @@ vdi rstld -1 desktop.app
 prline ERROR! desktop.app not found!
 stop
 include plrle as pl
-include bench+lib+common as common
-asm include;bench+media+credits1.tas0;IMAGE_credits
-asm include;bench+media+image_info.tas0;IMAGE_info
+include bench/lib/common as common
+asm include;bench/media/credits1.tas0;IMAGE_credits
+asm include;bench/media/image_info.tas0;IMAGE_info

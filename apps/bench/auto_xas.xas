@@ -1,7 +1,10 @@
 print SBTCVM DISKMAP build script
-xas bench+media+media.xas
-stnp --module bench+lib+common.stnp
+xas bench/media/media.xas
+
+stnp --module bench/lib/common.stnp
 ##DEPRECIATED disks are now directly bootable.
 #stnp bench
-xas bench+bench+bench.xas
+
+xas bench/bench/bench.xas
+
 diskedit --new bench

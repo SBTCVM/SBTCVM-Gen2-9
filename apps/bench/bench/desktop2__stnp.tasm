@@ -459,17 +459,17 @@ null;;goto--jumper-106
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 111: bench+lib+common as common
-includeas;bench+lib+common,common
-#module include: line 112: plrle as pl
+#module include: line 112: bench/lib/common as common
+includeas;bench/lib/common,common
+#module include: line 113: plrle as pl
 includeas;plrle,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #113
-include;bench+media+info.tas0;ICON_info#SSTNPL Source Line: '113' 
-#___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #114
-include;bench+media+dos.tas0;ICON_dos#SSTNPL Source Line: '114' 
+include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '114' 
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #115
-include;bench+media+credits_icn.tas0;ICON_credits#SSTNPL Source Line: '115' 
+include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '115' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #116
+include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '116' 
 #END OF FILE

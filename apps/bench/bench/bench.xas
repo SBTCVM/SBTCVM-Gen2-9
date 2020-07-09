@@ -1,5 +1,5 @@
-stnp bench+bench+desktop2.stnp
-stnp bench+bench+boot.stnp
-stnp bench+bench+info.stnp
-stnp bench+bench+dos.stnp
-stnp bench+bench+credits.stnp
+stnp %xwd%/desktop2.stnp
+stnp %xwd%/boot.stnp
+stnp %xwd%/info.stnp
+stnp %xwd%/dos.stnp
+stnp %xwd%/credits.stnp

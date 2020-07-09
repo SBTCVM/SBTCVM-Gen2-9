@@ -5,4 +5,4 @@ prline Starting desktop.app...
 vdi rstld -1 desktop.app
 prline ERROR! desktop.app not found!
 stop
-include bench+lib+common as common
+include bench/lib/common as common

@@ -108,8 +108,9 @@ return
 
 
 
-include bench+lib+common as common
+
+include bench/lib/common as common
 include plrle as pl
-asm include;bench+media+info.tas0;ICON_info
-asm include;bench+media+dos.tas0;ICON_dos
-asm include;bench+media+credits_icn.tas0;ICON_credits
+asm include;bench/media/info.tas0;ICON_info
+asm include;bench/media/dos.tas0;ICON_dos
+asm include;bench/media/credits_icn.tas0;ICON_credits

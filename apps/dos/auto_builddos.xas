@@ -1,10 +1,10 @@
-gfxcon -cp dos+media+bigsplash
-gfxcon -p dos+media+bigsplash_curses
+gfxcon -cp %xwd%/media/bigsplash
+gfxcon -p %xwd%/media/bigsplash_curses
 print build boot.txe
-stnp %xwd%+boot+boot_txe.stnp
+stnp %xwd%/boot/boot_txe.stnp
 
 print build command.txe
-stnp %xwd%+command+command.stnp
+stnp %xwd%/command/command.stnp
 
 
 
@@ -22,9 +22,9 @@ print Build tdsk1 disk image
 diskedit --new dos
 
 print build tools.
-xas %xwd%+tools
+xas %xwd%/tools
 
 print build test programs...
-xas %xwd%+tests
+xas %xwd%/tests
 
 print done.

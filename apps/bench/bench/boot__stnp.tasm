@@ -118,6 +118,6 @@ fopwri1;:!
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 8: bench+lib+common as common
-includeas;bench+lib+common,common
+#module include: line 8: bench/lib/common as common
+includeas;bench/lib/common,common
 #END OF FILE

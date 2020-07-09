@@ -115,11 +115,11 @@ label scene_4
 	asm setreg1;>IMG_BG_4
 	set pl.offset
 return
-include bench+lib+common as common
+include bench/lib/common as common
 include segment as seg
 include plrle as pl
-asm include;bench+media+credits_bg.tas0;IMG_BG_1
-asm include;bench+media+credits_bg_2.tas0;IMG_BG_2
-asm include;bench+media+credits_bg_3.tas0;IMG_BG_3
-asm include;bench+media+credits_bg_4.tas0;IMG_BG_4
+asm include;bench/media/credits_bg.tas0;IMG_BG_1
+asm include;bench/media/credits_bg_2.tas0;IMG_BG_2
+asm include;bench/media/credits_bg_3.tas0;IMG_BG_3
+asm include;bench/media/credits_bg_4.tas0;IMG_BG_4
 

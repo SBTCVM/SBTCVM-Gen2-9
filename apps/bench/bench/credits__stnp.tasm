@@ -718,22 +718,22 @@ datawrite1;>pl.offset
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 118: bench+lib+common as common
-includeas;bench+lib+common,common
+#module include: line 118: bench/lib/common as common
+includeas;bench/lib/common,common
 #module include: line 119: segment as seg
 includeas;segment,seg
 #module include: line 120: plrle as pl
 includeas;plrle,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #121
-include;bench+media+credits_bg.tas0;IMG_BG_1#SSTNPL Source Line: '121' 
+include;bench/media/credits_bg.tas0;IMG_BG_1#SSTNPL Source Line: '121' 
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #122
-include;bench+media+credits_bg_2.tas0;IMG_BG_2#SSTNPL Source Line: '122' 
+include;bench/media/credits_bg_2.tas0;IMG_BG_2#SSTNPL Source Line: '122' 
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #123
-include;bench+media+credits_bg_3.tas0;IMG_BG_3#SSTNPL Source Line: '123' 
+include;bench/media/credits_bg_3.tas0;IMG_BG_3#SSTNPL Source Line: '123' 
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #124
-include;bench+media+credits_bg_4.tas0;IMG_BG_4#SSTNPL Source Line: '124' 
+include;bench/media/credits_bg_4.tas0;IMG_BG_4#SSTNPL Source Line: '124' 
 #END OF FILE

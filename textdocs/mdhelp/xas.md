@@ -29,10 +29,12 @@ _You should use a ';' if your print argument contains one!!!_
 	exit
 
 
-# '+' Path syntax:
-Given that SBTCVM is meant to be portable, XAS uses a special operator for path delination:
+#  Path deliniation syntax:
 
-For example say we have a TROM APP directory called `SOMEAPP` in `VMUSER`, and we have our
+SBTCVM XAS (and other SBTCVM utilities)
+will accept either a `+` or a `/` for deliniating paths
+
+For example say we have a TROM APP directory called `SOMEAPP` in `vmuser`, and we have our
 `auto_main.xas` file call a secondary xas script we have there. picture it looking like so:
 
 
@@ -41,13 +43,13 @@ For example say we have a TROM APP directory called `SOMEAPP` in `VMUSER`, and w
 
 
 Since `something.xas` is not the 'auto' xas (prefixed with `auto_`), we need to
-tell XAS its NOT in the main search path. **(`APPS, DEMOS, VMSYSTEM, VMSYSTEM/ROMS, ROMS, VMUSER` and `r_*` directories within them)**
+tell XAS its NOT in the main search path. **(`apps, demos, vmsystem, vmsystem/roms, roms, vmuser` and `r_*` directories within them)**
 
-As `SOMEAPP` is in `VMUSER`, aka in the search path, we only need:
+As `SOMEAPP` is in `vmuser`, aka in the search path, we only need:
 
 
 	xas SOMEAPP+somthing.xas
-
+	xas SOMEAPP/somthing.xas
 
 similar for 'non-auto' stnp and tasm files.
 
@@ -79,6 +81,7 @@ i.e.
 
 	print %xwd%
 	stnp %xwd%+somthing.stnp
+	stnp %xwd%/somthing.stnp
 
 `%xwd%` is a XAS-script-specific shorthand that automatically fills in 
 the current XAS script's location in its place.

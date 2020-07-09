@@ -4,5 +4,5 @@ SBTCVM DOS v0.1
 #second is entry source filename (in the same form you would use when running
 #a trom at that path)
 #third is destination filename for within disk image.
-trom;dos+command+command.trom;command.txe
-trom;dos+boot+boot_txe.trom;boot.txe
+trom;dos/command/command.trom;command.txe
+trom;dos/boot/boot_txe.trom;boot.txe
