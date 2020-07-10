@@ -54,17 +54,31 @@ iowrite1;>buffer.1.write.tail
 #buffer 1 tail write
 dataread1;>$common.DESK_MIN_VERS
 iowrite1;>buffer.1.write.tail
-#bprinttail1
-fopset1;>buffer.1.write.tail
-fopwri1;:\n
-fopset1;>io.ttywr
-#bprinttail1
-fopset1;>buffer.1.write.tail
-fopwri1;:-
-fopwri1;:-
-fopwri1;:-
-fopwri1;:\n
-fopset1;>io.ttywr
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-16
+s1push1
+goto;>seg.output--label
+null;;goto--jumper-16
+#Wait loop
+setreg1;0
+datawrite1;>waitcy-loopback-18
+setreg1;0;waitcy-loopback-18
+setreg2;10x1
+add
+datawrite1;>waitcy-loopback-18
+setreg2;10x5000
+gotoifless;>waitcy-loopback-18
+
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-19
+s1push1
+goto;>scene_2--label
+null;;goto--jumper-19
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-20
+s1push1
+goto;>refresh--label
+null;;goto--jumper-20
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:-
@@ -73,8 +87,55 @@ fopwri1;:C
 fopwri1;:o
 fopwri1;:d
 fopwri1;:e
+fopwri1;:\n
+fopset1;>io.ttywr
+#bprinttail1
+fopset1;>buffer.1.write.tail
+fopwri1;:T
+fopwri1;:h
+fopwri1;:o
+fopwri1;:m
+fopwri1;:a
+fopwri1;:s
 fopwri1;:\s
-fopwri1;:+
+fopwri1;:L
+fopwri1;:e
+fopwri1;:a
+fopwri1;:t
+fopwri1;:h
+fopwri1;:e
+fopwri1;:r
+fopwri1;:s
+fopwri1;:\n
+fopset1;>io.ttywr
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-25
+s1push1
+goto;>seg.output--label
+null;;goto--jumper-25
+#Wait loop
+setreg1;0
+datawrite1;>waitcy-loopback-27
+setreg1;0;waitcy-loopback-27
+setreg2;10x1
+add
+datawrite1;>waitcy-loopback-27
+setreg2;10x5000
+gotoifless;>waitcy-loopback-27
+
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-28
+s1push1
+goto;>scene_3--label
+null;;goto--jumper-28
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-29
+s1push1
+goto;>refresh--label
+null;;goto--jumper-29
+#bprinttail1
+fopset1;>buffer.1.write.tail
+fopwri1;:-
 fopwri1;:\s
 fopwri1;:A
 fopwri1;:r
@@ -105,30 +166,30 @@ fopwri1;:s
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-20
+setreg1;>goto--jumper-33
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-20
+null;;goto--jumper-33
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-22
-setreg1;0;waitcy-loopback-22
+datawrite1;>waitcy-loopback-35
+setreg1;0;waitcy-loopback-35
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-22
+datawrite1;>waitcy-loopback-35
 setreg2;10x5000
-gotoifless;>waitcy-loopback-22
+gotoifless;>waitcy-loopback-35
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-23
+setreg1;>goto--jumper-36
 s1push1
-goto;>scene_2--label
-null;;goto--jumper-23
+goto;>scene_4--label
+null;;goto--jumper-36
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-24
+setreg1;>goto--jumper-37
 s1push1
 goto;>refresh--label
-null;;goto--jumper-24
+null;;goto--jumper-37
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:'
@@ -233,30 +294,30 @@ fopwri1;:s
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-32
+setreg1;>goto--jumper-44
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-32
+null;;goto--jumper-44
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-34
-setreg1;0;waitcy-loopback-34
+datawrite1;>waitcy-loopback-46
+setreg1;0;waitcy-loopback-46
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-34
+datawrite1;>waitcy-loopback-46
 setreg2;10x5000
-gotoifless;>waitcy-loopback-34
+gotoifless;>waitcy-loopback-46
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-35
+setreg1;>goto--jumper-47
 s1push1
-goto;>scene_3--label
-null;;goto--jumper-35
+goto;>scene_5--label
+null;;goto--jumper-47
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-36
+setreg1;>goto--jumper-48
 s1push1
 goto;>refresh--label
-null;;goto--jumper-36
+null;;goto--jumper-48
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:'
@@ -349,30 +410,30 @@ fopwri1;:s
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-44
+setreg1;>goto--jumper-56
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-44
+null;;goto--jumper-56
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-46
-setreg1;0;waitcy-loopback-46
+datawrite1;>waitcy-loopback-58
+setreg1;0;waitcy-loopback-58
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-46
+datawrite1;>waitcy-loopback-58
 setreg2;10x5000
-gotoifless;>waitcy-loopback-46
+gotoifless;>waitcy-loopback-58
 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-47
+setreg1;>goto--jumper-59
 s1push1
-goto;>scene_4--label
-null;;goto--jumper-47
+goto;>scene_6--label
+null;;goto--jumper-59
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-48
+setreg1;>goto--jumper-60
 s1push1
 goto;>refresh--label
-null;;goto--jumper-48
+null;;goto--jumper-60
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:E
@@ -543,19 +604,19 @@ fopwri1;:-
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-61
+setreg1;>goto--jumper-73
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-61
+null;;goto--jumper-73
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-63
-setreg1;0;waitcy-loopback-63
+datawrite1;>waitcy-loopback-75
+setreg1;0;waitcy-loopback-75
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-63
+datawrite1;>waitcy-loopback-75
 setreg2;10x5000
-gotoifless;>waitcy-loopback-63
+gotoifless;>waitcy-loopback-75
 
 #prline
 fopwri1;:S
@@ -658,10 +719,10 @@ datawrite1;>pl.posy
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posx
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-85
+setreg1;>goto--jumper-97
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-85
+null;;goto--jumper-97
 #buffer 1 reset
 iowrite1;>buffer.1.reset
 #val (used with set to change variable value during runtime.)
@@ -671,18 +732,18 @@ datawrite1;>seg.posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-95
+setreg1;>goto--jumper-107
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-95
+null;;goto--jumper-107
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;scene_1--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #100
-setreg1;>IMG_BG_1#SSTNPL Source Line: '100' 
+#_______NOTE: this corresponds to SSTNPL source line #112
+setreg1;>IMG_BG_1#SSTNPL Source Line: '112' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #return from subroutine.
@@ -691,8 +752,8 @@ gotoreg1
 #label
 null;;scene_2--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #105
-setreg1;>IMG_BG_2#SSTNPL Source Line: '105' 
+#_______NOTE: this corresponds to SSTNPL source line #117
+setreg1;>IMG_BG_2#SSTNPL Source Line: '117' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #return from subroutine.
@@ -701,8 +762,8 @@ gotoreg1
 #label
 null;;scene_3--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #110
-setreg1;>IMG_BG_3#SSTNPL Source Line: '110' 
+#_______NOTE: this corresponds to SSTNPL source line #122
+setreg1;>IMG_BG_3#SSTNPL Source Line: '122' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #return from subroutine.
@@ -711,29 +772,55 @@ gotoreg1
 #label
 null;;scene_4--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #115
-setreg1;>IMG_BG_4#SSTNPL Source Line: '115' 
+#_______NOTE: this corresponds to SSTNPL source line #127
+setreg1;>IMG_BG_4#SSTNPL Source Line: '127' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 118: bench/lib/common as common
+#label
+null;;scene_5--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #132
+setreg1;>IMG_BG_5#SSTNPL Source Line: '132' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;scene_6--label
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #137
+setreg1;>IMG_BG_6#SSTNPL Source Line: '137' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#return from subroutine.
+s1pop1
+gotoreg1
+#module include: line 141: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 119: segment as seg
+#module include: line 142: segment as seg
 includeas;segment,seg
-#module include: line 120: plrle as pl
+#module include: line 143: plrle as pl
 includeas;plrle,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #121
-include;bench/media/credits_bg.tas0;IMG_BG_1#SSTNPL Source Line: '121' 
+#_______NOTE: this corresponds to SSTNPL source line #144
+include;bench/media/credits_bg.tas0;IMG_BG_1#SSTNPL Source Line: '144' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #122
-include;bench/media/credits_bg_2.tas0;IMG_BG_2#SSTNPL Source Line: '122' 
+#_______NOTE: this corresponds to SSTNPL source line #145
+include;bench/media/credits_bg_2.tas0;IMG_BG_2#SSTNPL Source Line: '145' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #123
-include;bench/media/credits_bg_3.tas0;IMG_BG_3#SSTNPL Source Line: '123' 
+#_______NOTE: this corresponds to SSTNPL source line #146
+include;bench/media/credits_bg_3.tas0;IMG_BG_3#SSTNPL Source Line: '146' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #124
-include;bench/media/credits_bg_4.tas0;IMG_BG_4#SSTNPL Source Line: '124' 
+#_______NOTE: this corresponds to SSTNPL source line #147
+include;bench/media/credits_bg_4.tas0;IMG_BG_4#SSTNPL Source Line: '147' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #148
+include;bench/media/credits_bg_5.tas0;IMG_BG_5#SSTNPL Source Line: '148' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #149
+include;bench/media/credits_bg_6.tas0;IMG_BG_6#SSTNPL Source Line: '149' 
 #END OF FILE

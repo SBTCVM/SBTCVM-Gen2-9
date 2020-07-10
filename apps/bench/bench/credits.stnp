@@ -13,16 +13,28 @@ bwrtail1 :.
 bwrtail1 $common.DESK_SUB_VERS
 bwrtail1 :.
 bwrtail1 $common.DESK_MIN_VERS
-bprinttail1 
-bprinttail1 ---
-bprinttail1 - Code + Artwork
-bprinttail1 Thomas Leathers
 gsub seg.output
 
 waitcy 30000
 gsub scene_2
 gsub refresh
 
+
+bprinttail1 - Code
+bprinttail1 Thomas Leathers
+gsub seg.output
+
+waitcy 30000
+gsub scene_3
+gsub refresh
+
+bprinttail1 - Artwork
+bprinttail1 Thomas Leathers
+gsub seg.output
+
+waitcy 30000
+gsub scene_4
+gsub refresh
 bprinttail1 'segment' module
 bprinttail1 
 bprinttail1 is displaying this text.
@@ -32,7 +44,7 @@ bprinttail1 Thomas Leathers
 gsub seg.output
 
 waitcy 30000
-gsub scene_3
+gsub scene_5
 gsub refresh
 
 bprinttail1 'plrle' module
@@ -44,7 +56,7 @@ bprinttail1 Thomas Leathers
 gsub seg.output
 
 waitcy 30000
-gsub scene_4
+gsub scene_6
 gsub refresh
 
 bprinttail1 End Of Credits
@@ -115,6 +127,17 @@ label scene_4
 	asm setreg1;>IMG_BG_4
 	set pl.offset
 return
+
+label scene_5
+	asm setreg1;>IMG_BG_5
+	set pl.offset
+return
+
+label scene_6
+	asm setreg1;>IMG_BG_6
+	set pl.offset
+return
+
 include bench/lib/common as common
 include segment as seg
 include plrle as pl
@@ -122,4 +145,5 @@ asm include;bench/media/credits_bg.tas0;IMG_BG_1
 asm include;bench/media/credits_bg_2.tas0;IMG_BG_2
 asm include;bench/media/credits_bg_3.tas0;IMG_BG_3
 asm include;bench/media/credits_bg_4.tas0;IMG_BG_4
-
+asm include;bench/media/credits_bg_5.tas0;IMG_BG_5
+asm include;bench/media/credits_bg_6.tas0;IMG_BG_6

@@ -9,3 +9,5 @@ gfxcon -plrle %xwd%/credits_bg.png
 gfxcon -plrle %xwd%/credits_bg_2.png
 gfxcon -plrle %xwd%/credits_bg_3.png
 gfxcon -plrle %xwd%/credits_bg_4.png
+gfxcon -plrle %xwd%/credits_bg_5.png
+gfxcon -plrle %xwd%/credits_bg_6.png
