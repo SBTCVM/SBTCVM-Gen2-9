@@ -275,26 +275,11 @@ return
 	return
 
 
-
-
-## '?' help command.##
-	label help
-		textcolor *+++--0
-		prline vdi [cmd]    : Pass commands directly to SBTVDI Serial Console. see: 'vdi help'
-		prline ?            : This text.
-		prline *:           : select drive (currently only 'A:', 'B:', 'R:') case-insensitive.
-		prline drives       : list drive information
-		prline ver          : Print Version
-		prline about        : About SBTCVM-DOS
-		prline dir <string> : list files on CURRENT drive. optionally specify string filename
-		prline                  must contain.
-		prline <exec>       : search current disk, then all disks, for <exec>.txe, reset-load
-		prline                  first match.
-		prline *:\<exec>    : run <exec>.txe on drive (*) e.g. A:\boot for boot.txe on A:
-		print shutdown     : Shutdown SBTCVM-DOS
-		textcolor *0+0---
-		newline
-	return
+#call `command` help category via help.txe (saves space in command.txe)
+label help
+	bprinthead2n command
+	vdi rstld -1 help.txe
+return
 
 
 label splash

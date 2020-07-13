@@ -8,6 +8,7 @@ stnp --module cprle.stnp
 stnp --module plrle.stnp
 stnp --module musicengine.stnp
 stnp --module segment.stnp
+stnp --module dosargs.stnp
 
 #Standard namespace library
 print;standard namespace library

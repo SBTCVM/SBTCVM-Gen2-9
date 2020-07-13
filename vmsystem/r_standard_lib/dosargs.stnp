@@ -1,0 +1,76 @@
+###SBTCVM-DOS Command-line argument read-to-table module
+###based on comprompt module
+
+############################################
+##Entry Code Variables
+###READ THIS FOR SIZE OF arguments
+var size=0
+#one less than size, for indexing
+var itersize=0
+#####
+
+var shell_entry_zeroit=0
+var shell_entry_buff=0
+var shell_entry_chbuff=0
+
+####Ignore these please####
+
+var clearbuffer=@0
+
+var max=@80
+
+############################################
+
+
+#entry buffer
+#Table is purposely 5 entries longer than max size.
+table buffer,85,1
+tpad 85
+
+
+label getentry
+	val 0
+	set size
+	label getentry_loop
+		brdtail2
+		set shell_entry_chbuff
+		if shell_entry_chbuff,@0 gsub getentry_tobuff
+		if shell_entry_chbuff,@0 return
+		
+		
+		if size,max goto getentry_loop
+		add size,@1
+		set size
+		
+		get shell_entry_chbuff
+		push
+	goto getentry_loop
+
+
+
+label getentry_tobuff
+	#prevent stack2 underflow upon no arguments
+	if size,@0 return
+	stackrev
+	sub size,@1
+	set itersize
+	add size,@1
+	set shell_entry_zeroit
+	uiter getentry_tobuff_iter,getentry_tobuff_loop,@0,itersize
+	uiter getentry_pad_iter,getentry_pad,size,shell_entry_zeroit
+	if clearbuffer,@0 return
+	uiter getentry_pad_iter,getentry_pad,shell_entry_zeroit,max
+	return
+
+
+label getentry_tobuff_loop
+	pop
+	set shell_entry_buff
+	tabw buffer,getentry_tobuff_iter,@0,shell_entry_buff
+return
+
+label getentry_pad
+	
+	tabw buffer,getentry_pad_iter,@0,@0
+	
+	return 

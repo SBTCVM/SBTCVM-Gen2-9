@@ -1,29 +1,65 @@
-var kb=0
+var cmdflg=0
+var validflg=0
+gsub dosargs.getentry
 
-	textcolor *+00---
-	newline
-	prline ---SBTCVM HELP BROWSER---
-	newline
-	textcolor *+++--0
-		prline SBTCVM HELP - INDEX
-	textcolor *+++---
-	prline q: return to DOS
-	prline 1: overview
+textcolor *++0---
 
-label loop
-	keyprompt
-	set kb
-		if kb,:1 goto overview
-		if kb,:q goto return_dos
-		if kb,:Q goto return_dos
-goto loop
+tabstrc dosargs.buffer,@0,@0,command
+	set cmdflg
+	if cmdflg,@1 gsub command_txe_help
+	if cmdflg,@1 =validflg @1
+tabstrc dosargs.buffer,@0,@0,overview
+	set cmdflg
+	if cmdflg,@1 gsub overview
+	if cmdflg,@1 =validflg @1
+tabstrc dosargs.buffer,@0,@0,/?
+	set cmdflg
+	if cmdflg,@1 gsub help_help
+	if cmdflg,@1 =validflg @1
+if validflg,@0 gsub Errortext
+vdi rstld -1 command.txe
+stop
 
+label Errortext
+prline Please see `help /?` for usage
+return
+
+label help_help
+	prline Help Categories:
+	gsub divider
+	prline /?       - this help
+	prline command  - command.txe help
+	prline overview - overview of SBTCVM-DOS
+return
 
 label overview
-	vdi rstld -1 help_overview.hlp
-stop
+	prline SBTCVM-DOS Overview
+	gsub divider
+	prline SBTCVM DOS is a disk-based operating-system for SBTCVM...
+	prline (needs more info)
+return
 
 
-label return_dos
-	vdi rstld -1 command.txe
-stop
+label divider
+textcolor *000000
+prline ------------------------------
+textcolor *+0+---
+return
+
+label command_txe_help
+		prline command.txe command help
+		gsub divider
+		prline vdi [cmd]    : Pass commands directly to SBTVDI Serial Console. see: 'vdi help'
+		prline ?            : This text.
+		prline *:           : select drive (currently only 'A:', 'B:', 'R:') case-insensitive.
+		prline drives       : list drive information
+		prline ver          : Print Version
+		prline dir <string> : list files on CURRENT drive. optionally specify string filename
+		prline                  must contain.
+		prline <exec>       : search current disk, then all disks, for <exec>.txe, reset-load
+		prline                  first match.
+		prline *:\<exec>    : run <exec>.txe on drive (*) e.g. A:\boot for boot.txe on A:
+		prline shutdown     : Shutdown SBTCVM-DOS
+return
+
+include dosargs as dosargs
