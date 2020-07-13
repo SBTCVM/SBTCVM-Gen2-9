@@ -38,10 +38,6 @@ label main
 		set cmdflg
 		if cmdflg,@1 gsub help
 		if cmdflg,@1 =validflg @1
-	tabstrc cp.buffer,@0,@0,about
-		set cmdflg
-		if cmdflg,@1 gsub about
-		if cmdflg,@1 =validflg @1
 	tabstrc cp.buffer,@0,@0,vdi
 		set cmdflg
 		if cmdflg,@1 gsub vdi
@@ -300,36 +296,6 @@ return
 		newline
 	return
 
-##About Subroutine##
-	label about
-		textcolor *+++--0
-		newline
-		prline --ABOUT--
-		gsub splash
-		textcolor *+++--0
-		prline  v0.1 (SBTCVM Disk Operating System)
-		prline Part of SBTCVM Gen2-9
-		prline 
-		prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
-		prline 
-		prline SBTCVM-DOS is free software: you can redistribute it and/or modify
-		prline it under the terms of the GNU General Public License as published by
-		prline the Free Software Foundation, either version 3 of the License, or
-		prline (at your option) any later version.
-		prline 
-		prline SBTCVM-DOS is distributed in the hope that it will be useful,
-		prline but WITHOUT ANY WARRANTY; without even the implied warranty of
-		prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-		prline GNU General Public License for more details.
-		prline 
-		prline You should have received a copy of the GNU General Public License
-		print along with SBTCVM-DOS. If not, see <http://www.gnu.org/licenses/>
-		
-		#ensure last output line is a 'print' statement, not a 'prline' statement!
-		
-		textcolor *0+0---
-		newline
-	return
 
 label splash
 	textcolor *+++0--

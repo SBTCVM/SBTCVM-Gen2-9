@@ -1,0 +1,66 @@
+
+
+gsub about
+prline Press any key to return to SBTCVM-DOS
+keyprompt
+vdi rstld -1 command.txe
+prline ERROR cannot load command.txe!
+stop
+
+##About Subroutine##
+	label about
+		
+		textcolor *---+++
+		newline
+		textcolor *+++---
+		prline                               --About SBTCVM-DOS--
+		textcolor *---+++
+		newline
+		gsub splash
+		textcolor *+++---
+		prline  v0.1.1 (SBTCVM Disk Operating System)
+		prline Part of SBTCVM Gen2-9
+		prline 
+		prline Copyright (c) 2018-2020 Thomas Leathers & Contributors
+		prline 
+		prline SBTCVM-DOS is free software: you can redistribute it and/or modify
+		prline it under the terms of the GNU General Public License as published by
+		prline the Free Software Foundation, either version 3 of the License, or
+		prline (at your option) any later version.
+		prline 
+		prline SBTCVM-DOS is distributed in the hope that it will be useful,
+		prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+		prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+		prline GNU General Public License for more details.
+		prline 
+		prline You should have received a copy of the GNU General Public License
+		print along with SBTCVM-DOS. If not, see <http://www.gnu.org/licenses/>
+		
+		#ensure last output line is a 'print' statement, not a 'prline' statement!
+		
+		textcolor *0+0---
+		newline
+	return
+
+
+
+
+label splash
+	textcolor *+++0--
+	print S
+	textcolor *+++00-
+	print B
+	textcolor *+++-0-
+	print T
+	textcolor *+++-00
+	print C
+	textcolor *+++--0
+	print V
+	textcolor *+++0-0
+	print M
+	textcolor *+++---
+	print -
+	textcolor *0++---
+	print DOS
+	textcolor *+++---
+return

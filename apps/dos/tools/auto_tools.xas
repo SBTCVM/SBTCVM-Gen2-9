@@ -6,3 +6,6 @@ xas %xwd%/help
 #xas %xwd%/splash
 
 xas %xwd%/echo
+
+xas %xwd%/about
+

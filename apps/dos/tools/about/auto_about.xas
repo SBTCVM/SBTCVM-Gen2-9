@@ -1,0 +1,2 @@
+stnp %xwd%/about.stnp
+diskedit --appendfile dos %xwd%/about.trom about.txe trom
