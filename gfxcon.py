@@ -186,12 +186,19 @@ def colart_maker_RLE(imagepath, notrailnew=0):
 
 
 
-def plot_RLE(imagepath, lineinterpol=0):
+def plot_RLE(imagepath, lineinterpol=0, threshold=None):
 	print("converting image into PLRLE plotter image format...")
+	if threshold!=None:
+		try:
+			threshold=int(threshold)
+		except ValueError:
+			sys.exit("INVALID THRESHOLD ARGUMENT!")
+		if threshold<0:
+			sys.exit("INVALID THRESHOLD ARGUMENT!")
 	image=pygame.image.load(imagepath)
 	xsize=image.get_width()
 	ysize=image.get_height()
-	
+	pixcol=None
 	#print(image.get_height())
 	#print(ysize)
 	size=1
@@ -206,7 +213,11 @@ def plot_RLE(imagepath, lineinterpol=0):
 	for coly in xrange(0, ysize):
 		buffx=""
 		for linex in xrange(0, xsize):
+			prevpix = pixcol
 			pixcol = image.get_at((linex, coly))
+			if threshold!=None and prevpix!=None:
+				if abs(prevpix[0]-pixcol[0])<threshold and abs(prevpix[1]-pixcol[1])<threshold and abs(prevpix[2]-pixcol[2])<threshold:
+					pixcol = prevpix
 			if lineinterpol==0:
 				buffx=bin8totrit3(pixcol[0])+bin8totrit3(pixcol[1])+bin8totrit3(pixcol[2])
 			else:
@@ -263,6 +274,10 @@ if __name__=="__main__":
 		arg=sys.argv[2]
 	except IndexError:
 		arg=None
+	try:
+		arg2=sys.argv[3]
+	except IndexError:
+		arg2=None
 	if cmd in ["-h", "--help"]:
 		print('''SBTCVM Gen2-9 gfx conversion utility.
 -p(n) [image]     : convert an image into 3-color ternary-packed art,
@@ -271,8 +286,10 @@ if __name__=="__main__":
 	and place it in a tas0 file. append n for no trailing newline.
 -cprle(n) [image] : convert an image into 27-color cprle compressed
 	packed art image data.
--plrle(i) [image] : convert an image into 9-trit (PLRLE format) rle compressed
-	tritmap image. append i for line-based striped interpolation.''')
+-plrle(i) [image] (threshold) : convert an image into 9-trit (PLRLE format) rle compressed.
+	tritmap image. append i for line-based striped interpolation.
+	follow image name by an OPTIONAL threshold integer value a color channel must change for encoder to change colors.
+	(at cost of detail)''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2-9 gfx conversion utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -321,10 +338,10 @@ see readme.md for more information and licensing of media.
 		colart_maker_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
 	elif cmd in ["-plrle"]:
 		print("RLE-encoded 9-trit RGB tritmap.")
-		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1))
+		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=0, threshold=arg2)
 	elif cmd in ["-plrlei"]:
 		print("RLE-encoded 9-trit RGB tritmap. (line interpolated)")
-		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), 1)
+		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=1, threshold=arg2)
 
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")

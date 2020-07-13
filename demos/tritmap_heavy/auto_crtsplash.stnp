@@ -1,0 +1,15 @@
+ 
+gamode @30
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+keyprompt
+
+stop
+
+
+include plrle as pl
+asm include;tritmap_heavy+image.tas0;image_offset1
