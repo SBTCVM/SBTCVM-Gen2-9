@@ -139,6 +139,10 @@ x :  m : asm varname  : description
 520: [w] plot.fhalt : instruct the plotter to wait until next frame.
 521: [b] plot.buffer: write: clear draw buffer. read: get number of items in
 		draw buffer. (keep at or below 30 for constant drawing.)
+522: [w] plot.x3    : set plotter x3 position register
+523: [w] plot.y3    : set plotter y3 position register
+524: [w] plot.tri   : draw triangle between x1,y1 x2,y2, and x3,y3
+
 
 
 #bi-directional buffers (read.head & read.tail return 0 when buffer is empty)

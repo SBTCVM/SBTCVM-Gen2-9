@@ -71,6 +71,7 @@ ga.mode.tty;0
 snd.1.stop;206
 io.ttywr;1
 plot.y1;502
+plot.y3;523
 plot.y2;504
 rand4.end;60
 snd.1.vol;201
@@ -80,11 +81,13 @@ snd.2.play;215
 snd.2.pan;212
 snd.4.pulse;233
 plot.x2;503
+plot.x3;522
 plot.x1;501
 plot.height;510
 io.tritdump;2
 snd.1.wave;200
 snd.4.stop;236
+plot.tri;524
 mouse.realx;303
 mouse.realy;304
 mouse.locky;302

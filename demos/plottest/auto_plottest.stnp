@@ -1,6 +1,7 @@
 
 prline This will show a basic plotter example, then wait for a keypress.
-prline press a key when you see white lines on a blue background.
+prline press a key when you see white lines on a blue background, with a few 
+prline pink triangles... [press a key to begin demo]
 
 keyprompt
 
@@ -56,6 +57,23 @@ drawy1 @35
 drawy2 @35
 drawline
 
+### you can draw triangles like this:
+drawcolor *+++000+00
+drawx1 @12
+drawy1 @14
+drawy2 @-1
+drawx2 @-21
+drawy3 @43
+drawx3 @-20
+drawtri
+
+drawx3 @-200
+drawcolor *+++---+++
+drawtri
+
+drawy3 @-100
+drawcolor *+00---000
+drawtri
 
 #you can get how many operations are in the plotter's draw command buffer like
 #so:

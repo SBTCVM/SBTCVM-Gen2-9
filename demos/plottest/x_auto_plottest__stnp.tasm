@@ -16,6 +16,17 @@ null;+++++++++;*+++++++++
 null;10x33;@33
 null;10x34;@34
 null;10x35;@35
+null;+++000+00;*+++000+00
+null;10x12;@12
+null;10x14;@14
+null;10x-1;@-1
+null;10x-21;@-21
+null;10x43;@43
+null;10x-20;@-20
+null;10x-200;@-200
+null;+++---+++;*+++---+++
+null;10x-100;@-100
+null;+00---000;*+00---000
 null;10x0;@0
 #prline
 fopwri1;:T
@@ -56,7 +67,7 @@ fopwri1;:m
 fopwri1;:p
 fopwri1;:l
 fopwri1;:e
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:t
 fopwri1;:h
@@ -142,13 +153,72 @@ fopwri1;:o
 fopwri1;:u
 fopwri1;:n
 fopwri1;:d
+fopwri1;:\m
+fopwri1;:\s
+fopwri1;:w
+fopwri1;:i
+fopwri1;:t
+fopwri1;:h
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:\s
+fopwri1;:f
+fopwri1;:e
+fopwri1;:w
+fopwri1;:\s
+fopwri1;:\n
+#prline
+fopwri1;:p
+fopwri1;:i
+fopwri1;:n
+fopwri1;:k
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:r
+fopwri1;:i
+fopwri1;:a
+fopwri1;:n
+fopwri1;:g
+fopwri1;:l
+fopwri1;:e
+fopwri1;:s
 fopwri1;:.
+fopwri1;:.
+fopwri1;:.
+fopwri1;:\s
+fopwri1;:[
+fopwri1;:p
+fopwri1;:r
+fopwri1;:e
+fopwri1;:s
+fopwri1;:s
+fopwri1;:\s
+fopwri1;:a
+fopwri1;:\s
+fopwri1;:k
+fopwri1;:e
+fopwri1;:y
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:o
+fopwri1;:\s
+fopwri1;:b
+fopwri1;:e
+fopwri1;:g
+fopwri1;:i
+fopwri1;:n
+fopwri1;:\s
+fopwri1;:d
+fopwri1;:e
+fopwri1;:m
+fopwri1;:o
+fopwri1;:]
 fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-5
-gotoif;>keyprompt--loop-5
+ioread1;>io.ttyrd;keyprompt--loop-6
+gotoif;>keyprompt--loop-6
 #plotter y pos 1
 dataread1;>@32
 iowrite1;>plot.y1
@@ -220,6 +290,45 @@ dataread1;>@35
 iowrite1;>plot.y2
 #plotter draw line
 iowrite1;>plot.line
+#plotter draw line
+dataread1;>*+++000+00
+iowrite1;>plot.color
+#plotter x pos 1
+dataread1;>@12
+iowrite1;>plot.x1
+#plotter y pos 1
+dataread1;>@14
+iowrite1;>plot.y1
+#plotter y pos 2
+dataread1;>@-1
+iowrite1;>plot.y2
+#plotter x pos 2
+dataread1;>@-21
+iowrite1;>plot.x2
+#plotter y pos 3
+dataread1;>@43
+iowrite1;>plot.y3
+#plotter x pos 3
+dataread1;>@-20
+iowrite1;>plot.x3
+#plotter draw triangle
+iowrite1;>plot.tri
+#plotter x pos 3
+dataread1;>@-200
+iowrite1;>plot.x3
+#plotter draw line
+dataread1;>*+++---+++
+iowrite1;>plot.color
+#plotter draw triangle
+iowrite1;>plot.tri
+#plotter y pos 3
+dataread1;>@-100
+iowrite1;>plot.y3
+#plotter draw line
+dataread1;>*+00---000
+iowrite1;>plot.color
+#plotter draw triangle
+iowrite1;>plot.tri
 #plotter get buffer content length.
 ioread1;>plot.buffer
 #set(1) (used after 2-op math, asm code, or get)
@@ -235,8 +344,8 @@ iowrite1;>ga.mode
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-73
-gotoif;>keyprompt--loop-73
+ioread1;>io.ttyrd;keyprompt--loop-91
+gotoif;>keyprompt--loop-91
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
@@ -276,8 +385,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-79
-gotoif;>keyprompt--loop-79
+ioread1;>io.ttyrd;keyprompt--loop-97
+gotoif;>keyprompt--loop-97
 #stop (shutdown vm)
 stop
 #END OF FILE

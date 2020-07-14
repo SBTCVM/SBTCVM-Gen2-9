@@ -567,6 +567,8 @@ class PlotterEngine:
 		self.y1=0
 		self.x2=0
 		self.y2=0
+		self.x3=0
+		self.y3=0
 		self.color=(127, 127, 127)
 		self.widthr=1
 		self.heightr=1
@@ -584,6 +586,10 @@ class PlotterEngine:
 		ioref.setwritenotify(520, self.fhalt)
 		ioref.setwritenotify(521, self.flush)
 		ioref.setreadoverride(521, self.buffsize)
+		ioref.setwritenotify(522, self.dx3)
+		ioref.setwritenotify(523, self.dy3)
+		ioref.setwritenotify(524, self.tri)
+		
 	def flush(self, addr, data):
 		self.drawbuff=[]
 	def buffsize(self, addr, data):
@@ -592,10 +598,15 @@ class PlotterEngine:
 		self.x1=int(data)+121
 	def dx2(self, addr, data):
 		self.x2=int(data)+121
+	def dx3(self, addr, data):
+		self.x3=int(data)+121
+	
 	def dy1(self, addr, data):
 		self.y1=int(data)+121
 	def dy2(self, addr, data):
 		self.y2=int(data)+121
+	def dy3(self, addr, data):
+		self.y3=int(data)+121
 	
 	def widthset(self, addr, data):
 		self.widthr=int(data)
@@ -613,6 +624,8 @@ class PlotterEngine:
 		self.color=(R, G, B)
 	def line(self, addr, data):
 		self.drawbuff.append([1, self.x1, self.y1, self.x2, self.y2, self.color])
+	def tri(self, addr, data):
+		self.drawbuff.append([3, self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, self.color])
 	def rect(self, addr, data):
 		self.drawbuff.append([2, self.x1, self.y1, self.widthr, self.heightr, self.color])
 	def fill(self, addr, data):
@@ -642,7 +655,10 @@ class PlotterEngine:
 			if chunk[0]==2:
 				drect=pygame.Rect((int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag)))
 				uprects.append(pygame.draw.rect(surface, chunk[5], drect, 0))
+			if chunk[0]==3:
+				uprects.append(pygame.draw.polygon(surface, chunk[7], [(int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag)), (int(chunk[5]*self.xmag), int(chunk[6]*self.ymag))]))
 
+			
 		surface.unlock()
 		if fullup:
 			pygame.display.flip()

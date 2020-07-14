@@ -214,6 +214,9 @@ Command documentation:
 	drawy1    [varname]: set plotter y1
 	drawx2    [varname]: set plotter x2
 	drawy2    [varname]: set plotter y2
+	drawx3    [varname]: set plotter x3
+	drawy3    [varname]: set plotter y3
+	drawtri            : draw trinagle between x1,y1 x2,y2 & x3,y3 using plotter color
 	drawwdith  [varname]: set plotter width register
 	drawheight  [varname]: set plotter height register
 	drawcolor [varname]: set plotter color (9-trit RGB)

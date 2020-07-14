@@ -73,6 +73,9 @@ v>plot.width;10x509
 v>plot.height;10x510
 v>plot.fhalt;10x520
 v>plot.buffer;10x521
+v>plot.x3;10x522
+v>plot.y3;10x523
+v>plot.tri;10x524
 
 
 ##sound
