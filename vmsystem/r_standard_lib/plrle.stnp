@@ -104,9 +104,16 @@ var RL_loopcount_add1=0
 
 label RL_printBAR
 
-	add RL_loopcount,@1
-	set RL_loopcount_add1
-	mul RL_loopcount_add1,pixx
+	#add RL_loopcount,@1
+	#set RL_loopcount_add1
+	#mul RL_loopcount_add1,pixx
+	#set RL_BARWIDE
+	
+	get1 RL_loopcount
+	asm setreg2;10x1
+	asm add
+	get2 pixx
+	asm mul
 	set RL_BARWIDE
 	
 	
@@ -116,13 +123,17 @@ label RL_printBAR
 	
 	label no_trans
 		add RL_BARWIDE,@1
-		set RL_BARWIDEDRAW
-		drawwidth RL_BARWIDEDRAW
+		#faster
+		asm iowrite1;>plot.width
+		
+		#set RL_BARWIDEDRAW
+		#drawwidth RL_BARWIDEDRAW
 		drawrect
 	label yes_trans
 	add RL_BARWIDE,px
 	set px
-	drawx1 px
+	#drawx1 px
+	asm iowrite1;>plot.x1
 return
 
 ################END OF CPRLE DECODER ROUTINES#########

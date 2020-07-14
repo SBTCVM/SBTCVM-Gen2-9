@@ -171,45 +171,46 @@ s1pop1
 gotoreg1
 #label
 null;;RL_printBAR--label
-#add (2op math)
+#get(1) (may be used with set, or asm code)
 dataread1;>RL_loopcount
-dataread2;>@1
-add
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>RL_loopcount_add1
-#multiply (2op math)
-dataread1;>RL_loopcount_add1
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #113
+setreg2;10x1#SSTNPL Source Line: '113' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #114
+add#SSTNPL Source Line: '114' 
+#get2 (may be used with set2, and asm code.)
 dataread2;>pixx
-mul
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #116
+mul#SSTNPL Source Line: '116' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_BARWIDE
 #conditional goto
 dataread1;>do_trans
 dataread2;>@0
-gotoif;>goto--branch-114
-goto;>goto--jumper-114
-setreg1;>goto--jumper-114;goto--branch-114
+gotoif;>goto--branch-121
+goto;>goto--jumper-121
+setreg1;>goto--jumper-121;goto--branch-121
 goto;>no_trans--label
-null;;goto--jumper-114
+null;;goto--jumper-121
 #conditional goto
 dataread1;>RL_data
 dataread2;>transkey
-gotoif;>goto--branch-115
-goto;>goto--jumper-115
-setreg1;>goto--jumper-115;goto--branch-115
+gotoif;>goto--branch-122
+goto;>goto--jumper-122
+setreg1;>goto--jumper-122;goto--branch-122
 goto;>yes_trans--label
-null;;goto--jumper-115
+null;;goto--jumper-122
 #label
 null;;no_trans--label
 #add (2op math)
 dataread1;>RL_BARWIDE
 dataread2;>@1
 add
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>RL_BARWIDEDRAW
-#plotter width
-dataread1;>RL_BARWIDEDRAW
-iowrite1;>plot.width
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #127
+iowrite1;>plot.width#SSTNPL Source Line: '127' 
 #plotter draw rect
 iowrite1;>plot.rect
 #label
@@ -220,9 +221,9 @@ dataread2;>px
 add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>px
-#plotter x pos 1
-dataread1;>px
-iowrite1;>plot.x1
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #136
+iowrite1;>plot.x1#SSTNPL Source Line: '136' 
 #return from subroutine.
 s1pop1
 gotoreg1

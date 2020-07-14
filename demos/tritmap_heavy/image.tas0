@@ -1,6 +1,6 @@
 #SBTCVM Gen2-9 GFXCON: run-length encoded tritmap
 #Needs to be decoded manually.
-#image file: vmuser/tritmap_heavy/image.png
+#image file: demos/tritmap_heavy/image.png
 null;>.DATASIZE
 raw;10x0,0+++-+-++
 raw;10x0,0000++-00
