@@ -140,7 +140,7 @@ return
 
 include bench/lib/common as common
 include segment as seg
-include plrle as pl
+include plrle_noalpha as pl
 asm include;bench/media/credits_bg.tas0;IMG_BG_1
 asm include;bench/media/credits_bg_2.tas0;IMG_BG_2
 asm include;bench/media/credits_bg_3.tas0;IMG_BG_3

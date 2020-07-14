@@ -461,8 +461,8 @@ s1pop1
 gotoreg1
 #module include: line 112: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 113: plrle as pl
-includeas;plrle,pl
+#module include: line 113: plrle_noalpha as pl
+includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #114
 include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '114' 

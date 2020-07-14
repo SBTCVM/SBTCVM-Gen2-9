@@ -803,8 +803,8 @@ gotoreg1
 includeas;bench/lib/common,common
 #module include: line 142: segment as seg
 includeas;segment,seg
-#module include: line 143: plrle as pl
-includeas;plrle,pl
+#module include: line 143: plrle_noalpha as pl
+includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #144
 include;bench/media/credits_bg.tas0;IMG_BG_1#SSTNPL Source Line: '144' 

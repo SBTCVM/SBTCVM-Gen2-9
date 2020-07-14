@@ -11,5 +11,5 @@ keyprompt
 stop
 
 
-include plrle as pl
+include plrle_noalpha as pl
 asm include;tritmap_heavy+image.tas0;image_offset1

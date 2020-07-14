@@ -35,7 +35,7 @@ stop
 
 
 
-include plrle as pl
+include plrle_noalpha as pl
 asm include;tritmap+test.tas0;image_offset1
 asm include;tritmap+test_copy.tas0;image_offset2
 

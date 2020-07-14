@@ -53,5 +53,5 @@ label mouse_wait
 return
 	
 
-include plrle as pl
+include plrle_noalpha as pl
 asm include;bench+media+logo.tas0;ICON_logo

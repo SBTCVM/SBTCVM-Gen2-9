@@ -494,8 +494,8 @@ ioread1;>io.ttyrd;keyprompt--loop-30
 gotoif;>keyprompt--loop-30
 #stop (shutdown vm)
 stop
-#module include: line 38: plrle as pl
-includeas;plrle,pl
+#module include: line 38: plrle_noalpha as pl
+includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #39
 include;tritmap+test.tas0;image_offset1#SSTNPL Source Line: '39' 

@@ -119,8 +119,8 @@ null;;goto--jumper-52
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 56: plrle as pl
-includeas;plrle,pl
+#module include: line 56: plrle_noalpha as pl
+includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #57
 include;bench+media+logo.tas0;ICON_logo#SSTNPL Source Line: '57' 
