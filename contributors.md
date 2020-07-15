@@ -1,35 +1,18 @@
 # Development Team:        
         
-Lead Developer:        
-  Thomas Leathers        
+**Lead Developer, coder, graphics artist, testing, system design, compilers**:        
+Thomas Leathers        
         
-Graphics and UI:        
-  Thomas Leathers        
+**Resident JAVA Guru, coder, testing, system design:**       
+Krystos        
         
-Utilities and systems programming:        
-  Thomas Leathers        
-  eekee        
-        
-TROM programming:        
-  Thomas Leathers        
-  eekee        
+**testing, system design, coder:**        
+WolfSkin
 
-Compilers & Interpreters:
-  Thomas Leathers        
-  eekee        
- 
-VM architecture and system design:        
-  Thomas Leathers        
-  eekee        
-        
-Research:        
-  eekee        
-  Thomas Leathers        
-        
-Testing:        
-  eekee        
-  Thomas Leathers        
-        
+**testing, system design, coder:**        
+eekee
+
+
 ## Former teammembers:
 Wyatt Huckaby (former webmaster)        
 
