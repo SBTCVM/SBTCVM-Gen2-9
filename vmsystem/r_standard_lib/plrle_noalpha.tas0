@@ -171,27 +171,21 @@ null;;RL_printBAR--label
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_loopcount
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #113
-setreg2;10x1#SSTNPL Source Line: '113' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #114
-add#SSTNPL Source Line: '114' 
+#_______NOTE: this corresponds to SSTNPL source line #109
+adddata1;10x1#SSTNPL Source Line: '109' 
 #get2 (may be used with set2, and asm code.)
 dataread2;>pixx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #116
-mul#SSTNPL Source Line: '116' 
+#_______NOTE: this corresponds to SSTNPL source line #111
+mul#SSTNPL Source Line: '111' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_BARWIDE
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #119
-setreg2;10x1#SSTNPL Source Line: '119' 
+#_______NOTE: this corresponds to SSTNPL source line #115
+adddata1;10x1#SSTNPL Source Line: '115' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #120
-add#SSTNPL Source Line: '120' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #122
-iowrite1;>plot.width#SSTNPL Source Line: '122' 
+#_______NOTE: this corresponds to SSTNPL source line #117
+iowrite1;>plot.width#SSTNPL Source Line: '117' 
 #plotter draw rect
 iowrite1;>plot.rect
 #label
@@ -203,8 +197,8 @@ add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>px
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #131
-iowrite1;>plot.x1#SSTNPL Source Line: '131' 
+#_______NOTE: this corresponds to SSTNPL source line #125
+iowrite1;>plot.x1#SSTNPL Source Line: '125' 
 #return from subroutine.
 s1pop1
 gotoreg1

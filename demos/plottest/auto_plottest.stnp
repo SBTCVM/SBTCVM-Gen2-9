@@ -1,7 +1,7 @@
 
 prline This will show a basic plotter example, then wait for a keypress.
-prline press a key when you see white lines on a blue background, with a few 
-prline pink triangles... [press a key to begin demo]
+prline press a key when you see the pink spacecraft in the blue & grey
+prline hangar [press a key to begin demo]
 
 keyprompt
 
@@ -23,39 +23,44 @@ drawflush
 drawfill *-0+-000++
 
 
-drawx1 @-121
-drawy1 @-121
-
-drawwidth @121
-drawheight @121
-
-drawcolor *00+000000
-drawrect
+###Floor stripes (lines)
 
 drawcolor *+++++++++
 
+uiter linecount,floor_lines,@0,@50
 
 
+
+#WALL (triangle)
+
+drawcolor *00000000+
 drawx1 @-121
 drawy1 @-121
 
 drawx2 @121
 drawy2 @121
 
-drawline
+drawx3 @121
+drawy3 @-121
+drawtri
+
+#SPACE (rect)
+
+drawx1 @-121
+drawy1 @-121
+
+drawwidth @121
+drawheight @121
+
+drawcolor *---------
+drawrect
 
 
-drawy1 @33
-drawy2 @33
-drawline
 
-drawy1 @34
-drawy2 @34
-drawline
 
-drawy1 @35
-drawy2 @35
-drawline
+
+
+
 
 ### you can draw triangles like this:
 drawcolor *+++000+00
@@ -67,12 +72,22 @@ drawy3 @43
 drawx3 @-20
 drawtri
 
+drawcolor *---------
+drawx1 @-10
+drawtri
+
+
 drawx3 @-200
 drawcolor *+++---+++
 drawtri
 
-drawy3 @-100
+drawy3 @-50
 drawcolor *+00---000
+drawtri
+
+drawy3 @14
+drawx3 @12
+drawcolor *+0-------
 drawtri
 
 #you can get how many operations are in the plotter's draw command buffer like
@@ -96,3 +111,21 @@ prline Thank you. Press a key to exit.
 
 keyprompt
 stop
+
+
+var lspace=@1
+var lpos=0
+
+label floor_lines
+	drawx1 @-121
+	drawx2 @121
+	drawy1 lpos
+	drawy2 lpos
+	add lpos,lspace
+	set lpos
+	add lspace,@4
+	set lspace
+	drawline
+return
+
+
