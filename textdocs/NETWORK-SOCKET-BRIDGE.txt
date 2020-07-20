@@ -35,4 +35,36 @@ R: serial ConnectionError: 0 for no error, any other number means there was an e
 ------SBTSOC Protocol Details------
 
 
+----message scheme----
 
+
+messages are to be contained within brackets `[]`
+the message type is to be split from the message contents with a `:`
+
+----connection start----
+
+upon connection, the machine initializing the connection will send a
+version confirmation message, which describes the protocol version
+requested to be used.
+
+	[ver:0]
+
+Following this, the machine being connected to, will send either a confirmation:
+
+	[vready]
+	
+or, if the version is not supported, it will return an error message, and close
+ the connection:
+
+	[verror]
+
+
+----data IO----
+
+--for 9 trits--
+
+	[d9:+-0+++000]
+
+--for 12 trits--
+
+	[d12:+++---+++000]
