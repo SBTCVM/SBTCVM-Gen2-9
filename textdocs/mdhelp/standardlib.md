@@ -11,6 +11,11 @@ This module is used to render vector text on the SBTGA plotter. (mode 30)
 
 see _plottertext_ in _demos_ for a good example.
 
+### dosargs
+This is the official SSTNPL module for parsing command line arguments
+passed to applications by SBTCVM-DOS's `command.txe`
+
+see the __SBTCVM-DOS source code__ for examples of its usage.
 
 ### comprompt
 This is a standard command prompt routine shared by several SSTNPL-based 
@@ -25,8 +30,9 @@ This is a standard decoder for gfxcon's color packart compression method.
 
 see _comppack_ in _demos_ for a good example.
 
-### plrle
+### plrle & plrle_noalpha
 This is a standard decoder for gfxcon's compressed tritmap format. (uses SBTGA plotter mode (mode 30))
+the latter module name lacks color-key transparency support but is marginally faster when decoding...
 
 see _tritmap_ in _demos_ for a good example.
 
