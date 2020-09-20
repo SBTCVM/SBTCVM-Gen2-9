@@ -1,0 +1,47 @@
+
+val @9800
+set gt.input
+
+
+gsub test_it
+newline
+val @-9800
+set gt.input
+
+gsub test_it
+newline
+val @-8801
+set gt.input
+gsub test_it
+keyprompt
+stop
+
+label test_it
+	dumpd gt.input
+	newline
+	dumpt gt.input
+	newline
+	
+	prline please wait while i extract the nonets...
+	
+	gsub gt.gettris
+	prline tri1
+	dumpd gt.tri1
+	newline
+	dumpt gt.tri1
+	newline
+	
+	prline tri2
+	dumpd gt.tri2
+	newline
+	dumpt gt.tri2
+	newline
+	
+	prline tri3
+	dumpd gt.tri3
+	newline
+	dumpt gt.tri3
+	newline
+return
+
+include gettriads as gt

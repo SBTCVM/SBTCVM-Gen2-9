@@ -1,0 +1,13 @@
+int9;input;10x9800
+int9;tri1;0
+int9;tri2;0
+int9;tri3;0
+int9;temp1;0
+int9;temp2;0
+int9;@729;10x729
+int9;@729;10x729
+int9;@27;10x27
+int9;@729;10x729
+int9;@27;10x27
+int9;@27;10x27
+label;gettris

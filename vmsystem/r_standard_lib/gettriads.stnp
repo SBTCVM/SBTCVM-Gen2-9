@@ -1,0 +1,42 @@
+ 
+
+
+
+
+
+
+var input=@9800
+var tri1=0
+var tri2=0
+var tri3=0
+
+
+
+var temp1=0
+var temp2=0
+label gettris
+	mul input,@729
+	set temp1
+	div temp1,@729
+	set tri1
+
+#--- 2nd triad
+
+	sub input,tri1
+	set temp1
+	set temp2#(used later on)
+	mul temp1,@27
+	set temp1
+	div temp1,@729
+	set tri2
+
+
+#--- 3rd triad
+	div temp2,@27
+	set temp2
+	sub temp2,tri2
+	set temp2
+	div temp2,@27
+	set tri3
+return
+

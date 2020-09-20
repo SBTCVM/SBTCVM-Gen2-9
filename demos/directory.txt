@@ -104,6 +104,9 @@ burst:
 
 doodle:
 	A crude, mouse-based drawing demo using the plotter. [nocurses][mouse]
+
+test_gettriads:
+	a very boring but important & useful test of the SSTNPL gettriads module.
 	
 plottest:
 	A basic example of SBTGA mode 30: plotter mode.
