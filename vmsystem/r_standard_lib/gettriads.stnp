@@ -5,7 +5,7 @@
 
 
 
-var input=@9800
+var input=0
 var tri1=0
 var tri2=0
 var tri3=0

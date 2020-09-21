@@ -36,6 +36,12 @@ the latter module name lacks color-key transparency support but is marginally fa
 
 see _tritmap_ in _demos_ for a good example.
 
+### gettriads
+A VERY simple module containing a subroutine that extracts the three triads in a nonet, and places them in 3
+separate variables....
+
+see _`test_gettriads`_ in _demos_ for usage example.
+
 ### musicengine
 
 music playback routine Module for SBTCVM's 4-channel sound chip.
