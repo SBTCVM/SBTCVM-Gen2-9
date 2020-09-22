@@ -1,0 +1,18 @@
+ 
+gamode @30
+prline Notice: This program requires SBTGA Graphics!
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+keyprompt
+
+gamode @0
+
+vdi rstld -1 command.txe
+
+
+include plrle_noalpha as pl
+asm include;dos+media+dosfloppy.tas0;image_offset1

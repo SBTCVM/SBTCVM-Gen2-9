@@ -1,1 +1,2 @@
- 
+stnp %xwd%/splash.stnp
+diskedit --appendfile dos %xwd%/splash.trom splash.txe trom
