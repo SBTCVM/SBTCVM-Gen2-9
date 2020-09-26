@@ -1,0 +1,5 @@
+ 
+diskedit --new showcase
+xas %xwd%/media
+xas %xwd%/menu
+xas %xwd%/splash

@@ -1,0 +1,3 @@
+stnp %xwd%/splash.stnp
+diskedit --appendfile showcase %xwd%/splash.trom boot.txe trom
+diskedit --appendfile showcase %xwd%/splash.trom showcase.txe trom

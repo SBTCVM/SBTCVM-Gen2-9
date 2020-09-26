@@ -1,0 +1,81 @@
+ 
+gamode @30
+val @3
+set pl.pixx
+set pl.pixy
+
+val *---------
+set seg.color_on
+
+val @-115
+set seg.posx
+set seg.posy
+gsub seg.init_pos
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+#### Title ####
+
+bprinttail1 SBTCVM Showcase
+gsub seg.output
+####set params for subtitle text###
+
+val @4
+set seg.height
+val @10
+set seg.vert_space
+
+bprinttail1 Version 1.0
+bprinttail1 For SBTCVM Gen 2-9
+gsub seg.output
+
+
+### Change segment params for lower text###
+val *+++++++++
+set seg.color_on
+
+val @10
+set seg.posy
+gsub seg.init_pos
+
+###Lower text###
+
+bprinttail1 Simple
+bprinttail1 Balanced
+bprinttail1 Ternary
+bprinttail1 Computer
+bprinttail1 Virtual
+bprinttail1 Machine
+
+
+gsub seg.output
+
+####prompt text####
+
+val @110
+set seg.posy
+gsub seg.init_pos
+
+
+val @3
+set seg.height
+set seg.width
+val @7
+set seg.vert_space
+set seg.hori_space
+bprinttail1 Press a key to begin.
+gsub seg.output
+
+keyprompt
+
+gamode @0
+
+vdi rstld -1 mainmenu.txe
+
+
+include plrle_noalpha as pl
+include segment as seg
+asm include;showcase+media+bootsplash.tas0;image_offset1

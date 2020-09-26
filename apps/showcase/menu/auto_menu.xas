@@ -1,0 +1,2 @@
+stnp %xwd%/mainmenu.stnp
+diskedit --appendfile showcase %xwd%/mainmenu.trom mainmenu.txe trom

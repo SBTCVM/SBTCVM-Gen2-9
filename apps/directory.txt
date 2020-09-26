@@ -35,6 +35,11 @@ bench:
 	SBTCVM-DOS automatically.
 	[plotter],[nocurses],[mouse]
 
+showcase:
+	SBTCVM Showcase Disk: this disk features a fancy introduction
+	To the wonders of SBTCVM Gen 2-9.
+	[plotter],[nocurses]
+
 ----GAMES----
 
 ontrain:
