@@ -71,7 +71,6 @@ gsub seg.output
 
 keyprompt
 
-gamode @0
 
 vdi rstld -1 mainmenu.txe
 

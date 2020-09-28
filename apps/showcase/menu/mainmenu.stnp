@@ -1,4 +1,62 @@
- 
-prline TEST PRESS KEY TO EXIT
-keyprompt
-stop
+drawfill *+00+00+++
+drawx1 @-121
+drawy1 @-121
+drawwidth @243
+drawheight @10
+drawcolor *-------++
+drawrect
+
+
+val *+++++++++
+set seg.color_on
+
+val @-117
+set seg.posx
+val @-119
+set seg.posy
+gsub seg.init_pos
+
+val @2
+set seg.height
+val @3
+set seg.width
+val @7
+set seg.vert_space
+val @8
+set seg.hori_space
+
+bprinttail1 SBTCVM Showcase - Main Menu
+gsub seg.output
+
+val *---------
+set seg.color_on
+
+val @-90
+set seg.posy
+gsub seg.init_pos
+
+bprinttail1 <q> quit
+bprinttail1 <s> splash
+gsub seg.output
+
+var KBuff=0
+
+label Main
+	keyprompt
+	set KBuff
+	if KBuff,:q stop
+	if KBuff,:Q stop
+	if KBuff,:s goto DEMO_splash
+	if KBuff,:S goto DEMO_splash
+goto Main
+
+label DEMO_splash
+	vdi rstld -1 boot.txe
+	gamode @0
+	prline CRASH! x.x
+	prline ERROR: Cannot find boot program. wait... what?
+	prline Press a key to exit.
+	keyprompt
+	stop
+
+include segment as seg
