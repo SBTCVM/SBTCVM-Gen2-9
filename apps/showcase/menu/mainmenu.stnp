@@ -37,6 +37,7 @@ gsub seg.init_pos
 
 bprinttail1 <q> quit
 bprinttail1 <s> splash
+bprinttail1 <c> Plot Colors
 gsub seg.output
 
 var KBuff=0
@@ -48,6 +49,8 @@ label Main
 	if KBuff,:Q stop
 	if KBuff,:s goto DEMO_splash
 	if KBuff,:S goto DEMO_splash
+	if KBuff,:c goto DEMO_color
+	if KBuff,:C goto DEMO_color
 goto Main
 
 label DEMO_splash
@@ -55,6 +58,15 @@ label DEMO_splash
 	gamode @0
 	prline CRASH! x.x
 	prline ERROR: Cannot find boot program. wait... what?
+	prline Press a key to exit.
+	keyprompt
+	stop
+
+label DEMO_color
+	vdi rstld -1 color.txe
+	gamode @0
+	prline CRASH! x.x
+	prline ERROR: Cannot find Plot Colors program.
 	prline Press a key to exit.
 	keyprompt
 	stop

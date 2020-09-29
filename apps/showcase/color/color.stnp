@@ -1,0 +1,80 @@
+gamode @30
+
+var xpos=@-121
+var ypos=@-121
+
+var color=@-9841
+
+get1 color
+asm iowrite1;>plot.color
+
+drawwidth @2
+drawheight @6
+
+
+drawx1 @-121
+drawy1 @-121
+
+val *+++++++++
+set seg.color_on
+
+val @-117
+set seg.posx
+val @-119
+set seg.posy
+gsub seg.init_pos
+
+val @2
+set seg.height
+val @3
+set seg.width
+val @7
+set seg.vert_space
+val @8
+set seg.hori_space
+
+label main
+	#drawx1 xpos
+	#drawcolor color
+
+	drawrect
+	if color,@9841 goto end
+	
+	
+	
+	if xpos,@121 gsub rollover
+	
+	asm setreg2;10x1
+	get1 xpos
+	asm add
+	asm iowrite1;>plot.x1
+	set xpos
+	
+	get1 color
+	asm add
+	asm iowrite1;>plot.color
+	set color
+	
+goto main
+
+label rollover
+	val @-122
+	set xpos
+	add ypos,@3
+	set ypos
+	drawy1 ypos
+	return
+
+
+label end
+	bprinttail1 SBTCVM Showcase - Plot Colors
+	bprinttail1 Press any key.
+	gsub seg.output
+	keyprompt
+	vdi rstld -1 mainmenu.txe
+	
+
+
+
+include segment as seg
+

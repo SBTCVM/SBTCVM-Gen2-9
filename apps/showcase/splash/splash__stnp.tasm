@@ -40,6 +40,33 @@ setreg1;>goto--jumper-18
 s1push1
 goto;>pl.decode--label
 null;;goto--jumper-18
+#val (used with set to change variable value during runtime.)
+setreg1;10x2
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.pixx
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.pixy
+#val (used with set to change variable value during runtime.)
+setreg1;10x20
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.posx
+#val (used with set to change variable value during runtime.)
+setreg1;10x-50
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.posy
+#val (used with set to change variable value during runtime.)
+setreg1;+++---+++
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.transkey
+#val (used with set to change variable value during runtime.)
+setreg1;10x1
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.do_trans
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #35
+setreg1;>image_offset2#SSTNPL Source Line: '35' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl2.offset
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:S
@@ -60,10 +87,10 @@ fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-23
+setreg1;>goto--jumper-42
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-23
+null;;goto--jumper-42
 #val (used with set to change variable value during runtime.)
 setreg1;10x4
 #set(1) (used after 2-op math, asm code, or get)
@@ -110,10 +137,10 @@ fopwri1;:9
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-33
+setreg1;>goto--jumper-52
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-33
+null;;goto--jumper-52
 #val (used with set to change variable value during runtime.)
 setreg1;+++++++++
 #set(1) (used after 2-op math, asm code, or get)
@@ -123,10 +150,10 @@ setreg1;10x10
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-42
+setreg1;>goto--jumper-61
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-42
+null;;goto--jumper-61
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:S
@@ -195,19 +222,24 @@ fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-54
+setreg1;>goto--jumper-73
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-54
+null;;goto--jumper-73
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-76
+s1push1
+goto;>pl2.decode--label
+null;;goto--jumper-76
 #val (used with set to change variable value during runtime.)
 setreg1;10x110
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-60
+setreg1;>goto--jumper-83
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-60
+null;;goto--jumper-83
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -246,15 +278,15 @@ fopwri1;:.
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-70
+setreg1;>goto--jumper-93
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-70
+null;;goto--jumper-93
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-72
-gotoif;>keyprompt--loop-72
+ioread1;>io.ttyrd;keyprompt--loop-95
+gotoif;>keyprompt--loop-95
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -280,11 +312,16 @@ fopwri1;:x
 fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
-#module include: line 78: plrle_noalpha as pl
+#module include: line 101: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
-#module include: line 79: segment as seg
+#module include: line 102: plrle as pl2
+includeas;plrle,pl2
+#module include: line 103: segment as seg
 includeas;segment,seg
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #80
-include;showcase+media+bootsplash.tas0;image_offset1#SSTNPL Source Line: '80' 
+#_______NOTE: this corresponds to SSTNPL source line #104
+include;showcase+media+bootsplash.tas0;image_offset1#SSTNPL Source Line: '104' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #105
+include;showcase+media+icon.tas0;image_offset2#SSTNPL Source Line: '105' 
 #END OF FILE

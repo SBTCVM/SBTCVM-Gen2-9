@@ -17,6 +17,25 @@ set pl.offset
 
 gsub pl.decode
 
+### mascot icon ###
+
+val @2
+set pl2.pixx
+set pl2.pixy
+val @20
+set pl2.posx
+val @-50
+set pl2.posy
+val *+++---+++
+set pl2.transkey
+val @1
+set pl2.do_trans
+
+
+asm setreg1;>image_offset2
+set pl2.offset
+
+
 #### Title ####
 
 bprinttail1 SBTCVM Showcase
@@ -53,6 +72,10 @@ bprinttail1 Machine
 
 gsub seg.output
 
+### Draw mascot Icon ###
+gsub pl2.decode
+
+
 ####prompt text####
 
 val @110
@@ -76,5 +99,9 @@ vdi rstld -1 mainmenu.txe
 
 
 include plrle_noalpha as pl
+include plrle as pl2
 include segment as seg
 asm include;showcase+media+bootsplash.tas0;image_offset1
+asm include;showcase+media+icon.tas0;image_offset2
+
+

@@ -1,0 +1,2 @@
+stnp %xwd%/color.stnp
+diskedit --appendfile showcase %xwd%/color.trom color.txe trom
