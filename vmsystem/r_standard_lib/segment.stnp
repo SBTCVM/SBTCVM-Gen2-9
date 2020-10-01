@@ -465,31 +465,58 @@ label seg_15
 return
 
 label segment_single
-	mul segx1,width
-	set segx1
-	add segx1,current_x
-	set segx1
+	#mul segx1,width
+	#set segx1
+	#add segx1,current_x
+	#set segx1
 	
-	mul segy1,height
-	set segy1
-	add segy1,posy
-	set segy1
+	get1 segx1
+	get2 width
+	asm mul
+	get2 current_x
+	asm add
+	asm iowrite1;>plot.x1
 	
-	mul segx2,width
-	set segx2
-	add segx2,current_x
-	set segx2
+	#mul segy1,height
+	#set segy1
+	#add segy1,posy
+	#set segy1
 	
-	mul segy2,height
-	set segy2
-	add segy2,posy
-	set segy2
+	get1 segy1
+	get2 height
+	asm mul
+	get2 posy
+	asm add
+	asm iowrite1;>plot.y1
 	
+	#mul segx2,width
+	#set segx2
+	#add segx2,current_x
+	#set segx2
 	
-	drawx1 segx1
-	drawx2 segx2
-	drawy1 segy1
-	drawy2 segy2
+	get1 segx2
+	get2 width
+	asm mul
+	get2 current_x
+	asm add
+	asm iowrite1;>plot.x2
+	
+	#mul segy2,height
+	#set segy2
+	#add segy2,posy
+	#set segy2
+	
+	get1 segy2
+	get2 height
+	asm mul
+	get2 posy
+	asm add
+	asm iowrite1;>plot.y2
+	
+	#drawx1 segx1
+	#drawx2 segx2
+	#drawy1 segy1
+	#drawy2 segy2
 	drawcolor color_on
 	drawline
 return

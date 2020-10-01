@@ -2568,66 +2568,66 @@ s1pop1
 gotoreg1
 #label
 null;;segment_single--label
-#multiply (2op math)
+#get(1) (may be used with set, or asm code)
 dataread1;>segx1
+#get2 (may be used with set2, and asm code.)
 dataread2;>width
-mul
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segx1
-#add (2op math)
-dataread1;>segx1
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #475
+mul#SSTNPL Source Line: '475' 
+#get2 (may be used with set2, and asm code.)
 dataread2;>current_x
-add
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segx1
-#multiply (2op math)
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #477
+add#SSTNPL Source Line: '477' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #478
+iowrite1;>plot.x1#SSTNPL Source Line: '478' 
+#get(1) (may be used with set, or asm code)
 dataread1;>segy1
+#get2 (may be used with set2, and asm code.)
 dataread2;>height
-mul
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segy1
-#add (2op math)
-dataread1;>segy1
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #487
+mul#SSTNPL Source Line: '487' 
+#get2 (may be used with set2, and asm code.)
 dataread2;>posy
-add
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segy1
-#multiply (2op math)
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #489
+add#SSTNPL Source Line: '489' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #490
+iowrite1;>plot.y1#SSTNPL Source Line: '490' 
+#get(1) (may be used with set, or asm code)
 dataread1;>segx2
+#get2 (may be used with set2, and asm code.)
 dataread2;>width
-mul
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segx2
-#add (2op math)
-dataread1;>segx2
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #499
+mul#SSTNPL Source Line: '499' 
+#get2 (may be used with set2, and asm code.)
 dataread2;>current_x
-add
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segx2
-#multiply (2op math)
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #501
+add#SSTNPL Source Line: '501' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #502
+iowrite1;>plot.x2#SSTNPL Source Line: '502' 
+#get(1) (may be used with set, or asm code)
 dataread1;>segy2
+#get2 (may be used with set2, and asm code.)
 dataread2;>height
-mul
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segy2
-#add (2op math)
-dataread1;>segy2
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #511
+mul#SSTNPL Source Line: '511' 
+#get2 (may be used with set2, and asm code.)
 dataread2;>posy
-add
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>segy2
-#plotter x pos 1
-dataread1;>segx1
-iowrite1;>plot.x1
-#plotter x pos 2
-dataread1;>segx2
-iowrite1;>plot.x2
-#plotter y pos 1
-dataread1;>segy1
-iowrite1;>plot.y1
-#plotter y pos 2
-dataread1;>segy2
-iowrite1;>plot.y2
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #513
+add#SSTNPL Source Line: '513' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #514
+iowrite1;>plot.y2#SSTNPL Source Line: '514' 
 #plotter draw line
 dataread1;>color_on
 iowrite1;>plot.color
