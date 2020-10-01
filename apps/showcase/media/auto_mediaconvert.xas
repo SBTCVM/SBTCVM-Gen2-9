@@ -1,2 +1,4 @@
 gfxcon -plrle %xwd%/bootsplash
 gfxcon -plrle %xwd%/icon
+gfxcon -plrle %xwd%/imagetest 15
+gfxcon -plrle %xwd%/3dletters 5

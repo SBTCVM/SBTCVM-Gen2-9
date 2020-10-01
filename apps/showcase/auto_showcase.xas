@@ -4,3 +4,5 @@ xas %xwd%/media
 xas %xwd%/menu
 xas %xwd%/splash
 xas %xwd%/color
+xas %xwd%/pixmap
+xas %xwd%/credits

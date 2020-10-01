@@ -1,0 +1,80 @@
+gamode @30
+
+
+
+
+
+drawfill *---------
+
+val @1
+set pl.pixx
+set pl.pixy
+
+val @-121
+set pl.posy
+val @-40
+set pl.posx
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+
+
+
+val @-117
+set seg.posx
+val @-80
+set seg.posy
+gsub seg.init_pos
+
+val @2
+set seg.height
+val @1
+set seg.width
+val @7
+set seg.vert_space
+val @3
+set seg.hori_space
+
+val *++++++---
+set seg.color_on
+
+bprinttail1                          ------ Development Team ------
+gsub seg.output
+
+val *+++++++++
+set seg.color_on
+
+bprinttail1 --Lead Developer, coder, graphics artist, testing, system design, compilers--
+bprinttail1 Thomas Leathers 
+bprinttail1 
+bprinttail1 --Resident JAVA Guru, coder, testing, system design--
+bprinttail1 Krystos
+bprinttail1 
+bprinttail1 --testing, system design, coder--
+bprinttail1 WolfSkin
+bprinttail1 
+bprinttail1 --testing, system design, coder--
+bprinttail1 eekee
+bprinttail1 
+bprinttail1 See contributors.md for more awesome people 
+bprinttail1 who helped make SBTCVM what it is today.
+bprinttail1 
+gsub seg.output
+val *---++++++
+set seg.color_on
+bprinttail1 Press any key to exit.
+bprinttail1 
+
+gsub seg.output
+
+keyprompt
+vdi rstld -1 mainmenu.txe
+
+
+include plrle_noalpha as pl
+include segment as seg
+asm include;showcase+media+3dletters.tas0;image_offset1
+

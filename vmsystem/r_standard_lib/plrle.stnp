@@ -66,19 +66,18 @@ return
 ####get new datavalue####
 label RL_decode_mainloop
 	
-	# get new datavalue
-	
+	#set pointers
 	get rl_iter
 	asm datawrite1;>RL_GET_DATA
-	asm dataread1;;RL_GET_DATA
-	set RL_data
+	asm datawrite1;>RL_GET_LEN
 	
 	#get length of new datavalue
-	
-	get rl_iter
-	asm datawrite1;>RL_GET_LEN
 	asm instread1;;RL_GET_LEN
 	set RL_loopcount
+	
+	# get new datavalue
+	asm dataread1;;RL_GET_DATA
+	set RL_data
 	
 	#newline code
 	if RL_loopcount,@-1 goto RL_newline
@@ -92,10 +91,12 @@ label RL_decode_mainloop
 label RL_newline
 	add py,pixy
 	set py
-	drawy1 py
+	#drawy1 py
+	asm iowrite1;>plot.y1
 	get posx
 	set px
-	drawx1 px
+	#drawx1 px
+	asm iowrite1;>plot.x1
 return
 
 var RL_BARWIDE=0

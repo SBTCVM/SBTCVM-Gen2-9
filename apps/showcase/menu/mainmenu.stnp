@@ -38,6 +38,8 @@ gsub seg.init_pos
 bprinttail1 <q> quit
 bprinttail1 <s> splash
 bprinttail1 <c> Plot Colors
+bprinttail1 <p> PIXMAP
+bprinttail1 <1> credits
 gsub seg.output
 
 var KBuff=0
@@ -51,6 +53,10 @@ label Main
 	if KBuff,:S goto DEMO_splash
 	if KBuff,:c goto DEMO_color
 	if KBuff,:C goto DEMO_color
+	if KBuff,:p goto DEMO_pixmap
+	if KBuff,:P goto DEMO_pixmap
+	if KBuff,:1 goto DEMO_credits
+	if KBuff,:! goto DEMO_credits
 goto Main
 
 label DEMO_splash
@@ -67,6 +73,24 @@ label DEMO_color
 	gamode @0
 	prline CRASH! x.x
 	prline ERROR: Cannot find Plot Colors program.
+	prline Press a key to exit.
+	keyprompt
+	stop
+
+label DEMO_credits
+	vdi rstld -1 credits.txe
+	gamode @0
+	prline CRASH! x.x
+	prline ERROR: Cannot find Credits program.
+	prline Press a key to exit.
+	keyprompt
+	stop
+
+label DEMO_pixmap
+	vdi rstld -1 pixmap.txe
+	gamode @0
+	prline CRASH! x.x
+	prline ERROR: Cannot find Pixmap program.
 	prline Press a key to exit.
 	keyprompt
 	stop

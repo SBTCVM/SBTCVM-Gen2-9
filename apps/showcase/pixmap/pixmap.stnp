@@ -1,0 +1,60 @@
+gamode @30
+
+var xpos=@-121
+var ypos=@-121
+
+var color=@-9841
+
+get1 color
+asm iowrite1;>plot.color
+
+drawwidth @2
+drawheight @6
+
+
+drawx1 @-121
+drawy1 @-121
+
+val *+++++++++
+set seg.color_on
+
+val @-117
+set seg.posx
+val @-119
+set seg.posy
+gsub seg.init_pos
+
+val @2
+set seg.height
+val @3
+set seg.width
+val @7
+set seg.vert_space
+val @8
+set seg.hori_space
+
+
+val @1
+set pl.pixx
+set pl.pixy
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+label end
+	bprinttail1 SBTCVM Showcase - Pixmap
+	bprinttail1 Press any key.
+	gsub seg.output
+	keyprompt
+	vdi rstld -1 mainmenu.txe
+	
+
+
+
+include plrle_noalpha as pl
+include segment as seg
+asm include;showcase+media+imagetest.tas0;image_offset1
+
+

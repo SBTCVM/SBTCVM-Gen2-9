@@ -1,0 +1,2 @@
+stnp %xwd%/pixmap.stnp
+diskedit --appendfile showcase %xwd%/pixmap.trom pixmap.txe trom

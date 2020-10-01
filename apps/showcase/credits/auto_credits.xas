@@ -1,0 +1,3 @@
+ 
+stnp %xwd%/credits.stnp
+diskedit --appendfile showcase %xwd%/credits.trom credits.txe trom
