@@ -34,24 +34,17 @@ val @8
 set seg.hori_space
 
 label main
-	#drawx1 xpos
-	#drawcolor color
-
 	drawrect
-	if color,@9841 goto end
-	
-	
 	
 	if xpos,@121 gsub rollover
 	
-	asm setreg2;10x1
 	get1 xpos
-	asm add
+	asm adddata1;10x1
 	asm iowrite1;>plot.x1
 	set xpos
 	
 	get1 color
-	asm add
+	asm adddata1;10x1
 	asm iowrite1;>plot.color
 	set color
 	
@@ -60,10 +53,13 @@ goto main
 label rollover
 	val @-122
 	set xpos
-	add ypos,@3
+	get1 ypos
+	asm adddata1;10x3
+	asm iowrite1;>plot.y1
 	set ypos
-	drawy1 ypos
+	if color,@9841 goto end
 	return
+	
 
 
 label end
