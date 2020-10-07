@@ -52,10 +52,15 @@ label output
 	
 	ifmore b_tmp,:9 goto skip_to_symbols
 	ifmore b_tmp,:Z goto skip_alpha
+	ifmore b_tmp,:T goto skip_alpha_upper_thirdquar
 	ifmore b_tmp,:M goto skip_alpha_upper_firsthalf
+	ifmore b_tmp,:G goto skip_alpha_upper_firstquar
 	
 	ifmore b_tmp,:\s goto skip_alpha_lower
+	ifmore b_tmp,:t goto skip_alpha_lower_thirdquar
 	ifmore b_tmp,:m goto skip_alpha_lower_firsthalf
+	ifmore b_tmp,:g goto skip_alpha_lower_firstquar
+	
 	
 	
 	if b_tmp,:a =offset @2
@@ -65,6 +70,10 @@ label output
 	if b_tmp,:e =offset @6
 	if b_tmp,:f =offset @7
 	if b_tmp,:g =offset @8
+	
+	goto end
+	label skip_alpha_lower_firstquar
+	
 	if b_tmp,:h =offset @9
 	if b_tmp,:i =offset @10
 	if b_tmp,:j =offset @11
@@ -83,6 +92,10 @@ label output
 	if b_tmp,:r =offset @19
 	if b_tmp,:s =offset @20
 	if b_tmp,:t =offset @21
+	
+	goto end
+	label skip_alpha_lower_thirdquar
+	
 	if b_tmp,:u =offset @22
 	if b_tmp,:v =offset @23
 	if b_tmp,:w =offset @24
@@ -100,6 +113,10 @@ label output
 	if b_tmp,:E =offset @6
 	if b_tmp,:F =offset @7
 	if b_tmp,:G =offset @8
+	
+	goto end
+	label skip_alpha_upper_firstquar
+	
 	if b_tmp,:H =offset @9
 	if b_tmp,:I =offset @10
 	if b_tmp,:J =offset @11
@@ -119,6 +136,10 @@ label output
 	if b_tmp,:R =offset @19
 	if b_tmp,:S =offset @20
 	if b_tmp,:T =offset @21
+	
+	goto end
+	label skip_alpha_upper_thirdquar
+	
 	if b_tmp,:U =offset @22
 	if b_tmp,:V =offset @23
 	if b_tmp,:W =offset @24
@@ -236,6 +257,7 @@ return
 
 
 label segment_draw
+drawcolor color_on
 ##0
 	tabr seg_data,@0,offset
 	set boolt
@@ -465,10 +487,6 @@ label seg_15
 return
 
 label segment_single
-	#mul segx1,width
-	#set segx1
-	#add segx1,current_x
-	#set segx1
 	
 	get1 segx1
 	get2 width
@@ -477,10 +495,6 @@ label segment_single
 	asm add
 	asm iowrite1;>plot.x1
 	
-	#mul segy1,height
-	#set segy1
-	#add segy1,posy
-	#set segy1
 	
 	get1 segy1
 	get2 height
@@ -489,10 +503,6 @@ label segment_single
 	asm add
 	asm iowrite1;>plot.y1
 	
-	#mul segx2,width
-	#set segx2
-	#add segx2,current_x
-	#set segx2
 	
 	get1 segx2
 	get2 width
@@ -501,10 +511,6 @@ label segment_single
 	asm add
 	asm iowrite1;>plot.x2
 	
-	#mul segy2,height
-	#set segy2
-	#add segy2,posy
-	#set segy2
 	
 	get1 segy2
 	get2 height
@@ -513,11 +519,6 @@ label segment_single
 	asm add
 	asm iowrite1;>plot.y2
 	
-	#drawx1 segx1
-	#drawx2 segx2
-	#drawy1 segy1
-	#drawy2 segy2
-	drawcolor color_on
 	drawline
 return
 

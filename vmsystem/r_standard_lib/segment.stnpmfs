@@ -20,9 +20,13 @@ int9;@1;10x1
 int9;:\s;:\s
 int9;:9;:9
 int9;:Z;:Z
+int9;:T;:T
 int9;:M;:M
+int9;:G;:G
 int9;:\s;:\s
+int9;:t;:t
 int9;:m;:m
+int9;:g;:g
 int9;:a;:a
 int9;@2;10x2
 int9;:b;:b
@@ -213,9 +217,13 @@ int9;@15;10x15
 int9;$false;10x0
 label;init_pos
 label;output
+label;skip_alpha_lower_firstquar
 label;skip_alpha_lower_firsthalf
+label;skip_alpha_lower_thirdquar
 label;skip_alpha_lower
+label;skip_alpha_upper_firstquar
 label;skip_alpha_upper_firsthalf
+label;skip_alpha_upper_thirdquar
 label;skip_alpha
 label;skip_to_symbols
 label;end
