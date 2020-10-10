@@ -1,7 +1,20 @@
+var sysbak=0
+
+#avoid endless loop.
+if sysbak,$true goto startup
+
+vdimode @1
+vdi rstld 2 command.state.tri
+#refresh VDI to avoid error text.
+vdimode @1
+
 ########## SBTCVM-DOS - Command Interpreter ########## 
 label startup
+#marks program as backup, so the state restore doesn't occur when restored. (avoids endless loop)
+	if sysbak,$false gsub version
+	val @1
+	set sysbak
 	
-	#gsub version
 	textcolor *+++---
 	prline Type '?' for help. READY.
 	#prline READY.
@@ -99,6 +112,7 @@ label driveA
 	val :A
 	set drive
 	ifless cp.size,@3 return
+	vdi membak 2 command.state.tri
 	vdin rstld 0 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
@@ -115,6 +129,7 @@ label driveB
 	val :B
 	set drive
 	ifless cp.size,@3 return
+	vdi membak 2 command.state.tri
 	vdin rstld 1 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
@@ -132,6 +147,7 @@ label driveR
 	val :R
 	set drive
 	ifless cp.size,@3 return
+	vdi membak 2 command.state.tri
 	vdin rstld 2 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
@@ -196,7 +212,7 @@ label invalid
 			return
 
 	label run_command
-		
+		vdi membak 2 command.state.tri
 		#try current drive FIRST
 		vdin rstld 
 			if drive,:A =driveref :0
@@ -315,6 +331,7 @@ return
 
 #call `command` help category via help.txe (saves space in command.txe)
 label help
+	vdi membak 2 command.state.tri
 	bprinthead2n command
 	vdi rstld -1 help.txe
 return

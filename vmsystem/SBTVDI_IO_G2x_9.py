@@ -254,12 +254,11 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 			return
 	def membackup(self, diskid, filename):
 		for did in self.disks:
-			if diskid==did or diskid==-1:
+			if diskid==did:
 				if self.disks[did]==None:
-					if diskid!=-1:
-						self.outstr("ERROR:  drive index '" + str(diskid) + "' Not ready/no disk inserted.\n")
-						self.status=-5
-						return
+					self.outstr("ERROR:  drive index '" + str(diskid) + "' Not ready/no disk inserted.\n")
+					self.status=-5
+					return
 				else:
 					self.disks[did].files[filename]=[]
 					diskfref=self.disks[did].files[filename]
