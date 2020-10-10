@@ -93,38 +93,50 @@ goto main
 
 ### DRIVE SELECT/RUN SUBROUTINES ###
 label driveA
+	val 0
+	set extflg
+	ifmore cp.size,@4 gsub extcheck
 	val :A
 	set drive
 	ifless cp.size,@3 return
 	vdin rstld 0 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
-		vdi .txe#send newline+.txe
+		gsub cmd_run_send_newline
+		
 		
 		gsub vdi_outloop
 return
 
 label driveB
+	val 0
+	set extflg
+	ifmore cp.size,@4 gsub extcheck
 	val :B
 	set drive
 	ifless cp.size,@3 return
 	vdin rstld 1 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
-		vdi .txe#send newline+.txe
+		gsub cmd_run_send_newline
+		
 		
 		gsub vdi_outloop
 return
 
 
 label driveR
+	val 0
+	set extflg
+	ifmore cp.size,@4 gsub extcheck
 	val :R
 	set drive
 	ifless cp.size,@3 return
 	vdin rstld 2 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@3,cp.itersize
-		vdi .txe#send newline+.txe
+		gsub cmd_run_send_newline
+		
 		
 		gsub vdi_outloop
 return
@@ -167,10 +179,16 @@ label directory_list_R
 return
 var driveref=:0
 var invalid_charcheck=0
+var extflg=0
+var extoffset=0
 label invalid
+	val 0
+	set extflg
+	ifmore cp.size,@4 gsub extcheck
 	textcolor *++0---
 	ifless cp.size,@2 goto run_command
-	
+		
+		
 		tabr cp.buffer,@1,@0
 		set invalid_charcheck
 		ifnot invalid_charcheck,:: goto run_command
@@ -178,6 +196,7 @@ label invalid
 			return
 
 	label run_command
+		
 		#try current drive FIRST
 		vdin rstld 
 			if drive,:A =driveref :0
@@ -188,17 +207,36 @@ label invalid
 			vdin  #print space
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@0,cp.itersize
-		vdi .txe#send newline
+		gsub cmd_run_send_newline
 		
 		#if does not load, try ALL drives...
 		vdin rstld -1 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@0,cp.itersize
-		vdi .txe#send newline
+		gsub cmd_run_send_newline
 		
 		gsub vdi_outloop
 		return
 
+
+label extcheck
+	sub cp.size,@4
+	set extoffset
+	tabstrc cp.buffer,extoffset,@0,.txe
+	set extflg
+	#dumpd extflg
+	#newline
+return
+
+label cmd_run_send_newline
+	if extflg,$true goto cmd_run_send_newline_noext
+		vdi .txe#send newline
+		return
+	label cmd_run_send_newline_noext
+		vdi 
+		return
+
+return
 #get character from iterator var, write to VDI serial INPUT
 var run_s_tmp=0
 var run_tobuffer_flg=0
