@@ -12,11 +12,11 @@ vdimode @1
 label startup
 #marks program as backup, so the state restore doesn't occur when restored. (avoids endless loop)
 	if sysbak,$false gsub version
+	if sysbak,$false gsub help_ready_splash
 	val @1
 	set sysbak
 	
-	textcolor *+++---
-	prline Type '?' for help. READY.
+	
 	#prline READY.
 	vdimode @1
 	##setup command prompt library##
@@ -28,12 +28,18 @@ label startup
 	breset2
 goto main
 
+label help_ready_splash
+	textcolor *+++---
+	prline Type '?' for help. READY.
+return
+
+
 ##variables##
 var cmdflg=0
 var validflg=0
 var drive=:A
 
-#reset Hardware buffer 2
+
 
 
 label main
@@ -109,9 +115,12 @@ label driveA
 	val 0
 	set extflg
 	ifmore cp.size,@4 gsub extcheck
-	val :A
-	set drive
-	ifless cp.size,@3 return
+	ifnotless cp.size,@3 goto driveA_run
+		val :A
+		set drive
+	return
+	
+	label driveA_run
 	vdi membak 2 command.state.tri
 	vdin rstld 0 
 		gsub run_send_setup
@@ -125,10 +134,12 @@ return
 label driveB
 	val 0
 	set extflg
-	ifmore cp.size,@4 gsub extcheck
-	val :B
-	set drive
-	ifless cp.size,@3 return
+	ifnotless cp.size,@3 goto driveB_run
+		val :B
+		set drive
+	return
+	
+	label driveB_run
 	vdi membak 2 command.state.tri
 	vdin rstld 1 
 		gsub run_send_setup
@@ -144,9 +155,13 @@ label driveR
 	val 0
 	set extflg
 	ifmore cp.size,@4 gsub extcheck
-	val :R
-	set drive
-	ifless cp.size,@3 return
+	
+	ifnotless cp.size,@3 goto driveR_run
+		val :R
+		set drive
+	return
+	
+	label driveR_run
 	vdi membak 2 command.state.tri
 	vdin rstld 2 
 		gsub run_send_setup
