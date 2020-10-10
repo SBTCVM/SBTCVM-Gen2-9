@@ -234,8 +234,11 @@ label invalid
 		gsub vdi_outloop
 		return
 
-
+##approach doesn't work always, needs redesigned to
+#avoid command line arguments causing false engatives.
+#DISABLED for now.
 label extcheck
+	return
 	sub cp.size,@4
 	set extoffset
 	tabstrc cp.buffer,extoffset,@0,.txe
