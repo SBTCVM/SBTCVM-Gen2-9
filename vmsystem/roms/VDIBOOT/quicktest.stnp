@@ -1,0 +1,67 @@
+
+
+var kb=0
+
+label MAIN
+	prline please choose option:
+			textcolor *000000
+			print _______________________________________
+			textcolor *+++---
+			newline
+		prline   [1] - soundtest
+		prline   [2] - info
+		prline   [3] - mem test (SLOW)
+		prline   [4] - mem test (FAST)
+		prline   [q] - exit quicktest.
+		print >
+	keyprompt
+		set kb
+		newline
+		if kb,:1 gsub soundtest
+		if kb,:2 gsub info
+		if kb,:3 gsub QTM.memtest_slow
+		if kb,:4 gsub QTM.memtest_fast
+		if kb,:q return
+		if kb,:Q return
+	goto MAIN
+	
+
+
+
+label soundtest
+	prline 220Hz BEEP.
+	val @220
+	asm iowrite1;>snd.1.freq
+	val @1
+	asm iowrite1;>snd.1.wave
+	asm iowrite1;>snd.1.play
+	waitcy 5000
+	asm iowrite1;>snd.1.stop
+return
+
+
+var boolcache=0
+
+label info
+	#TTY color check
+		asm ioread1;>io.ttycolor
+		set boolcache
+		print TTY has color? 
+		if boolcache,$true gsub true
+		if boolcache,$false gsub false
+	
+	prline CPU Type? SBTCVM_G2x_9_rx
+	prline Bios? SBTCVM-SBTVDI Bios (for Gen 2-9)
+	return
+
+
+label false
+prline NO
+return
+
+
+label true
+prline YES
+return
+
+include VDIBOOT/quicktest_memory as QTM

@@ -9,6 +9,7 @@ null;0;kb
 null;000000;*000000
 null;+++---;*+++---
 null;:1;:1
+null;:2;:2
 null;:q;:q
 null;:Q;:Q
 null;:b;:b
@@ -167,6 +168,32 @@ fopwri1;:\n
 fopwri1;:\s
 fopwri1;:\s
 fopwri1;:[
+fopwri1;:2
+fopwri1;:]
+fopwri1;:\s
+fopwri1;:-
+fopwri1;:\s
+fopwri1;:Q
+fopwri1;:u
+fopwri1;:i
+fopwri1;:c
+fopwri1;:k
+fopwri1;:\s
+fopwri1;:t
+fopwri1;:e
+fopwri1;:s
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:m
+fopwri1;:e
+fopwri1;:n
+fopwri1;:u
+fopwri1;:.
+fopwri1;:\n
+#prline
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:[
 fopwri1;:q
 fopwri1;:]
 fopwri1;:\s
@@ -206,8 +233,8 @@ fopwri1;:>
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-19
-gotoif;>keyprompt--loop-19
+ioread1;>io.ttyrd;keyprompt--loop-20
+gotoif;>keyprompt--loop-20
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>kb
 #print newline
@@ -215,55 +242,64 @@ fopwri1;:\n
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:1
-gotoif;>goto--branch-22
-goto;>goto--jumper-22
-setreg1;>goto--jumper-22;goto--branch-22
+gotoif;>goto--branch-23
+goto;>goto--jumper-23
+setreg1;>goto--jumper-23;goto--branch-23
 s1push1
 goto;>vdi_serial--label
-null;;goto--jumper-22
+null;;goto--jumper-23
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:2
+gotoif;>goto--branch-24
+goto;>goto--jumper-24
+setreg1;>goto--jumper-24;goto--branch-24
+s1push1
+goto;>qtest.MAIN--label
+null;;goto--jumper-24
 #conditional stop
 dataread1;>kb
 dataread2;>:q
-gotoif;>goto--branch-23
-goto;>goto--jumper-23
-stop;;goto--branch-23
+gotoif;>goto--branch-25
+goto;>goto--jumper-25
+stop;;goto--branch-25
 
-null;;goto--jumper-23
+null;;goto--jumper-25
 #conditional stop
 dataread1;>kb
 dataread2;>:Q
-gotoif;>goto--branch-24
-goto;>goto--jumper-24
-stop;;goto--branch-24
+gotoif;>goto--branch-26
+goto;>goto--jumper-26
+stop;;goto--branch-26
 
-null;;goto--jumper-24
+null;;goto--jumper-26
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:b
-gotoif;>goto--branch-25
-goto;>goto--jumper-25
-setreg1;>goto--jumper-25;goto--branch-25
+gotoif;>goto--branch-27
+goto;>goto--jumper-27
+setreg1;>goto--jumper-27;goto--branch-27
 s1push1
 goto;>BootUp--label
-null;;goto--jumper-25
+null;;goto--jumper-27
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:B
-gotoif;>goto--branch-26
-goto;>goto--jumper-26
-setreg1;>goto--jumper-26;goto--branch-26
+gotoif;>goto--branch-28
+goto;>goto--jumper-28
+setreg1;>goto--jumper-28;goto--branch-28
 s1push1
 goto;>BootUp--label
-null;;goto--jumper-26
+null;;goto--jumper-28
 #goto 
 goto;>MAIN--label
 #label
 null;;BootUp--label
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-30
+setreg1;>goto--jumper-32
 s1push1
 goto;>splash--label
-null;;goto--jumper-30
+null;;goto--jumper-32
 #vdi mode set
 dataread1;>@1
 iowrite1;>vdi.cli.status
@@ -518,7 +554,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:0
 fopwri1;:.
-fopwri1;:3
+fopwri1;:4
 fopwri1;:\n
 #prline
 fopwri1;:<
@@ -684,11 +720,11 @@ fopwri1;:\n
 dataread1;>*+++---
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #73
-include;vdishell.tas0#SSTNPL Source Line: '73' 
+#_______NOTE: this corresponds to SSTNPL source line #75
+include;vdishell.tas0#SSTNPL Source Line: '75' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #74
-dataread1;>vdiexitcode#SSTNPL Source Line: '74' 
+#_______NOTE: this corresponds to SSTNPL source line #76
+dataread1;>vdiexitcode#SSTNPL Source Line: '76' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>exitcode
 #prline
@@ -722,20 +758,22 @@ fopwri1;:\n
 #conditional return
 dataread1;>exitcode
 dataread2;>@1
-gotoif;>goto--branch-81
-goto;>goto--jumper-81
-s1pop1;;goto--branch-81
+gotoif;>goto--branch-83
+goto;>goto--jumper-83
+s1pop1;;goto--branch-83
 gotoreg1
-null;;goto--jumper-81
+null;;goto--jumper-83
 #conditional stop
 dataread1;>exitcode
 dataread2;>@2
-gotoif;>goto--branch-82
-goto;>goto--jumper-82
-stop;;goto--branch-82
+gotoif;>goto--branch-84
+goto;>goto--jumper-84
+stop;;goto--branch-84
 
-null;;goto--jumper-82
+null;;goto--jumper-84
 #return from subroutine.
 s1pop1
 gotoreg1
+#module include: line 87: VDIBOOT/quicktest as qtest
+includeas;VDIBOOT/quicktest,qtest
 #END OF FILE

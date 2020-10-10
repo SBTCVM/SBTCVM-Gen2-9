@@ -1,0 +1,136 @@
+ 
+
+var memcnt=0
+var mtotal=0
+var mptotal=@9841
+var fastmode=0
+
+label memtest_fast
+val @1
+set fastmode
+gsub memtest
+return
+
+
+label memtest_slow
+val @0
+set fastmode
+gsub memtest
+return
+
+
+label memtest
+val 0
+set memcnt
+set mtotal
+val @9841
+set mptotal
+
+val @-9841
+set mtestaddr
+
+gsub _memtest_loop
+####uiter mtestaddr,_memtest_loop,@-3280,@3280
+div memcnt,@1000
+set mtotal
+mul mtotal,@6
+set mtotal
+dumpd mtotal
+prline KiloNonets OK.
+return
+
+var mtestaddr=0
+var mtesttmp=0
+label _memtest_loop
+	add memcnt,@1
+	set memcnt
+	div memcnt,@1000
+	set mtotal
+	mul mtotal,@6
+	set mtotal
+	
+	if fastmode,$true goto fasthack
+	
+	get mtestaddr
+	asm datawrite1;>MTEST1
+	asm dataread1;;MTEST1
+	set mtesttmp
+	gsub _mtest_formatter
+	
+	add mtestaddr,@1
+	set mtestaddr
+	
+	get mtestaddr
+	asm datawrite1;>MTEST2
+	asm dataread1;;MTEST2
+	set mtesttmp
+	gsub _mtest_formatter
+	
+	add mtestaddr,@1
+	set mtestaddr
+	
+	get mtestaddr
+	asm datawrite1;>MTEST3
+	asm dataread1;;MTEST3
+	set mtesttmp
+	gsub _mtest_formatter
+	
+	
+	newline
+	gsub _mtest_slowmode
+	label skip3
+	
+	if mtestaddr,@9841 return
+	
+	add mtestaddr,@1
+	set mtestaddr
+	
+	ifnot mtotal,mptotal gsub _memtest_memdmp
+	
+	
+	
+	
+	goto _memtest_loop
+
+
+label fasthack
+
+add mtestaddr,@2
+set mtestaddr
+goto skip3
+
+label _memtest_memdmp
+	newline
+	copy mtotal,mptotal
+	dumpd mtotal
+	prline KN
+	newline
+return
+
+var notfasttty=0
+
+label _mtest_slowmode
+
+asm ioread1;>io.ttycolor
+	set notfasttty
+	if notfasttty,$false return
+	waitcy 250
+return
+
+label _mtest_formatter
+	dumpd mtestaddr
+	print =
+	dumpd mtesttmp
+	print =
+	#if not in standard block, use space instead.
+	ifnotrange :a,:?,mtesttmp goto _mtest_formatter_blank
+	
+	chardump mtesttmp
+	goto _mtest_formatter_end
+	label _mtest_formatter_blank
+	
+	chardump :\s
+	
+	label _mtest_formatter_end
+	print |
+return

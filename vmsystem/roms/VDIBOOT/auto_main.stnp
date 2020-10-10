@@ -14,12 +14,14 @@ label MAIN
 			newline
 		prline   [b] - Try to bootup again
 		prline   [1] - SBTVDI SERIAL Wrapper shell
+		prline   [2] - Quick test menu.
 		prline   [q] - shutdown/QUIT SBTCVM Session
 		print >
 	keyprompt
 		set kb
 		newline
 		if kb,:1 gsub vdi_serial
+		if kb,:2 gsub qtest.MAIN
 		if kb,:q stop
 		if kb,:Q stop
 		if kb,:b gsub BootUp
@@ -46,7 +48,7 @@ label splash
 	prline <|      x      |>
 	prline <| .___/0\___. |>  SBTCVM Gen 2-9
 	prline <| |+/     \-| |>  --------------
-	prline <| |/  <|>  \| |>  SBTCVM-SBTVDI BIOS v0.3
+	prline <| |/  <|>  \| |>  SBTCVM-SBTVDI BIOS v0.4
 	prline <| |<|> _ <|>| |>
 	prline <| \  ._|_.  / |>
 	prline <|__|       |__|>  Begin drive bootup...
@@ -81,3 +83,5 @@ label vdi_serial
 	if exitcode,@1 return
 	if exitcode,@2 stop
 return
+
+include VDIBOOT/quicktest as qtest

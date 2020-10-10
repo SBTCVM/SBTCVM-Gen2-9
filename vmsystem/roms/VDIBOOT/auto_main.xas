@@ -1,0 +1,4 @@
+stnp --module %xwd%/quicktest_memory.stnp
+stnp --module %xwd%/quicktest.stnp
+stnp %xwd%
+
