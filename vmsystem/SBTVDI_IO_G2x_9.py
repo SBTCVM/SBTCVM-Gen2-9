@@ -151,6 +151,7 @@ quit   : request to quit
 			self.outstr('''dmnt0 [disk image]: Mount SBTVDI disk image to drive index 0
 dmnt1 [disk image]: Mount SBTVDI disk image to drive index 1
 rstld [drive index] [filename] : load and run full-memory programs from disk.
+membak [drive index] [filename] : dump system memory to a file on disk.
 list [drive index] [pattern] : list files on disk, optionally filter by filename part. e.g. extension.
 ''')
 		elif cmd=="dmnt0" or cmd=="dmnt1":
@@ -183,6 +184,17 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 								del self.disks[mntindex]
 						self.disks[mntindex]=retval
 								
+		elif cmd=='membak':
+			if not len(cmdlist_as)>=3:
+				self.outstr("ERROR: specify 'membak [diskid] [filename]'!\n")
+				self.status=-2
+			else:
+				try:
+					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+						self.membackup(int(cmdlist_as[1]), cmdlist_as[2])
+				except ValueError:
+					self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
+					self.status=-1
 		elif cmd=="rstld":
 			if not len(cmdlist_as)>=3:
 				self.outstr("ERROR: specify 'rstld [diskid] [filename]'!\n")
@@ -240,7 +252,25 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 			self.outstr("ERROR:  drive index '" + str(diskid) + "' does not exist.\n")
 			self.status=-4
 			return
-
+	def membackup(self, diskid, filename):
+		for did in self.disks:
+			if diskid==did or diskid==-1:
+				if self.disks[did]==None:
+					if diskid!=-1:
+						self.outstr("ERROR:  drive index '" + str(diskid) + "' Not ready/no disk inserted.\n")
+						self.status=-5
+						return
+				else:
+					self.disks[did].files[filename]=[]
+					diskfref=self.disks[did].files[filename]
+					addr=libbaltcalc.mni(9)
+					while addr<=libbaltcalc.mpi(9):
+						diskfref.append([self.memsys.INSTDICT[addr], self.memsys.DATDICT[addr]])
+						addr+=1
+		if diskid not in self.disks and diskid!=-1:
+			self.outstr("ERROR:  drive index '" + str(diskid) + "' does not exist.\n")
+			self.status=-4
+			return
 	def resetload_getfile(self, diskid, filename):
 		for did in self.disks:
 			if diskid==did or diskid==-1:
