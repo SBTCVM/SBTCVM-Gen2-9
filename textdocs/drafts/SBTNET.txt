@@ -1,0 +1,50 @@
+SBTCVM SBTNET
+
+SBTNET
+
+
+control scheme:
+
+SBTNET Control serial (similar to SBTVDI Serial)
+
+commands:
+
+	mode [number] set socket mode
+	connect [hostname]:[port]
+	listmodes [show supported socket modes]
+	help [general help]
+	timeout [milliseconds]
+
+
+register plan:
+R: control serial read
+W: control serial write
+
+W: socket Send
+R: socket Receive
+R: socket ReceiveBufferSize
+R: serial ConnectedStatus: 0 for not connected, 1 for connected
+R: serial ConnectionError: 0 for no error, any other number means there was an error.
+
+B: main T-ADR register
+B: sub T-ADR register
+B: mid T-ADR register
+B: base T-ADR register
+
+------SBTNET Protocol Details------
+
+TCP/IP-based server simulates the network HUB.
+
+SBTNET addressing scheme:
+
+4 Nonets per address in the form [main].[sub].[mid].[base]
+logically, each of the nonets will be managed as a separate number. 
+the address format is mainly for display.
+
+
+VM should handle the local server TCP/IP communication, so applications 
+don't have to handle the bridging setup.
+
+protocol should be efficent, (with some error correction preferrably).
+
+
