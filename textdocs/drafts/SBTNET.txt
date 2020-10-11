@@ -9,11 +9,7 @@ SBTNET Control serial (similar to SBTVDI Serial)
 
 commands:
 
-	mode [number] set socket mode
-	connect [hostname]:[port]
-	listmodes [show supported socket modes]
-	help [general help]
-	timeout [milliseconds]
+	None yet!
 
 
 register plan:
