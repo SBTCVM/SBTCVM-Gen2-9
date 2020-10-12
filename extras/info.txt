@@ -8,6 +8,8 @@ app_resources:
         - etc.
         - you can also find the source vector of the stylized 'SBTCVM'
             text thats still used in a few places, here.
+        - as well, the base vector used in the current mascot icon
+            design is available here.
 
 icon_resources:
         - SVG & PNG versions of various SBTCVM Sub-projects of
@@ -16,3 +18,13 @@ icon_resources:
 mockups:
         - Various screen mockups, UI drafts, and other such things that
             don't really fit in the textdocs directory.
+            
+
+misc:
+        - several .gpl pallets for the GNU Image Manipulation Program 
+            (GIMP) making it easier to draw in, and convert images to,
+            those colorspaces.
+            - 1-trit greyscale (1-trit-grey.gpl)
+            - 2-trit greyscale (2-trit-grey.gpl)
+            - 3-trit greyscale (3-trit-grey.gpl)
+            - 3-trit RGB (3-trit-RGB.gpl)
