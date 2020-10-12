@@ -1,0 +1,15 @@
+
+Directory of SBTCVM Gen 2-9 extras folder:
+
+app_resources:  
+        - assorted elements, pixel art, and other such things.
+        - source assets for graphics found in VM TROM/TDSK1 applications.
+        - etc.
+
+icon_resources:
+        - SVG & PNG versions of various SBTCVM Sub-projects of
+          varying importance to Gen 2
+
+mockups:
+        - Various screen mockups, UI drafts, and other such things that
+          don't really fit in the textdocs directory.

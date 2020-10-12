@@ -1,0 +1,12 @@
+Most of these are icons for technologies SBTCVM currently uses, or has
+in development/planning stage.
+
+You can find the current mascot logo in vmsystem/gfx
+
+
+SBTNET is a planned Networking system, similar to TCP/IP,
+only emulated (obviousy), and designed for Ternary machines in mind.
+
+CerberOS is a planned Unix-like OS, primarily intended to be written
+for Gen 2's succsessor, Gen 3, though kernel & other subsystems may end
+up with prototypes running within Gen 2.
