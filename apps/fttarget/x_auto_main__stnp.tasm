@@ -50,8 +50,6 @@ null;10x1;@1
 null;+++++++++;*+++++++++
 null;000000+++;*000000+++
 null;10x101;@101
-null;+++--0;*+++--0
-null;+++---;*+++---
 #label
 null;;MAIN--label
 #___RAW ASSEMBLY CODE___
@@ -85,7 +83,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:0
 fopwri1;:.
-fopwri1;:1
+fopwri1;:2
 fopwri1;:\n
 #prline
 fopwri1;:1
@@ -281,235 +279,240 @@ fopwri1;:u
 fopwri1;:i
 fopwri1;:t
 fopwri1;:\n
+#print
+fopwri1;:>
+fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-29
-gotoif;>keyprompt--loop-29
+ioread1;>io.ttyrd;keyprompt--loop-30
+gotoif;>keyprompt--loop-30
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>kb
+#print newline
+fopwri1;:\n
 #conditional set
-dataread1;>kb
-dataread2;>:1
-gotoif;>goto--branch-31
-goto;>goto--jumper-31
-dataread1;>@8;goto--branch-31
-datawrite1;>badguy_fallspeed
-null;;goto--jumper-31
-#conditional set
-dataread1;>kb
-dataread2;>:!
-gotoif;>goto--branch-32
-goto;>goto--jumper-32
-dataread1;>@8;goto--branch-32
-datawrite1;>badguy_fallspeed
-null;;goto--jumper-32
-#conditional subroutine goto
 dataread1;>kb
 dataread2;>:1
 gotoif;>goto--branch-33
 goto;>goto--jumper-33
-setreg1;>goto--jumper-33;goto--branch-33
-s1push1
-goto;>GAMESTART--label
+dataread1;>@8;goto--branch-33
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-33
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:!
 gotoif;>goto--branch-34
 goto;>goto--jumper-34
-setreg1;>goto--jumper-34;goto--branch-34
-s1push1
-goto;>GAMESTART--label
+dataread1;>@8;goto--branch-34
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-34
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:2
+dataread2;>:1
 gotoif;>goto--branch-35
 goto;>goto--jumper-35
-dataread1;>@12;goto--branch-35
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-35;goto--branch-35
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-35
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:@
+dataread2;>:!
 gotoif;>goto--branch-36
 goto;>goto--jumper-36
-dataread1;>@12;goto--branch-36
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-36;goto--branch-36
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-36
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:2
 gotoif;>goto--branch-37
 goto;>goto--jumper-37
-setreg1;>goto--jumper-37;goto--branch-37
-s1push1
-goto;>GAMESTART--label
+dataread1;>@12;goto--branch-37
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-37
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:@
 gotoif;>goto--branch-38
 goto;>goto--jumper-38
-setreg1;>goto--jumper-38;goto--branch-38
-s1push1
-goto;>GAMESTART--label
+dataread1;>@12;goto--branch-38
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-38
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:3
+dataread2;>:2
 gotoif;>goto--branch-39
 goto;>goto--jumper-39
-dataread1;>@16;goto--branch-39
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-39;goto--branch-39
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-39
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:\p
+dataread2;>:@
 gotoif;>goto--branch-40
 goto;>goto--jumper-40
-dataread1;>@16;goto--branch-40
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-40;goto--branch-40
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-40
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:3
 gotoif;>goto--branch-41
 goto;>goto--jumper-41
-setreg1;>goto--jumper-41;goto--branch-41
-s1push1
-goto;>GAMESTART--label
+dataread1;>@16;goto--branch-41
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-41
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:\p
 gotoif;>goto--branch-42
 goto;>goto--jumper-42
-setreg1;>goto--jumper-42;goto--branch-42
-s1push1
-goto;>GAMESTART--label
+dataread1;>@16;goto--branch-42
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-42
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:4
+dataread2;>:3
 gotoif;>goto--branch-43
 goto;>goto--jumper-43
-dataread1;>@20;goto--branch-43
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-43;goto--branch-43
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-43
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:$
+dataread2;>:\p
 gotoif;>goto--branch-44
 goto;>goto--jumper-44
-dataread1;>@20;goto--branch-44
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-44;goto--branch-44
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-44
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:4
 gotoif;>goto--branch-45
 goto;>goto--jumper-45
-setreg1;>goto--jumper-45;goto--branch-45
-s1push1
-goto;>GAMESTART--label
+dataread1;>@20;goto--branch-45
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-45
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:$
 gotoif;>goto--branch-46
 goto;>goto--jumper-46
-setreg1;>goto--jumper-46;goto--branch-46
-s1push1
-goto;>GAMESTART--label
+dataread1;>@20;goto--branch-46
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-46
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:5
+dataread2;>:4
 gotoif;>goto--branch-47
 goto;>goto--jumper-47
-dataread1;>@24;goto--branch-47
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-47;goto--branch-47
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-47
-#conditional set
+#conditional subroutine goto
 dataread1;>kb
-dataread2;>:%
+dataread2;>:$
 gotoif;>goto--branch-48
 goto;>goto--jumper-48
-dataread1;>@24;goto--branch-48
-datawrite1;>badguy_fallspeed
+setreg1;>goto--jumper-48;goto--branch-48
+s1push1
+goto;>GAMESTART--label
 null;;goto--jumper-48
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:5
 gotoif;>goto--branch-49
 goto;>goto--jumper-49
-setreg1;>goto--jumper-49;goto--branch-49
-s1push1
-goto;>GAMESTART--label
+dataread1;>@24;goto--branch-49
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-49
-#conditional subroutine goto
+#conditional set
 dataread1;>kb
 dataread2;>:%
 gotoif;>goto--branch-50
 goto;>goto--jumper-50
-setreg1;>goto--jumper-50;goto--branch-50
-s1push1
-goto;>GAMESTART--label
+dataread1;>@24;goto--branch-50
+datawrite1;>badguy_fallspeed
 null;;goto--jumper-50
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:h
+dataread2;>:5
 gotoif;>goto--branch-51
 goto;>goto--jumper-51
 setreg1;>goto--jumper-51;goto--branch-51
 s1push1
-goto;>Help--label
+goto;>GAMESTART--label
 null;;goto--jumper-51
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:H
+dataread2;>:%
 gotoif;>goto--branch-52
 goto;>goto--jumper-52
 setreg1;>goto--jumper-52;goto--branch-52
 s1push1
-goto;>Help--label
+goto;>GAMESTART--label
 null;;goto--jumper-52
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:a
+dataread2;>:h
 gotoif;>goto--branch-53
 goto;>goto--jumper-53
 setreg1;>goto--jumper-53;goto--branch-53
 s1push1
-goto;>About--label
+goto;>Help--label
 null;;goto--jumper-53
 #conditional subroutine goto
 dataread1;>kb
-dataread2;>:A
+dataread2;>:H
 gotoif;>goto--branch-54
 goto;>goto--jumper-54
 setreg1;>goto--jumper-54;goto--branch-54
 s1push1
-goto;>About--label
+goto;>Help--label
 null;;goto--jumper-54
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:a
+gotoif;>goto--branch-55
+goto;>goto--jumper-55
+setreg1;>goto--jumper-55;goto--branch-55
+s1push1
+goto;>About--label
+null;;goto--jumper-55
+#conditional subroutine goto
+dataread1;>kb
+dataread2;>:A
+gotoif;>goto--branch-56
+goto;>goto--jumper-56
+setreg1;>goto--jumper-56;goto--branch-56
+s1push1
+goto;>About--label
+null;;goto--jumper-56
 #conditional stop
 dataread1;>kb
 dataread2;>:q
-gotoif;>goto--branch-55
-goto;>goto--jumper-55
-stop;;goto--branch-55
+gotoif;>goto--branch-57
+goto;>goto--jumper-57
+stop;;goto--branch-57
 
-null;;goto--jumper-55
+null;;goto--jumper-57
 #conditional stop
 dataread1;>kb
 dataread2;>:Q
-gotoif;>goto--branch-56
-goto;>goto--jumper-56
-stop;;goto--branch-56
+gotoif;>goto--branch-58
+goto;>goto--jumper-58
+stop;;goto--branch-58
 
-null;;goto--jumper-56
+null;;goto--jumper-58
 #goto 
 goto;>MAIN--label
 #label
@@ -524,13 +527,13 @@ datawrite1;>score
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #70
-iowrite1;>snd.1.wave#SSTNPL Source Line: '70' 
+#_______NOTE: this corresponds to SSTNPL source line #72
+iowrite1;>snd.1.wave#SSTNPL Source Line: '72' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x440
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #72
-iowrite1;>snd.1.freq#SSTNPL Source Line: '72' 
+#_______NOTE: this corresponds to SSTNPL source line #74
+iowrite1;>snd.1.freq#SSTNPL Source Line: '74' 
 #plotter fill
 dataread1;>*---------
 iowrite1;>plot.fill
@@ -541,15 +544,15 @@ iowrite1;>plot.width
 dataread1;>@20
 iowrite1;>plot.height
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-78
+setreg1;>goto--jumper-80
 s1push1
 goto;>badG_start--label
-null;;goto--jumper-78
+null;;goto--jumper-80
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-79
+setreg1;>goto--jumper-81
 s1push1
 goto;>gameloop--label
-null;;goto--jumper-79
+null;;goto--jumper-81
 #prline
 fopwri1;:p
 fopwri1;:r
@@ -590,8 +593,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-81
-gotoif;>keyprompt--loop-81
+ioread1;>io.ttyrd;keyprompt--loop-83
+gotoif;>keyprompt--loop-83
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -617,11 +620,11 @@ datawrite1;>badguy_Y
 #conditional goto
 dataread1;>badguy_Y
 dataread2;>@100
-gotoifmore;>goto--branch-94
-goto;>goto--jumper-94
-setreg1;>goto--jumper-94;goto--branch-94
+gotoifmore;>goto--branch-96
+goto;>goto--jumper-96
+setreg1;>goto--jumper-96;goto--branch-96
 goto;>gameover--label
-null;;goto--jumper-94
+null;;goto--jumper-96
 #plotter draw line
 dataread1;>*+++------
 iowrite1;>plot.color
@@ -654,8 +657,8 @@ iowrite1;>plot.color
 #plotter draw triangle
 iowrite1;>plot.tri
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #115
-ioread1;>mouse.realx#SSTNPL Source Line: '115' 
+#_______NOTE: this corresponds to SSTNPL source line #117
+ioread1;>mouse.realx#SSTNPL Source Line: '117' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>realx
 #plotter x pos 3
@@ -669,37 +672,37 @@ iowrite1;>plot.tri
 #label
 null;;drawLOCK--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #124
-ioread1;>plot.buffer#SSTNPL Source Line: '124' 
+#_______NOTE: this corresponds to SSTNPL source line #126
+ioread1;>plot.buffer#SSTNPL Source Line: '126' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>locktmp
 #conditional goto
 dataread1;>locktmp
 dataread2;>@0
-gotoifmore;>goto--branch-126
-goto;>goto--jumper-126
-setreg1;>goto--jumper-126;goto--branch-126
+gotoifmore;>goto--branch-128
+goto;>goto--jumper-128
+setreg1;>goto--jumper-128;goto--branch-128
 goto;>drawLOCK--label
-null;;goto--jumper-126
+null;;goto--jumper-128
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #128
-iowrite1;>plot.fhalt#SSTNPL Source Line: '128' 
+#_______NOTE: this corresponds to SSTNPL source line #130
+iowrite1;>plot.fhalt#SSTNPL Source Line: '130' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #131
-ioread1;>mouse.button#SSTNPL Source Line: '131' 
+#_______NOTE: this corresponds to SSTNPL source line #133
+ioread1;>mouse.button#SSTNPL Source Line: '133' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>clickbuff
 #conditional goto
 dataread1;>clickbuff
 dataread2;>@0
-gotoifmore;>goto--jumper-133
-goto;>goto--branch-133
-setreg1;>goto--jumper-133;goto--branch-133
+gotoifmore;>goto--jumper-135
+goto;>goto--branch-135
+setreg1;>goto--jumper-135;goto--branch-135
 goto;>gameloop--label
-null;;goto--jumper-133
+null;;goto--jumper-135
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #135
-ioread1;>mouse.lockx#SSTNPL Source Line: '135' 
+#_______NOTE: this corresponds to SSTNPL source line #137
+ioread1;>mouse.lockx#SSTNPL Source Line: '137' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>clickx
 #add (2op math)
@@ -711,17 +714,17 @@ datawrite1;>hit_du
 #conditional goto
 dataread1;>clickx
 dataread2;>badguy_X
-gotoifmore;>goto--halfstep-140
-gotoif;>goto--halfstep-140
-goto;>goto--jumper-140
-dataread1;>clickx;goto--halfstep-140
+gotoifmore;>goto--halfstep-142
+gotoif;>goto--halfstep-142
+goto;>goto--jumper-142
+dataread1;>clickx;goto--halfstep-142
 dataread2;>hit_du
-gotoifless;>goto--branch-140
-gotoif;>goto--branch-140
-goto;>goto--jumper-140
-setreg1;>goto--jumper-140;goto--branch-140
+gotoifless;>goto--branch-142
+gotoif;>goto--branch-142
+goto;>goto--jumper-142
+setreg1;>goto--jumper-142;goto--branch-142
 goto;>DO_hit--label
-null;;goto--jumper-140
+null;;goto--jumper-142
 #goto 
 goto;>DO_miss--label
 #goto 
@@ -732,8 +735,8 @@ null;;gameover--label
 dataread1;>@0
 iowrite1;>ga.mode
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #150
-include;fttarget/gameover.tas0#SSTNPL Source Line: '150' 
+#_______NOTE: this corresponds to SSTNPL source line #152
+include;fttarget/gameover.tas0#SSTNPL Source Line: '152' 
 #print
 fopwri1;:S
 fopwri1;:c
@@ -753,8 +756,8 @@ gotoreg1
 #label
 null;;DO_hit--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #158
-iowrite1;>snd.1.play#SSTNPL Source Line: '158' 
+#_______NOTE: this corresponds to SSTNPL source line #160
+iowrite1;>snd.1.play#SSTNPL Source Line: '160' 
 #add (2op math)
 dataread1;>@1
 dataread2;>score
@@ -788,13 +791,13 @@ iowrite1;>plot.color
 iowrite1;>plot.line
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-174
-setreg1;0;waitcy-loopback-174
+datawrite1;>waitcy-loopback-176
+setreg1;0;waitcy-loopback-176
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-174
+datawrite1;>waitcy-loopback-176
 setreg2;10x416
-gotoifless;>waitcy-loopback-174
+gotoifless;>waitcy-loopback-176
 
 #plotter draw line
 dataread1;>*---------
@@ -807,19 +810,19 @@ iowrite1;>plot.x1
 #plotter draw rect
 iowrite1;>plot.rect
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-182
+setreg1;>goto--jumper-184
 s1push1
 goto;>badG_start--label
-null;;goto--jumper-182
+null;;goto--jumper-184
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #184
-iowrite1;>snd.1.stop#SSTNPL Source Line: '184' 
+#_______NOTE: this corresponds to SSTNPL source line #186
+iowrite1;>snd.1.stop#SSTNPL Source Line: '186' 
 #goto 
 goto;>gameloop--label
 #label
 null;;DO_miss--label
 #plotter y pos 1
-dataread1;>badguy_Y
+dataread1;>@-121
 iowrite1;>plot.y1
 #plotter y pos 2
 dataread1;>@121
@@ -837,13 +840,13 @@ iowrite1;>plot.color
 iowrite1;>plot.line
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-198
-setreg1;0;waitcy-loopback-198
+datawrite1;>waitcy-loopback-200
+setreg1;0;waitcy-loopback-200
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-198
-setreg2;10x166
-gotoifless;>waitcy-loopback-198
+datawrite1;>waitcy-loopback-200
+setreg2;10x100
+gotoifless;>waitcy-loopback-200
 
 #plotter draw line
 dataread1;>*---------
@@ -870,9 +873,9 @@ s1pop1
 gotoreg1
 #label
 null;;Help--label
-#Set text colors
-dataread1;>*+++--0
-iowrite1;>io.textcolor
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #224
+include;fttarget/help.tas0#SSTNPL Source Line: '224' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1090,9 +1093,6 @@ fopwri1;:V
 fopwri1;:E
 fopwri1;:R
 fopwri1;:!
-#Set text colors
-dataread1;>*+++---
-iowrite1;>io.textcolor
 #print newline
 fopwri1;:\n
 #print
@@ -1108,19 +1108,24 @@ fopwri1;:k
 fopwri1;:e
 fopwri1;:y
 fopwri1;:.
+fopwri1;:\s
+fopwri1;:>
+fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-231
-gotoif;>keyprompt--loop-231
+ioread1;>io.ttyrd;keyprompt--loop-232
+gotoif;>keyprompt--loop-232
+#print newline
+fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 null;;About--label
-#Set text colors
-dataread1;>*+++--0
-iowrite1;>io.textcolor
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #237
+include;fttarget/about.tas0#SSTNPL Source Line: '237' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1151,7 +1156,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:0
 fopwri1;:.
-fopwri1;:1
+fopwri1;:2
 fopwri1;:\s
 fopwri1;:-
 fopwri1;:\s
@@ -1232,8 +1237,6 @@ fopwri1;:T
 fopwri1;:G
 fopwri1;:A
 fopwri1;:)
-fopwri1;:\n
-#prline
 fopwri1;:\n
 #prline
 fopwri1;:W
@@ -1968,9 +1971,6 @@ fopwri1;:e
 fopwri1;:s
 fopwri1;:/
 fopwri1;:>
-#Set text colors
-dataread1;>*+++---
-iowrite1;>io.textcolor
 #print newline
 fopwri1;:\n
 #print
@@ -1986,11 +1986,16 @@ fopwri1;:k
 fopwri1;:e
 fopwri1;:y
 fopwri1;:.
+fopwri1;:\s
+fopwri1;:>
+fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-259
-gotoif;>keyprompt--loop-259
+ioread1;>io.ttyrd;keyprompt--loop-258
+gotoif;>keyprompt--loop-258
+#print newline
+fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1

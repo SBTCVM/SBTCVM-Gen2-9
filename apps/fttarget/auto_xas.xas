@@ -1,3 +1,5 @@
 gfxcon -cp %xwd%/title
 gfxcon -cp %xwd%/gameover
+gfxcon -cp %xwd%/help
+gfxcon -cp %xwd%/about
 stnp %xwd%

@@ -21,13 +21,15 @@ var kb=0
 
 label MAIN
 asm include;fttarget/title.tas0
-prline Falling Ternary Targets v0.1
+prline Falling Ternary Targets v0.2
 prline 1: Begin Easy Game         3: Begin Hard Game
 prline 2: Begin Medium Game       4: Begin Crazy Game
 prline 5: Begin Game Of Questionable Victory Chances... >:)
 prline h: help           a: about          q: Quit
+print >?
 keyprompt
 set kb
+newline
 if kb,:1 =badguy_fallspeed @8
 if kb,:! =badguy_fallspeed @8
 if kb,:1 gsub GAMESTART
@@ -187,7 +189,7 @@ goto gameloop
 label DO_miss
 	
 	
-	drawy1 badguy_Y
+	drawy1 @-121
 	
 	#laser
 	drawy2 @121
@@ -195,7 +197,7 @@ label DO_miss
 	drawx2 clickx
 	drawcolor *000000+++
 	drawline
-	waitcy 1000
+	waitcy 600
 	drawcolor *---------
 	
 	#erase laser
@@ -219,24 +221,22 @@ return
 
 
 label Help
-textcolor *+++--0
+asm include;fttarget/help.tas0
 prline Falling Ternary Targets - HELP
 prline -------------
 prline use mouse to move targeting triangle left or right.
 prline click when the target is pointed at by targeting triangle
 print Let any targets get past the triangle, and its GAME OVER!
-textcolor *+++---
 newline 
-print Press a key.
+print Press a key. >?
 keyprompt
+newline
 return
 
 label About
-
-textcolor *+++--0
-prline Falling Ternary Targets - v0.1 - a falling targets game.
+asm include;fttarget/about.tas0
+prline Falling Ternary Targets - v0.2 - a falling targets game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
-prline 
 prline Written in SSTNPL.
 prline 
 prline Copyright (c) 2018-2020 Thomas Leathers & Contributors
@@ -253,10 +253,10 @@ prline GNU General Public License for more details.
 prline 
 prline You should have received a copy of the GNU General Public License
 print along with Falling Ternary Targets. If not, see <http://www.gnu.org/licenses/>
-textcolor *+++---
 newline 
-print Press a key.
+print Press a key. >?
 keyprompt
+newline
 return
 
 
