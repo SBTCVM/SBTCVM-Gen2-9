@@ -3,6 +3,7 @@
 var kb=0
 
 label MAIN
+	textcolor *+++---
 	prline please choose option:
 			textcolor *000000
 			print _______________________________________
@@ -17,10 +18,12 @@ label MAIN
 	keyprompt
 		set kb
 		newline
+		textcolor *+0----
 		if kb,:1 gsub soundtest
 		if kb,:2 gsub info
 		if kb,:3 gsub QTM.memtest_slow
 		if kb,:4 gsub QTM.memtest_fast
+		textcolor *+++---
 		if kb,:q return
 		if kb,:Q return
 	goto MAIN

@@ -48,6 +48,11 @@ ontrain:
 	features 4 speed options.
 	[ttycolor],[mouse],[plotter],[nocurses],[sound]
 
+fttarget:
+	Falling Ternary Targets: An arcade-style falling-target game.
+	Features a scoring system and multiple play speeds.
+	[ttycolor],[mouse],[plotter],[nocurses],[sound]
+
 gtt:
 	Guess That trit: a classic number guessing game from all the way back
 	in the Gen 1 era. [ttycolor],[sound]

@@ -1,0 +1,262 @@
+
+
+
+var realx=0
+var clickx=0
+var clickbuff=0
+var locktmp=0
+var hit_du=0
+var hit_dl=0
+
+
+var score=0
+var badguy_X=0
+var badguy_Y=0
+
+var badguy_int_y=@-150
+var badguy_fallspeed=@8
+
+var kb=0
+
+
+label MAIN
+asm include;fttarget/title.tas0
+prline Falling Ternary Targets v0.1
+prline 1: Begin Easy Game         3: Begin Hard Game
+prline 2: Begin Medium Game       4: Begin Crazy Game
+prline 5: Begin Game Of Questionable Victory Chances... >:)
+prline h: help           a: about          q: Quit
+keyprompt
+set kb
+if kb,:1 =badguy_fallspeed @8
+if kb,:! =badguy_fallspeed @8
+if kb,:1 gsub GAMESTART
+if kb,:! gsub GAMESTART
+if kb,:2 =badguy_fallspeed @12
+if kb,:@ =badguy_fallspeed @12
+if kb,:2 gsub GAMESTART
+if kb,:@ gsub GAMESTART
+if kb,:3 =badguy_fallspeed @16
+if kb,:\p =badguy_fallspeed @16
+if kb,:3 gsub GAMESTART
+if kb,:\p gsub GAMESTART
+if kb,:4 =badguy_fallspeed @20
+if kb,:$ =badguy_fallspeed @20
+if kb,:4 gsub GAMESTART
+if kb,:$ gsub GAMESTART
+if kb,:5 =badguy_fallspeed @24
+if kb,:% =badguy_fallspeed @24
+if kb,:5 gsub GAMESTART
+if kb,:% gsub GAMESTART
+if kb,:h gsub Help
+if kb,:H gsub Help
+if kb,:a gsub About
+if kb,:A gsub About
+if kb,:q stop
+if kb,:Q stop
+
+
+
+goto MAIN
+
+
+
+label GAMESTART
+gamode @30
+	val @0
+	set score
+	
+	val @1
+	asm iowrite1;>snd.1.wave
+	val @440
+	asm iowrite1;>snd.1.freq
+	drawfill *---------
+	
+	drawwidth @20
+	drawheight @20
+	
+	gsub badG_start
+	gsub gameloop
+	prline press a key to return to main menu.
+	keyprompt
+return
+
+label gameloop
+	
+	drawcolor *---------
+	drawx1 badguy_X
+	drawy1 badguy_Y
+	drawrect
+	
+	add badguy_Y,badguy_fallspeed
+	set badguy_Y
+	
+	ifmore badguy_Y,@100 goto gameover
+	
+	drawcolor *+++------
+	drawx1 badguy_X
+	drawy1 badguy_Y
+	drawrect
+	
+	
+	drawx1 @-121
+	drawx2 @121
+	
+	drawy1 @121
+	drawy2 @121
+	drawy3 @100
+	
+	#####erase old tri
+	drawcolor *---------
+	drawtri
+	#####
+	
+		#get mouse realtime x
+		asm ioread1;>mouse.realx
+			set realx
+		drawx3 realx
+		
+		drawcolor *+++00++++
+		drawtri
+		
+		
+		label drawLOCK
+			asm ioread1;>plot.buffer
+			set locktmp
+			ifmore locktmp,@0 goto drawLOCK
+			
+		asm iowrite1;>plot.fhalt
+		
+		
+		asm ioread1;>mouse.button
+			set clickbuff
+		ifnotmore clickbuff,@0 goto gameloop
+		
+			asm ioread1;>mouse.lockx
+				set clickx
+			add @20,badguy_X
+			set hit_du
+
+			ifrange badguy_X,hit_du,clickx goto DO_hit
+			goto DO_miss
+		
+		
+		
+	goto gameloop
+
+
+label gameover
+	gamode @0
+	asm include;fttarget/gameover.tas0
+	print Score: 
+	dumpd score
+	newline
+
+	return
+
+label DO_hit
+	asm iowrite1;>snd.1.play
+	add @1,score
+	set score
+	
+	#blast
+	drawcolor *+++++++++
+	drawx1 badguy_X
+	drawy1 badguy_Y
+	drawrect
+	
+	#laser
+	drawy2 @121
+	drawx1 clickx
+	drawx2 clickx
+	drawcolor *000000+++
+	drawline
+	waitcy 2500
+	drawcolor *---------
+	
+	#erase blast & laser
+	drawline
+	
+	drawx1 badguy_X
+	drawrect
+	gsub badG_start
+	
+	asm iowrite1;>snd.1.stop
+goto gameloop
+
+label DO_miss
+	
+	
+	drawy1 badguy_Y
+	
+	#laser
+	drawy2 @121
+	drawx1 clickx
+	drawx2 clickx
+	drawcolor *000000+++
+	drawline
+	waitcy 1000
+	drawcolor *---------
+	
+	#erase laser
+	drawline
+	
+	
+goto gameloop
+
+label badG_start
+	get badguy_int_y
+	set badguy_Y
+	rrange @-121,@101
+	set badguy_X
+return
+
+
+
+
+
+
+
+
+label Help
+textcolor *+++--0
+prline Falling Ternary Targets - HELP
+prline -------------
+prline use mouse to move targeting triangle left or right.
+prline click when the target is pointed at by targeting triangle
+print Let any targets get past the triangle, and its GAME OVER!
+textcolor *+++---
+newline 
+print Press a key.
+keyprompt
+return
+
+label About
+
+textcolor *+++--0
+prline Falling Ternary Targets - v0.1 - a falling targets game.
+prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
+prline 
+prline Written in SSTNPL.
+prline 
+prline Copyright (c) 2018-2020 Thomas Leathers & Contributors
+prline 
+prline Falling Ternary Targets is free software: you can redistribute it and/or modify
+prline it under the terms of the GNU General Public License as published by
+prline the Free Software Foundation, either version 3 of the License, or
+prline (at your option) any later version.
+prline 
+prline Falling Ternary Targets is distributed in the hope that it will be useful,
+prline but WITHOUT ANY WARRANTY; without even the implied warranty of
+prline MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+prline GNU General Public License for more details.
+prline 
+prline You should have received a copy of the GNU General Public License
+print along with Falling Ternary Targets. If not, see <http://www.gnu.org/licenses/>
+textcolor *+++---
+newline 
+print Press a key.
+keyprompt
+return
+
+
