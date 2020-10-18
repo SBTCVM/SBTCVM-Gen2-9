@@ -734,9 +734,13 @@ null;;gameover--label
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
+#print newline
+fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #152
-include;fttarget/gameover.tas0#SSTNPL Source Line: '152' 
+#_______NOTE: this corresponds to SSTNPL source line #153
+include;fttarget/gameover.tas0#SSTNPL Source Line: '153' 
+#print newline
+fopwri1;:\n
 #print
 fopwri1;:S
 fopwri1;:c
@@ -756,8 +760,8 @@ gotoreg1
 #label
 null;;DO_hit--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #160
-iowrite1;>snd.1.play#SSTNPL Source Line: '160' 
+#_______NOTE: this corresponds to SSTNPL source line #162
+iowrite1;>snd.1.play#SSTNPL Source Line: '162' 
 #add (2op math)
 dataread1;>@1
 dataread2;>score
@@ -791,13 +795,13 @@ iowrite1;>plot.color
 iowrite1;>plot.line
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-176
-setreg1;0;waitcy-loopback-176
+datawrite1;>waitcy-loopback-178
+setreg1;0;waitcy-loopback-178
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-176
+datawrite1;>waitcy-loopback-178
 setreg2;10x416
-gotoifless;>waitcy-loopback-176
+gotoifless;>waitcy-loopback-178
 
 #plotter draw line
 dataread1;>*---------
@@ -810,13 +814,13 @@ iowrite1;>plot.x1
 #plotter draw rect
 iowrite1;>plot.rect
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-184
+setreg1;>goto--jumper-186
 s1push1
 goto;>badG_start--label
-null;;goto--jumper-184
+null;;goto--jumper-186
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #186
-iowrite1;>snd.1.stop#SSTNPL Source Line: '186' 
+#_______NOTE: this corresponds to SSTNPL source line #188
+iowrite1;>snd.1.stop#SSTNPL Source Line: '188' 
 #goto 
 goto;>gameloop--label
 #label
@@ -840,13 +844,13 @@ iowrite1;>plot.color
 iowrite1;>plot.line
 #Wait loop
 setreg1;0
-datawrite1;>waitcy-loopback-200
-setreg1;0;waitcy-loopback-200
+datawrite1;>waitcy-loopback-202
+setreg1;0;waitcy-loopback-202
 setreg2;10x1
 add
-datawrite1;>waitcy-loopback-200
+datawrite1;>waitcy-loopback-202
 setreg2;10x100
-gotoifless;>waitcy-loopback-200
+gotoifless;>waitcy-loopback-202
 
 #plotter draw line
 dataread1;>*---------
@@ -874,8 +878,8 @@ gotoreg1
 #label
 null;;Help--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #224
-include;fttarget/help.tas0#SSTNPL Source Line: '224' 
+#_______NOTE: this corresponds to SSTNPL source line #226
+include;fttarget/help.tas0#SSTNPL Source Line: '226' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1114,8 +1118,8 @@ fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-232
-gotoif;>keyprompt--loop-232
+ioread1;>io.ttyrd;keyprompt--loop-234
+gotoif;>keyprompt--loop-234
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -1124,8 +1128,8 @@ gotoreg1
 #label
 null;;About--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #237
-include;fttarget/about.tas0#SSTNPL Source Line: '237' 
+#_______NOTE: this corresponds to SSTNPL source line #239
+include;fttarget/about.tas0#SSTNPL Source Line: '239' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1992,8 +1996,8 @@ fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-258
-gotoif;>keyprompt--loop-258
+ioread1;>io.ttyrd;keyprompt--loop-260
+gotoif;>keyprompt--loop-260
 #print newline
 fopwri1;:\n
 #return from subroutine.

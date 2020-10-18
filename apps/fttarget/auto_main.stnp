@@ -149,7 +149,9 @@ label gameloop
 
 label gameover
 	gamode @0
+	newline
 	asm include;fttarget/gameover.tas0
+	newline
 	print Score: 
 	dumpd score
 	newline

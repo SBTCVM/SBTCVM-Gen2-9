@@ -47,8 +47,8 @@ var KBuff=0
 label Main
 	keyprompt
 	set KBuff
-	if KBuff,:q stop
-	if KBuff,:Q stop
+	if KBuff,:q goto QUIT
+	if KBuff,:Q goto QUIT
 	if KBuff,:s goto DEMO_splash
 	if KBuff,:S goto DEMO_splash
 	if KBuff,:c goto DEMO_color
@@ -58,6 +58,13 @@ label Main
 	if KBuff,:1 goto DEMO_credits
 	if KBuff,:! goto DEMO_credits
 goto Main
+
+label QUIT
+	gamode @0
+	#this should return to DOS if available.
+	vdi rstld -1 command.txe
+	prline Shutting down...
+	stop
 
 label DEMO_splash
 	vdi rstld -1 boot.txe
