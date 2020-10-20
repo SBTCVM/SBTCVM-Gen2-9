@@ -21,6 +21,10 @@ world (6.5KHz CPU), but it does have:
 
 - 19,683 words or, 39.366 KN (KiloNonets [GLOSSARY](glossary/glossary_datameasure.md) ), of RAM
 - an assembler
+- disk support
+- simplistic graphics
+- mouse support
+- 4 channel stereo PSG-style sound emulation.
 - and SSTNPL, a nice higher-level language. (higher-level than the assembler at least.)
 
 ### What are the SBTCVM project's goals?

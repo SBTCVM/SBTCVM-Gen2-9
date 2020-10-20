@@ -66,7 +66,7 @@ When used, the SSTNPL compiler will automatically run the assembler for you.
 
 ### diskedit.py: [XAS command: diskedit]
 disk edit & build utility for SBTCVM's disk image format.
-can generate disk images from *.diskmap files.
+can generate disk images from `*.diskmap` files.
 
 
 ### romdump.py: [XAS command: dump]

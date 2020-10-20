@@ -31,3 +31,9 @@ inst|data|info
 -1|**N/A**|print a newline (used for formatting)
 
 also, the **first word** of the image data contains the **end address** in its data word.
+
+## PLRLE
+
+A decendant of CPRLE, PLRLE is an advanced, **9-trit RGB tritmap compression format**,
+complete with lossy & lossless compression modes, and a combined decoder/renderer 
+with basic scaling support. works with the **SBTGA** Plotter (mode 30)

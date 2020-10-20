@@ -10,6 +10,9 @@ SBTCVM Simplified Ternary Numeric Programming Language
 ## SBTVDI
 SBTCVM Balanced Ternary Virtual Disk Interface
 
+## SBTNET
+**S**BTNET **B**alanced **T**ernary **NE**twork **T**echnology
+
 ## VDI
 Short for SBTVDI (see above)
 
