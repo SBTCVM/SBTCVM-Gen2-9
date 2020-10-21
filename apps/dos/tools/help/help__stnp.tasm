@@ -27,10 +27,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>dosargs.buffer--table
-add
+adddata1;10x1
+adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--7
 null;;tabstrc--adrbuff--7
 #reset output buffer to 0
@@ -221,10 +219,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>dosargs.buffer--table
-add
+adddata1;10x1
+adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--11
 null;;tabstrc--adrbuff--11
 #reset output buffer to 0
@@ -437,10 +433,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>dosargs.buffer--table
-add
+adddata1;10x1
+adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--15
 null;;tabstrc--adrbuff--15
 #reset output buffer to 0

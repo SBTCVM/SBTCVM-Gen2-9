@@ -127,10 +127,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--61
 null;;tabstrc--adrbuff--61
 #reset output buffer to 0
@@ -255,10 +253,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--66
 null;;tabstrc--adrbuff--66
 #reset output buffer to 0
@@ -405,10 +401,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--71
 null;;tabstrc--adrbuff--71
 #reset output buffer to 0
@@ -582,7 +576,7 @@ fopwri1;:\s
 fopwri1;:y
 fopwri1;:o
 fopwri1;:u
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:u
 fopwri1;:s

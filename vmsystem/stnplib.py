@@ -1456,10 +1456,8 @@ dataread2;>''' + ypos + '''
 mul
 dataread2;>''' + xoffset + '''
 add
-setreg2;10x1
-add
-setreg2;>''' + tname + '''--table
-add
+adddata1;10x1
+adddata1;>''' + tname + '''--table
 datawrite1;>tabstrc--adrbuff--''' + str(lineno) + '''
 null;;tabstrc--adrbuff--''' + str(lineno) + '''
 #reset output buffer to 0
