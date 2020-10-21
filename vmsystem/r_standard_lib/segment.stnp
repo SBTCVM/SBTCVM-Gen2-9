@@ -52,115 +52,61 @@ label output
 	
 	ifmore b_tmp,:9 goto skip_to_symbols
 	ifmore b_tmp,:Z goto skip_alpha
-	ifmore b_tmp,:T goto skip_alpha_upper_thirdquar
-	ifmore b_tmp,:M goto skip_alpha_upper_firsthalf
-	ifmore b_tmp,:G goto skip_alpha_upper_firstquar
+	#ifmore b_tmp,:T goto skip_alpha_upper_thirdquar
+	#ifmore b_tmp,:M goto skip_alpha_upper_firsthalf
+	#ifmore b_tmp,:G goto skip_alpha_upper_firstquar
 	
 	ifmore b_tmp,:\s goto skip_alpha_lower
-	ifmore b_tmp,:t goto skip_alpha_lower_thirdquar
-	ifmore b_tmp,:m goto skip_alpha_lower_firsthalf
-	ifmore b_tmp,:g goto skip_alpha_lower_firstquar
 	
 	
+	#this code calculates constant. (can be replaced with constant once calculated)
+	#asm setreg1;:a
+	#asm setreg2;10x-2
+	#asm add
+	#asm abs1
+	#asm iowrite1;>io.decdump
 	
-	if b_tmp,:a =offset @2
-	if b_tmp,:b =offset @3
-	if b_tmp,:c =offset @4
-	if b_tmp,:d =offset @5
-	if b_tmp,:e =offset @6
-	if b_tmp,:f =offset @7
-	if b_tmp,:g =offset @8
+	#constant is 123
+	asm setreg1;10x123
+	get2 b_tmp
+	asm add
+	set offset
 	
-	goto end
-	label skip_alpha_lower_firstquar
-	
-	if b_tmp,:h =offset @9
-	if b_tmp,:i =offset @10
-	if b_tmp,:j =offset @11
-	if b_tmp,:k =offset @12
-	if b_tmp,:l =offset @13
-	if b_tmp,:m =offset @14
-	
-	goto end
-	label skip_alpha_lower_firsthalf
-	
-	
-	if b_tmp,:n =offset @15
-	if b_tmp,:o =offset @16
-	if b_tmp,:p =offset @17
-	if b_tmp,:q =offset @18
-	if b_tmp,:r =offset @19
-	if b_tmp,:s =offset @20
-	if b_tmp,:t =offset @21
-	
-	goto end
-	label skip_alpha_lower_thirdquar
-	
-	if b_tmp,:u =offset @22
-	if b_tmp,:v =offset @23
-	if b_tmp,:w =offset @24
-	if b_tmp,:x =offset @25
-	if b_tmp,:y =offset @26
-	if b_tmp,:z =offset @27
 	
 	goto end
 	label skip_alpha_lower
 	
-	if b_tmp,:A =offset @2
-	if b_tmp,:B =offset @3
-	if b_tmp,:C =offset @4
-	if b_tmp,:D =offset @5
-	if b_tmp,:E =offset @6
-	if b_tmp,:F =offset @7
-	if b_tmp,:G =offset @8
+	#this code calculates constant. (can be replaced with constant once calculated)
+	#asm setreg1;:A
+	#asm setreg2;10x-2
+	#asm add
+	#asm abs1
+	#asm iowrite1;>io.decdump
 	
-	goto end
-	label skip_alpha_upper_firstquar
-	
-	if b_tmp,:H =offset @9
-	if b_tmp,:I =offset @10
-	if b_tmp,:J =offset @11
-	if b_tmp,:K =offset @12
-	if b_tmp,:L =offset @13
-	if b_tmp,:M =offset @14
-	
-	goto end
-	label skip_alpha_upper_firsthalf
+	asm setreg1;10x96
+	get2 b_tmp
+	asm add
+	set offset
 	
 	
-	
-	if b_tmp,:N =offset @15
-	if b_tmp,:O =offset @16
-	if b_tmp,:P =offset @17
-	if b_tmp,:Q =offset @18
-	if b_tmp,:R =offset @19
-	if b_tmp,:S =offset @20
-	if b_tmp,:T =offset @21
-	
-	goto end
-	label skip_alpha_upper_thirdquar
-	
-	if b_tmp,:U =offset @22
-	if b_tmp,:V =offset @23
-	if b_tmp,:W =offset @24
-	if b_tmp,:X =offset @25
-	if b_tmp,:Y =offset @26
-	if b_tmp,:Z =offset @27
 	goto end
 	label skip_alpha
 	#0-9
-	if b_tmp,:0 =offset @28
-	if b_tmp,:1 =offset @29
-	if b_tmp,:2 =offset @30
-	if b_tmp,:3 =offset @31
-	if b_tmp,:4 =offset @32
-	if b_tmp,:5 =offset @33
-	if b_tmp,:6 =offset @34
-	if b_tmp,:7 =offset @35
-	if b_tmp,:8 =offset @36
-	if b_tmp,:9 =offset @37
-	#SYMBOLS
+	
+	#this code calculates constant. (can be replaced with constant once calculated)
+	#asm setreg1;:0
+	#asm setreg2;10x-28
+	#asm add
+	#asm abs1
+	#asm iowrite1;>io.decdump
+	
+	asm setreg1;10x95
+	get2 b_tmp
+	asm add
+	set offset
 	goto end
+	
+	#SYMBOLS
 	label skip_to_symbols
 	if b_tmp,:? =offset @38
 	if b_tmp,:+ =offset @39
