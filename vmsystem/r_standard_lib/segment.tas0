@@ -1282,10 +1282,8 @@ dataread2;>offset
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--208
 dataread1;;tabr--adrbuff--208
 #set(1) (used after 2-op math, asm code, or get)
@@ -1327,10 +1325,8 @@ dataread2;>offset
 mul
 dataread2;>@1
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--222
 dataread1;;tabr--adrbuff--222
 #set(1) (used after 2-op math, asm code, or get)
@@ -1372,10 +1368,8 @@ dataread2;>offset
 mul
 dataread2;>@2
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--236
 dataread1;;tabr--adrbuff--236
 #set(1) (used after 2-op math, asm code, or get)
@@ -1417,10 +1411,8 @@ dataread2;>offset
 mul
 dataread2;>@3
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--250
 dataread1;;tabr--adrbuff--250
 #set(1) (used after 2-op math, asm code, or get)
@@ -1462,10 +1454,8 @@ dataread2;>offset
 mul
 dataread2;>@4
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--264
 dataread1;;tabr--adrbuff--264
 #set(1) (used after 2-op math, asm code, or get)
@@ -1507,10 +1497,8 @@ dataread2;>offset
 mul
 dataread2;>@5
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--278
 dataread1;;tabr--adrbuff--278
 #set(1) (used after 2-op math, asm code, or get)
@@ -1552,10 +1540,8 @@ dataread2;>offset
 mul
 dataread2;>@6
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--292
 dataread1;;tabr--adrbuff--292
 #set(1) (used after 2-op math, asm code, or get)
@@ -1597,10 +1583,8 @@ dataread2;>offset
 mul
 dataread2;>@7
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--306
 dataread1;;tabr--adrbuff--306
 #set(1) (used after 2-op math, asm code, or get)
@@ -1642,10 +1626,8 @@ dataread2;>offset
 mul
 dataread2;>@8
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--320
 dataread1;;tabr--adrbuff--320
 #set(1) (used after 2-op math, asm code, or get)
@@ -1687,10 +1669,8 @@ dataread2;>offset
 mul
 dataread2;>@9
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--334
 dataread1;;tabr--adrbuff--334
 #set(1) (used after 2-op math, asm code, or get)
@@ -1732,10 +1712,8 @@ dataread2;>offset
 mul
 dataread2;>@10
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--348
 dataread1;;tabr--adrbuff--348
 #set(1) (used after 2-op math, asm code, or get)
@@ -1777,10 +1755,8 @@ dataread2;>offset
 mul
 dataread2;>@11
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--362
 dataread1;;tabr--adrbuff--362
 #set(1) (used after 2-op math, asm code, or get)
@@ -1822,10 +1798,8 @@ dataread2;>offset
 mul
 dataread2;>@12
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--376
 dataread1;;tabr--adrbuff--376
 #set(1) (used after 2-op math, asm code, or get)
@@ -1867,10 +1841,8 @@ dataread2;>offset
 mul
 dataread2;>@13
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--390
 dataread1;;tabr--adrbuff--390
 #set(1) (used after 2-op math, asm code, or get)
@@ -1912,10 +1884,8 @@ dataread2;>offset
 mul
 dataread2;>@14
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--404
 dataread1;;tabr--adrbuff--404
 #set(1) (used after 2-op math, asm code, or get)
@@ -1957,10 +1927,8 @@ dataread2;>offset
 mul
 dataread2;>@15
 add
-setreg2;10x1
-add
-setreg2;>seg_data--table
-add
+adddata1;10x1
+adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--418
 dataread1;;tabr--adrbuff--418
 #set(1) (used after 2-op math, asm code, or get)

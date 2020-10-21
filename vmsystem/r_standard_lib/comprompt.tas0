@@ -301,10 +301,8 @@ dataread2;>@0
 mul
 dataread2;>getentry_tobuff_iter
 add
-setreg2;10x1
-add
-setreg2;>buffer--table
-add
+adddata1;10x1
+adddata1;>buffer--table
 datawrite1;>tabw--adrbuff--85
 dataread1;>shell_entry_buff
 datawrite1;;tabw--adrbuff--85
@@ -319,10 +317,8 @@ dataread2;>@0
 mul
 dataread2;>getentry_pad_iter
 add
-setreg2;10x1
-add
-setreg2;>buffer--table
-add
+adddata1;10x1
+adddata1;>buffer--table
 datawrite1;>tabw--adrbuff--90
 dataread1;>@0
 datawrite1;;tabw--adrbuff--90

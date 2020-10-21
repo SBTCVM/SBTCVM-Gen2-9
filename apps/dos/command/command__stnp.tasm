@@ -2063,10 +2063,8 @@ dataread2;>@0
 mul
 dataread2;>@1
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabr--adrbuff--223
 dataread1;;tabr--adrbuff--223
 #set(1) (used after 2-op math, asm code, or get)
@@ -2439,10 +2437,8 @@ dataread2;>@0
 mul
 dataread2;>run_iter
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabr--adrbuff--284
 dataread1;;tabr--adrbuff--284
 #set(1) (used after 2-op math, asm code, or get)
@@ -2495,10 +2491,8 @@ dataread2;>@0
 mul
 dataread2;>run_iter
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabr--adrbuff--299
 dataread1;;tabr--adrbuff--299
 #___RAW ASSEMBLY CODE___
@@ -2515,10 +2509,8 @@ dataread2;>@0
 mul
 dataread2;>run_iter
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabr--adrbuff--304
 dataread1;;tabr--adrbuff--304
 iowrite1;>io.ttywr
@@ -2701,10 +2693,8 @@ dataread2;>@0
 mul
 dataread2;>vdi_iter
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabr--adrbuff--345
 dataread1;;tabr--adrbuff--345
 #___RAW ASSEMBLY CODE___

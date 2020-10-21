@@ -474,10 +474,8 @@ dataread2;>''' + yv + '''
 mul
 dataread2;>''' + xv + '''
 add
-setreg2;10x1
-add
-setreg2;>''' + tname + '''--table
-add
+adddata1;10x1
+adddata1;>''' + tname + '''--table
 datawrite1;>tabr--adrbuff--''' + str(lineno) + '''
 ''' + readop +  ''';;tabr--adrbuff--''' + str(lineno) + '''
 ''')
@@ -546,10 +544,8 @@ dataread2;>''' + yv + '''
 mul
 dataread2;>''' + xv + '''
 add
-setreg2;10x1
-add
-setreg2;>''' + tname + '''--table
-add
+adddata1;10x1
+adddata1;>''' + tname + '''--table
 datawrite1;>tabw--adrbuff--''' + str(lineno) + '''
 dataread1;>''' + datav + '''
 ''' + writeop + ''';;tabw--adrbuff--''' + str(lineno) + '''
