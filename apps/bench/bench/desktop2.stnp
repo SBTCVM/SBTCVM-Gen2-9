@@ -27,24 +27,24 @@ label main
 	set xbuff
 	asm ioread1;>mouse.locky
 	set ybuff
-	ifnotrange @-90,@-63,ybuff goto row1_skip
+	ifrange @-90,@-63,ybuff begin
 	
 		#ifrange @-120,@-93,xbuff =actflg @1
 		ifrange @-120,@-93,xbuff gsub info
 	
-	label row1_skip
-	ifnotrange @-58,@-32,ybuff goto row2_skip
+	end
+	ifrange @-58,@-32,ybuff begin
 	
 		#ifrange @-120,@-93,xbuff =actflg @1
 		ifrange @-120,@-93,xbuff gsub dos
 	
-	label row2_skip
-	ifnotrange @-26,@1,ybuff goto row3_skip
+	end
+	ifrange @-26,@1,ybuff begin
 	
 		#ifrange @-120,@-93,xbuff =actflg @1
 		ifrange @-120,@-93,xbuff gsub credits
 	
-	label row3_skip
+	end
 goto main
 
 

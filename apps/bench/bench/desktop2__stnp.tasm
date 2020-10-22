@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=desktop2
 head-nspin=stdnsp
@@ -63,7 +63,7 @@ datawrite1;>xbuff
 ioread1;>mouse.locky#SSTNPL Source Line: '28' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff
-#conditional goto
+#conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-90
 gotoifmore;>goto--halfstep-30
@@ -74,8 +74,8 @@ dataread2;>@-63
 gotoifless;>goto--jumper-30
 gotoif;>goto--jumper-30
 goto;>goto--branch-30
-setreg1;>goto--jumper-30;goto--branch-30
-goto;>row1_skip--label
+goto;>flow--con-x-1;goto--branch-30
+
 null;;goto--jumper-30
 #conditional subroutine goto
 dataread1;>xbuff
@@ -92,9 +92,8 @@ setreg1;>goto--jumper-33;goto--branch-33
 s1push1
 goto;>info--label
 null;;goto--jumper-33
-#label
-null;;row1_skip--label
-#conditional goto
+null;;flow--con-x-1
+#conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-58
 gotoifmore;>goto--halfstep-36
@@ -105,8 +104,8 @@ dataread2;>@-32
 gotoifless;>goto--jumper-36
 gotoif;>goto--jumper-36
 goto;>goto--branch-36
-setreg1;>goto--jumper-36;goto--branch-36
-goto;>row2_skip--label
+goto;>flow--con-x-2;goto--branch-36
+
 null;;goto--jumper-36
 #conditional subroutine goto
 dataread1;>xbuff
@@ -123,9 +122,8 @@ setreg1;>goto--jumper-39;goto--branch-39
 s1push1
 goto;>dos--label
 null;;goto--jumper-39
-#label
-null;;row2_skip--label
-#conditional goto
+null;;flow--con-x-2
+#conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-26
 gotoifmore;>goto--halfstep-42
@@ -136,8 +134,8 @@ dataread2;>@1
 gotoifless;>goto--jumper-42
 gotoif;>goto--jumper-42
 goto;>goto--branch-42
-setreg1;>goto--jumper-42;goto--branch-42
-goto;>row3_skip--label
+goto;>flow--con-x-3;goto--branch-42
+
 null;;goto--jumper-42
 #conditional subroutine goto
 dataread1;>xbuff
@@ -154,8 +152,7 @@ setreg1;>goto--jumper-45;goto--branch-45
 s1push1
 goto;>credits--label
 null;;goto--jumper-45
-#label
-null;;row3_skip--label
+null;;flow--con-x-3
 #goto 
 goto;>main--label
 #label

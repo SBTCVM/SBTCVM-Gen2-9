@@ -61,7 +61,7 @@ label main
 	
 	### Row 1 ###
 	
-	ifnotrange @1,@6,ybuff_main goto row1_skip
+	ifrange @1,@6,ybuff_main begin
 	
 		ifrange @1,@13,xbuff_main =main_actflg @1
 		ifrange @1,@13,xbuff_main gsub calc_init
@@ -74,11 +74,11 @@ label main
 		ifrange @61,@73,xbuff_main =main_actflg @1
 		ifrange @61,@73,xbuff_main stop
 	
-	label row1_skip
+	end
 	
 	### Row 2 ###
 	
-	ifnotrange @8,@13,ybuff_main goto row2_skip
+	ifrange @8,@13,ybuff_main begin
 	
 		ifrange @1,@13,xbuff_main =main_actflg @1
 		ifrange @1,@13,xbuff_main gsub crystal_ball
@@ -91,11 +91,11 @@ label main
 		ifrange @61,@73,xbuff_main =main_actflg @1
 		ifrange @61,@73,xbuff_main gsub nothing_here
 	
-	label row2_skip
+	end
 	
 	### Row 3 ###
 	
-	ifnotrange @15,@20,ybuff_main goto row3_skip
+	ifrange @15,@20,ybuff_main begin
 	
 		ifrange @1,@13,xbuff_main =main_actflg @1
 		ifrange @1,@13,xbuff_main gsub nothing_here
@@ -108,7 +108,7 @@ label main
 		ifrange @61,@73,xbuff_main =main_actflg @1
 		ifrange @61,@73,xbuff_main gsub nothing_here
 	
-	label row3_skip
+	end
 	
 	asm iowrite1;>mouse.button
 goto main
@@ -563,7 +563,7 @@ return
 		asm ioread1;>mouse.locky
 		set ybuff_calc
 		
-		ifnotrange @0,@4,xbuff_calc goto calc_col1_skip
+		ifrange @0,@4,xbuff_calc begin
 			val @1
 			set calc_redrawflgx
 			
@@ -574,9 +574,9 @@ return
 			if ybuff_calc,@7 gsub calc_div
 			if ybuff_calc,@9 gsub calc_tritpop
 		
-		label calc_col1_skip
+		end
 		
-		ifnotrange @5,@9,xbuff_calc goto calc_col2_skip
+		ifrange @5,@9,xbuff_calc begin
 			val @1
 			set calc_redrawflgx
 			
@@ -586,10 +586,10 @@ return
 			if ybuff_calc,@7 gsub calc_entrytobuffer
 			if ybuff_calc,@9 gsub calc_cleanup
 			
-		label calc_col2_skip
+		end
 		
 		
-		ifnotrange @10,@14,xbuff_calc goto calc_col3_skip
+		ifrange @10,@14,xbuff_calc begin
 			val @1
 			set calc_redrawflgx
 			
@@ -600,14 +600,14 @@ return
 			if ybuff_calc,@7 return
 			if ybuff_calc,@9 gsub calc_purgeentry
 			
-		label calc_col3_skip
+		end
 		
-		ifnotrange @15,@20,xbuff_calc goto calc_col4_skip
+		ifrange @15,@20,xbuff_calc begin
 			val @1
 			set calc_redrawflgx
 			if ybuff_calc,@3 gsub help_calc
 		
-		label calc_col4_skip
+		end
 		
 		
 		if @3,ybuff_calc =calc_redrawflgy @1

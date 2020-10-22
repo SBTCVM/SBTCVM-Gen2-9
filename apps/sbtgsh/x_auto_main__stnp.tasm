@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -155,7 +155,7 @@ datawrite1;>xbuff_main
 ioread1;>mouse.locky#SSTNPL Source Line: '59' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff_main
-#conditional goto
+#conditional flow control begin
 dataread1;>ybuff_main
 dataread2;>@1
 gotoifmore;>goto--halfstep-64
@@ -166,8 +166,8 @@ dataread2;>@6
 gotoifless;>goto--jumper-64
 gotoif;>goto--jumper-64
 goto;>goto--branch-64
-setreg1;>goto--jumper-64;goto--branch-64
-goto;>row1_skip--label
+goto;>flow--con-x-1;goto--branch-64
+
 null;;goto--jumper-64
 #conditional set
 dataread1;>xbuff_main
@@ -313,9 +313,8 @@ goto;>goto--jumper-75
 stop;;goto--branch-75
 
 null;;goto--jumper-75
-#label
-null;;row1_skip--label
-#conditional goto
+null;;flow--con-x-1
+#conditional flow control begin
 dataread1;>ybuff_main
 dataread2;>@8
 gotoifmore;>goto--halfstep-81
@@ -326,8 +325,8 @@ dataread2;>@13
 gotoifless;>goto--jumper-81
 gotoif;>goto--jumper-81
 goto;>goto--branch-81
-setreg1;>goto--jumper-81;goto--branch-81
-goto;>row2_skip--label
+goto;>flow--con-x-2;goto--branch-81
+
 null;;goto--jumper-81
 #conditional set
 dataread1;>xbuff_main
@@ -474,9 +473,8 @@ setreg1;>goto--jumper-92;goto--branch-92
 s1push1
 goto;>nothing_here--label
 null;;goto--jumper-92
-#label
-null;;row2_skip--label
-#conditional goto
+null;;flow--con-x-2
+#conditional flow control begin
 dataread1;>ybuff_main
 dataread2;>@15
 gotoifmore;>goto--halfstep-98
@@ -487,8 +485,8 @@ dataread2;>@20
 gotoifless;>goto--jumper-98
 gotoif;>goto--jumper-98
 goto;>goto--branch-98
-setreg1;>goto--jumper-98;goto--branch-98
-goto;>row3_skip--label
+goto;>flow--con-x-3;goto--branch-98
+
 null;;goto--jumper-98
 #conditional set
 dataread1;>xbuff_main
@@ -635,8 +633,7 @@ setreg1;>goto--jumper-109;goto--branch-109
 s1push1
 goto;>nothing_here--label
 null;;goto--jumper-109
-#label
-null;;row3_skip--label
+null;;flow--con-x-3
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #113
 iowrite1;>mouse.button#SSTNPL Source Line: '113' 
@@ -1982,7 +1979,7 @@ fopwri1;:t
 fopwri1;:i
 fopwri1;:o
 fopwri1;:n
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:e
 fopwri1;:i
@@ -2015,7 +2012,7 @@ fopwri1;:e
 fopwri1;:n
 fopwri1;:s
 fopwri1;:e
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:o
 fopwri1;:r
@@ -2123,7 +2120,7 @@ fopwri1;:e
 fopwri1;:f
 fopwri1;:u
 fopwri1;:l
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\n
 #prline
 fopwri1;:b
@@ -2399,7 +2396,7 @@ fopwri1;:\s
 fopwri1;:n
 fopwri1;:o
 fopwri1;:t
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:s
 fopwri1;:e
@@ -2860,19 +2857,19 @@ fopwri1;:a
 fopwri1;:d
 fopwri1;:d
 fopwri1;:]
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:[
 fopwri1;:s
 fopwri1;:u
 fopwri1;:b
 fopwri1;:]
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:[
 fopwri1;:d
 fopwri1;:i
 fopwri1;:v
 fopwri1;:]
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:a
 fopwri1;:n
 fopwri1;:d
@@ -3521,7 +3518,7 @@ datawrite1;>xbuff_calc
 ioread1;>mouse.locky#SSTNPL Source Line: '563' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff_calc
-#conditional goto
+#conditional flow control begin
 dataread1;>xbuff_calc
 dataread2;>@0
 gotoifmore;>goto--halfstep-566
@@ -3532,8 +3529,8 @@ dataread2;>@4
 gotoifless;>goto--jumper-566
 gotoif;>goto--jumper-566
 goto;>goto--branch-566
-setreg1;>goto--jumper-566;goto--branch-566
-goto;>calc_col1_skip--label
+goto;>flow--con-x-4;goto--branch-566
+
 null;;goto--jumper-566
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
@@ -3583,9 +3580,8 @@ setreg1;>goto--jumper-575;goto--branch-575
 s1push1
 goto;>calc_tritpop--label
 null;;goto--jumper-575
-#label
-null;;calc_col1_skip--label
-#conditional goto
+null;;flow--con-x-4
+#conditional flow control begin
 dataread1;>xbuff_calc
 dataread2;>@5
 gotoifmore;>goto--halfstep-579
@@ -3596,8 +3592,8 @@ dataread2;>@9
 gotoifless;>goto--jumper-579
 gotoif;>goto--jumper-579
 goto;>goto--branch-579
-setreg1;>goto--jumper-579;goto--branch-579
-goto;>calc_col2_skip--label
+goto;>flow--con-x-5;goto--branch-579
+
 null;;goto--jumper-579
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
@@ -3647,9 +3643,8 @@ setreg1;>goto--jumper-587;goto--branch-587
 s1push1
 goto;>calc_cleanup--label
 null;;goto--jumper-587
-#label
-null;;calc_col2_skip--label
-#conditional goto
+null;;flow--con-x-5
+#conditional flow control begin
 dataread1;>xbuff_calc
 dataread2;>@10
 gotoifmore;>goto--halfstep-592
@@ -3660,8 +3655,8 @@ dataread2;>@14
 gotoifless;>goto--jumper-592
 gotoif;>goto--jumper-592
 goto;>goto--branch-592
-setreg1;>goto--jumper-592;goto--branch-592
-goto;>calc_col3_skip--label
+goto;>flow--con-x-6;goto--branch-592
+
 null;;goto--jumper-592
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
@@ -3719,9 +3714,8 @@ setreg1;>goto--jumper-601;goto--branch-601
 s1push1
 goto;>calc_purgeentry--label
 null;;goto--jumper-601
-#label
-null;;calc_col3_skip--label
-#conditional goto
+null;;flow--con-x-6
+#conditional flow control begin
 dataread1;>xbuff_calc
 dataread2;>@15
 gotoifmore;>goto--halfstep-605
@@ -3732,8 +3726,8 @@ dataread2;>@20
 gotoifless;>goto--jumper-605
 gotoif;>goto--jumper-605
 goto;>goto--branch-605
-setreg1;>goto--jumper-605;goto--branch-605
-goto;>calc_col4_skip--label
+goto;>flow--con-x-7;goto--branch-605
+
 null;;goto--jumper-605
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
@@ -3748,8 +3742,7 @@ setreg1;>goto--jumper-608;goto--branch-608
 s1push1
 goto;>help_calc--label
 null;;goto--jumper-608
-#label
-null;;calc_col4_skip--label
+null;;flow--con-x-7
 #conditional set
 dataread1;>@3
 dataread2;>ybuff_calc
@@ -4219,7 +4212,7 @@ fopwri1;:t
 fopwri1;:i
 fopwri1;:o
 fopwri1;:n
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:t
 fopwri1;:h
@@ -4282,7 +4275,7 @@ fopwri1;:e
 fopwri1;:a
 fopwri1;:v
 fopwri1;:e
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:i
 fopwri1;:f
@@ -4599,7 +4592,7 @@ null;;goto--jumper-787
 fopwri1;:Y
 fopwri1;:e
 fopwri1;:s
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:i
 fopwri1;:n
@@ -4607,7 +4600,7 @@ fopwri1;:d
 fopwri1;:e
 fopwri1;:e
 fopwri1;:d
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:I
 fopwri1;:\s
@@ -5434,10 +5427,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--964
 null;;tabstrc--adrbuff--964
 #reset output buffer to 0
@@ -5554,10 +5545,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--968
 null;;tabstrc--adrbuff--968
 #reset output buffer to 0
@@ -5674,10 +5663,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--972
 null;;tabstrc--adrbuff--972
 #reset output buffer to 0
@@ -5794,10 +5781,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--976
 null;;tabstrc--adrbuff--976
 #reset output buffer to 0
@@ -5958,10 +5943,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--980
 null;;tabstrc--adrbuff--980
 #reset output buffer to 0
@@ -6100,10 +6083,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--984
 null;;tabstrc--adrbuff--984
 #reset output buffer to 0
@@ -6198,10 +6179,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--988
 null;;tabstrc--adrbuff--988
 #reset output buffer to 0
@@ -6317,10 +6296,8 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-setreg2;10x1
-add
-setreg2;>cp.buffer--table
-add
+adddata1;10x1
+adddata1;>cp.buffer--table
 datawrite1;>tabstrc--adrbuff--992
 null;;tabstrc--adrbuff--992
 #reset output buffer to 0
