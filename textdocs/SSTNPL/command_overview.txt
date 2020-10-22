@@ -240,15 +240,15 @@ Command documentation:
 	NOTE: 'break' will break from loop. 
 	
 	--2-argument conditions:
-		while         : true if [var1]=[var2]
-		until         : true if [var1]!=[var2] (var1 not equal to var2)
-		whilemore     : true if [var1]>[var2]
-		whileless     : true if [var1]<[var2]
-		untilmore     : true if [var1]<=[var2]
-		untilless     : true if [var1]>=[var2]
+		while         : runs while [var1]=[var2]
+		until         : runs until [var1]=[var2]
+		whilemore     : runs while [var1]>[var2]
+		whileless     : runs while [var1]<[var2]
+		untilmore     : runs until [var1]>[var2]
+		untilless     : runs until [var1]<[var2]
 	--3-argument conditions:
-		whilerange    : true if [var1]<=[var3]<=[var2]
-		untilrange    : false if [var1]<=[var3]<=[var2]
+		whilerange    : runs while [var1]<=[var3]<=[var2]
+		untilrange    : runs until [var1]<=[var3]<=[var2]
 
 
 
