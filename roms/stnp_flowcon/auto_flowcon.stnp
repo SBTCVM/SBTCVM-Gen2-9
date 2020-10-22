@@ -38,6 +38,11 @@ val @14
 set foo
 gsub test3
 
+newline
+
+gsub fortest
+
+
 prline boom
 keyprompt
 stop
@@ -66,4 +71,40 @@ ifnotrange @0,@12,foo begin
 	break
 	prline you should NEVER see this text print.
 end
+return
+
+
+
+
+label fortest
+for f in drange @10,@1,@1
+
+	dumpd f
+
+end
+newline
+for f in urange @1,@10,@1
+
+	dumpd f
+
+end
+newline
+for f in urange @1,@10,@2
+
+	dumpd f
+
+end
+newline
+for f in urange @1,@10,@3
+
+	dumpd f
+
+end
+newline
+for f in urange @1,@100,@1
+	dumpd f
+	#test break inside for loops to be on safe side.
+	if f,@11 break
+end
+newline
 return

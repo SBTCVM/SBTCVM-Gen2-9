@@ -39,16 +39,24 @@ def set_const(name, value):
 	localconstants[name]=value
 
 fcon_stack=[]
+fcon_loopb=[]
 fcon_id_cnt=0
 
 #flow control Logic helpers
 
-def fcon_begin():
+def fcon_begin(loop=False):
 	global fcon_id_cnt
 	fcon_id_cnt+=1
-	fcon_strx="flow--con-x-"+str(fcon_id_cnt)
+	if loop:
+		fcon_strx="flowloop--con-x-"+str(fcon_id_cnt)
+	else:
+		fcon_strx="flow--con-x-"+str(fcon_id_cnt)
 	fcon_stack.insert(0, fcon_strx)
 	return fcon_strx
+
+def fcon_loopback():
+	
+	return fcon_stack[0]+"--start"
 
 def fcon_break():
 	return fcon_stack[0]
@@ -82,6 +90,8 @@ class in_fcon_end:
 		
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		if fcon_break().startswith("flowloop"):
+			destobj.write("goto;>" + fcon_loopback() + "\n")
 		destobj.write("null;;" + fcon_end() + "\n")
 		return
 
@@ -417,6 +427,102 @@ class in_intcommon1:
 		
 
 
+class in_for:
+	def __init__(self):
+		self.keywords=["for"]
+	def p0(self, args, keyword, lineno):
+		try:
+			var, indummy, formode, modeargs = args.split(" ")
+		except ValueError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + args + "'"
+		try:
+			start, end, step = modeargs.split(",")
+		except IndexError:
+			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + args + "'"
+		
+		if formode not in ["urange", "drange"]:
+			return 1, keyword+": Line: " + str(lineno) + ": '" + formode + "' is not a valid for mode."
+		
+		if isaliteral(start):
+			xret=literal_syntax(start, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(end):
+			xret=literal_syntax(end, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(step):
+			xret=literal_syntax(step, keyword, lineno)
+			if xret!=None:
+				return xret
+		for char in var:
+			if char not in varvalid:
+				return 1, keyword+": Line: " + str(lineno) + ": Invalid character in iteration variable name! '" + char + "'"
+		if var in reservednames:
+			return 1, keyword+": Line: " + str(lineno) + ": iteration variable name: '" + var + "' Is reserved."
+
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		var, indummy, formode, modeargs = args.split(" ")
+		start, end, step = modeargs.split(",")
+		retlist = []
+		if isaliteral(start):
+			retlist.extend(literal_do(start))
+			
+		if isaliteral(end):
+			retlist.extend(literal_do(end))
+		
+		if isaliteral(step):
+			retlist.extend(literal_do(step))
+		retlist.extend([npvar(var, "10x0", vtype=nptype_int)])
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		var, indummy, formode, modeargs = args.split(" ")
+		start, end, step = modeargs.split(",")
+		for f in [var, start, end, step]:
+			if f not in valid_nvars:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		var, indummy, formode, modeargs = args.split(" ")
+		start, end, step = modeargs.split(",")
+		blockname=fcon_begin(loop=True)
+		if formode=="drange":
+			destobj.write('''#Downward range iterator
+dataread1;>''' + start + '''
+datawrite1;>''' + var + '''
+null;;for-drange-loopback-''' +  str(lineno) + '''
+goto;>for-drange-subpos-''' +  str(lineno) + '''
+null;;''' + fcon_loopback() + '''
+dataread1;>''' + var + '''
+dataread2;>''' + step + '''
+sub
+datawrite1;>''' + var + '''
+dataread2;>''' + end + '''
+gotoifmore;>for-drange-loopback-''' +  str(lineno) + '''
+gotoif;>for-drange-loopback-''' +  str(lineno) + '''
+goto;>''' + blockname + '''
+null;;for-drange-subpos-''' +  str(lineno) + '''
+''')
+		if formode=="urange":
+			destobj.write('''#Downward range iterator
+dataread1;>''' + start + '''
+datawrite1;>''' + var + '''
+null;;for-drange-loopback-''' +  str(lineno) + '''
+goto;>for-drange-subpos-''' +  str(lineno) + '''
+null;;''' + fcon_loopback() + '''
+dataread1;>''' + var + '''
+dataread2;>''' + step + '''
+add
+datawrite1;>''' + var + '''
+dataread2;>''' + end + '''
+gotoifless;>for-drange-loopback-''' +  str(lineno) + '''
+gotoif;>for-drange-loopback-''' +  str(lineno) + '''
+goto;>''' + blockname + '''
+null;;for-drange-subpos-''' +  str(lineno) + '''
+''')
+		
+		return
 
 #same as intcommon1, but supports literals.
 class in_intcommon1b:
@@ -1383,6 +1489,9 @@ gotoif;>diter-loopback-''' +  str(lineno) + '''
 ''')
 		return
 
+
+
+
 #print/prline statement.
 #also handles table string tstr syntax
 class in_print:
@@ -1900,6 +2009,7 @@ class mainloop:
 		in_vdistat(),
 		in_fcon_break(),
 		in_fcon_end(),
+		in_for(),
 		in_condgoto(["if"], "gotoif", condmode=0),#conditionals
 		in_condgoto(["ifmore"], "gotoifmore", condmode=0),
 		in_condgoto(["ifless"], "gotoifless", condmode=0),

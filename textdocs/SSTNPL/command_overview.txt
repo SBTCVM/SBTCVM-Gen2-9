@@ -143,7 +143,8 @@ Command documentation:
 
 --FLOW CONTROL COMMANDS:
 	----------FLOW CONTROL NOTES----------
-		SSTNPL v0.4 and later has a basic system for nestable conditional codeblocks.
+		SSTNPL v0.4 and later has a basic system for nestable conditional codeblocks,
+		& for loop blocks.
 		
 		See conditional goto section on how to actually add 'begin' statements to code.
 		(note the conditional code block (begin, break, end, etc) system is fully automatic.
@@ -155,7 +156,21 @@ Command documentation:
 	break : skip to corrisponding 'end' statement
 	end   : used in conjunction with conditional code blocks 
 			(made via the conditional operation 'begin') 
+
+
+--for loops:
+		NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
+		NOTE: 'break' will break from loop. 
+		
+		for [var1] in [mode] [start][end][step]
+		
+		NOTE: start, end, and step can be literals.
+		NOTE: var1 is created by for statement. should be unique to for 
+			loop. ESPECIALLY IF FOR LOOPS ARE NESTED!
 	
+		-----modes-----
+			urange :  count from [start] UP TO [end] by increments of [step]
+			drange :  count from [start] DOWN TO [end] by increments of [step]
 
 --Gotos & conditionals:
 	label [name] : create a label with the name [name], for use with gotos.

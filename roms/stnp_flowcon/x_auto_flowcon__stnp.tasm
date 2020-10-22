@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_flowcon
 head-nspin=stdnsp
@@ -10,6 +10,12 @@ null;10x2;bar
 null;10x2;@2
 null;10x0;@0
 null;10x12;@12
+null;10x10;@10
+null;10x1;@1
+null;10x0;f
+null;10x3;@3
+null;10x100;@100
+null;10x11;@11
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -184,6 +190,13 @@ setreg1;>goto--jumper-39
 s1push1
 goto;>test3--label
 null;;goto--jumper-39
+#print newline
+fopwri1;:\n
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-43
+s1push1
+goto;>fortest--label
+null;;goto--jumper-43
 #prline
 fopwri1;:b
 fopwri1;:o
@@ -193,8 +206,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-42
-gotoif;>keyprompt--loop-42
+ioread1;>io.ttyrd;keyprompt--loop-47
+gotoif;>keyprompt--loop-47
 #stop (shutdown vm)
 stop
 #label
@@ -202,11 +215,11 @@ null;;test2--label
 #conditional flow control begin
 dataread1;>foo
 dataread2;>bar
-gotoif;>goto--jumper-47
-goto;>goto--branch-47
-goto;>flow--con-x-3;goto--branch-47
+gotoif;>goto--jumper-52
+goto;>goto--branch-52
+goto;>flow--con-x-3;goto--branch-52
 
-null;;goto--jumper-47
+null;;goto--jumper-52
 #prline
 fopwri1;:t
 fopwri1;:e
@@ -227,11 +240,11 @@ fopwri1;:\n
 #conditional flow control begin
 dataread1;>foo
 dataread2;>@2
-gotoif;>goto--jumper-49
-goto;>goto--branch-49
-goto;>flow--con-x-4;goto--branch-49
+gotoif;>goto--jumper-54
+goto;>goto--branch-54
+goto;>flow--con-x-4;goto--branch-54
 
-null;;goto--jumper-49
+null;;goto--jumper-54
 #prline
 fopwri1;:w
 fopwri1;:o
@@ -260,11 +273,11 @@ null;;flow--con-x-4
 #conditional flow control break
 dataread1;>bar
 dataread2;>@2
-gotoif;>goto--jumper-52
-goto;>goto--branch-52
-goto;>flow--con-x-3;goto--branch-52
+gotoif;>goto--jumper-57
+goto;>goto--branch-57
+goto;>flow--con-x-3;goto--branch-57
 
-null;;goto--jumper-52
+null;;goto--jumper-57
 #prline
 fopwri1;:b
 fopwri1;:a
@@ -284,17 +297,17 @@ null;;test3--label
 #conditional flow control begin
 dataread1;>foo
 dataread2;>@0
-gotoifmore;>goto--halfstep-59
-gotoif;>goto--halfstep-59
-goto;>goto--branch-59
-dataread1;>foo;goto--halfstep-59
+gotoifmore;>goto--halfstep-64
+gotoif;>goto--halfstep-64
+goto;>goto--branch-64
+dataread1;>foo;goto--halfstep-64
 dataread2;>@12
-gotoifless;>goto--jumper-59
-gotoif;>goto--jumper-59
-goto;>goto--branch-59
-goto;>flow--con-x-5;goto--branch-59
+gotoifless;>goto--jumper-64
+gotoif;>goto--jumper-64
+goto;>goto--branch-64
+goto;>flow--con-x-5;goto--branch-64
 
-null;;goto--jumper-59
+null;;goto--jumper-64
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -334,17 +347,17 @@ null;;flow--con-x-5
 #conditional flow control begin
 dataread1;>foo
 dataread2;>@0
-gotoifmore;>goto--halfstep-63
-gotoif;>goto--halfstep-63
-goto;>goto--jumper-63
-dataread1;>foo;goto--halfstep-63
+gotoifmore;>goto--halfstep-68
+gotoif;>goto--halfstep-68
+goto;>goto--jumper-68
+dataread1;>foo;goto--halfstep-68
 dataread2;>@12
-gotoifless;>goto--branch-63
-gotoif;>goto--branch-63
-goto;>goto--jumper-63
-goto;>flow--con-x-6;goto--branch-63
+gotoifless;>goto--branch-68
+gotoif;>goto--branch-68
+goto;>goto--jumper-68
+goto;>flow--con-x-6;goto--branch-68
 
-null;;goto--jumper-63
+null;;goto--jumper-68
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -427,6 +440,129 @@ fopwri1;:t
 fopwri1;:.
 fopwri1;:\n
 null;;flow--con-x-6
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
+null;;fortest--label
+#Downward range iterator
+dataread1;>@10
+datawrite1;>f
+null;;for-drange-loopback-80
+goto;>for-drange-subpos-80
+null;;flowloop--con-x-7--start
+dataread1;>f
+dataread2;>@1
+sub
+datawrite1;>f
+dataread2;>@1
+gotoifmore;>for-drange-loopback-80
+gotoif;>for-drange-loopback-80
+goto;>flowloop--con-x-7
+null;;for-drange-subpos-80
+#Dump (decimal)
+dataread1;>f
+iowrite1;>io.decdump
+goto;>flowloop--con-x-7--start
+null;;flowloop--con-x-7
+#print newline
+fopwri1;:\n
+#Downward range iterator
+dataread1;>@1
+datawrite1;>f
+null;;for-drange-loopback-86
+goto;>for-drange-subpos-86
+null;;flowloop--con-x-8--start
+dataread1;>f
+dataread2;>@1
+add
+datawrite1;>f
+dataread2;>@10
+gotoifless;>for-drange-loopback-86
+gotoif;>for-drange-loopback-86
+goto;>flowloop--con-x-8
+null;;for-drange-subpos-86
+#Dump (decimal)
+dataread1;>f
+iowrite1;>io.decdump
+goto;>flowloop--con-x-8--start
+null;;flowloop--con-x-8
+#print newline
+fopwri1;:\n
+#Downward range iterator
+dataread1;>@1
+datawrite1;>f
+null;;for-drange-loopback-92
+goto;>for-drange-subpos-92
+null;;flowloop--con-x-9--start
+dataread1;>f
+dataread2;>@2
+add
+datawrite1;>f
+dataread2;>@10
+gotoifless;>for-drange-loopback-92
+gotoif;>for-drange-loopback-92
+goto;>flowloop--con-x-9
+null;;for-drange-subpos-92
+#Dump (decimal)
+dataread1;>f
+iowrite1;>io.decdump
+goto;>flowloop--con-x-9--start
+null;;flowloop--con-x-9
+#print newline
+fopwri1;:\n
+#Downward range iterator
+dataread1;>@1
+datawrite1;>f
+null;;for-drange-loopback-98
+goto;>for-drange-subpos-98
+null;;flowloop--con-x-10--start
+dataread1;>f
+dataread2;>@3
+add
+datawrite1;>f
+dataread2;>@10
+gotoifless;>for-drange-loopback-98
+gotoif;>for-drange-loopback-98
+goto;>flowloop--con-x-10
+null;;for-drange-subpos-98
+#Dump (decimal)
+dataread1;>f
+iowrite1;>io.decdump
+goto;>flowloop--con-x-10--start
+null;;flowloop--con-x-10
+#print newline
+fopwri1;:\n
+#Downward range iterator
+dataread1;>@1
+datawrite1;>f
+null;;for-drange-loopback-104
+goto;>for-drange-subpos-104
+null;;flowloop--con-x-11--start
+dataread1;>f
+dataread2;>@1
+add
+datawrite1;>f
+dataread2;>@100
+gotoifless;>for-drange-loopback-104
+gotoif;>for-drange-loopback-104
+goto;>flowloop--con-x-11
+null;;for-drange-subpos-104
+#Dump (decimal)
+dataread1;>f
+iowrite1;>io.decdump
+#conditional flow control break
+dataread1;>f
+dataread2;>@11
+gotoif;>goto--branch-107
+goto;>goto--jumper-107
+goto;>flowloop--con-x-11;goto--branch-107
+
+null;;goto--jumper-107
+goto;>flowloop--con-x-11--start
+null;;flowloop--con-x-11
+#print newline
+fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
