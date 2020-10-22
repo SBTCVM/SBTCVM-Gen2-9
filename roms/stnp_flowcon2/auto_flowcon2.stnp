@@ -1,0 +1,105 @@
+
+var foo=@1
+var bar=@1
+
+prline while
+while foo,bar
+	add bar,@1
+	set bar
+	dumpd bar
+end
+
+newline
+val @-12
+set bar
+
+prline until
+until foo,bar
+	
+	add bar,@1
+	set bar
+	dumpd bar
+end
+
+newline
+val @12
+set bar
+
+prline untilmore
+untilmore foo,bar
+	
+	sub bar,@1
+	set bar
+	dumpd bar
+end
+
+newline
+val @12
+set bar
+
+prline whileless
+whileless foo,bar
+	
+	sub bar,@1
+	set bar
+	dumpd bar
+end
+
+newline
+val @-12
+set bar
+
+prline whilemore
+whilemore foo,bar
+	
+	add bar,@1
+	set bar
+	dumpd bar
+end
+
+newline
+val @-12
+set bar
+
+prline untilless
+untilless foo,bar
+	
+	add bar,@1
+	set bar
+	dumpd bar
+end
+
+newline
+
+
+val @7
+set foo
+val @21
+set bar
+
+gsub rangetests
+
+
+keyprompt
+stop
+
+
+
+
+label rangetests
+	prline whilerange
+	whilerange @1,@10,foo
+		add foo,@1
+		set foo
+		dumpd foo
+		
+	end
+	newline
+	prline untilrange
+	untilrange @1,@10,bar
+		sub bar,@1
+		set bar
+		dumpd bar
+		
+	end
+return

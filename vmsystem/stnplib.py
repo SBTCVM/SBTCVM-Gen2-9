@@ -1025,6 +1025,139 @@ goto;>''' + fcon_begin() + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--ju
 setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
 		return
 
+
+#while/until loops
+class in_whileuntil:
+	def __init__(self, keywords, gotoop, condmode=0, gotoop2=None):
+		self.keywords=keywords
+		self.gotoop=gotoop
+		self.gotoop2=gotoop2
+		self.condmode=condmode
+	#conditional logic selector function.
+	def getcond(self, lineno, var0, var1, thirdarg=None, inverse=False):
+		#check wether to inverse flow order. (only used by 'begin' so far.)
+		if inverse:
+			if self.condmode==0:
+				cmode=1
+			if self.condmode==1:
+				cmode=0
+			if self.condmode==2:
+				cmode=3
+			if self.condmode==3:
+				cmode=2
+		else:
+			cmode=self.condmode
+		if cmode==0:
+			return '''dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' +  str(lineno)
+		if cmode==1:
+			return '''dataread1;>''' + var0 + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop + ''';>goto--jumper-''' + str(lineno) + '''
+goto;>goto--branch-''' +  str(lineno)
+		#range checks
+		if cmode==2:
+			return '''dataread1;>''' + thirdarg + '''
+dataread2;>''' + var0 + '''
+''' + self.gotoop + ''';>goto--halfstep-''' + str(lineno) + '''
+gotoif;>goto--halfstep-''' + str(lineno) + '''
+goto;>goto--jumper-''' + str(lineno) + '''
+dataread1;>''' + thirdarg + ''';goto--halfstep-''' + str(lineno) + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop2 + ''';>goto--branch-''' + str(lineno) + '''
+gotoif;>goto--branch-''' + str(lineno) + '''
+goto;>goto--jumper-''' + str(lineno)
+		#not range
+		if cmode==3:
+			return '''dataread1;>''' + thirdarg + '''
+dataread2;>''' + var0 + '''
+''' + self.gotoop + ''';>goto--halfstep-''' + str(lineno) + '''
+gotoif;>goto--halfstep-''' + str(lineno) + '''
+goto;>goto--branch-''' + str(lineno) + '''
+dataread1;>''' + thirdarg + ''';goto--halfstep-''' + str(lineno) + '''
+dataread2;>''' + var1 + '''
+''' + self.gotoop2 + ''';>goto--jumper-''' + str(lineno) + '''
+gotoif;>goto--jumper-''' + str(lineno) + '''
+goto;>goto--branch-''' + str(lineno)
+	def p0(self, args, keyword, lineno):
+		if self.condmode in [2, 3]:
+			try:
+				arga, argb, argc=args.split(",")
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify range condition args as '<startvar>,<endvar>,<valuevar>'"
+		else:
+			
+			try:
+				arga, argb=args.split(",")
+				argc=None
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify condition args as '<var>,<var>'"
+		###LITERALS
+		if isaliteral(arga):
+			xret=literal_syntax(arga, keyword, lineno)
+			if xret!=None:
+				return xret
+		if isaliteral(argb):
+			xret=literal_syntax(argb, keyword, lineno)
+			if xret!=None:
+				return xret
+		if argc!=None:
+			if isaliteral(argc):
+				xret=literal_syntax(argc, keyword, lineno)
+				if xret!=None:
+					return xret
+		
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		if self.condmode in [2, 3]:
+			try:
+				arga, argb, argc=args.split(",")
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify range condition args as '<startvar>,<endvar>,<valuevar>'"
+		else:
+			
+			try:
+				arga, argb=args.split(",")
+				argc=None
+			except ValueError:
+				return 1, keyword+": Line: " + str(lineno) + ": Must specify condition args as '<var>,<var>'"
+		retlist=[]
+		if isaliteral(arga):
+			retlist.extend(literal_do(arga))
+		if isaliteral(argb):
+			retlist.extend(literal_do(argb))
+		if argc!=None:
+			if isaliteral(argc):
+				retlist.extend(literal_do(argc))
+		
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		#variable check
+		for x in args.split(","):
+			if not x in valid_nvars:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + x + "'"
+		return 0, None
+		
+
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		try:
+			var0, var1, thirdarg = args.split(",")
+		except ValueError:
+			var0, var1 = args.split(",")
+			thirdarg=None
+		#action code for individual 'modes'
+		#see getcond for condition logic modes.
+		#gsub goto
+		blockname=fcon_begin(loop=True)
+		destobj.write('''#conditional flow control begin
+null;;''' + fcon_loopback() + '''
+''' + self.getcond(lineno, var0, var1, thirdarg, inverse=True) + '''
+goto;>''' + blockname + ";goto--branch-" +  str(lineno) + '''
+null;;goto--jumper-''' +  str(lineno) + "\n")
+		return
+
 #common 2-operator math class
 class in_int2opmath:
 	def __init__(self, keywords, instruct, comment):
@@ -2018,6 +2151,14 @@ class mainloop:
 		in_condgoto(["ifnotless"], "gotoifless", condmode=1),
 		in_condgoto(["ifrange"], "gotoifmore", condmode=2, gotoop2="gotoifless"),
 		in_condgoto(["ifnotrange"], "gotoifmore", condmode=3, gotoop2="gotoifless"),
+		in_whileuntil(["while"], "gotoif", condmode=0),#while/until
+		in_whileuntil(["whilemore"], "gotoifmore", condmode=0),
+		in_whileuntil(["whileless"], "gotoifless", condmode=0),
+		in_whileuntil(["until"], "gotoif", condmode=1),
+		in_whileuntil(["untilmore"], "gotoifmore", condmode=1),
+		in_whileuntil(["untilless"], "gotoifless", condmode=1),
+		in_whileuntil(["whilerange"], "gotoifmore", condmode=2, gotoop2="gotoifless"),
+		in_whileuntil(["untilrange"], "gotoifmore", condmode=3, gotoop2="gotoifless"),
 		in_common0(["return"], "s1pop1\ngotoreg1\n", "return from subroutine."),
 		in_common0(["newline"], "fopwri1;:\\n\n", "print newline"),
 		in_common0(["space"], "fopwri1;:\\s\n", "print space"),

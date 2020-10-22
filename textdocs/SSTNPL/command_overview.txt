@@ -144,12 +144,18 @@ Command documentation:
 --FLOW CONTROL COMMANDS:
 	----------FLOW CONTROL NOTES----------
 		SSTNPL v0.4 and later has a basic system for nestable conditional codeblocks,
-		& for loop blocks.
+			assorted types of while/until loop blocks, & for loop blocks.
+		
+		conditional & loop blocks can be nested within each other.
 		
 		See conditional goto section on how to actually add 'begin' statements to code.
-		(note the conditional code block (begin, break, end, etc) system is fully automatic.
-		please only place end statements in the same 'section' of code as the conditional begin. 
-		also make sure it is placed AFTER the begin!
+		(note the conditional code block (begin, break, end, for, while, 
+			until. etc) system is fully automatic.
+			
+		please only place end statements in the same 'section' of code as 
+			the conditional begin/loop operation. 
+			
+		also make sure it is placed AFTER the begin/loop operation!
 		Doing otherwise WILL LEAD TO UNEXPECTED RESULTS!
 
 
@@ -225,6 +231,26 @@ Command documentation:
 		if var1,var2 dumpt var5
 		if var1,var2 dumpt *+0-
 	  
+
+-- While/Until loops
+	
+	SSTNPL has a selection of various while/until commands available:
+	-----NOTE FOR WHILE/UNTIL LOOPS: var1 var2 and var3 can be Literals as well as variables.-----
+	NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
+	NOTE: 'break' will break from loop. 
+	
+	--2-argument conditions:
+		while         : true if [var1]=[var2]
+		until         : true if [var1]!=[var2] (var1 not equal to var2)
+		whilemore     : true if [var1]>[var2]
+		whileless     : true if [var1]<[var2]
+		untilmore     : true if [var1]<=[var2]
+		untilless     : true if [var1]>=[var2]
+	--3-argument conditions:
+		whilerange    : true if [var1]<=[var3]<=[var2]
+		untilrange    : false if [var1]<=[var3]<=[var2]
+
+
 
 --TTY output:
 	print [string]      : print specified raw text.
