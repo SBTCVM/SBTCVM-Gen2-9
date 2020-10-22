@@ -68,5 +68,3 @@ prefixed with **`auto_`**
 ### Links:
 - [Project blog](https://sbtcvm.blogspot.com/)
 - [FAQ](https://sbtcvm.blogspot.com/p/faqs.html)
-- [SSTNPL guide](https://sbtcvm.blogspot.com/p/sstnpl-guide.html)
-- [SBTCVM Assembly guide](https://sbtcvm.blogspot.com/p/g2asm-faq-and-start-guide-sbtcvm.html)
