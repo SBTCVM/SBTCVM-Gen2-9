@@ -1,0 +1,34 @@
+
+var foo=@1
+var bar=@1
+
+#SSTNPL block syntax error testing.
+#uncomment one section at a time to test each scenario.
+
+#DO NOT REPORT BUGS ON THIS!
+#These commented sections of code 
+#     are for TESTING BLOCK ERROR DETECTION.
+
+######## while non-terminated
+while foo,bar
+
+
+######## for non-terminated
+for f in drange @10,@1,@1
+
+
+######## if block non-terminated
+if foo,bar begin
+
+
+######## end outside of block
+#end
+
+######## if break non-terminated
+#if foo,bar break
+
+######## 'hard' break outside of block:
+#break
+
+
+

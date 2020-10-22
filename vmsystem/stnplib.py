@@ -39,7 +39,7 @@ def set_const(name, value):
 	localconstants[name]=value
 
 fcon_stack=[]
-fcon_loopb=[]
+
 fcon_id_cnt=0
 
 #flow control Logic helpers
@@ -64,6 +64,21 @@ def fcon_break():
 def fcon_end():
 	return fcon_stack.pop(0)
 
+#flow control logic syntax helpers
+
+fsyntax_stack=[]
+
+def fsyntax_begin(lineno, info):
+	fsyntax_stack.insert(0, "Block: type '" + info + "' on line '" + str(lineno) + "'")
+
+def fsyntax_break(lineno, info):
+	if fsyntax_stack==[]:
+		return 1, "Break: '" + info + "' on line '" + str(lineno) + "', is not within a block."
+def fsyntax_end(lineno, info):
+	if fsyntax_stack==[]:
+		return 1, "End: '" + info + "' on line '" + str(lineno) + "', is not within a block."
+	fsyntax_stack.pop(0)
+
 class in_fcon_break:
 	def __init__(self):
 		self.keywords=["break"]
@@ -72,7 +87,9 @@ class in_fcon_break:
 	def p1(self, args, keyword, lineno):
 		return []
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
-		
+		retx=fsyntax_break(lineno, keyword)
+		if retx!=None:
+			return retx
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("goto;>" + fcon_break() + "\n")
@@ -86,7 +103,9 @@ class in_fcon_end:
 	def p1(self, args, keyword, lineno):
 		return []
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
-		
+		retx=fsyntax_end(lineno, keyword)
+		if retx!=None:
+			return retx
 		
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
@@ -482,6 +501,7 @@ class in_for:
 		for f in [var, start, end, step]:
 			if f not in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + args + "'"
+		fsyntax_begin(lineno, keyword)
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		var, indummy, formode, modeargs = args.split(" ")
@@ -949,9 +969,14 @@ goto;>goto--branch-''' + str(lineno)
 		for x in arglist[0].split(","):
 			if not x in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + x + "'"
+				
+		if arglist[1]=="break":
+			retx=fsyntax_break(lineno, keyword)
+			if retx!=None:
+				return retx
+		if arglist[1]=="begin":
+			fsyntax_begin(lineno, keyword)
 		return 0, None
-		
-
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		arglist=args.split(" ")
 		if len(arglist)==3:
@@ -1138,6 +1163,7 @@ goto;>goto--branch-''' + str(lineno)
 		for x in args.split(","):
 			if not x in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + x + "'"
+		fsyntax_begin(lineno, keyword)
 		return 0, None
 		
 
@@ -2301,6 +2327,11 @@ class mainloop:
 					retval, errordesc = inst.p2(data, keyword, lineno, self.nvars, self.valid_nvars, self.labels, self.tables)
 					if retval!=0:
 						return 1, errordesc
+		if not len(fsyntax_stack)==0:
+			for block in fsyntax_stack:
+				print("    ERROR!: " + block + " Was not terminated.")
+			return 1, "Parser: Block termination Error(s). see above!"
+			
 		return 0, None
 	#SBTCVM assembly source code generator pass.
 	def p3(self):
