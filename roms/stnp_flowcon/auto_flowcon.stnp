@@ -1,0 +1,69 @@
+
+
+prline foo is 1, bar is 2
+var foo=@1
+var bar=@2
+
+
+if foo,bar begin
+	prline explode test 1: foo = bar.
+end
+
+ifnot foo,bar begin
+	prline explode test 2: foo != bar.
+end
+
+prline foo is now 2
+
+val @2
+set foo
+
+gsub test2
+
+prline foo and bar are now 4
+
+val @4
+set foo
+set bar
+gsub test2
+
+newline
+val @12
+set foo
+gsub test3
+
+
+newline
+val @14
+set foo
+gsub test3
+
+prline boom
+keyprompt
+stop
+
+
+label test2
+	if foo,bar begin
+		prline test 3: foo=bar
+		if foo,@2 begin
+			prline woo! code blocks ROCK!
+		end
+		ifnot bar,@2 break
+		prline bar is 2
+	end
+return
+
+
+label test3
+ifrange @0,@12,foo begin
+	prline foo is between 0 & 12. YAY!
+	prline WOO!
+end
+ifnotrange @0,@12,foo begin
+	prline foo is NOT between 0 and 12... awww. D:
+	#test hard-break. just because.
+	break
+	prline you should NEVER see this text print.
+end
+return

@@ -60,7 +60,12 @@ Note that constants only use a word of memory if they are actually used as a lit
 
 
 
+
+
+
 Command documentation:
+
+
 
 --Constants
 	const [constname]=[nvalue] : create a constant called [constname], with the value [nvalue].
@@ -136,6 +141,22 @@ Command documentation:
 	abs [varname]    : get the absolute value of an integer variable or literal. use set to store result.
 	nabs [varname]   : get the INVERTED absolute value of an integer variable or literal. use set to store result.
 
+--FLOW CONTROL COMMANDS:
+	----------FLOW CONTROL NOTES----------
+		SSTNPL v0.4 and later has a basic system for nestable conditional codeblocks.
+		
+		See conditional goto section on how to actually add 'begin' statements to code.
+		(note the conditional code block (begin, break, end, etc) system is fully automatic.
+		please only place end statements in the same 'section' of code as the conditional begin. 
+		also make sure it is placed AFTER the begin!
+		Doing otherwise WILL LEAD TO UNEXPECTED RESULTS!
+
+
+	break : skip to corrisponding 'end' statement
+	end   : used in conjunction with conditional code blocks 
+			(made via the conditional operation 'begin') 
+	
+
 --Gotos & conditionals:
 	label [name] : create a label with the name [name], for use with gotos.
 	goto [name]  : goto label [name]
@@ -164,6 +185,8 @@ Command documentation:
 		ifnotrange : false if [var1]<=[var3]<=[var2]
 	
 	--modes:
+		begin : begin a conditional code block for the following lines until the next 'end' statement.
+				(see FLOW CONTROL COMMANDS section above)
 		goto : ordinary goto.
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
 		return : just like normal return command. should omit label.

@@ -17,8 +17,8 @@ nptype_const=6
 
 #SSTNPL compiler main routine library.
 
-stnpvers='v0.3.0'
-versint=(0, 3, 0)
+stnpvers='v0.4.0'
+versint=(0, 4, 0)
 
 class npvar:
 	def __init__(self, vname, vdata, vtype=nptype_int, frommodule=0):
@@ -37,6 +37,54 @@ localconstants={}
 def set_const(name, value):
 	constants[name]=value
 	localconstants[name]=value
+
+fcon_stack=[]
+fcon_id_cnt=0
+
+#flow control Logic helpers
+
+def fcon_begin():
+	global fcon_id_cnt
+	fcon_id_cnt+=1
+	fcon_strx="flow--con-x-"+str(fcon_id_cnt)
+	fcon_stack.insert(0, fcon_strx)
+	return fcon_strx
+
+def fcon_break():
+	return fcon_stack[0]
+
+def fcon_end():
+	return fcon_stack.pop(0)
+
+class in_fcon_break:
+	def __init__(self):
+		self.keywords=["break"]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("goto;>" + fcon_break() + "\n")
+		return
+
+class in_fcon_end:
+	def __init__(self):
+		self.keywords=["end"]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		
+		
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("null;;" + fcon_end() + "\n")
+		return
+
 
 #variable creation statement
 class in_var:
@@ -649,19 +697,31 @@ class in_condgoto:
 		self.gotoop2=gotoop2
 		self.condmode=condmode
 	#conditional logic selector function.
-	def getcond(self, lineno, var0, var1, thirdarg=None):
-		if self.condmode==0:
+	def getcond(self, lineno, var0, var1, thirdarg=None, inverse=False):
+		#check wether to inverse flow order. (only used by 'begin' so far.)
+		if inverse:
+			if self.condmode==0:
+				cmode=1
+			if self.condmode==1:
+				cmode=0
+			if self.condmode==2:
+				cmode=3
+			if self.condmode==3:
+				cmode=2
+		else:
+			cmode=self.condmode
+		if cmode==0:
 			return '''dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' +  str(lineno)
-		if self.condmode==1:
+		if cmode==1:
 			return '''dataread1;>''' + var0 + '''
 dataread2;>''' + var1 + '''
 ''' + self.gotoop + ''';>goto--jumper-''' + str(lineno) + '''
 goto;>goto--branch-''' +  str(lineno)
 		#range checks
-		if self.condmode==2:
+		if cmode==2:
 			return '''dataread1;>''' + thirdarg + '''
 dataread2;>''' + var0 + '''
 ''' + self.gotoop + ''';>goto--halfstep-''' + str(lineno) + '''
@@ -673,7 +733,7 @@ dataread2;>''' + var1 + '''
 gotoif;>goto--branch-''' + str(lineno) + '''
 goto;>goto--jumper-''' + str(lineno)
 		#not range
-		if self.condmode==3:
+		if cmode==3:
 			return '''dataread1;>''' + thirdarg + '''
 dataread2;>''' + var0 + '''
 ''' + self.gotoop + ''';>goto--halfstep-''' + str(lineno) + '''
@@ -690,7 +750,7 @@ goto;>goto--branch-''' + str(lineno)
 			if len(arglist)!=2:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 			#return mode doesn't need label argument.
-			elif arglist[1]!="return" and arglist[1]!="stop":
+			elif arglist[1] not in ["return", "stop", "break", "begin"]:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 		if self.condmode in [2, 3]:
 			try:
@@ -777,7 +837,7 @@ goto;>goto--branch-''' + str(lineno)
 			if valname not in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant character variable'" + vname + "'"
 		#check goto mode
-		if (arglist[1] not in ["goto", "gsub", "stop", "return", "chardump", "dumpt", "dumpd"]) and (not arglist[1].startswith("=")):
+		if (arglist[1] not in ["begin", "break", "goto", "gsub", "stop", "return", "chardump", "dumpt", "dumpd"]) and (not arglist[1].startswith("=")):
 			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! See documentation for valid modes."
 		#variable check
 		for x in arglist[0].split(","):
@@ -839,6 +899,19 @@ s1pop1;''' + ";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-"
 			destobj.write('''#conditional stop
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 stop;''' + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
+		#conditional flow control break
+		elif arglist[1]=="break":
+			destobj.write('''#conditional flow control break
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
+goto;>''' + fcon_break() + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
+		#conditional flow control begin
+		elif arglist[1]=="begin":
+			destobj.write('''#conditional flow control begin
+''' + self.getcond(lineno, var0, var1, thirdarg, inverse=True) + '''
+goto;>''' + fcon_begin() + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
+		
 		#basic goto
 		else:
 			destobj.write('''#conditional goto
@@ -1825,6 +1898,8 @@ class mainloop:
 		in_rawasm(),
 		in_getchar(),
 		in_vdistat(),
+		in_fcon_break(),
+		in_fcon_end(),
 		in_condgoto(["if"], "gotoif", condmode=0),#conditionals
 		in_condgoto(["ifmore"], "gotoifmore", condmode=0),
 		in_condgoto(["ifless"], "gotoifless", condmode=0),
