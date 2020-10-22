@@ -8,6 +8,7 @@ app_resources:
         - etc.
         - you can also find the source vector of the stylized 'SBTCVM'
             text thats still used in a few places, here.
+            - a similar SSTNPL vector is also here.
         - as well, the base vector used in the current mascot icon
             design is available here.
 

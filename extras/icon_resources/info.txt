@@ -10,3 +10,5 @@ only emulated (obviousy), and designed for Ternary machines in mind.
 CerberOS is a planned Unix-like OS, primarily intended to be written
 for Gen 2's succsessor, Gen 3, though kernel & other subsystems may end
 up with prototypes running within Gen 2.
+
+SSTNPL is one of SBTCVM Gen 2-9's bundled programming languages.
