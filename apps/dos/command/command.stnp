@@ -115,12 +115,13 @@ label driveA
 	val 0
 	set extflg
 	ifmore cp.size,@4 gsub extcheck
-	ifnotless cp.size,@3 goto driveA_run
+	
+	ifless cp.size,@3 begin
 		val :A
 		set drive
-	return
+		return
+	end
 	
-	label driveA_run
 	vdi membak 2 command.state.tri
 	vdin rstld 0 
 		gsub run_send_setup
@@ -129,17 +130,20 @@ label driveA
 		
 		
 		gsub vdi_outloop
+	#clear argument buffer on failed commands
+		breset2
 return
 
 label driveB
 	val 0
 	set extflg
-	ifnotless cp.size,@3 goto driveB_run
+	
+	ifless cp.size,@3 begin
 		val :B
 		set drive
-	return
+		return
+	end
 	
-	label driveB_run
 	vdi membak 2 command.state.tri
 	vdin rstld 1 
 		gsub run_send_setup
@@ -148,6 +152,8 @@ label driveB
 		
 		
 		gsub vdi_outloop
+	#clear argument buffer on failed commands
+		breset2
 return
 
 
@@ -156,12 +162,13 @@ label driveR
 	set extflg
 	ifmore cp.size,@4 gsub extcheck
 	
-	ifnotless cp.size,@3 goto driveR_run
+	ifless cp.size,@3 begin
 		val :R
 		set drive
-	return
+		return
+	end
 	
-	label driveR_run
+	
 	vdi membak 2 command.state.tri
 	vdin rstld 2 
 		gsub run_send_setup
@@ -170,6 +177,8 @@ label driveR
 		
 		
 		gsub vdi_outloop
+	#clear argument buffer on failed commands
+		breset2
 return
 
 
@@ -208,27 +217,30 @@ label directory_list_R
 	vdi 
 	gsub vdi_outloop
 return
+
 var driveref=:0
 var invalid_charcheck=0
 var extflg=0
 var extoffset=0
+
 label invalid
 	val 0
 	set extflg
 	ifmore cp.size,@4 gsub extcheck
 	textcolor *++0---
-	ifless cp.size,@2 goto run_command
+	
+	ifnotless cp.size,@2 begin
 		
 		
 		tabr cp.buffer,@1,@0
 		set invalid_charcheck
-		ifnot invalid_charcheck,:: goto run_command
+		if invalid_charcheck,:: begin
 			prline Drive Not Valid. see 'drives' command.
 			return
-
-	label run_command
-		vdi membak 2 command.state.tri
-		#try current drive FIRST
+		end
+	end
+	vdi membak 2 command.state.tri
+	#try current drive FIRST
 		vdin rstld 
 			if drive,:A =driveref :0
 			if drive,:B =driveref :1
@@ -240,13 +252,16 @@ label invalid
 		uiter run_iter,run_send_char_exec,@0,cp.itersize
 		gsub cmd_run_send_newline
 		
-		#if does not load, try ALL drives...
+	#if does not load, try ALL drives...
 		vdin rstld -1 
 		gsub run_send_setup
 		uiter run_iter,run_send_char_exec,@0,cp.itersize
 		gsub cmd_run_send_newline
 		
 		gsub vdi_outloop
+		
+	#clear argument buffer on failed commands
+		breset2
 		return
 
 ##approach doesn't work always, needs redesigned to
@@ -263,14 +278,15 @@ label extcheck
 return
 
 label cmd_run_send_newline
-	if extflg,$true goto cmd_run_send_newline_noext
+	if extflg,$false begin
 		vdi .txe#send newline
 		return
-	label cmd_run_send_newline_noext
-		vdi 
-		return
+	end
+	
+	vdi 
+	return
 
-return
+
 #get character from iterator var, write to VDI serial INPUT
 var run_s_tmp=0
 var run_tobuffer_flg=0
@@ -283,14 +299,14 @@ return
 label run_send_char_exec
 	tabr cp.buffer,run_iter,@0
 	set run_s_tmp
-	if run_tobuffer_flg,@1 goto run_send_doredir
-	if run_s_tmp,:\s =run_tobuffer_flg @1
-	if run_s_tmp,:\s return
-	
-	get run_s_tmp
-		asm iowrite1;>vdi.cli.in
-		return
-	label run_send_doredir
+	if run_tobuffer_flg,@0 begin
+		if run_s_tmp,:\s =run_tobuffer_flg @1
+		if run_s_tmp,:\s return
+		
+		get run_s_tmp
+			asm iowrite1;>vdi.cli.in
+			return
+	end
 		bwrhead2 run_s_tmp
 return
 
