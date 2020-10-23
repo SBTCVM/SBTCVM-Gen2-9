@@ -1,0 +1,60 @@
+var cmdflg=0
+var validflg=0
+var cmdx=0
+var quiet=0
+gsub dosargs.getentry
+
+##### Handles /Q (quiet) option #####
+tabstrc dosargs.buffer,@0,@0,/Q
+set cmdflg
+if cmdflg,@1 begin
+	val @3
+	set cmdx
+	val @1
+	set quiet
+end
+
+tabstrc dosargs.buffer,cmdx,@0,ga0
+	set cmdflg
+	if cmdflg,@1 begin
+		gamode @0
+		if quiet,$false begin
+			prline SBTGA Mode 0: 81x25 TTY
+		end
+		val @1
+		set validflg
+	end
+tabstrc dosargs.buffer,cmdx,@0,ga30
+	set cmdflg
+	if cmdflg,@1 begin
+		gamode @30
+		if quiet,$false begin
+			prline SBTGA Mode 30: 243x243 Vector Plotter
+		end
+		val @1
+		set validflg
+	end
+tabstrc dosargs.buffer,@0,@0,/?
+	set cmdflg
+	if cmdflg,@1 gsub mode_help
+	if cmdflg,@1 =validflg @1
+
+
+if validflg,@0 gsub Errortext
+vdi rstld -1 command.txe
+stop
+
+label Errortext
+prline Please see `mode /?` for usage
+return
+
+label mode_help
+prline ----MODE: sets SBTGA properties.----
+prline USAGE: mode [/Q] command
+prline ga0  : Set display to 81x25 TTY
+prline ga30 : Set display to 243x243 Vector Plotter
+prline /?   : This help text
+prline /Q   : use as shown above to suppress mode change text.
+return
+
+include dosargs as dosargs

@@ -13,21 +13,14 @@ null;;tail_readout--label
 ioread1;>buffer.2.read.tail
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>tempvar
-#conditional goto
+#conditional flow control begin
 dataread1;>tempvar
 dataread2;>@0
-gotoif;>goto--branch-7
-goto;>goto--jumper-7
-setreg1;>goto--jumper-7;goto--branch-7
-goto;>end--label
-null;;goto--jumper-7
-#Dump (character)
-dataread1;>tempvar
-iowrite1;>io.ttywr
-#goto 
-goto;>tail_readout--label
-#label
-null;;end--label
+gotoif;>goto--jumper-8
+goto;>goto--branch-8
+goto;>flow--con-x-1;goto--branch-8
+
+null;;goto--jumper-8
 #print newline
 fopwri1;:\n
 #vdi
@@ -54,4 +47,10 @@ fopwri1;:x
 fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
+null;;flow--con-x-1
+#Dump (character)
+dataread1;>tempvar
+iowrite1;>io.ttywr
+#goto 
+goto;>tail_readout--label
 #END OF FILE

@@ -12,6 +12,14 @@ tabstrc dosargs.buffer,@0,@0,overview
 	set cmdflg
 	if cmdflg,@1 gsub overview
 	if cmdflg,@1 =validflg @1
+tabstrc dosargs.buffer,@0,@0,tools
+	set cmdflg
+	if cmdflg,@1 gsub tools
+	if cmdflg,@1 =validflg @1
+tabstrc dosargs.buffer,@0,@0,toys
+	set cmdflg
+	if cmdflg,@1 gsub toys
+	if cmdflg,@1 =validflg @1
 tabstrc dosargs.buffer,@0,@0,/?
 	set cmdflg
 	if cmdflg,@1 gsub help_help
@@ -30,6 +38,8 @@ label help_help
 	prline /?       - this help
 	prline command  - command.txe help
 	prline overview - overview of SBTCVM-DOS
+	prline tools    - useful tools & utilities.
+	prline toys     - Fun things.
 return
 
 label overview
@@ -39,6 +49,19 @@ label overview
 	prline (needs more info)
 return
 
+label tools
+	prline Tools
+	gsub divider
+	prline help  - help utility. (You're using it now.)
+	prline mode  - Set SBGTA properties. i.e. Screen Mode.
+	prline about - About SBTCVM-DOS
+return
+
+label toys
+	prline Toys
+	gsub divider
+	prline splash - A nice graphics test.
+return
 
 label divider
 textcolor *000000

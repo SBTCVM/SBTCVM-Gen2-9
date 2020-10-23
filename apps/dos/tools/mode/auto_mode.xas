@@ -1,0 +1,2 @@
+stnp %xwd%/mode.stnp
+diskedit --appendfile dos %xwd%/mode.trom mode.txe trom
