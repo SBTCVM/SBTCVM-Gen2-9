@@ -574,6 +574,40 @@ class in_intcommon1b:
 		return
 
 
+
+class in_sum:
+	def __init__(self):
+		self.keywords=["sum"]
+		
+	def p0(self, args, keyword, lineno):
+		for vint in args.split(","):
+			if isaliteral(vint):
+				xret=literal_syntax(vint, keyword, lineno)
+				if xret!=None:
+					return xret
+		
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		retlist=[]
+		for vint in args.split(","):
+			if isaliteral(vint):
+				retlist.extend(literal_do(vint))
+			
+		return retlist
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		for vint in args.split(","):
+			if vint in valid_nvars:
+				pass
+			else:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant variable'" + vint + "'"
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("#multi-variable SUM \nsetreg1;0\n")
+		for vint in args.split(","):
+			destobj.write("dataread2;>" + vint + "\nadd\n")
+		return
+
+
 #variable invert (in-place)
 #NOTICE: DEPRECIATED
 class in_invert:
@@ -1573,6 +1607,17 @@ class in_waitcycle:
 			argint=int(args)
 		except ValueError:
 			return 1, keyword+": Line: " + str(lineno) + ": invalid cycle count integer'" + args + "'"
+		#value can't be any lower than 6, as the loop wouldn't run at all.
+		if argint<6:
+			return 1, keyword+": Line: " + str(lineno) + ": '" + args + "' is less than the minimum supported cycle count (6)"
+		
+		#ensure value is at or below 9841 once divided by wait loop length (6) aka 59046
+		if argint>59046:
+			return 1, keyword+": Line: " + str(lineno) + ": '" + args + "' is greater than the maximum supported cycle count (59046)"
+		
+		if argint % 6 != 0:
+			print("SUM: Notice: the requested wait time: '" + args + "' is not divisible by 6. \n      Actual wait time: '" + str((argint//6)*6) + "'")
+		
 		return 0, None
 	def p1(self, args, keyword, lineno):
 		return []
@@ -2108,6 +2153,7 @@ class mainloop:
 		in_diter(),
 		in_u2iter(),
 		in_d2iter(),
+		in_sum(),
 		in_waitcycle(),
 		in_intcommon1b(["dumpt"], "dataread1;>", "\niowrite1;>io.tritdump\n", "Dump (trits)"),
 		in_intcommon1b(["vdimode"], "dataread1;>", "\niowrite1;>vdi.cli.status\n", "vdi mode set"),

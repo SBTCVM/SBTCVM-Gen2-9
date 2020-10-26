@@ -122,18 +122,28 @@ Command documentation:
 --System:
 	stop : Shutdown SBTCVM (this is how you quit a program in SBTCVM, when its loaded via a trom image.
 	waitcy [cycles] : wait for roughly the given number of cycles (numbers divisible by 6 are most accurate.)
+		values from 6 up to 59046 (6*9841) are valid.
+		NOTE: will print out a notice when [cycles] not divisible by 6.
 
 --Math: 
+	--- single-result math ---
 	-----NOTE var1 and var2 can be Literals-----
 	add [var1],[var2] : add 2 integer variables. use 'set' to store result.
 	sub [var1],[var2] : subtract 2 integer variables. use 'set' to store result.
 	mul [var1],[var2] : multiply 2 integer variables. use 'set' to store result.
 	div [var1],[var2] : divide 2 integer variables. use 'set' to store result.
 	
+	--- dual-result math ---
 	divmod [var1],[var2] : modulo division. use set1 to store modulo, use set2 to store quotient.
 		divmod @11,@2
 		set1 modulo
 		set2 quotient
+	
+	--- special multi-argument math ---
+	sum [var1],[var2],[var3]... : sum up an arbitrary 
+		combination & quantity of variables & literals. use 'set' to store result.
+			sum var1,var2,@40,*--,:4,$some_constant
+			set sum
 
 --Logic and tritwise:
 	invert [varname] : invert the sign of variable [varname], in-place. [DEPRECIATED]

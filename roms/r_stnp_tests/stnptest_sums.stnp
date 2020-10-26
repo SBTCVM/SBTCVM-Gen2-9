@@ -1,0 +1,15 @@
+ 
+#basic SUM test
+
+var sam=@10
+var bob=@12
+var phill=0
+
+sum sam,bob,@40
+set phill
+dumpd phill
+
+
+
+keyprompt
+stop

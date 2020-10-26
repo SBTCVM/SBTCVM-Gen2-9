@@ -1,0 +1,15 @@
+ 
+prline MAX 59046
+waitcy 59046
+prline 7 cycles (not divisible by 6)
+waitcy 7
+
+#too large
+#waitcy 100000
+
+#too small
+#waitcy 1
+
+prline done. press a key to exit.
+keyprompt
+stop
