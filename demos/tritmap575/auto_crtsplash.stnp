@@ -1,0 +1,21 @@
+ 
+gamode @31
+
+asm setreg1;>image_offset1
+set pl.offset
+
+#(PLRLE is configured for mode 30 by default)
+val @-287
+set pl.posx
+set pl.posy
+
+
+gsub pl.decode
+
+keyprompt
+
+stop
+
+
+include plrle_noalpha as pl
+asm include;tritmap575+image.tas0;image_offset1

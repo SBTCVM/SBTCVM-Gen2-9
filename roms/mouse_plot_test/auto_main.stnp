@@ -1,6 +1,6 @@
-prline Mouse test (GA MODE 30 (plotter))
+prline Mouse test (GA MODE 30 & 31 (plotter))
 
-prline right click to exit
+prline right click to cycle between plotter modes.
 
 prline press a key to begin
 
@@ -12,14 +12,30 @@ gamode @30
 var btnbuff=0
 var xbuff=0
 var ybuff=0
-
+var mode=@30
 
 
 label main
 asm ioread1;>mouse.button
 set btnbuff
 if btnbuff,@0 goto main
-if btnbuff,@3 stop
+if btnbuff,@3 begin
+	if mode,@30 begin
+		prline SBTGA Mode 31: 575x575 plotter
+		val @31
+		set mode
+		gamode mode
+		goto main
+	end
+	if mode,@31 begin
+		prline SBTGA Mode 30: 243x243 plotter
+		val @30
+		set mode
+		gamode mode
+		goto main
+	end
+	
+end
 
 asm ioread1;>mouse.lockx
 set xbuff

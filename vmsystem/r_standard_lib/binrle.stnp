@@ -1,0 +1,188 @@
+
+
+#settings
+var offset=0
+#xpos
+var posx=0
+#ypos
+var posy=0
+
+var on=*+++++++++
+var off=*---------
+
+#pixel sizes
+var pixx=@1
+var pixy=@1
+
+
+var RL_pointer=0
+var iwide=0
+
+var draw_pixx=0
+var draw_pixy=0
+var temp_raw_width=0
+var px=0
+var py=0
+var px_rel=0
+var color_bool=0
+var length_buff=0
+var length_temp=0
+var length_final=0
+var banksel=@1
+var data=@1
+var breakRUNflg=0
+
+label decode
+	get posx
+	set px
+	get posy
+	set py
+	val @0
+	set px_rel
+	
+	drawy1 posy
+	drawx1 posx
+	
+	val @1
+	set data
+	val @1
+	set banksel
+	
+	add pixx,@1
+	set draw_pixx
+	add pixy,@1
+	set draw_pixy
+	
+	drawwidth draw_pixx
+	drawheight draw_pixy
+	
+	
+	copy offset,RL_pointer
+	
+	get RL_pointer
+	asm datawrite1;>RL_GET_WIDE
+	asm datawrite1;>RL_GET_STARTCOL
+	asm instread1;;RL_GET_WIDE
+	
+	set iwide
+	asm dataread1;;RL_GET_STARTCOL
+	set color_bool
+	if color_bool,@0 =color_bool @-1
+	drawcolor off
+	if color_bool,@-1 begin
+		drawcolor on
+	end
+	add RL_pointer,@1
+	set RL_pointer
+	
+	until data,@0
+		#dumpd RL_pointer
+		#dumpd banksel
+		if banksel,@1 begin
+			get RL_pointer
+			asm datawrite1;>RL_GET_INST
+			asm instread1;;RL_GET_INST
+			set data
+			set length_buff
+		end
+		if banksel,@-1 begin
+			get RL_pointer
+			asm datawrite1;>RL_GET_DATA
+			asm dataread1;;RL_GET_DATA
+			set data
+			set length_buff
+			get1 RL_pointer
+			asm adddata1;10x1
+			set1 RL_pointer
+			
+		end
+		
+		#newline
+		
+		inv banksel
+		set banksel
+		
+		if data,@0 break
+		ifnotless data,@1 begin
+			inv color_bool
+			set color_bool
+			drawcolor off
+			#dumpd color_bool
+			if color_bool,@-1 begin
+				drawcolor on
+			end
+		end
+		ifless data,@1 begin
+			abs data
+			set data
+			set length_buff
+		end
+		
+		#prline ls
+		until length_buff,@0
+			#prline l
+			drawx1 px
+			drawy1 py
+			#dumpd px
+			#dumpd py
+			
+			get1 px_rel
+			get2 length_buff
+			asm add
+			set length_temp
+			val @0
+			set length_final
+			ifmore length_temp,iwide begin
+				sub length_temp,iwide
+				set length_final
+				sub length_buff,length_final
+				set length_buff
+				val @1
+				set breakRUNflg
+				
+			end
+			
+			add px_rel,length_buff
+			set px_rel
+			get1 length_buff
+			get2 pixx
+			asm mul
+			get2 px
+			asm add
+			#asm adddata1;10x1
+			set1 px
+			
+			if breakRUNflg,@1 begin
+				val @0
+				set breakRUNflg
+				get posx
+				set px
+				get @0
+				set px_rel
+				add py,pixy
+				set py
+			end
+			
+			get1 length_buff
+			get2 pixx
+			asm mul
+			asm adddata1;10x1
+			set length_buff
+			drawwidth length_buff
+			drawrect
+			
+			get length_final
+			set length_buff
+		end
+		ifnotless px_rel,iwide begin
+			get posx
+			set px
+			get @0
+			set px_rel
+			add py,pixy
+			set py
+		end
+		#prline le
+	end
+	
+return

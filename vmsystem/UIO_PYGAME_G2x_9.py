@@ -45,7 +45,7 @@ getmonofont(16)
 charwidth=monofont.size("_")[0]
 charheight=monofont.size("|_ABC123")[1]
 
-
+plotter_modes=[30, 31]
 
 pygame.display.set_caption("SBTCVM Gen2-9", "SBTCVM Gen2-9")
 class uio:
@@ -74,6 +74,8 @@ class uio:
 		
 		self.plotobj=PlotterEngine(ioref, 243, 243, self.plotx, self.ploty, 30)
 		
+		self.plotx31=575
+		self.ploty31=575
 		
 		#load and set window icon.
 		self.picon=pygame.image.load(os.path.join(*["vmsystem", "GFX", "icon64.png"]))
@@ -124,7 +126,7 @@ class uio:
 		self.shutdown=0
 		self.clock=pygame.time.Clock()
 		pygame.display.set_caption(romname + " - SBTCVM Gen2-9", romname + " - SBTCVM Gen2-9")
-		self.mousesys=MouseEngine(ioref, 243, 243, self.plotx, self.ploty, charwidth, charheight)
+		self.mousesys=MouseEngine(ioref, self.plotobj, charwidth, charheight)
 	#input and display thread
 	def statup(self):
 		self.running=1
@@ -158,13 +160,13 @@ class uio:
 				if event.type==pygame.MOUSEBUTTONDOWN:
 					if self.gamode==0:
 						self.mousesys.mousedown_ga0(event)
-					if self.gamode==30:
-						self.mousesys.mousedown_ga30(event)
+					if self.gamode in plotter_modes:
+						self.mousesys.mousedown_gaplot(event)
 				if event.type==pygame.MOUSEBUTTONUP:
 					if self.gamode==0:
 						self.mousesys.mouseup_ga0(event)
-					if self.gamode==30:
-						self.mousesys.mouseup_ga30(event)
+					if self.gamode in plotter_modes:
+						self.mousesys.mouseup_gaplot(event)
 				if event.type==pygame.QUIT:
 					self.cpu.exception("User Stop", -50, cancatch=0)
 			#if in gamode=0 (TTY mode), draw TTY output.
@@ -175,16 +177,24 @@ class uio:
 				self.render_dumbtty()
 			else:
 				self.ttybuff=[]
-			if self.gamode==30:
+			if self.gamode in plotter_modes:
 				self.plotobj.draw(self.screensurf)
 		self.running=0
 		return
 		
 	def setgamode(self, addr, data):
 		self.newmode=int(data)
+		if self.newmode in plotter_modes:
+			#if its a plotter mode, we need to change the params here, so delays 
+			#in plotter enable procedure doesn't cause drawing commands to 'go missing'
+			#when the screen surface is replaced.
+			if self.newmode==30:
+				self.plotobj.setup(243, 243, self.plotx, self.ploty, 121)
+			else:
+				self.plotobj.setup(575, 575, self.plotx31, self.ploty31, 287)
 	def dogamode(self, data):
 		
-		if self.gamode==30:
+		if self.gamode in plotter_modes:
 			self.plotobj.disable()
 		
 		if self.fscreen:
@@ -201,6 +211,13 @@ class uio:
 				self.screensurf.fill((127, 127, 127))
 				pygame.display.flip()
 				self.mousesys.modechange(data)
+			if data==31:
+				self.gamode=31
+				self.screensurf=pygame.display.set_mode((self.plotx31, self.ploty31), pygame.FULLSCREEN)
+				self.plotobj.enable()
+				self.screensurf.fill((127, 127, 127))
+				pygame.display.flip()
+				self.mousesys.modechange(data)
 		else:
 			if data==0:
 				self.gamode=0
@@ -211,6 +228,13 @@ class uio:
 			if data==30:
 				self.gamode=30
 				self.screensurf=pygame.display.set_mode((self.plotx, self.ploty))
+				self.plotobj.enable()
+				self.screensurf.fill((127, 127, 127))
+				pygame.display.flip()
+				self.mousesys.modechange(data)
+			if data==31:
+				self.gamode=31
+				self.screensurf=pygame.display.set_mode((self.plotx31, self.ploty31))
 				self.plotobj.enable()
 				self.screensurf.fill((127, 127, 127))
 				pygame.display.flip()
@@ -478,12 +502,9 @@ class uio:
 			pygame.display.update(uprects)
 
 class MouseEngine:
-	def __init__(self, ioref, plotx, ploty, plotrealx, plotrealy, TTYcharw, TTYcharh):
+	def __init__(self, ioref, plot, TTYcharw, TTYcharh):
 		self.ioref=ioref
-		self.plotx=plotx
-		self.ploty=ploty
-		self.plotrealx=plotrealx
-		self.plotrealy=plotrealy
+		self.plot=plot
 		self.TTYcharw=TTYcharw
 		self.TTYcharh=TTYcharh
 		self.gamode=0
@@ -497,15 +518,15 @@ class MouseEngine:
 		ioref.setreadoverride(303, self.getrealx)
 		ioref.setreadoverride(304, self.getrealy)
 		self.clearbuff=0
-	def mousedown_ga30(self, event):
-		posy=int(((event.pos[1]/float(self.plotrealy))*self.ploty)-121)
-		posx=int(((event.pos[0]/float(self.plotrealx))*self.plotx)-121)
+	def mousedown_gaplot(self, event):
+		posy=int(((event.pos[1]/float(self.plot.realy))*self.plot.ysize)-self.plot.offset)
+		posx=int(((event.pos[0]/float(self.plot.realx))*self.plot.xsize)-self.plot.offset)
 		button=event.button
 		self.clickbuff.append([button, posx, posy])
 		return
-	def mouseup_ga30(self, event):
-		posy=int(((event.pos[1]/float(self.plotrealy))*self.ploty)-121)
-		posx=int(((event.pos[0]/float(self.plotrealx))*self.plotx)-121)
+	def mouseup_gaplot(self, event):
+		posy=int(((event.pos[1]/float(self.plot.realy))*self.plot.ysize)-self.plot.offset)
+		posx=int(((event.pos[0]/float(self.plot.realx))*self.plot.xsize)-self.plot.offset)
 		button=-event.button
 		self.clickbuff.append([button, posx, posy])
 		return
@@ -544,16 +565,16 @@ class MouseEngine:
 		if self.gamode==0:
 			return btint(mpos[0]//self.TTYcharw)
 		if self.gamode==30:
-			return btint(int(((mpos[0]/float(self.plotrealx))*self.plotx)-121))
+			return btint(int(((event.pos[0]/float(self.plot.realx))*self.plot.xsize)-self.plot.offset))
 	def getrealy(self, addr, data):
 		mpos=pygame.mouse.get_pos()
 		if self.gamode==0:
 			return btint(mpos[1]//self.TTYcharh)
-		if self.gamode==30:
-			return btint(int(((mpos[1]/float(self.plotrealy))*self.ploty)-121))
+		if self.gamode in plotter_modes:
+			return btint(int(((event.pos[1]/float(self.plot.realy))*self.plot.ysize)-self.plot.offset))
 
 class PlotterEngine:
-	def __init__(self, ioref, xsize, ysize, realx, realy, itemlimit=30):
+	def __init__(self, ioref, xsize, ysize, realx, realy, itemlimit=30, offset=121):
 		self.xsize=xsize
 		self.ysize=ysize
 		self.drawbuff=[]
@@ -569,6 +590,7 @@ class PlotterEngine:
 		self.y2=0
 		self.x3=0
 		self.y3=0
+		self.offset=offset
 		self.color=(127, 127, 127)
 		self.widthr=1
 		self.heightr=1
@@ -595,18 +617,18 @@ class PlotterEngine:
 	def buffsize(self, addr, data):
 		return btint(len(self.drawbuff))
 	def dx1(self, addr, data):
-		self.x1=int(data)+121
+		self.x1=int(data)+self.offset
 	def dx2(self, addr, data):
-		self.x2=int(data)+121
+		self.x2=int(data)+self.offset
 	def dx3(self, addr, data):
-		self.x3=int(data)+121
+		self.x3=int(data)+self.offset
 	
 	def dy1(self, addr, data):
-		self.y1=int(data)+121
+		self.y1=int(data)+self.offset
 	def dy2(self, addr, data):
-		self.y2=int(data)+121
+		self.y2=int(data)+self.offset
 	def dy3(self, addr, data):
-		self.y3=int(data)+121
+		self.y3=int(data)+self.offset
 	
 	def widthset(self, addr, data):
 		self.widthr=int(data)
@@ -665,7 +687,17 @@ class PlotterEngine:
 		else:
 			pygame.display.update(uprects)
 	def enable(self):
+		
+		
 		self.active=1
+	def setup(self, xsize, ysize, realx, realy, offset):
+		self.xsize=xsize
+		self.ysize=ysize
+		self.realx=realx
+		self.realy=realy
+		self.xmag=realx/float(xsize)
+		self.ymag=realy/float(ysize)
+		self.offset=offset
 	def disable(self):
 		self.active=0
 

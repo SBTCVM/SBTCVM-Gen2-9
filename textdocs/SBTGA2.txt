@@ -2,26 +2,10 @@ SBTCVM Balanced Ternary Graphics Adapter v2
 --planning and specifications--
 
 Modes:
-Tilemap modes:
-In place of the framebuffer modes, will be tilemapped modes,
-in which the display is split into a grid of tiles, 
-and each tile points to a tile definition.
-
-tile IDs are 9 trits. (1 short word) (2 per long word)
-
-each tile definition can be in either 1-trit Monochrome, 3-trit RGB, or 9-trit RGB.
-Same with sprites.
-
-This means tiles of all color modes can be used in one screen.
-
-the palette should be specified via the load-tile IO address used.
 
 
 Display modes:
 0: SBTGA off (TTY) [implemented]
-1: 9x9 tile: 108x81 (9x12 tiles) 4:3 (108 short words, 54 long words if double packed)
-2: 9x9 tile:  54x36  (4x6 tiles) 3:2 (18 short words, 9 long words if double packed)
-11: 3x3 tile: 108x81  (27x36 tiles) 4:3 (976 short words, 486 long words if double packed)
-12: 3x3 tile:  54x36  (12x18 tiles) 3:2 (54 short words, 27 long words if double packed)
-30: plotter mode. [implemented in pygame frontend]
+30: 243x243 plotter mode. [implemented in pygame frontend]
+31: 575x575 plotter mode
 

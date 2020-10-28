@@ -1,0 +1,44 @@
+
+gamode @31
+
+drawfill *000000000
+
+asm setreg1;>test_image2
+set1 brl.offset
+
+val @-247
+set brl.posx
+set brl.posy
+val @2
+set brl.pixx
+set brl.pixy
+
+gsub brl.decode
+
+keyprompt
+
+gamode @31
+
+drawfill *000000000
+
+val *00000++++
+set brl.off
+val *0++0+++++
+asm setreg1;>test_image
+set1 brl.offset
+
+val @-287
+set brl.posx
+set brl.posy
+val @1
+set brl.pixx
+set brl.pixy
+gsub brl.decode
+
+keyprompt
+
+
+
+include binrle as brl
+asm include;binrle_test/image.tas0;test_image
+asm include;binrle_test/image2.tas0;test_image2

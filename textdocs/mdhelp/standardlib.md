@@ -31,10 +31,16 @@ This is a standard decoder for gfxcon's color packart compression method.
 see _comppack_ in _demos_ for a good example.
 
 ### plrle & plrle_noalpha
-This is a standard decoder for gfxcon's compressed tritmap format. (uses SBTGA plotter mode (mode 30))
+This is a standard decoder for gfxcon's compressed tritmap format. (uses SBTGA plotter mode (mode 30, 31))
 the latter module name lacks color-key transparency support but is marginally faster when decoding...
 
 see _tritmap_ in _demos_ for a good example.
+
+### binrle
+This is a standard decoder for gfxcon's 2-color compressed tritmap format. (uses SBTGA plotter mode (mode 30, 31))
+more space-efficient than PLRLE, at a severe cost in image colorspace.
+
+see _`binrle_test`_ in _demos_ for a good example.
 
 ### gettriads
 A VERY simple module containing a subroutine that extracts the three triads in a nonet, and places them in 3

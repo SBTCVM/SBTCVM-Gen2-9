@@ -36,4 +36,11 @@ also, the **first word** of the image data contains the **end address** in its d
 
 A decendant of CPRLE, PLRLE is an advanced, **9-trit RGB tritmap compression format**,
 complete with lossy & lossless compression modes, and a combined decoder/renderer 
-with basic scaling support. works with the **SBTGA** Plotter (mode 30)
+with basic scaling support. works with the **SBTGA** Plotter (mode 30, 31)
+
+## BINRLE
+
+like PLRLE, its a Run-length tritmap compression format for the SBTGA plotter(mode 30, 31)
+the key difference is a lack of a lossy compression mode, and a hard-limit of only 2 colors.
+
+interpolation mode can be used to emulate a tone between the two colors, to an extent.

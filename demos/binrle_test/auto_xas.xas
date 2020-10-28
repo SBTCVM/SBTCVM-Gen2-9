@@ -1,0 +1,4 @@
+gfxcon -binrle %xwd%/image
+gfxcon -binrlei %xwd%/image2
+
+stnp %xwd%

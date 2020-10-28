@@ -85,12 +85,19 @@ tritmap2:
 	(rather basic) color-key-based transparency support [nocurses]
 	
 tritmap_heavy:
-	A 243x243 PLRLE tritma photo-conversion example. (a basic 9-trit RGB, per-line
+	A 243x243 PLRLE tritmap photo-conversion example. (a basic 9-trit RGB, per-line
 	run-length compression scheme.) uses the 'plrle' SSTNPL module,
 	and 'gfxcon -plrle' (with a threshold of 35) The threshold is a newer
 	feature of the PLRLE encoder that lowers image sizes, at the cost of image quality.
 	photo By Thomas Leathers [nocurses]
 	
+tritmap575:
+	a 575x575 PLRLE tritmap image example. using the higher resolution, 
+	575x575 SBTGA Mode 31 plotter. [nocurses]
+	
+binrle_test:
+	A few tests of the 2-color SBTCVM BINRLE tritmap format. runs in mode 31.
+	[nocurses]
 plottertext:
 	Example/test program for the 'segment' SSTNPL Module
 	a 53-symbol vector text renderer. (A-Z, 0-9, plus some symbols.)

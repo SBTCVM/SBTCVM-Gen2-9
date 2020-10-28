@@ -11,6 +11,7 @@ stnp --module musicengine.stnp
 stnp --module segment.stnp
 stnp --module dosargs.stnp
 stnp --module gettriads.stnp
+stnp --module binrle.stnp
 
 #Standard namespace library
 print;standard namespace library

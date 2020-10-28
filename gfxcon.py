@@ -185,6 +185,117 @@ def colart_maker_RLE(imagepath, notrailnew=0):
 	return
 
 
+def plot_BIN_RLE(imagepath, lineinterpol=0):
+	print("converting image into BINRLE plotter image format...")
+	image=pygame.image.load(imagepath)
+	xsize=image.get_width()
+	ysize=image.get_height()
+	pixcol=None
+	#print(image.get_height())
+	#print(ysize)
+	size=1
+	pbuff=None
+	bufflen=0
+	bank=1
+	color_bool=binencode(image.get_at((0, 0)))
+	outf=open(imagepath.rsplit(".")[0]+".tas0", 'w')
+	outf.write('''#SBTCVM Gen2-9 GFXCON: run-length encoded tritmap
+#Needs to be decoded manually.
+#image file: ''' + imagepath + "\n"
+'''raw;10x''' + str(xsize) + ''',10x''' + str(color_bool) + '''
+''')
+	for coly in xrange(0, ysize):
+		for linex in xrange(0, xsize):
+			pixcol = image.get_at((linex, coly))
+			if lineinterpol==0:
+				buffx=binencode(pixcol, offset=0)
+			else:
+				if coly % 2:
+					buffx=binencode(pixcol, offset=-20)
+				else:
+					buffx=binencode(pixcol, offset=20)
+			if buffx==pbuff:
+				bufflen+=1
+			elif pbuff==None:
+				pbuff=buffx
+				
+				bufflen=0
+			else:
+				bufflen, bank, size = binformat(bufflen, bank, outf, size)
+				pbuff=buffx
+				
+				bufflen=0
+	if pbuff!=None:
+		bufflen, bank, size = binformat(bufflen, bank, outf, size)
+	#write exit code
+	bufflen, bank, size = binformat(0, bank, outf, size)
+	if bank==1:
+		#if last raw statement unfinished, finish it with extra zero.
+		outf.write("10x0\n")
+		size+=1
+	outf.close()
+	print("Done.")
+	print(g2com.nonetformatted_smart(size))
+	return
+
+
+def binformat(bufflen, bank, outf, size):
+	splitup=True
+	bufflen+=1
+	start=True
+	while splitup:
+		#DO NOT USE 9841! it will integer-overflow the BINRLE module's decoder algorithm!
+		if bufflen>9041:
+			bufflen-=9041
+			if start==True:
+				presetval="9041"
+				start=0
+			else:
+				presetval="-9041"
+			if bank==1:
+				bank=0
+				outf.write("raw;10x" + presetval + ",")
+			else:
+				bank=1
+				outf.write("10x" + presetval + "\n")
+				size+=1
+				
+			if bufflen<=9841 and bufflen>0:
+				splitup=False
+				if bank==1:
+					bank=0
+					outf.write("raw;10x" + str(-bufflen) + ",")
+				else:
+					bank=1
+					outf.write("10x" + str(-bufflen) + "\n")
+					
+				
+		elif bufflen>0:
+			splitup=False
+			if bank==1:
+				bank=0
+				outf.write("raw;10x" + str(bufflen) + ",")
+			else:
+				bank=1
+				outf.write("10x" + str(bufflen) + "\n")
+				size+=1
+			bufflen=0
+		if bufflen<=0:
+			splitup=False
+	return bufflen, bank, size
+
+def binencode(rgb, offset=0):
+	r=rgb[0]+offset
+	g=rgb[1]+offset
+	b=rgb[2]+offset
+	mono=(r+g+b)/3.0
+	if mono>127:
+		return 1
+	else:
+		return 0
+	
+	
+
 
 def plot_RLE(imagepath, lineinterpol=0, threshold=None):
 	print("converting image into PLRLE plotter image format...")
@@ -289,7 +400,8 @@ if __name__=="__main__":
 -plrle(i) [image] (threshold) : convert an image into 9-trit (PLRLE format) rle compressed.
 	tritmap image. append i for line-based striped interpolation.
 	follow image name by an OPTIONAL threshold integer value a color channel must change for encoder to change colors.
-	(at cost of detail)''')
+	(at cost of detail)
+-binrle(i) [image] : boolean (2 tone) RLE-compressed tritmap format. uses BINRLE module.''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2-9 gfx conversion utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -342,6 +454,13 @@ see readme.md for more information and licensing of media.
 	elif cmd in ["-plrlei"]:
 		print("RLE-encoded 9-trit RGB tritmap. (line interpolated)")
 		plot_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=1, threshold=arg2)
+	elif cmd in ["-binrle"]:
+		print("RLE-encoded boolean tritmap.")
+		plot_BIN_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=0)
+	elif cmd in ["-binrlei"]:
+		print("RLE-encoded boolean tritmap. (line interpolated)")
+		plot_BIN_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=12)
+
 
 	elif cmd == None:
 		print("Tip: try gfxcon.py -h for help.")
