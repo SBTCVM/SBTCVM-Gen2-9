@@ -1,3 +1,8 @@
+prline This will show 2 different BINRLE images.
+prline press any key to advance to next screen, when an image has 
+prline finished drawing. [press any key]
+keyprompt
+
 
 gamode @31
 
@@ -36,7 +41,7 @@ set brl.pixy
 gsub brl.decode
 
 keyprompt
-
+stop
 
 
 include binrle as brl

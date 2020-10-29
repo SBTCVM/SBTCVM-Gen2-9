@@ -228,10 +228,14 @@ def plot_BIN_RLE(imagepath, lineinterpol=0):
 	if pbuff!=None:
 		bufflen, bank, size = binformat(bufflen, bank, outf, size)
 	#write exit code
-	bufflen, bank, size = binformat(0, bank, outf, size)
-	if bank==1:
-		#if last raw statement unfinished, finish it with extra zero.
+	
+	if bank==0:
+		#if last raw statement unfinished, finish it with terminator zero.
 		outf.write("10x0\n")
+		size+=1
+	else:
+		#else, finish it with blank null as terminator.
+		outf.write("null\n")
 		size+=1
 	outf.close()
 	print("Done.")
