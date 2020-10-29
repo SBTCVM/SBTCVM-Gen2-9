@@ -276,16 +276,20 @@ goto;>goto--branch-135
 goto;>flow--con-x-9;goto--branch-135
 
 null;;goto--jumper-135
-#subtract (2op math)
+#get(1) (may be used with set, or asm code)
 dataread1;>length_temp
+#get2 (may be used with set2, and asm code.)
 dataread2;>iwide
-sub
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>length_final
-#subtract (2op math)
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #139
+sub2#SSTNPL Source Line: '139' 
+#set2 (used for asm, or get2)
+datawrite2;>length_final
+#get(1) (may be used with set, or asm code)
 dataread1;>length_buff
-dataread2;>length_final
-sub
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #142
+sub#SSTNPL Source Line: '142' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>length_buff
 #val (used with set to change variable value during runtime.)
@@ -304,23 +308,23 @@ dataread1;>length_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>pixx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #149
-mul#SSTNPL Source Line: '149' 
+#_______NOTE: this corresponds to SSTNPL source line #159
+mul#SSTNPL Source Line: '159' 
 #get2 (may be used with set2, and asm code.)
 dataread2;>px
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #151
-add#SSTNPL Source Line: '151' 
+#_______NOTE: this corresponds to SSTNPL source line #161
+add#SSTNPL Source Line: '161' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>px
 #conditional flow control begin
 dataread1;>breakRUNflg
 dataread2;>@1
-gotoif;>goto--jumper-155
-goto;>goto--branch-155
-goto;>flow--con-x-10;goto--branch-155
+gotoif;>goto--jumper-165
+goto;>goto--branch-165
+goto;>flow--con-x-10;goto--branch-165
 
-null;;goto--jumper-155
+null;;goto--jumper-165
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -345,11 +349,11 @@ dataread1;>length_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>pixx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #168
-mul#SSTNPL Source Line: '168' 
+#_______NOTE: this corresponds to SSTNPL source line #178
+mul#SSTNPL Source Line: '178' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #169
-adddata1;10x1#SSTNPL Source Line: '169' 
+#_______NOTE: this corresponds to SSTNPL source line #179
+adddata1;10x1#SSTNPL Source Line: '179' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>length_buff
 #plotter width
@@ -366,11 +370,11 @@ null;;flowloop--con-x-8
 #conditional flow control begin
 dataread1;>px_rel
 dataread2;>iwide
-gotoifless;>goto--branch-177
-goto;>goto--jumper-177
-goto;>flow--con-x-11;goto--branch-177
+gotoifless;>goto--branch-187
+goto;>goto--jumper-187
+goto;>flow--con-x-11;goto--branch-187
 
-null;;goto--jumper-177
+null;;goto--jumper-187
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)

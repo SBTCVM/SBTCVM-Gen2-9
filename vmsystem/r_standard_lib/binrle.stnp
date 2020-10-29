@@ -133,9 +133,15 @@ label decode
 			val @0
 			set length_final
 			ifmore length_temp,iwide begin
-				sub length_temp,iwide
-				set length_final
-				sub length_buff,length_final
+				
+				get1 length_temp
+				get2 iwide
+				asm sub2
+				set2 length_final
+				get1 length_buff
+				asm sub
+				
+				
 				set length_buff
 				val @1
 				set breakRUNflg
