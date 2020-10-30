@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.2.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_doodle
 head-nspin=stdnsp
@@ -149,7 +149,7 @@ iowrite1;>plot.fill
 dataread1;>*+++++++++
 iowrite1;>plot.color
 #label
-null;;main--label
+zerosize;;main--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #28
 ioread1;>mouse.button#SSTNPL Source Line: '28' 
@@ -163,7 +163,7 @@ goto;>goto--jumper-31
 setreg1;>goto--jumper-31;goto--branch-31
 s1push1
 goto;>linedraw--label
-null;;goto--jumper-31
+zerosize;;goto--jumper-31
 #conditional goto
 dataread1;>btnbuff
 dataread2;>@0
@@ -171,7 +171,7 @@ gotoif;>goto--branch-32
 goto;>goto--jumper-32
 setreg1;>goto--jumper-32;goto--branch-32
 goto;>main--label
-null;;goto--jumper-32
+zerosize;;goto--jumper-32
 #conditional stop
 dataread1;>btnbuff
 dataread2;>@3
@@ -179,7 +179,7 @@ gotoif;>goto--branch-33
 goto;>goto--jumper-33
 stop;;goto--branch-33
 
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #35
 ioread1;>mouse.realx#SSTNPL Source Line: '35' 
@@ -203,7 +203,7 @@ gotoifmore;>goto--branch-42
 goto;>goto--jumper-42
 dataread1;>@1;goto--branch-42
 datawrite1;>drawflg
-null;;goto--jumper-42
+zerosize;;goto--jumper-42
 #conditional set
 dataread1;>btnbuff
 dataread2;>@0
@@ -211,11 +211,11 @@ gotoifless;>goto--branch-43
 goto;>goto--jumper-43
 dataread1;>@0;goto--branch-43
 datawrite1;>drawflg
-null;;goto--jumper-43
+zerosize;;goto--jumper-43
 #goto 
 goto;>main--label
 #label
-null;;linedraw--label
+zerosize;;linedraw--label
 #copy variables 
 dataread1;>curx
 datawrite1;>lastx
