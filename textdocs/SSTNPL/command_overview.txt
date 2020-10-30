@@ -42,6 +42,22 @@ Literals:
 	Character:
 		if :a,:a, goto somthing
 	
+		
+		
+		--NOTE: the following characters require escape sequences:
+		
+			ASCII        | escape sequence in SSTNPL character literals
+			-------------|----------
+			newline      | `\n`
+			null         | `\0`
+			backspace    | `\x`
+			vertical bar | `\v`
+			`;`          | `\c`
+			`\`          | `\\`
+			space        | `\s`
+			`#`          | `\p`
+			`,`          | `\m`
+	
 	Constants:
 		if somebool,$true goto somthing
 	
