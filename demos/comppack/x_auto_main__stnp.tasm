@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -131,7 +131,7 @@ gotoif;>keyprompt--loop-20
 setreg1;>goto--jumper-26
 s1push1
 goto;>cprle.decode--label
-null;;goto--jumper-26
+zerosize;;goto--jumper-26
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
@@ -143,7 +143,7 @@ fopwri1;:\n
 setreg1;>goto--jumper-31
 s1push1
 goto;>cprle.decode--label
-null;;goto--jumper-31
+zerosize;;goto--jumper-31
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd

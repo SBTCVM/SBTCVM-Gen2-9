@@ -135,6 +135,24 @@ class marker:
 	def p3(self, data, keyword, gotos, lineno):
 		return []
 
+class zerosize:
+	def __init__(self):
+		self.keywords=["zerosize"]
+		self.prefixes=[]
+		self.nsp=0
+		self.marks={}
+	def p0(self, data, keyword, lineno):
+		return 0, None
+	def p1(self, data, keyword, lineno, addr, gotos):
+		self.marks[lineno]=addr
+		return 0, {}
+	def p2(self, data, keyword, gotos, lineno):
+		
+		return 0, None
+	def p3(self, data, keyword, gotos, lineno):
+		return []
+
+
 #basic instruction. literally any instruction that uses this automatically supports goto refrence carrot stntax (keyword;>gotorefrence)
 class instruct:
 	def __init__(self, keywords, opcode):
@@ -457,6 +475,7 @@ class mainloop:
 		#instruction list
 		self.instlist=[instruct(["null"], 0),
 		rawinst(),
+		zerosize(),
 		instruct(["setreg1"], -9841),#register manip
 		instruct(["setreg2"], -9840),
 		instruct(["copy2to1"], -9839),

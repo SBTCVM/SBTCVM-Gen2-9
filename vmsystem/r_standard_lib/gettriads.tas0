@@ -14,7 +14,7 @@ null;0;temp2
 null;10x729;@729
 null;10x27;@27
 #label
-null;;gettris--label
+zerosize;;gettris--label
 #multiply (2op math)
 dataread1;>input
 dataread2;>@729

@@ -111,7 +111,7 @@ class in_fcon_end:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		if fcon_break().startswith("flowloop"):
 			destobj.write("goto;>" + fcon_loopback() + "\n")
-		destobj.write("null;;" + fcon_end() + "\n")
+		destobj.write("zerosize;;" + fcon_end() + "\n")
 		return
 
 
@@ -346,7 +346,7 @@ class in_label:
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
-		destobj.write("#label\n" + "null;;" + args+"--label" + "\n")
+		destobj.write("#label\n" + "zerosize;;" + args+"--label" + "\n")
 		return
 		
 
@@ -389,7 +389,7 @@ class in_table:
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		args, w, h= args.split(",")
-		destobj.write("#table width=" + w + ", height=" + h + "\n" + "null;;" + args+"--table" + "\n")
+		destobj.write("#table width=" + w + ", height=" + h + "\n" + "zerosize;;" + args+"--table" + "\n")
 		return
 		
 
@@ -522,7 +522,7 @@ dataread2;>''' + end + '''
 gotoifmore;>for-drange-loopback-''' +  str(lineno) + '''
 gotoif;>for-drange-loopback-''' +  str(lineno) + '''
 goto;>''' + blockname + '''
-null;;for-drange-subpos-''' +  str(lineno) + '''
+zerosize;;for-drange-subpos-''' +  str(lineno) + '''
 ''')
 		if formode=="urange":
 			destobj.write('''#Downward range iterator
@@ -539,7 +539,7 @@ dataread2;>''' + end + '''
 gotoifless;>for-drange-loopback-''' +  str(lineno) + '''
 gotoif;>for-drange-loopback-''' +  str(lineno) + '''
 goto;>''' + blockname + '''
-null;;for-drange-subpos-''' +  str(lineno) + '''
+zerosize;;for-drange-subpos-''' +  str(lineno) + '''
 ''')
 		
 		return
@@ -682,7 +682,6 @@ dataread2;>''' + yv + '''
 mul
 dataread2;>''' + xv + '''
 add
-adddata1;10x1
 adddata1;>''' + tname + '''--table
 datawrite1;>tabr--adrbuff--''' + str(lineno) + '''
 ''' + readop +  ''';;tabr--adrbuff--''' + str(lineno) + '''
@@ -752,7 +751,6 @@ dataread2;>''' + yv + '''
 mul
 dataread2;>''' + xv + '''
 add
-adddata1;10x1
 adddata1;>''' + tname + '''--table
 datawrite1;>tabw--adrbuff--''' + str(lineno) + '''
 dataread1;>''' + datav + '''
@@ -844,7 +842,7 @@ class in_labelgoto:
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		if keyword=="gsub":
 			
-			destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ns1push1\ngoto;>" + args +"--label" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+			destobj.write("#goto (extra code stores away return address.)\n" + "setreg1;>goto--jumper-" +  str(lineno) + "\ns1push1\ngoto;>" + args +"--label" + "\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		else:
 			destobj.write("#goto \n" + "goto;>" + args +"--label" + "\n")
 		return
@@ -1026,31 +1024,31 @@ goto;>goto--branch-''' + str(lineno)
 		if arglist[1]=="gsub":
 			destobj.write('''#conditional subroutine goto
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ns1push1\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ns1push1\ngoto;>" + label + "--label\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		#set variable
 		elif arglist[1].startswith("="):
 			destobj.write('''#conditional set
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>" + arglist[1][1:] + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\ndatawrite1;>" + arglist[1][1:] + "\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		
 		#conditional character dump
 		elif arglist[1]=="chardump":
 			destobj.write('''#conditional chardump
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.ttywr" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.ttywr" + "\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		#conditional decimal dump
 		elif arglist[1]=="dumpd":
 			destobj.write('''#conditional dumpd
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.decdump" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.decdump" + "\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		#conditional ternary dump
 		elif arglist[1]=="dumpt":
 			destobj.write('''#conditional dumpt
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.tritdump" + "\nnull;;goto--jumper-" +  str(lineno) + "\n")
+dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.tritdump" + "\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		
 		
@@ -1058,30 +1056,30 @@ dataread1;>''' + arglist[2] + ";goto--branch-" +  str(lineno) + "\niowrite1;>io.
 		elif arglist[1]=="return":
 			destobj.write('''#conditional return
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-s1pop1;''' + ";goto--branch-" +  str(lineno) + "\ngotoreg1\nnull;;goto--jumper-" +  str(lineno) + "\n")
+s1pop1;''' + ";goto--branch-" +  str(lineno) + "\ngotoreg1\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		#conditional stop
 		elif arglist[1]=="stop":
 			destobj.write('''#conditional stop
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-stop;''' + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
+stop;''' + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		#conditional flow control break
 		elif arglist[1]=="break":
 			destobj.write('''#conditional flow control break
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-goto;>''' + fcon_break() + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
+goto;>''' + fcon_break() + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		#conditional flow control begin
 		elif arglist[1]=="begin":
 			destobj.write('''#conditional flow control begin
 ''' + self.getcond(lineno, var0, var1, thirdarg, inverse=True) + '''
-goto;>''' + fcon_begin() + ";goto--branch-" +  str(lineno) + "\n\nnull;;goto--jumper-" +  str(lineno) + "\n")
+goto;>''' + fcon_begin() + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
 		#basic goto
 		else:
 			destobj.write('''#conditional goto
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
-setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ngoto;>" + label + "--label\nnull;;goto--jumper-" +  str(lineno) + "\n")
+setreg1;>goto--jumper-''' +  str(lineno) + ";goto--branch-" +  str(lineno) + "\ngoto;>" + label + "--label\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		return
 
 
@@ -1215,7 +1213,7 @@ goto;>goto--branch-''' + str(lineno)
 null;;''' + fcon_loopback() + '''
 ''' + self.getcond(lineno, var0, var1, thirdarg, inverse=True) + '''
 goto;>''' + blockname + ";goto--branch-" +  str(lineno) + '''
-null;;goto--jumper-''' +  str(lineno) + "\n")
+zerosize;;goto--jumper-''' +  str(lineno) + "\n")
 		return
 
 #common 2-operator math class
@@ -1842,7 +1840,6 @@ dataread2;>''' + ypos + '''
 mul
 dataread2;>''' + xoffset + '''
 add
-adddata1;10x1
 adddata1;>''' + tname + '''--table
 datawrite1;>tabstrc--adrbuff--''' + str(lineno) + '''
 null;;tabstrc--adrbuff--''' + str(lineno) + '''
@@ -1891,7 +1888,7 @@ setreg2;:''' + char + '''
 
 gotoif;>tabstrc--recurs-checkyes--''' + str(lineno) + '_' + str(counter) + '''
 goto;>tabstrc--recurs-checkno--''' + str(lineno) + '_' + str(counter) + '''
-null;;tabstrc--recurs-checkyes--''' + str(lineno) + '_' + str(counter) + '''
+zerosize;;tabstrc--recurs-checkyes--''' + str(lineno) + '_' + str(counter) + '''
 ''')
 #######If list is now empty, set flag
 		if slist==[]:
@@ -1906,7 +1903,7 @@ datawrite1;;tabstrc--recurs-flag--''' + str(lineno) + "_" + str(counter) + '''
 			self.recursive_parse(slist, counter, lineno, destobj)
 ####### SKip recursion endpoint
 		destobj.write('''#recursionskip endpoint
-null;;tabstrc--recurs-checkno--''' + str(lineno) + '_' + str(counter) + '''
+zerosize;;tabstrc--recurs-checkno--''' + str(lineno) + '_' + str(counter) + '''
 ''')
 		return
 		

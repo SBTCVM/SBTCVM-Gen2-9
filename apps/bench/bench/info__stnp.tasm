@@ -10,12 +10,12 @@ null;0;ybuff
 null;10x1;actflg
 null;0;btnbuff
 #label
-null;;info--label
+zerosize;;info--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-8
 s1push1
 goto;>common.ui_base_draw--label
-null;;goto--jumper-8
+zerosize;;goto--jumper-8
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -39,7 +39,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-20
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-20
+zerosize;;goto--jumper-20
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -59,12 +59,12 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-29
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-29
+zerosize;;goto--jumper-29
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-30
 s1push1
 goto;>common.mouse_wait--label
-null;;goto--jumper-30
+zerosize;;goto--jumper-30
 #prline
 fopwri1;:S
 fopwri1;:t

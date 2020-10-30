@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_segtest
 head-nspin=stdnsp
@@ -28,7 +28,7 @@ datawrite1;>seg.posy
 setreg1;>goto--jumper-21
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-21
+zerosize;;goto--jumper-21
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:u
@@ -150,9 +150,9 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-33
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #label
-null;;main--label
+zerosize;;main--label
 #Get character from TTY input.
 ioread1;>io.ttyrd
 datawrite1;>kb
@@ -163,7 +163,7 @@ iowrite1;>buffer.1.write.tail
 setreg1;>goto--jumper-40
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-40
+zerosize;;goto--jumper-40
 #goto 
 goto;>main--label
 #keprompt: prompt for single keypress, continue only when keypress is received.

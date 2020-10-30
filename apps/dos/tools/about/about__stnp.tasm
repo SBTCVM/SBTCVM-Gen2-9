@@ -19,7 +19,7 @@ null;0++---;*0++---
 setreg1;>goto--jumper-3
 s1push1
 goto;>about--label
-null;;goto--jumper-3
+zerosize;;goto--jumper-3
 #prline
 fopwri1;:P
 fopwri1;:r
@@ -123,7 +123,7 @@ fopwri1;:\n
 #stop (shutdown vm)
 stop
 #label
-null;;about--label
+zerosize;;about--label
 #Set text colors
 dataread1;>*---+++
 iowrite1;>io.textcolor
@@ -193,7 +193,7 @@ fopwri1;:\n
 setreg1;>goto--jumper-19
 s1push1
 goto;>splash--label
-null;;goto--jumper-19
+zerosize;;goto--jumper-19
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
@@ -943,7 +943,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;splash--label
+zerosize;;splash--label
 #Set text colors
 dataread1;>*+++0--
 iowrite1;>io.textcolor

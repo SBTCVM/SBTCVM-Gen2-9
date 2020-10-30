@@ -74,7 +74,7 @@ null;10x13;@13
 null;10x14;@14
 null;10x15;@15
 #label
-null;;init_pos--label
+zerosize;;init_pos--label
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)
@@ -83,7 +83,7 @@ datawrite1;>current_x
 s1pop1
 gotoreg1
 #label
-null;;output--label
+zerosize;;output--label
 #buffer 1 head read
 ioread1;>buffer.1.read.head
 #set(1) (used after 2-op math, asm code, or get)
@@ -99,7 +99,7 @@ gotoif;>goto--branch-47
 goto;>goto--jumper-47
 s1pop1;;goto--branch-47
 gotoreg1
-null;;goto--jumper-47
+zerosize;;goto--jumper-47
 #conditional subroutine goto
 dataread1;>b_tmp
 dataread2;>@1
@@ -108,7 +108,7 @@ goto;>goto--jumper-48
 setreg1;>goto--jumper-48;goto--branch-48
 s1push1
 goto;>newline--label
-null;;goto--jumper-48
+zerosize;;goto--jumper-48
 #conditional goto
 dataread1;>b_tmp
 dataread2;>@1
@@ -116,7 +116,7 @@ gotoif;>goto--branch-49
 goto;>goto--jumper-49
 setreg1;>goto--jumper-49;goto--branch-49
 goto;>output--label
-null;;goto--jumper-49
+zerosize;;goto--jumper-49
 #conditional goto
 dataread1;>b_tmp
 dataread2;>:\s
@@ -124,7 +124,7 @@ gotoif;>goto--branch-51
 goto;>goto--jumper-51
 setreg1;>goto--jumper-51;goto--branch-51
 goto;>skip_draw--label
-null;;goto--jumper-51
+zerosize;;goto--jumper-51
 #conditional goto
 dataread1;>b_tmp
 dataread2;>:9
@@ -132,7 +132,7 @@ gotoifmore;>goto--branch-53
 goto;>goto--jumper-53
 setreg1;>goto--jumper-53;goto--branch-53
 goto;>skip_to_symbols--label
-null;;goto--jumper-53
+zerosize;;goto--jumper-53
 #conditional goto
 dataread1;>b_tmp
 dataread2;>:Z
@@ -140,7 +140,7 @@ gotoifmore;>goto--branch-54
 goto;>goto--jumper-54
 setreg1;>goto--jumper-54;goto--branch-54
 goto;>skip_alpha--label
-null;;goto--jumper-54
+zerosize;;goto--jumper-54
 #conditional goto
 dataread1;>b_tmp
 dataread2;>:\s
@@ -148,7 +148,7 @@ gotoifmore;>goto--branch-59
 goto;>goto--jumper-59
 setreg1;>goto--jumper-59;goto--branch-59
 goto;>skip_alpha_lower--label
-null;;goto--jumper-59
+zerosize;;goto--jumper-59
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #70
 setreg1;10x123#SSTNPL Source Line: '70' 
@@ -162,7 +162,7 @@ datawrite1;>offset
 #goto 
 goto;>end--label
 #label
-null;;skip_alpha_lower--label
+zerosize;;skip_alpha_lower--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #86
 setreg1;10x96#SSTNPL Source Line: '86' 
@@ -176,7 +176,7 @@ datawrite1;>offset
 #goto 
 goto;>end--label
 #label
-null;;skip_alpha--label
+zerosize;;skip_alpha--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #103
 setreg1;10x95#SSTNPL Source Line: '103' 
@@ -190,7 +190,7 @@ datawrite1;>offset
 #goto 
 goto;>end--label
 #label
-null;;skip_to_symbols--label
+zerosize;;skip_to_symbols--label
 #conditional set
 dataread1;>b_tmp
 dataread2;>:?
@@ -198,7 +198,7 @@ gotoif;>goto--branch-111
 goto;>goto--jumper-111
 dataread1;>@38;goto--branch-111
 datawrite1;>offset
-null;;goto--jumper-111
+zerosize;;goto--jumper-111
 #conditional set
 dataread1;>b_tmp
 dataread2;>:+
@@ -206,7 +206,7 @@ gotoif;>goto--branch-112
 goto;>goto--jumper-112
 dataread1;>@39;goto--branch-112
 datawrite1;>offset
-null;;goto--jumper-112
+zerosize;;goto--jumper-112
 #conditional set
 dataread1;>b_tmp
 dataread2;>:-
@@ -214,7 +214,7 @@ gotoif;>goto--branch-113
 goto;>goto--jumper-113
 dataread1;>@40;goto--branch-113
 datawrite1;>offset
-null;;goto--jumper-113
+zerosize;;goto--jumper-113
 #conditional set
 dataread1;>b_tmp
 dataread2;>:_
@@ -222,7 +222,7 @@ gotoif;>goto--branch-114
 goto;>goto--jumper-114
 dataread1;>@41;goto--branch-114
 datawrite1;>offset
-null;;goto--jumper-114
+zerosize;;goto--jumper-114
 #conditional set
 dataread1;>b_tmp
 dataread2;>:<
@@ -230,7 +230,7 @@ gotoif;>goto--branch-115
 goto;>goto--jumper-115
 dataread1;>@42;goto--branch-115
 datawrite1;>offset
-null;;goto--jumper-115
+zerosize;;goto--jumper-115
 #conditional set
 dataread1;>b_tmp
 dataread2;>:>
@@ -238,7 +238,7 @@ gotoif;>goto--branch-116
 goto;>goto--jumper-116
 dataread1;>@43;goto--branch-116
 datawrite1;>offset
-null;;goto--jumper-116
+zerosize;;goto--jumper-116
 #conditional set
 dataread1;>b_tmp
 dataread2;>:"
@@ -246,7 +246,7 @@ gotoif;>goto--branch-117
 goto;>goto--jumper-117
 dataread1;>@44;goto--branch-117
 datawrite1;>offset
-null;;goto--jumper-117
+zerosize;;goto--jumper-117
 #conditional set
 dataread1;>b_tmp
 dataread2;>:'
@@ -254,7 +254,7 @@ gotoif;>goto--branch-118
 goto;>goto--jumper-118
 dataread1;>@45;goto--branch-118
 datawrite1;>offset
-null;;goto--jumper-118
+zerosize;;goto--jumper-118
 #conditional set
 dataread1;>b_tmp
 dataread2;>:$
@@ -262,7 +262,7 @@ gotoif;>goto--branch-119
 goto;>goto--jumper-119
 dataread1;>@46;goto--branch-119
 datawrite1;>offset
-null;;goto--jumper-119
+zerosize;;goto--jumper-119
 #conditional set
 dataread1;>b_tmp
 dataread2;>:%
@@ -270,7 +270,7 @@ gotoif;>goto--branch-120
 goto;>goto--jumper-120
 dataread1;>@47;goto--branch-120
 datawrite1;>offset
-null;;goto--jumper-120
+zerosize;;goto--jumper-120
 #conditional set
 dataread1;>b_tmp
 dataread2;>:\v
@@ -278,7 +278,7 @@ gotoif;>goto--branch-121
 goto;>goto--jumper-121
 dataread1;>@48;goto--branch-121
 datawrite1;>offset
-null;;goto--jumper-121
+zerosize;;goto--jumper-121
 #conditional set
 dataread1;>b_tmp
 dataread2;>:/
@@ -286,7 +286,7 @@ gotoif;>goto--branch-122
 goto;>goto--jumper-122
 dataread1;>@49;goto--branch-122
 datawrite1;>offset
-null;;goto--jumper-122
+zerosize;;goto--jumper-122
 #conditional set
 dataread1;>b_tmp
 dataread2;>:\b
@@ -294,7 +294,7 @@ gotoif;>goto--branch-123
 goto;>goto--jumper-123
 dataread1;>@50;goto--branch-123
 datawrite1;>offset
-null;;goto--jumper-123
+zerosize;;goto--jumper-123
 #conditional set
 dataread1;>b_tmp
 dataread2;>:=
@@ -302,7 +302,7 @@ gotoif;>goto--branch-124
 goto;>goto--jumper-124
 dataread1;>@51;goto--branch-124
 datawrite1;>offset
-null;;goto--jumper-124
+zerosize;;goto--jumper-124
 #conditional set
 dataread1;>b_tmp
 dataread2;>:.
@@ -310,7 +310,7 @@ gotoif;>goto--branch-125
 goto;>goto--jumper-125
 dataread1;>@52;goto--branch-125
 datawrite1;>offset
-null;;goto--jumper-125
+zerosize;;goto--jumper-125
 #conditional set
 dataread1;>b_tmp
 dataread2;>:\m
@@ -318,16 +318,16 @@ gotoif;>goto--branch-126
 goto;>goto--jumper-126
 dataread1;>@53;goto--branch-126
 datawrite1;>offset
-null;;goto--jumper-126
+zerosize;;goto--jumper-126
 #label
-null;;end--label
+zerosize;;end--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-129
 s1push1
 goto;>segment_draw--label
-null;;goto--jumper-129
+zerosize;;goto--jumper-129
 #label
-null;;skip_draw--label
+zerosize;;skip_draw--label
 #add (2op math)
 dataread1;>current_x
 dataread2;>hori_space
@@ -337,7 +337,7 @@ datawrite1;>current_x
 #goto 
 goto;>output--label
 #table width=16, height=54
-null;;seg_data--table
+zerosize;;seg_data--table
 #tdat
 null;+
 null;+
@@ -1257,7 +1257,7 @@ null;0
 null;+
 null;0
 #label
-null;;newline--label
+zerosize;;newline--label
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)
@@ -1272,7 +1272,7 @@ datawrite1;>posy
 s1pop1
 gotoreg1
 #label
-null;;segment_draw--label
+zerosize;;segment_draw--label
 #plotter draw line
 dataread1;>color_on
 iowrite1;>plot.color
@@ -1282,7 +1282,6 @@ dataread2;>offset
 mul
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--208
 dataread1;;tabr--adrbuff--208
@@ -1295,7 +1294,7 @@ gotoif;>goto--branch-210
 goto;>goto--jumper-210
 setreg1;>goto--jumper-210;goto--branch-210
 goto;>seg_1--label
-null;;goto--jumper-210
+zerosize;;goto--jumper-210
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1316,16 +1315,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-219
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-219
+zerosize;;goto--jumper-219
 #label
-null;;seg_1--label
+zerosize;;seg_1--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@1
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--222
 dataread1;;tabr--adrbuff--222
@@ -1338,7 +1336,7 @@ gotoif;>goto--branch-224
 goto;>goto--jumper-224
 setreg1;>goto--jumper-224;goto--branch-224
 goto;>seg_2--label
-null;;goto--jumper-224
+zerosize;;goto--jumper-224
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1359,16 +1357,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-233
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-233
+zerosize;;goto--jumper-233
 #label
-null;;seg_2--label
+zerosize;;seg_2--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@2
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--236
 dataread1;;tabr--adrbuff--236
@@ -1381,7 +1378,7 @@ gotoif;>goto--branch-238
 goto;>goto--jumper-238
 setreg1;>goto--jumper-238;goto--branch-238
 goto;>seg_3--label
-null;;goto--jumper-238
+zerosize;;goto--jumper-238
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1402,16 +1399,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-247
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-247
+zerosize;;goto--jumper-247
 #label
-null;;seg_3--label
+zerosize;;seg_3--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@3
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--250
 dataread1;;tabr--adrbuff--250
@@ -1424,7 +1420,7 @@ gotoif;>goto--branch-252
 goto;>goto--jumper-252
 setreg1;>goto--jumper-252;goto--branch-252
 goto;>seg_4--label
-null;;goto--jumper-252
+zerosize;;goto--jumper-252
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -1445,16 +1441,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-261
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-261
+zerosize;;goto--jumper-261
 #label
-null;;seg_4--label
+zerosize;;seg_4--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@4
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--264
 dataread1;;tabr--adrbuff--264
@@ -1467,7 +1462,7 @@ gotoif;>goto--branch-266
 goto;>goto--jumper-266
 setreg1;>goto--jumper-266;goto--branch-266
 goto;>seg_5--label
-null;;goto--jumper-266
+zerosize;;goto--jumper-266
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -1488,16 +1483,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-275
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-275
+zerosize;;goto--jumper-275
 #label
-null;;seg_5--label
+zerosize;;seg_5--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@5
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--278
 dataread1;;tabr--adrbuff--278
@@ -1510,7 +1504,7 @@ gotoif;>goto--branch-280
 goto;>goto--jumper-280
 setreg1;>goto--jumper-280;goto--branch-280
 goto;>seg_6--label
-null;;goto--jumper-280
+zerosize;;goto--jumper-280
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -1531,16 +1525,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-289
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-289
+zerosize;;goto--jumper-289
 #label
-null;;seg_6--label
+zerosize;;seg_6--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@6
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--292
 dataread1;;tabr--adrbuff--292
@@ -1553,7 +1546,7 @@ gotoif;>goto--branch-294
 goto;>goto--jumper-294
 setreg1;>goto--jumper-294;goto--branch-294
 goto;>seg_7--label
-null;;goto--jumper-294
+zerosize;;goto--jumper-294
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -1574,16 +1567,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-303
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-303
+zerosize;;goto--jumper-303
 #label
-null;;seg_7--label
+zerosize;;seg_7--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@7
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--306
 dataread1;;tabr--adrbuff--306
@@ -1596,7 +1588,7 @@ gotoif;>goto--branch-308
 goto;>goto--jumper-308
 setreg1;>goto--jumper-308;goto--branch-308
 goto;>seg_8--label
-null;;goto--jumper-308
+zerosize;;goto--jumper-308
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -1617,16 +1609,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-317
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-317
+zerosize;;goto--jumper-317
 #label
-null;;seg_8--label
+zerosize;;seg_8--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@8
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--320
 dataread1;;tabr--adrbuff--320
@@ -1639,7 +1630,7 @@ gotoif;>goto--branch-322
 goto;>goto--jumper-322
 setreg1;>goto--jumper-322;goto--branch-322
 goto;>seg_9--label
-null;;goto--jumper-322
+zerosize;;goto--jumper-322
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1660,16 +1651,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-331
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-331
+zerosize;;goto--jumper-331
 #label
-null;;seg_9--label
+zerosize;;seg_9--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@9
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--334
 dataread1;;tabr--adrbuff--334
@@ -1682,7 +1672,7 @@ gotoif;>goto--branch-336
 goto;>goto--jumper-336
 setreg1;>goto--jumper-336;goto--branch-336
 goto;>seg_10--label
-null;;goto--jumper-336
+zerosize;;goto--jumper-336
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -1703,16 +1693,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-345
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-345
+zerosize;;goto--jumper-345
 #label
-null;;seg_10--label
+zerosize;;seg_10--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@10
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--348
 dataread1;;tabr--adrbuff--348
@@ -1725,7 +1714,7 @@ gotoif;>goto--branch-350
 goto;>goto--jumper-350
 setreg1;>goto--jumper-350;goto--branch-350
 goto;>seg_11--label
-null;;goto--jumper-350
+zerosize;;goto--jumper-350
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -1746,16 +1735,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-359
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-359
+zerosize;;goto--jumper-359
 #label
-null;;seg_11--label
+zerosize;;seg_11--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@11
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--362
 dataread1;;tabr--adrbuff--362
@@ -1768,7 +1756,7 @@ gotoif;>goto--branch-364
 goto;>goto--jumper-364
 setreg1;>goto--jumper-364;goto--branch-364
 goto;>seg_12--label
-null;;goto--jumper-364
+zerosize;;goto--jumper-364
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -1789,16 +1777,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-373
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-373
+zerosize;;goto--jumper-373
 #label
-null;;seg_12--label
+zerosize;;seg_12--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@12
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--376
 dataread1;;tabr--adrbuff--376
@@ -1811,7 +1798,7 @@ gotoif;>goto--branch-378
 goto;>goto--jumper-378
 setreg1;>goto--jumper-378;goto--branch-378
 goto;>seg_13--label
-null;;goto--jumper-378
+zerosize;;goto--jumper-378
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -1832,16 +1819,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-387
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-387
+zerosize;;goto--jumper-387
 #label
-null;;seg_13--label
+zerosize;;seg_13--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@13
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--390
 dataread1;;tabr--adrbuff--390
@@ -1854,7 +1840,7 @@ gotoif;>goto--branch-392
 goto;>goto--jumper-392
 setreg1;>goto--jumper-392;goto--branch-392
 goto;>seg_14--label
-null;;goto--jumper-392
+zerosize;;goto--jumper-392
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -1875,16 +1861,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-401
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-401
+zerosize;;goto--jumper-401
 #label
-null;;seg_14--label
+zerosize;;seg_14--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@14
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--404
 dataread1;;tabr--adrbuff--404
@@ -1897,7 +1882,7 @@ gotoif;>goto--branch-406
 goto;>goto--jumper-406
 setreg1;>goto--jumper-406;goto--branch-406
 goto;>seg_15--label
-null;;goto--jumper-406
+zerosize;;goto--jumper-406
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1918,16 +1903,15 @@ datawrite1;>segy2
 setreg1;>goto--jumper-415
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-415
+zerosize;;goto--jumper-415
 #label
-null;;seg_15--label
+zerosize;;seg_15--label
 #SSTNPL table read instruction.
 setreg1;10x16
 dataread2;>offset
 mul
 dataread2;>@15
 add
-adddata1;10x1
 adddata1;>seg_data--table
 datawrite1;>tabr--adrbuff--418
 dataread1;;tabr--adrbuff--418
@@ -1940,7 +1924,7 @@ gotoif;>goto--branch-420
 goto;>goto--jumper-420
 s1pop1;;goto--branch-420
 gotoreg1
-null;;goto--jumper-420
+zerosize;;goto--jumper-420
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -1961,12 +1945,12 @@ datawrite1;>segy2
 setreg1;>goto--jumper-429
 s1push1
 goto;>segment_single--label
-null;;goto--jumper-429
+zerosize;;goto--jumper-429
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;segment_single--label
+zerosize;;segment_single--label
 #get(1) (may be used with set, or asm code)
 dataread1;>segx1
 #get2 (may be used with set2, and asm code.)

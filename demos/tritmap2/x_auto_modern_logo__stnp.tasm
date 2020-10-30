@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_modern_logo
 head-nspin=stdnsp
@@ -118,7 +118,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-25
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-25
+zerosize;;goto--jumper-25
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd

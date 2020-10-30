@@ -19,7 +19,7 @@ null;10x1;@1
 null;10x0;getentry_tobuff_iter
 null;10x0;getentry_pad_iter
 #table width=85, height=1
-null;;buffer--table
+zerosize;;buffer--table
 #tpad
 null;0
 null;0
@@ -107,13 +107,13 @@ null;0
 null;0
 null;0
 #label
-null;;getentry--label
+zerosize;;getentry--label
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>size
 #label
-null;;getentry_loop--label
+zerosize;;getentry_loop--label
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
@@ -128,7 +128,7 @@ gotoif;>goto--branch-39
 goto;>goto--jumper-39
 setreg1;>goto--jumper-39;goto--branch-39
 goto;>shell_entry_skipnewline--label
-null;;goto--jumper-39
+zerosize;;goto--jumper-39
 #conditional subroutine goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
@@ -137,7 +137,7 @@ goto;>goto--jumper-40
 setreg1;>goto--jumper-40;goto--branch-40
 s1push1
 goto;>getentry_tobuff--label
-null;;goto--jumper-40
+zerosize;;goto--jumper-40
 #conditional return
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
@@ -145,9 +145,9 @@ gotoif;>goto--branch-41
 goto;>goto--jumper-41
 s1pop1;;goto--branch-41
 gotoreg1
-null;;goto--jumper-41
+zerosize;;goto--jumper-41
 #label
-null;;shell_entry_skipnewline--label
+zerosize;;shell_entry_skipnewline--label
 #conditional goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
@@ -155,7 +155,7 @@ gotoif;>goto--branch-44
 goto;>goto--jumper-44
 setreg1;>goto--jumper-44;goto--branch-44
 goto;>getentry_loop--label
-null;;goto--jumper-44
+zerosize;;goto--jumper-44
 #conditional subroutine goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\x
@@ -164,7 +164,7 @@ goto;>goto--jumper-46
 setreg1;>goto--jumper-46;goto--branch-46
 s1push1
 goto;>getentry_backone--label
-null;;goto--jumper-46
+zerosize;;goto--jumper-46
 #conditional goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\x
@@ -172,7 +172,7 @@ gotoif;>goto--branch-47
 goto;>goto--jumper-47
 setreg1;>goto--jumper-47;goto--branch-47
 goto;>getentry_loop--label
-null;;goto--jumper-47
+zerosize;;goto--jumper-47
 #conditional goto
 dataread1;>size
 dataread2;>max
@@ -180,7 +180,7 @@ gotoif;>goto--branch-50
 goto;>goto--jumper-50
 setreg1;>goto--jumper-50;goto--branch-50
 goto;>getentry_loop--label
-null;;goto--jumper-50
+zerosize;;goto--jumper-50
 #Dump (character)
 dataread1;>shell_entry_chbuff
 iowrite1;>io.ttywr
@@ -197,7 +197,7 @@ s2push1
 #goto 
 goto;>getentry_loop--label
 #label
-null;;getentry_backone--label
+zerosize;;getentry_backone--label
 #conditional return
 dataread1;>size
 dataread2;>@0
@@ -205,7 +205,7 @@ gotoif;>goto--branch-61
 goto;>goto--jumper-61
 s1pop1;;goto--branch-61
 gotoreg1
-null;;goto--jumper-61
+zerosize;;goto--jumper-61
 #Dump (character)
 dataread1;>:\x
 iowrite1;>io.ttywr
@@ -221,7 +221,7 @@ datawrite1;>size
 s1pop1
 gotoreg1
 #label
-null;;getentry_tobuff--label
+zerosize;;getentry_tobuff--label
 #stack reverse (uses stack 2)
 s2reverse
 #subtract (2op math)
@@ -271,7 +271,7 @@ gotoif;>goto--branch-77
 goto;>goto--jumper-77
 s1pop1;;goto--branch-77
 gotoreg1
-null;;goto--jumper-77
+zerosize;;goto--jumper-77
 #Upward range iterator
 dataread1;>shell_entry_zeroit
 datawrite1;>getentry_pad_iter
@@ -290,7 +290,7 @@ gotoif;>uiter-loopback-78
 s1pop1
 gotoreg1
 #label
-null;;getentry_tobuff_loop--label
+zerosize;;getentry_tobuff_loop--label
 #stack pop (uses stack 2)
 s2pop1
 #set(1) (used after 2-op math, asm code, or get)
@@ -301,7 +301,6 @@ dataread2;>@0
 mul
 dataread2;>getentry_tobuff_iter
 add
-adddata1;10x1
 adddata1;>buffer--table
 datawrite1;>tabw--adrbuff--85
 dataread1;>shell_entry_buff
@@ -310,14 +309,13 @@ datawrite1;;tabw--adrbuff--85
 s1pop1
 gotoreg1
 #label
-null;;getentry_pad--label
+zerosize;;getentry_pad--label
 #SSTNPL table write instruction.
 setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>getentry_pad_iter
 add
-adddata1;10x1
 adddata1;>buffer--table
 datawrite1;>tabw--adrbuff--90
 dataread1;>@0

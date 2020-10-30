@@ -25,7 +25,7 @@ null;0;RL_BARWIDE
 null;0;RL_BARWIDEDRAW
 null;0;RL_loopcount_add1
 #label
-null;;decode--label
+zerosize;;decode--label
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)
@@ -105,7 +105,7 @@ gotoif;>uiter-loopback-61
 s1pop1
 gotoreg1
 #label
-null;;RL_decode_mainloop--label
+zerosize;;RL_decode_mainloop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
@@ -131,7 +131,7 @@ gotoif;>goto--branch-84
 goto;>goto--jumper-84
 setreg1;>goto--jumper-84;goto--branch-84
 goto;>RL_newline--label
-null;;goto--jumper-84
+zerosize;;goto--jumper-84
 #plotter draw line
 dataread1;>RL_data
 iowrite1;>plot.color
@@ -139,12 +139,12 @@ iowrite1;>plot.color
 setreg1;>goto--jumper-89
 s1push1
 goto;>RL_printBAR--label
-null;;goto--jumper-89
+zerosize;;goto--jumper-89
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;RL_newline--label
+zerosize;;RL_newline--label
 #add (2op math)
 dataread1;>py
 dataread2;>pixy
@@ -165,7 +165,7 @@ iowrite1;>plot.x1#SSTNPL Source Line: '100'
 s1pop1
 gotoreg1
 #label
-null;;RL_printBAR--label
+zerosize;;RL_printBAR--label
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_loopcount
 #___RAW ASSEMBLY CODE___
@@ -187,7 +187,7 @@ iowrite1;>plot.width#SSTNPL Source Line: '119'
 #plotter draw rect
 iowrite1;>plot.rect
 #label
-null;;yes_trans--label
+zerosize;;yes_trans--label
 #add (2op math)
 dataread1;>RL_BARWIDE
 dataread2;>px

@@ -20,7 +20,7 @@ null;10x-32;@-32
 null;10x-26;@-26
 null;10x30;@30
 #label
-null;;main--label
+zerosize;;main--label
 #conditional subroutine goto
 dataread1;>actflg
 dataread2;>@1
@@ -29,7 +29,7 @@ goto;>goto--jumper-14
 setreg1;>goto--jumper-14;goto--branch-14
 s1push1
 goto;>draw_desktop--label
-null;;goto--jumper-14
+zerosize;;goto--jumper-14
 #conditional set
 dataread1;>actflg
 dataread2;>@1
@@ -37,9 +37,9 @@ gotoif;>goto--branch-15
 goto;>goto--jumper-15
 dataread1;>@0;goto--branch-15
 datawrite1;>actflg
-null;;goto--jumper-15
+zerosize;;goto--jumper-15
 #label
-null;;main_loop--label
+zerosize;;main_loop--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #19
 ioread1;>mouse.button#SSTNPL Source Line: '19' 
@@ -52,7 +52,7 @@ gotoif;>goto--jumper-22
 goto;>goto--branch-22
 setreg1;>goto--jumper-22;goto--branch-22
 goto;>main_loop--label
-null;;goto--jumper-22
+zerosize;;goto--jumper-22
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #26
 ioread1;>mouse.lockx#SSTNPL Source Line: '26' 
@@ -76,7 +76,7 @@ gotoif;>goto--jumper-30
 goto;>goto--branch-30
 goto;>flow--con-x-1;goto--branch-30
 
-null;;goto--jumper-30
+zerosize;;goto--jumper-30
 #conditional subroutine goto
 dataread1;>xbuff
 dataread2;>@-120
@@ -91,8 +91,8 @@ goto;>goto--jumper-33
 setreg1;>goto--jumper-33;goto--branch-33
 s1push1
 goto;>info--label
-null;;goto--jumper-33
-null;;flow--con-x-1
+zerosize;;goto--jumper-33
+zerosize;;flow--con-x-1
 #conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-58
@@ -106,7 +106,7 @@ gotoif;>goto--jumper-36
 goto;>goto--branch-36
 goto;>flow--con-x-2;goto--branch-36
 
-null;;goto--jumper-36
+zerosize;;goto--jumper-36
 #conditional subroutine goto
 dataread1;>xbuff
 dataread2;>@-120
@@ -121,8 +121,8 @@ goto;>goto--jumper-39
 setreg1;>goto--jumper-39;goto--branch-39
 s1push1
 goto;>dos--label
-null;;goto--jumper-39
-null;;flow--con-x-2
+zerosize;;goto--jumper-39
+zerosize;;flow--con-x-2
 #conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-26
@@ -136,7 +136,7 @@ gotoif;>goto--jumper-42
 goto;>goto--branch-42
 goto;>flow--con-x-3;goto--branch-42
 
-null;;goto--jumper-42
+zerosize;;goto--jumper-42
 #conditional subroutine goto
 dataread1;>xbuff
 dataread2;>@-120
@@ -151,12 +151,12 @@ goto;>goto--jumper-45
 setreg1;>goto--jumper-45;goto--branch-45
 s1push1
 goto;>credits--label
-null;;goto--jumper-45
-null;;flow--con-x-3
+zerosize;;goto--jumper-45
+zerosize;;flow--con-x-3
 #goto 
 goto;>main--label
 #label
-null;;info--label
+zerosize;;info--label
 #prline
 fopwri1;:S
 fopwri1;:t
@@ -232,7 +232,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;dos--label
+zerosize;;dos--label
 #prline
 fopwri1;:S
 fopwri1;:t
@@ -305,7 +305,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;credits--label
+zerosize;;credits--label
 #prline
 fopwri1;:S
 fopwri1;:t
@@ -390,7 +390,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;draw_desktop--label
+zerosize;;draw_desktop--label
 #Set SBTGA mode
 dataread1;>@30
 iowrite1;>ga.mode
@@ -398,7 +398,7 @@ iowrite1;>ga.mode
 setreg1;>goto--jumper-76
 s1push1
 goto;>common.ui_base_draw--label
-null;;goto--jumper-76
+zerosize;;goto--jumper-76
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -424,7 +424,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-93
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-93
+zerosize;;goto--jumper-93
 #val (used with set to change variable value during runtime.)
 setreg1;10x-58
 #set(1) (used after 2-op math, asm code, or get)
@@ -438,7 +438,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-100
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-100
+zerosize;;goto--jumper-100
 #val (used with set to change variable value during runtime.)
 setreg1;10x-26
 #set(1) (used after 2-op math, asm code, or get)
@@ -452,7 +452,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-106
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-106
+zerosize;;goto--jumper-106
 #return from subroutine.
 s1pop1
 gotoreg1

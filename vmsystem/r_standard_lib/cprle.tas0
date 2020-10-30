@@ -16,7 +16,7 @@ null;10x-1;@-1
 null;10x0;RL_ilvar
 null;10x0;@0
 #label
-null;;decode--label
+zerosize;;decode--label
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
@@ -64,7 +64,7 @@ gotoif;>uiter-loopback-32
 s1pop1
 gotoreg1
 #label
-null;;RL_decode_mainloop--label
+zerosize;;RL_decode_mainloop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
@@ -92,7 +92,7 @@ gotoif;>goto--branch-55
 goto;>goto--jumper-55
 setreg1;>goto--jumper-55;goto--branch-55
 goto;>RL_newline--label
-null;;goto--jumper-55
+zerosize;;goto--jumper-55
 #Upward range iterator
 dataread1;>@0
 datawrite1;>RL_ilvar
@@ -111,14 +111,14 @@ gotoif;>uiter-loopback-59
 s1pop1
 gotoreg1
 #label
-null;;RL_newline--label
+zerosize;;RL_newline--label
 #print newline
 fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;RL_printlooop--label
+zerosize;;RL_printlooop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_data
 #___RAW ASSEMBLY CODE___

@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -18,7 +18,7 @@ datawrite1;>mus.offset
 setreg1;>goto--jumper-5
 s1push1
 goto;>mus.init--label
-null;;goto--jumper-5
+zerosize;;goto--jumper-5
 #print newline
 fopwri1;:\n
 #print newline
@@ -174,12 +174,12 @@ gotoif;>keyprompt--loop-19
 dataread1;>@30
 iowrite1;>ga.mode
 #label
-null;;start--label
+zerosize;;start--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-41
 s1push1
 goto;>drop.pre_init--label
-null;;goto--jumper-41
+zerosize;;goto--jumper-41
 #Upward range iterator
 dataread1;>@-200
 datawrite1;>iter1
@@ -198,7 +198,7 @@ gotoif;>uiter-loopback-42
 setreg1;>goto--jumper-44
 s1push1
 goto;>bands.pre_init--label
-null;;goto--jumper-44
+zerosize;;goto--jumper-44
 #Upward range iterator
 dataread1;>@-200
 datawrite1;>iter1
@@ -232,32 +232,32 @@ includeas;ternarydreams+bands,bands
 #_______NOTE: this corresponds to SSTNPL source line #59
 includeas;ternarydreams+tdmusic0.tas0,tdmusic0#SSTNPL Source Line: '59' 
 #label
-null;;droploop--label
+zerosize;;droploop--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-62
 s1push1
 goto;>mus.cycle--label
-null;;goto--jumper-62
+zerosize;;goto--jumper-62
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-63
 s1push1
 goto;>drop.cycle_run--label
-null;;goto--jumper-63
+zerosize;;goto--jumper-63
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;bandsloop--label
+zerosize;;bandsloop--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-67
 s1push1
 goto;>mus.cycle--label
-null;;goto--jumper-67
+zerosize;;goto--jumper-67
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-68
 s1push1
 goto;>bands.cycle_run--label
-null;;goto--jumper-68
+zerosize;;goto--jumper-68
 #return from subroutine.
 s1pop1
 gotoreg1

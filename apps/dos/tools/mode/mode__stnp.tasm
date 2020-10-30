@@ -17,7 +17,7 @@ null;10x30;@30
 setreg1;>goto--jumper-5
 s1push1
 goto;>dosargs.getentry--label
-null;;goto--jumper-5
+zerosize;;goto--jumper-5
 #######tabstrc
 #init
 setreg1;10x85
@@ -48,7 +48,7 @@ setreg2;:/
 
 gotoif;>tabstrc--recurs-checkyes--8_1
 goto;>tabstrc--recurs-checkno--8_1
-null;;tabstrc--recurs-checkyes--8_1
+zerosize;;tabstrc--recurs-checkyes--8_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--8
@@ -68,16 +68,16 @@ setreg2;:Q
 
 gotoif;>tabstrc--recurs-checkyes--8_2
 goto;>tabstrc--recurs-checkno--8_2
-null;;tabstrc--recurs-checkyes--8_2
+zerosize;;tabstrc--recurs-checkyes--8_2
 ##set flag########
 setreg1;>tabstrc--outbuff--8
 datawrite1;>tabstrc--recurs-flag--8_2
 setreg1;+
 datawrite1;;tabstrc--recurs-flag--8_2
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--8_2
+zerosize;;tabstrc--recurs-checkno--8_2
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--8_1
+zerosize;;tabstrc--recurs-checkno--8_1
 #read output to register 1 for 'set' to use.
 dataread1;>tabstrc--outbuff--8
 #######tabstrc END
@@ -90,7 +90,7 @@ gotoif;>goto--jumper-10
 goto;>goto--branch-10
 goto;>flow--con-x-1;goto--branch-10
 
-null;;goto--jumper-10
+zerosize;;goto--jumper-10
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -99,7 +99,7 @@ datawrite1;>cmdx
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>quiet
-null;;flow--con-x-1
+zerosize;;flow--con-x-1
 #######tabstrc
 #init
 setreg1;10x85
@@ -130,7 +130,7 @@ setreg2;:g
 
 gotoif;>tabstrc--recurs-checkyes--17_1
 goto;>tabstrc--recurs-checkno--17_1
-null;;tabstrc--recurs-checkyes--17_1
+zerosize;;tabstrc--recurs-checkyes--17_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17
@@ -150,7 +150,7 @@ setreg2;:a
 
 gotoif;>tabstrc--recurs-checkyes--17_2
 goto;>tabstrc--recurs-checkno--17_2
-null;;tabstrc--recurs-checkyes--17_2
+zerosize;;tabstrc--recurs-checkyes--17_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17
@@ -170,18 +170,18 @@ setreg2;:0
 
 gotoif;>tabstrc--recurs-checkyes--17_3
 goto;>tabstrc--recurs-checkno--17_3
-null;;tabstrc--recurs-checkyes--17_3
+zerosize;;tabstrc--recurs-checkyes--17_3
 ##set flag########
 setreg1;>tabstrc--outbuff--17
 datawrite1;>tabstrc--recurs-flag--17_3
 setreg1;+
 datawrite1;;tabstrc--recurs-flag--17_3
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--17_3
+zerosize;;tabstrc--recurs-checkno--17_3
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--17_2
+zerosize;;tabstrc--recurs-checkno--17_2
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--17_1
+zerosize;;tabstrc--recurs-checkno--17_1
 #read output to register 1 for 'set' to use.
 dataread1;>tabstrc--outbuff--17
 #######tabstrc END
@@ -194,7 +194,7 @@ gotoif;>goto--jumper-19
 goto;>goto--branch-19
 goto;>flow--con-x-2;goto--branch-19
 
-null;;goto--jumper-19
+zerosize;;goto--jumper-19
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
@@ -205,7 +205,7 @@ gotoif;>goto--jumper-21
 goto;>goto--branch-21
 goto;>flow--con-x-3;goto--branch-21
 
-null;;goto--jumper-21
+zerosize;;goto--jumper-21
 #prline
 fopwri1;:S
 fopwri1;:B
@@ -231,12 +231,12 @@ fopwri1;:T
 fopwri1;:T
 fopwri1;:Y
 fopwri1;:\n
-null;;flow--con-x-3
+zerosize;;flow--con-x-3
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>validflg
-null;;flow--con-x-2
+zerosize;;flow--con-x-2
 #######tabstrc
 #init
 setreg1;10x85
@@ -267,7 +267,7 @@ setreg2;:g
 
 gotoif;>tabstrc--recurs-checkyes--27_1
 goto;>tabstrc--recurs-checkno--27_1
-null;;tabstrc--recurs-checkyes--27_1
+zerosize;;tabstrc--recurs-checkyes--27_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--27
@@ -287,7 +287,7 @@ setreg2;:a
 
 gotoif;>tabstrc--recurs-checkyes--27_2
 goto;>tabstrc--recurs-checkno--27_2
-null;;tabstrc--recurs-checkyes--27_2
+zerosize;;tabstrc--recurs-checkyes--27_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--27
@@ -307,7 +307,7 @@ setreg2;:3
 
 gotoif;>tabstrc--recurs-checkyes--27_3
 goto;>tabstrc--recurs-checkno--27_3
-null;;tabstrc--recurs-checkyes--27_3
+zerosize;;tabstrc--recurs-checkyes--27_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--27
@@ -327,20 +327,20 @@ setreg2;:0
 
 gotoif;>tabstrc--recurs-checkyes--27_4
 goto;>tabstrc--recurs-checkno--27_4
-null;;tabstrc--recurs-checkyes--27_4
+zerosize;;tabstrc--recurs-checkyes--27_4
 ##set flag########
 setreg1;>tabstrc--outbuff--27
 datawrite1;>tabstrc--recurs-flag--27_4
 setreg1;+
 datawrite1;;tabstrc--recurs-flag--27_4
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--27_4
+zerosize;;tabstrc--recurs-checkno--27_4
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--27_3
+zerosize;;tabstrc--recurs-checkno--27_3
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--27_2
+zerosize;;tabstrc--recurs-checkno--27_2
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--27_1
+zerosize;;tabstrc--recurs-checkno--27_1
 #read output to register 1 for 'set' to use.
 dataread1;>tabstrc--outbuff--27
 #######tabstrc END
@@ -353,7 +353,7 @@ gotoif;>goto--jumper-29
 goto;>goto--branch-29
 goto;>flow--con-x-4;goto--branch-29
 
-null;;goto--jumper-29
+zerosize;;goto--jumper-29
 #Set SBTGA mode
 dataread1;>@30
 iowrite1;>ga.mode
@@ -364,7 +364,7 @@ gotoif;>goto--jumper-31
 goto;>goto--branch-31
 goto;>flow--con-x-5;goto--branch-31
 
-null;;goto--jumper-31
+zerosize;;goto--jumper-31
 #prline
 fopwri1;:S
 fopwri1;:B
@@ -404,12 +404,12 @@ fopwri1;:t
 fopwri1;:e
 fopwri1;:r
 fopwri1;:\n
-null;;flow--con-x-5
+zerosize;;flow--con-x-5
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>validflg
-null;;flow--con-x-4
+zerosize;;flow--con-x-4
 #######tabstrc
 #init
 setreg1;10x85
@@ -440,7 +440,7 @@ setreg2;:/
 
 gotoif;>tabstrc--recurs-checkyes--37_1
 goto;>tabstrc--recurs-checkno--37_1
-null;;tabstrc--recurs-checkyes--37_1
+zerosize;;tabstrc--recurs-checkyes--37_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--37
@@ -460,16 +460,16 @@ setreg2;:?
 
 gotoif;>tabstrc--recurs-checkyes--37_2
 goto;>tabstrc--recurs-checkno--37_2
-null;;tabstrc--recurs-checkyes--37_2
+zerosize;;tabstrc--recurs-checkyes--37_2
 ##set flag########
 setreg1;>tabstrc--outbuff--37
 datawrite1;>tabstrc--recurs-flag--37_2
 setreg1;+
 datawrite1;;tabstrc--recurs-flag--37_2
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--37_2
+zerosize;;tabstrc--recurs-checkno--37_2
 #recursionskip endpoint
-null;;tabstrc--recurs-checkno--37_1
+zerosize;;tabstrc--recurs-checkno--37_1
 #read output to register 1 for 'set' to use.
 dataread1;>tabstrc--outbuff--37
 #######tabstrc END
@@ -483,7 +483,7 @@ goto;>goto--jumper-39
 setreg1;>goto--jumper-39;goto--branch-39
 s1push1
 goto;>mode_help--label
-null;;goto--jumper-39
+zerosize;;goto--jumper-39
 #conditional set
 dataread1;>cmdflg
 dataread2;>@1
@@ -491,7 +491,7 @@ gotoif;>goto--branch-40
 goto;>goto--jumper-40
 dataread1;>@1;goto--branch-40
 datawrite1;>validflg
-null;;goto--jumper-40
+zerosize;;goto--jumper-40
 #conditional subroutine goto
 dataread1;>validflg
 dataread2;>@0
@@ -500,7 +500,7 @@ goto;>goto--jumper-43
 setreg1;>goto--jumper-43;goto--branch-43
 s1push1
 goto;>Errortext--label
-null;;goto--jumper-43
+zerosize;;goto--jumper-43
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -528,7 +528,7 @@ fopset1;>io.ttywr
 #stop (shutdown vm)
 stop
 #label
-null;;Errortext--label
+zerosize;;Errortext--label
 #prline
 fopwri1;:P
 fopwri1;:l
@@ -565,7 +565,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;mode_help--label
+zerosize;;mode_help--label
 #prline
 fopwri1;:-
 fopwri1;:-

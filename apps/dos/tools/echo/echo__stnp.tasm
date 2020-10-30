@@ -8,7 +8,7 @@ fopset2;>io.packart
 null;0;tempvar
 null;10x0;@0
 #label
-null;;tail_readout--label
+zerosize;;tail_readout--label
 #buffer 2 tail read
 ioread1;>buffer.2.read.tail
 #set(1) (used after 2-op math, asm code, or get)
@@ -20,7 +20,7 @@ gotoif;>goto--jumper-8
 goto;>goto--branch-8
 goto;>flow--con-x-1;goto--branch-8
 
-null;;goto--jumper-8
+zerosize;;goto--jumper-8
 #print newline
 fopwri1;:\n
 #vdi
@@ -47,7 +47,7 @@ fopwri1;:x
 fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
-null;;flow--con-x-1
+zerosize;;flow--con-x-1
 #Dump (character)
 dataread1;>tempvar
 iowrite1;>io.ttywr

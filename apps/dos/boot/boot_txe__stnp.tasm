@@ -24,7 +24,7 @@ goto;>goto--jumper-9
 setreg1;>goto--jumper-9;goto--branch-9
 s1push1
 goto;>bigsplash--label
-null;;goto--jumper-9
+zerosize;;goto--jumper-9
 #conditional subroutine goto
 dataread1;>has_tty_color
 dataread2;>@0
@@ -33,7 +33,7 @@ goto;>goto--jumper-10
 setreg1;>goto--jumper-10;goto--branch-10
 s1push1
 goto;>bigsplash_curses--label
-null;;goto--jumper-10
+zerosize;;goto--jumper-10
 #Set text colors
 dataread1;>*++0---
 iowrite1;>io.textcolor
@@ -123,7 +123,7 @@ fopset1;>io.ttywr
 #stop (shutdown vm)
 stop
 #label
-null;;bigsplash--label
+zerosize;;bigsplash--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #21
 include;dos/media/bigsplash.tas0#SSTNPL Source Line: '21' 
@@ -131,7 +131,7 @@ include;dos/media/bigsplash.tas0#SSTNPL Source Line: '21'
 s1pop1
 gotoreg1
 #label
-null;;bigsplash_curses--label
+zerosize;;bigsplash_curses--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #26
 include;dos/media/bigsplash_curses.tas0#SSTNPL Source Line: '26' 

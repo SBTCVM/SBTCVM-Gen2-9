@@ -178,7 +178,7 @@ datawrite1;>brl.pixy
 setreg1;>goto--jumper-21
 s1push1
 goto;>brl.decode--label
-null;;goto--jumper-21
+zerosize;;goto--jumper-21
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
@@ -217,7 +217,7 @@ datawrite1;>brl.pixy
 setreg1;>goto--jumper-41
 s1push1
 goto;>brl.decode--label
-null;;goto--jumper-41
+zerosize;;goto--jumper-41
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd

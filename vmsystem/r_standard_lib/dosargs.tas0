@@ -17,7 +17,7 @@ null;10x1;@1
 null;10x0;getentry_tobuff_iter
 null;10x0;getentry_pad_iter
 #table width=85, height=1
-null;;buffer--table
+zerosize;;buffer--table
 #tpad
 null;0
 null;0
@@ -105,13 +105,13 @@ null;0
 null;0
 null;0
 #label
-null;;getentry--label
+zerosize;;getentry--label
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>size
 #label
-null;;getentry_loop--label
+zerosize;;getentry_loop--label
 #buffer 2 tail read
 ioread1;>buffer.2.read.tail
 #set(1) (used after 2-op math, asm code, or get)
@@ -124,7 +124,7 @@ goto;>goto--jumper-37
 setreg1;>goto--jumper-37;goto--branch-37
 s1push1
 goto;>getentry_tobuff--label
-null;;goto--jumper-37
+zerosize;;goto--jumper-37
 #conditional return
 dataread1;>shell_entry_chbuff
 dataread2;>@0
@@ -132,7 +132,7 @@ gotoif;>goto--branch-38
 goto;>goto--jumper-38
 s1pop1;;goto--branch-38
 gotoreg1
-null;;goto--jumper-38
+zerosize;;goto--jumper-38
 #conditional goto
 dataread1;>size
 dataread2;>max
@@ -140,7 +140,7 @@ gotoif;>goto--branch-41
 goto;>goto--jumper-41
 setreg1;>goto--jumper-41;goto--branch-41
 goto;>getentry_loop--label
-null;;goto--jumper-41
+zerosize;;goto--jumper-41
 #add (2op math)
 dataread1;>size
 dataread2;>@1
@@ -154,7 +154,7 @@ s2push1
 #goto 
 goto;>getentry_loop--label
 #label
-null;;getentry_tobuff--label
+zerosize;;getentry_tobuff--label
 #conditional return
 dataread1;>size
 dataread2;>@0
@@ -162,7 +162,7 @@ gotoif;>goto--branch-53
 goto;>goto--jumper-53
 s1pop1;;goto--branch-53
 gotoreg1
-null;;goto--jumper-53
+zerosize;;goto--jumper-53
 #stack reverse (uses stack 2)
 s2reverse
 #subtract (2op math)
@@ -212,7 +212,7 @@ gotoif;>goto--branch-61
 goto;>goto--jumper-61
 s1pop1;;goto--branch-61
 gotoreg1
-null;;goto--jumper-61
+zerosize;;goto--jumper-61
 #Upward range iterator
 dataread1;>shell_entry_zeroit
 datawrite1;>getentry_pad_iter
@@ -231,7 +231,7 @@ gotoif;>uiter-loopback-62
 s1pop1
 gotoreg1
 #label
-null;;getentry_tobuff_loop--label
+zerosize;;getentry_tobuff_loop--label
 #stack pop (uses stack 2)
 s2pop1
 #set(1) (used after 2-op math, asm code, or get)
@@ -242,7 +242,6 @@ dataread2;>@0
 mul
 dataread2;>getentry_tobuff_iter
 add
-adddata1;10x1
 adddata1;>buffer--table
 datawrite1;>tabw--adrbuff--69
 dataread1;>shell_entry_buff
@@ -251,14 +250,13 @@ datawrite1;;tabw--adrbuff--69
 s1pop1
 gotoreg1
 #label
-null;;getentry_pad--label
+zerosize;;getentry_pad--label
 #SSTNPL table write instruction.
 setreg1;10x85
 dataread2;>@0
 mul
 dataread2;>getentry_pad_iter
 add
-adddata1;10x1
 adddata1;>buffer--table
 datawrite1;>tabw--adrbuff--74
 dataread1;>@0

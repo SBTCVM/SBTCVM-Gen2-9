@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=bands
 head-nspin=stdnsp
@@ -20,7 +20,7 @@ null;10x9841;@9841
 null;00+00+00+;*00+00+00+
 null;10x4;@4
 #label
-null;;pre_init--label
+zerosize;;pre_init--label
 #plotter x pos 1
 dataread1;>@-121
 iowrite1;>plot.x1
@@ -34,22 +34,22 @@ iowrite1;>plot.fill
 s1pop1
 gotoreg1
 #label
-null;;cycle_run--label
+zerosize;;cycle_run--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-23
 s1push1
 goto;>mainloop--label
-null;;goto--jumper-23
+zerosize;;goto--jumper-23
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;mainloop--label
+zerosize;;mainloop--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-46
 s1push1
 goto;>debug1--label
-null;;goto--jumper-46
+zerosize;;goto--jumper-46
 #plotter draw line
 dataread1;>fxcolor
 iowrite1;>plot.color
@@ -81,7 +81,7 @@ datawrite1;>y1
 setreg1;>goto--jumper-64
 s1push1
 goto;>colorinc--label
-null;;goto--jumper-64
+zerosize;;goto--jumper-64
 #conditional subroutine goto
 dataread1;>y1
 dataread2;>@-221
@@ -96,12 +96,12 @@ goto;>goto--branch-68
 setreg1;>goto--jumper-68;goto--branch-68
 s1push1
 goto;>changedir--label
-null;;goto--jumper-68
+zerosize;;goto--jumper-68
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;changedir--label
+zerosize;;changedir--label
 #Get signwise/tritwise inversion of var
 dataread1;>dir
 invert1
@@ -118,7 +118,7 @@ datawrite1;>fxcolor
 s1pop1
 gotoreg1
 #label
-null;;colorinc--label
+zerosize;;colorinc--label
 #add (2op math)
 dataread1;>fxcolor
 dataread2;>*00+00+00+
@@ -129,7 +129,7 @@ datawrite1;>fxcolor
 s1pop1
 gotoreg1
 #label
-null;;debug1--label
+zerosize;;debug1--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #89
 ioread1;>plot.buffer#SSTNPL Source Line: '89' 
@@ -143,12 +143,12 @@ goto;>goto--jumper-91
 setreg1;>goto--jumper-91;goto--branch-91
 s1push1
 goto;>debug1_print--label
-null;;goto--jumper-91
+zerosize;;goto--jumper-91
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;debug1_print--label
+zerosize;;debug1_print--label
 #Dump (decimal)
 dataread1;>debug_buffsize
 iowrite1;>io.decdump

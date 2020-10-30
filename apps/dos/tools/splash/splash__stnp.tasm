@@ -66,7 +66,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-8
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-8
+zerosize;;goto--jumper-8
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd

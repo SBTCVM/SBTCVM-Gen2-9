@@ -21,7 +21,7 @@ null;:1;$DESK_MIN_VERS
 null;0;btnbuff
 null;10x1;@1
 #label
-null;;ui_base_draw--label
+zerosize;;ui_base_draw--label
 #plotter fill
 dataread1;>$COLOR_desktop
 iowrite1;>plot.fill
@@ -74,12 +74,12 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-33
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;print_version--label
+zerosize;;print_version--label
 #Dump (character)
 dataread1;>:v
 iowrite1;>io.ttywr
@@ -102,7 +102,7 @@ iowrite1;>io.ttywr
 s1pop1
 gotoreg1
 #label
-null;;mouse_wait--label
+zerosize;;mouse_wait--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #50
 ioread1;>mouse.button#SSTNPL Source Line: '50' 
@@ -115,7 +115,7 @@ gotoif;>goto--jumper-52
 goto;>goto--branch-52
 setreg1;>goto--jumper-52;goto--branch-52
 goto;>mouse_wait--label
-null;;goto--jumper-52
+zerosize;;goto--jumper-52
 #return from subroutine.
 s1pop1
 gotoreg1

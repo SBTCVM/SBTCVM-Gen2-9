@@ -565,13 +565,13 @@ class MouseEngine:
 		if self.gamode==0:
 			return btint(mpos[0]//self.TTYcharw)
 		if self.gamode==30:
-			return btint(int(((event.pos[0]/float(self.plot.realx))*self.plot.xsize)-self.plot.offset))
+			return btint(int(((mpos[0]/float(self.plot.realx))*self.plot.xsize)-self.plot.offset))
 	def getrealy(self, addr, data):
 		mpos=pygame.mouse.get_pos()
 		if self.gamode==0:
 			return btint(mpos[1]//self.TTYcharh)
 		if self.gamode in plotter_modes:
-			return btint(int(((event.pos[1]/float(self.plot.realy))*self.plot.ysize)-self.plot.offset))
+			return btint(int(((mpos[1]/float(self.plot.realy))*self.plot.ysize)-self.plot.offset))
 
 class PlotterEngine:
 	def __init__(self, ioref, xsize, ysize, realx, realy, itemlimit=30, offset=121):

@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_burst
 head-nspin=stdnsp
@@ -37,7 +37,7 @@ iowrite1;>ga.mode
 dataread1;>*---------
 iowrite1;>plot.fill
 #label
-null;;loop--label
+zerosize;;loop--label
 #add (2op math)
 dataread1;>fillflg
 dataread2;>@1
@@ -58,7 +58,7 @@ goto;>goto--jumper-31
 setreg1;>goto--jumper-31;goto--branch-31
 s1push1
 goto;>filler--label
-null;;goto--jumper-31
+zerosize;;goto--jumper-31
 #conditional set
 dataread1;>fillflg
 dataread2;>@250
@@ -66,7 +66,7 @@ gotoif;>goto--branch-32
 goto;>goto--jumper-32
 dataread1;>@1;goto--branch-32
 datawrite1;>fillflg
-null;;goto--jumper-32
+zerosize;;goto--jumper-32
 #conditional subroutine goto
 dataread1;>pointflg
 dataread2;>@25
@@ -75,7 +75,7 @@ goto;>goto--jumper-33
 setreg1;>goto--jumper-33;goto--branch-33
 s1push1
 goto;>randpoint--label
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #conditional set
 dataread1;>pointflg
 dataread2;>@25
@@ -83,7 +83,7 @@ gotoif;>goto--branch-34
 goto;>goto--jumper-34
 dataread1;>@1;goto--branch-34
 datawrite1;>pointflg
-null;;goto--jumper-34
+zerosize;;goto--jumper-34
 #Random ranged number
 dataread1;>@-121
 dataread2;>@121
@@ -126,15 +126,15 @@ gotoif;>goto--jumper-50
 goto;>goto--branch-50
 setreg1;>goto--jumper-50;goto--branch-50
 goto;>end--label
-null;;goto--jumper-50
+zerosize;;goto--jumper-50
 #goto 
 goto;>loop--label
 #label
-null;;end--label
+zerosize;;end--label
 #stop (shutdown vm)
 stop
 #label
-null;;randpoint--label
+zerosize;;randpoint--label
 #Random ranged number
 dataread1;>@-121
 dataread2;>@121
@@ -159,7 +159,7 @@ iowrite1;>plot.y1
 s1pop1
 gotoreg1
 #label
-null;;filler--label
+zerosize;;filler--label
 #plotter fill
 dataread1;>fillcolor
 iowrite1;>plot.fill

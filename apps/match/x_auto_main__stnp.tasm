@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -129,7 +129,7 @@ fopwri1;:y
 fopwri1;:.
 fopwri1;:\n
 #label
-null;;menu--label
+zerosize;;menu--label
 #prline
 fopwri1;:C
 fopwri1;:a
@@ -216,7 +216,7 @@ gotoif;>goto--branch-52
 goto;>goto--jumper-52
 setreg1;>goto--jumper-52;goto--branch-52
 goto;>main--label
-null;;goto--jumper-52
+zerosize;;goto--jumper-52
 #conditional subroutine goto
 dataread1;>kb2
 dataread2;>:a
@@ -225,7 +225,7 @@ goto;>goto--jumper-53
 setreg1;>goto--jumper-53;goto--branch-53
 s1push1
 goto;>about--label
-null;;goto--jumper-53
+zerosize;;goto--jumper-53
 #conditional stop
 dataread1;>kb2
 dataread2;>:q
@@ -233,7 +233,7 @@ gotoif;>goto--branch-54
 goto;>goto--jumper-54
 stop;;goto--branch-54
 
-null;;goto--jumper-54
+zerosize;;goto--jumper-54
 #conditional subroutine goto
 dataread1;>kb2
 dataread2;>:h
@@ -242,11 +242,11 @@ goto;>goto--jumper-55
 setreg1;>goto--jumper-55;goto--branch-55
 s1push1
 goto;>help--label
-null;;goto--jumper-55
+zerosize;;goto--jumper-55
 #goto 
 goto;>menu--label
 #label
-null;;main--label
+zerosize;;main--label
 #print newline
 fopwri1;:\n
 #prline
@@ -283,17 +283,17 @@ fopwri1;:\n
 setreg1;>goto--jumper-64
 s1push1
 goto;>step1--label
-null;;goto--jumper-64
+zerosize;;goto--jumper-64
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-65
 s1push1
 goto;>step2--label
-null;;goto--jumper-65
+zerosize;;goto--jumper-65
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-66
 s1push1
 goto;>domatch--label
-null;;goto--jumper-66
+zerosize;;goto--jumper-66
 #conditional goto
 dataread1;>matches
 dataread2;>@6
@@ -301,11 +301,11 @@ gotoif;>goto--branch-67
 goto;>goto--jumper-67
 setreg1;>goto--jumper-67;goto--branch-67
 goto;>win--label
-null;;goto--jumper-67
+zerosize;;goto--jumper-67
 #goto 
 goto;>main--label
 #label
-null;;domatch--label
+zerosize;;domatch--label
 #conditional goto
 dataread1;>card1
 dataread2;>card2
@@ -313,7 +313,7 @@ gotoif;>goto--branch-72
 goto;>goto--jumper-72
 setreg1;>goto--jumper-72;goto--branch-72
 goto;>domatch_same--label
-null;;goto--jumper-72
+zerosize;;goto--jumper-72
 #conditional goto
 dataread1;>card1val
 dataread2;>card2val
@@ -321,7 +321,7 @@ gotoif;>goto--branch-73
 goto;>goto--jumper-73
 setreg1;>goto--jumper-73;goto--branch-73
 goto;>domatch_true--label
-null;;goto--jumper-73
+zerosize;;goto--jumper-73
 #prline
 fopwri1;:T
 fopwri1;:r
@@ -338,7 +338,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;domatch_true--label
+zerosize;;domatch_true--label
 #add (2op math)
 dataread1;>matches
 dataread2;>@1
@@ -366,10 +366,7 @@ dataread2;>y1
 mul
 dataread2;>x1
 add
-setreg2;10x1
-add
-setreg2;>cardview--table
-add
+adddata1;>cardview--table
 datawrite1;>tabw--adrbuff--81
 dataread1;>:+
 datawrite1;;tabw--adrbuff--81
@@ -379,10 +376,7 @@ dataread2;>y2
 mul
 dataread2;>x2
 add
-setreg2;10x1
-add
-setreg2;>cardview--table
-add
+adddata1;>cardview--table
 datawrite1;>tabw--adrbuff--82
 dataread1;>:+
 datawrite1;;tabw--adrbuff--82
@@ -390,7 +384,7 @@ datawrite1;;tabw--adrbuff--82
 s1pop1
 gotoreg1
 #label
-null;;domatch_same--label
+zerosize;;domatch_same--label
 #prline
 fopwri1;:H
 fopwri1;:E
@@ -435,14 +429,14 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;step1--label
+zerosize;;step1--label
 #print newline
 fopwri1;:\n
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-94
 s1push1
 goto;>showcards--label
-null;;goto--jumper-94
+zerosize;;goto--jumper-94
 #print newline
 fopwri1;:\n
 #prline
@@ -490,7 +484,7 @@ fopwri1;:\n
 setreg1;>goto--jumper-97
 s1push1
 goto;>getcard--label
-null;;goto--jumper-97
+zerosize;;goto--jumper-97
 #copy variables 
 dataread1;>pickx
 datawrite1;>x1
@@ -503,10 +497,7 @@ dataread2;>picky
 mul
 dataread2;>pickx
 add
-setreg2;10x1
-add
-setreg2;>cardvals--table
-add
+adddata1;>cardvals--table
 datawrite1;>tabr--adrbuff--100
 dataread1;;tabr--adrbuff--100
 #set(1) (used after 2-op math, asm code, or get)
@@ -517,10 +508,7 @@ dataread2;>picky
 mul
 dataread2;>pickx
 add
-setreg2;10x1
-add
-setreg2;>cardview--table
-add
+adddata1;>cardview--table
 datawrite1;>tabr--adrbuff--102
 dataread1;;tabr--adrbuff--102
 #set(1) (used after 2-op math, asm code, or get)
@@ -551,7 +539,7 @@ gotoif;>goto--jumper-111
 goto;>goto--branch-111
 s1pop1;;goto--branch-111
 gotoreg1
-null;;goto--jumper-111
+zerosize;;goto--jumper-111
 #prline
 fopwri1;:C
 fopwri1;:a
@@ -578,14 +566,14 @@ fopwri1;:\n
 #goto 
 goto;>step1--label
 #label
-null;;step2--label
+zerosize;;step2--label
 #print newline
 fopwri1;:\n
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-119
 s1push1
 goto;>showcards--label
-null;;goto--jumper-119
+zerosize;;goto--jumper-119
 #print newline
 fopwri1;:\n
 #prline
@@ -634,7 +622,7 @@ fopwri1;:\n
 setreg1;>goto--jumper-122
 s1push1
 goto;>getcard--label
-null;;goto--jumper-122
+zerosize;;goto--jumper-122
 #copy variables 
 dataread1;>pickx
 datawrite1;>x2
@@ -647,10 +635,7 @@ dataread2;>picky
 mul
 dataread2;>pickx
 add
-setreg2;10x1
-add
-setreg2;>cardvals--table
-add
+adddata1;>cardvals--table
 datawrite1;>tabr--adrbuff--126
 dataread1;;tabr--adrbuff--126
 #set(1) (used after 2-op math, asm code, or get)
@@ -661,10 +646,7 @@ dataread2;>picky
 mul
 dataread2;>pickx
 add
-setreg2;10x1
-add
-setreg2;>cardview--table
-add
+adddata1;>cardview--table
 datawrite1;>tabr--adrbuff--128
 dataread1;;tabr--adrbuff--128
 #set(1) (used after 2-op math, asm code, or get)
@@ -695,7 +677,7 @@ gotoif;>goto--jumper-137
 goto;>goto--branch-137
 s1pop1;;goto--branch-137
 gotoreg1
-null;;goto--jumper-137
+zerosize;;goto--jumper-137
 #prline
 fopwri1;:C
 fopwri1;:a
@@ -722,7 +704,7 @@ fopwri1;:\n
 #goto 
 goto;>step2--label
 #label
-null;;getcard--label
+zerosize;;getcard--label
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
@@ -741,7 +723,7 @@ gotoif;>goto--branch-149
 goto;>goto--jumper-149
 dataread1;>@0;goto--branch-149
 datawrite1;>pickx
-null;;goto--jumper-149
+zerosize;;goto--jumper-149
 #conditional set
 dataread1;>kb
 dataread2;>:q
@@ -749,7 +731,7 @@ gotoif;>goto--branch-150
 goto;>goto--jumper-150
 dataread1;>@0;goto--branch-150
 datawrite1;>picky
-null;;goto--jumper-150
+zerosize;;goto--jumper-150
 #conditional set
 dataread1;>kb
 dataread2;>:q
@@ -757,7 +739,7 @@ gotoif;>goto--branch-151
 goto;>goto--jumper-151
 dataread1;>@1;goto--branch-151
 datawrite1;>didpick
-null;;goto--jumper-151
+zerosize;;goto--jumper-151
 #conditional set
 dataread1;>kb
 dataread2;>:w
@@ -765,7 +747,7 @@ gotoif;>goto--branch-152
 goto;>goto--jumper-152
 dataread1;>@1;goto--branch-152
 datawrite1;>pickx
-null;;goto--jumper-152
+zerosize;;goto--jumper-152
 #conditional set
 dataread1;>kb
 dataread2;>:w
@@ -773,7 +755,7 @@ gotoif;>goto--branch-153
 goto;>goto--jumper-153
 dataread1;>@0;goto--branch-153
 datawrite1;>picky
-null;;goto--jumper-153
+zerosize;;goto--jumper-153
 #conditional set
 dataread1;>kb
 dataread2;>:w
@@ -781,7 +763,7 @@ gotoif;>goto--branch-154
 goto;>goto--jumper-154
 dataread1;>@1;goto--branch-154
 datawrite1;>didpick
-null;;goto--jumper-154
+zerosize;;goto--jumper-154
 #conditional set
 dataread1;>kb
 dataread2;>:e
@@ -789,7 +771,7 @@ gotoif;>goto--branch-155
 goto;>goto--jumper-155
 dataread1;>@2;goto--branch-155
 datawrite1;>pickx
-null;;goto--jumper-155
+zerosize;;goto--jumper-155
 #conditional set
 dataread1;>kb
 dataread2;>:e
@@ -797,7 +779,7 @@ gotoif;>goto--branch-156
 goto;>goto--jumper-156
 dataread1;>@0;goto--branch-156
 datawrite1;>picky
-null;;goto--jumper-156
+zerosize;;goto--jumper-156
 #conditional set
 dataread1;>kb
 dataread2;>:e
@@ -805,7 +787,7 @@ gotoif;>goto--branch-157
 goto;>goto--jumper-157
 dataread1;>@1;goto--branch-157
 datawrite1;>didpick
-null;;goto--jumper-157
+zerosize;;goto--jumper-157
 #conditional set
 dataread1;>kb
 dataread2;>:r
@@ -813,7 +795,7 @@ gotoif;>goto--branch-158
 goto;>goto--jumper-158
 dataread1;>@3;goto--branch-158
 datawrite1;>pickx
-null;;goto--jumper-158
+zerosize;;goto--jumper-158
 #conditional set
 dataread1;>kb
 dataread2;>:r
@@ -821,7 +803,7 @@ gotoif;>goto--branch-159
 goto;>goto--jumper-159
 dataread1;>@0;goto--branch-159
 datawrite1;>picky
-null;;goto--jumper-159
+zerosize;;goto--jumper-159
 #conditional set
 dataread1;>kb
 dataread2;>:r
@@ -829,7 +811,7 @@ gotoif;>goto--branch-160
 goto;>goto--jumper-160
 dataread1;>@1;goto--branch-160
 datawrite1;>didpick
-null;;goto--jumper-160
+zerosize;;goto--jumper-160
 #conditional set
 dataread1;>kb
 dataread2;>:a
@@ -837,7 +819,7 @@ gotoif;>goto--branch-162
 goto;>goto--jumper-162
 dataread1;>@0;goto--branch-162
 datawrite1;>pickx
-null;;goto--jumper-162
+zerosize;;goto--jumper-162
 #conditional set
 dataread1;>kb
 dataread2;>:a
@@ -845,7 +827,7 @@ gotoif;>goto--branch-163
 goto;>goto--jumper-163
 dataread1;>@1;goto--branch-163
 datawrite1;>picky
-null;;goto--jumper-163
+zerosize;;goto--jumper-163
 #conditional set
 dataread1;>kb
 dataread2;>:a
@@ -853,7 +835,7 @@ gotoif;>goto--branch-164
 goto;>goto--jumper-164
 dataread1;>@1;goto--branch-164
 datawrite1;>didpick
-null;;goto--jumper-164
+zerosize;;goto--jumper-164
 #conditional set
 dataread1;>kb
 dataread2;>:s
@@ -861,7 +843,7 @@ gotoif;>goto--branch-165
 goto;>goto--jumper-165
 dataread1;>@1;goto--branch-165
 datawrite1;>pickx
-null;;goto--jumper-165
+zerosize;;goto--jumper-165
 #conditional set
 dataread1;>kb
 dataread2;>:s
@@ -869,7 +851,7 @@ gotoif;>goto--branch-166
 goto;>goto--jumper-166
 dataread1;>@1;goto--branch-166
 datawrite1;>picky
-null;;goto--jumper-166
+zerosize;;goto--jumper-166
 #conditional set
 dataread1;>kb
 dataread2;>:s
@@ -877,7 +859,7 @@ gotoif;>goto--branch-167
 goto;>goto--jumper-167
 dataread1;>@1;goto--branch-167
 datawrite1;>didpick
-null;;goto--jumper-167
+zerosize;;goto--jumper-167
 #conditional set
 dataread1;>kb
 dataread2;>:d
@@ -885,7 +867,7 @@ gotoif;>goto--branch-168
 goto;>goto--jumper-168
 dataread1;>@2;goto--branch-168
 datawrite1;>pickx
-null;;goto--jumper-168
+zerosize;;goto--jumper-168
 #conditional set
 dataread1;>kb
 dataread2;>:d
@@ -893,7 +875,7 @@ gotoif;>goto--branch-169
 goto;>goto--jumper-169
 dataread1;>@1;goto--branch-169
 datawrite1;>picky
-null;;goto--jumper-169
+zerosize;;goto--jumper-169
 #conditional set
 dataread1;>kb
 dataread2;>:d
@@ -901,7 +883,7 @@ gotoif;>goto--branch-170
 goto;>goto--jumper-170
 dataread1;>@1;goto--branch-170
 datawrite1;>didpick
-null;;goto--jumper-170
+zerosize;;goto--jumper-170
 #conditional set
 dataread1;>kb
 dataread2;>:f
@@ -909,7 +891,7 @@ gotoif;>goto--branch-171
 goto;>goto--jumper-171
 dataread1;>@3;goto--branch-171
 datawrite1;>pickx
-null;;goto--jumper-171
+zerosize;;goto--jumper-171
 #conditional set
 dataread1;>kb
 dataread2;>:f
@@ -917,7 +899,7 @@ gotoif;>goto--branch-172
 goto;>goto--jumper-172
 dataread1;>@1;goto--branch-172
 datawrite1;>picky
-null;;goto--jumper-172
+zerosize;;goto--jumper-172
 #conditional set
 dataread1;>kb
 dataread2;>:f
@@ -925,7 +907,7 @@ gotoif;>goto--branch-173
 goto;>goto--jumper-173
 dataread1;>@1;goto--branch-173
 datawrite1;>didpick
-null;;goto--jumper-173
+zerosize;;goto--jumper-173
 #conditional set
 dataread1;>kb
 dataread2;>:z
@@ -933,7 +915,7 @@ gotoif;>goto--branch-175
 goto;>goto--jumper-175
 dataread1;>@0;goto--branch-175
 datawrite1;>pickx
-null;;goto--jumper-175
+zerosize;;goto--jumper-175
 #conditional set
 dataread1;>kb
 dataread2;>:z
@@ -941,7 +923,7 @@ gotoif;>goto--branch-176
 goto;>goto--jumper-176
 dataread1;>@2;goto--branch-176
 datawrite1;>picky
-null;;goto--jumper-176
+zerosize;;goto--jumper-176
 #conditional set
 dataread1;>kb
 dataread2;>:z
@@ -949,7 +931,7 @@ gotoif;>goto--branch-177
 goto;>goto--jumper-177
 dataread1;>@1;goto--branch-177
 datawrite1;>didpick
-null;;goto--jumper-177
+zerosize;;goto--jumper-177
 #conditional set
 dataread1;>kb
 dataread2;>:x
@@ -957,7 +939,7 @@ gotoif;>goto--branch-178
 goto;>goto--jumper-178
 dataread1;>@1;goto--branch-178
 datawrite1;>pickx
-null;;goto--jumper-178
+zerosize;;goto--jumper-178
 #conditional set
 dataread1;>kb
 dataread2;>:x
@@ -965,7 +947,7 @@ gotoif;>goto--branch-179
 goto;>goto--jumper-179
 dataread1;>@2;goto--branch-179
 datawrite1;>picky
-null;;goto--jumper-179
+zerosize;;goto--jumper-179
 #conditional set
 dataread1;>kb
 dataread2;>:x
@@ -973,7 +955,7 @@ gotoif;>goto--branch-180
 goto;>goto--jumper-180
 dataread1;>@1;goto--branch-180
 datawrite1;>didpick
-null;;goto--jumper-180
+zerosize;;goto--jumper-180
 #conditional set
 dataread1;>kb
 dataread2;>:c
@@ -981,7 +963,7 @@ gotoif;>goto--branch-181
 goto;>goto--jumper-181
 dataread1;>@2;goto--branch-181
 datawrite1;>pickx
-null;;goto--jumper-181
+zerosize;;goto--jumper-181
 #conditional set
 dataread1;>kb
 dataread2;>:c
@@ -989,7 +971,7 @@ gotoif;>goto--branch-182
 goto;>goto--jumper-182
 dataread1;>@2;goto--branch-182
 datawrite1;>picky
-null;;goto--jumper-182
+zerosize;;goto--jumper-182
 #conditional set
 dataread1;>kb
 dataread2;>:c
@@ -997,7 +979,7 @@ gotoif;>goto--branch-183
 goto;>goto--jumper-183
 dataread1;>@1;goto--branch-183
 datawrite1;>didpick
-null;;goto--jumper-183
+zerosize;;goto--jumper-183
 #conditional set
 dataread1;>kb
 dataread2;>:v
@@ -1005,7 +987,7 @@ gotoif;>goto--branch-184
 goto;>goto--jumper-184
 dataread1;>@3;goto--branch-184
 datawrite1;>pickx
-null;;goto--jumper-184
+zerosize;;goto--jumper-184
 #conditional set
 dataread1;>kb
 dataread2;>:v
@@ -1013,7 +995,7 @@ gotoif;>goto--branch-185
 goto;>goto--jumper-185
 dataread1;>@2;goto--branch-185
 datawrite1;>picky
-null;;goto--jumper-185
+zerosize;;goto--jumper-185
 #conditional set
 dataread1;>kb
 dataread2;>:v
@@ -1021,7 +1003,7 @@ gotoif;>goto--branch-186
 goto;>goto--jumper-186
 dataread1;>@1;goto--branch-186
 datawrite1;>didpick
-null;;goto--jumper-186
+zerosize;;goto--jumper-186
 #conditional goto
 dataread1;>kb
 dataread2;>:i
@@ -1029,7 +1011,7 @@ gotoif;>goto--branch-187
 goto;>goto--jumper-187
 setreg1;>goto--jumper-187;goto--branch-187
 goto;>quit--label
-null;;goto--jumper-187
+zerosize;;goto--jumper-187
 #conditional return
 dataread1;>didpick
 dataread2;>@1
@@ -1037,11 +1019,11 @@ gotoif;>goto--branch-188
 goto;>goto--jumper-188
 s1pop1;;goto--branch-188
 gotoreg1
-null;;goto--jumper-188
+zerosize;;goto--jumper-188
 #goto 
 goto;>getcard--label
 #label
-null;;win--label
+zerosize;;win--label
 #print newline
 fopwri1;:\n
 #prline
@@ -1164,7 +1146,7 @@ gotoif;>keyprompt--loop-203
 #stop (shutdown vm)
 stop
 #label
-null;;quit--label
+zerosize;;quit--label
 #prline
 fopwri1;:G
 fopwri1;:o
@@ -1204,9 +1186,9 @@ gotoif;>keyprompt--loop-210
 #stop (shutdown vm)
 stop
 #label
-null;;showcards--label
+zerosize;;showcards--label
 #table width=5, height=3
-null;;cardview--table
+zerosize;;cardview--table
 #prline
 fopwri1;:Q
 fopwri1;:W
@@ -1229,7 +1211,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;placecard--label
+zerosize;;placecard--label
 #Random ranged number
 dataread1;>@0
 dataread2;>@3
@@ -1250,10 +1232,7 @@ dataread2;>cardy
 mul
 dataread2;>cardx
 add
-setreg2;10x1
-add
-setreg2;>cardvals--table
-add
+adddata1;>cardvals--table
 datawrite1;>tabr--adrbuff--236
 dataread1;;tabr--adrbuff--236
 #set(1) (used after 2-op math, asm code, or get)
@@ -1265,21 +1244,18 @@ gotoif;>goto--branch-238
 goto;>goto--jumper-238
 setreg1;>goto--jumper-238;goto--branch-238
 goto;>placecard_write--label
-null;;goto--jumper-238
+zerosize;;goto--jumper-238
 #goto 
 goto;>placecard--label
 #label
-null;;placecard_write--label
+zerosize;;placecard_write--label
 #SSTNPL table write instruction.
 setreg1;10x4
 dataread2;>cardy
 mul
 dataread2;>cardx
 add
-setreg2;10x1
-add
-setreg2;>cardvals--table
-add
+adddata1;>cardvals--table
 datawrite1;>tabw--adrbuff--242
 dataread1;>cardv
 datawrite1;;tabw--adrbuff--242
@@ -1287,7 +1263,7 @@ datawrite1;;tabw--adrbuff--242
 s1pop1
 gotoreg1
 #table width=4, height=3
-null;;cardvals--table
+zerosize;;cardvals--table
 #tdat
 null;0
 null;0
@@ -1304,7 +1280,7 @@ null;0
 null;0
 null;0
 #label
-null;;about--label
+zerosize;;about--label
 #print newline
 fopwri1;:\n
 #prline
@@ -1616,7 +1592,7 @@ fopwri1;:t
 fopwri1;:i
 fopwri1;:o
 fopwri1;:n
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:e
 fopwri1;:i
@@ -1649,7 +1625,7 @@ fopwri1;:e
 fopwri1;:n
 fopwri1;:s
 fopwri1;:e
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:o
 fopwri1;:r
@@ -1754,7 +1730,7 @@ fopwri1;:e
 fopwri1;:f
 fopwri1;:u
 fopwri1;:l
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\n
 #prline
 fopwri1;:b
@@ -2027,7 +2003,7 @@ fopwri1;:\s
 fopwri1;:n
 fopwri1;:o
 fopwri1;:t
-fopwri1;:,
+fopwri1;:\m
 fopwri1;:\s
 fopwri1;:s
 fopwri1;:e
@@ -2115,7 +2091,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;help--label
+zerosize;;help--label
 #prline
 fopwri1;:C
 fopwri1;:a

@@ -14,12 +14,12 @@ null;:1;$common.DESK_MIN_VERS
 setreg1;>goto--jumper-4
 s1push1
 goto;>scene_1--label
-null;;goto--jumper-4
+zerosize;;goto--jumper-4
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-5
 s1push1
 goto;>refresh--label
-null;;goto--jumper-5
+zerosize;;goto--jumper-5
 #bprinttail1n
 fopset1;>buffer.1.write.tail
 fopwri1;:S
@@ -58,7 +58,7 @@ iowrite1;>buffer.1.write.tail
 setreg1;>goto--jumper-16
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-16
+zerosize;;goto--jumper-16
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-18
@@ -73,12 +73,12 @@ gotoifless;>waitcy-loopback-18
 setreg1;>goto--jumper-19
 s1push1
 goto;>scene_2--label
-null;;goto--jumper-19
+zerosize;;goto--jumper-19
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-20
 s1push1
 goto;>refresh--label
-null;;goto--jumper-20
+zerosize;;goto--jumper-20
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:-
@@ -112,7 +112,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-25
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-25
+zerosize;;goto--jumper-25
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-27
@@ -127,12 +127,12 @@ gotoifless;>waitcy-loopback-27
 setreg1;>goto--jumper-28
 s1push1
 goto;>scene_3--label
-null;;goto--jumper-28
+zerosize;;goto--jumper-28
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-29
 s1push1
 goto;>refresh--label
-null;;goto--jumper-29
+zerosize;;goto--jumper-29
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:-
@@ -169,7 +169,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-33
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-35
@@ -184,12 +184,12 @@ gotoifless;>waitcy-loopback-35
 setreg1;>goto--jumper-36
 s1push1
 goto;>scene_4--label
-null;;goto--jumper-36
+zerosize;;goto--jumper-36
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-37
 s1push1
 goto;>refresh--label
-null;;goto--jumper-37
+zerosize;;goto--jumper-37
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:'
@@ -297,7 +297,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-44
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-44
+zerosize;;goto--jumper-44
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-46
@@ -312,12 +312,12 @@ gotoifless;>waitcy-loopback-46
 setreg1;>goto--jumper-47
 s1push1
 goto;>scene_5--label
-null;;goto--jumper-47
+zerosize;;goto--jumper-47
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-48
 s1push1
 goto;>refresh--label
-null;;goto--jumper-48
+zerosize;;goto--jumper-48
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:'
@@ -413,7 +413,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-56
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-56
+zerosize;;goto--jumper-56
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-58
@@ -428,12 +428,12 @@ gotoifless;>waitcy-loopback-58
 setreg1;>goto--jumper-59
 s1push1
 goto;>scene_6--label
-null;;goto--jumper-59
+zerosize;;goto--jumper-59
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-60
 s1push1
 goto;>refresh--label
-null;;goto--jumper-60
+zerosize;;goto--jumper-60
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:E
@@ -607,7 +607,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-73
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-73
+zerosize;;goto--jumper-73
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-75
@@ -701,7 +701,7 @@ fopwri1;:\n
 #stop (shutdown vm)
 stop
 #label
-null;;refresh--label
+zerosize;;refresh--label
 #val (used with set to change variable value during runtime.)
 setreg1;+++++++++
 #set(1) (used after 2-op math, asm code, or get)
@@ -722,7 +722,7 @@ datawrite1;>pl.posx
 setreg1;>goto--jumper-97
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-97
+zerosize;;goto--jumper-97
 #buffer 1 reset
 iowrite1;>buffer.1.reset
 #val (used with set to change variable value during runtime.)
@@ -735,12 +735,12 @@ datawrite1;>seg.posy
 setreg1;>goto--jumper-107
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-107
+zerosize;;goto--jumper-107
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;scene_1--label
+zerosize;;scene_1--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #112
 setreg1;>IMG_BG_1#SSTNPL Source Line: '112' 
@@ -750,7 +750,7 @@ datawrite1;>pl.offset
 s1pop1
 gotoreg1
 #label
-null;;scene_2--label
+zerosize;;scene_2--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #117
 setreg1;>IMG_BG_2#SSTNPL Source Line: '117' 
@@ -760,7 +760,7 @@ datawrite1;>pl.offset
 s1pop1
 gotoreg1
 #label
-null;;scene_3--label
+zerosize;;scene_3--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #122
 setreg1;>IMG_BG_3#SSTNPL Source Line: '122' 
@@ -770,7 +770,7 @@ datawrite1;>pl.offset
 s1pop1
 gotoreg1
 #label
-null;;scene_4--label
+zerosize;;scene_4--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #127
 setreg1;>IMG_BG_4#SSTNPL Source Line: '127' 
@@ -780,7 +780,7 @@ datawrite1;>pl.offset
 s1pop1
 gotoreg1
 #label
-null;;scene_5--label
+zerosize;;scene_5--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #132
 setreg1;>IMG_BG_5#SSTNPL Source Line: '132' 
@@ -790,7 +790,7 @@ datawrite1;>pl.offset
 s1pop1
 gotoreg1
 #label
-null;;scene_6--label
+zerosize;;scene_6--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #137
 setreg1;>IMG_BG_6#SSTNPL Source Line: '137' 

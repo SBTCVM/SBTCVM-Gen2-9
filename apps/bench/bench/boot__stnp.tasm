@@ -23,7 +23,7 @@ fopwri1;:\s
 setreg1;>goto--jumper-2
 s1push1
 goto;>common.print_version--label
-null;;goto--jumper-2
+zerosize;;goto--jumper-2
 #prline
 fopwri1;:\s
 fopwri1;:b

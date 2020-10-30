@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -51,7 +51,7 @@ null;+++++++++;*+++++++++
 null;000000+++;*000000+++
 null;10x101;@101
 #label
-null;;MAIN--label
+zerosize;;MAIN--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #23
 include;fttarget/title.tas0#SSTNPL Source Line: '23' 
@@ -298,7 +298,7 @@ gotoif;>goto--branch-33
 goto;>goto--jumper-33
 dataread1;>@8;goto--branch-33
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #conditional set
 dataread1;>kb
 dataread2;>:!
@@ -306,7 +306,7 @@ gotoif;>goto--branch-34
 goto;>goto--jumper-34
 dataread1;>@8;goto--branch-34
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-34
+zerosize;;goto--jumper-34
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:1
@@ -315,7 +315,7 @@ goto;>goto--jumper-35
 setreg1;>goto--jumper-35;goto--branch-35
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-35
+zerosize;;goto--jumper-35
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:!
@@ -324,7 +324,7 @@ goto;>goto--jumper-36
 setreg1;>goto--jumper-36;goto--branch-36
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-36
+zerosize;;goto--jumper-36
 #conditional set
 dataread1;>kb
 dataread2;>:2
@@ -332,7 +332,7 @@ gotoif;>goto--branch-37
 goto;>goto--jumper-37
 dataread1;>@12;goto--branch-37
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-37
+zerosize;;goto--jumper-37
 #conditional set
 dataread1;>kb
 dataread2;>:@
@@ -340,7 +340,7 @@ gotoif;>goto--branch-38
 goto;>goto--jumper-38
 dataread1;>@12;goto--branch-38
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-38
+zerosize;;goto--jumper-38
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:2
@@ -349,7 +349,7 @@ goto;>goto--jumper-39
 setreg1;>goto--jumper-39;goto--branch-39
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-39
+zerosize;;goto--jumper-39
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:@
@@ -358,7 +358,7 @@ goto;>goto--jumper-40
 setreg1;>goto--jumper-40;goto--branch-40
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-40
+zerosize;;goto--jumper-40
 #conditional set
 dataread1;>kb
 dataread2;>:3
@@ -366,7 +366,7 @@ gotoif;>goto--branch-41
 goto;>goto--jumper-41
 dataread1;>@16;goto--branch-41
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-41
+zerosize;;goto--jumper-41
 #conditional set
 dataread1;>kb
 dataread2;>:\p
@@ -374,7 +374,7 @@ gotoif;>goto--branch-42
 goto;>goto--jumper-42
 dataread1;>@16;goto--branch-42
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-42
+zerosize;;goto--jumper-42
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:3
@@ -383,7 +383,7 @@ goto;>goto--jumper-43
 setreg1;>goto--jumper-43;goto--branch-43
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-43
+zerosize;;goto--jumper-43
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:\p
@@ -392,7 +392,7 @@ goto;>goto--jumper-44
 setreg1;>goto--jumper-44;goto--branch-44
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-44
+zerosize;;goto--jumper-44
 #conditional set
 dataread1;>kb
 dataread2;>:4
@@ -400,7 +400,7 @@ gotoif;>goto--branch-45
 goto;>goto--jumper-45
 dataread1;>@20;goto--branch-45
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-45
+zerosize;;goto--jumper-45
 #conditional set
 dataread1;>kb
 dataread2;>:$
@@ -408,7 +408,7 @@ gotoif;>goto--branch-46
 goto;>goto--jumper-46
 dataread1;>@20;goto--branch-46
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-46
+zerosize;;goto--jumper-46
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:4
@@ -417,7 +417,7 @@ goto;>goto--jumper-47
 setreg1;>goto--jumper-47;goto--branch-47
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-47
+zerosize;;goto--jumper-47
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:$
@@ -426,7 +426,7 @@ goto;>goto--jumper-48
 setreg1;>goto--jumper-48;goto--branch-48
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-48
+zerosize;;goto--jumper-48
 #conditional set
 dataread1;>kb
 dataread2;>:5
@@ -434,7 +434,7 @@ gotoif;>goto--branch-49
 goto;>goto--jumper-49
 dataread1;>@24;goto--branch-49
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-49
+zerosize;;goto--jumper-49
 #conditional set
 dataread1;>kb
 dataread2;>:%
@@ -442,7 +442,7 @@ gotoif;>goto--branch-50
 goto;>goto--jumper-50
 dataread1;>@24;goto--branch-50
 datawrite1;>badguy_fallspeed
-null;;goto--jumper-50
+zerosize;;goto--jumper-50
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:5
@@ -451,7 +451,7 @@ goto;>goto--jumper-51
 setreg1;>goto--jumper-51;goto--branch-51
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-51
+zerosize;;goto--jumper-51
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:%
@@ -460,7 +460,7 @@ goto;>goto--jumper-52
 setreg1;>goto--jumper-52;goto--branch-52
 s1push1
 goto;>GAMESTART--label
-null;;goto--jumper-52
+zerosize;;goto--jumper-52
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:h
@@ -469,7 +469,7 @@ goto;>goto--jumper-53
 setreg1;>goto--jumper-53;goto--branch-53
 s1push1
 goto;>Help--label
-null;;goto--jumper-53
+zerosize;;goto--jumper-53
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:H
@@ -478,7 +478,7 @@ goto;>goto--jumper-54
 setreg1;>goto--jumper-54;goto--branch-54
 s1push1
 goto;>Help--label
-null;;goto--jumper-54
+zerosize;;goto--jumper-54
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:a
@@ -487,7 +487,7 @@ goto;>goto--jumper-55
 setreg1;>goto--jumper-55;goto--branch-55
 s1push1
 goto;>About--label
-null;;goto--jumper-55
+zerosize;;goto--jumper-55
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:A
@@ -496,7 +496,7 @@ goto;>goto--jumper-56
 setreg1;>goto--jumper-56;goto--branch-56
 s1push1
 goto;>About--label
-null;;goto--jumper-56
+zerosize;;goto--jumper-56
 #conditional stop
 dataread1;>kb
 dataread2;>:q
@@ -504,7 +504,7 @@ gotoif;>goto--branch-57
 goto;>goto--jumper-57
 stop;;goto--branch-57
 
-null;;goto--jumper-57
+zerosize;;goto--jumper-57
 #conditional stop
 dataread1;>kb
 dataread2;>:Q
@@ -512,11 +512,11 @@ gotoif;>goto--branch-58
 goto;>goto--jumper-58
 stop;;goto--branch-58
 
-null;;goto--jumper-58
+zerosize;;goto--jumper-58
 #goto 
 goto;>MAIN--label
 #label
-null;;GAMESTART--label
+zerosize;;GAMESTART--label
 #Set SBTGA mode
 dataread1;>@30
 iowrite1;>ga.mode
@@ -547,12 +547,12 @@ iowrite1;>plot.height
 setreg1;>goto--jumper-80
 s1push1
 goto;>badG_start--label
-null;;goto--jumper-80
+zerosize;;goto--jumper-80
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-81
 s1push1
 goto;>gameloop--label
-null;;goto--jumper-81
+zerosize;;goto--jumper-81
 #prline
 fopwri1;:p
 fopwri1;:r
@@ -599,7 +599,7 @@ gotoif;>keyprompt--loop-83
 s1pop1
 gotoreg1
 #label
-null;;gameloop--label
+zerosize;;gameloop--label
 #plotter draw line
 dataread1;>*---------
 iowrite1;>plot.color
@@ -624,7 +624,7 @@ gotoifmore;>goto--branch-96
 goto;>goto--jumper-96
 setreg1;>goto--jumper-96;goto--branch-96
 goto;>gameover--label
-null;;goto--jumper-96
+zerosize;;goto--jumper-96
 #plotter draw line
 dataread1;>*+++------
 iowrite1;>plot.color
@@ -670,7 +670,7 @@ iowrite1;>plot.color
 #plotter draw triangle
 iowrite1;>plot.tri
 #label
-null;;drawLOCK--label
+zerosize;;drawLOCK--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #126
 ioread1;>plot.buffer#SSTNPL Source Line: '126' 
@@ -683,7 +683,7 @@ gotoifmore;>goto--branch-128
 goto;>goto--jumper-128
 setreg1;>goto--jumper-128;goto--branch-128
 goto;>drawLOCK--label
-null;;goto--jumper-128
+zerosize;;goto--jumper-128
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #130
 iowrite1;>plot.fhalt#SSTNPL Source Line: '130' 
@@ -699,7 +699,7 @@ gotoifmore;>goto--jumper-135
 goto;>goto--branch-135
 setreg1;>goto--jumper-135;goto--branch-135
 goto;>gameloop--label
-null;;goto--jumper-135
+zerosize;;goto--jumper-135
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #137
 ioread1;>mouse.lockx#SSTNPL Source Line: '137' 
@@ -724,13 +724,13 @@ gotoif;>goto--branch-142
 goto;>goto--jumper-142
 setreg1;>goto--jumper-142;goto--branch-142
 goto;>DO_hit--label
-null;;goto--jumper-142
+zerosize;;goto--jumper-142
 #goto 
 goto;>DO_miss--label
 #goto 
 goto;>gameloop--label
 #label
-null;;gameover--label
+zerosize;;gameover--label
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
@@ -758,7 +758,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;DO_hit--label
+zerosize;;DO_hit--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #162
 iowrite1;>snd.1.play#SSTNPL Source Line: '162' 
@@ -817,14 +817,14 @@ iowrite1;>plot.rect
 setreg1;>goto--jumper-186
 s1push1
 goto;>badG_start--label
-null;;goto--jumper-186
+zerosize;;goto--jumper-186
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #188
 iowrite1;>snd.1.stop#SSTNPL Source Line: '188' 
 #goto 
 goto;>gameloop--label
 #label
-null;;DO_miss--label
+zerosize;;DO_miss--label
 #plotter y pos 1
 dataread1;>@-121
 iowrite1;>plot.y1
@@ -860,7 +860,7 @@ iowrite1;>plot.line
 #goto 
 goto;>gameloop--label
 #label
-null;;badG_start--label
+zerosize;;badG_start--label
 #get(1) (may be used with set, or asm code)
 dataread1;>badguy_int_y
 #set(1) (used after 2-op math, asm code, or get)
@@ -876,7 +876,7 @@ datawrite1;>badguy_X
 s1pop1
 gotoreg1
 #label
-null;;Help--label
+zerosize;;Help--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #226
 include;fttarget/help.tas0#SSTNPL Source Line: '226' 
@@ -1126,7 +1126,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;About--label
+zerosize;;About--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #239
 include;fttarget/about.tas0#SSTNPL Source Line: '239' 

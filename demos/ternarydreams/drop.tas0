@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=drop
 head-nspin=stdnsp
@@ -24,7 +24,7 @@ null;10x121;@121
 null;+++++++++;*+++++++++
 null;10x4;@4
 #label
-null;;pre_init--label
+zerosize;;pre_init--label
 #plotter width
 dataread1;>@5
 iowrite1;>plot.width
@@ -44,17 +44,17 @@ iowrite1;>plot.fill
 s1pop1
 gotoreg1
 #label
-null;;cycle_run--label
+zerosize;;cycle_run--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-35
 s1push1
 goto;>main--label
-null;;goto--jumper-35
+zerosize;;goto--jumper-35
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;main--label
+zerosize;;main--label
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-43
@@ -108,7 +108,7 @@ gotoifless;>goto--branch-61
 goto;>goto--jumper-61
 dataread1;>@121;goto--branch-61
 datawrite1;>xpos
-null;;goto--jumper-61
+zerosize;;goto--jumper-61
 #conditional set
 dataread1;>xpos
 dataread2;>@121
@@ -116,7 +116,7 @@ gotoifmore;>goto--branch-62
 goto;>goto--jumper-62
 dataread1;>@-121;goto--branch-62
 datawrite1;>xpos
-null;;goto--jumper-62
+zerosize;;goto--jumper-62
 #conditional set
 dataread1;>ypos
 dataread2;>floorlevel
@@ -124,7 +124,7 @@ gotoifless;>goto--jumper-67
 goto;>goto--branch-67
 dataread1;>hitvelocity_y;goto--branch-67
 datawrite1;>vely
-null;;goto--jumper-67
+zerosize;;goto--jumper-67
 #plotter draw line
 dataread1;>*+++++++++
 iowrite1;>plot.color
@@ -134,12 +134,12 @@ iowrite1;>plot.rect
 setreg1;>goto--jumper-72
 s1push1
 goto;>debug1--label
-null;;goto--jumper-72
+zerosize;;goto--jumper-72
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;debug1--label
+zerosize;;debug1--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #80
 ioread1;>plot.buffer#SSTNPL Source Line: '80' 
@@ -153,12 +153,12 @@ goto;>goto--jumper-82
 setreg1;>goto--jumper-82;goto--branch-82
 s1push1
 goto;>debug1_print--label
-null;;goto--jumper-82
+zerosize;;goto--jumper-82
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;debug1_print--label
+zerosize;;debug1_print--label
 #Dump (decimal)
 dataread1;>debug_buffsize
 iowrite1;>io.decdump

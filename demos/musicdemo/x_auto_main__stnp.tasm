@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -27,17 +27,17 @@ datawrite1;>mus.offset
 setreg1;>goto--jumper-17
 s1push1
 goto;>mus.init--label
-null;;goto--jumper-17
+zerosize;;goto--jumper-17
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #20
 include;musicdemo+splash.tas0#SSTNPL Source Line: '20' 
 #label
-null;;loop--label
+zerosize;;loop--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-22
 s1push1
 goto;>mus.cycle--label
-null;;goto--jumper-22
+zerosize;;goto--jumper-22
 #Get character from TTY input.
 ioread1;>io.ttyrd
 datawrite1;>ch
@@ -48,7 +48,7 @@ gotoif;>goto--jumper-24
 goto;>goto--branch-24
 stop;;goto--branch-24
 
-null;;goto--jumper-24
+zerosize;;goto--jumper-24
 #goto 
 goto;>loop--label
 #module include: line 35: musicengine as mus
