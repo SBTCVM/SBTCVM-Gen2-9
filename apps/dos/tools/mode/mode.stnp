@@ -34,6 +34,16 @@ tabstrc dosargs.buffer,cmdx,@0,ga30
 		val @1
 		set validflg
 	end
+tabstrc dosargs.buffer,cmdx,@0,ga31
+	set cmdflg
+	if cmdflg,@1 begin
+		gamode @31
+		if quiet,$false begin
+			prline SBTGA Mode 31: 575x575 Vector Plotter
+		end
+		val @1
+		set validflg
+	end
 tabstrc dosargs.buffer,@0,@0,/?
 	set cmdflg
 	if cmdflg,@1 gsub mode_help
@@ -53,6 +63,7 @@ prline ----MODE: sets SBTGA properties.----
 prline USAGE: mode [/Q] command
 prline ga0  : Set display to 81x25 TTY
 prline ga30 : Set display to 243x243 Vector Plotter
+prline ga31 : Set display to 575x575 Vector Plotter
 prline /?   : This help text
 prline /Q   : use as shown above to suppress mode change text.
 return

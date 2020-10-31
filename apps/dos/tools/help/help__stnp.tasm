@@ -27,7 +27,6 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--7
 null;;tabstrc--adrbuff--7
@@ -219,7 +218,6 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--11
 null;;tabstrc--adrbuff--11
@@ -433,7 +431,6 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--15
 null;;tabstrc--adrbuff--15
@@ -581,7 +578,6 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--19
 null;;tabstrc--adrbuff--19
@@ -707,7 +703,6 @@ dataread2;>@0
 mul
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>dosargs.buffer--table
 datawrite1;>tabstrc--adrbuff--23
 null;;tabstrc--adrbuff--23
