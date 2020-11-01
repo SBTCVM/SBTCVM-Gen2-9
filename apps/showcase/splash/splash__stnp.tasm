@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=splash
 head-nspin=stdnsp
@@ -29,7 +29,7 @@ datawrite1;>seg.posy
 setreg1;>goto--jumper-13
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-13
+zerosize;;goto--jumper-13
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #15
 setreg1;>image_offset1#SSTNPL Source Line: '15' 
@@ -39,7 +39,7 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-18
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-18
+zerosize;;goto--jumper-18
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -90,7 +90,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-42
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-42
+zerosize;;goto--jumper-42
 #val (used with set to change variable value during runtime.)
 setreg1;10x4
 #set(1) (used after 2-op math, asm code, or get)
@@ -140,7 +140,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-52
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-52
+zerosize;;goto--jumper-52
 #val (used with set to change variable value during runtime.)
 setreg1;+++++++++
 #set(1) (used after 2-op math, asm code, or get)
@@ -153,7 +153,7 @@ datawrite1;>seg.posy
 setreg1;>goto--jumper-61
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-61
+zerosize;;goto--jumper-61
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:S
@@ -225,12 +225,12 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-73
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-73
+zerosize;;goto--jumper-73
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-76
 s1push1
 goto;>pl2.decode--label
-null;;goto--jumper-76
+zerosize;;goto--jumper-76
 #val (used with set to change variable value during runtime.)
 setreg1;10x110
 #set(1) (used after 2-op math, asm code, or get)
@@ -239,7 +239,7 @@ datawrite1;>seg.posy
 setreg1;>goto--jumper-83
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-83
+zerosize;;goto--jumper-83
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -281,7 +281,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-93
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-93
+zerosize;;goto--jumper-93
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd

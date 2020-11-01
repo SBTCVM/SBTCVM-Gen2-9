@@ -36,7 +36,22 @@ set seg.hori_space
 label main
 	drawrect
 	
-	if xpos,@121 gsub rollover
+	if xpos,@121 begin
+		val @-122
+		set xpos
+		get1 ypos
+		asm adddata1;10x3
+		asm iowrite1;>plot.y1
+		set ypos
+		if color,@9841 begin
+			bprinttail1 SBTCVM Showcase - Plot Colors
+			bprinttail1 Press any key.
+			gsub seg.output
+			keyprompt
+			vdi rstld -1 mainmenu.txe
+		end
+	end
+	
 	
 	get1 xpos
 	asm adddata1;10x1
@@ -49,27 +64,6 @@ label main
 	set color
 	
 goto main
-
-label rollover
-	val @-122
-	set xpos
-	get1 ypos
-	asm adddata1;10x3
-	asm iowrite1;>plot.y1
-	set ypos
-	if color,@9841 goto end
-	return
-	
-
-
-label end
-	bprinttail1 SBTCVM Showcase - Plot Colors
-	bprinttail1 Press any key.
-	gsub seg.output
-	keyprompt
-	vdi rstld -1 mainmenu.txe
-	
-
 
 
 include segment as seg

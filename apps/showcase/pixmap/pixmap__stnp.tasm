@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=pixmap
 head-nspin=stdnsp
@@ -48,7 +48,7 @@ datawrite1;>seg.posy
 setreg1;>goto--jumper-25
 s1push1
 goto;>seg.init_pos--label
-null;;goto--jumper-25
+zerosize;;goto--jumper-25
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -80,9 +80,9 @@ datawrite1;>pl.offset
 setreg1;>goto--jumper-44
 s1push1
 goto;>pl.decode--label
-null;;goto--jumper-44
+zerosize;;goto--jumper-44
 #label
-null;;end--label
+zerosize;;end--label
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:S
@@ -133,7 +133,7 @@ fopset1;>io.ttywr
 setreg1;>goto--jumper-49
 s1push1
 goto;>seg.output--label
-null;;goto--jumper-49
+zerosize;;goto--jumper-49
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
