@@ -1,0 +1,3 @@
+ 
+gfxcon -binrlei4 %xwd%+image.png
+stnp %xwd%

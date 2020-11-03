@@ -1,0 +1,18 @@
+ 
+gamode @30
+
+val @-121
+set brl.posx
+set brl.posy
+asm setreg1;>image_offset1
+set brl.offset
+
+gsub brl.decode
+
+keyprompt
+
+stop
+
+
+include binrle as brl
+asm include;binrle_4line/image.tas0;image_offset1

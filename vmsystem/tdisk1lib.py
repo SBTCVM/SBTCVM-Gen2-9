@@ -93,15 +93,23 @@ def savedisk(diskobj):
 		raise ValueError("Disk Object is a ramdisk. It contains no filename to save to.")
 	if diskobj.fname==None:
 		raise ValueError("Disk Object has 'None' for the filename. This is ONLY permitted for ramdisks!")
-	#build tdsk1 datastructure
-	outstr=diskobj.label + "\n" + str(len(diskobj.files)) + "\n"
-	for dfile in diskobj.files:
-		outstr=outstr+"{"+dfile+"\n"
-		for fdat in diskobj.files[dfile]:
-			outstr=outstr+str(int(fdat[0]))+","+str(int(fdat[1]))+"\n"
-	#save tdsk1 file.
 	diskfile=open(diskobj.fname, "w")
-	diskfile.write(outstr)
+	diskfile.write(diskobj.label + "\n" + str(len(diskobj.files)) + "\n")
+	for dfile in diskobj.files:
+		diskfile.write("{"+dfile+"\n")
+		for fdat in diskobj.files[dfile]:
+			diskfile.write(str(int(fdat[0]))+","+str(int(fdat[1]))+"\n")
+			
+	
+	##build tdsk1 datastructure
+	#outstr=diskobj.label + "\n" + str(len(diskobj.files)) + "\n"
+	#for dfile in diskobj.files:
+		#outstr=outstr+"{"+dfile+"\n"
+		#for fdat in diskobj.files[dfile]:
+			#outstr=outstr+str(int(fdat[0]))+","+str(int(fdat[1]))+"\n"
+	##save tdsk1 file.
+	#diskfile=open(diskobj.fname, "w")
+	#diskfile.write(outstr)
 	diskfile.close()
 
 ##basic disk load/file read/save test code

@@ -29,3 +29,6 @@ misc:
             - 2-trit greyscale (2-trit-grey.gpl)
             - 3-trit greyscale (3-trit-grey.gpl)
             - 3-trit RGB (3-trit-RGB.gpl)
+            There's also a palette for working with BINRLE's 4-line
+            interpolation mode.
+            - 5-tone greyscale (BINRLE_4_line_interpolated.gpl)

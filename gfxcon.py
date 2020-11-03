@@ -197,7 +197,13 @@ def plot_BIN_RLE(imagepath, lineinterpol=0):
 	pbuff=None
 	bufflen=0
 	bank=1
-	color_bool=binencode(image.get_at((0, 0)))
+	#find initial color state
+	if lineinterpol==0:
+		color_bool=binencode(image.get_at((0, 0)), offset=0)
+	elif lineinterpol==2:
+		color_bool=binencode(image.get_at((0, 0)), offset=-51-25)
+	else:
+		color_bool=binencode(image.get_at((0, 0)), offset=42)
 	outf=open(imagepath.rsplit(".")[0]+".tas0", 'w')
 	outf.write('''#SBTCVM Gen2-9 GFXCON: run-length encoded tritmap
 #Needs to be decoded manually.
@@ -209,11 +215,20 @@ def plot_BIN_RLE(imagepath, lineinterpol=0):
 			pixcol = image.get_at((linex, coly))
 			if lineinterpol==0:
 				buffx=binencode(pixcol, offset=0)
+			elif lineinterpol==2:
+				if coly % 4 == 0:
+					buffx=binencode(pixcol, offset=-51-25)
+				elif coly % 4 == 1:
+					buffx=binencode(pixcol, offset=-51+25)
+				elif coly % 4 == 2:
+					buffx=binencode(pixcol, offset=51-25)
+				else:
+					buffx=binencode(pixcol, offset=51+25)
 			else:
 				if coly % 2:
-					buffx=binencode(pixcol, offset=-20)
+					buffx=binencode(pixcol, offset=-42)
 				else:
-					buffx=binencode(pixcol, offset=20)
+					buffx=binencode(pixcol, offset=42)
 			if buffx==pbuff:
 				bufflen+=1
 			elif pbuff==None:
@@ -405,7 +420,9 @@ if __name__=="__main__":
 	tritmap image. append i for line-based striped interpolation.
 	follow image name by an OPTIONAL threshold integer value a color channel must change for encoder to change colors.
 	(at cost of detail)
--binrle(i) [image] : boolean (2 tone) RLE-compressed tritmap format. uses BINRLE module.''')
+-binrle [image] : boolean (2 tone) RLE-compressed tritmap format. uses BINRLE module.
+-binrlei [image] : same as -binrle, only enable 2-line interpolation.
+-binrlei4 [image] : same as -binrle, only enable 4-line interpolation.''')
 	elif cmd in ["-v", "--version"]:
 		print("SBTCVM Gen2-9 gfx conversion utility. v1.0.0\n" + "part of SBTCVM-Gen2-9 v2.1.0.alpha")
 	elif cmd in ["-a", "--about"]:
@@ -463,7 +480,10 @@ see readme.md for more information and licensing of media.
 		plot_BIN_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=0)
 	elif cmd in ["-binrlei"]:
 		print("RLE-encoded boolean tritmap. (line interpolated)")
-		plot_BIN_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=12)
+		plot_BIN_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=1)
+	elif cmd in ["-binrlei4"]:
+		print("RLE-encoded boolean tritmap. (4 line interpolated)")
+		plot_BIN_RLE(iofuncts.findtrom(arg, ext=".png", exitonfail=1, exitmsg="image file was not found. STOP", dirauto=1), lineinterpol=2)
 
 
 	elif cmd == None:

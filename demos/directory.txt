@@ -98,6 +98,12 @@ tritmap575:
 binrle_test:
 	A few tests of the 2-color SBTCVM BINRLE tritmap format. runs in mode 31.
 	[nocurses]
+
+binrle_4line:
+	a test image for BINRLE's 4-line interpolation mode. (gfxcon -binrlei4 [image])
+		this BINRLE mode effectively attempts a 5-tone greyscale palette.
+	[nocurses]
+
 plottertext:
 	Example/test program for the 'segment' SSTNPL Module
 	a 53-symbol vector text renderer. (A-Z, 0-9, plus some symbols.)

@@ -1,0 +1,9 @@
+GIMP Palette
+Name: BINRLE_4_line_interpolated
+Columns: 16
+#
+  0   0   0	#0
+ 64  64  64	#1
+128 128 128	#2
+191 191 191	#3
+255 255 255	#4
