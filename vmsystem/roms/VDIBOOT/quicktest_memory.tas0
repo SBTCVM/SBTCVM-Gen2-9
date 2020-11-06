@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=quicktest_memory
 head-nspin=stdnsp
@@ -23,7 +23,7 @@ null;:a;:a
 null;:?;:?
 null;:\s;:\s
 #label
-null;;memtest_fast--label
+zerosize;;memtest_fast--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -32,12 +32,12 @@ datawrite1;>fastmode
 setreg1;>goto--jumper-11
 s1push1
 goto;>memtest--label
-null;;goto--jumper-11
+zerosize;;goto--jumper-11
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;memtest_slow--label
+zerosize;;memtest_slow--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -46,12 +46,12 @@ datawrite1;>fastmode
 setreg1;>goto--jumper-18
 s1push1
 goto;>memtest--label
-null;;goto--jumper-18
+zerosize;;goto--jumper-18
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;memtest--label
+zerosize;;memtest--label
 #val (used with set to change variable value during runtime.)
 setreg1;0
 #set(1) (used after 2-op math, asm code, or get)
@@ -70,7 +70,7 @@ datawrite1;>mtestaddr
 setreg1;>goto--jumper-32
 s1push1
 goto;>_memtest_loop--label
-null;;goto--jumper-32
+zerosize;;goto--jumper-32
 #divide (2op math)
 dataread1;>memcnt
 dataread2;>@1000
@@ -106,7 +106,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;_memtest_loop--label
+zerosize;;_memtest_loop--label
 #add (2op math)
 dataread1;>memcnt
 dataread2;>@1
@@ -132,7 +132,7 @@ gotoif;>goto--branch-52
 goto;>goto--jumper-52
 setreg1;>goto--jumper-52;goto--branch-52
 goto;>fasthack--label
-null;;goto--jumper-52
+zerosize;;goto--jumper-52
 #get(1) (may be used with set, or asm code)
 dataread1;>mtestaddr
 #___RAW ASSEMBLY CODE___
@@ -147,7 +147,7 @@ datawrite1;>mtesttmp
 setreg1;>goto--jumper-58
 s1push1
 goto;>_mtest_formatter--label
-null;;goto--jumper-58
+zerosize;;goto--jumper-58
 #add (2op math)
 dataread1;>mtestaddr
 dataread2;>@1
@@ -168,7 +168,7 @@ datawrite1;>mtesttmp
 setreg1;>goto--jumper-67
 s1push1
 goto;>_mtest_formatter--label
-null;;goto--jumper-67
+zerosize;;goto--jumper-67
 #add (2op math)
 dataread1;>mtestaddr
 dataread2;>@1
@@ -189,16 +189,16 @@ datawrite1;>mtesttmp
 setreg1;>goto--jumper-76
 s1push1
 goto;>_mtest_formatter--label
-null;;goto--jumper-76
+zerosize;;goto--jumper-76
 #print newline
 fopwri1;:\n
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-80
 s1push1
 goto;>_mtest_slowmode--label
-null;;goto--jumper-80
+zerosize;;goto--jumper-80
 #label
-null;;skip3--label
+zerosize;;skip3--label
 #conditional return
 dataread1;>mtestaddr
 dataread2;>@9841
@@ -206,7 +206,7 @@ gotoif;>goto--branch-83
 goto;>goto--jumper-83
 s1pop1;;goto--branch-83
 gotoreg1
-null;;goto--jumper-83
+zerosize;;goto--jumper-83
 #add (2op math)
 dataread1;>mtestaddr
 dataread2;>@1
@@ -221,11 +221,11 @@ goto;>goto--branch-88
 setreg1;>goto--jumper-88;goto--branch-88
 s1push1
 goto;>_memtest_memdmp--label
-null;;goto--jumper-88
+zerosize;;goto--jumper-88
 #goto 
 goto;>_memtest_loop--label
 #label
-null;;fasthack--label
+zerosize;;fasthack--label
 #add (2op math)
 dataread1;>mtestaddr
 dataread2;>@2
@@ -235,7 +235,7 @@ datawrite1;>mtestaddr
 #goto 
 goto;>skip3--label
 #label
-null;;_memtest_memdmp--label
+zerosize;;_memtest_memdmp--label
 #print newline
 fopwri1;:\n
 #copy variables 
@@ -254,7 +254,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;_mtest_slowmode--label
+zerosize;;_mtest_slowmode--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #114
 ioread1;>io.ttycolor#SSTNPL Source Line: '114' 
@@ -267,7 +267,7 @@ gotoif;>goto--branch-116
 goto;>goto--jumper-116
 s1pop1;;goto--branch-116
 gotoreg1
-null;;goto--jumper-116
+zerosize;;goto--jumper-116
 #Wait loop
 setreg1;0
 datawrite1;>waitcy-loopback-117
@@ -282,7 +282,7 @@ gotoifless;>waitcy-loopback-117
 s1pop1
 gotoreg1
 #label
-null;;_mtest_formatter--label
+zerosize;;_mtest_formatter--label
 #Dump (decimal)
 dataread1;>mtestaddr
 iowrite1;>io.decdump
@@ -306,19 +306,19 @@ gotoif;>goto--jumper-126
 goto;>goto--branch-126
 setreg1;>goto--jumper-126;goto--branch-126
 goto;>_mtest_formatter_blank--label
-null;;goto--jumper-126
+zerosize;;goto--jumper-126
 #Dump (character)
 dataread1;>mtesttmp
 iowrite1;>io.ttywr
 #goto 
 goto;>_mtest_formatter_end--label
 #label
-null;;_mtest_formatter_blank--label
+zerosize;;_mtest_formatter_blank--label
 #Dump (character)
 dataread1;>:\s
 iowrite1;>io.ttywr
 #label
-null;;_mtest_formatter_end--label
+zerosize;;_mtest_formatter_end--label
 #print
 fopwri1;:\v
 #return from subroutine.

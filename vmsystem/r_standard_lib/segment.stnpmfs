@@ -13,6 +13,8 @@ int9;segx1;0
 int9;segy1;0
 int9;segx2;0
 int9;segy2;0
+int9;segxBOTH;0
+int9;segyBOTH;0
 int9;b_tmp;0
 int9;@0;10x0
 int9;@1;10x1
@@ -110,4 +112,6 @@ label;seg_13
 label;seg_14
 label;seg_15
 label;segment_single
+label;segment_single_x_twin
+label;segment_single_y_twin
 table;seg_data;16;54

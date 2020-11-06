@@ -29,6 +29,8 @@ var segx1=0
 var segy1=0
 var segx2=0
 var segy2=0
+var segxBOTH=0
+var segyBOTH=0
 var b_tmp=0
 
 label init_pos
@@ -201,6 +203,12 @@ label newline
 	set posy
 return
 
+######### EXPLANATION 
+#for vertical segments (x1 x2 are same) use `segxBOTH, segy1, segy2` with `segment_single_x_twin`
+#for vertical segments (y1 y2 are same) use `segyBOTH, segx1, segx2` with `segment_single_y_twin`
+#otherwise, use `segx1, segx2, segy1, segy2` with `segment_single`
+#
+
 
 label segment_draw
 drawcolor color_on
@@ -209,28 +217,23 @@ drawcolor color_on
 	set boolt
 	if boolt,$false goto seg_1
 	val @0
-	set segx1
-	val @1
-	set segy1
-	val @0
-	set segx2
+	set segxBOTH
 	val @2
 	set segy2
-	gsub segment_single
+	val @1
+	set segy1
+	gsub segment_single_x_twin
 label seg_1
 ##1
 	tabr seg_data,@1,offset
 	set boolt
 	if boolt,$false goto seg_2
 	val @0
-	set segx1
-	val @0
+	set segxBOTH
 	set segy1
-	val @0
-	set segx2
 	val @1
 	set segy2
-	gsub segment_single
+	gsub segment_single_x_twin
 label seg_2
 ##2
 	tabr seg_data,@2,offset
@@ -238,13 +241,11 @@ label seg_2
 	if boolt,$false goto seg_3
 	val @0
 	set segx1
-	val @0
-	set segy1
+	set segyBOTH
 	val @1
 	set segx2
-	val @0
-	set segy2
-	gsub segment_single
+	
+	gsub segment_single_y_twin
 label seg_3
 ##3
 	tabr seg_data,@3,offset
@@ -253,40 +254,35 @@ label seg_3
 	val @1
 	set segx1
 	val @0
-	set segy1
+	set segyBOTH
 	val @2
 	set segx2
-	val @0
-	set segy2
-	gsub segment_single
+	
+	gsub segment_single_y_twin
 label seg_4
 ##4
 	tabr seg_data,@4,offset
 	set boolt
 	if boolt,$false goto seg_5
 	val @2
-	set segx1
+	set segxBOTH
 	val @0
 	set segy1
-	val @2
-	set segx2
 	val @1
 	set segy2
-	gsub segment_single
+	gsub segment_single_x_twin
 label seg_5
 ##5
 	tabr seg_data,@5,offset
 	set boolt
 	if boolt,$false goto seg_6
 	val @2
-	set segx1
+	set segxBOTH
+	set segy2
 	val @1
 	set segy1
-	val @2
-	set segx2
-	val @2
-	set segy2
-	gsub segment_single
+	
+	gsub segment_single_x_twin
 label seg_6
 ##6
 	tabr seg_data,@6,offset
@@ -294,12 +290,12 @@ label seg_6
 	if boolt,$false goto seg_7
 	val @2
 	set segx1
-	val @2
+	
+	set segy2
 	set segy1
 	val @1
 	set segx2
-	val @2
-	set segy2
+
 	gsub segment_single
 label seg_7
 ##7
@@ -310,10 +306,10 @@ label seg_7
 	set segx1
 	val @2
 	set segy1
+	set segy2
 	val @0
 	set segx2
-	val @2
-	set segy2
+	
 	gsub segment_single
 label seg_8
 ##8
@@ -322,11 +318,9 @@ label seg_8
 	if boolt,$false goto seg_9
 	val @0
 	set segx1
-	val @0
 	set segy1
 	val @1
 	set segx2
-	val @1
 	set segy2
 	gsub segment_single
 label seg_9
@@ -334,15 +328,12 @@ label seg_9
 	tabr seg_data,@9,offset
 	set boolt
 	if boolt,$false goto seg_10
-	val @1
-	set segx1
 	val @0
 	set segy1
 	val @1
-	set segx2
-	val @1
+	set segxBOTH
 	set segy2
-	gsub segment_single
+	gsub segment_single_x_twin
 label seg_10
 ##10
 	tabr seg_data,@10,offset
@@ -354,7 +345,6 @@ label seg_10
 	set segy1
 	val @1
 	set segx2
-	val @1
 	set segy2
 	gsub segment_single
 label seg_11
@@ -365,12 +355,9 @@ label seg_11
 	val @2
 	set segx1
 	val @1
-	set segy1
-	val @1
+	set segyBOTH
 	set segx2
-	val @1
-	set segy2
-	gsub segment_single
+	gsub segment_single_y_twin
 label seg_12
 ##12
 	tabr seg_data,@12,offset
@@ -378,11 +365,9 @@ label seg_12
 	if boolt,$false goto seg_13
 	val @2
 	set segx1
-	val @2
 	set segy1
 	val @1
 	set segx2
-	val @1
 	set segy2
 	gsub segment_single
 label seg_13
@@ -390,15 +375,12 @@ label seg_13
 	tabr seg_data,@13,offset
 	set boolt
 	if boolt,$false goto seg_14
-	val @1
-	set segx1
 	val @2
 	set segy1
 	val @1
-	set segx2
-	val @1
+	set segxBOTH
 	set segy2
-	gsub segment_single
+	gsub segment_single_x_twin
 label seg_14
 ##14
 	tabr seg_data,@14,offset
@@ -410,7 +392,6 @@ label seg_14
 	set segy1
 	val @1
 	set segx2
-	val @1
 	set segy2
 	gsub segment_single
 label seg_15
@@ -421,12 +402,10 @@ label seg_15
 	val @0
 	set segx1
 	val @1
-	set segy1
-	val @1
+	
 	set segx2
-	val @1
-	set segy2
-	gsub segment_single
+	set segyBOTH
+	gsub segment_single_y_twin
 
 
 
@@ -468,3 +447,59 @@ label segment_single
 	drawline
 return
 
+label segment_single_x_twin
+	
+	get1 segxBOTH
+	get2 width
+	asm mul
+	get2 current_x
+	asm add
+	asm iowrite1;>plot.x1
+	asm iowrite1;>plot.x2
+	
+	
+	get1 segy1
+	get2 height
+	asm mul
+	get2 posy
+	asm add
+	asm iowrite1;>plot.y1
+	
+	
+	get1 segy2
+	get2 height
+	asm mul
+	get2 posy
+	asm add
+	asm iowrite1;>plot.y2
+	
+	drawline
+return
+
+label segment_single_y_twin
+	
+	get1 segx1
+	get2 width
+	asm mul
+	get2 current_x
+	asm add
+	asm iowrite1;>plot.x1
+	
+	
+	get1 segyBOTH
+	get2 height
+	asm mul
+	get2 posy
+	asm add
+	asm iowrite1;>plot.y1
+	asm iowrite1;>plot.y2
+	
+	get1 segx2
+	get2 width
+	asm mul
+	get2 current_x
+	asm add
+	asm iowrite1;>plot.x2
+	
+	drawline
+return

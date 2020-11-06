@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=quicktest
 head-nspin=stdnsp
@@ -19,7 +19,7 @@ null;0;boolcache
 null;10x1;$true
 null;10x0;$false
 #label
-null;;MAIN--label
+zerosize;;MAIN--label
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
@@ -224,7 +224,7 @@ goto;>goto--jumper-22
 setreg1;>goto--jumper-22;goto--branch-22
 s1push1
 goto;>soundtest--label
-null;;goto--jumper-22
+zerosize;;goto--jumper-22
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:2
@@ -233,7 +233,7 @@ goto;>goto--jumper-23
 setreg1;>goto--jumper-23;goto--branch-23
 s1push1
 goto;>info--label
-null;;goto--jumper-23
+zerosize;;goto--jumper-23
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:3
@@ -242,7 +242,7 @@ goto;>goto--jumper-24
 setreg1;>goto--jumper-24;goto--branch-24
 s1push1
 goto;>QTM.memtest_slow--label
-null;;goto--jumper-24
+zerosize;;goto--jumper-24
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:4
@@ -251,7 +251,7 @@ goto;>goto--jumper-25
 setreg1;>goto--jumper-25;goto--branch-25
 s1push1
 goto;>QTM.memtest_fast--label
-null;;goto--jumper-25
+zerosize;;goto--jumper-25
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
@@ -262,7 +262,7 @@ gotoif;>goto--branch-27
 goto;>goto--jumper-27
 s1pop1;;goto--branch-27
 gotoreg1
-null;;goto--jumper-27
+zerosize;;goto--jumper-27
 #conditional return
 dataread1;>kb
 dataread2;>:Q
@@ -270,11 +270,11 @@ gotoif;>goto--branch-28
 goto;>goto--jumper-28
 s1pop1;;goto--branch-28
 gotoreg1
-null;;goto--jumper-28
+zerosize;;goto--jumper-28
 #goto 
 goto;>MAIN--label
 #label
-null;;soundtest--label
+zerosize;;soundtest--label
 #prline
 fopwri1;:2
 fopwri1;:2
@@ -318,7 +318,7 @@ iowrite1;>snd.1.stop#SSTNPL Source Line: '42'
 s1pop1
 gotoreg1
 #label
-null;;info--label
+zerosize;;info--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #50
 ioread1;>io.ttycolor#SSTNPL Source Line: '50' 
@@ -348,7 +348,7 @@ goto;>goto--jumper-53
 setreg1;>goto--jumper-53;goto--branch-53
 s1push1
 goto;>true--label
-null;;goto--jumper-53
+zerosize;;goto--jumper-53
 #conditional subroutine goto
 dataread1;>boolcache
 dataread2;>$false
@@ -357,7 +357,7 @@ goto;>goto--jumper-54
 setreg1;>goto--jumper-54;goto--branch-54
 s1push1
 goto;>false--label
-null;;goto--jumper-54
+zerosize;;goto--jumper-54
 #prline
 fopwri1;:C
 fopwri1;:P
@@ -429,7 +429,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;false--label
+zerosize;;false--label
 #prline
 fopwri1;:N
 fopwri1;:O
@@ -438,7 +438,7 @@ fopwri1;:\n
 s1pop1
 gotoreg1
 #label
-null;;true--label
+zerosize;;true--label
 #prline
 fopwri1;:Y
 fopwri1;:E

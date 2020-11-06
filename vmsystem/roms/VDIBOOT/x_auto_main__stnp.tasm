@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=auto_main
 head-nspin=stdnsp
@@ -24,9 +24,9 @@ null;10x2;@2
 setreg1;>goto--jumper-5
 s1push1
 goto;>BootUp--label
-null;;goto--jumper-5
+zerosize;;goto--jumper-5
 #label
-null;;MAIN--label
+zerosize;;MAIN--label
 #prline
 fopwri1;:p
 fopwri1;:l
@@ -247,7 +247,7 @@ goto;>goto--jumper-23
 setreg1;>goto--jumper-23;goto--branch-23
 s1push1
 goto;>vdi_serial--label
-null;;goto--jumper-23
+zerosize;;goto--jumper-23
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:2
@@ -256,7 +256,7 @@ goto;>goto--jumper-24
 setreg1;>goto--jumper-24;goto--branch-24
 s1push1
 goto;>qtest.MAIN--label
-null;;goto--jumper-24
+zerosize;;goto--jumper-24
 #conditional stop
 dataread1;>kb
 dataread2;>:q
@@ -264,7 +264,7 @@ gotoif;>goto--branch-25
 goto;>goto--jumper-25
 stop;;goto--branch-25
 
-null;;goto--jumper-25
+zerosize;;goto--jumper-25
 #conditional stop
 dataread1;>kb
 dataread2;>:Q
@@ -272,7 +272,7 @@ gotoif;>goto--branch-26
 goto;>goto--jumper-26
 stop;;goto--branch-26
 
-null;;goto--jumper-26
+zerosize;;goto--jumper-26
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:b
@@ -281,7 +281,7 @@ goto;>goto--jumper-27
 setreg1;>goto--jumper-27;goto--branch-27
 s1push1
 goto;>BootUp--label
-null;;goto--jumper-27
+zerosize;;goto--jumper-27
 #conditional subroutine goto
 dataread1;>kb
 dataread2;>:B
@@ -290,16 +290,16 @@ goto;>goto--jumper-28
 setreg1;>goto--jumper-28;goto--branch-28
 s1push1
 goto;>BootUp--label
-null;;goto--jumper-28
+zerosize;;goto--jumper-28
 #goto 
 goto;>MAIN--label
 #label
-null;;BootUp--label
+zerosize;;BootUp--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-32
 s1push1
 goto;>splash--label
-null;;goto--jumper-32
+zerosize;;goto--jumper-32
 #vdi mode set
 dataread1;>@1
 iowrite1;>vdi.cli.status
@@ -382,7 +382,7 @@ iowrite1;>io.textcolor
 s1pop1
 gotoreg1
 #label
-null;;splash--label
+zerosize;;splash--label
 #Set text colors
 dataread1;>*++0---
 iowrite1;>io.textcolor
@@ -682,7 +682,7 @@ iowrite1;>io.textcolor
 s1pop1
 gotoreg1
 #label
-null;;vdi_serial--label
+zerosize;;vdi_serial--label
 #Set text colors
 dataread1;>*0++--0
 iowrite1;>io.textcolor
@@ -762,7 +762,7 @@ gotoif;>goto--branch-83
 goto;>goto--jumper-83
 s1pop1;;goto--branch-83
 gotoreg1
-null;;goto--jumper-83
+zerosize;;goto--jumper-83
 #conditional stop
 dataread1;>exitcode
 dataread2;>@2
@@ -770,7 +770,7 @@ gotoif;>goto--branch-84
 goto;>goto--jumper-84
 stop;;goto--branch-84
 
-null;;goto--jumper-84
+zerosize;;goto--jumper-84
 #return from subroutine.
 s1pop1
 gotoreg1
