@@ -4,26 +4,11 @@ gsub dosargs.getentry
 
 textcolor *++0---
 
-tabstrc dosargs.buffer,@0,@0,command
-	set cmdflg
-	if cmdflg,@1 gsub command_txe_help
-	if cmdflg,@1 =validflg @1
-tabstrc dosargs.buffer,@0,@0,overview
-	set cmdflg
-	if cmdflg,@1 gsub overview
-	if cmdflg,@1 =validflg @1
-tabstrc dosargs.buffer,@0,@0,tools
-	set cmdflg
-	if cmdflg,@1 gsub tools
-	if cmdflg,@1 =validflg @1
-tabstrc dosargs.buffer,@0,@0,toys
-	set cmdflg
-	if cmdflg,@1 gsub toys
-	if cmdflg,@1 =validflg @1
-tabstrc dosargs.buffer,@0,@0,/?
-	set cmdflg
-	if cmdflg,@1 gsub help_help
-	if cmdflg,@1 =validflg @1
+{tabstrc dosargs.buffer,@0,@0,command / set cmdflg / if cmdflg,@1 gsub command_txe_help / if cmdflg,@1 =validflg @1}
+{tabstrc dosargs.buffer,@0,@0,overview / set cmdflg / if cmdflg,@1 gsub overview / if cmdflg,@1 =validflg @1}
+{tabstrc dosargs.buffer,@0,@0,tools / set cmdflg / if cmdflg,@1 gsub tools / if cmdflg,@1 =validflg @1}
+{tabstrc dosargs.buffer,@0,@0,toys / set cmdflg / if cmdflg,@1 gsub toys / if cmdflg,@1 =validflg @1}
+{tabstrc dosargs.buffer,@0,@0,/? / set cmdflg / if cmdflg,@1 gsub help_help / if cmdflg,@1 =validflg @1}
 if validflg,@0 gsub Errortext
 vdi rstld -1 command.txe
 stop

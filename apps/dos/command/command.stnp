@@ -13,98 +13,58 @@ label startup
 #marks program as backup, so the state restore doesn't occur when restored. (avoids endless loop)
 	if sysbak,$false gsub version
 	if sysbak,$false gsub help_ready_splash
-	val @1
-	set sysbak
+	{val @1 / set sysbak}
 	
 	
 	#prline READY.
 	vdimode @1
 	##setup command prompt library##
-		val @70
-		set cp.max
-		
-		val @0
-		set cp.clearbuffer
+		{val @70 / set cp.max}
+		{val @0 / set cp.clearbuffer}
 	breset2
 goto main
 
 label help_ready_splash
-	textcolor *+++---
-	prline Type '?' for help. READY.
+	{textcolor *+++--- / prline Type '?' for help. READY.}
 return
 
 
 ##variables##
-var cmdflg=0
-var validflg=0
-var drive=:A
+{var cmdflg=0 / var validflg=0 / var drive=:A}
 
 
 
 
 label main
-	textcolor *0+0---
-	chardump drive
-	print :\>
-	textcolor *+++---
-	gsub cp.getentry
+	{textcolor *0+0--- / chardump drive / print :\>}
+	{textcolor *+++--- / gsub cp.getentry / newline}
 	
-	newline
-	val 0
-	set cmdflg
-	set validflg
-	tabstrc cp.buffer,@0,@0,?
-		set cmdflg
-		if cmdflg,@1 gsub help
-		if cmdflg,@1 =validflg @1
-	tabstrc cp.buffer,@0,@0,vdi
-		set cmdflg
-		if cmdflg,@1 gsub vdi
-		if cmdflg,@1 =validflg @1
-	tabstrc cp.buffer,@0,@0,drives
-		set cmdflg
-		if cmdflg,@1 gsub drives
-		if cmdflg,@1 =validflg @1
-	tabstrc cp.buffer,@0,@0,ver
-		set cmdflg
-		if cmdflg,@1 gsub version
-		if cmdflg,@1 =validflg @1
-	tabstrc cp.buffer,@0,@0,dir
-		set cmdflg
-		if cmdflg,@1 gsub directory_list
-		if cmdflg,@1 =validflg @1
-	tabstrc cp.buffer,@0,@0,shutdown
-		set cmdflg
-		if cmdflg,@1 gsub shutdown
-		if cmdflg,@1 =validflg @1
+	{val 0 / set cmdflg / set validflg}
+	
+	#help
+		{tabstrc cp.buffer,@0,@0,? / set cmdflg / if cmdflg,@1 gsub help / if cmdflg,@1 =validflg @1}
+	#vdi
+		{tabstrc cp.buffer,@0,@0,vdi / set cmdflg / if cmdflg,@1 gsub vdi / if cmdflg,@1 =validflg @1}
+	#drives
+		{tabstrc cp.buffer,@0,@0,drives / set cmdflg / if cmdflg,@1 gsub drives / if cmdflg,@1 =validflg @1}
+	#ver
+		{tabstrc cp.buffer,@0,@0,ver / set cmdflg / if cmdflg,@1 gsub version / if cmdflg,@1 =validflg @1}
+	#dir
+		{tabstrc cp.buffer,@0,@0,dir / set cmdflg / if cmdflg,@1 gsub directory_list / if cmdflg,@1 =validflg @1}
+	#shutdown
+		{tabstrc cp.buffer,@0,@0,shutdown / set cmdflg / if cmdflg,@1 gsub shutdown / if cmdflg,@1 =validflg @1}
+	
 	####DRIVE SELECT/RUN####
 		#A
-			tabstrc cp.buffer,@0,@0,a:
-				set cmdflg
-				if cmdflg,@1 gsub driveA
-				if cmdflg,@1 =validflg @1
-			tabstrc cp.buffer,@0,@0,A:
-				set cmdflg
-				if cmdflg,@1 gsub driveA
-				if cmdflg,@1 =validflg @1
+			{tabstrc cp.buffer,@0,@0,a: / set cmdflg / if cmdflg,@1 gsub driveA / if cmdflg,@1 =validflg @1}
+			{tabstrc cp.buffer,@0,@0,A: / set cmdflg / if cmdflg,@1 gsub driveA / if cmdflg,@1 =validflg @1}
 		#B
-			tabstrc cp.buffer,@0,@0,b:
-				set cmdflg
-				if cmdflg,@1 gsub driveB
-				if cmdflg,@1 =validflg @1
-			tabstrc cp.buffer,@0,@0,B:
-				set cmdflg
-				if cmdflg,@1 gsub driveB
-				if cmdflg,@1 =validflg @1
+			{tabstrc cp.buffer,@0,@0,b: / set cmdflg / if cmdflg,@1 gsub driveB / if cmdflg,@1 =validflg @1}
+			{tabstrc cp.buffer,@0,@0,B: / set cmdflg / if cmdflg,@1 gsub driveB / if cmdflg,@1 =validflg @1}
 		#R (RAMDISK)
-			tabstrc cp.buffer,@0,@0,r:
-				set cmdflg
-				if cmdflg,@1 gsub driveR
-				if cmdflg,@1 =validflg @1
-			tabstrc cp.buffer,@0,@0,R:
-				set cmdflg
-				if cmdflg,@1 gsub driveR
-				if cmdflg,@1 =validflg @1
+			{tabstrc cp.buffer,@0,@0,r: / set cmdflg / if cmdflg,@1 gsub driveR / if cmdflg,@1 =validflg @1}
+			{tabstrc cp.buffer,@0,@0,R: / set cmdflg / if cmdflg,@1 gsub driveR / if cmdflg,@1 =validflg @1}
+
 		
 	if validflg,@0 gsub invalid
 goto main
@@ -112,15 +72,10 @@ goto main
 
 ### DRIVE SELECT/RUN SUBROUTINES ###
 label driveA
-	val 0
-	set extflg
+	{val 0 / set extflg}
 	ifmore cp.size,@4 gsub extcheck
 	
-	ifless cp.size,@3 begin
-		val :A
-		set drive
-		return
-	end
+	{ifless cp.size,@3 begin / val :A / set drive / return / end}
 	
 	vdi membak 2 command.state.tri
 	vdin rstld 0 
@@ -135,14 +90,11 @@ label driveA
 return
 
 label driveB
-	val 0
-	set extflg
+	{val 0 / set extflg}
 	
-	ifless cp.size,@3 begin
-		val :B
-		set drive
-		return
-	end
+	ifmore cp.size,@4 gsub extcheck
+	
+	{ifless cp.size,@3 begin / val :B / set drive / return / end}
 	
 	vdi membak 2 command.state.tri
 	vdin rstld 1 
@@ -158,15 +110,10 @@ return
 
 
 label driveR
-	val 0
-	set extflg
+	{val 0 / set extflg}
 	ifmore cp.size,@4 gsub extcheck
 	
-	ifless cp.size,@3 begin
-		val :R
-		set drive
-		return
-	end
+	{ifless cp.size,@3 begin / val :R / set drive / return / end}
 	
 	
 	vdi membak 2 command.state.tri
@@ -218,14 +165,10 @@ label directory_list_R
 	gsub vdi_outloop
 return
 
-var driveref=:0
-var invalid_charcheck=0
-var extflg=0
-var extoffset=0
+{var driveref=:0 / var invalid_charcheck=0 / var extflg=0 / var extoffset=0}
 
 label invalid
-	val 0
-	set extflg
+	{val 0 / set extflg}
 	ifmore cp.size,@4 gsub extcheck
 	textcolor *++0---
 	
@@ -278,42 +221,34 @@ label extcheck
 return
 
 label cmd_run_send_newline
-	if extflg,$false begin
-		vdi .txe#send newline
-		return
-	end
+	{if extflg,$false begin / vdi .txe#send newline / return / end}
 	
 	vdi 
 	return
 
 
 #get character from iterator var, write to VDI serial INPUT
-var run_s_tmp=0
-var run_tobuffer_flg=0
+{var run_s_tmp=0 / var run_tobuffer_flg=0}
 
 label run_send_setup
-val @0
-set run_tobuffer_flg
+	{val @0 / set run_tobuffer_flg}
 return
 
 label run_send_char_exec
 	tabr cp.buffer,run_iter,@0
 	set run_s_tmp
 	if run_tobuffer_flg,@0 begin
-		if run_s_tmp,:\s =run_tobuffer_flg @1
-		if run_s_tmp,:\s return
+		{if run_s_tmp,:\s begin / val @1 / set run_tobuffer_flg / return / end}
 		
-		get run_s_tmp
-			asm iowrite1;>vdi.cli.in
-			return
+		{get run_s_tmp / asm iowrite1;>vdi.cli.in}
+		return
 	end
 		bwrhead2 run_s_tmp
 return
 
 
 label run_send_char
-	tabr cp.buffer,run_iter,@0
-	asm iowrite1;>vdi.cli.in
+	{tabr cp.buffer,run_iter,@0 / asm iowrite1;>vdi.cli.in}
 	return
 
 label pattern_print_char
@@ -322,20 +257,18 @@ return
 
 label version
 	gsub splash
-	textcolor *0++---
-	prline  Command Interpreter v2
+	{textcolor *0++--- / prline  Command Interpreter v2}
 return
 
 var vdi_vdioutput_buffer=0
 ##VDI command processor##
 label vdi
 	####ensure VDI serial is in mode 1####
-		val @1
-		asm iowrite1;>vdi.cli.status
+		{val @1 / asm iowrite1;>vdi.cli.status}
+		
 	####Write output from shell input buffer (cp.buffer) to VDI serial input.####
 	uiter vdi_iter,vdi_buffiter,@4,cp.itersize
-	val :\n
-	asm iowrite1;>vdi.cli.in
+	{val :\n / asm iowrite1;>vdi.cli.in}
 	
 	goto vdi_outloop
 	
@@ -372,22 +305,14 @@ return
 
 
 label splash
-	textcolor *+++0--
-	print S
-	textcolor *+++00-
-	print B
-	textcolor *+++-0-
-	print T
-	textcolor *+++-00
-	print C
-	textcolor *+++--0
-	print V
-	textcolor *+++0-0
-	print M
-	textcolor *+++---
-	print -
-	textcolor *0++---
-	print DOS
+	{textcolor *+++0-- / print S}
+	{textcolor *+++00- / print B}
+	{textcolor *+++-0- / print T}
+	{textcolor *+++-00 / print C}
+	{textcolor *+++--0 / print V}
+	{textcolor *+++0-0 / print M}
+	{textcolor *+++--- / print -}
+	{textcolor *0++--- / print DOS}
 	textcolor *+++---
 return
 

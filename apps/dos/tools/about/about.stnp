@@ -46,21 +46,14 @@ stop
 
 
 label splash
-	textcolor *+++0--
-	print S
-	textcolor *+++00-
-	print B
-	textcolor *+++-0-
-	print T
-	textcolor *+++-00
-	print C
-	textcolor *+++--0
-	print V
-	textcolor *+++0-0
-	print M
-	textcolor *+++---
-	print -
-	textcolor *0++---
-	print DOS
+	{textcolor *+++0-- / print S}
+	{textcolor *+++00- / print B}
+	{textcolor *+++-0- / print T}
+	{textcolor *+++-00 / print C}
+	{textcolor *+++--0 / print V}
+	{textcolor *+++0-0 / print M}
+	{textcolor *+++--- / print -}
+	{textcolor *0++--- / print DOS}
 	textcolor *+++---
 return
+
