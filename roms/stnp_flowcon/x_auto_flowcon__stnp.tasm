@@ -16,6 +16,8 @@ null;10x0;f
 null;10x3;@3
 null;10x100;@100
 null;10x11;@11
+null;10x-200;@-200
+null;10x170;@170
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -43,7 +45,7 @@ gotoif;>goto--jumper-8
 goto;>goto--branch-8
 goto;>flow--con-x-1;goto--branch-8
 
-null;;goto--jumper-8
+zerosize;;goto--jumper-8
 #prline
 fopwri1;:e
 fopwri1;:x
@@ -72,7 +74,7 @@ fopwri1;:a
 fopwri1;:r
 fopwri1;:.
 fopwri1;:\n
-null;;flow--con-x-1
+zerosize;;flow--con-x-1
 #conditional flow control begin
 dataread1;>foo
 dataread2;>bar
@@ -80,7 +82,7 @@ gotoif;>goto--branch-12
 goto;>goto--jumper-12
 goto;>flow--con-x-2;goto--branch-12
 
-null;;goto--jumper-12
+zerosize;;goto--jumper-12
 #prline
 fopwri1;:e
 fopwri1;:x
@@ -110,7 +112,7 @@ fopwri1;:a
 fopwri1;:r
 fopwri1;:.
 fopwri1;:\n
-null;;flow--con-x-2
+zerosize;;flow--con-x-2
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -133,7 +135,7 @@ datawrite1;>foo
 setreg1;>goto--jumper-21
 s1push1
 goto;>test2--label
-null;;goto--jumper-21
+zerosize;;goto--jumper-21
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -167,7 +169,7 @@ datawrite1;>bar
 setreg1;>goto--jumper-28
 s1push1
 goto;>test2--label
-null;;goto--jumper-28
+zerosize;;goto--jumper-28
 #print newline
 fopwri1;:\n
 #val (used with set to change variable value during runtime.)
@@ -178,7 +180,7 @@ datawrite1;>foo
 setreg1;>goto--jumper-33
 s1push1
 goto;>test3--label
-null;;goto--jumper-33
+zerosize;;goto--jumper-33
 #print newline
 fopwri1;:\n
 #val (used with set to change variable value during runtime.)
@@ -189,14 +191,14 @@ datawrite1;>foo
 setreg1;>goto--jumper-39
 s1push1
 goto;>test3--label
-null;;goto--jumper-39
+zerosize;;goto--jumper-39
 #print newline
 fopwri1;:\n
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-43
 s1push1
 goto;>fortest--label
-null;;goto--jumper-43
+zerosize;;goto--jumper-43
 #prline
 fopwri1;:b
 fopwri1;:o
@@ -211,7 +213,7 @@ gotoif;>keyprompt--loop-47
 #stop (shutdown vm)
 stop
 #label
-null;;test2--label
+zerosize;;test2--label
 #conditional flow control begin
 dataread1;>foo
 dataread2;>bar
@@ -219,7 +221,7 @@ gotoif;>goto--jumper-52
 goto;>goto--branch-52
 goto;>flow--con-x-3;goto--branch-52
 
-null;;goto--jumper-52
+zerosize;;goto--jumper-52
 #prline
 fopwri1;:t
 fopwri1;:e
@@ -244,7 +246,7 @@ gotoif;>goto--jumper-54
 goto;>goto--branch-54
 goto;>flow--con-x-4;goto--branch-54
 
-null;;goto--jumper-54
+zerosize;;goto--jumper-54
 #prline
 fopwri1;:w
 fopwri1;:o
@@ -269,7 +271,7 @@ fopwri1;:C
 fopwri1;:K
 fopwri1;:!
 fopwri1;:\n
-null;;flow--con-x-4
+zerosize;;flow--con-x-4
 #conditional flow control break
 dataread1;>bar
 dataread2;>@2
@@ -277,7 +279,7 @@ gotoif;>goto--jumper-57
 goto;>goto--branch-57
 goto;>flow--con-x-3;goto--branch-57
 
-null;;goto--jumper-57
+zerosize;;goto--jumper-57
 #prline
 fopwri1;:b
 fopwri1;:a
@@ -288,12 +290,12 @@ fopwri1;:s
 fopwri1;:\s
 fopwri1;:2
 fopwri1;:\n
-null;;flow--con-x-3
+zerosize;;flow--con-x-3
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;test3--label
+zerosize;;test3--label
 #conditional flow control begin
 dataread1;>foo
 dataread2;>@0
@@ -307,7 +309,7 @@ gotoif;>goto--jumper-64
 goto;>goto--branch-64
 goto;>flow--con-x-5;goto--branch-64
 
-null;;goto--jumper-64
+zerosize;;goto--jumper-64
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -343,7 +345,7 @@ fopwri1;:O
 fopwri1;:O
 fopwri1;:!
 fopwri1;:\n
-null;;flow--con-x-5
+zerosize;;flow--con-x-5
 #conditional flow control begin
 dataread1;>foo
 dataread2;>@0
@@ -357,7 +359,7 @@ gotoif;>goto--branch-68
 goto;>goto--jumper-68
 goto;>flow--con-x-6;goto--branch-68
 
-null;;goto--jumper-68
+zerosize;;goto--jumper-68
 #prline
 fopwri1;:f
 fopwri1;:o
@@ -439,18 +441,18 @@ fopwri1;:n
 fopwri1;:t
 fopwri1;:.
 fopwri1;:\n
-null;;flow--con-x-6
+zerosize;;flow--con-x-6
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
-null;;fortest--label
-#Downward range iterator
+zerosize;;fortest--label
+#For Loop: Downward range iterator
 dataread1;>@10
 datawrite1;>f
-null;;for-drange-loopback-80
+zerosize;;for-drange-loopback-80
 goto;>for-drange-subpos-80
-null;;flowloop--con-x-7--start
+zerosize;;flowloop--con-x-7--start
 dataread1;>f
 dataread2;>@1
 sub
@@ -459,20 +461,20 @@ dataread2;>@1
 gotoifmore;>for-drange-loopback-80
 gotoif;>for-drange-loopback-80
 goto;>flowloop--con-x-7
-null;;for-drange-subpos-80
+zerosize;;for-drange-subpos-80
 #Dump (decimal)
 dataread1;>f
 iowrite1;>io.decdump
 goto;>flowloop--con-x-7--start
-null;;flowloop--con-x-7
+zerosize;;flowloop--con-x-7
 #print newline
 fopwri1;:\n
-#Downward range iterator
+#For Loop: Upward range iterator
 dataread1;>@1
 datawrite1;>f
-null;;for-drange-loopback-86
+zerosize;;for-drange-loopback-86
 goto;>for-drange-subpos-86
-null;;flowloop--con-x-8--start
+zerosize;;flowloop--con-x-8--start
 dataread1;>f
 dataread2;>@1
 add
@@ -481,20 +483,20 @@ dataread2;>@10
 gotoifless;>for-drange-loopback-86
 gotoif;>for-drange-loopback-86
 goto;>flowloop--con-x-8
-null;;for-drange-subpos-86
+zerosize;;for-drange-subpos-86
 #Dump (decimal)
 dataread1;>f
 iowrite1;>io.decdump
 goto;>flowloop--con-x-8--start
-null;;flowloop--con-x-8
+zerosize;;flowloop--con-x-8
 #print newline
 fopwri1;:\n
-#Downward range iterator
+#For Loop: Upward range iterator
 dataread1;>@1
 datawrite1;>f
-null;;for-drange-loopback-92
+zerosize;;for-drange-loopback-92
 goto;>for-drange-subpos-92
-null;;flowloop--con-x-9--start
+zerosize;;flowloop--con-x-9--start
 dataread1;>f
 dataread2;>@2
 add
@@ -503,20 +505,20 @@ dataread2;>@10
 gotoifless;>for-drange-loopback-92
 gotoif;>for-drange-loopback-92
 goto;>flowloop--con-x-9
-null;;for-drange-subpos-92
+zerosize;;for-drange-subpos-92
 #Dump (decimal)
 dataread1;>f
 iowrite1;>io.decdump
 goto;>flowloop--con-x-9--start
-null;;flowloop--con-x-9
+zerosize;;flowloop--con-x-9
 #print newline
 fopwri1;:\n
-#Downward range iterator
+#For Loop: Upward range iterator
 dataread1;>@1
 datawrite1;>f
-null;;for-drange-loopback-98
+zerosize;;for-drange-loopback-98
 goto;>for-drange-subpos-98
-null;;flowloop--con-x-10--start
+zerosize;;flowloop--con-x-10--start
 dataread1;>f
 dataread2;>@3
 add
@@ -525,42 +527,68 @@ dataread2;>@10
 gotoifless;>for-drange-loopback-98
 gotoif;>for-drange-loopback-98
 goto;>flowloop--con-x-10
-null;;for-drange-subpos-98
+zerosize;;for-drange-subpos-98
 #Dump (decimal)
 dataread1;>f
 iowrite1;>io.decdump
 goto;>flowloop--con-x-10--start
-null;;flowloop--con-x-10
+zerosize;;flowloop--con-x-10
 #print newline
 fopwri1;:\n
-#Downward range iterator
+#For Loop: Upward range iterator
 dataread1;>@1
 datawrite1;>f
-null;;for-drange-loopback-104
-goto;>for-drange-subpos-104
-null;;flowloop--con-x-11--start
+zerosize;;for-drange-loopback-106
+goto;>for-drange-subpos-106
+zerosize;;flowloop--con-x-11--start
 dataread1;>f
 dataread2;>@1
 add
 datawrite1;>f
 dataread2;>@100
-gotoifless;>for-drange-loopback-104
-gotoif;>for-drange-loopback-104
+gotoifless;>for-drange-loopback-106
+gotoif;>for-drange-loopback-106
 goto;>flowloop--con-x-11
-null;;for-drange-subpos-104
+zerosize;;for-drange-subpos-106
 #Dump (decimal)
 dataread1;>f
 iowrite1;>io.decdump
 #conditional flow control break
 dataread1;>f
 dataread2;>@11
-gotoif;>goto--branch-107
-goto;>goto--jumper-107
-goto;>flowloop--con-x-11;goto--branch-107
+gotoif;>goto--branch-109
+goto;>goto--jumper-109
+goto;>flowloop--con-x-11;goto--branch-109
 
-null;;goto--jumper-107
+zerosize;;goto--jumper-109
 goto;>flowloop--con-x-11--start
-null;;flowloop--con-x-11
+zerosize;;flowloop--con-x-11
+#print newline
+fopwri1;:\n
+#For Loop: random range iterator
+dataread1;>@-200
+iowrite1;>rand1.start
+dataread1;>@170
+iowrite1;>rand1.end
+null;;for-random-iter-114
+zerosize;;for-random-loopback-114
+ioread1;>rand1.get
+datawrite1;>f
+goto;>for-random-subpos-114
+zerosize;;flowloop--con-x-12--start
+dataread1;>for-random-iter-114
+adddata1;10x1
+datawrite1;>for-random-iter-114
+dataread2;>@12
+gotoifless;>for-random-loopback-114
+gotoif;>for-random-loopback-114
+goto;>flowloop--con-x-12
+zerosize;;for-random-subpos-114
+#Dump (decimal)
+dataread1;>f
+iowrite1;>io.decdump
+goto;>flowloop--con-x-12--start
+zerosize;;flowloop--con-x-12
 #print newline
 fopwri1;:\n
 #return from subroutine.

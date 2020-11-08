@@ -74,7 +74,7 @@ end
 return
 
 
-
+#var arguments are: start,end,steps
 
 label fortest
 for f in drange @10,@1,@1
@@ -101,10 +101,21 @@ for f in urange @1,@10,@3
 
 end
 newline
+
+
 for f in urange @1,@100,@1
 	dumpd f
 	#test break inside for loops to be on safe side.
 	if f,@11 break
 end
+newline
+#var arguments for random mode are: random_start,random_end,loops
+
+for f in random @-200,@170,@12
+
+	dumpd f
+
+end
+
 newline
 return

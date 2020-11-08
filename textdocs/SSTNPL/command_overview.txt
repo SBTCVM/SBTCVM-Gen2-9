@@ -194,15 +194,28 @@ Command documentation:
 		NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
 		NOTE: 'break' will break from loop. 
 		
-		for [var1] in [mode] [start][end][step]
+		basic syntax:  
+			for [var1] in [mode] <args>
+			
+		NOTE: see specific mode sections for syntax & meaning of <args> section.
 		
-		NOTE: start, end, and step can be literals.
 		NOTE: var1 is created by for statement. should be unique to for 
 			loop. ESPECIALLY IF FOR LOOPS ARE NESTED!
 	
-		-----modes-----
+		-----range iterator modes-----
+		
+			for [var1] in [mode] [start][end][step]
+		NOTE: start, end, and step can be literals.
+		
 			urange :  count from [start] UP TO [end] by increments of [step]
 			drange :  count from [start] DOWN TO [end] by increments of [step]
+		
+		-----random range mode-----
+		
+			for [var1] in random [start][end][loops]
+		NOTE: start, end, & loops can be literals.
+		
+			random : set [var1] to a random value between [start] and [end] for [loops]
 
 --Gotos & conditionals:
 	label [name] : create a label with the name [name], for use with gotos.

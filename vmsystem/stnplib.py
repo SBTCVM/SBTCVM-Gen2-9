@@ -459,7 +459,7 @@ class in_for:
 		except IndexError:
 			return 1, keyword+": Line: " + str(lineno) + ": invalid argument sequence.'" + args + "'"
 		
-		if formode not in ["urange", "drange"]:
+		if formode not in ["urange", "drange", "random"]:
 			return 1, keyword+": Line: " + str(lineno) + ": '" + formode + "' is not a valid for mode."
 		
 		if isaliteral(start):
@@ -505,15 +505,18 @@ class in_for:
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		var, indummy, formode, modeargs = args.split(" ")
-		start, end, step = modeargs.split(",")
+		#moved this to each individual section below, so different for modes
+		#can have different argument names & numbers of arguments.
+		#start, end, step = modeargs.split(",")
 		blockname=fcon_begin(loop=True)
 		if formode=="drange":
-			destobj.write('''#Downward range iterator
+			start, end, step = modeargs.split(",")
+			destobj.write('''#For Loop: Downward range iterator
 dataread1;>''' + start + '''
 datawrite1;>''' + var + '''
-null;;for-drange-loopback-''' +  str(lineno) + '''
+zerosize;;for-drange-loopback-''' +  str(lineno) + '''
 goto;>for-drange-subpos-''' +  str(lineno) + '''
-null;;''' + fcon_loopback() + '''
+zerosize;;''' + fcon_loopback() + '''
 dataread1;>''' + var + '''
 dataread2;>''' + step + '''
 sub
@@ -525,12 +528,13 @@ goto;>''' + blockname + '''
 zerosize;;for-drange-subpos-''' +  str(lineno) + '''
 ''')
 		if formode=="urange":
-			destobj.write('''#Downward range iterator
+			start, end, step = modeargs.split(",")
+			destobj.write('''#For Loop: Upward range iterator
 dataread1;>''' + start + '''
 datawrite1;>''' + var + '''
-null;;for-drange-loopback-''' +  str(lineno) + '''
+zerosize;;for-drange-loopback-''' +  str(lineno) + '''
 goto;>for-drange-subpos-''' +  str(lineno) + '''
-null;;''' + fcon_loopback() + '''
+zerosize;;''' + fcon_loopback() + '''
 dataread1;>''' + var + '''
 dataread2;>''' + step + '''
 add
@@ -541,7 +545,30 @@ gotoif;>for-drange-loopback-''' +  str(lineno) + '''
 goto;>''' + blockname + '''
 zerosize;;for-drange-subpos-''' +  str(lineno) + '''
 ''')
-		
+		#helpful note: `null;;for-random-iter-<lineno>` stores true iteration
+		#count! DO NOT REPLACE IT WITH ZEROSIZE!
+		if formode=="random":
+			start, end, loops = modeargs.split(",")
+			destobj.write('''#For Loop: random range iterator
+dataread1;>''' + start + '''
+iowrite1;>rand1.start
+dataread1;>''' + end + '''
+iowrite1;>rand1.end
+null;;for-random-iter-''' +  str(lineno) + '''
+zerosize;;for-random-loopback-''' +  str(lineno) + '''
+ioread1;>rand1.get
+datawrite1;>''' + var + '''
+goto;>for-random-subpos-''' +  str(lineno) + '''
+zerosize;;''' + fcon_loopback() + '''
+dataread1;>for-random-iter-''' +  str(lineno) + '''
+adddata1;10x1
+datawrite1;>for-random-iter-''' +  str(lineno) + '''
+dataread2;>''' + loops + '''
+gotoifless;>for-random-loopback-''' +  str(lineno) + '''
+gotoif;>for-random-loopback-''' +  str(lineno) + '''
+goto;>''' + blockname + '''
+zerosize;;for-random-subpos-''' +  str(lineno) + '''
+''')
 		return
 
 #same as intcommon1, but supports literals.
