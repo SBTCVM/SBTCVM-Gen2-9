@@ -43,11 +43,11 @@ datawrite1;>remain5
 #conditional flow control begin
 dataread1;>remain3
 dataread2;>@0
-gotoif;>goto--jumper-12-1
-goto;>goto--branch-12-1
-goto;>flow--con-x-2;goto--branch-12-1
+gotoif;>goto--jumper-13-1
+goto;>goto--branch-13-1
+goto;>flow--con-x-2;goto--branch-13-1
 
-zerosize;;goto--jumper-12-1
+zerosize;;goto--jumper-13-1
 #print
 fopwri1;:f
 fopwri1;:i
@@ -57,11 +57,11 @@ zerosize;;flow--con-x-2
 #conditional flow control begin
 dataread1;>remain5
 dataread2;>@0
-gotoif;>goto--jumper-13-1
-goto;>goto--branch-13-1
-goto;>flow--con-x-3;goto--branch-13-1
+gotoif;>goto--jumper-14-1
+goto;>goto--branch-14-1
+goto;>flow--con-x-3;goto--branch-14-1
 
-zerosize;;goto--jumper-13-1
+zerosize;;goto--jumper-14-1
 #print
 fopwri1;:b
 fopwri1;:u
@@ -71,19 +71,19 @@ zerosize;;flow--con-x-3
 #conditional flow control begin
 dataread1;>remain3
 dataread2;>@0
-gotoif;>goto--branch-15-0
-goto;>goto--jumper-15-0
-goto;>flow--con-x-4;goto--branch-15-0
+gotoif;>goto--branch-15-1
+goto;>goto--jumper-15-1
+goto;>flow--con-x-4;goto--branch-15-1
 
-zerosize;;goto--jumper-15-0
+zerosize;;goto--jumper-15-1
 #conditional flow control begin
 dataread1;>remain5
 dataread2;>@0
-gotoif;>goto--branch-16-0
-goto;>goto--jumper-16-0
-goto;>flow--con-x-5;goto--branch-16-0
+gotoif;>goto--branch-15-2
+goto;>goto--jumper-15-2
+goto;>flow--con-x-5;goto--branch-15-2
 
-zerosize;;goto--jumper-16-0
+zerosize;;goto--jumper-15-2
 #Dump (decimal)
 dataread1;>f
 iowrite1;>io.decdump
