@@ -1,0 +1,23 @@
+ 
+var remain3=+
+var remain5=+
+
+
+for f in urange @1,@100,@1
+	divmod f,@3
+	set remain3
+	divmod f,@5
+	set remain5
+	
+	{if remain3,@0 begin / print fizz / end}
+	{if remain5,@0 begin / print buzz / end}
+	
+	ifnot remain3,@0 begin
+		ifnot remain5,@0 begin
+			dumpd f
+		end
+	end
+	newline
+end
+
+stop

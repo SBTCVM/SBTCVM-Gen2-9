@@ -16,11 +16,11 @@ datawrite1;>tempvar
 #conditional flow control begin
 dataread1;>tempvar
 dataread2;>@0
-gotoif;>goto--jumper-8
-goto;>goto--branch-8
-goto;>flow--con-x-1;goto--branch-8
+gotoif;>goto--jumper-8-0
+goto;>goto--branch-8-0
+goto;>flow--con-x-1;goto--branch-8-0
 
-zerosize;;goto--jumper-8
+zerosize;;goto--jumper-8-0
 #print newline
 fopwri1;:\n
 #vdi

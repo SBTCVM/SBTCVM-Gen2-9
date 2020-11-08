@@ -6,7 +6,23 @@ SSTNPL: SBTCVM Simplified Ternary Numeric Programming Language
 you may use spaces and/or tabs at the start of any line of code, at your leisure.
 Such whitespace will be ignored automatically.
 
+### Split Lines:
+	
+	Split lines can be used to put multiple commands on one line of code.
+	FAIR WARNING: be wary of using split lines and print statements! ;)
+		example:
+			{asm setreg1;10x1 / asm segreg2;10x1 / asm add / set somevar}
+		excerpt from a fizzbuzz demo: 
+			{if remain3,@0 begin / print fizz / end}
+			{if remain5,@0 begin / print buzz / end}
+		
 
+#line numbers in compiler messages:
+
+		1-0
+		
+	the left number is the real source line, while the right is used in 
+	split lines to identify individual commands.
 
 #### [nvalue] syntax for var, const, and val:####
 Literal prefixes are also acceptable

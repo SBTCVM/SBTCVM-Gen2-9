@@ -10,8 +10,8 @@ null;10x1;@1
 null;10x0;@0
 null;++0---;*++0---
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #4
-ioread1;>io.ttycolor#SSTNPL Source Line: '4' 
+#_______NOTE: this corresponds to SSTNPL source line #4-0
+ioread1;>io.ttycolor#SSTNPL Source Line: '4-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>has_tty_color
 #print newline
@@ -19,21 +19,21 @@ fopwri1;:\n
 #conditional subroutine goto
 dataread1;>has_tty_color
 dataread2;>@1
-gotoif;>goto--branch-9
-goto;>goto--jumper-9
-setreg1;>goto--jumper-9;goto--branch-9
+gotoif;>goto--branch-9-0
+goto;>goto--jumper-9-0
+setreg1;>goto--jumper-9-0;goto--branch-9-0
 s1push1
 goto;>bigsplash--label
-zerosize;;goto--jumper-9
+zerosize;;goto--jumper-9-0
 #conditional subroutine goto
 dataread1;>has_tty_color
 dataread2;>@0
-gotoif;>goto--branch-10
-goto;>goto--jumper-10
-setreg1;>goto--jumper-10;goto--branch-10
+gotoif;>goto--branch-10-0
+goto;>goto--jumper-10-0
+setreg1;>goto--jumper-10-0;goto--branch-10-0
 s1push1
 goto;>bigsplash_curses--label
-zerosize;;goto--jumper-10
+zerosize;;goto--jumper-10-0
 #Set text colors
 dataread1;>*++0---
 iowrite1;>io.textcolor
@@ -125,16 +125,16 @@ stop
 #label
 zerosize;;bigsplash--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #21
-include;dos/media/bigsplash.tas0#SSTNPL Source Line: '21' 
+#_______NOTE: this corresponds to SSTNPL source line #21-0
+include;dos/media/bigsplash.tas0#SSTNPL Source Line: '21-0' 
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 zerosize;;bigsplash_curses--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #26
-include;dos/media/bigsplash_curses.tas0#SSTNPL Source Line: '26' 
+#_______NOTE: this corresponds to SSTNPL source line #26-0
+include;dos/media/bigsplash_curses.tas0#SSTNPL Source Line: '26-0' 
 #return from subroutine.
 s1pop1
 gotoreg1

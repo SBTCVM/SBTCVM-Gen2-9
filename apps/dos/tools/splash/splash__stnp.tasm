@@ -58,20 +58,20 @@ fopwri1;:s
 fopwri1;:!
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #5
-setreg1;>image_offset1#SSTNPL Source Line: '5' 
+#_______NOTE: this corresponds to SSTNPL source line #5-0
+setreg1;>image_offset1#SSTNPL Source Line: '5-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-8
+setreg1;>goto--jumper-8-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-8
+zerosize;;goto--jumper-8-0
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-10
-gotoif;>keyprompt--loop-10
+ioread1;>io.ttyrd;keyprompt--loop-10-0
+gotoif;>keyprompt--loop-10-0
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
@@ -99,9 +99,9 @@ fopwri1;:x
 fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
-#module include: line 17: plrle_noalpha as pl
+#module include: line 17-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #18
-include;dos+media+dosfloppy.tas0;image_offset1#SSTNPL Source Line: '18' 
+#_______NOTE: this corresponds to SSTNPL source line #18-0
+include;dos+media+dosfloppy.tas0;image_offset1#SSTNPL Source Line: '18-0' 
 #END OF FILE

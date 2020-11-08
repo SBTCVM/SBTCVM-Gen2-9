@@ -16,10 +16,10 @@ null;+++--0;*+++--0
 null;+++0-0;*+++0-0
 null;0++---;*0++---
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-3
+setreg1;>goto--jumper-3-0
 s1push1
 goto;>about--label
-zerosize;;goto--jumper-3
+zerosize;;goto--jumper-3-0
 #prline
 fopwri1;:P
 fopwri1;:r
@@ -62,8 +62,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-5
-gotoif;>keyprompt--loop-5
+ioread1;>io.ttyrd;keyprompt--loop-5-0
+gotoif;>keyprompt--loop-5-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -190,10 +190,10 @@ iowrite1;>io.textcolor
 #print newline
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-19
+setreg1;>goto--jumper-19-0
 s1push1
 goto;>splash--label
-zerosize;;goto--jumper-19
+zerosize;;goto--jumper-19-0
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor

@@ -2069,6 +2069,10 @@ def compwrap(sourcepath):
 	print("SSTNPL: MAIN COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
 	
+	print("Pass B: preparse split lines")
+	mainret=mainl.p_preparser()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
 	print("Pass V: Parser Validation")
 	mainret=mainl.p_parsevalid()
 	if mainret[0]==1:
@@ -2272,15 +2276,38 @@ class mainloop:
 		self.valid_instructs=[]
 		for inst in self.instructs:
 			self.valid_instructs.extend(inst.keywords)
-	#parser validation pass
-	def p_parsevalid(self):
+		
+	def p_preparser(self):
 		self.srcobj.seek(0)
+		self.srclines=[]
 		lineno=0
 		for line in self.srcobj:
 			line=line.lstrip()
-			lineno+=1
 			if line.endswith("\n"):
 				line=line[:-1]
+			lineno+=1
+			if line.startswith("{"):
+				if not line.endswith("}"):
+					return 1, "Parser Error! (line " + str(lineno) + ") : split line not terminated with closing brace!"
+
+				line=line[1:-1]
+				line_subcount=0
+				for item in line.split(" / "):
+					line_subcount+=1
+					self.srclines.append([str(lineno) + "-" + str(line_subcount), item])
+			else:
+				self.srclines.append([str(lineno) + "-0", line])
+		return 0, None
+	#parser validation pass
+	def p_parsevalid(self):
+		#self.srcobj.seek(0)
+		#lineno=0
+		for line in self.srclines:
+			#line=line.lstrip()
+			#lineno+=1
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno, line=line
 			if '#' in line:
 				line=line.rsplit("#", 1)[0]
 			try:
@@ -2298,13 +2325,14 @@ class mainloop:
 		return 0, None
 	#pre-variables syntax check pass
 	def p0(self):
-		self.srcobj.seek(0)
-		lineno=0
-		for line in self.srcobj:
-			line=line.lstrip()
-			lineno+=1
-			if line.endswith("\n"):
-				line=line[:-1]
+		#self.srcobj.seek(0)
+		#lineno=0
+		for line in self.srclines:
+			#line=line.lstrip()
+			#lineno+=1
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno, line=line
 			if '#' in line:
 				line=line.rsplit("#", 1)[0]
 			try:
@@ -2321,13 +2349,14 @@ class mainloop:
 	
 	#constant syntax prepass (used instead of pass 0 for in_include & in_const)
 	def p_const(self):
-		self.srcobj.seek(0)
-		lineno=0
-		for line in self.srcobj:
-			line=line.lstrip()
-			lineno+=1
-			if line.endswith("\n"):
-				line=line[:-1]
+		#self.srcobj.seek(0)
+		#lineno=0
+		for line in self.srclines:
+			#line=line.lstrip()
+			#lineno+=1
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno, line=line
 			if '#' in line:
 				line=line.rsplit("#", 1)[0]
 			try:
@@ -2351,13 +2380,14 @@ class mainloop:
 		return 0, None
 	#variable parse & define pass.
 	def p1(self):
-		self.srcobj.seek(0)
-		lineno=0
-		for line in self.srcobj:
-			line=line.lstrip()
-			lineno+=1
-			if line.endswith("\n"):
-				line=line[:-1]
+		#self.srcobj.seek(0)
+		#lineno=0
+		for line in self.srclines:
+			#line=line.lstrip()
+			#lineno+=1
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno, line=line
 			if '#' in line:
 				line=line.rsplit("#", 1)[0]
 			try:
@@ -2378,13 +2408,14 @@ class mainloop:
 							self.tables[rvar.vname]=rvar
 	#post-variable syntax check pass. (i.e. checking if variable exists.)
 	def p2(self):
-		self.srcobj.seek(0)
-		lineno=0
-		for line in self.srcobj:
-			line=line.lstrip()
-			lineno+=1
-			if line.endswith("\n"):
-				line=line[:-1]
+		#self.srcobj.seek(0)
+		#lineno=0
+		for line in self.srclines:
+			#line=line.lstrip()
+			#lineno+=1
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno, line=line
 			if '#' in line:
 				line=line.rsplit("#", 1)[0]
 			try:
@@ -2411,13 +2442,14 @@ class mainloop:
 			if rvar.vtype==nptype_int and rvar.vname not in self.comped_nvars and rvar.frommodule==0:
 				self.outobj.write('null;' + rvar.vdata + ';' + rvar.vname + "\n")
 				self.comped_nvars.extend([rvar.vname])
-		self.srcobj.seek(0)
-		lineno=0
-		for line in self.srcobj:
-			line=line.lstrip()
-			lineno+=1
-			if line.endswith("\n"):
-				line=line[:-1]
+		#self.srcobj.seek(0)
+		#lineno=0
+		for line in self.srclines:
+			#line=line.lstrip()
+			#lineno+=1
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno, line=line
 			if '#' in line:
 				line=line.rsplit("#", 1)[0]
 			try:
