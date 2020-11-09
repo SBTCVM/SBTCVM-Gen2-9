@@ -221,7 +221,7 @@ label extcheck
 return
 
 label cmd_run_send_newline
-	{if extflg,$false begin / vdi .txe#send newline / return / end}
+	{if extflg,$false begin / vdi .txe / return / end}
 	
 	vdi 
 	return

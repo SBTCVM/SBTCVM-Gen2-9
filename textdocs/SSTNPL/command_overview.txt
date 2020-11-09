@@ -10,14 +10,20 @@ Such whitespace will be ignored automatically.
 	
 	Split lines can be used to put multiple commands on one line of code.
 	FAIR WARNING: be wary of using split lines and print statements! ;)
+	
+	HELPFUL REMINDER: be sure you remove comments from the middle of adapted 
+	split-line statements!
 		example:
 			{asm setreg1;10x1 / asm segreg2;10x1 / asm add / set somevar}
 		excerpt from a fizzbuzz demo: 
 			{if remain3,@0 begin / print fizz / end}
 			{if remain5,@0 begin / print buzz / end}
-		
 
-#line numbers in compiler messages:
+### Macros
+	see macros.txt
+	
+
+###line numbers in compiler messages:
 
 		1-0
 		

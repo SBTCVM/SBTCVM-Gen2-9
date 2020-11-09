@@ -1,0 +1,4 @@
+int9;testvar1;0
+label;test_frommod
+label;testroutine
+macro;sub_test;{val %0% / set %mod%testvar1 / gsub %mod%testroutine}

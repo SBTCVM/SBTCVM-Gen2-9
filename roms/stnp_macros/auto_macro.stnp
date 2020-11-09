@@ -1,0 +1,16 @@
+
+
+
+
+
+def hello1 {prline Hello %0%}
+def hello2 {prline Hello %0% & %1%!}
+ 
+!hello1(Sam)
+!hello1(Bob)
+
+!hello2(Sam, Bob)
+!hello2(Steve,Phill)
+
+keyprompt
+stop

@@ -1,0 +1,8 @@
+!macro_module.sub_test(@270)
+
+gsub macro_module.test_frommod
+
+keyprompt
+stop
+
+include stnp_macros_module/macromodule as macro_module

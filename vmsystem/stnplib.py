@@ -13,6 +13,7 @@ nptype_str=3#not used
 nptype_label=4
 nptype_table=5
 nptype_const=6
+nptype_macro=7
 
 
 #SSTNPL compiler main routine library.
@@ -214,9 +215,7 @@ class in_include:
 	def __init__(self):
 		self.keywords=["include"]
 		self.varspacenames=[]
-	def p0(self, args, keyword, lineno):
-		return 0, None
-	def p_const(self, args, keyword, lineno):
+	def pmacro(self, args, keyword, lineno):
 		
 		#basic check
 		try:
@@ -240,6 +239,33 @@ class in_include:
 		if iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)==None:
 			return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': UNABLE TO FIND MODULE's '*.stmpmfs' VARIABLE MANIFEST FILE."
 		
+		#check manifest file for errors/corrupted data during first error check pass.
+		fname=iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)
+		fileobj=open(fname, "r")
+		varlist=[]
+		for f in fileobj:
+			f=f.replace("\n", "")
+			if ";" in f:
+				try:
+					flist=f.split(";", 2)
+					if flist[0]=="macro":
+						try:
+							name=varprefix + "." + flist[1]
+							code=flist[2]
+						except ValueError:
+							return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': MALFORMED MACRO ENTRY IN MANIFEST\n    '" + f + "'"
+						nvar=npvar(name, code, vtype=nptype_macro)
+						nvar.modprefix=varprefix + "."
+						varlist.extend([nvar])
+				except IndexError:
+					return 1, keyword+": Line: " + str(lineno) + ": '" + basename + "': MALFORMED DATAFIELD IN MANIFEST\n    '" + f + "'"
+		fileobj.close()
+		return varlist
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p_const(self, args, keyword, lineno):
+		
+		basename, foo, varprefix = args.split(" ")
 		#check manifest file for errors/corrupted data during first error check pass.
 		fname=iofuncts.findtrom(basename, ext=".stnpmfs", exitonfail=0, dirauto=1)
 		fileobj=open(fname, "r")
@@ -2068,7 +2094,10 @@ def compwrap(sourcepath):
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL: MAIN COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
-	
+	print("Pass MD: preparse macro definitions")
+	mainret=mainl.p_macrodef()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
 	print("Pass B: preparse split lines")
 	mainret=mainl.p_preparser()
 	if mainret[0]==1:
@@ -2117,6 +2146,14 @@ def modcomp(sourcepath):
 	sourcefile=open(sourcepath, 'r')
 	print("SSTNPL: MODULE COMPILER STARTUP:")
 	mainl=mainloop(sourcefile, destpath, sourcepath, bpname)
+	print("Pass MD: preparse macro definitions")
+	mainret=mainl.p_macrodef()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
+	print("Pass B: preparse split lines")
+	mainret=mainl.p_preparser()
+	if mainret[0]==1:
+		sys.exit(mainret[1])
 	print("Pass V: Parser Validation")
 	mainret=mainl.p_parsevalid()
 	if mainret[0]==1:
@@ -2154,6 +2191,39 @@ def DO_buffer(num):
 	in_str_out(["bprinthead" + num + "n"], ">buffer." + num + ".write.head", newl=False),
 	in_str_out(["bprinttail" + num + "n"], ">buffer." + num + ".write.tail", newl=False)]
 
+class in_macro_def:
+	def __init__(self):
+		self.keywords=["def"]
+	def pmacro(self, args, keyword, lineno):
+		try:
+			name, code = args.split(" ", 1)
+			for f in name:
+				if f not in varvalid:
+					return 1, "def: (line " + str(lineno) + "): invalid character '" + f + "' in macro name '" + name + "'"
+		except ValueError:
+			return 1, "def: Syntax Error! must use form 'def name code'"
+		return [npvar(name, code, vtype=nptype_macro)]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		return
+
+def macroarg_count(macro_code):
+	argcnt=0
+	incode=True
+	while incode:
+		key="%" + str(argcnt) + "%"
+		if key in macro_code:
+			argcnt+=1
+		else:
+			incode=False
+	return argcnt
+	
+	
 #SSTNPL Compiler Engine class.
 class mainloop:
 	def __init__(self, srcobj, destpath, sourcepath, bpname):
@@ -2169,6 +2239,7 @@ class mainloop:
 		##############################
 		#master instruction list
 		self.instructs=[in_var(),
+		in_macro_def(),
 		in_include(),
 		in_label(),
 		in_table(),
@@ -2268,7 +2339,7 @@ class mainloop:
 		##############################
 		self.bpname=bpname
 		self.labels=[]
-		
+		self.macros={}
 		#run iterative instruction setups:
 		for f in ["1", "2", "3", "4"]:
 			self.instructs.extend(DO_buffer(f))
@@ -2276,20 +2347,92 @@ class mainloop:
 		self.valid_instructs=[]
 		for inst in self.instructs:
 			self.valid_instructs.extend(inst.keywords)
-		
-	def p_preparser(self):
+	#parse macro definitions
+	def p_macrodef(self):
 		self.srcobj.seek(0)
-		self.srclines=[]
+		self.srclines_macro=[]
 		lineno=0
 		for line in self.srcobj:
 			line=line.lstrip()
 			if line.endswith("\n"):
 				line=line[:-1]
 			lineno+=1
+			if '#' in line:
+				line=line.rsplit("#", 1)[0]
+			try:
+				keyword, data = line.split(" ", 1)
+			except ValueError:
+				keyword = line
+				data=""
+			for inst in self.instructs:
+				if keyword in inst.keywords:
+					try:
+						
+						retvals = inst.pmacro(data, keyword, lineno)
+						if retvals!=None:
+							if retvals!=[]:
+								if retvals[0]==1:
+									return 1, retvals[1]
+								else:
+									for rvar in retvals:
+										if rvar.vtype==nptype_macro:
+											self.macros[rvar.vname]=rvar
+					except AttributeError:
+						pass
+			self.srclines_macro.append(line)
+			if line.startswith("{"):
+				print(line)
+		return 0, None
+		
+	def p_preparser(self):
+		self.srcobj.seek(0)
+		self.srclines=[]
+		lineno=0
+		for line in self.srclines_macro:
+			#line=line.lstrip()
+			#if line.endswith("\n"):
+			#	line=line[:-1]
+			lineno+=1
+			#macro usage parser
+			if line.startswith("!"):
+				if not line.endswith(")"):
+					return 1, "Parser Error! (line " + str(lineno) + "): split line not terminated with closing ')' !"
+				line=line[1:-1]
+				
+				args=line.split("(", 1)
+				#check if name is specified & args are structured correctly
+				if len(args)!=2:
+					return 1, "Macro Error! (line " + str(lineno) + "): must specify !name(arg,arg2,arg3...)!"
+				#check if macro exists
+				name, args = args
+				args=args.split(",")
+				if name not in self.macros:
+					return 1, "Macro Error! (line " + str(lineno) + "): Macro '" + name + "' Does not exist."
+				#argument count check
+				macro_npvar=self.macros[name]
+				macro_args=macroarg_count(macro_npvar.vdata)
+				if not len(args)==macro_args:
+					return 1, "Macro Error! (line " + str(lineno) + "): Argument Mismatch! '" + str(macro_args) + "' required by '" + name + "'."
+				newline=macro_npvar.vdata
+				#replace placeholders with code
+				argcnt=0
+				if "%mod%" in newline:
+					try:
+						newline=newline.replace("%mod%", macro_npvar.modprefix)
+					except AttributeError:
+						newline=newline.replace("%mod%", "")
+				for f in args:
+					#allow for cannonical name(arg, arg, arg) form found in other languages.
+					if f.startswith(" "):
+						f=f[1:]
+					newline=newline.replace("%" + str(argcnt) + "%", f)
+					argcnt+=1
+				line=newline
+			#split_line parser
 			if line.startswith("{"):
 				if not line.endswith("}"):
-					return 1, "Parser Error! (line " + str(lineno) + ") : split line not terminated with closing brace!"
-
+					print(line)
+					return 1, "Parser Error! (line " + str(lineno) + "): split line not terminated with closing brace!"
 				line=line[1:-1]
 				line_subcount=0
 				for item in line.split(" / "):
@@ -2308,8 +2451,8 @@ class mainloop:
 			#if line.endswith("\n"):
 			#	line=line[:-1]
 			lineno, line=line
-			if '#' in line:
-				line=line.rsplit("#", 1)[0]
+			#if '#' in line:
+			#	line=line.rsplit("#", 1)[0]
 			try:
 				keyword, data = line.split(" ", 1)
 			except ValueError:
@@ -2333,8 +2476,8 @@ class mainloop:
 			#if line.endswith("\n"):
 			#	line=line[:-1]
 			lineno, line=line
-			if '#' in line:
-				line=line.rsplit("#", 1)[0]
+			#if '#' in line:
+			#	line=line.rsplit("#", 1)[0]
 			try:
 				keyword, data = line.split(" ", 1)
 			except ValueError:
@@ -2357,8 +2500,8 @@ class mainloop:
 			#if line.endswith("\n"):
 			#	line=line[:-1]
 			lineno, line=line
-			if '#' in line:
-				line=line.rsplit("#", 1)[0]
+			#if '#' in line:
+			#	line=line.rsplit("#", 1)[0]
 			try:
 				keyword, data = line.split(" ", 1)
 			except ValueError:
@@ -2388,8 +2531,8 @@ class mainloop:
 			#if line.endswith("\n"):
 			#	line=line[:-1]
 			lineno, line=line
-			if '#' in line:
-				line=line.rsplit("#", 1)[0]
+			#if '#' in line:
+			#	line=line.rsplit("#", 1)[0]
 			try:
 				keyword, data = line.split(" ", 1)
 			except ValueError:
@@ -2416,8 +2559,8 @@ class mainloop:
 			#if line.endswith("\n"):
 			#	line=line[:-1]
 			lineno, line=line
-			if '#' in line:
-				line=line.rsplit("#", 1)[0]
+			#if '#' in line:
+			#	line=line.rsplit("#", 1)[0]
 			try:
 				keyword, data = line.split(" ", 1)
 			except ValueError:
@@ -2450,8 +2593,8 @@ class mainloop:
 			#if line.endswith("\n"):
 			#	line=line[:-1]
 			lineno, line=line
-			if '#' in line:
-				line=line.rsplit("#", 1)[0]
+			#if '#' in line:
+			#	line=line.rsplit("#", 1)[0]
 			try:
 				keyword, data = line.split(" ", 1)
 			except ValueError:
@@ -2474,6 +2617,10 @@ class mainloop:
 			mfsfile.write('table;' + f + ";" + str(rvar.vdata[0]) + ";" + str(rvar.vdata[1]) + "\n")
 		for f in localconstants:
 			mfsfile.write('const;' + f + ";" + localconstants[f] + "\n")
+		for f in self.macros:
+			d=self.macros[f]
+			mfsfile.write('macro;' + d.vname + ";" + d.vdata + "\n")
+
 		mfsfile.close()
 			
 	

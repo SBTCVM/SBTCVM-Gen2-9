@@ -1,0 +1,74 @@
+ 
+# SSTNPL Macro system
+
+While SSTNPL lacks a function system (and lacks recursion capacity to a large degree)
+It does have a statically compiled macro feature to help supplement this.
+
+#LIMITATIONS:
+	- you CANNOT define macros within:
+		- other macros
+		- ANY split-line blocks. (example for identification: {val @0 / set somevar}
+	- you CANNOT use macros within:
+		- other macros
+		- ANY split-line blocks. (example for identification: {val @0 / set somevar}
+	
+
+### define macros
+
+	def [name] [code]
+	
+	example 1:
+	
+		def test {prline %0%---%1%---%2%}
+	
+	Note: %0%, %1%, etc. are arguments. the number of arguments
+	required by a macro is determined by the number of these numbered placeholders.
+	
+	they MUST START AT ZERO! (%0%)
+	
+
+### using macros:
+	
+	!name(arg1, arg2, arg3, etc...)
+	
+	example 1:
+		
+		!test(A. B, C)
+		
+		with the above example, this will create the following code:
+		
+			{prline A---B---C}
+	
+
+
+### using macros with modules:
+	For modules, a special macro placeholder is available:
+	
+		%mod%
+		
+	This allows a macro in a module, to generate valid code that 
+	refrences variables in that module, regardless of weither its
+	used in that module, or code that includes that module:
+	
+	the following macro can function within and outside of a module it 
+	is defined in.
+	
+		def sub_test {val %0% / set %mod%testvar1 / gsub %mod%testroutine}
+	
+	using it in the module:
+		
+		!sub_test(@270)
+		
+		this will translate as:
+		
+			{val @270 / set testvar1 / gsub testroutine}
+		
+	using in code that 'include's the module as 'test':
+	
+		!test.sub_test(@75)
+		
+		this will translate as:
+		
+			{val @75 / set test.testvar1 / gsub test.testroutine}
+	
+

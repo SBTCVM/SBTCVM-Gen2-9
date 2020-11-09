@@ -1,0 +1,2 @@
+stnp --module %xwd%/macromodule.stnp
+stnp %xwd% 
