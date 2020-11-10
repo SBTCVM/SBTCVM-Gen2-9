@@ -2380,8 +2380,8 @@ class mainloop:
 					except AttributeError:
 						pass
 			self.srclines_macro.append(line)
-			if line.startswith("{"):
-				print(line)
+			#if line.startswith("{"):
+			#	print(line)
 		return 0, None
 		
 	def p_preparser(self):
@@ -2431,7 +2431,7 @@ class mainloop:
 			#split_line parser
 			if line.startswith("{"):
 				if not line.endswith("}"):
-					print(line)
+					#print(line)
 					return 1, "Parser Error! (line " + str(lineno) + "): split line not terminated with closing brace!"
 				line=line[1:-1]
 				line_subcount=0

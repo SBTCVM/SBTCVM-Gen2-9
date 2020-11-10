@@ -32,7 +32,8 @@ return
 ##variables##
 {var cmdflg=0 / var validflg=0 / var drive=:A}
 
-
+#define macro to simplify command parser boilerplate.
+def cmd {tabstrc cp.buffer,@0,@0,%0% / set cmdflg / if cmdflg,@1 gsub %1% / if cmdflg,@1 =validflg @1}
 
 
 label main
@@ -41,30 +42,24 @@ label main
 	
 	{val 0 / set cmdflg / set validflg}
 	
-	#help
-		{tabstrc cp.buffer,@0,@0,? / set cmdflg / if cmdflg,@1 gsub help / if cmdflg,@1 =validflg @1}
-	#vdi
-		{tabstrc cp.buffer,@0,@0,vdi / set cmdflg / if cmdflg,@1 gsub vdi / if cmdflg,@1 =validflg @1}
-	#drives
-		{tabstrc cp.buffer,@0,@0,drives / set cmdflg / if cmdflg,@1 gsub drives / if cmdflg,@1 =validflg @1}
-	#ver
-		{tabstrc cp.buffer,@0,@0,ver / set cmdflg / if cmdflg,@1 gsub version / if cmdflg,@1 =validflg @1}
-	#dir
-		{tabstrc cp.buffer,@0,@0,dir / set cmdflg / if cmdflg,@1 gsub directory_list / if cmdflg,@1 =validflg @1}
-	#shutdown
-		{tabstrc cp.buffer,@0,@0,shutdown / set cmdflg / if cmdflg,@1 gsub shutdown / if cmdflg,@1 =validflg @1}
+	!cmd(?, help)
+	!cmd(vdi, vdi)
+	!cmd(drives, drives)
+	!cmd(ver, version)
+	!cmd(dir, directory_list)
+	!cmd(shutdown, shutdown)
+	
 	
 	####DRIVE SELECT/RUN####
 		#A
-			{tabstrc cp.buffer,@0,@0,a: / set cmdflg / if cmdflg,@1 gsub driveA / if cmdflg,@1 =validflg @1}
-			{tabstrc cp.buffer,@0,@0,A: / set cmdflg / if cmdflg,@1 gsub driveA / if cmdflg,@1 =validflg @1}
+		!cmd(a:, driveA)
+		!cmd(A:, driveA)
 		#B
-			{tabstrc cp.buffer,@0,@0,b: / set cmdflg / if cmdflg,@1 gsub driveB / if cmdflg,@1 =validflg @1}
-			{tabstrc cp.buffer,@0,@0,B: / set cmdflg / if cmdflg,@1 gsub driveB / if cmdflg,@1 =validflg @1}
+		!cmd(b:, driveB)
+		!cmd(B:, driveB)
 		#R (RAMDISK)
-			{tabstrc cp.buffer,@0,@0,r: / set cmdflg / if cmdflg,@1 gsub driveR / if cmdflg,@1 =validflg @1}
-			{tabstrc cp.buffer,@0,@0,R: / set cmdflg / if cmdflg,@1 gsub driveR / if cmdflg,@1 =validflg @1}
-
+		!cmd(r:, driveR)
+		!cmd(R:, driveR)
 		
 	if validflg,@0 gsub invalid
 goto main
