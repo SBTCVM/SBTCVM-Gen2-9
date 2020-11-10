@@ -45,15 +45,18 @@ stop
 
 
 
+def prcolor {textcolor *%0% / print %1%}
+
 label splash
-	{textcolor *+++0-- / print S}
-	{textcolor *+++00- / print B}
-	{textcolor *+++-0- / print T}
-	{textcolor *+++-00 / print C}
-	{textcolor *+++--0 / print V}
-	{textcolor *+++0-0 / print M}
-	{textcolor *+++--- / print -}
-	{textcolor *0++--- / print DOS}
+	!prcolor(+++0--, S)
+	!prcolor(+++00-, B)
+	!prcolor(+++-0-, T)
+	!prcolor(+++-00, C)
+	!prcolor(+++--0, V)
+	!prcolor(+++0-0, M)
+	!prcolor(+++---, -)
+	!prcolor(0++---, DOS)
 	textcolor *+++---
 return
+
 

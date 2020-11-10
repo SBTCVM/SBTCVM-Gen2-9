@@ -2787,10 +2787,10 @@ gotoreg1
 #label
 zerosize;;shutdown--label
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-317-0
+setreg1;>goto--jumper-318-0
 s1push1
 goto;>splash--label
-zerosize;;goto--jumper-317-0
+zerosize;;goto--jumper-318-0
 #prline
 fopwri1;:\s
 fopwri1;:i
@@ -2822,6 +2822,6 @@ fopwri1;:.
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 325-0: comprompt as cp
+#module include: line 326-0: comprompt as cp
 includeas;comprompt,cp
 #END OF FILE

@@ -1,0 +1,76 @@
+#THIS DEMO USES THE 'comprompt' module.
+#(include statement at end of this file)
+
+### THIS IS DIFFERENT FROM THE ORDINARY `shelldemo` DEMO
+###    t uses the newer cmd, cmd_get, and cmd_else macros
+
+### SEE `shelldemo` for in-depth comments of comprompt's
+###    Overall usage.
+
+prline This is a basic multi-character-command shell demo.
+prline This specific variant is testing comprompt's cmd* macros.
+prline type 'help' for commands
+
+val @70
+set cp.max
+val @0
+set cp.clearbuffer
+var cmdflg=0
+var validcom=0
+
+
+##### SPECIAL PARAM FOR comprompt's cmd* MACRO API
+#controls wether the macros: `cmd_stop_yn` and `cmd_stop` should try to
+#  return to SBTCVM DOS before exiting. (on by default)
+
+#@1=ON. ON BY DEFAULT
+val @1
+set cp.DOSEXIT
+
+label main
+	textcolor *0++---
+	print >
+	
+	#place this before !cmd/!cmd_stop/!cmd_stop_YN macros in prompt loop!
+	!cp.cmd_get()
+	
+	#normal commands. ARGS: (<command_string>, <subroutine_label>
+		!cp.cmd(help, help_routine)
+		!cp.cmd(hello, hello_routine)
+	
+	#exit commands. macro with _YN suffix will ask whether to quit.
+		!cp.cmd_stop(quit)
+		!cp.cmd_stop_YN(askquit)
+	
+	#place this AFTER !cmd/!cmd_stop/!cmd_stop_YN macros in prompt loop,
+	#    To specify a subroutine to be run if no valid command is detected.
+	!cp.cmd_else(invalid)
+goto main
+
+
+label invalid
+	prline Unknown command
+return
+
+
+
+#hello command
+label hello_routine
+	prline And a good day to you, user. :D
+return
+
+#help command
+label help_routine
+	textcolor *+++--0
+	prline command Help:
+	prline help: this text
+	prline hello: print a greeting message.
+	prline quit: quit.
+	prline askquit: ask whether to quit.
+	textcolor *+++---
+	newline
+return
+
+#place comprompt include statement at END of file, OUTSIDE of normal code.
+include comprompt as cp
+

@@ -82,40 +82,40 @@ datawrite1;>RL_pointer
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #63
-datawrite1;>RL_GET_WIDE#SSTNPL Source Line: '63' 
+#_______NOTE: this corresponds to SSTNPL source line #63-0
+datawrite1;>RL_GET_WIDE#SSTNPL Source Line: '63-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #64
-datawrite1;>RL_GET_STARTCOL#SSTNPL Source Line: '64' 
+#_______NOTE: this corresponds to SSTNPL source line #64-0
+datawrite1;>RL_GET_STARTCOL#SSTNPL Source Line: '64-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #65
-instread1;;RL_GET_WIDE#SSTNPL Source Line: '65' 
+#_______NOTE: this corresponds to SSTNPL source line #65-0
+instread1;;RL_GET_WIDE#SSTNPL Source Line: '65-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>iwide
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #68
-dataread1;;RL_GET_STARTCOL#SSTNPL Source Line: '68' 
+#_______NOTE: this corresponds to SSTNPL source line #68-0
+dataread1;;RL_GET_STARTCOL#SSTNPL Source Line: '68-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>color_bool
 #conditional set
 dataread1;>color_bool
 dataread2;>@0
-gotoif;>goto--branch-70
-goto;>goto--jumper-70
-dataread1;>@-1;goto--branch-70
+gotoif;>goto--branch-70-0
+goto;>goto--jumper-70-0
+dataread1;>@-1;goto--branch-70-0
 datawrite1;>color_bool
-zerosize;;goto--jumper-70
+zerosize;;goto--jumper-70-0
 #plotter draw line
 dataread1;>off
 iowrite1;>plot.color
 #conditional flow control begin
 dataread1;>color_bool
 dataread2;>@-1
-gotoif;>goto--jumper-72
-goto;>goto--branch-72
-goto;>flow--con-x-1;goto--branch-72
+gotoif;>goto--jumper-72-0
+goto;>goto--branch-72-0
+goto;>flow--con-x-1;goto--branch-72-0
 
-zerosize;;goto--jumper-72
+zerosize;;goto--jumper-72-0
 #plotter draw line
 dataread1;>on
 iowrite1;>plot.color
@@ -130,26 +130,26 @@ datawrite1;>RL_pointer
 null;;flowloop--con-x-2--start
 dataread1;>data
 dataread2;>@0
-gotoif;>goto--branch-78
-goto;>goto--jumper-78
-goto;>flowloop--con-x-2;goto--branch-78
-zerosize;;goto--jumper-78
+gotoif;>goto--branch-78-0
+goto;>goto--jumper-78-0
+goto;>flowloop--con-x-2;goto--branch-78-0
+zerosize;;goto--jumper-78-0
 #conditional flow control begin
 dataread1;>banksel
 dataread2;>@1
-gotoif;>goto--jumper-81
-goto;>goto--branch-81
-goto;>flow--con-x-3;goto--branch-81
+gotoif;>goto--jumper-81-0
+goto;>goto--branch-81-0
+goto;>flow--con-x-3;goto--branch-81-0
 
-zerosize;;goto--jumper-81
+zerosize;;goto--jumper-81-0
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #83
-datawrite1;>RL_GET_INST#SSTNPL Source Line: '83' 
+#_______NOTE: this corresponds to SSTNPL source line #83-0
+datawrite1;>RL_GET_INST#SSTNPL Source Line: '83-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #84
-instread1;;RL_GET_INST#SSTNPL Source Line: '84' 
+#_______NOTE: this corresponds to SSTNPL source line #84-0
+instread1;;RL_GET_INST#SSTNPL Source Line: '84-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>data
 #set(1) (used after 2-op math, asm code, or get)
@@ -158,19 +158,19 @@ zerosize;;flow--con-x-3
 #conditional flow control begin
 dataread1;>banksel
 dataread2;>@-1
-gotoif;>goto--jumper-88
-goto;>goto--branch-88
-goto;>flow--con-x-4;goto--branch-88
+gotoif;>goto--jumper-88-0
+goto;>goto--branch-88-0
+goto;>flow--con-x-4;goto--branch-88-0
 
-zerosize;;goto--jumper-88
+zerosize;;goto--jumper-88-0
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #90
-datawrite1;>RL_GET_DATA#SSTNPL Source Line: '90' 
+#_______NOTE: this corresponds to SSTNPL source line #90-0
+datawrite1;>RL_GET_DATA#SSTNPL Source Line: '90-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #91
-dataread1;;RL_GET_DATA#SSTNPL Source Line: '91' 
+#_______NOTE: this corresponds to SSTNPL source line #91-0
+dataread1;;RL_GET_DATA#SSTNPL Source Line: '91-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>data
 #set(1) (used after 2-op math, asm code, or get)
@@ -178,8 +178,8 @@ datawrite1;>length_buff
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #95
-adddata1;10x1#SSTNPL Source Line: '95' 
+#_______NOTE: this corresponds to SSTNPL source line #95-0
+adddata1;10x1#SSTNPL Source Line: '95-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_pointer
 zerosize;;flow--con-x-4
@@ -191,19 +191,19 @@ datawrite1;>banksel
 #conditional flow control break
 dataread1;>data
 dataread2;>@0
-gotoif;>goto--branch-105
-goto;>goto--jumper-105
-goto;>flowloop--con-x-2;goto--branch-105
+gotoif;>goto--branch-105-0
+goto;>goto--jumper-105-0
+goto;>flowloop--con-x-2;goto--branch-105-0
 
-zerosize;;goto--jumper-105
+zerosize;;goto--jumper-105-0
 #conditional flow control begin
 dataread1;>data
 dataread2;>@1
-gotoifless;>goto--branch-106
-goto;>goto--jumper-106
-goto;>flow--con-x-5;goto--branch-106
+gotoifless;>goto--branch-106-0
+goto;>goto--jumper-106-0
+goto;>flow--con-x-5;goto--branch-106-0
 
-zerosize;;goto--jumper-106
+zerosize;;goto--jumper-106-0
 #Get signwise/tritwise inversion of var
 dataread1;>color_bool
 invert1
@@ -215,11 +215,11 @@ iowrite1;>plot.color
 #conditional flow control begin
 dataread1;>color_bool
 dataread2;>@-1
-gotoif;>goto--jumper-111
-goto;>goto--branch-111
-goto;>flow--con-x-6;goto--branch-111
+gotoif;>goto--jumper-111-0
+goto;>goto--branch-111-0
+goto;>flow--con-x-6;goto--branch-111-0
 
-zerosize;;goto--jumper-111
+zerosize;;goto--jumper-111-0
 #plotter draw line
 dataread1;>on
 iowrite1;>plot.color
@@ -228,11 +228,11 @@ zerosize;;flow--con-x-5
 #conditional flow control begin
 dataread1;>data
 dataread2;>@1
-gotoifless;>goto--jumper-115
-goto;>goto--branch-115
-goto;>flow--con-x-7;goto--branch-115
+gotoifless;>goto--jumper-115-0
+goto;>goto--branch-115-0
+goto;>flow--con-x-7;goto--branch-115-0
 
-zerosize;;goto--jumper-115
+zerosize;;goto--jumper-115-0
 #Get abs of var
 dataread1;>data
 abs1
@@ -245,10 +245,10 @@ zerosize;;flow--con-x-7
 null;;flowloop--con-x-8--start
 dataread1;>length_buff
 dataread2;>@0
-gotoif;>goto--branch-122
-goto;>goto--jumper-122
-goto;>flowloop--con-x-8;goto--branch-122
-zerosize;;goto--jumper-122
+gotoif;>goto--branch-122-0
+goto;>goto--jumper-122-0
+goto;>flowloop--con-x-8;goto--branch-122-0
+zerosize;;goto--jumper-122-0
 #plotter x pos 1
 dataread1;>px
 iowrite1;>plot.x1
@@ -260,8 +260,8 @@ dataread1;>px_rel
 #get2 (may be used with set2, and asm code.)
 dataread2;>length_buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #131
-add#SSTNPL Source Line: '131' 
+#_______NOTE: this corresponds to SSTNPL source line #131-0
+add#SSTNPL Source Line: '131-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>length_temp
 #val (used with set to change variable value during runtime.)
@@ -271,25 +271,25 @@ datawrite1;>length_final
 #conditional flow control begin
 dataread1;>length_temp
 dataread2;>iwide
-gotoifmore;>goto--jumper-135
-goto;>goto--branch-135
-goto;>flow--con-x-9;goto--branch-135
+gotoifmore;>goto--jumper-135-0
+goto;>goto--branch-135-0
+goto;>flow--con-x-9;goto--branch-135-0
 
-zerosize;;goto--jumper-135
+zerosize;;goto--jumper-135-0
 #get(1) (may be used with set, or asm code)
 dataread1;>length_temp
 #get2 (may be used with set2, and asm code.)
 dataread2;>iwide
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #139
-sub2#SSTNPL Source Line: '139' 
+#_______NOTE: this corresponds to SSTNPL source line #139-0
+sub2#SSTNPL Source Line: '139-0' 
 #set2 (used for asm, or get2)
 datawrite2;>length_final
 #get(1) (may be used with set, or asm code)
 dataread1;>length_buff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #142
-sub#SSTNPL Source Line: '142' 
+#_______NOTE: this corresponds to SSTNPL source line #142-0
+sub#SSTNPL Source Line: '142-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>length_buff
 #val (used with set to change variable value during runtime.)
@@ -308,23 +308,23 @@ dataread1;>length_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>pixx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #155
-mul#SSTNPL Source Line: '155' 
+#_______NOTE: this corresponds to SSTNPL source line #155-0
+mul#SSTNPL Source Line: '155-0' 
 #get2 (may be used with set2, and asm code.)
 dataread2;>px
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #157
-add#SSTNPL Source Line: '157' 
+#_______NOTE: this corresponds to SSTNPL source line #157-0
+add#SSTNPL Source Line: '157-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>px
 #conditional flow control begin
 dataread1;>breakRUNflg
 dataread2;>@1
-gotoif;>goto--jumper-161
-goto;>goto--branch-161
-goto;>flow--con-x-10;goto--branch-161
+gotoif;>goto--jumper-161-0
+goto;>goto--branch-161-0
+goto;>flow--con-x-10;goto--branch-161-0
 
-zerosize;;goto--jumper-161
+zerosize;;goto--jumper-161-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -349,11 +349,11 @@ dataread1;>length_buff
 #get2 (may be used with set2, and asm code.)
 dataread2;>pixx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #174
-mul#SSTNPL Source Line: '174' 
+#_______NOTE: this corresponds to SSTNPL source line #174-0
+mul#SSTNPL Source Line: '174-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #175
-adddata1;10x1#SSTNPL Source Line: '175' 
+#_______NOTE: this corresponds to SSTNPL source line #175-0
+adddata1;10x1#SSTNPL Source Line: '175-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>length_buff
 #plotter width
@@ -370,11 +370,11 @@ zerosize;;flowloop--con-x-8
 #conditional flow control begin
 dataread1;>px_rel
 dataread2;>iwide
-gotoifless;>goto--branch-183
-goto;>goto--jumper-183
-goto;>flow--con-x-11;goto--branch-183
+gotoifless;>goto--branch-183-0
+goto;>goto--jumper-183-0
+goto;>flow--con-x-11;goto--branch-183-0
 
-zerosize;;goto--jumper-183
+zerosize;;goto--jumper-183-0
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)

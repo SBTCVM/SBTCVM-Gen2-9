@@ -13,7 +13,13 @@ var itersize=0
 var shell_entry_zeroit=0
 var shell_entry_buff=0
 var shell_entry_chbuff=0
+
+
 ########CONFIGURATION OF INPUT CODE#########
+
+#controls wether the macros: `cmd_stop_yn` and `cmd_stop` should try to
+#  return to SBTCVM DOS before exiting. (on by default)
+var DOSEXIT=@1
 
 #####set this to @1 to enable 'purging of the input buffer'
 var clearbuffer=@0
@@ -22,6 +28,42 @@ var clearbuffer=@0
 var max=@80
 
 ############################################
+
+#### basic parser macros ####
+
+var cmdflg=0
+var validflg=0
+def cmd_get {val @0 / set %mod%validflg / set %mod%cmdflg / gsub %mod%getentry / newline}
+
+def cmd {tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %1% / if %mod%cmdflg,@1 =%mod%validflg @1}
+
+def cmd_stop {tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 goto %mod%exitcode}
+
+def cmd_stop_YN {tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %mod%stopYN / if %mod%cmdflg,@1 =%mod%validflg @1}
+
+def cmd_else {ifnot %mod%validflg,@1 gsub %0%}
+
+############################################
+
+var skb=0
+
+label stopYN
+	prline QUIT? [Y/N]
+	label stopYN_loop
+		keyprompt
+		set skb
+		if skb,:N return
+		if skb,:n return
+		if skb,:Y goto exitcode
+		if skb,:y goto exitcode
+	goto stopYN_loop
+
+label exitcode
+	if DOSEXIT,@1 begin
+		vdi rstld -1 command.txe
+		prline DOS NOT FOUND.
+	end
+	stop
 
 
 #entry buffer

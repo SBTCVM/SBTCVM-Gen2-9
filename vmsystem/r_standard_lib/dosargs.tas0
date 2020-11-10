@@ -119,28 +119,28 @@ datawrite1;>shell_entry_chbuff
 #conditional subroutine goto
 dataread1;>shell_entry_chbuff
 dataread2;>@0
-gotoif;>goto--branch-37
-goto;>goto--jumper-37
-setreg1;>goto--jumper-37;goto--branch-37
+gotoif;>goto--branch-37-0
+goto;>goto--jumper-37-0
+setreg1;>goto--jumper-37-0;goto--branch-37-0
 s1push1
 goto;>getentry_tobuff--label
-zerosize;;goto--jumper-37
+zerosize;;goto--jumper-37-0
 #conditional return
 dataread1;>shell_entry_chbuff
 dataread2;>@0
-gotoif;>goto--branch-38
-goto;>goto--jumper-38
-s1pop1;;goto--branch-38
+gotoif;>goto--branch-38-0
+goto;>goto--jumper-38-0
+s1pop1;;goto--branch-38-0
 gotoreg1
-zerosize;;goto--jumper-38
+zerosize;;goto--jumper-38-0
 #conditional goto
 dataread1;>size
 dataread2;>max
-gotoif;>goto--branch-41
-goto;>goto--jumper-41
-setreg1;>goto--jumper-41;goto--branch-41
+gotoif;>goto--branch-41-0
+goto;>goto--jumper-41-0
+setreg1;>goto--jumper-41-0;goto--branch-41-0
 goto;>getentry_loop--label
-zerosize;;goto--jumper-41
+zerosize;;goto--jumper-41-0
 #add (2op math)
 dataread1;>size
 dataread2;>@1
@@ -158,11 +158,11 @@ zerosize;;getentry_tobuff--label
 #conditional return
 dataread1;>size
 dataread2;>@0
-gotoif;>goto--branch-53
-goto;>goto--jumper-53
-s1pop1;;goto--branch-53
+gotoif;>goto--branch-53-0
+goto;>goto--jumper-53-0
+s1pop1;;goto--branch-53-0
 gotoreg1
-zerosize;;goto--jumper-53
+zerosize;;goto--jumper-53-0
 #stack reverse (uses stack 2)
 s2reverse
 #subtract (2op math)
@@ -180,52 +180,52 @@ datawrite1;>shell_entry_zeroit
 #Upward range iterator
 dataread1;>@0
 datawrite1;>getentry_tobuff_iter
-setreg1;>uiter-retpos-59;uiter-loopback-59
+setreg1;>uiter-retpos-59-0;uiter-loopback-59-0
 s1push1
 goto;>getentry_tobuff_loop--label
-dataread1;>getentry_tobuff_iter;uiter-retpos-59
+dataread1;>getentry_tobuff_iter;uiter-retpos-59-0
 setreg2;10x1
 add
 datawrite1;>getentry_tobuff_iter
 dataread2;>itersize
-gotoifless;>uiter-loopback-59
-gotoif;>uiter-loopback-59
+gotoifless;>uiter-loopback-59-0
+gotoif;>uiter-loopback-59-0
 
 #Upward range iterator
 dataread1;>size
 datawrite1;>getentry_pad_iter
-setreg1;>uiter-retpos-60;uiter-loopback-60
+setreg1;>uiter-retpos-60-0;uiter-loopback-60-0
 s1push1
 goto;>getentry_pad--label
-dataread1;>getentry_pad_iter;uiter-retpos-60
+dataread1;>getentry_pad_iter;uiter-retpos-60-0
 setreg2;10x1
 add
 datawrite1;>getentry_pad_iter
 dataread2;>shell_entry_zeroit
-gotoifless;>uiter-loopback-60
-gotoif;>uiter-loopback-60
+gotoifless;>uiter-loopback-60-0
+gotoif;>uiter-loopback-60-0
 
 #conditional return
 dataread1;>clearbuffer
 dataread2;>@0
-gotoif;>goto--branch-61
-goto;>goto--jumper-61
-s1pop1;;goto--branch-61
+gotoif;>goto--branch-61-0
+goto;>goto--jumper-61-0
+s1pop1;;goto--branch-61-0
 gotoreg1
-zerosize;;goto--jumper-61
+zerosize;;goto--jumper-61-0
 #Upward range iterator
 dataread1;>shell_entry_zeroit
 datawrite1;>getentry_pad_iter
-setreg1;>uiter-retpos-62;uiter-loopback-62
+setreg1;>uiter-retpos-62-0;uiter-loopback-62-0
 s1push1
 goto;>getentry_pad--label
-dataread1;>getentry_pad_iter;uiter-retpos-62
+dataread1;>getentry_pad_iter;uiter-retpos-62-0
 setreg2;10x1
 add
 datawrite1;>getentry_pad_iter
 dataread2;>max
-gotoifless;>uiter-loopback-62
-gotoif;>uiter-loopback-62
+gotoifless;>uiter-loopback-62-0
+gotoif;>uiter-loopback-62-0
 
 #return from subroutine.
 s1pop1
@@ -243,9 +243,9 @@ mul
 dataread2;>getentry_tobuff_iter
 add
 adddata1;>buffer--table
-datawrite1;>tabw--adrbuff--69
+datawrite1;>tabw--adrbuff--69-0
 dataread1;>shell_entry_buff
-datawrite1;;tabw--adrbuff--69
+datawrite1;;tabw--adrbuff--69-0
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -258,9 +258,9 @@ mul
 dataread2;>getentry_pad_iter
 add
 adddata1;>buffer--table
-datawrite1;>tabw--adrbuff--74
+datawrite1;>tabw--adrbuff--74-0
 dataread1;>@0
-datawrite1;;tabw--adrbuff--74
+datawrite1;;tabw--adrbuff--74-0
 #return from subroutine.
 s1pop1
 gotoreg1

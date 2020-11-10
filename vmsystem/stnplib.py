@@ -2412,7 +2412,8 @@ class mainloop:
 				macro_npvar=self.macros[name]
 				macro_args=macroarg_count(macro_npvar.vdata)
 				if not len(args)==macro_args:
-					return 1, "Macro Error! (line " + str(lineno) + "): Argument Mismatch! '" + str(macro_args) + "' required by '" + name + "'."
+					if not args==[""]:
+						return 1, "Macro Error! (line " + str(lineno) + "): Argument Mismatch! '" + str(macro_args) + "' required by '" + name + "'."
 				newline=macro_npvar.vdata
 				#replace placeholders with code
 				argcnt=0

@@ -27,11 +27,11 @@ datawrite1;>RL_pointer
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #22
-datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '22' 
+#_______NOTE: this corresponds to SSTNPL source line #22-0
+datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '22-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #23
-dataread1;;RL_GET_SIZE#SSTNPL Source Line: '23' 
+#_______NOTE: this corresponds to SSTNPL source line #23-0
+dataread1;;RL_GET_SIZE#SSTNPL Source Line: '23-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_SIZE
 #subtract (2op math)
@@ -49,16 +49,16 @@ datawrite1;>RL_pointer
 #Upward range iterator
 dataread1;>RL_pointer
 datawrite1;>rl_iter
-setreg1;>uiter-retpos-32;uiter-loopback-32
+setreg1;>uiter-retpos-32-0;uiter-loopback-32-0
 s1push1
 goto;>RL_decode_mainloop--label
-dataread1;>rl_iter;uiter-retpos-32
+dataread1;>rl_iter;uiter-retpos-32-0
 setreg2;10x1
 add
 datawrite1;>rl_iter
 dataread2;>RL_SIZE
-gotoifless;>uiter-loopback-32
-gotoif;>uiter-loopback-32
+gotoifless;>uiter-loopback-32-0
+gotoif;>uiter-loopback-32-0
 
 #return from subroutine.
 s1pop1
@@ -68,44 +68,44 @@ zerosize;;RL_decode_mainloop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #43
-datawrite1;>RL_GET_DATA#SSTNPL Source Line: '43' 
+#_______NOTE: this corresponds to SSTNPL source line #43-0
+datawrite1;>RL_GET_DATA#SSTNPL Source Line: '43-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #44
-dataread1;;RL_GET_DATA#SSTNPL Source Line: '44' 
+#_______NOTE: this corresponds to SSTNPL source line #44-0
+dataread1;;RL_GET_DATA#SSTNPL Source Line: '44-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_data
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #50
-datawrite1;>RL_GET_LEN#SSTNPL Source Line: '50' 
+#_______NOTE: this corresponds to SSTNPL source line #50-0
+datawrite1;>RL_GET_LEN#SSTNPL Source Line: '50-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #51
-instread1;;RL_GET_LEN#SSTNPL Source Line: '51' 
+#_______NOTE: this corresponds to SSTNPL source line #51-0
+instread1;;RL_GET_LEN#SSTNPL Source Line: '51-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_loopcount
 #conditional goto
 dataread1;>RL_loopcount
 dataread2;>@-1
-gotoif;>goto--branch-55
-goto;>goto--jumper-55
-setreg1;>goto--jumper-55;goto--branch-55
+gotoif;>goto--branch-55-0
+goto;>goto--jumper-55-0
+setreg1;>goto--jumper-55-0;goto--branch-55-0
 goto;>RL_newline--label
-zerosize;;goto--jumper-55
+zerosize;;goto--jumper-55-0
 #Upward range iterator
 dataread1;>@0
 datawrite1;>RL_ilvar
-setreg1;>uiter-retpos-59;uiter-loopback-59
+setreg1;>uiter-retpos-59-0;uiter-loopback-59-0
 s1push1
 goto;>RL_printlooop--label
-dataread1;>RL_ilvar;uiter-retpos-59
+dataread1;>RL_ilvar;uiter-retpos-59-0
 setreg2;10x1
 add
 datawrite1;>RL_ilvar
 dataread2;>RL_loopcount
-gotoifless;>uiter-loopback-59
-gotoif;>uiter-loopback-59
+gotoifless;>uiter-loopback-59-0
+gotoif;>uiter-loopback-59-0
 
 #return from subroutine.
 s1pop1
@@ -122,8 +122,8 @@ zerosize;;RL_printlooop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_data
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #68
-iowrite1;>io.cpack#SSTNPL Source Line: '68' 
+#_______NOTE: this corresponds to SSTNPL source line #68-0
+iowrite1;>io.cpack#SSTNPL Source Line: '68-0' 
 #return from subroutine.
 s1pop1
 gotoreg1

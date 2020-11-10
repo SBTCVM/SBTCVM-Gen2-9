@@ -3,8 +3,17 @@ int9;itersize;0
 int9;shell_entry_zeroit;0
 int9;shell_entry_buff;0
 int9;shell_entry_chbuff;0
+int9;DOSEXIT;10x1
 int9;clearbuffer;10x0
 int9;max;10x80
+int9;cmdflg;0
+int9;validflg;0
+int9;skb;0
+int9;:N;:N
+int9;:n;:n
+int9;:Y;:Y
+int9;:y;:y
+int9;@1;10x1
 int9;@0;10x0
 int9;:\n;:\n
 int9;:\n;:\n
@@ -25,6 +34,9 @@ int9;getentry_pad_iter;10x0
 int9;@0;10x0
 int9;@0;10x0
 int9;@0;10x0
+label;stopYN
+label;stopYN_loop
+label;exitcode
 label;getentry
 label;getentry_loop
 label;shell_entry_skipnewline
@@ -33,3 +45,8 @@ label;getentry_tobuff
 label;getentry_tobuff_loop
 label;getentry_pad
 table;buffer;85;1
+macro;cmd_stop_YN;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %mod%stopYN / if %mod%cmdflg,@1 =%mod%validflg @1}
+macro;cmd_else;{ifnot %mod%validflg,@1 gsub %0%}
+macro;cmd_get;{val @0 / set %mod%validflg / set %mod%cmdflg / gsub %mod%getentry / newline}
+macro;cmd;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %1% / if %mod%cmdflg,@1 =%mod%validflg @1}
+macro;cmd_stop;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 goto %mod%exitcode}

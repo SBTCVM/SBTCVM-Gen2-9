@@ -107,10 +107,10 @@ iowrite1;>io.textcolor
 #print
 fopwri1;:>
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-47
+setreg1;>goto--jumper-47-0
 s1push1
 goto;>cp.getentry--label
-zerosize;;goto--jumper-47
+zerosize;;goto--jumper-47-0
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
@@ -128,123 +128,123 @@ mul
 dataread2;>@0
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabstrc--adrbuff--61
-null;;tabstrc--adrbuff--61
+datawrite1;>tabstrc--adrbuff--61-0
+null;;tabstrc--adrbuff--61-0
 #reset output buffer to 0
 setreg1;0
-datawrite1;>tabstrc--outbuff--61
-null;;tabstrc--outbuff--61
+datawrite1;>tabstrc--outbuff--61-0
+null;;tabstrc--outbuff--61-0
 #recursive_parser
 #recursion
 
-setreg1;>tabstrc--adrbuff--61
+setreg1;>tabstrc--adrbuff--61-0
 
-datawrite1;>tabstrc--recurs-tabbuff--61_1
-dataread1;;tabstrc--recurs-tabbuff--61_1
-datawrite1;>tabstrc--recurs-tabbuff_read--61_1
-dataread1;;tabstrc--recurs-tabbuff_read--61_1
+datawrite1;>tabstrc--recurs-tabbuff--61-0_1
+dataread1;;tabstrc--recurs-tabbuff--61-0_1
+datawrite1;>tabstrc--recurs-tabbuff_read--61-0_1
+dataread1;;tabstrc--recurs-tabbuff_read--61-0_1
 
 setreg2;:h
 
 
-gotoif;>tabstrc--recurs-checkyes--61_1
-goto;>tabstrc--recurs-checkno--61_1
-zerosize;;tabstrc--recurs-checkyes--61_1
+gotoif;>tabstrc--recurs-checkyes--61-0_1
+goto;>tabstrc--recurs-checkno--61-0_1
+zerosize;;tabstrc--recurs-checkyes--61-0_1
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--61
+dataread1;>tabstrc--adrbuff--61-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--61
+datawrite1;>tabstrc--adrbuff--61-0
 
-setreg1;>tabstrc--adrbuff--61
+setreg1;>tabstrc--adrbuff--61-0
 
-datawrite1;>tabstrc--recurs-tabbuff--61_2
-dataread1;;tabstrc--recurs-tabbuff--61_2
-datawrite1;>tabstrc--recurs-tabbuff_read--61_2
-dataread1;;tabstrc--recurs-tabbuff_read--61_2
+datawrite1;>tabstrc--recurs-tabbuff--61-0_2
+dataread1;;tabstrc--recurs-tabbuff--61-0_2
+datawrite1;>tabstrc--recurs-tabbuff_read--61-0_2
+dataread1;;tabstrc--recurs-tabbuff_read--61-0_2
 
 setreg2;:e
 
 
-gotoif;>tabstrc--recurs-checkyes--61_2
-goto;>tabstrc--recurs-checkno--61_2
-zerosize;;tabstrc--recurs-checkyes--61_2
+gotoif;>tabstrc--recurs-checkyes--61-0_2
+goto;>tabstrc--recurs-checkno--61-0_2
+zerosize;;tabstrc--recurs-checkyes--61-0_2
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--61
+dataread1;>tabstrc--adrbuff--61-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--61
+datawrite1;>tabstrc--adrbuff--61-0
 
-setreg1;>tabstrc--adrbuff--61
+setreg1;>tabstrc--adrbuff--61-0
 
-datawrite1;>tabstrc--recurs-tabbuff--61_3
-dataread1;;tabstrc--recurs-tabbuff--61_3
-datawrite1;>tabstrc--recurs-tabbuff_read--61_3
-dataread1;;tabstrc--recurs-tabbuff_read--61_3
+datawrite1;>tabstrc--recurs-tabbuff--61-0_3
+dataread1;;tabstrc--recurs-tabbuff--61-0_3
+datawrite1;>tabstrc--recurs-tabbuff_read--61-0_3
+dataread1;;tabstrc--recurs-tabbuff_read--61-0_3
 
 setreg2;:l
 
 
-gotoif;>tabstrc--recurs-checkyes--61_3
-goto;>tabstrc--recurs-checkno--61_3
-zerosize;;tabstrc--recurs-checkyes--61_3
+gotoif;>tabstrc--recurs-checkyes--61-0_3
+goto;>tabstrc--recurs-checkno--61-0_3
+zerosize;;tabstrc--recurs-checkyes--61-0_3
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--61
+dataread1;>tabstrc--adrbuff--61-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--61
+datawrite1;>tabstrc--adrbuff--61-0
 
-setreg1;>tabstrc--adrbuff--61
+setreg1;>tabstrc--adrbuff--61-0
 
-datawrite1;>tabstrc--recurs-tabbuff--61_4
-dataread1;;tabstrc--recurs-tabbuff--61_4
-datawrite1;>tabstrc--recurs-tabbuff_read--61_4
-dataread1;;tabstrc--recurs-tabbuff_read--61_4
+datawrite1;>tabstrc--recurs-tabbuff--61-0_4
+dataread1;;tabstrc--recurs-tabbuff--61-0_4
+datawrite1;>tabstrc--recurs-tabbuff_read--61-0_4
+dataread1;;tabstrc--recurs-tabbuff_read--61-0_4
 
 setreg2;:p
 
 
-gotoif;>tabstrc--recurs-checkyes--61_4
-goto;>tabstrc--recurs-checkno--61_4
-zerosize;;tabstrc--recurs-checkyes--61_4
+gotoif;>tabstrc--recurs-checkyes--61-0_4
+goto;>tabstrc--recurs-checkno--61-0_4
+zerosize;;tabstrc--recurs-checkyes--61-0_4
 ##set flag########
-setreg1;>tabstrc--outbuff--61
-datawrite1;>tabstrc--recurs-flag--61_4
+setreg1;>tabstrc--outbuff--61-0
+datawrite1;>tabstrc--recurs-flag--61-0_4
 setreg1;+
-datawrite1;;tabstrc--recurs-flag--61_4
+datawrite1;;tabstrc--recurs-flag--61-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--61_4
+zerosize;;tabstrc--recurs-checkno--61-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--61_3
+zerosize;;tabstrc--recurs-checkno--61-0_3
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--61_2
+zerosize;;tabstrc--recurs-checkno--61-0_2
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--61_1
+zerosize;;tabstrc--recurs-checkno--61-0_1
 #read output to register 1 for 'set' to use.
-dataread1;>tabstrc--outbuff--61
+dataread1;>tabstrc--outbuff--61-0
 #######tabstrc END
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>cmdflg
 #conditional set
 dataread1;>cmdflg
 dataread2;>@1
-gotoif;>goto--branch-63
-goto;>goto--jumper-63
-dataread1;>@1;goto--branch-63
+gotoif;>goto--branch-63-0
+goto;>goto--jumper-63-0
+dataread1;>@1;goto--branch-63-0
 datawrite1;>validcom
-zerosize;;goto--jumper-63
+zerosize;;goto--jumper-63-0
 #conditional subroutine goto
 dataread1;>cmdflg
 dataread2;>@1
-gotoif;>goto--branch-64
-goto;>goto--jumper-64
-setreg1;>goto--jumper-64;goto--branch-64
+gotoif;>goto--branch-64-0
+goto;>goto--jumper-64-0
+setreg1;>goto--jumper-64-0;goto--branch-64-0
 s1push1
 goto;>help--label
-zerosize;;goto--jumper-64
+zerosize;;goto--jumper-64-0
 #######tabstrc
 #init
 setreg1;10x85
@@ -253,145 +253,145 @@ mul
 dataread2;>@0
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabstrc--adrbuff--66
-null;;tabstrc--adrbuff--66
+datawrite1;>tabstrc--adrbuff--66-0
+null;;tabstrc--adrbuff--66-0
 #reset output buffer to 0
 setreg1;0
-datawrite1;>tabstrc--outbuff--66
-null;;tabstrc--outbuff--66
+datawrite1;>tabstrc--outbuff--66-0
+null;;tabstrc--outbuff--66-0
 #recursive_parser
 #recursion
 
-setreg1;>tabstrc--adrbuff--66
+setreg1;>tabstrc--adrbuff--66-0
 
-datawrite1;>tabstrc--recurs-tabbuff--66_1
-dataread1;;tabstrc--recurs-tabbuff--66_1
-datawrite1;>tabstrc--recurs-tabbuff_read--66_1
-dataread1;;tabstrc--recurs-tabbuff_read--66_1
+datawrite1;>tabstrc--recurs-tabbuff--66-0_1
+dataread1;;tabstrc--recurs-tabbuff--66-0_1
+datawrite1;>tabstrc--recurs-tabbuff_read--66-0_1
+dataread1;;tabstrc--recurs-tabbuff_read--66-0_1
 
 setreg2;:h
 
 
-gotoif;>tabstrc--recurs-checkyes--66_1
-goto;>tabstrc--recurs-checkno--66_1
-zerosize;;tabstrc--recurs-checkyes--66_1
+gotoif;>tabstrc--recurs-checkyes--66-0_1
+goto;>tabstrc--recurs-checkno--66-0_1
+zerosize;;tabstrc--recurs-checkyes--66-0_1
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--66
+dataread1;>tabstrc--adrbuff--66-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--66
+datawrite1;>tabstrc--adrbuff--66-0
 
-setreg1;>tabstrc--adrbuff--66
+setreg1;>tabstrc--adrbuff--66-0
 
-datawrite1;>tabstrc--recurs-tabbuff--66_2
-dataread1;;tabstrc--recurs-tabbuff--66_2
-datawrite1;>tabstrc--recurs-tabbuff_read--66_2
-dataread1;;tabstrc--recurs-tabbuff_read--66_2
+datawrite1;>tabstrc--recurs-tabbuff--66-0_2
+dataread1;;tabstrc--recurs-tabbuff--66-0_2
+datawrite1;>tabstrc--recurs-tabbuff_read--66-0_2
+dataread1;;tabstrc--recurs-tabbuff_read--66-0_2
 
 setreg2;:e
 
 
-gotoif;>tabstrc--recurs-checkyes--66_2
-goto;>tabstrc--recurs-checkno--66_2
-zerosize;;tabstrc--recurs-checkyes--66_2
+gotoif;>tabstrc--recurs-checkyes--66-0_2
+goto;>tabstrc--recurs-checkno--66-0_2
+zerosize;;tabstrc--recurs-checkyes--66-0_2
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--66
+dataread1;>tabstrc--adrbuff--66-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--66
+datawrite1;>tabstrc--adrbuff--66-0
 
-setreg1;>tabstrc--adrbuff--66
+setreg1;>tabstrc--adrbuff--66-0
 
-datawrite1;>tabstrc--recurs-tabbuff--66_3
-dataread1;;tabstrc--recurs-tabbuff--66_3
-datawrite1;>tabstrc--recurs-tabbuff_read--66_3
-dataread1;;tabstrc--recurs-tabbuff_read--66_3
+datawrite1;>tabstrc--recurs-tabbuff--66-0_3
+dataread1;;tabstrc--recurs-tabbuff--66-0_3
+datawrite1;>tabstrc--recurs-tabbuff_read--66-0_3
+dataread1;;tabstrc--recurs-tabbuff_read--66-0_3
 
 setreg2;:l
 
 
-gotoif;>tabstrc--recurs-checkyes--66_3
-goto;>tabstrc--recurs-checkno--66_3
-zerosize;;tabstrc--recurs-checkyes--66_3
+gotoif;>tabstrc--recurs-checkyes--66-0_3
+goto;>tabstrc--recurs-checkno--66-0_3
+zerosize;;tabstrc--recurs-checkyes--66-0_3
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--66
+dataread1;>tabstrc--adrbuff--66-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--66
+datawrite1;>tabstrc--adrbuff--66-0
 
-setreg1;>tabstrc--adrbuff--66
+setreg1;>tabstrc--adrbuff--66-0
 
-datawrite1;>tabstrc--recurs-tabbuff--66_4
-dataread1;;tabstrc--recurs-tabbuff--66_4
-datawrite1;>tabstrc--recurs-tabbuff_read--66_4
-dataread1;;tabstrc--recurs-tabbuff_read--66_4
+datawrite1;>tabstrc--recurs-tabbuff--66-0_4
+dataread1;;tabstrc--recurs-tabbuff--66-0_4
+datawrite1;>tabstrc--recurs-tabbuff_read--66-0_4
+dataread1;;tabstrc--recurs-tabbuff_read--66-0_4
 
 setreg2;:l
 
 
-gotoif;>tabstrc--recurs-checkyes--66_4
-goto;>tabstrc--recurs-checkno--66_4
-zerosize;;tabstrc--recurs-checkyes--66_4
+gotoif;>tabstrc--recurs-checkyes--66-0_4
+goto;>tabstrc--recurs-checkno--66-0_4
+zerosize;;tabstrc--recurs-checkyes--66-0_4
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--66
+dataread1;>tabstrc--adrbuff--66-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--66
+datawrite1;>tabstrc--adrbuff--66-0
 
-setreg1;>tabstrc--adrbuff--66
+setreg1;>tabstrc--adrbuff--66-0
 
-datawrite1;>tabstrc--recurs-tabbuff--66_5
-dataread1;;tabstrc--recurs-tabbuff--66_5
-datawrite1;>tabstrc--recurs-tabbuff_read--66_5
-dataread1;;tabstrc--recurs-tabbuff_read--66_5
+datawrite1;>tabstrc--recurs-tabbuff--66-0_5
+dataread1;;tabstrc--recurs-tabbuff--66-0_5
+datawrite1;>tabstrc--recurs-tabbuff_read--66-0_5
+dataread1;;tabstrc--recurs-tabbuff_read--66-0_5
 
 setreg2;:o
 
 
-gotoif;>tabstrc--recurs-checkyes--66_5
-goto;>tabstrc--recurs-checkno--66_5
-zerosize;;tabstrc--recurs-checkyes--66_5
+gotoif;>tabstrc--recurs-checkyes--66-0_5
+goto;>tabstrc--recurs-checkno--66-0_5
+zerosize;;tabstrc--recurs-checkyes--66-0_5
 ##set flag########
-setreg1;>tabstrc--outbuff--66
-datawrite1;>tabstrc--recurs-flag--66_5
+setreg1;>tabstrc--outbuff--66-0
+datawrite1;>tabstrc--recurs-flag--66-0_5
 setreg1;+
-datawrite1;;tabstrc--recurs-flag--66_5
+datawrite1;;tabstrc--recurs-flag--66-0_5
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--66_5
+zerosize;;tabstrc--recurs-checkno--66-0_5
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--66_4
+zerosize;;tabstrc--recurs-checkno--66-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--66_3
+zerosize;;tabstrc--recurs-checkno--66-0_3
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--66_2
+zerosize;;tabstrc--recurs-checkno--66-0_2
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--66_1
+zerosize;;tabstrc--recurs-checkno--66-0_1
 #read output to register 1 for 'set' to use.
-dataread1;>tabstrc--outbuff--66
+dataread1;>tabstrc--outbuff--66-0
 #######tabstrc END
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>cmdflg
 #conditional set
 dataread1;>cmdflg
 dataread2;>@1
-gotoif;>goto--branch-68
-goto;>goto--jumper-68
-dataread1;>@1;goto--branch-68
+gotoif;>goto--branch-68-0
+goto;>goto--jumper-68-0
+dataread1;>@1;goto--branch-68-0
 datawrite1;>validcom
-zerosize;;goto--jumper-68
+zerosize;;goto--jumper-68-0
 #conditional subroutine goto
 dataread1;>cmdflg
 dataread2;>@1
-gotoif;>goto--branch-69
-goto;>goto--jumper-69
-setreg1;>goto--jumper-69;goto--branch-69
+gotoif;>goto--branch-69-0
+goto;>goto--jumper-69-0
+setreg1;>goto--jumper-69-0;goto--branch-69-0
 s1push1
 goto;>hello--label
-zerosize;;goto--jumper-69
+zerosize;;goto--jumper-69-0
 #######tabstrc
 #init
 setreg1;10x85
@@ -400,131 +400,131 @@ mul
 dataread2;>@0
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabstrc--adrbuff--71
-null;;tabstrc--adrbuff--71
+datawrite1;>tabstrc--adrbuff--71-0
+null;;tabstrc--adrbuff--71-0
 #reset output buffer to 0
 setreg1;0
-datawrite1;>tabstrc--outbuff--71
-null;;tabstrc--outbuff--71
+datawrite1;>tabstrc--outbuff--71-0
+null;;tabstrc--outbuff--71-0
 #recursive_parser
 #recursion
 
-setreg1;>tabstrc--adrbuff--71
+setreg1;>tabstrc--adrbuff--71-0
 
-datawrite1;>tabstrc--recurs-tabbuff--71_1
-dataread1;;tabstrc--recurs-tabbuff--71_1
-datawrite1;>tabstrc--recurs-tabbuff_read--71_1
-dataread1;;tabstrc--recurs-tabbuff_read--71_1
+datawrite1;>tabstrc--recurs-tabbuff--71-0_1
+dataread1;;tabstrc--recurs-tabbuff--71-0_1
+datawrite1;>tabstrc--recurs-tabbuff_read--71-0_1
+dataread1;;tabstrc--recurs-tabbuff_read--71-0_1
 
 setreg2;:q
 
 
-gotoif;>tabstrc--recurs-checkyes--71_1
-goto;>tabstrc--recurs-checkno--71_1
-zerosize;;tabstrc--recurs-checkyes--71_1
+gotoif;>tabstrc--recurs-checkyes--71-0_1
+goto;>tabstrc--recurs-checkno--71-0_1
+zerosize;;tabstrc--recurs-checkyes--71-0_1
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--71
+dataread1;>tabstrc--adrbuff--71-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--71
+datawrite1;>tabstrc--adrbuff--71-0
 
-setreg1;>tabstrc--adrbuff--71
+setreg1;>tabstrc--adrbuff--71-0
 
-datawrite1;>tabstrc--recurs-tabbuff--71_2
-dataread1;;tabstrc--recurs-tabbuff--71_2
-datawrite1;>tabstrc--recurs-tabbuff_read--71_2
-dataread1;;tabstrc--recurs-tabbuff_read--71_2
+datawrite1;>tabstrc--recurs-tabbuff--71-0_2
+dataread1;;tabstrc--recurs-tabbuff--71-0_2
+datawrite1;>tabstrc--recurs-tabbuff_read--71-0_2
+dataread1;;tabstrc--recurs-tabbuff_read--71-0_2
 
 setreg2;:u
 
 
-gotoif;>tabstrc--recurs-checkyes--71_2
-goto;>tabstrc--recurs-checkno--71_2
-zerosize;;tabstrc--recurs-checkyes--71_2
+gotoif;>tabstrc--recurs-checkyes--71-0_2
+goto;>tabstrc--recurs-checkno--71-0_2
+zerosize;;tabstrc--recurs-checkyes--71-0_2
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--71
+dataread1;>tabstrc--adrbuff--71-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--71
+datawrite1;>tabstrc--adrbuff--71-0
 
-setreg1;>tabstrc--adrbuff--71
+setreg1;>tabstrc--adrbuff--71-0
 
-datawrite1;>tabstrc--recurs-tabbuff--71_3
-dataread1;;tabstrc--recurs-tabbuff--71_3
-datawrite1;>tabstrc--recurs-tabbuff_read--71_3
-dataread1;;tabstrc--recurs-tabbuff_read--71_3
+datawrite1;>tabstrc--recurs-tabbuff--71-0_3
+dataread1;;tabstrc--recurs-tabbuff--71-0_3
+datawrite1;>tabstrc--recurs-tabbuff_read--71-0_3
+dataread1;;tabstrc--recurs-tabbuff_read--71-0_3
 
 setreg2;:i
 
 
-gotoif;>tabstrc--recurs-checkyes--71_3
-goto;>tabstrc--recurs-checkno--71_3
-zerosize;;tabstrc--recurs-checkyes--71_3
+gotoif;>tabstrc--recurs-checkyes--71-0_3
+goto;>tabstrc--recurs-checkno--71-0_3
+zerosize;;tabstrc--recurs-checkyes--71-0_3
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--71
+dataread1;>tabstrc--adrbuff--71-0
 setreg2;+
 add
-datawrite1;>tabstrc--adrbuff--71
+datawrite1;>tabstrc--adrbuff--71-0
 
-setreg1;>tabstrc--adrbuff--71
+setreg1;>tabstrc--adrbuff--71-0
 
-datawrite1;>tabstrc--recurs-tabbuff--71_4
-dataread1;;tabstrc--recurs-tabbuff--71_4
-datawrite1;>tabstrc--recurs-tabbuff_read--71_4
-dataread1;;tabstrc--recurs-tabbuff_read--71_4
+datawrite1;>tabstrc--recurs-tabbuff--71-0_4
+dataread1;;tabstrc--recurs-tabbuff--71-0_4
+datawrite1;>tabstrc--recurs-tabbuff_read--71-0_4
+dataread1;;tabstrc--recurs-tabbuff_read--71-0_4
 
 setreg2;:t
 
 
-gotoif;>tabstrc--recurs-checkyes--71_4
-goto;>tabstrc--recurs-checkno--71_4
-zerosize;;tabstrc--recurs-checkyes--71_4
+gotoif;>tabstrc--recurs-checkyes--71-0_4
+goto;>tabstrc--recurs-checkno--71-0_4
+zerosize;;tabstrc--recurs-checkyes--71-0_4
 ##set flag########
-setreg1;>tabstrc--outbuff--71
-datawrite1;>tabstrc--recurs-flag--71_4
+setreg1;>tabstrc--outbuff--71-0
+datawrite1;>tabstrc--recurs-flag--71-0_4
 setreg1;+
-datawrite1;;tabstrc--recurs-flag--71_4
+datawrite1;;tabstrc--recurs-flag--71-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--71_4
+zerosize;;tabstrc--recurs-checkno--71-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--71_3
+zerosize;;tabstrc--recurs-checkno--71-0_3
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--71_2
+zerosize;;tabstrc--recurs-checkno--71-0_2
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--71_1
+zerosize;;tabstrc--recurs-checkno--71-0_1
 #read output to register 1 for 'set' to use.
-dataread1;>tabstrc--outbuff--71
+dataread1;>tabstrc--outbuff--71-0
 #######tabstrc END
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>cmdflg
 #conditional set
 dataread1;>cmdflg
 dataread2;>@1
-gotoif;>goto--branch-73
-goto;>goto--jumper-73
-dataread1;>@1;goto--branch-73
+gotoif;>goto--branch-73-0
+goto;>goto--jumper-73-0
+dataread1;>@1;goto--branch-73-0
 datawrite1;>validcom
-zerosize;;goto--jumper-73
+zerosize;;goto--jumper-73-0
 #conditional stop
 dataread1;>cmdflg
 dataread2;>@1
-gotoif;>goto--branch-74
-goto;>goto--jumper-74
-stop;;goto--branch-74
+gotoif;>goto--branch-74-0
+goto;>goto--jumper-74-0
+stop;;goto--branch-74-0
 
-zerosize;;goto--jumper-74
+zerosize;;goto--jumper-74-0
 #conditional subroutine goto
 dataread1;>validcom
 dataread2;>@0
-gotoif;>goto--branch-76
-goto;>goto--jumper-76
-setreg1;>goto--jumper-76;goto--branch-76
+gotoif;>goto--branch-76-0
+goto;>goto--jumper-76-0
+setreg1;>goto--jumper-76-0;goto--branch-76-0
 s1push1
 goto;>invalid--label
-zerosize;;goto--jumper-76
+zerosize;;goto--jumper-76-0
 #goto 
 goto;>main--label
 #label
@@ -679,6 +679,6 @@ fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 101: comprompt as cp
+#module include: line 101-0: comprompt as cp
 includeas;comprompt,cp
 #END OF FILE
