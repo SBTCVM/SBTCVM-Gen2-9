@@ -19,6 +19,10 @@ shelldemo:
 			load1
 			load2
 
+shelldemo_macros:
+	similar to `shelldemo` above, only using comprompt's provided macros
+	for command parsing loops.
+
 
 ----'demoscene-style demos'----
 ternarydreams:
@@ -109,6 +113,11 @@ plottertext:
 	a 53-symbol vector text renderer. (A-Z, 0-9, plus some symbols.)
 	features automatic newline support for drawing multiline text.
 	a bit slow, but scalable. the module is on the slightly larger side!
+	[nocurses]
+
+plotter_gradient:
+	a gradient demo powered by the `mergetriads` and `rgbadd` SSTNPL modules.
+	Originally designed to test them.
 	[nocurses]
 
 burst:

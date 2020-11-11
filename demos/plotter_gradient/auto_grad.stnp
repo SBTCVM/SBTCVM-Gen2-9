@@ -1,0 +1,105 @@
+gamode @31
+
+var bandheight=@6
+
+drawwidth @575
+drawheight bandheight
+drawx1 @-287
+var colortemp=0
+
+#!rgbadd.setRGB(*---, *---, *---)
+
+
+
+
+!rgbadd.sethalf(@0, @0, @0)
+
+prline Test 1-1: all channel rollover
+!rgbadd.setrollover(@1, @1, @1)
+gsub test1
+prline DONE, press key.
+keyprompt
+
+prline Test 1-2: G & B channel rollover, R channel max/min
+!rgbadd.setrollover(@0, @1, @1)
+gsub test1
+
+prline DONE, press key.
+keyprompt
+
+prline Test 2-1: All channel Max/Min (monochrome test)
+!rgbadd.setrollover(@0, @0, @0)
+gsub test2
+
+prline DONE, press key.
+keyprompt
+
+prline Test 2-2: R & G rollover, B max/min (monochrome test)
+!rgbadd.setrollover(@1, @1, @0)
+gsub test2
+
+prline DONE, press key.
+keyprompt
+
+prline Test 2-3: All channel Max/Min, zoomed
+val @21
+set bandheight
+drawheight bandheight
+!rgbadd.setrollover(@0, @0, @0)
+gsub test2
+val @6
+set bandheight
+drawheight bandheight
+
+prline DONE, press key.
+keyprompt
+
+prline Test 2-4: All channel rollover (monochrome test)
+!rgbadd.setrollover(@1, @1, @1)
+gsub test2
+
+prline DONE, press key to exit
+keyprompt
+stop
+
+
+
+
+label test1
+!rgbadd.setRGB_add(*+, *+-, *-)
+!rgbadd.setRGB(*---, *---, *---)
+for y in urange @-287,@287,bandheight
+
+	drawy1 y
+	gsub rgbadd.color_add
+	!mtri.mergetri_set(rgbadd.r, rgbadd.g, rgbadd.b)
+	set colortemp
+	#dumpt colortemp
+	drawcolor colortemp
+	drawrect
+	
+end
+
+return
+
+label test2
+!rgbadd.setRGB_add(*+, *+, *+)
+!rgbadd.setRGB(*---, *---, *---)
+for y in urange @-287,@287,bandheight
+
+	drawy1 y
+	gsub rgbadd.color_add
+	!mtri.mergetri_set(rgbadd.r, rgbadd.g, rgbadd.b)
+	set colortemp
+	#dumpt colortemp
+	drawcolor colortemp
+	drawrect
+	
+end
+
+return
+
+
+
+include mergetriads as mtri
+include rgbadd as rgbadd

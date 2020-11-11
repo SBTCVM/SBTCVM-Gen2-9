@@ -1,0 +1,23 @@
+var output=0
+var tri1=0
+var tri2=0
+var tri3=0
+
+
+def mergetri_set {get %0% / set %mod%tri3 / get %1% / set %mod%tri2 / get %2% / set %mod%tri1 / gsub %mod%mergetris / get %mod%output}
+
+
+label mergetris
+val @0
+	set output
+	get2 output
+	get1 tri3
+	asm muldata1;10x729
+	asm add2
+	get1 tri2
+	asm muldata1;10x27
+	asm add2
+	get1 tri1
+	asm add2
+	set2 output
+return

@@ -1,0 +1,73 @@
+# Lousy, Poor man's color add function
+
+
+
+
+
+
+var r=0
+var g=0
+var b=0
+var r_add=0
+var g_add=0
+var b_add=0
+var rollover_r=0
+var rollover_g=0
+var rollover_b=0
+var r_half=0
+var g_half=0
+var b_half=0
+
+var intern_r=0
+var intern_c=0
+
+def setRGB {get %0% / set %mod%r / get %1% / set %mod%g / get %2% / set %mod%b}
+
+def setRGB_add {get %0% / set %mod%r_add / get %1% / set %mod%g_add / get %2% / set %mod%b_add}
+def setrollover {get %0% / set %mod%rollover_r / get %1% / set %mod%rollover_g / get %2% / set %mod%rollover_b}
+def sethalf {get %0% / set %mod%r_half / get %1% / set %mod%g_half / get %2% / set %mod%b_half}
+
+def intern_c_add {add %0%,%0%_add / set %0%}
+
+def intern_c_limit {get %0% / set intern_c / get rollover_%0% / set intern_r / gsub value_limit / get intern_r / set rollover_%0% / get intern_c / set %0%}
+
+def intern_c_half {if %0%_half,@1 begin / div %0%,@2 / set %0% / div %0%_add,@2 / set %0%_add / end}
+
+
+label color_add
+	#color channel pair halfing (x=x/2, x_add=x_add/2)
+	!intern_c_half(r)
+	!intern_c_half(g)
+	!intern_c_half(b)
+	#add color channel pairs (x=x+x_add)
+	!intern_c_add(r)
+	!intern_c_add(g)
+	!intern_c_add(b)
+	#value limiting code
+	!intern_c_limit(r)
+	!intern_c_limit(g)
+	!intern_c_limit(b)
+	#newline
+return
+
+label value_limit
+	#dumpd intern_c
+	if intern_r,@1 begin
+		ifmore intern_c,@13 begin
+			whilemore intern_c,@13
+				sub intern_c,@27
+				set intern_c
+			end
+		return
+		end
+		#we don't need an ifnot here, as the above if block returns this subroutine.
+		whileless intern_c,@-13
+			add intern_c,@27
+			set intern_c
+		end
+	return
+	end
+	#we don't need an ifnot here, as the above if block returns this subroutine.
+	ifmore intern_c,@13 =intern_c @13
+	ifless intern_c,@-13 =intern_c @-13
+return

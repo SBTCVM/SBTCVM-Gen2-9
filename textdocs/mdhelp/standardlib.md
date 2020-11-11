@@ -48,6 +48,17 @@ separate variables....
 
 see _`test_gettriads`_ in _demos_ for usage example.
 
+### mergetriads
+Counterpart to `gettriads`, `mergetriads`, as you may suppose, merges 3 triads into a Nonet.
+
+see _`plotter_gradients`_ in _demos_ for usage example.
+
+### rgbadd
+A fairly flexible 9-trit RGB color adding library.
+Features special modes for incremental-addition-based gradients.
+
+see _`plotter_gradients`_ in _demos_ for usage example.
+
 ### musicengine
 
 music playback routine Module for SBTCVM's 4-channel sound chip.

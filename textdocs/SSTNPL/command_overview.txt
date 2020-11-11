@@ -120,8 +120,8 @@ Command documentation:
 --Variables:
 	var [varname]=[nvalue]  : create a integer variable called [varname], with the value [nvalue].
 	
-	get1/get  : get value of a variable into register 1
-	get2      : get value of a variable into register 2
+	get1/get  : get value of a variable into register 1. Supports literals.
+	get2      : get value of a variable into register 2. Supports literals.
 	
 	set1/set [varname]  : set variable using value of register 1.
 	set2 [varname]      : set variable using value of register 2.

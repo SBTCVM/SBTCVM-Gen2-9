@@ -1,0 +1,42 @@
+int9;r;0
+int9;g;0
+int9;b;0
+int9;r_add;0
+int9;g_add;0
+int9;b_add;0
+int9;rollover_r;0
+int9;rollover_g;0
+int9;rollover_b;0
+int9;r_half;0
+int9;g_half;0
+int9;b_half;0
+int9;intern_r;0
+int9;intern_c;0
+int9;@1;10x1
+int9;@2;10x2
+int9;@2;10x2
+int9;@1;10x1
+int9;@2;10x2
+int9;@2;10x2
+int9;@1;10x1
+int9;@2;10x2
+int9;@2;10x2
+int9;@1;10x1
+int9;@13;10x13
+int9;@13;10x13
+int9;@27;10x27
+int9;@-13;10x-13
+int9;@27;10x27
+int9;@13;10x13
+int9;@13;10x13
+int9;@-13;10x-13
+int9;@-13;10x-13
+label;color_add
+label;value_limit
+macro;intern_c_limit;{get %0% / set intern_c / get rollover_%0% / set intern_r / gsub value_limit / get intern_r / set rollover_%0% / get intern_c / set %0%}
+macro;intern_c_add;{add %0%,%0%_add / set %0%}
+macro;setRGB_add;{get %0% / set %mod%r_add / get %1% / set %mod%g_add / get %2% / set %mod%b_add}
+macro;sethalf;{get %0% / set %mod%r_half / get %1% / set %mod%g_half / get %2% / set %mod%b_half}
+macro;setRGB;{get %0% / set %mod%r / get %1% / set %mod%g / get %2% / set %mod%b}
+macro;setrollover;{get %0% / set %mod%rollover_r / get %1% / set %mod%rollover_g / get %2% / set %mod%rollover_b}
+macro;intern_c_half;{if %0%_half,@1 begin / div %0%,@2 / set %0% / div %0%_add,@2 / set %0%_add / end}

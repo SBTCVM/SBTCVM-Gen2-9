@@ -2283,9 +2283,9 @@ class mainloop:
 		in_intcommon1b(["drawfill"], "dataread1;>", "\niowrite1;>plot.fill\n", "plotter fill"),
 		in_intcommon1b(["drawfhalt"], "dataread1;>", "\niowrite1;>plot.fhalt\n", "plotter fhalt"),
 		in_intcommon1(["set", "set1"], "datawrite1;>", "\n", "set(1) (used after 2-op math, asm code, or get)"),
-		in_intcommon1(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
+		in_intcommon1b(["get", "get1"], "dataread1;>", "\n", "get(1) (may be used with set, or asm code)"),
 		in_intcommon1(["set2"], "datawrite2;>", "\n", "set2 (used for asm, or get2)"),
-		in_intcommon1(["get2"], "dataread2;>", "\n", "get2 (may be used with set2, and asm code.)"),
+		in_intcommon1b(["get2"], "dataread2;>", "\n", "get2 (may be used with set2, and asm code.)"),
 		in_common0(["pop", "pop1"], "s2pop1\n", "stack pop (uses stack 2)"),#stack
 		in_common0(["peek", "peek1"], "s2peek1\n", "stack peek (uses stack 2)"),
 		in_common0(["stackrev"], "s2reverse\n", "stack reverse (uses stack 2)"),

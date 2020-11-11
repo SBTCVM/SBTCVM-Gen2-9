@@ -1,0 +1,6 @@
+int9;output;0
+int9;tri1;0
+int9;tri2;0
+int9;tri3;0
+label;mergetris
+macro;mergetri_set;{get %0% / set %mod%tri3 / get %1% / set %mod%tri2 / get %2% / set %mod%tri1 / gsub %mod%mergetris / get %mod%output}
