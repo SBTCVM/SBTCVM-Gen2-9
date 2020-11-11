@@ -2,19 +2,45 @@
 
 const DESK_MAIN_VERS=:0
 const DESK_SUB_VERS=:1
-const DESK_MIN_VERS=:1
-
+const DESK_MIN_VERS=:2
 const COLOR_desktop=000000+++
+
+const COLOR_desktop0=0-+0-++++
+const COLOR_desktop1=00-00-+++
+const COLOR_desktop2=000000+++
+const COLOR_desktop3=00+00++++
+const COLOR_desktop4=0+-0+-+++
+
 const COLOR_hud=+++++++++
 const COLOR_hudshadow1=+00+00+00
 
 label ui_base_draw
-	drawfill $COLOR_desktop
+	drawfill $COLOR_desktop2
+	drawx1 @-121
+	
+	drawwidth @243
+	drawheight @46
+	
+	drawy1 @-99
+	drawcolor $COLOR_desktop0
+	drawrect
+	
+	drawy1 @-55
+	drawcolor $COLOR_desktop1
+	drawrect
+	
+	drawy1 @33
+	drawcolor $COLOR_desktop3
+	drawrect
+	
+	drawy1 @77
+	drawcolor $COLOR_desktop4
+	drawrect
 	
 	drawcolor $COLOR_hud
-		drawx1 @-121
+		#drawx1 @-121
 		drawy1 @-121
-		drawwidth @243
+		#drawwidth @243
 		drawheight @22
 		drawrect
 	drawcolor $COLOR_hudshadow1

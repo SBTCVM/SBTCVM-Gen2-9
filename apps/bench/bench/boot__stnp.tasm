@@ -20,10 +20,10 @@ fopwri1;:C
 fopwri1;:H
 fopwri1;:\s
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-2
+setreg1;>goto--jumper-2-0
 s1push1
 goto;>common.print_version--label
-zerosize;;goto--jumper-2
+zerosize;;goto--jumper-2-0
 #prline
 fopwri1;:\s
 fopwri1;:b
@@ -118,6 +118,6 @@ fopwri1;:!
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 8: bench/lib/common as common
+#module include: line 8-0: bench/lib/common as common
 includeas;bench/lib/common,common
 #END OF FILE
