@@ -594,7 +594,10 @@ class PlotterEngine:
 		self.color=(127, 127, 127)
 		self.widthr=1
 		self.heightr=1
-		
+		self.buffers={}
+		self.buffer_index=0
+		self.buffer_min=-13
+		self.buffer_max=13
 		ioref.setwritenotify(501, self.dx1)
 		ioref.setwritenotify(502, self.dy1)
 		ioref.setwritenotify(503, self.dx2)
@@ -611,9 +614,24 @@ class PlotterEngine:
 		ioref.setwritenotify(522, self.dx3)
 		ioref.setwritenotify(523, self.dy3)
 		ioref.setwritenotify(524, self.tri)
+		ioref.setwritenotify(525, self.copy)
+		ioref.setwritenotify(526, self.blit)
+		ioref.setwritenotify(527, self.select)
 		
 	def flush(self, addr, data):
 		self.drawbuff=[]
+	def copy(self, addr, data):
+		dint=int(data)
+		if dint<=self.buffer_max and dint>=self.buffer_min:
+			self.drawbuff.append([4, dint])
+	def blit(self, addr, data):
+		dint=int(data)
+		if dint<=self.buffer_max and dint>=self.buffer_min:
+			self.drawbuff.append([5, dint])
+	def select(self, addr, data):
+		dint=int(data)
+		if dint<=self.buffer_max and dint>=self.buffer_min:
+			self.drawbuff.append([6, dint])
 	def buffsize(self, addr, data):
 		return btint(len(self.drawbuff))
 	def dx1(self, addr, data):
@@ -658,11 +676,24 @@ class PlotterEngine:
 		self.drawbuff.append([0, (R, G, B)])
 	def fhalt(self, addr, data):
 		self.drawbuff.append([-1])
+	
+	def _surfselect(self, surface):
+		if self.buffer_index!=0 and self.buffer_index in self.buffers:
+			return self.buffers[self.buffer_index]
+		elif self.buffer_index!=0 and self.buffer_index not in self.buffers:
+			xc=self.buffers[self.buffer_index]=surface.copy()
+			xc.fill((127, 127, 127))
+			return xc
+		else:
+			return surface
+		
 	def draw(self, surface):
+		Xsurface=self._surfselect(surface)
+		
 		cnt=0
 		uprects=[]
 		fullup=0
-		surface.lock()
+		Xsurface.lock()
 		while len(self.drawbuff)>0 and cnt!=self.itemlimit:
 			cnt+=1
 			
@@ -670,18 +701,48 @@ class PlotterEngine:
 			if chunk[0]==-1:
 				break
 			if chunk[0]==0:
-				surface.fill(chunk[1])
+				Xsurface.fill(chunk[1])
 				fullup=1
 			if chunk[0]==1:
-				uprects.append(pygame.draw.line(surface, chunk[5], (int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag))))
+				uprects.append(pygame.draw.line(Xsurface, chunk[5], (int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag))))
 			if chunk[0]==2:
 				drect=pygame.Rect((int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag)))
-				uprects.append(pygame.draw.rect(surface, chunk[5], drect, 0))
+				uprects.append(pygame.draw.rect(Xsurface, chunk[5], drect, 0))
 			if chunk[0]==3:
-				uprects.append(pygame.draw.polygon(surface, chunk[7], [(int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag)), (int(chunk[5]*self.xmag), int(chunk[6]*self.ymag))]))
-
+				uprects.append(pygame.draw.polygon(Xsurface, chunk[7], [(int(chunk[1]*self.xmag), int(chunk[2]*self.ymag)), (int(chunk[3]*self.xmag), int(chunk[4]*self.ymag)), (int(chunk[5]*self.xmag), int(chunk[6]*self.ymag))]))
+			if chunk[0]==4:
+				if chunk[1]==0 and self.buffer_index!=0:
+					Xsurface.unlock()
+					surface.unlock()
+					surface.blit(Xsurface, (0, 0))
+					Xsurface.lock()
+					fullup=1
+				elif chunk[1]==self.buffer_index:
+					pass
+				else:
+					self.buffers[chunk[1]]=Xsurface.copy()
+			if chunk[0]==5:
+				if chunk[1]==0 and self.buffer_index!=0:
+					surface.unlock()
+					Xsurface.unlock()
+					Xsurface.blit(surface, (0, 0))
+					Xsurface.lock()
+				elif chunk[1] in self.buffers:
+					if chunk[1]!=self.buffer_index:
+						sx=self.buffers[chunk[1]]
+						sx.unlock()
+						Xsurface.unlock()
+						Xsurface.blit(sx, (0, 0))
+						Xsurface.lock()
+						if self.buffer_index==0:
+							fullup=1
+			if chunk[0]==6:
+				self.buffer_index=chunk[1]
+				Xsurface.unlock()
+				Xsurface=self._surfselect(surface)
+				Xsurface.lock()
 			
-		surface.unlock()
+		Xsurface.unlock()
 		if fullup:
 			pygame.display.flip()
 		else:
@@ -691,6 +752,8 @@ class PlotterEngine:
 		
 		self.active=1
 	def setup(self, xsize, ysize, realx, realy, offset):
+		self.buffers={}
+		self.buffer_index=0
 		self.xsize=xsize
 		self.ysize=ysize
 		self.realx=realx

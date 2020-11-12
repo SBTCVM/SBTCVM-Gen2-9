@@ -142,8 +142,12 @@ x :  m : asm varname  : description
 522: [w] plot.x3    : set plotter x3 position register
 523: [w] plot.y3    : set plotter y3 position register
 524: [w] plot.tri   : draw triangle between x1,y1 x2,y2, and x3,y3
-
-
+525: [w] plot.copy  : write a value from -13 to +13, copies to specified 
+		buffer, from selected buffer
+526: [w] plot.blit  : write a value from -13 to +13, copies from specified 
+		buffer, to selected buffer
+527: [w] plot.select  : write a value from -13 to +13, selects draw buffer
+		(0 is default)
 
 #bi-directional buffers (read.head & read.tail return 0 when buffer is empty)
 700: [w] buffer.1.write.head : write value to top of buffer

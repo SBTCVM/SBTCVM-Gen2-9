@@ -1,0 +1,38 @@
+
+gamode @30
+drawfill *---------
+
+drawselect @-13
+
+drawfill *+++++++++
+
+prline BEEP
+keyprompt
+
+drawcopy @0
+
+prline BEEP BEEP
+keyprompt
+
+drawselect @0
+
+
+drawfill *-+0+-+0++
+
+drawcopy @-13
+
+prline BEEP BEEP BEEP
+keyprompt
+
+drawfill *0
+
+prline BEEP BEEP BEEP QUACK
+keyprompt
+
+drawblit @-13
+
+prline did it explode?
+keyprompt
+stop
+
+

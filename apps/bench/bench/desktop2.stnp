@@ -8,11 +8,24 @@ var ybuff=0
 var actflg=@1
 var btnbuff=0
 
+var isbackup=0
+
+if isbackup,@0 begin
+	val @1
+	set isbackup
+	gsub draw_desktop
+	drawcopy @12
+end
+val @1
+set actflg
 
 label main
 	
-	if actflg,@1 gsub draw_desktop
-	if actflg,@1 =actflg @0
+	if actflg,@1 begin
+		val @0
+		set actflg
+		drawblit @12
+	end
 	
 	label main_loop
 	
@@ -52,24 +65,31 @@ goto main
 
 label info
 prline Starting info.app...
+gsub backup_self
 vdi rstld -1 info.app
 prline ERROR! info.app not found!
 return
 
 label dos
 prline Starting dos.app...
+gsub backup_self
 vdi rstld -1 dos.app
 prline ERROR! dos.app not found!
 return
 
 label credits
 prline Starting credits.app...
+gsub backup_self
 vdi rstld -1 credits.app
 prline ERROR! credits.app not found!
 return
 
+
+label backup_self
+vdi membak 2 desktop.back.tri
+return
+
 label draw_desktop
-gamode @30
 
 
 

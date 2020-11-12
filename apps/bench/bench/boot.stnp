@@ -2,7 +2,25 @@ print SBTCVM BENCH
 gsub common.print_version
 prline  bootup...
 prline Starting desktop.app...
+gamode @30
+val @-121
+set pl.posx
+set pl.posy
+val @3
+set pl.pixy
+asm setreg1;>image1
+set pl.offset
+gsub pl.decode
+drawcopy @13
+
 vdi rstld -1 desktop.app
+gamode @0
 prline ERROR! desktop.app not found!
 stop
+
+
+
+
 include bench/lib/common as common
+include plrle_noalpha as pl
+asm include;bench/media/wallpaper.tas0;image1

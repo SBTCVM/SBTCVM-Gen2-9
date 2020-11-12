@@ -7,6 +7,7 @@ snd.2.wave;210
 rand1.get;52
 rand3.get;58
 snd.1.pan;202
+plot.blit;526
 rand2.start;53
 buffer.1.write.head;700
 buffer.4.read.tail;733
@@ -40,9 +41,11 @@ buffer.4.reset;734
 buffer.2.read.head;712
 rand2.get;55
 rand3.end;57
+plot.copy;525
 snd.1.pulse;203
 plot.width;509
 ga.mode;500
+plot.select;527
 plot.color;505
 snd.3.wave;220
 snd.3.vol;221

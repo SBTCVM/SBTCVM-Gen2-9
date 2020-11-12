@@ -9,6 +9,8 @@ null;10x0;@0
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
+#print newline
+fopwri1;:\n
 #prline
 fopwri1;:S
 fopwri1;:t

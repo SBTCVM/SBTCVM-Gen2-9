@@ -3,6 +3,7 @@ gfxcon -plrle %xwd%/info.png
 gfxcon -plrle %xwd%/dos.png
 
 gfxcon -plrlei %xwd%/image_info.png 20
+gfxcon -plrlei %xwd%/wallpaper.png 32
 gfxcon -plrle %xwd%/credits1.png
 gfxcon -plrle %xwd%/credits_icn.png
 gfxcon -plrle %xwd%/credits_bg.png

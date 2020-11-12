@@ -31,7 +31,7 @@ label info
 
 
 prline Starting desktop.app...
-vdi rstld -1 desktop.app
+vdi rstld 2 desktop.back.tri
 prline ERROR! desktop.app not found!
 stop
 include plrle_noalpha as pl

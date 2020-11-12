@@ -75,7 +75,7 @@ gsub seg.output
 waitcy 30000
 
 prline Starting desktop.app...
-vdi rstld -1 desktop.app
+vdi rstld 2 desktop.back.tri
 prline ERROR! desktop.app not found!
 stop
 

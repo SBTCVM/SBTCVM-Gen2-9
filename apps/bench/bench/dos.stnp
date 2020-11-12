@@ -1,4 +1,5 @@
 gamode @0
+newline
 prline Starting SBTCVM-DOS command shell... run 'bench' to return!
 prline Try to load...
 vdi rstld -1 command.txe

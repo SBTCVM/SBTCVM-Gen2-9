@@ -76,6 +76,9 @@ v>plot.buffer;10x521
 v>plot.x3;10x522
 v>plot.y3;10x523
 v>plot.tri;10x524
+v>plot.copy;10x525
+v>plot.blit;10x526
+v>plot.select;10x527
 
 
 ##sound
