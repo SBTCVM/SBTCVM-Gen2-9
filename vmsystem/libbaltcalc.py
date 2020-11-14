@@ -40,7 +40,35 @@ def DECTOBT(NUMTOCONV1):
 	if (str(digbat)==""):
 		digbat="0"
 	return(digbat)
-	
+
+
+
+def tritchop(decimal_int, split_point):
+	tritcount=0
+	retlist=[]
+	issplit=False
+	for f in [0, 0]:
+		while decimal_int != 0:
+			if decimal_int % 3 == 0:
+				#0
+				pass
+			elif decimal_int % 3 == 1:
+				#+
+				f+=(3**tritcount)
+			elif decimal_int % 3 == 2:
+				#-
+				f-=(3**tritcount)
+			tritcount+=1
+			decimal_int = (decimal_int + 1) // 3
+			if tritcount==split_point and not issplit:
+				tritcount=0
+				issplit=True
+				break
+		retlist.append(f)
+	return retlist
+
+def tritmerge(decimal_int_upper, decimal_int_lower, length_of_lower):
+	return ((decimal_int_upper * (3**length_of_lower)) + decimal_int_lower)
 
 def btmul(numA, numB):
 	numAcon=BTTODEC(numA)
