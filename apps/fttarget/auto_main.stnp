@@ -21,7 +21,7 @@ var kb=0
 
 label MAIN
 asm include;fttarget/title.tas0
-prline Falling Ternary Targets v0.2
+prline Falling Ternary Targets v0.3
 prline 1: Begin Easy Game         3: Begin Hard Game
 prline 2: Begin Medium Game       4: Begin Crazy Game
 prline 5: Begin Game Of Questionable Victory Chances... >:)
@@ -65,6 +65,7 @@ goto MAIN
 
 label GAMESTART
 gamode @30
+	gsub prep_bg
 	val @0
 	set score
 	
@@ -84,11 +85,13 @@ gamode @30
 return
 
 label gameloop
+	drawblit @2
+	#drawcolor *---------
+	#drawx1 badguy_X
+	#drawy1 badguy_Y
+	#drawrect
 	
-	drawcolor *---------
-	drawx1 badguy_X
-	drawy1 badguy_Y
-	drawrect
+	
 	
 	add badguy_Y,badguy_fallspeed
 	set badguy_Y
@@ -109,8 +112,8 @@ label gameloop
 	drawy3 @100
 	
 	#####erase old tri
-	drawcolor *---------
-	drawtri
+	#drawcolor *---------
+	#drawtri
 	#####
 	
 		#get mouse realtime x
@@ -126,7 +129,7 @@ label gameloop
 			asm ioread1;>plot.buffer
 			set locktmp
 			ifmore locktmp,@0 goto drawLOCK
-			
+		drawcopy @0
 		asm iowrite1;>plot.fhalt
 		
 		
@@ -175,14 +178,15 @@ label DO_hit
 	drawx2 clickx
 	drawcolor *000000+++
 	drawline
+	drawcopy @0
 	waitcy 2500
 	drawcolor *---------
 	
-	#erase blast & laser
-	drawline
+	##erase blast & laser
+	#drawline
 	
-	drawx1 badguy_X
-	drawrect
+	#drawx1 badguy_X
+	#drawrect
 	gsub badG_start
 	
 	asm iowrite1;>snd.1.stop
@@ -199,11 +203,12 @@ label DO_miss
 	drawx2 clickx
 	drawcolor *000000+++
 	drawline
+	drawcopy @0
 	waitcy 600
 	drawcolor *---------
 	
-	#erase laser
-	drawline
+	##erase laser
+	#drawline
 	
 	
 goto gameloop
@@ -237,7 +242,7 @@ return
 
 label About
 asm include;fttarget/about.tas0
-prline Falling Ternary Targets - v0.2 - a falling targets game.
+prline Falling Ternary Targets - v0.3 - a falling targets game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
 prline Written in SSTNPL.
 prline 
@@ -261,4 +266,20 @@ keyprompt
 newline
 return
 
+label prep_bg
+drawselect @2
+val @-121
+set pl.posx
+set pl.posy
+val @3
+set pl.pixx
+set pl.pixy
+asm setreg1;>image_offset1
+set pl.offset
+gsub pl.decode
+drawselect @1
+return
 
+
+include plrle_noalpha as pl
+asm include;fttarget/gamebg.tas0;image_offset1

@@ -23,10 +23,12 @@ ternary with SBTCVM, should prove a fun challenge!
 
 ## Screenshots:
 
-!['highway' TROM screenshot](/textdocs/screenshots/highway1.png)
+!['tritmap_heavy' TROM: High resolution Compressed image demo](/textdocs/screenshots/tritmap.png)
+!['fttarget' TROM: Falling Ternary Targets Game](/textdocs/screenshots/fttarget.png)
 !['clicalc' TROM's memory monitor](/textdocs/screenshots/monitor1.png)
 !['ontrain' TROM: Oncoming Trains game](/textdocs/screenshots/ontrain1.png)
 ![SBTCVM's GUI desktop 'bench' TROM/disk, showing its info screen.](/textdocs/screenshots/bench1.png)
+![Bench desktop](/textdocs/screenshots/bench2.png)
 
 ## Features:
 

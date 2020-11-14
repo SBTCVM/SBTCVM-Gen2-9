@@ -2,4 +2,5 @@ gfxcon -cp %xwd%/title
 gfxcon -cp %xwd%/gameover
 gfxcon -cp %xwd%/help
 gfxcon -cp %xwd%/about
+gfxcon -plrlei %xwd%/gamebg 20
 stnp %xwd%
