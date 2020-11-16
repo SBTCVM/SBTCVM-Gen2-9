@@ -27,6 +27,12 @@ Run a trom application in curses frontend:
 _**Notice:**  curses frontend is somewhat buggy & incomplete. pygame frontend HIGHLY recommended._
 
 
+Failing both curses and pygame, a barebones, (non-interactive) frontend, 
+the **bare frontend**
+is available:
+
+`./bare_sbtcvm.py counttestprint`
+
 
 ### where does SBTCVM search for applications and source code?
 In order _(non-bold text describes what applications & source code is kept there)_

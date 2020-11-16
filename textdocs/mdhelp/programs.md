@@ -9,7 +9,7 @@
 
 
 
-### PYG_SBTCVM.py: (PYGAME) [XAS command: run/runp]
+### pyg_sbtcvm.py: (PYGAME) [XAS command: run/runp]
 _requires pygame (truetype font and PNG support **REQUIRED**)_
 
 
@@ -19,7 +19,7 @@ SBTCVM's virtual machine. (with pygame frontend)
 Features an, 81-column by 25-line color graphical TTY display, SBTGA Graphics, mouse, and sound.
 
 
-### CUR_SBTCVM.py: (CURSES) [XAS command: runc]
+### cur_sbtcvm.py: (CURSES) [XAS command: runc]
 SBTCVM's virtual machine. (with curses frontend)
 
 _Note: Curses Frontend is **BUGGY**_
@@ -31,6 +31,21 @@ note: recommended to use terminal thats 81 columns or wider.
 also, the curses frontend may lack certain features. i.e. graphics.
 
 Does feature sound when pygame is installed.
+
+
+### bare_sbtcvm.py: (Non-interactive, barebones frontend) [XAS command: runb]
+
+even more stripped down than the curses frontend, this frontend lacks
+even input support. Mainly useful for non-interactive text-based use
+cases of the virtual machine.
+
+
+Does feature sound when pygame is installed.
+
+Neither curses nor pygame are required for basic use of this frontend.
+
+
+
 
 
 # Development Tools & Compilers
