@@ -7,10 +7,10 @@ import os
 import sys
 import time
 if sys.platform=="win32":
-	print("Bare Frontend: using windows mode.")
-	import msvcrt
-	getch=msvcrt.getch
-else:
+	print("Bare Frontend: using windows mode. WARNING: Input not yet supported.\n please use curses or pygame frontends!")
+	#import msvcrt
+	#getch=msvcrt.getch
+#else:
 	
 	print("Bare Frontend: using Nix* mode. WARNING: Input not yet supported.\n please use curses or pygame frontends!")
 	#import tty
@@ -68,16 +68,16 @@ class uio:
 		
 		while self.run:
 			time.sleep(0.1)
-			char=""
-			if sys.platform=="win32":
-				while char!=None and self.run:
-					char=getch()
-					if char == '\x08' or char == '\x7f' or char == "\b":
-						self.keyinbuff.append(2)
-					elif char=="\n":
-						self.keyinbuff.append(1)
-					elif char in tcon.strtodat:
-						self.keyinbuff.append(tcon.strtodat[char])
+			#char=""
+			#if sys.platform=="win32":
+				#while char!=None and self.run:
+					#char=getch()
+					#if char == '\x08' or char == '\x7f' or char == "\b":
+						#self.keyinbuff.append(2)
+					#elif char=="\n":
+						#self.keyinbuff.append(1)
+					#elif char in tcon.strtodat:
+						#self.keyinbuff.append(tcon.strtodat[char])
 			#else:
 				#char=getch()
 				#if char!=None:
