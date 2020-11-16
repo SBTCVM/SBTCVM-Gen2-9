@@ -23,6 +23,7 @@ gsub seg.init_pos
 ####
 bprinttail1 uses 'segment' module
 bprinttail1 ?+-_<>"'$%|/\=,.
+bprinttail1 [x] {x} 3^2=9 ` * !
 bprinttail1 abcdefghijklmnopq
 bprinttail1 rstuvwxyz 0123456789
 bprinttail1 you may now type stuff.

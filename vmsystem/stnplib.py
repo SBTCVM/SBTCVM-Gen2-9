@@ -65,6 +65,12 @@ def fcon_break():
 def fcon_end():
 	return fcon_stack.pop(0)
 
+def fcon_top():
+	fx=fcon_stack[0]
+	#if fx.startswith("flowloop--"):
+	return fx+"--start"
+	#return fx
+
 #flow control logic syntax helpers
 
 fsyntax_stack=[]
@@ -75,6 +81,10 @@ def fsyntax_begin(lineno, info):
 def fsyntax_break(lineno, info):
 	if fsyntax_stack==[]:
 		return 1, "Break: '" + info + "' on line '" + str(lineno) + "', is not within a block."
+def fsyntax_top(lineno, info):
+	if fsyntax_stack==[]:
+		return 1, "End: '" + info + "' on line '" + str(lineno) + "', is not within a block."
+
 def fsyntax_end(lineno, info):
 	if fsyntax_stack==[]:
 		return 1, "End: '" + info + "' on line '" + str(lineno) + "', is not within a block."
@@ -89,12 +99,45 @@ class in_fcon_break:
 		return []
 	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
 		retx=fsyntax_break(lineno, keyword)
-		if retx!=None:
-			return retx
+		
 		return 0, None
 	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
 		destobj.write("goto;>" + fcon_break() + "\n")
 		return
+
+class in_fcon_top:
+	def __init__(self):
+		self.keywords=["top"]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		retx=fsyntax_top(lineno, keyword)
+		
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		destobj.write("goto;>" + fcon_top() + "\n")
+		return
+
+class in_fcon_loop:
+	def __init__(self):
+		self.keywords=["loop"]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		fsyntax_begin(lineno, keyword)
+		
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		blockname=fcon_begin(loop=True)
+		destobj.write('''#unconditional loop
+zerosize;;''' + fcon_loopback() + "\n")
+		
+		return
+
 
 class in_fcon_end:
 	def __init__(self):
@@ -961,7 +1004,7 @@ goto;>goto--branch-''' + str(lineno)
 			if len(arglist)!=2:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 			#return mode doesn't need label argument.
-			elif arglist[1] not in ["return", "stop", "break", "begin"]:
+			elif arglist[1] not in ["return", "stop", "break", "begin", "top"]:
 				return 1, keyword+": Line: " + str(lineno) + ": Must specify args as '<var>,<var> goto <label>'"
 		if self.condmode in [2, 3]:
 			try:
@@ -1048,7 +1091,7 @@ goto;>goto--branch-''' + str(lineno)
 			if valname not in valid_nvars:
 				return 1, keyword+": Line: " + str(lineno) + ": Nonexistant character variable'" + vname + "'"
 		#check goto mode
-		if (arglist[1] not in ["begin", "break", "goto", "gsub", "stop", "return", "chardump", "dumpt", "dumpd"]) and (not arglist[1].startswith("=")):
+		if (arglist[1] not in ["begin", "break", "top", "goto", "gsub", "stop", "return", "chardump", "dumpt", "dumpd"]) and (not arglist[1].startswith("=")):
 			return 1, keyword+": Line: " + str(lineno) + ": Invalid conditional mode! See documentation for valid modes."
 		#variable check
 		for x in arglist[0].split(","):
@@ -1057,6 +1100,10 @@ goto;>goto--branch-''' + str(lineno)
 				
 		if arglist[1]=="break":
 			retx=fsyntax_break(lineno, keyword)
+			if retx!=None:
+				return retx
+		if arglist[1]=="top":
+			retx=fsyntax_top(lineno, keyword)
 			if retx!=None:
 				return retx
 		if arglist[1]=="begin":
@@ -1122,11 +1169,17 @@ stop;''' + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  st
 ''' + self.getcond(lineno, var0, var1, thirdarg) + '''
 goto;>''' + fcon_break() + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
 		
+		elif arglist[1]=="top":
+			destobj.write('''#conditional flow control to-top-of-block (top)
+''' + self.getcond(lineno, var0, var1, thirdarg) + '''
+goto;>''' + fcon_top() + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
+		
 		#conditional flow control begin
 		elif arglist[1]=="begin":
 			destobj.write('''#conditional flow control begin
 ''' + self.getcond(lineno, var0, var1, thirdarg, inverse=True) + '''
-goto;>''' + fcon_begin() + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + "\n")
+goto;>''' + fcon_begin() + ";goto--branch-" +  str(lineno) + "\n\nzerosize;;goto--jumper-" +  str(lineno) + '''
+zerosize;;''' + fcon_loopback() + "\n")
 		
 		#basic goto
 		else:
@@ -2316,6 +2369,8 @@ class mainloop:
 		in_vdistat(),
 		in_fcon_break(),
 		in_fcon_end(),
+		in_fcon_loop(),
+		in_fcon_top(),
 		in_for(),
 		in_condgoto(["if"], "gotoif", condmode=0),#conditionals
 		in_condgoto(["ifmore"], "gotoifmore", condmode=0),

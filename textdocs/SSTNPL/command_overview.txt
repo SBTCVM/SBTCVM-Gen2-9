@@ -208,6 +208,11 @@ Command documentation:
 
 
 	break : skip to corrisponding 'end' statement
+	top   : behavior varies depending on context:
+			- in looped blocks, run next loop iteration, or if loop end condition 
+				has been met, loop exits as normal.
+			- in conditional blocks, run conditional block from its start again
+				unconditionally.
 	end   : used in conjunction with conditional code blocks 
 			(made via the conditional operation 'begin') 
 
@@ -215,6 +220,7 @@ Command documentation:
 --for loops:
 		NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
 		NOTE: 'break' will break from loop. 
+		NOTE: 'top' will run next loop immediately/exit for loop on last iteration.
 		
 		basic syntax:  
 			for [var1] in [mode] <args>
@@ -269,6 +275,12 @@ Command documentation:
 	--modes:
 		begin : begin a conditional code block for the following lines until the next 'end' statement.
 				(see FLOW CONTROL COMMANDS section above)
+		break : break from a conditional code block/looped code block
+		top   : 
+			- in looped blocks, run next loop iteration, or if loop end condition 
+				has been met, loop exits as normal.
+			- in conditional blocks, run conditional block from its start again
+				(bypasses conditional check that begun the block.)
 		goto : ordinary goto.
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
 		return : just like normal return command. should omit label.
@@ -293,12 +305,21 @@ Command documentation:
 		if var1,var2 dumpt *+0-
 	  
 
+-- Unconditional loops
+
+	loop: loops a block of code infinately until a break is triggered.
+	NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
+	NOTE: 'break' will break from loop. 
+
 -- While/Until loops
 	
 	SSTNPL has a selection of various while/until commands available:
 	-----NOTE FOR WHILE/UNTIL LOOPS: var1 var2 and var3 can be Literals as well as variables.-----
 	NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
 	NOTE: 'break' will break from loop. 
+	NOTE: 'top' will run loop exit condition check immediately, if loop
+			should continue based upon exit condition, run next iteration
+			as normal.
 	
 	--2-argument conditions:
 		while         : runs while [var1]=[var2]
@@ -332,7 +353,7 @@ Command documentation:
 
 --SBTGA:
 	gamode [variable] : switch to the mode specified by the given variable.
-		30: plotter, 0: standard TTY (default mode)
+		30: 243x243 plotter, 31: 575x575 plotter, 0: standard TTY (default mode)
 
 --SBTGA plotter:
 	drawx1    [varname]: set plotter x1

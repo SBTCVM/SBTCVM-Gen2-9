@@ -1,0 +1,36 @@
+
+
+var kb=0
+
+
+loop
+	loop
+		prline press 1 to continue...
+		keyprompt
+		set kb
+		if kb,:3 top
+		if kb,:1 break
+		prline press 3 to hide this for 1 loop.
+	end
+	
+	prline press 0 to continue, press 4 to enter a conditional loop...
+	
+	
+	keyprompt
+	set kb
+	if kb,:4 begin
+		
+		prline press 5 to exit subloop
+		keyprompt
+		set kb
+		if kb,:5 break
+		
+		top
+	end
+	if kb,:0 break
+end
+
+
+prline goodbye! press a key to exit.
+keyprompt
+stop
