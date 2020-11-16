@@ -6,13 +6,15 @@ from . import libtextcon as tcon
 import os
 import sys
 import time
-if sys.platform=="win32":
-	print("Bare Frontend: using windows mode. WARNING: Input not yet supported.\n please use curses or pygame frontends!")
-	#import msvcrt
-	#getch=msvcrt.getch
+
+print("NOTICE: Bare Frontend is intended for non-interactive usage of SBTCVM. \n please use curses or pygame frontends if you need input!")
+#if sys.platform=="win32":
+#	print("Bare Frontend: using windows mode. NOTICE: Input not supported.\n please use curses or pygame frontends!")
+#	#import msvcrt
+#	#getch=msvcrt.getch
 #else:
-	
-	print("Bare Frontend: using Nix* mode. WARNING: Input not yet supported.\n please use curses or pygame frontends!")
+#	
+#	print("Bare Frontend: using Nix* mode. NOTICE: Input not supported.\n please use curses or pygame frontends!")
 	#import tty
 	#import termios
 	#def getch():

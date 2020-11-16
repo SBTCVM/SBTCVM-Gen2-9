@@ -139,9 +139,10 @@ else:
 	uiosys = UIO.uio(cpusys, memsys, iosys)
 	uiosys.ttyraw("SBTCVM Bare frontend. SBTCVM Gen2-9 v2.1.0 - Running: " + windowprefix)
 	uiosys.ttyraw("ready.")
-	dispthr=Thread(target = uiosys.statup, args = [])
-	dispthr.daemon=True
-	dispthr.start()
+	#disabled, as this has basically no uncommented code besides a sleep statement...
+	#dispthr=Thread(target = uiosys.statup, args = [])
+	#dispthr.daemon=True
+	#dispthr.start()
 	#main loop
 	clcnt=0.0
 	starttime=time.time()
