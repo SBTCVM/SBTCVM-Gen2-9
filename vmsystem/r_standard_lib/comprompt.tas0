@@ -94,6 +94,7 @@ goto;>goto--branch-62-0
 goto;>flow--con-x-1;goto--branch-62-0
 
 zerosize;;goto--jumper-62-0
+zerosize;;flow--con-x-1--start
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r

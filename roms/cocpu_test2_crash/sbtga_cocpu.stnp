@@ -1,0 +1,8 @@
+var counter=@0
+
+
+
+#THIS CRASHES ON PURPOSE!
+asm setreg1;10x0
+asm setreg2;10x0
+asm div

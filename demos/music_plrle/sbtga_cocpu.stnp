@@ -1,0 +1,10 @@
+asm setreg1;>xsong0.main
+set mus.offset
+gsub mus.init
+
+label loop
+gsub mus.cycle
+goto loop
+
+asm includeas;music_plrle+mellowdayspast.tas0,xsong0
+include musicengine as mus

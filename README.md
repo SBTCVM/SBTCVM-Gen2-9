@@ -35,6 +35,7 @@ ternary with SBTCVM, should prove a fun challenge!
 - bundled ternary software. including demos, games and utilities.
 - 4 channel sound chip
 - 6.5Khz, 9-trit CPU
+- 3.25Khz 9-trit Coprocessor
 - 39.388 KiloNonets of system RAM
 - pygame frontend features color graphics.
 - multiple specialized programming languages with integrated compilers. (SSTNPL, SBTCVM assembly)

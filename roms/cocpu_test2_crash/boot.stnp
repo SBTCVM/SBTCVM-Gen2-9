@@ -1,0 +1,20 @@
+
+prline WARNING! this will trigger A Division
+prline by Zero VMSYSHALT in the CoCPU!
+prline THIS IS NOT A BUG!
+prline press a key to begin.
+keyprompt
+
+prline Begin CoCPU startup....
+
+vdi garstld -1 sbtga_cocpu.txe
+
+val @0
+asm iowrite1;>cocpu.status
+
+loop
+	prline waiting...
+	
+	
+	
+end

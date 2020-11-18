@@ -1,3 +1,5 @@
+CPU 0 (main CPU) IOBus Map.
+
 key:
 
 m=mode
@@ -173,3 +175,15 @@ x :  m : asm varname  : description
 732: [r] buffer.4.read.head  : read value off top of buffer
 733: [r] buffer.4.read.tail  : read value off bottom of buffer
 734: [w] buffer.4.reset      : reset buffer
+
+
+#COCPU Secondary CPU control
+1000: [b] cocpu.status       : read to get cocpu status, write 1 to halt cocpu, write 0 to engage cocpu.
+1001: [w] cocpu.reset        : restart the CoCPU.
+
+#COCPU IO - MAIN CPU IO communication pipes:
+#read to get any values sent by cocpu, write to send values to cocpu IO bus. [buffered in both directions, returns 0 if buffer is empty!]
+1100: [b] cross.io.1         : [see above]
+1101: [b] cross.io.2         : [see above]
+1102: [b] cross.io.3         : [see above]
+1103: [b] cross.io.4         : [see above]

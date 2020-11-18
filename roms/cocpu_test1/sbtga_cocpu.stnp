@@ -1,0 +1,19 @@
+var counter=@0
+
+loop
+	add counter,@1
+	set counter
+	asm iowrite1;>cross.io.1
+	
+	
+	#halt cocpu when we reach 20 (test)
+	ifmore counter,@20 begin
+		
+		#we need to reset the counter for the second test to work!
+		val @0
+		set counter
+		
+		val @1
+		asm iowrite1;>cocpu.status
+	end
+end

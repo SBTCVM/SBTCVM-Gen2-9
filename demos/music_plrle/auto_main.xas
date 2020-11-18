@@ -1,0 +1,4 @@
+gfxcon -plrlei %xwd%/image.png
+stnp %xwd%/sbtga_cocpu
+stnp %xwd%/boot
+diskedit --new %xwd%

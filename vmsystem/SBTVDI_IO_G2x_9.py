@@ -64,10 +64,14 @@ class vdi_filebuff:
 #SBTCVM Balanced Ternary Virtual Disk Interface
 #DRAFT. 
 class sbtvdi:
-	def __init__(self, iosys, cpusys, memsys, diska=None, diskb=None, bootfromdisk=0):
+	def __init__(self, iosys, cpusys, memsys, cocpu, iosys2, cpusys2, memsys2, diska=None, diskb=None, bootfromdisk=0):
 		self.iosys=iosys
 		self.cpusys=cpusys
 		self.memsys=memsys
+		self.iosys2=iosys2
+		self.cpusys2=cpusys2
+		self.memsys2=memsys2
+		self.cocpu=cocpu
 		self.cmdbuff=[]
 		self.outbuff=[]
 		self.status=0
@@ -150,8 +154,10 @@ quit   : request to quit
 ''')
 			self.outstr('''dmnt0 [disk image]: Mount SBTVDI disk image to drive index 0
 dmnt1 [disk image]: Mount SBTVDI disk image to drive index 1
-rstld [drive index] [filename] : load and run full-memory programs from disk.
-membak [drive index] [filename] : dump system memory to a file on disk.
+rstld [drive index] [filename] : load and run full-memory programs from disk. [Main CPU]
+membak [drive index] [filename] : dump system memory to a file on disk. [Main CPU]
+garstld [drive index] [filename] : load and run full-memory programs from disk. [SBTGA CoCPU]
+gamembak [drive index] [filename] : dump system memory to a file on disk. [SBTGA CoCPU]
 list [drive index] [pattern] : list files on disk, optionally filter by filename part. e.g. extension.
 ''')
 		elif cmd=="dmnt0" or cmd=="dmnt1":
@@ -206,6 +212,28 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 				except ValueError:
 					self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
 					self.status=-1
+		elif cmd=='gamembak':
+			if not len(cmdlist_as)>=3:
+				self.outstr("ERROR: specify 'gamembak [diskid] [filename]'!\n")
+				self.status=-2
+			else:
+				try:
+					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+						self.membackup(int(cmdlist_as[1]), cmdlist_as[2], ga=True)
+				except ValueError:
+					self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
+					self.status=-1
+		elif cmd=="garstld":
+			if not len(cmdlist_as)>=3:
+				self.outstr("ERROR: specify 'garstld [diskid] [filename]'!\n")
+				self.status=-2
+			else:
+				try:
+					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+						self.resetload_getfile(int(cmdlist_as[1]), cmdlist_as[2], ga=True)
+				except ValueError:
+					self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
+					self.status=-1
 		elif cmd=="list":
 			if not len(cmdlist_as)>=2:
 				self.outstr("ERROR: specify 'list [diskid] (optional pattern)'!\n")
@@ -252,7 +280,7 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 			self.outstr("ERROR:  drive index '" + str(diskid) + "' does not exist.\n")
 			self.status=-4
 			return
-	def membackup(self, diskid, filename):
+	def membackup(self, diskid, filename, ga=False):
 		for did in self.disks:
 			if diskid==did:
 				if self.disks[did]==None:
@@ -264,13 +292,16 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 					diskfref=self.disks[did].files[filename]
 					addr=libbaltcalc.mni(9)
 					while addr<=libbaltcalc.mpi(9):
-						diskfref.append([self.memsys.INSTDICT[addr], self.memsys.DATDICT[addr]])
+						if ga:
+							diskfref.append([self.memsys2.INSTDICT[addr], self.memsys2.DATDICT[addr]])
+						else:
+							diskfref.append([self.memsys.INSTDICT[addr], self.memsys.DATDICT[addr]])
 						addr+=1
 		if diskid not in self.disks and diskid!=-1:
 			self.outstr("ERROR:  drive index '" + str(diskid) + "' does not exist.\n")
 			self.status=-4
 			return
-	def resetload_getfile(self, diskid, filename):
+	def resetload_getfile(self, diskid, filename, ga=False):
 		for did in self.disks:
 			if diskid==did or diskid==-1:
 				if self.disks[did]==None:
@@ -280,7 +311,7 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 						return
 				else:
 					if filename in self.disks[did].files:
-						self.resetload_restart(self.disks[did].files[filename])
+						self.resetload_restart(self.disks[did].files[filename], ga=ga)
 						return
 		if diskid not in self.disks and diskid!=-1:
 			self.outstr("ERROR:  drive index '" + str(diskid) + "' does not exist.\n")
@@ -288,11 +319,19 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 			return
 		self.outstr("ERROR: '" + filename + "' Was not found!\n")
 		self.status=-3
-	def resetload_restart(self, filelisting):
+	def resetload_restart(self, filelisting, ga=False):
+		
 		#restart CPU
-		self.cpusys.softreset()
-		#reset CLI io buffers and params
-		self.clireset(None, 0)
-		#call special memory system resetload helper. (blanks RAM and loads file into it)
-		self.memsys.resetload_helper(filelisting)
+		if ga:
+			
+			#reset CLI io buffers and params
+			self.clireset(None, 0)
+
+			self.cocpu.VDI_rstld(filelisting)
+		else:
+			self.cpusys.softreset()
+			#reset CLI io buffers and params
+			self.clireset(None, 0)
+			#call special memory system resetload helper. (blanks RAM and loads file into it)
+			self.memsys.resetload_helper(filelisting)
 		

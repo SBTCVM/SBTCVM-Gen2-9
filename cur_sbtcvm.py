@@ -10,6 +10,7 @@ import vmsystem.libbaltcalc as libbaltcalc
 from vmsystem.libbaltcalc import btint
 import vmsystem.MEM_G2x_9
 import vmsystem.CPU_G2x_9
+import vmsystem.COCPU_G2x_9 as ccpu
 import vmsystem.IO_G2x_9
 import vmsystem.UIO_CURSES_G2x_9 as UIO
 import vmsystem.COMMON_IO_G2x_9 as devcommon
@@ -136,13 +137,18 @@ else:
 		iosys=vmsystem.IO_G2x_9.io()
 		
 		cpusys=vmsystem.CPU_G2x_9.cpu(memsys, iosys)
+		memsys2=vmsystem.MEM_G2x_9.memory(None, mem_id=1, ignore_trom=1)
+		iosys2=vmsystem.IO_G2x_9.io(io_id=1)
+		cpusys2=vmsystem.CPU_G2x_9.cpu(memsys2, iosys2, cpu_id=1)
+		cocpu=ccpu.cocpu_setup(cpusys2, iosys, iosys2, memsys2, targtime, targspeed)
 		devcommon.factorydevs(iosys)
+		devcommon.factorydevs(iosys2)
 		#init SBTVDI interface.
-		vdi.sbtvdi(iosys, cpusys, memsys, diska=diska)
+		vdi.sbtvdi(iosys, cpusys, memsys, cocpu, iosys2, cpusys2, memsys2, diska=diska)
 		progrun=1
 		
 		#start sound system
-		snd.initsnd(iosys)
+		snd.initsnd(iosys, iosys2)
 		#curses startup
 		mainscr=curses.initscr()
 		curses.noecho()
@@ -198,8 +204,10 @@ else:
 				print(postout1)
 				print(postout2)
 				print(postout3)
-				progrun=0
 				
+				progrun=0
+				cocpu.powoff()
+				cocpu.printstats()
 			elif retval!=None:
 				#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
 				#(Store text in variables, as they need to be printed after curses has been shut down.
@@ -214,8 +222,25 @@ else:
 				print(postout1)
 				print(postout2)
 				print(postout3)
+				
+				
+				cocpu.powoff()
+				cocpu.printstats()
 				progrun=0
-			
+			elif cocpu.progrun==0:
+				
+				
+				postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
+				postout3=("Target Speed : '" + str(targspeed) + "' Khz")
+				uiosys.powoff()
+				curses.echo()
+				curses.endwin()
+				cocpu.printstats()
+				print(postout2)
+				print(postout3)
+				
+				progrun=0
+
 	#in case of drastic failure, shutdown curses!
 	finally:
 		if progrun:

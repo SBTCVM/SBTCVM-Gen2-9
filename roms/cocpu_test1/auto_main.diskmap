@@ -1,0 +1,3 @@
+CoCPU Test 1
+trom;cocpu_test1/boot.trom;boot.txe
+trom;cocpu_test1/sbtga_cocpu.trom;sbtga_cocpu.txe

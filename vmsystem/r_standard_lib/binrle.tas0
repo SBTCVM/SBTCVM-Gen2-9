@@ -116,6 +116,7 @@ goto;>goto--branch-72-0
 goto;>flow--con-x-1;goto--branch-72-0
 
 zerosize;;goto--jumper-72-0
+zerosize;;flow--con-x-1--start
 #plotter draw line
 dataread1;>on
 iowrite1;>plot.color
@@ -142,6 +143,7 @@ goto;>goto--branch-81-0
 goto;>flow--con-x-3;goto--branch-81-0
 
 zerosize;;goto--jumper-81-0
+zerosize;;flow--con-x-3--start
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
@@ -163,6 +165,7 @@ goto;>goto--branch-88-0
 goto;>flow--con-x-4;goto--branch-88-0
 
 zerosize;;goto--jumper-88-0
+zerosize;;flow--con-x-4--start
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
@@ -204,6 +207,7 @@ goto;>goto--jumper-106-0
 goto;>flow--con-x-5;goto--branch-106-0
 
 zerosize;;goto--jumper-106-0
+zerosize;;flow--con-x-5--start
 #Get signwise/tritwise inversion of var
 dataread1;>color_bool
 invert1
@@ -220,6 +224,7 @@ goto;>goto--branch-111-0
 goto;>flow--con-x-6;goto--branch-111-0
 
 zerosize;;goto--jumper-111-0
+zerosize;;flow--con-x-6--start
 #plotter draw line
 dataread1;>on
 iowrite1;>plot.color
@@ -233,6 +238,7 @@ goto;>goto--branch-115-0
 goto;>flow--con-x-7;goto--branch-115-0
 
 zerosize;;goto--jumper-115-0
+zerosize;;flow--con-x-7--start
 #Get abs of var
 dataread1;>data
 abs1
@@ -276,6 +282,7 @@ goto;>goto--branch-135-0
 goto;>flow--con-x-9;goto--branch-135-0
 
 zerosize;;goto--jumper-135-0
+zerosize;;flow--con-x-9--start
 #get(1) (may be used with set, or asm code)
 dataread1;>length_temp
 #get2 (may be used with set2, and asm code.)
@@ -325,6 +332,7 @@ goto;>goto--branch-161-0
 goto;>flow--con-x-10;goto--branch-161-0
 
 zerosize;;goto--jumper-161-0
+zerosize;;flow--con-x-10--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -375,6 +383,7 @@ goto;>goto--jumper-183-0
 goto;>flow--con-x-11;goto--branch-183-0
 
 zerosize;;goto--jumper-183-0
+zerosize;;flow--con-x-11--start
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)

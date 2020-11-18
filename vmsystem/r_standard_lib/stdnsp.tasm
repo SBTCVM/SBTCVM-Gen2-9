@@ -149,3 +149,10 @@ v>buffer.4.write.tail;10x731
 v>buffer.4.read.head;10x732
 v>buffer.4.read.tail;10x733
 v>buffer.4.reset;10x734
+
+v>cocpu.status;10x1000
+v>cocpu.reset;10x1001
+v>cross.io.1;10x1100
+v>cross.io.2;10x1101
+v>cross.io.3;10x1102
+v>cross.io.4;10x1103

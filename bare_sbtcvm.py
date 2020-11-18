@@ -8,6 +8,7 @@ import vmsystem.libbaltcalc as libbaltcalc
 from vmsystem.libbaltcalc import btint
 import vmsystem.MEM_G2x_9
 import vmsystem.CPU_G2x_9
+import vmsystem.COCPU_G2x_9 as ccpu
 import vmsystem.IO_G2x_9
 import vmsystem.UIO_BARE_G2x_9 as UIO
 import vmsystem.COMMON_IO_G2x_9 as devcommon
@@ -128,13 +129,19 @@ else:
 	iosys=vmsystem.IO_G2x_9.io()
 	
 	cpusys=vmsystem.CPU_G2x_9.cpu(memsys, iosys)
+	
+	memsys2=vmsystem.MEM_G2x_9.memory(None, mem_id=1, ignore_trom=1)
+	iosys2=vmsystem.IO_G2x_9.io(io_id=1)
+	cpusys2=vmsystem.CPU_G2x_9.cpu(memsys2, iosys2, cpu_id=1)
+	cocpu=ccpu.cocpu_setup(cpusys2, iosys, iosys2, memsys2, targtime, targspeed)
 	devcommon.factorydevs(iosys)
+	devcommon.factorydevs(iosys2)
 	#init SBTVDI interface.
-	vdi.sbtvdi(iosys, cpusys, memsys, diska=diska)
+	vdi.sbtvdi(iosys, cpusys, memsys, cocpu, iosys2, cpusys2, memsys2, diska=diska)
 	progrun=1
 	
 	#start sound system
-	snd.initsnd(iosys)
+	snd.initsnd(iosys, iosys2)
 	#uio startup
 	uiosys = UIO.uio(cpusys, memsys, iosys)
 	uiosys.ttyraw("SBTCVM Bare frontend. SBTCVM Gen2-9 v2.1.0 - Running: " + windowprefix)
@@ -166,6 +173,9 @@ else:
 			print(postout2)
 			print(postout3)
 			progrun=0
+			
+			cocpu.powoff()
+			cocpu.printstats()
 		elif retval!=None:
 			#benchmark session first, as uiosys.powoff() has to wait for the statup thread to terminate.
 			#(Store text in variables, as they need to be printed after curses has been shut down.
@@ -178,4 +188,15 @@ else:
 			print(postout3)
 			uiosys.powoff()
 			progrun=0
-		
+			cocpu.powoff()
+			cocpu.printstats()
+		elif cocpu.progrun==0:
+			
+			
+			postout2=("Approx. Speed: '" + str((float(clcnt)/(time.time()-starttime))/1000) + "' KHz")
+			postout3=("Target Speed : '" + str(targspeed) + "' Khz")
+			cocpu.printstats()
+			print(postout2)
+			print(postout3)
+			uiosys.powoff()
+			progrun=0

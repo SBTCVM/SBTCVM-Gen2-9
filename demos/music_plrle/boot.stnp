@@ -1,0 +1,22 @@
+newline
+prline Begin CoCPU startup....
+
+vdi garstld -1 sbtga_cocpu.txe
+val @0
+asm iowrite1;>cocpu.status
+
+gamode @30
+
+asm setreg1;>image_offset1
+set pl.offset
+
+gsub pl.decode
+
+keyprompt
+
+stop
+
+
+include plrle as pl
+asm include;music_plrle+image.tas0;image_offset1
+

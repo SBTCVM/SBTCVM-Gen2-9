@@ -1,0 +1,111 @@
+CPU 1 (SBTGA CoCPU) IOBus Map.
+
+key:
+
+m=mode
+[w]=write only
+[r]=read only
+[b]=bidirectional/both read & write
+
+x=address
+
+x :  m : asm varname  : description
+--+----+--------------+------------------------- 
+
+
+#separate from Main CPU's random generators
+50: [b]: rand1.start  : set start of random 1 range.
+51: [b]: rand1.end    : set end of random 1 range.
+52: [r]: rand1.get    : get random number 1 from configured range.
+53: [b]: rand2.start  : set start of random 2 range.
+54: [b]: rand2.end    : set end of random 2 range.
+55: [r]: rand2.get    : get random number 2 from configured range.
+56: [b]: rand3.start  : set start of random 3 range.
+57: [b]: rand3.end    : set end of random 3 range.
+58: [r]: rand3.get    : get random number 3 from configured range.
+59: [b]: rand4.start  : set start of random 4 range.
+60: [b]: rand4.end    : set end of random 4 range.
+61: [r]: rand4.get    : get random number 4 from configured range.
+
+
+
+#NOTE: the SBTSND-200 sound chip is only emulated when a valid backend is available.
+#currently this is limited to pygame.
+##NOTE: these are a seperate set of channels than the 4 accessible on the Main CPU's IOBus!
+		they are named the same so source code can be more exchangeable between the CPUs.
+#SND channel 1
+200: [w] snd.1.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+201: [w] snd.1.vol : set volume. 0 through 10
+202: [w] snd.1.pan : -1=right, 1=left, 0=center
+203: [w] snd.1.pulse : set pulse (waves 3 and 4) 0 through 10
+204: [w] snd.1.freq : set frequency in Hertz.
+205: [w] snd.1.play : write to start channel
+206: [w] snd.1.stop : write to stop channel
+
+#SND channel 2
+210: [w] snd.2.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+211: [w] snd.2.vol : set volume. 0 through 10
+212: [w] snd.2.pan : -1=right, 1=left, 0=center
+213: [w] snd.2.pulse : set pulse (waves 3 and 4) 0 through 10
+214: [w] snd.2.freq : set frequency in Hertz.
+215: [w] snd.2.play : write to start channel
+216: [w] snd.2.stop : write to stop channel
+
+#SND channel 3
+220: [w] snd.3.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+221: [w] snd.3.vol : set volume. 0 through 10
+222: [w] snd.3.pan : -1=right, 1=left, 0=center
+223: [w] snd.3.pulse : set pulse (waves 3 and 4) 0 through 10
+224: [w] snd.3.freq : set frequency in Hertz.
+225: [w] snd.3.play : write to start channel
+226: [w] snd.3.stop : write to stop channel
+
+#SND channel 4
+230: [w] snd.4.wave : 0=square, 1=triangle, 2=saw, 3=pulse, 4=tri-pulse, 5=noise.
+231: [w] snd.4.vol : set volume. 0 through 10
+232: [w] snd.4.pan : -1=right, 1=left, 0=center
+233: [w] snd.4.pulse : set pulse (waves 3 and 4) 0 through 10
+234: [w] snd.4.freq : set frequency in Hertz.
+235: [w] snd.4.play : write to start channel
+236: [w] snd.4.stop : write to stop channel
+
+
+
+
+#separate from main CPU's 2-way buffers.
+701: [w] buffer.1.write.tail : write value to bottom of buffer
+702: [r] buffer.1.read.head  : read value off top of buffer
+703: [r] buffer.1.read.tail  : read value off bottom of buffer
+704: [w] buffer.1.reset      : reset buffer
+
+710: [w] buffer.2.write.head : write value to top of buffer
+711: [w] buffer.2.write.tail : write value to bottom of buffer
+712: [r] buffer.2.read.head  : read value off top of buffer
+713: [r] buffer.2.read.tail  : read value off bottom of buffer
+714: [w] buffer.2.reset      : reset buffer
+
+720: [w] buffer.3.write.head : write value to top of buffer
+721: [w] buffer.3.write.tail : write value to bottom of buffer
+722: [r] buffer.3.read.head  : read value off top of buffer
+723: [r] buffer.3.read.tail  : read value off bottom of buffer
+724: [w] buffer.3.reset      : reset buffer
+
+730: [w] buffer.4.write.head : write value to top of buffer
+731: [w] buffer.4.write.tail : write value to bottom of buffer
+732: [r] buffer.4.read.head  : read value off top of buffer
+733: [r] buffer.4.read.tail  : read value off bottom of buffer
+734: [w] buffer.4.reset      : reset buffer
+
+
+#COCPU Secondary CPU self-control
+1000: [b] cocpu.status       : read to get cocpu status, write 1 to halt cocpu, 
+		write 0 to engage cocpu.
+1001: [w] cocpu.reset        : restart the CoCPU.
+
+#COCPU IO - MAIN CPU IO communication pipes:
+#read to get any values sent by main cpu, write to send values to main cpu 
+		IO bus. [buffered in both directions, returns 0 if buffer is empty!]
+1100: [b] cross.io.1         : [see above]
+1101: [b] cross.io.2         : [see above]
+1102: [b] cross.io.3         : [see above]
+1103: [b] cross.io.4         : [see above]

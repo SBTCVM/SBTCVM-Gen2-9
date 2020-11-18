@@ -7,11 +7,12 @@ btint=libbaltcalc.btint
 
 
 class cpu:
-	def __init__(self, memorysystem, iosystem):
+	def __init__(self, memorysystem, iosystem, cpu_id=0):
 		self.memsys=memorysystem
 		self.iosys=iosystem
+		self.cpu_id=cpu_id
 		self.designation="SBTCVM_G2x_9_r1"
-		print("SBTCVM Generation 2x 9-trit CPU core Initializing...\nCPU Designation: " + self.designation + "\n")
+		print("CPU" + str(cpu_id) + " Designation: " + self.designation + "\n")
 		self.execpoint=btint(libbaltcalc.mni(9))
 		self.reg1=btint(0)
 		self.reg2=btint(0)
@@ -50,9 +51,12 @@ class cpu:
 		self.exceptcode=0
 		self.exceptflg=0
 		self.critfault=None
-	def softreset(self):
+	def softreset(self, cocpu=0):
 		#soft CPU core RESET
-		self.execpoint=btint(libbaltcalc.mni(9))-1
+		if cocpu==1:
+			self.execpoint=btint(libbaltcalc.mni(9))
+		else:
+			self.execpoint=btint(libbaltcalc.mni(9))-1
 		self.reg1=btint(0)
 		self.reg2=btint(0)
 		

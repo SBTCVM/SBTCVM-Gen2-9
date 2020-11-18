@@ -20,13 +20,17 @@ soundbuffer=512
 
 
 #Sound init function.
-def initsnd(iosys):
+def initsnd(iosys, iosys2):
 	if backend==None:
 		return
 	sfx(iosys, 200, 0)
 	sfx(iosys, 210, 1)
 	sfx(iosys, 220, 2)
 	sfx(iosys, 230, 3)
+	sfx(iosys2, 200, 4)
+	sfx(iosys2, 210, 5)
+	sfx(iosys2, 220, 6)
+	sfx(iosys2, 230, 7)
 
 
 
