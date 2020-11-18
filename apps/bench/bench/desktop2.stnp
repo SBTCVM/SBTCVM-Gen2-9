@@ -13,8 +13,10 @@ var isbackup=0
 if isbackup,@0 begin
 	val @1
 	set isbackup
+	gsub common.tune
 	gsub draw_desktop
 	drawcopy @12
+	drawcopy @-1
 end
 val @1
 set actflg
@@ -25,12 +27,14 @@ label main
 		val @0
 		set actflg
 		drawblit @12
+		drawcopy @-1
 	end
 	
 	label main_loop
 	
 		asm ioread1;>mouse.button
 		set btnbuff
+		gsub common.mouse_cursor
 	
 	ifnot btnbuff,@1 goto main_loop
 	

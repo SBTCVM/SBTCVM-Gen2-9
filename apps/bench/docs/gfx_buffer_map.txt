@@ -2,6 +2,6 @@
 13: wallpaper
 12: Main Desktop
 
-
-
+-1: screen prebuffer for mouse_cursor (copy to here instead, then call common.mouse_cursor)
+-2: internal buffer for mouse_cursor [DO NOT USE IF USING MOUSE_CURSOR!]
 1: reserved for app use.
