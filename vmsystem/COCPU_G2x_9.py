@@ -71,7 +71,9 @@ class cocpu:
 		self.pipe0=io_pipe(self.iosys1, 1103, self.iosys2, 1103)
 		iosys1.setreadnotify(1001, self.io_reset)
 		iosys1.setwritenotify(1000, self.io_cocpu_state)
-		
+		self.postout1=None
+		self.postout2=None
+		self.postout3=None
 		iosys1.setreadoverride(1000, self.io_cocpu_getstate)
 		iosys2.setreadnotify(1001, self.io_reset)
 		iosys2.setwritenotify(1000, self.io_cocpu_state)
@@ -159,6 +161,10 @@ class cocpu:
 	def printstats(self):
 		if self.postout1!=None:
 			print(self.postout1)
-		print(self.postout2)
-		print(self.postout3)
+		
+		if self.postout2!=None:
+			print(self.postout2)
+		
+		if self.postout3!=None:
+			print(self.postout3)
 	
