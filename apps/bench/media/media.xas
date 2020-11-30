@@ -2,7 +2,7 @@ gfxcon -plrle %xwd%/logo.png
 gfxcon -plrle %xwd%/info.png
 gfxcon -plrle %xwd%/dos.png
 
-gfxcon -plrlei %xwd%/image_info.png 20
+gfxcon -plrlei %xwd%/image_info.png 10
 gfxcon -plrlei %xwd%/wallpaper.png 32
 gfxcon -plrle %xwd%/credits1.png
 gfxcon -plrle %xwd%/credits_icn.png
@@ -12,3 +12,6 @@ gfxcon -plrle %xwd%/credits_bg_3.png
 gfxcon -plrle %xwd%/credits_bg_4.png
 gfxcon -plrle %xwd%/credits_bg_5.png
 gfxcon -plrle %xwd%/credits_bg_6.png
+
+gfxcon -plrle %xwd%/diag_no.png
+gfxcon -plrle %xwd%/diag_yes.png

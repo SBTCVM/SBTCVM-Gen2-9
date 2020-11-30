@@ -1,3 +1,15 @@
+
+bprinttail1 Exit to DOS?
+gsub yn_dialog.main
+
+if yn_dialog.answer,@0 begin
+	prline Starting desktop.app...
+	vdi rstld 2 desktop.back.tri
+	prline ERROR! desktop backup not found!
+	stop
+end
+
+
 gamode @0
 newline
 prline Starting SBTCVM-DOS command shell... run 'bench' to return!
@@ -7,3 +19,6 @@ prline Can't load, try to mount dos disk on drive 1...
 vdi dmnt1 dos
 vdi rstld -1 command.txe
 prline ERROR! can't load SBTCVM-DOS!
+stop
+
+include bench/lib/yn_dialog as yn_dialog

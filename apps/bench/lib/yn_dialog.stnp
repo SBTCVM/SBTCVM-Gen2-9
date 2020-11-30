@@ -1,0 +1,95 @@
+
+
+var dialog_color=*+++++++++
+
+var answer=0
+var btnbuff=0
+var xbuff=0
+var ybuff=0
+label main
+	drawselect @-1
+	#drawblit @13
+	
+	val @0
+	set answer
+	drawx1 @-80
+	drawy1 @-40
+	
+	drawwidth @161
+	drawheight @81
+	
+	drawcolor dialog_color
+	drawrect
+	drawcopy @0
+	val *---------
+	set seg.color_on
+	val @-78
+	set seg.posx
+	val @-38
+	set seg.posy
+	gsub seg.init_pos
+	
+	val @4
+	set seg.height
+	val @2
+	set seg.width
+	val @12
+	set seg.vert_space
+	val @6
+	set seg.hori_space
+	gsub seg.output
+	drawcopy @0
+	val @3
+	set pl.pixx
+	set pl.pixy
+	
+	val @-75
+	set pl.posx
+	val @0
+	set pl.posy
+	
+	asm setreg1;>btn_yes
+	set pl.offset
+	gsub pl.decode
+	
+	val @39
+	set pl.posx
+	val @0
+	set pl.posy
+	
+	asm setreg1;>btn_no
+	set pl.offset
+	gsub pl.decode
+	
+	label _main_loop
+	
+		gsub common.mouse_cursor
+		asm ioread1;>mouse.button
+		set btnbuff
+		ifnotmore btnbuff,@0 begin
+			asm ioread1;>mouse.lockx
+			set xbuff
+			asm ioread1;>mouse.locky
+			set ybuff
+			
+			ifrange @0,@21,ybuff begin
+				ifrange @-75,@-39,xbuff begin
+					val @1
+					set answer
+					return
+				end
+				ifrange @39,@75,xbuff begin
+					val @0
+					set answer
+					return
+				end
+			end
+		end
+	goto _main_loop
+
+include plrle_noalpha as pl
+include segment as seg
+include bench/lib/common as common
+
+asm include;bench/media/diag_yes.tas0;btn_yes
+asm include;bench/media/diag_no.tas0;btn_no

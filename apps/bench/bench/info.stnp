@@ -6,13 +6,14 @@ var btnbuff=0
 
 label info
 	gsub common.ui_base_draw
-	val @3
+	val @1
 	set pl.pixx
+	val @2
 	set pl.pixy
 	
 	val @-90
 	set pl.posy
-	val @-120
+	val @-121
 	set pl.posx
 	
 	asm setreg1;>IMAGE_info

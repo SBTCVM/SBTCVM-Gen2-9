@@ -2,23 +2,19 @@
 #Needs to be decoded manually.
 #image file: apps/bench/media/info.png
 null;>.DATASIZE
-raw;10x1,0-+0-++++
-raw;10x4,-0--0-+--
-raw;10x1,0-+0-++++
+raw;10x8,-0--0-+--
 raw;-,0
 ###LINE DIV
-raw;10x0,0-+0-++++
-raw;10x2,-0--0-0+0
+raw;10x3,-0--0-0+0
 raw;10x0,+++++++++
-raw;10x2,-0--0-0+0
-raw;10x0,0-+0-++++
+raw;10x3,-0--0-0+0
 raw;-,0
 ###LINE DIV
 raw;10x8,--+-0-0+-
 raw;-,0
 ###LINE DIV
-raw;10x3,--+-0-000
-raw;10x0,+++++++++
+raw;10x2,--+-0-000
+raw;10x1,+++++++++
 raw;10x3,--+-0-000
 raw;-,0
 ###LINE DIV
@@ -37,16 +33,12 @@ raw;10x0,+++++++++
 raw;10x3,----0--++
 raw;-,0
 ###LINE DIV
-raw;10x0,0-+0-++++
 raw;10x2,----0--+-
-raw;10x0,+++++++++
+raw;10x2,+++++++++
 raw;10x2,----0--+-
-raw;10x0,0-+0-++++
 raw;-,0
 ###LINE DIV
-raw;10x1,0-+0-++++
-raw;10x4,----0--00
-raw;10x1,0-+0-++++
+raw;10x8,----0--00
 raw;-,0
 ###LINE DIV
 null;;.DATASIZE
