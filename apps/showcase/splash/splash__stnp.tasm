@@ -26,20 +26,20 @@ datawrite1;>seg.posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-13
+setreg1;>goto--jumper-13-0
 s1push1
 goto;>seg.init_pos--label
-zerosize;;goto--jumper-13
+zerosize;;goto--jumper-13-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #15
-setreg1;>image_offset1#SSTNPL Source Line: '15' 
+#_______NOTE: this corresponds to SSTNPL source line #15-0
+setreg1;>image_offset1#SSTNPL Source Line: '15-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-18
+setreg1;>goto--jumper-18-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-18
+zerosize;;goto--jumper-18-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -63,8 +63,8 @@ setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl2.do_trans
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #35
-setreg1;>image_offset2#SSTNPL Source Line: '35' 
+#_______NOTE: this corresponds to SSTNPL source line #35-0
+setreg1;>image_offset2#SSTNPL Source Line: '35-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl2.offset
 #bprinttail1
@@ -87,10 +87,10 @@ fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-42
+setreg1;>goto--jumper-42-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-42
+zerosize;;goto--jumper-42-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x4
 #set(1) (used after 2-op math, asm code, or get)
@@ -137,10 +137,10 @@ fopwri1;:9
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-52
+setreg1;>goto--jumper-52-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-52
+zerosize;;goto--jumper-52-0
 #val (used with set to change variable value during runtime.)
 setreg1;+++++++++
 #set(1) (used after 2-op math, asm code, or get)
@@ -150,10 +150,10 @@ setreg1;10x10
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-61
+setreg1;>goto--jumper-61-0
 s1push1
 goto;>seg.init_pos--label
-zerosize;;goto--jumper-61
+zerosize;;goto--jumper-61-0
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:S
@@ -222,24 +222,24 @@ fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-73
+setreg1;>goto--jumper-73-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-73
+zerosize;;goto--jumper-73-0
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-76
+setreg1;>goto--jumper-76-0
 s1push1
 goto;>pl2.decode--label
-zerosize;;goto--jumper-76
+zerosize;;goto--jumper-76-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x110
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-83
+setreg1;>goto--jumper-83-0
 s1push1
 goto;>seg.init_pos--label
-zerosize;;goto--jumper-83
+zerosize;;goto--jumper-83-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -278,15 +278,15 @@ fopwri1;:.
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-93
+setreg1;>goto--jumper-93-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-93
+zerosize;;goto--jumper-93-0
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-95
-gotoif;>keyprompt--loop-95
+ioread1;>io.ttyrd;keyprompt--loop-95-0
+gotoif;>keyprompt--loop-95-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -312,16 +312,16 @@ fopwri1;:x
 fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
-#module include: line 101: plrle_noalpha as pl
+#module include: line 101-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
-#module include: line 102: plrle as pl2
+#module include: line 102-0: plrle as pl2
 includeas;plrle,pl2
-#module include: line 103: segment as seg
+#module include: line 103-0: segment as seg
 includeas;segment,seg
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #104
-include;showcase+media+bootsplash.tas0;image_offset1#SSTNPL Source Line: '104' 
+#_______NOTE: this corresponds to SSTNPL source line #104-0
+include;showcase+media+bootsplash.tas0;image_offset1#SSTNPL Source Line: '104-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #105
-include;showcase+media+icon.tas0;image_offset2#SSTNPL Source Line: '105' 
+#_______NOTE: this corresponds to SSTNPL source line #105-0
+include;showcase+media+icon.tas0;image_offset2#SSTNPL Source Line: '105-0' 
 #END OF FILE

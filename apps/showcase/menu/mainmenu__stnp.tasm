@@ -55,10 +55,10 @@ setreg1;10x-119
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-17
+setreg1;>goto--jumper-17-0
 s1push1
 goto;>seg.init_pos--label
-zerosize;;goto--jumper-17
+zerosize;;goto--jumper-17-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -107,10 +107,10 @@ fopwri1;:u
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-29
+setreg1;>goto--jumper-29-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-29
+zerosize;;goto--jumper-29-0
 #val (used with set to change variable value during runtime.)
 setreg1;---------
 #set(1) (used after 2-op math, asm code, or get)
@@ -120,10 +120,10 @@ setreg1;10x-90
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-36
+setreg1;>goto--jumper-36-0
 s1push1
 goto;>seg.init_pos--label
-zerosize;;goto--jumper-36
+zerosize;;goto--jumper-36-0
 #bprinttail1
 fopset1;>buffer.1.write.tail
 fopwri1;:<
@@ -199,99 +199,99 @@ fopwri1;:s
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-43
+setreg1;>goto--jumper-43-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-43
+zerosize;;goto--jumper-43-0
 #label
 zerosize;;Main--label
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-48
-gotoif;>keyprompt--loop-48
+ioread1;>io.ttyrd;keyprompt--loop-48-0
+gotoif;>keyprompt--loop-48-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>KBuff
 #conditional goto
 dataread1;>KBuff
 dataread2;>:q
-gotoif;>goto--branch-50
-goto;>goto--jumper-50
-setreg1;>goto--jumper-50;goto--branch-50
+gotoif;>goto--branch-50-0
+goto;>goto--jumper-50-0
+setreg1;>goto--jumper-50-0;goto--branch-50-0
 goto;>QUIT--label
-zerosize;;goto--jumper-50
+zerosize;;goto--jumper-50-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:Q
-gotoif;>goto--branch-51
-goto;>goto--jumper-51
-setreg1;>goto--jumper-51;goto--branch-51
+gotoif;>goto--branch-51-0
+goto;>goto--jumper-51-0
+setreg1;>goto--jumper-51-0;goto--branch-51-0
 goto;>QUIT--label
-zerosize;;goto--jumper-51
+zerosize;;goto--jumper-51-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:s
-gotoif;>goto--branch-52
-goto;>goto--jumper-52
-setreg1;>goto--jumper-52;goto--branch-52
+gotoif;>goto--branch-52-0
+goto;>goto--jumper-52-0
+setreg1;>goto--jumper-52-0;goto--branch-52-0
 goto;>DEMO_splash--label
-zerosize;;goto--jumper-52
+zerosize;;goto--jumper-52-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:S
-gotoif;>goto--branch-53
-goto;>goto--jumper-53
-setreg1;>goto--jumper-53;goto--branch-53
+gotoif;>goto--branch-53-0
+goto;>goto--jumper-53-0
+setreg1;>goto--jumper-53-0;goto--branch-53-0
 goto;>DEMO_splash--label
-zerosize;;goto--jumper-53
+zerosize;;goto--jumper-53-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:c
-gotoif;>goto--branch-54
-goto;>goto--jumper-54
-setreg1;>goto--jumper-54;goto--branch-54
+gotoif;>goto--branch-54-0
+goto;>goto--jumper-54-0
+setreg1;>goto--jumper-54-0;goto--branch-54-0
 goto;>DEMO_color--label
-zerosize;;goto--jumper-54
+zerosize;;goto--jumper-54-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:C
-gotoif;>goto--branch-55
-goto;>goto--jumper-55
-setreg1;>goto--jumper-55;goto--branch-55
+gotoif;>goto--branch-55-0
+goto;>goto--jumper-55-0
+setreg1;>goto--jumper-55-0;goto--branch-55-0
 goto;>DEMO_color--label
-zerosize;;goto--jumper-55
+zerosize;;goto--jumper-55-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:p
-gotoif;>goto--branch-56
-goto;>goto--jumper-56
-setreg1;>goto--jumper-56;goto--branch-56
+gotoif;>goto--branch-56-0
+goto;>goto--jumper-56-0
+setreg1;>goto--jumper-56-0;goto--branch-56-0
 goto;>DEMO_pixmap--label
-zerosize;;goto--jumper-56
+zerosize;;goto--jumper-56-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:P
-gotoif;>goto--branch-57
-goto;>goto--jumper-57
-setreg1;>goto--jumper-57;goto--branch-57
+gotoif;>goto--branch-57-0
+goto;>goto--jumper-57-0
+setreg1;>goto--jumper-57-0;goto--branch-57-0
 goto;>DEMO_pixmap--label
-zerosize;;goto--jumper-57
+zerosize;;goto--jumper-57-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:1
-gotoif;>goto--branch-58
-goto;>goto--jumper-58
-setreg1;>goto--jumper-58;goto--branch-58
+gotoif;>goto--branch-58-0
+goto;>goto--jumper-58-0
+setreg1;>goto--jumper-58-0;goto--branch-58-0
 goto;>DEMO_credits--label
-zerosize;;goto--jumper-58
+zerosize;;goto--jumper-58-0
 #conditional goto
 dataread1;>KBuff
 dataread2;>:!
-gotoif;>goto--branch-59
-goto;>goto--jumper-59
-setreg1;>goto--jumper-59;goto--branch-59
+gotoif;>goto--branch-59-0
+goto;>goto--jumper-59-0
+setreg1;>goto--jumper-59-0;goto--branch-59-0
 goto;>DEMO_credits--label
-zerosize;;goto--jumper-59
+zerosize;;goto--jumper-59-0
 #goto 
 goto;>Main--label
 #label
@@ -454,8 +454,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-75
-gotoif;>keyprompt--loop-75
+ioread1;>io.ttyrd;keyprompt--loop-75-0
+gotoif;>keyprompt--loop-75-0
 #stop (shutdown vm)
 stop
 #label
@@ -563,8 +563,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-84
-gotoif;>keyprompt--loop-84
+ioread1;>io.ttyrd;keyprompt--loop-84-0
+gotoif;>keyprompt--loop-84-0
 #stop (shutdown vm)
 stop
 #label
@@ -670,8 +670,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-93
-gotoif;>keyprompt--loop-93
+ioread1;>io.ttyrd;keyprompt--loop-93-0
+gotoif;>keyprompt--loop-93-0
 #stop (shutdown vm)
 stop
 #label
@@ -775,10 +775,10 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-102
-gotoif;>keyprompt--loop-102
+ioread1;>io.ttyrd;keyprompt--loop-102-0
+gotoif;>keyprompt--loop-102-0
 #stop (shutdown vm)
 stop
-#module include: line 105: segment as seg
+#module include: line 105-0: segment as seg
 includeas;segment,seg
 #END OF FILE

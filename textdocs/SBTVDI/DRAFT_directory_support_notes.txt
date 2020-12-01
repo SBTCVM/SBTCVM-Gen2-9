@@ -1,0 +1,36 @@
+
+
+
+sbtvdi directory support:
+
+new commands:
+pwd [diskid]               | print working directory
+cd [diskID] [path]         | change working directory
+dlist/dl [diskid] [path]   | list directory contents
+mkdir [diskid] [path]
+
+
+
+tdsk format changes:
+{command.txe
+...data....
+<dos
+    {help.txe
+    ...data...
+    <help_d
+        {overview.hlp
+        ...data...
+    >
+>
+
+this would create a file tree like so:
+|-command.txe
+|+dos
+ |-help.txe
+ |+help_d
+  |overview.hlp
+ 
+
+directories are declared recursively like:
+<dirname
+>

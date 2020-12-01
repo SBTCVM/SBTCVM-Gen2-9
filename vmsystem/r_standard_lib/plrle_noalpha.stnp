@@ -34,6 +34,11 @@ label decode
 	drawy1 posy
 	drawx1 posx
 	
+	get1 pixx
+	asm datawrite1;>PIX_X_HACK
+	
+	get1 pixy
+	asm datawrite1;>PIX_Y_HACK
 	
 	add pixx,@1
 	set draw_pixx
@@ -72,59 +77,50 @@ label RL_decode_mainloop
 	asm datawrite1;>RL_GET_LEN
 	
 	#get length of new datavalue
-	asm instread1;;RL_GET_LEN
-	set RL_loopcount
+	
 	
 	# get new datavalue
 	asm dataread1;;RL_GET_DATA
-	set RL_data
+	asm iowrite1;>plot.color
 	
 	
 	#newline code
-	if RL_loopcount,@-1 goto RL_newline
+	asm instread1;;RL_GET_LEN
 	
-	#loop
-	drawcolor RL_data
-	#uiter RL_ilvar,RL_printlooop,@0,RL_loopcount
-	gsub RL_printBAR
+	asm setreg2;10x-1
+	asm gotoif;>RL_NEWLINE
+	
+	###Rectangle plot cod
+		asm adddata1;10x1
+		#get2 pixx
+		#asm mul
+		asm muldata1;10x0;PIX_X_HACK
+		
+			asm adddata1;10x1
+			#faster
+			asm iowrite1;>plot.width
+			asm subdata1;10x1
+			
+			asm iowrite1;>plot.rect
+		get2 px
+		asm add2
+		set2 px
+		asm iowrite2;>plot.x1
+	
 	return
 
-label RL_newline
-	add py,pixy
-	set py
-	#drawy1 py
+asm zerosize;;RL_NEWLINE
+	get1 py
+	asm adddata1;10x0;PIX_Y_HACK
+	set1 py
+	
 	asm iowrite1;>plot.y1
 	get posx
 	set px
-	#drawx1 px
-	asm iowrite1;>plot.x1
-return
-
-var RL_BARWIDE=0
-var RL_BARWIDEDRAW=0
-var RL_loopcount_add1=0
-
-label RL_printBAR
-	
-	get1 RL_loopcount
-	
-	asm adddata1;10x1
-	get2 pixx
-	asm mul
-	set RL_BARWIDE
-		
-		
-		asm adddata1;10x1
-		#faster
-		asm iowrite1;>plot.width
-		
-		
-		drawrect
-	label yes_trans
-	add RL_BARWIDE,px
-	set px
 	
 	asm iowrite1;>plot.x1
 return
+
+
 
 ################END OF PLRLE DECODER ROUTINES#########

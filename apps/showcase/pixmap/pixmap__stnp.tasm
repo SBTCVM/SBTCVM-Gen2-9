@@ -18,8 +18,8 @@ iowrite1;>ga.mode
 #get(1) (may be used with set, or asm code)
 dataread1;>color
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #9
-iowrite1;>plot.color#SSTNPL Source Line: '9' 
+#_______NOTE: this corresponds to SSTNPL source line #9-0
+iowrite1;>plot.color#SSTNPL Source Line: '9-0' 
 #plotter width
 dataread1;>@2
 iowrite1;>plot.width
@@ -45,10 +45,10 @@ setreg1;10x-119
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>seg.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-25
+setreg1;>goto--jumper-25-0
 s1push1
 goto;>seg.init_pos--label
-zerosize;;goto--jumper-25
+zerosize;;goto--jumper-25-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x2
 #set(1) (used after 2-op math, asm code, or get)
@@ -72,15 +72,15 @@ datawrite1;>pl.pixx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.pixy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #41
-setreg1;>image_offset1#SSTNPL Source Line: '41' 
+#_______NOTE: this corresponds to SSTNPL source line #41-0
+setreg1;>image_offset1#SSTNPL Source Line: '41-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-44
+setreg1;>goto--jumper-44-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-44
+zerosize;;goto--jumper-44-0
 #label
 zerosize;;end--label
 #bprinttail1
@@ -130,15 +130,15 @@ fopwri1;:.
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-49
+setreg1;>goto--jumper-49-0
 s1push1
 goto;>seg.output--label
-zerosize;;goto--jumper-49
+zerosize;;goto--jumper-49-0
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-50
-gotoif;>keyprompt--loop-50
+ioread1;>io.ttyrd;keyprompt--loop-50-0
+gotoif;>keyprompt--loop-50-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -164,11 +164,11 @@ fopwri1;:x
 fopwri1;:e
 fopwri1;:\n
 fopset1;>io.ttywr
-#module include: line 56: plrle_noalpha as pl
+#module include: line 56-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
-#module include: line 57: segment as seg
+#module include: line 57-0: segment as seg
 includeas;segment,seg
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #58
-include;showcase+media+imagetest.tas0;image_offset1#SSTNPL Source Line: '58' 
+#_______NOTE: this corresponds to SSTNPL source line #58-0
+include;showcase+media+imagetest.tas0;image_offset1#SSTNPL Source Line: '58-0' 
 #END OF FILE

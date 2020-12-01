@@ -10,8 +10,8 @@ null;10x31;@31
 dataread1;>@31
 iowrite1;>ga.mode
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #4
-setreg1;>image_offset1#SSTNPL Source Line: '4' 
+#_______NOTE: this corresponds to SSTNPL source line #4-0
+setreg1;>image_offset1#SSTNPL Source Line: '4-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #val (used with set to change variable value during runtime.)
@@ -21,20 +21,20 @@ datawrite1;>pl.posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-13
+setreg1;>goto--jumper-13-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-13
+zerosize;;goto--jumper-13-0
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-15
-gotoif;>keyprompt--loop-15
+ioread1;>io.ttyrd;keyprompt--loop-15-0
+gotoif;>keyprompt--loop-15-0
 #stop (shutdown vm)
 stop
-#module include: line 20: plrle_noalpha as pl
+#module include: line 20-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #21
-include;tritmap575+image.tas0;image_offset1#SSTNPL Source Line: '21' 
+#_______NOTE: this corresponds to SSTNPL source line #21-0
+include;tritmap575+image.tas0;image_offset1#SSTNPL Source Line: '21-0' 
 #END OF FILE
