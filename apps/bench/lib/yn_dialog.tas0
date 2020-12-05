@@ -16,10 +16,10 @@ null;10x-40;@-40
 null;10x161;@161
 null;10x81;@81
 null;10x0;@0
-null;10x21;@21
+null;10x15;@15
 null;10x-75;@-75
-null;10x-39;@-39
-null;10x39;@39
+null;10x-45;@-45
+null;10x45;@45
 null;10x75;@75
 #label
 zerosize;;main--label
@@ -116,7 +116,7 @@ s1push1
 goto;>pl.decode--label
 zerosize;;goto--jumper-53-0
 #val (used with set to change variable value during runtime.)
-setreg1;10x39
+setreg1;10x45
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posx
 #val (used with set to change variable value during runtime.)
@@ -171,7 +171,7 @@ gotoifmore;>goto--halfstep-75-0
 gotoif;>goto--halfstep-75-0
 goto;>goto--branch-75-0
 dataread1;>ybuff;goto--halfstep-75-0
-dataread2;>@21
+dataread2;>@15
 gotoifless;>goto--jumper-75-0
 gotoif;>goto--jumper-75-0
 goto;>goto--branch-75-0
@@ -186,7 +186,7 @@ gotoifmore;>goto--halfstep-76-0
 gotoif;>goto--halfstep-76-0
 goto;>goto--branch-76-0
 dataread1;>xbuff;goto--halfstep-76-0
-dataread2;>@-39
+dataread2;>@-45
 gotoifless;>goto--jumper-76-0
 gotoif;>goto--jumper-76-0
 goto;>goto--branch-76-0
@@ -204,7 +204,7 @@ gotoreg1
 zerosize;;flow--con-x-3
 #conditional flow control begin
 dataread1;>xbuff
-dataread2;>@39
+dataread2;>@45
 gotoifmore;>goto--halfstep-81-0
 gotoif;>goto--halfstep-81-0
 goto;>goto--branch-81-0

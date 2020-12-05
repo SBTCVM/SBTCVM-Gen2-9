@@ -52,7 +52,7 @@ label main
 	set pl.offset
 	gsub pl.decode
 	
-	val @39
+	val @45
 	set pl.posx
 	val @0
 	set pl.posy
@@ -72,13 +72,13 @@ label main
 			asm ioread1;>mouse.locky
 			set ybuff
 			
-			ifrange @0,@21,ybuff begin
-				ifrange @-75,@-39,xbuff begin
+			ifrange @0,@15,ybuff begin
+				ifrange @-75,@-45,xbuff begin
 					val @1
 					set answer
 					return
 				end
-				ifrange @39,@75,xbuff begin
+				ifrange @45,@75,xbuff begin
 					val @0
 					set answer
 					return
