@@ -12,11 +12,12 @@ import time
 import sys
 import vmsystem.iofuncts as iofuncts
 import vmsystem.g2common as g2com
+import vmsystem.libbal27 as bal27
 
 vers=sys.version_info[0]
 
 #just point xrange to range in python3.
-if vers==3:
+if vers>2:
 	xrange=range
 
 def TromLoad(fileobj):
@@ -166,6 +167,53 @@ def romdump_stringfind(fileobj, start, end):
 						stringcnt=0
 	
 
+def b27_char(fileobj, start, end):
+	if start==None:
+		start=-9841
+	if end==None:
+		end=9841
+	if end<start:
+		sys.exit("Error range start must be less than end")
+	pstring=""
+	inst=""
+	data=""
+	inst_char=""
+	data_char=""
+	mempos=-9842
+	widcnt=0
+	for line in fileobj:
+		mempos+=1
+		widcnt+=1
+		trval0, trval1 = line
+		inst=inst + bal27.inttob27(trval0).rjust(4)
+		data=data + bal27.inttob27(trval1).rjust(4)
+		tr0ischar=0
+		tr1ischar=0
+		for char in tcon.allchars:
+			if char.dataval==trval0:
+				inst_char += (char.bldumpstr)
+				tr0ischar=1
+				
+		if not tr0ischar:
+			inst_char += "."
+		
+		for char in tcon.allchars:
+			if char.dataval==trval1:
+				data_char += (char.bldumpstr)
+				tr1ischar=1
+				
+		if not tr1ischar:
+			data_char += "."
+		
+		if widcnt == 9:
+			if mempos in xrange(start, end+1) or mempos-8 in xrange(start, end+1) or start in xrange(mempos-8, mempos) or end in xrange(mempos-8, mempos):
+				print(inst + "|" + inst_char + "||" + data + "|" + data_char + "||" + str(mempos-8).rjust(6) + " TO" + str(mempos).rjust(6))
+			inst=""
+			data=""
+			inst_char=""
+			data_char=""
+			widcnt=0
+
 def romdump_stringfind_interlaced(fileobj, start, end):
 	
 	if start==None:
@@ -210,7 +258,7 @@ def romdump_stringfind_interlaced(fileobj, start, end):
 							print(pstring)
 						stringcnt=0
 	
-
+#verbose rom dump
 def romdumpver(fileobj, start, end, n0p=0):
 	mempos=-9842
 	if start==None:
@@ -243,6 +291,7 @@ def romdumpver(fileobj, start, end, n0p=0):
 			if not tr1ischar:
 				pstring += "  ."
 			pstring += str(int(trval0)).rjust(8) + str(int(trval1)).rjust(8)
+			pstring += bal27.inttob27(int(trval0)).rjust(6) + bal27.inttob27(int(trval1)).rjust(4)
 			pstring += " | adr:" + str(mempos).rjust(6)
 			print(pstring)
 
@@ -302,7 +351,7 @@ if __name__=="__main__":
 	except IndexError:
 		arg=None
 	#ensure arg is none when just file and range values are passed.
-	if cmd not in ["-d", "-dnp", "-r", "-rnp", "-i", "--info", "-t1", "-t2", "-t0", "-t", "-f", "-f2"]:
+	if cmd not in ["-d", "-dnp", "-r", "-c", "-rnp", "-i", "--info", "-t1", "-t2", "-t0", "-t", "-f", "-f2"]:
 		arg=None
 	if cmd in ["-a", "-h", "-v", "-i", "--about", "--help", "--version", "--info"]:
 		pass
@@ -336,12 +385,15 @@ if __name__=="__main__":
       addresses.
    -f2 [trom/diskfile]: same as -f, but try to find interlaced strings instead of normal
       ones.
+   -c [trom/diskfile]: a Septemvigesimal + BTT2 character output, similar to
+      'cannonical' hex+ascii dumps in binary.
    -d [trom/diskfile]: dump contents of trom to standard output in +0- form.
       instructions and data columns separated by two spaces. "  "
       a third column containing the address in signed decimal
       is separated via a vertical bar "|"
-   -r [trom/diskfile]: same as -d, but also prints chars & decimal values and labels
-      address column
+   -r [trom/diskfile]: same as -d, but also prints chars, 
+      Septemvigesimal (balanced base 27) values,  & decimal
+      values, and labels address column.
    -dnp [trom/diskfile]: same as -d, but using n0p representation.
    -rnp [trom/diskfile]: same as -dnp, but also prints chars & decimal values
    -t0/-t [trom/diskfile]: dump raw character data from data bank (excluding special
@@ -400,6 +452,8 @@ see readme.md for more information and licensing of media.
 		romdump(InputFileLoader(arg, dirauto=1), start, end, n0p=1)
 	elif cmd in ["-r"]:
 		romdumpver(InputFileLoader(arg, dirauto=1), start, end)
+	elif cmd in ["-c"]:
+		b27_char(InputFileLoader(arg, dirauto=1), start, end)
 	elif cmd in ["-rnp"]:
 		romdumpver(InputFileLoader(arg, dirauto=1), start, end, n0p=1)
 	elif cmd == None:
