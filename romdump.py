@@ -213,6 +213,8 @@ def b27_char(fileobj, start, end):
 			inst_char=""
 			data_char=""
 			widcnt=0
+	if widcnt!=0:
+		print(inst.ljust(9*4) + "|" + inst_char.ljust(9) + "||" + data.ljust(9*4) + "|" + data_char.ljust(9) + "||" + str(mempos-(widcnt-1)).rjust(6) + " TO" + str(mempos).rjust(6))
 
 def romdump_stringfind_interlaced(fileobj, start, end):
 	
