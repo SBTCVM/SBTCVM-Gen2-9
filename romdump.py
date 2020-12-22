@@ -387,14 +387,14 @@ if __name__=="__main__":
       addresses.
    -f2 [trom/diskfile]: same as -f, but try to find interlaced strings instead of normal
       ones.
-   -c [trom/diskfile]: a Septemvigesimal + BTT2 character output, similar to
+   -c [trom/diskfile]: a Septemvigesimal (sept.) + BTT2 character output, similar to
       'cannonical' hex+ascii dumps in binary.
    -d [trom/diskfile]: dump contents of trom to standard output in +0- form.
       instructions and data columns separated by two spaces. "  "
       a third column containing the address in signed decimal
       is separated via a vertical bar "|"
    -r [trom/diskfile]: same as -d, but also prints chars, 
-      Septemvigesimal (balanced base 27) values,  & decimal
+      Septemvigesimal (sept. / balanced base 27) values,  & decimal
       values, and labels address column.
    -dnp [trom/diskfile]: same as -d, but using n0p representation.
    -rnp [trom/diskfile]: same as -dnp, but also prints chars & decimal values

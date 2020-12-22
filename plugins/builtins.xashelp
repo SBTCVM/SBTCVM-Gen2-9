@@ -11,3 +11,9 @@ Exit XAS shell
 [directory]: show listing of directory. use '+' instead of '/' or '\'
 {find
 [string]: search for filenames containing [string].
+{history
+NOTE: if XAS says it 'Failed to load readline.` this command won't work.
+history list: Print current command history contents.
+history clear: clear XAS history.
+{debug
+debug XAS interactive mode. see `debug options` for available commands.

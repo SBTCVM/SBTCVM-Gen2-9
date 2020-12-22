@@ -321,14 +321,25 @@ def debugcmd(arg):
 		print("plugcmdid: " + str(shelldebug_plugcmdid))
 		
 
+histfilepath=os.path.join(*["vmuser", "CFG", "XAS_HISTORY.txt"])
+def posix_history_helper():
+	if not os.path.isfile(histfilepath):
+		print("Creating history file as: '" + histfilepath + "'")
+		open(histfilepath, "w").close()
+	readline.read_history_file(histfilepath)
+
 #interactive interpreter
 def xasshell():
 	global shelldebug
 	print(shellwelcome)
 	try:
+		global readline
 		import readline
+		posix_history_helper()
+		readline_inuse=True
 	except ImportError:
-		print("failed to load readline.")
+		print("Failed to load readline. Note: XAS will still work!")
+		readline_inuse=False
 	lineno=1
 	while True:
 		line=getinput()
@@ -374,12 +385,28 @@ def xasshell():
 			else:
 				if arg in helpitems:
 					print(arg + ": " + "\n".join(helpitems[arg]))
-				
+		elif cmd=="history":
+			if not readline_inuse:
+				print("ERROR: readline was not loaded. History support disabled.")
+			else:
+				if arg=="clear":
+					readline.clear_history()
+					print("History Cleared.")
+				if arg=="list":
+					curline=1
+					while curline!=readline.get_current_history_length()+1:
+						print(readline.get_history_item(curline))
+						curline+=1
+					
+				if arg==None:
+					print("please see 'help history' for usage.")
 		elif cmd=="about":
 			print(abouttext)
 		elif cmd in ["ver", "version", "info"]:
 			print(verinfo)
 		elif cmd=="exit":
+			if readline_inuse:
+				readline.write_history_file(histfilepath)
 			return
 		elif cmd in ["list", "ls", "dir"]:
 			listcmd(arg)
@@ -406,6 +433,7 @@ def xasshell():
 								print("XAS ERROR: plugin command error! cmd:'" + cmd + "'")
 							#print(shellwelcome)
 	print(ppx + "xas finished. exiting...")
+	
 
 def cmdvalid(cmd):
 	#if cmd=="runc":

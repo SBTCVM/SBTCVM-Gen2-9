@@ -4,6 +4,8 @@
 .~lock*
 vmuser/*
 !vmuser/info.txt
+vmuser/CFG/*
+!vmuser/CFG/dummy.txt
 cap/*
 !cap/dummy.txt
 

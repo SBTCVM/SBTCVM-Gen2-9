@@ -1,4 +1,5 @@
 Balanced Heptavigesimal/Balanced Septemvigesimal (Balanced base 27)
+also called 'sept' for short.
 D +13
 C +12
 B +11
