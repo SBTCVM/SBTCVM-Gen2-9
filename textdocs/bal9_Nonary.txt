@@ -1,0 +1,12 @@
+
+Balanced Nonary (balanced base 9) as supported by libbal9.py
+
+4 +4
+3 +3
+2 +2
+1 +1
+0  0
+Z -1
+X -2
+Y -3
+W -4

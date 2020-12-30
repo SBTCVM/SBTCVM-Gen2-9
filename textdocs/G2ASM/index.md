@@ -34,6 +34,34 @@ when working with hexadecimal numbers in many binary languages.
 	setreg2;10x-12
 
 
+#### Balanced Septemvigesimal Values
+
+you must prefix Septemvigesimal values with the `27!` prefix:
+for refrence, `MMM` is `-9841` and `DDD` is `9841`. remember gen 2
+doesn't support values outside that range! 
+
+1 septemvigesimal digit = 1 triad = 3 trits.
+
+Any combination of 3 septemvigesimal digits will work.
+
+	setreg1;27!MMM
+	setreg1;27!DDD
+
+
+#### Balanced Nonary Values
+
+you must prefix Septemvigesimal values with the `9!` prefix:
+for refrence, `ZWWWW` is `-9841` and `14444` is `9841`. remember gen 2
+doesn't support values outside that range!
+
+1 Nonary digit = 2 trits.
+
+Any combination of 4 Nonary digits will work.
+
+Due to integer range limits, the 5th digit may ONLY be `1`, `0`, or `Z`!
+
+	setreg1;9!ZWWWW
+	setreg1;9!14444
 
 #### Character Values
 

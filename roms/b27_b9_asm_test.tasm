@@ -1,0 +1,24 @@
+head-nspin=stdnsp
+head-nspout=1
+#base 27 & base 9 assembler tests
+
+fopset1;>io.decdump
+
+#septemvigesimal
+fopwri1;27!mmm
+fopwri1;27!ddd
+
+#Nonary
+fopwri1;9!14444
+fopwri1;9!ZWWWW
+
+stop
+
+marker;test
+raw;27!mmm,27!ddd
+raw;9!14444,9!ZWWWW
+
+v>b27test1;27!MMM
+v>b27test2;27!ddd
+v>b9test1;9!14444
+v>b9test2;9!ZWWWW

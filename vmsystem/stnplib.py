@@ -29,6 +29,10 @@ class npvar:
 		self.frommodule=frommodule
 
 tritvalid="+0-pn"
+bal9_valid="43210ZYXW"
+
+bal27_valid="DCBA9876543210ZYXWVUTSRQPNM"
+
 varvalid="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_1234567890"
 reservednames=[""]
 

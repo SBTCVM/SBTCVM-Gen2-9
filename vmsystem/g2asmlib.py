@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from . import libbaltcalc
+from . import libbal9 as bal9
+from . import libbal27 as bal27
 from . import iofuncts
 from . import libtextcon as tcon
 btint=libbaltcalc.btint
@@ -10,7 +12,9 @@ from subprocess import call
 tritvalid="+0-pn"
 #SBTCVM assembly v3 main routine library.
 
+bal9_valid="43210ZYXW"
 
+bal27_valid="DCBA9876543210ZYXWVUTSRQPNM"
 
 
 def assemble(pathx, syntaxonly=0, pfx="", exitonerr=1):
@@ -175,7 +179,23 @@ class instruct:
 				int(data[3:])
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
-			
+		elif data.startswith("27!"):
+			data=data.upper()
+			for char in data[3:]:
+				
+				if char not in bal27_valid:
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in Septemvigesimal data string!"
+			if bal27.b27toint(data[3:]) > 9841 or bal27.b27toint(data[3:]) < -9841:
+				return 1, keyword+": Line: " + str(lineno) + ": Septemvigesimal Value out of range!"
+		elif data.startswith("9!"):
+			data=data.upper()
+			for char in data[2:]:
+				
+				if char not in bal9_valid:
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in Nonary data string!"
+			if bal9.b9toint(data[2:]) > 9841 or bal9.b9toint(data[2:]) < -9841:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonary Value out of range!"
+
 		else:
 			if len(data)>9:
 				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
@@ -204,6 +224,10 @@ class instruct:
 			return [[self.opcode, 0]]
 		elif data.startswith("10x"):
 			return [[self.opcode, int(data[3:]), lineno]]
+		elif data.startswith("27!"):
+			return [[self.opcode, bal27.b27toint(data[3:].upper()), lineno]]
+		elif data.startswith("9!"):
+			return [[self.opcode, bal9.b9toint(data[2:].upper()), lineno]]
 		elif data.startswith(">"):
 			return [[self.opcode, gotos[data[1:]], lineno]]
 		elif data.startswith(":"):
@@ -231,6 +255,22 @@ class rawinst:
 					return 0, None
 				else:
 					return 1, keyword+": Line: " + str(lineno) + ": unknown text character!(" + data + ")"
+			elif data.startswith("27!"):
+				data=data.upper()
+				for char in data[3:]:
+					
+					if char not in bal27_valid:
+						return 1, keyword+": Line: " + str(lineno) + ": invalid char in Septemvigesimal data string!"
+				if bal27.b27toint(data[3:]) > 9841 or bal27.b27toint(data[3:]) < -9841:
+					return 1, keyword+": Line: " + str(lineno) + ": Septemvigesimal Value out of range!"
+			elif data.startswith("9!"):
+				data=data.upper()
+				for char in data[2:]:
+					
+					if char not in bal9_valid:
+						return 1, keyword+": Line: " + str(lineno) + ": invalid char in Nonary data string!"
+				if bal9.b9toint(data[2:]) > 9841 or bal9.b9toint(data[2:]) < -9841:
+					return 1, keyword+": Line: " + str(lineno) + ": Nonary Value out of range!"
 			elif data.startswith("10x"):
 				try:
 					int(data[3:])
@@ -266,6 +306,10 @@ class rawinst:
 		data2=datalist[1]
 		if data1.startswith("10x"):
 			data1res=int(data1[3:])
+		elif data1.startswith("27!"):
+			data1res=bal27.b27toint(data1[3:].upper())
+		elif data1.startswith("9!"):
+			data1res=bal9.b9toint(data1[2:].upper())
 		elif data1.startswith(">"):
 			data1res=gotos[data1[1:]]
 		elif data1.startswith(":"):
@@ -275,6 +319,10 @@ class rawinst:
 			data1res=libbaltcalc.btint(data1)
 		if data2.startswith("10x"):
 			data2res=int(data2[3:])
+		elif data2.startswith("27!"):
+			data2res=bal27.b27toint(data2[3:].upper())
+		elif data2.startswith("9!"):
+			data2res=bal9.b9toint(data2[2:].upper())
 		elif data2.startswith(">"):
 			data2res=gotos[data2[1:]]
 		elif data2.startswith(":"):
@@ -413,6 +461,22 @@ class nspacevar:
 			except ValueError:
 				return 1, keyword+": Line: " + str(lineno) + ": decimal int syntax error!"
 			
+		elif data.startswith("27!"):
+			data=data.upper()
+			for char in data[3:]:
+				
+				if char not in bal27_valid:
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in Septemvigesimal data string!"
+			if bal27.b27toint(data[3:]) > 9841 or bal27.b27toint(data[3:]) < -9841:
+				return 1, keyword+": Line: " + str(lineno) + ": Septemvigesimal Value out of range!"
+		elif data.startswith("9!"):
+			data=data.upper()
+			for char in data[2:]:
+				
+				if char not in bal9_valid:
+					return 1, keyword+": Line: " + str(lineno) + ": invalid char in Nonary data string!"
+			if bal9.b9toint(data[2:]) > 9841 or bal9.b9toint(data[2:]) < -9841:
+				return 1, keyword+": Line: " + str(lineno) + ": Nonary Value out of range!"
 		else:
 			if len(data)>9:
 				return 1, keyword+": Line: " + str(lineno) + ": string too large!"
@@ -427,6 +491,11 @@ class nspacevar:
 			return 0, {keyword[2:]: 0}
 		elif data.startswith("10x"):
 			return 0, {keyword[2:]: int(data[3:])}
+		elif data.startswith("27!"):
+			return 0, {keyword[2:]: bal27.b27toint(data[3:].upper())}
+		elif data.startswith("9!"):
+			return 0, {keyword[2:]: bal9.b9toint(data[2:].upper())}
+
 		elif data.startswith(":"):
 			chdat=data[1:]
 			return 0, {keyword[2:]: tcon.asm_chrtodat[chdat]}
