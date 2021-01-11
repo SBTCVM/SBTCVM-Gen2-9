@@ -92,9 +92,31 @@ print("plugins loaded.")
 
 
 verinfo="SBTCVM XAS Shell " + xasvers + "\nPart Of SBTCVM Gen 2-9"
+cfg_fname="xas.cfg"
+cfg_disp_name="XAS Configuration file [xas.cfg]"
+cfg_header_info="#SBTCVM XAS Shell " + xasvers + " Configuration File. \n#Please use XAS Shell to change these settings, unless you REALLY know what you are doing!"
+
+#Default Configuration
+default_cfg = {"debug_plugcmdid" : False,
+"prompt" : "XAS>"}
+
+cfg_bools=["debug_plugcmdid"]
+cfg_ints=[]
+
+cfg=iofuncts.cfg_load(cfg_fname, default_cfg, cfg_bools, cfg_ints, cfg_disp_name)
 
 
+##Debug variables.
+shelldebug_plugcmdid=cfg["debug_plugcmdid"]
 
+#prompt text used (default: XAS>)
+XAS_prompt=cfg["prompt"]
+
+def save_cfg():
+	cfg["debug_plugcmdid"]=shelldebug_plugcmdid
+	cfg["prompt"]=XAS_prompt
+	iofuncts.cfg_save(cfg_fname, cfg, cfg_bools, cfg_ints, cfg_header_info)
+	
 
 abouttext='''SBTCVM eXtensible Assembly Script (XAS) v2
 interactive shell mode.
@@ -154,7 +176,8 @@ ftype_descs_fixed_short={
 "diskmap": "diskmap : ",
   "tdsk1": "tdsk1   : ",
     "xas": "xas     : "}
- 
+
+
 #generic fileinfo printer (used by find and list)
 def fileinfo(filen, pathx, sublist=0):
 	if sublist:
@@ -174,9 +197,9 @@ autodirexts=["trom", "nsp", "stnp", "xas", "tdsk1", "diskmap", "stnpmfs", "tas0"
 def getinput():
 	try:
 		try:
-			return raw_input('XAS>')
+			return raw_input(XAS_prompt)
 		except NameError:
-			return input('XAS>')
+			return input(XAS_prompt)
 	except KeyboardInterrupt:
 		print("Keyboard Interrupt. Exiting.")
 		return 'exit'
@@ -292,8 +315,7 @@ def listcmd(path):
 				return
 	print("XAS ERROR: path not found.")
 
-##Debug variables.
-shelldebug_plugcmdid=False
+
 #Debug command. (Intended to help debug interactive mode as it becomes more advanced.)
 def debugcmd(arg):
 	global shelldebug_plugcmdid
@@ -301,7 +323,7 @@ def debugcmd(arg):
 		print("""DEBUG COMMANDS: (BOOL options accept 1/true/on and 0/false/off)
     plugcmdid [BOOL]: Plugin Command Identifiers
     status: print XAS shell status""")
-	arglist=arg.split(" ")
+	arglist=arg.split(" ", 1)
 	try:
 		dcmd=arglist[0]
 		darg=arglist[1]
@@ -320,7 +342,34 @@ def debugcmd(arg):
 		print("--DEBUG OPTIONS--")
 		print("plugcmdid: " + str(shelldebug_plugcmdid))
 		
-
+def configcmd(arg):
+	global XAS_prompt
+	if arg=="help":
+		print("""XAS CONFIG: (BOOL options accept 1/true/on and 0/false/off)
+    prompt [string] : Change The default XAS Prompt text.
+    status: print Summary of Current XAS Configuration""")
+	arglist=arg.split(" ", 1)
+	try:
+		dcmd=arglist[0]
+		darg=arglist[1]
+	except IndexError:
+		dcmd=arglist[0]
+		darg=None
+	if dcmd=="prompt":
+		if darg=="":
+			print("Please specify 'config prompt [prompt text]'")
+			
+		elif darg=="[prompt text]":
+			print("Haha... Now seriously... Please specify 'config prompt [prompt text]'")
+			
+		elif darg==None:
+			print("Please specify 'config prompt [prompt text]'")
+			
+		else:
+			XAS_prompt=darg
+	if dcmd=="status":
+		print("--XAS CONFIG OPTIONS--")
+		print("Prompt: " + XAS_prompt)
 histfilepath=os.path.join(*["vmuser", "CFG", "XAS_HISTORY.txt"])
 def posix_history_helper():
 	if not os.path.isfile(histfilepath):
@@ -359,6 +408,11 @@ def xasshell():
 				print("Please see 'debug options' for XAS debug commands.")
 			else:
 				debugcmd(arg)
+		if cmd=="config":
+			if arg==None:
+				print("Please see 'config help' for XAS config commands.")
+			else:
+				configcmd(arg)
 		if cmd=="xas":
 			if arg!=None:
 				pathx=iofuncts.findtrom(arg, ext=".xas", exitonfail=0, exitmsg="XAS ERROR: xas script: '" + arg + "' was not found. Line: '" + str(lineno) + "'", dirauto=1)
@@ -405,6 +459,7 @@ def xasshell():
 		elif cmd in ["ver", "version", "info"]:
 			print(verinfo)
 		elif cmd=="exit":
+			save_cfg()
 			if readline_inuse:
 				readline.write_history_file(histfilepath)
 			return
@@ -433,6 +488,7 @@ def xasshell():
 								print("XAS ERROR: plugin command error! cmd:'" + cmd + "'")
 							#print(shellwelcome)
 	print(ppx + "xas finished. exiting...")
+	
 	
 
 def cmdvalid(cmd):

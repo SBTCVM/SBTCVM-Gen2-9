@@ -17,3 +17,5 @@ history list: Print current command history contents.
 history clear: clear XAS history.
 {debug
 debug XAS interactive mode. see `debug options` for available commands.
+{config
+configure assorted XAS config options. see `config help` for info.
