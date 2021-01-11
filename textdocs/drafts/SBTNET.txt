@@ -25,21 +25,29 @@ R: serial ConnectionError: 0 for no error, any other number means there was an e
 B: main T-ADR register
 B: sub T-ADR register
 B: mid T-ADR register
+B: mid2 T-ADR register
+B: mid3 T-ADR register
 B: base T-ADR register
 
 ------SBTNET Protocol Details------
 
-TCP/IP-based server simulates the network HUB.
+TCP/IP-based SBTNET 'clearnet Gateway' server simulates the local network for 
+SBTNET-capable Applications and VMs.
 
-SBTNET addressing scheme:
+SBTNET addressing scheme [T-ADR]:
 
-4 Nonets per address in the form [main].[sub].[mid].[base]
+6 Nonets per address in the form [0];[1];[2];[3];[4];[5]:[port]
+DDD to MMM in septemvigesimal per Nonet
+
+10-trit [managed as 2 Nonets] Port range (-29524 to +29524) 1DDD to ZMMM in septemvigesimal
+
 logically, each of the nonets will be managed as a separate number. 
 the address format is mainly for display.
 
 
-VM should handle the local server TCP/IP communication, so applications 
-don't have to handle the bridging setup.
+VM should handle the local server TCP/IP communication, to the effect
+that as far as code in the vm is concerned, its connected to a 
+'hardware' SBTNET gateway system over a physical connection.
 
 protocol should be efficent, (with some error correction preferrably).
 
