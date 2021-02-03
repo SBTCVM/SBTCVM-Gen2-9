@@ -1,0 +1,2 @@
+stnp %xwd%/cpctrl.stnp
+diskedit --appendfile dos %xwd%/cpctrl.trom cpctrl.txe trom

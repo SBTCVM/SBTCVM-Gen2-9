@@ -154,11 +154,16 @@ quit   : request to quit
 ''')
 			self.outstr('''dmnt0 [disk image]: Mount SBTVDI disk image to drive index 0
 dmnt1 [disk image]: Mount SBTVDI disk image to drive index 1
-rstld [drive index] [filename] : load and run full-memory programs from disk. [Main CPU]
-membak [drive index] [filename] : dump system memory to a file on disk. [Main CPU]
-garstld [drive index] [filename] : load and run full-memory programs from disk. [SBTGA CoCPU]
-gamembak [drive index] [filename] : dump system memory to a file on disk. [SBTGA CoCPU]
-list [drive index] [pattern] : list files on disk, optionally filter by filename part. e.g. extension.
+rstld [drive index] [filename] : load and run full-memory programs from 
+  disk. [Main CPU]
+membak [drive index] [filename] : dump system memory to a file on disk.
+  [Main CPU]
+garstld [drive index] [filename] : load and run full-memory programs from disk.
+  [SBTGA CoCPU]
+gamembak [drive index] [filename] : dump system memory to a file on disk.
+  [SBTGA CoCPU]
+list [drive index] [pattern] : list files on disk, optionally filter by 
+  filename part. e.g. extension.
 ''')
 		elif cmd=="dmnt0" or cmd=="dmnt1":
 			if cmd=="dmnt0":
@@ -324,8 +329,9 @@ list [drive index] [pattern] : list files on disk, optionally filter by filename
 		#restart CPU
 		if ga:
 			
-			#reset CLI io buffers and params
-			self.clireset(None, 0)
+			#NO.
+			##reset CLI io buffers and params
+			#self.clireset(None, 0)
 
 			self.cocpu.VDI_rstld(filelisting)
 		else:

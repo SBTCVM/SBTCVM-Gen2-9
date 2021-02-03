@@ -1,0 +1,73 @@
+var cmdflg=0
+var validflg=0
+var cmdx=0
+var status=0
+gsub dosargs.getentry
+
+
+tabstrc dosargs.buffer,cmdx,@0,halt
+	set cmdflg
+	if cmdflg,@1 begin
+		asm setreg1;10x1
+		asm iowrite1;>cocpu.status
+		prline Coprocessor Halted.
+		val @1
+		set validflg
+	end
+tabstrc dosargs.buffer,cmdx,@0,engage
+	set cmdflg
+	if cmdflg,@1 begin
+		asm setreg1;10x0
+		asm iowrite1;>cocpu.status
+		prline Coprocessor Engaged.
+		val @1
+		set validflg
+	end
+tabstrc dosargs.buffer,cmdx,@0,reset
+	set cmdflg
+	if cmdflg,@1 begin
+		asm setreg1;10x0
+		asm iowrite1;>cocpu.reset
+		prline Coprocessor Reset.
+		val @1
+		set validflg
+	end
+tabstrc dosargs.buffer,cmdx,@0,status
+	set cmdflg
+	if cmdflg,@1 begin
+		asm ioread1;>cocpu.status
+		set status
+		if status,$true begin
+			prline Coprocessor Is Halted.
+		end
+		if status,$false begin
+			prline Coprocessor Is Engaged.
+		end
+		val @1
+		set validflg
+	end
+tabstrc dosargs.buffer,@0,@0,/?
+	set cmdflg
+	if cmdflg,@1 gsub cpctrl_help
+	if cmdflg,@1 =validflg @1
+
+
+if validflg,@0 gsub Errortext
+vdi rstld -1 command.txe
+stop
+
+label Errortext
+prline Please see `cpctrl /?` for usage
+return
+
+label cpctrl_help
+prline ----cpctrl: contrls SBTGA coprocessor from SBTCVM DOS.----
+prline USAGE : cpctrl [command]
+prline status: get Coprocessor Status
+prline halt  : halt coprocessor
+prline engage: engage coprocessor
+prline reset : reset coprocessor
+prline /?    : This help text
+return
+
+include dosargs as dosargs

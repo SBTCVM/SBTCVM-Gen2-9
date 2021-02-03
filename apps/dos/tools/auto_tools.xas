@@ -8,3 +8,5 @@ xas %xwd%/echo
 xas %xwd%/about
 
 xas %xwd%/mode
+
+xas %xwd%/cpctrl
