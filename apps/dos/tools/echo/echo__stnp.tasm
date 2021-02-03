@@ -21,6 +21,7 @@ goto;>goto--branch-8-0
 goto;>flow--con-x-1;goto--branch-8-0
 
 zerosize;;goto--jumper-8-0
+zerosize;;flow--con-x-1--start
 #print newline
 fopwri1;:\n
 #vdi

@@ -97,7 +97,7 @@ label draw_desktop
 
 
 
-gsub common.ui_base_draw
+gsub ui.base_draw
 
 val @3
 set pl.pixx
@@ -134,6 +134,7 @@ return
 
 
 include bench/lib/common as common
+include bench/lib/ui as ui
 include plrle_noalpha as pl
 asm include;bench/media/info.tas0;ICON_info
 asm include;bench/media/dos.tas0;ICON_dos

@@ -1,4 +1,4 @@
-SBTCVM Bench v0.2.0
+SBTCVM Bench v0.2.1
 trom;bench/bench/desktop2.trom;desktop.app
 trom;bench/bench/boot.trom;boot.txe
 trom;bench/bench/boot.trom;bench.txe

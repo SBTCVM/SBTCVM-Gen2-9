@@ -91,6 +91,7 @@ goto;>goto--branch-10-0
 goto;>flow--con-x-1;goto--branch-10-0
 
 zerosize;;goto--jumper-10-0
+zerosize;;flow--con-x-1--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -194,6 +195,7 @@ goto;>goto--branch-19-0
 goto;>flow--con-x-2;goto--branch-19-0
 
 zerosize;;goto--jumper-19-0
+zerosize;;flow--con-x-2--start
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
@@ -205,6 +207,7 @@ goto;>goto--branch-21-0
 goto;>flow--con-x-3;goto--branch-21-0
 
 zerosize;;goto--jumper-21-0
+zerosize;;flow--con-x-3--start
 #prline
 fopwri1;:S
 fopwri1;:B
@@ -352,6 +355,7 @@ goto;>goto--branch-29-0
 goto;>flow--con-x-4;goto--branch-29-0
 
 zerosize;;goto--jumper-29-0
+zerosize;;flow--con-x-4--start
 #Set SBTGA mode
 dataread1;>@30
 iowrite1;>ga.mode
@@ -363,6 +367,7 @@ goto;>goto--branch-31-0
 goto;>flow--con-x-5;goto--branch-31-0
 
 zerosize;;goto--jumper-31-0
+zerosize;;flow--con-x-5--start
 #prline
 fopwri1;:S
 fopwri1;:B
@@ -524,6 +529,7 @@ goto;>goto--branch-39-0
 goto;>flow--con-x-6;goto--branch-39-0
 
 zerosize;;goto--jumper-39-0
+zerosize;;flow--con-x-6--start
 #Set SBTGA mode
 dataread1;>@31
 iowrite1;>ga.mode
@@ -535,6 +541,7 @@ goto;>goto--branch-41-0
 goto;>flow--con-x-7;goto--branch-41-0
 
 zerosize;;goto--jumper-41-0
+zerosize;;flow--con-x-7--start
 #prline
 fopwri1;:S
 fopwri1;:B

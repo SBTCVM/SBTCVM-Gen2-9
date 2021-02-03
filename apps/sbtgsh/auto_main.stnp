@@ -378,7 +378,7 @@ label help_about
 	prline SBTCVM Balanced Ternary Graphical SHell - v0.5
 	prline Part of SBTCVM Gen2-9
 	prline 
-	prline Copyright (c) 2018-2019 Thomas Leathers & Contributors
+	prline Copyright (c) 2018-2021 Thomas Leathers & Contributors
 	prline 
 	prline SBTCVM SBTGSH is free software: you can redistribute it and/or modify
 	prline it under the terms of the GNU General Public License as published by

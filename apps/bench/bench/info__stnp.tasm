@@ -14,7 +14,7 @@ zerosize;;info--label
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-8-0
 s1push1
-goto;>common.ui_base_draw--label
+goto;>ui.base_draw--label
 zerosize;;goto--jumper-8-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
@@ -157,10 +157,12 @@ stop
 includeas;plrle_noalpha,pl
 #module include: line 39-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #40-0
-include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '40-0' 
+#module include: line 40-0: bench/lib/ui as ui
+includeas;bench/lib/ui,ui
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #41-0
-include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '41-0' 
+include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '41-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #42-0
+include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '42-0' 
 #END OF FILE

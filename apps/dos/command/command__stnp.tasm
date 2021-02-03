@@ -1458,6 +1458,7 @@ goto;>goto--branch-73-1
 goto;>flow--con-x-1;goto--branch-73-1
 
 zerosize;;goto--jumper-73-1
+zerosize;;flow--con-x-1--start
 #val (used with set to change variable value during runtime.)
 setreg1;:A
 #set(1) (used after 2-op math, asm code, or get)
@@ -1564,6 +1565,7 @@ goto;>goto--branch-92-1
 goto;>flow--con-x-2;goto--branch-92-1
 
 zerosize;;goto--jumper-92-1
+zerosize;;flow--con-x-2--start
 #val (used with set to change variable value during runtime.)
 setreg1;:B
 #set(1) (used after 2-op math, asm code, or get)
@@ -1670,6 +1672,7 @@ goto;>goto--branch-111-1
 goto;>flow--con-x-3;goto--branch-111-1
 
 zerosize;;goto--jumper-111-1
+zerosize;;flow--con-x-3--start
 #val (used with set to change variable value during runtime.)
 setreg1;:R
 #set(1) (used after 2-op math, asm code, or get)
@@ -2033,6 +2036,7 @@ goto;>goto--jumper-170-0
 goto;>flow--con-x-4;goto--branch-170-0
 
 zerosize;;goto--jumper-170-0
+zerosize;;flow--con-x-4--start
 #SSTNPL table read instruction.
 setreg1;10x85
 dataread2;>@0
@@ -2052,6 +2056,7 @@ goto;>goto--branch-175-0
 goto;>flow--con-x-5;goto--branch-175-0
 
 zerosize;;goto--jumper-175-0
+zerosize;;flow--con-x-5--start
 #prline
 fopwri1;:D
 fopwri1;:r
@@ -2371,6 +2376,7 @@ goto;>goto--branch-219-1
 goto;>flow--con-x-6;goto--branch-219-1
 
 zerosize;;goto--jumper-219-1
+zerosize;;flow--con-x-6--start
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:.
@@ -2420,6 +2426,7 @@ goto;>goto--branch-235-0
 goto;>flow--con-x-7;goto--branch-235-0
 
 zerosize;;goto--jumper-235-0
+zerosize;;flow--con-x-7--start
 #conditional flow control begin
 dataread1;>run_s_tmp
 dataread2;>:\s
@@ -2428,6 +2435,7 @@ goto;>goto--branch-236-1
 goto;>flow--con-x-8;goto--branch-236-1
 
 zerosize;;goto--jumper-236-1
+zerosize;;flow--con-x-8--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)

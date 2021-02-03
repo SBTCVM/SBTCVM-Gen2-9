@@ -1,0 +1,31 @@
+
+const COLOR_hud=+++++++++
+const COLOR_hudshadow1=+00+00+00
+
+label base_draw
+	drawx1 @-121
+	drawwidth @243
+	
+	drawcolor $COLOR_hud
+		drawy1 @-121
+		drawheight @22
+		drawrect
+	drawcolor $COLOR_hudshadow1
+		drawy1 @-99
+		drawheight @3
+		drawrect
+	val @3
+		set pl.pixx
+		set pl.pixy
+		
+		val @-120
+		set pl.posx
+		set pl.posy
+		asm setreg1;>ICON_logo
+		set pl.offset
+		gsub pl.decode
+		
+return 
+
+include plrle_noalpha as pl
+asm include;bench+media+logo.tas0;ICON_logo

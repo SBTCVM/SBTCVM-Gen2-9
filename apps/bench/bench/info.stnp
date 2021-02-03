@@ -5,7 +5,7 @@ var btnbuff=0
 
 
 label info
-	gsub common.ui_base_draw
+	gsub ui.base_draw
 	val @1
 	set pl.pixx
 	val @2
@@ -37,5 +37,6 @@ prline ERROR! desktop.app not found!
 stop
 include plrle_noalpha as pl
 include bench/lib/common as common
+include bench/lib/ui as ui
 asm include;bench/media/credits1.tas0;IMAGE_credits
 asm include;bench/media/image_info.tas0;IMAGE_info
