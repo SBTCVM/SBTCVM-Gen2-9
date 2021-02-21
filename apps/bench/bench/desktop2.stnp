@@ -68,66 +68,64 @@ goto main
 
 
 label info
-prline Starting info.app...
-gsub backup_self
-vdi rstld -1 info.app
-prline ERROR! info.app not found!
+	prline Starting info.app...
+	gsub backup_self
+	vdi rstld -1 info.app
+	prline ERROR! info.app not found!
 return
 
 label dos
-prline Starting dos.app...
-gsub backup_self
-vdi rstld -1 dos.app
-prline ERROR! dos.app not found!
+	prline Starting dos.app...
+	gsub backup_self
+	vdi rstld -1 dos.app
+	prline ERROR! dos.app not found!
 return
 
 label credits
-prline Starting credits.app...
-gsub backup_self
-vdi rstld -1 credits.app
-prline ERROR! credits.app not found!
+	prline Starting credits.app...
+	gsub backup_self
+	vdi rstld -1 credits.app
+	prline ERROR! credits.app not found!
 return
 
 
 label backup_self
-vdi membak 2 desktop.back.tri
+	vdi membak 2 desktop.back.tri
 return
 
 label draw_desktop
-
-
-
-gsub ui.base_draw
-
-val @3
-set pl.pixx
-set pl.pixy
-
-val @-120
-set pl.posx
-set pl.posy
-
-#vertical spacing: start+(3*9)+5
-
-#info
-val @-90
-set pl.posy
-asm setreg1;>ICON_info
-set pl.offset
-gsub pl.decode
-
-#dos
-val @-58
-set pl.posy
-asm setreg1;>ICON_dos
-set pl.offset
-gsub pl.decode
-
-val @-26
-set pl.posy
-asm setreg1;>ICON_credits
-set pl.offset
-gsub pl.decode
+	gsub ui.base_draw
+	
+	val @3
+	set pl.pixx
+	set pl.pixy
+	
+	val @-120
+	set pl.posx
+	set pl.posy
+	
+	#vertical spacing: start+(3*9)+5
+	
+	#info
+		val @-90
+		set pl.posy
+		asm setreg1;>ICON_info
+		set pl.offset
+		gsub pl.decode
+	
+	#dos
+		val @-58
+		set pl.posy
+		asm setreg1;>ICON_dos
+		set pl.offset
+		gsub pl.decode
+	
+	#credits
+		val @-26
+		set pl.posy
+		asm setreg1;>ICON_credits
+		set pl.offset
+		gsub pl.decode
 return
 
 

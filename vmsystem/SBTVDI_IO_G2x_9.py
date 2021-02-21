@@ -243,16 +243,17 @@ list [drive index] [pattern] : list files on disk, optionally filter by
 			if not len(cmdlist_as)>=2:
 				self.outstr("ERROR: specify 'list [diskid] (optional pattern)'!\n")
 				self.status=-2
-			try:
-				if len(cmdlist_as)==2:
-					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
-						self.filelist(int(cmdlist_as[1]), None)
-				else:
-					if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
-						self.filelist(int(cmdlist_as[1]), cmdlist_as[2])
-			except ValueError:
-				self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
-				self.status=-1
+			else:
+				try:
+					if len(cmdlist_as)==2:
+						if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+							self.filelist(int(cmdlist_as[1]), None)
+					else:
+						if int(cmdlist_as[1]) in self.disks or int(cmdlist_as[1]) == -1:
+							self.filelist(int(cmdlist_as[1]), cmdlist_as[2])
+				except ValueError:
+					self.outstr("ERROR: Invalid Integer in disk id! '" + cmdlist_as[1] + "'\n")
+					self.status=-1
 			
 				
 		else:

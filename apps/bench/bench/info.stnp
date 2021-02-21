@@ -35,6 +35,7 @@ prline Starting desktop.app...
 vdi rstld 2 desktop.back.tri
 prline ERROR! desktop.app not found!
 stop
+
 include plrle_noalpha as pl
 include bench/lib/common as common
 include bench/lib/ui as ui
