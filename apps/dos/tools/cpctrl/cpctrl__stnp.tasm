@@ -51,8 +51,7 @@ zerosize;;tabstrc--recurs-checkyes--8-0_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--8-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--8-0
 
 setreg1;>tabstrc--adrbuff--8-0
@@ -71,8 +70,7 @@ zerosize;;tabstrc--recurs-checkyes--8-0_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--8-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--8-0
 
 setreg1;>tabstrc--adrbuff--8-0
@@ -91,8 +89,7 @@ zerosize;;tabstrc--recurs-checkyes--8-0_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--8-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--8-0
 
 setreg1;>tabstrc--adrbuff--8-0
@@ -200,8 +197,7 @@ zerosize;;tabstrc--recurs-checkyes--17-0_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--17-0
 
 setreg1;>tabstrc--adrbuff--17-0
@@ -220,8 +216,7 @@ zerosize;;tabstrc--recurs-checkyes--17-0_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--17-0
 
 setreg1;>tabstrc--adrbuff--17-0
@@ -240,8 +235,7 @@ zerosize;;tabstrc--recurs-checkyes--17-0_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--17-0
 
 setreg1;>tabstrc--adrbuff--17-0
@@ -260,8 +254,7 @@ zerosize;;tabstrc--recurs-checkyes--17-0_4
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--17-0
 
 setreg1;>tabstrc--adrbuff--17-0
@@ -280,8 +273,7 @@ zerosize;;tabstrc--recurs-checkyes--17-0_5
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--17-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--17-0
 
 setreg1;>tabstrc--adrbuff--17-0
@@ -394,8 +386,7 @@ zerosize;;tabstrc--recurs-checkyes--26-0_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--26-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--26-0
 
 setreg1;>tabstrc--adrbuff--26-0
@@ -414,8 +405,7 @@ zerosize;;tabstrc--recurs-checkyes--26-0_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--26-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--26-0
 
 setreg1;>tabstrc--adrbuff--26-0
@@ -434,8 +424,7 @@ zerosize;;tabstrc--recurs-checkyes--26-0_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--26-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--26-0
 
 setreg1;>tabstrc--adrbuff--26-0
@@ -454,8 +443,7 @@ zerosize;;tabstrc--recurs-checkyes--26-0_4
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--26-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--26-0
 
 setreg1;>tabstrc--adrbuff--26-0
@@ -564,8 +552,7 @@ zerosize;;tabstrc--recurs-checkyes--35-0_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--35-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--35-0
 
 setreg1;>tabstrc--adrbuff--35-0
@@ -584,8 +571,7 @@ zerosize;;tabstrc--recurs-checkyes--35-0_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--35-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--35-0
 
 setreg1;>tabstrc--adrbuff--35-0
@@ -604,8 +590,7 @@ zerosize;;tabstrc--recurs-checkyes--35-0_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--35-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--35-0
 
 setreg1;>tabstrc--adrbuff--35-0
@@ -624,8 +609,7 @@ zerosize;;tabstrc--recurs-checkyes--35-0_4
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--35-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--35-0
 
 setreg1;>tabstrc--adrbuff--35-0
@@ -644,8 +628,7 @@ zerosize;;tabstrc--recurs-checkyes--35-0_5
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--35-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--35-0
 
 setreg1;>tabstrc--adrbuff--35-0
@@ -804,8 +787,7 @@ zerosize;;tabstrc--recurs-checkyes--49-0_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--49-0
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--49-0
 
 setreg1;>tabstrc--adrbuff--49-0

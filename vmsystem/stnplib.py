@@ -1979,8 +1979,7 @@ dataread1;>tabstrc--outbuff--''' + str(lineno) + '''
 		if not first:
 			destobj.write('''#increment pointer
 dataread1;>tabstrc--adrbuff--''' + str(lineno) + '''
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--''' + str(lineno) + '''
 ''')
 
