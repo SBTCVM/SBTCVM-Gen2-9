@@ -1,0 +1,23 @@
+#unconditional begin block test.
+
+#only really useful with conditional `top` statements, and code formatting.
+
+#unconditional `begin` statements, and their `end` statements only use 
+#	'zerosize', so no additional memory is used.
+
+#IMPORTANT: do note, that when `end` statements are paired with looped blocks,
+#	a `goto` is used to facilitate the loop, so the above blurb depends
+#	on context!!
+
+var kb=0
+
+begin
+	prline press A to ask again, any other key to exit.
+	keyprompt
+	set kb
+	if kb,:A top
+	if kb,:a top
+	
+end
+
+stop

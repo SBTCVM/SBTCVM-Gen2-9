@@ -213,9 +213,28 @@ Command documentation:
 				has been met, loop exits as normal.
 			- in conditional blocks, run conditional block from its start again
 				unconditionally.
+			- in non-looped blocks, do the same as with conditional blocks.
 	end   : used in conjunction with conditional code blocks 
 			(made via the conditional operation 'begin') 
 
+--begin blocks:
+
+	Begin blocks are mostly identical to conditional blocks, and are provided to allow use
+	of 'top' outside of conditional blocks and loops, or within specific scopes, 
+	which can be more readable than using gotos in some cases.
+
+	--Example (from roms/stnp_flowcon5):
+
+		var kb=0
+		begin
+			prline press A to ask again, any other key to exit.
+			keyprompt
+			set kb
+			if kb,:A top
+			if kb,:a top
+			
+		end
+		stop
 
 --for loops:
 		NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
@@ -279,7 +298,7 @@ Command documentation:
 		top   : 
 			- in looped blocks, run next loop iteration, or if loop end condition 
 				has been met, loop exits as normal.
-			- in conditional blocks, run conditional block from its start again
+			- in conditional blocks/non-looped blocks, run conditional block from its start again
 				(bypasses conditional check that begun the block.)
 		goto : ordinary goto.
 		gsub : store next block (line) of code as return address. (same as normal gsub command)
