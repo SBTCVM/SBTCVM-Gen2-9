@@ -153,16 +153,16 @@ fopwri1;:!
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 38-0: plrle_noalpha as pl
+#module include: line 39-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
-#module include: line 39-0: bench/lib/common as common
+#module include: line 40-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 40-0: bench/lib/ui as ui
+#module include: line 41-0: bench/lib/ui as ui
 includeas;bench/lib/ui,ui
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #41-0
-include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '41-0' 
-#___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #42-0
-include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '42-0' 
+include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '42-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #43-0
+include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '43-0' 
 #END OF FILE

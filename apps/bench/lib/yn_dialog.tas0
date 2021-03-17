@@ -133,8 +133,8 @@ setreg1;>goto--jumper-62-0
 s1push1
 goto;>pl.decode--label
 zerosize;;goto--jumper-62-0
-#label
-zerosize;;_main_loop--label
+#unconditional loop
+zerosize;;flowloop--con-x-1--start
 #goto (extra code stores away return address.)
 setreg1;>goto--jumper-66-0
 s1push1
@@ -150,10 +150,10 @@ dataread1;>btnbuff
 dataread2;>@0
 gotoifmore;>goto--branch-69-0
 goto;>goto--jumper-69-0
-goto;>flow--con-x-1;goto--branch-69-0
+goto;>flow--con-x-2;goto--branch-69-0
 
 zerosize;;goto--jumper-69-0
-zerosize;;flow--con-x-1--start
+zerosize;;flow--con-x-2--start
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #70-0
 ioread1;>mouse.lockx#SSTNPL Source Line: '70-0' 
@@ -175,10 +175,10 @@ dataread2;>@15
 gotoifless;>goto--jumper-75-0
 gotoif;>goto--jumper-75-0
 goto;>goto--branch-75-0
-goto;>flow--con-x-2;goto--branch-75-0
+goto;>flow--con-x-3;goto--branch-75-0
 
 zerosize;;goto--jumper-75-0
-zerosize;;flow--con-x-2--start
+zerosize;;flow--con-x-3--start
 #conditional flow control begin
 dataread1;>xbuff
 dataread2;>@-75
@@ -190,10 +190,10 @@ dataread2;>@-45
 gotoifless;>goto--jumper-76-0
 gotoif;>goto--jumper-76-0
 goto;>goto--branch-76-0
-goto;>flow--con-x-3;goto--branch-76-0
+goto;>flow--con-x-4;goto--branch-76-0
 
 zerosize;;goto--jumper-76-0
-zerosize;;flow--con-x-3--start
+zerosize;;flow--con-x-4--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
@@ -201,7 +201,7 @@ datawrite1;>answer
 #return from subroutine.
 s1pop1
 gotoreg1
-zerosize;;flow--con-x-3
+zerosize;;flow--con-x-4
 #conditional flow control begin
 dataread1;>xbuff
 dataread2;>@45
@@ -213,10 +213,10 @@ dataread2;>@75
 gotoifless;>goto--jumper-81-0
 gotoif;>goto--jumper-81-0
 goto;>goto--branch-81-0
-goto;>flow--con-x-4;goto--branch-81-0
+goto;>flow--con-x-5;goto--branch-81-0
 
 zerosize;;goto--jumper-81-0
-zerosize;;flow--con-x-4--start
+zerosize;;flow--con-x-5--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -224,11 +224,11 @@ datawrite1;>answer
 #return from subroutine.
 s1pop1
 gotoreg1
-zerosize;;flow--con-x-4
+zerosize;;flow--con-x-5
+zerosize;;flow--con-x-3
 zerosize;;flow--con-x-2
-zerosize;;flow--con-x-1
-#goto 
-goto;>_main_loop--label
+goto;>flowloop--con-x-1--start
+zerosize;;flowloop--con-x-1
 #module include: line 90-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #module include: line 91-0: segment as seg

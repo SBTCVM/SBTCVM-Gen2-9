@@ -6,49 +6,49 @@ const DESK_MIN_VERS=:1
 
 
 label tune
-#soundchip param setup
-val @220
-asm iowrite1;>snd.1.freq
-val @277
-asm iowrite1;>snd.2.freq
-val @330
-asm iowrite1;>snd.3.freq
-val @2
-asm iowrite1;>snd.1.wave
-asm iowrite1;>snd.2.wave
-asm iowrite1;>snd.3.wave
-val @5
-asm iowrite1;>snd.1.vol
-asm iowrite1;>snd.2.vol
-asm iowrite1;>snd.3.vol
-val @-1
-asm iowrite1;>snd.1.pan
-val @0
-asm iowrite1;>snd.2.pan
-val @1
-asm iowrite1;>snd.3.pan
-#play startup tune.
-asm iowrite1;>snd.1.play
-waitcy 1000
-asm iowrite1;>snd.2.play
-waitcy 1000
-asm iowrite1;>snd.3.play
-waitcy 8000
-
-asm iowrite1;>snd.1.stop
-asm iowrite1;>snd.2.stop
-asm iowrite1;>snd.3.stop
+	#soundchip param setup
+	val @220
+	asm iowrite1;>snd.1.freq
+	val @277
+	asm iowrite1;>snd.2.freq
+	val @330
+	asm iowrite1;>snd.3.freq
+	val @2
+	asm iowrite1;>snd.1.wave
+	asm iowrite1;>snd.2.wave
+	asm iowrite1;>snd.3.wave
+	val @5
+	asm iowrite1;>snd.1.vol
+	asm iowrite1;>snd.2.vol
+	asm iowrite1;>snd.3.vol
+	val @-1
+	asm iowrite1;>snd.1.pan
+	val @0
+	asm iowrite1;>snd.2.pan
+	val @1
+	asm iowrite1;>snd.3.pan
+	#play startup tune.
+	asm iowrite1;>snd.1.play
+	waitcy 1000
+	asm iowrite1;>snd.2.play
+	waitcy 1000
+	asm iowrite1;>snd.3.play
+	waitcy 8000
+	
+	asm iowrite1;>snd.1.stop
+	asm iowrite1;>snd.2.stop
+	asm iowrite1;>snd.3.stop
 return
 
 
 
 label print_version
-chardump :v
-chardump $DESK_MAIN_VERS
-chardump :.
-chardump $DESK_SUB_VERS
-chardump :.
-chardump $DESK_MIN_VERS
+	chardump :v
+	chardump $DESK_MAIN_VERS
+	chardump :.
+	chardump $DESK_SUB_VERS
+	chardump :.
+	chardump $DESK_MIN_VERS
 return
 
 var mouse_color=*---------
@@ -100,11 +100,12 @@ label mouse_cursor
 return
 
 label flock
-asm iowrite1;>plot.fhalt
-label drawLOCK
+	asm iowrite1;>plot.fhalt
+	loop
 		asm ioread1;>plot.buffer
 		set locktmp
-		ifmore locktmp,@0 goto drawLOCK
+		ifnotmore locktmp,@0 break
+	end
 return
 
 var btnbuff=0
@@ -112,11 +113,12 @@ var btnbuff=0
 label mouse_wait
 	drawselect @0
 	drawcopy @-1
-label mouse_wait_loop
-	gsub mouse_cursor
-	asm ioread1;>mouse.button
-	set btnbuff
-	ifnot btnbuff,@1 goto mouse_wait_loop
+	loop
+		gsub mouse_cursor
+		asm ioread1;>mouse.button
+		set btnbuff
+		if btnbuff,@1 break
+	end
 return
 	
 

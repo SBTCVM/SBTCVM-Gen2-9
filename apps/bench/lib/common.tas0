@@ -239,21 +239,23 @@ zerosize;;flock--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #103-0
 iowrite1;>plot.fhalt#SSTNPL Source Line: '103-0' 
-#label
-zerosize;;drawLOCK--label
+#unconditional loop
+zerosize;;flowloop--con-x-1--start
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #105-0
 ioread1;>plot.buffer#SSTNPL Source Line: '105-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>locktmp
-#conditional goto
+#conditional flow control break
 dataread1;>locktmp
 dataread2;>@0
-gotoifmore;>goto--branch-107-0
-goto;>goto--jumper-107-0
-setreg1;>goto--jumper-107-0;goto--branch-107-0
-goto;>drawLOCK--label
+gotoifmore;>goto--jumper-107-0
+goto;>goto--branch-107-0
+goto;>flowloop--con-x-1;goto--branch-107-0
+
 zerosize;;goto--jumper-107-0
+goto;>flowloop--con-x-1--start
+zerosize;;flowloop--con-x-1
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -265,26 +267,28 @@ iowrite1;>plot.select
 #plotter buffer copy
 dataread1;>@-1
 iowrite1;>plot.copy
-#label
-zerosize;;mouse_wait_loop--label
+#unconditional loop
+zerosize;;flowloop--con-x-2--start
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-116-0
+setreg1;>goto--jumper-117-0
 s1push1
 goto;>mouse_cursor--label
-zerosize;;goto--jumper-116-0
+zerosize;;goto--jumper-117-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #117-0
-ioread1;>mouse.button#SSTNPL Source Line: '117-0' 
+#_______NOTE: this corresponds to SSTNPL source line #118-0
+ioread1;>mouse.button#SSTNPL Source Line: '118-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
-#conditional goto
+#conditional flow control break
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--jumper-119-0
-goto;>goto--branch-119-0
-setreg1;>goto--jumper-119-0;goto--branch-119-0
-goto;>mouse_wait_loop--label
-zerosize;;goto--jumper-119-0
+gotoif;>goto--branch-120-0
+goto;>goto--jumper-120-0
+goto;>flowloop--con-x-2;goto--branch-120-0
+
+zerosize;;goto--jumper-120-0
+goto;>flowloop--con-x-2--start
+zerosize;;flowloop--con-x-2
 #return from subroutine.
 s1pop1
 gotoreg1

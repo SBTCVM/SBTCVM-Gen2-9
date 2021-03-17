@@ -78,15 +78,15 @@ setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.pixy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #11-0
-setreg1;>image1#SSTNPL Source Line: '11-0' 
+#_______NOTE: this corresponds to SSTNPL source line #13-0
+setreg1;>image1#SSTNPL Source Line: '13-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-13-0
+setreg1;>goto--jumper-15-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-13-0
+zerosize;;goto--jumper-15-0
 #plotter buffer copy
 dataread1;>@13
 iowrite1;>plot.copy
@@ -150,11 +150,11 @@ fopwri1;:!
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 24-0: bench/lib/common as common
+#module include: line 26-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 25-0: plrle_noalpha as pl
+#module include: line 27-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #26-0
-include;bench/media/wallpaper.tas0;image1#SSTNPL Source Line: '26-0' 
+#_______NOTE: this corresponds to SSTNPL source line #28-0
+include;bench/media/wallpaper.tas0;image1#SSTNPL Source Line: '28-0' 
 #END OF FILE

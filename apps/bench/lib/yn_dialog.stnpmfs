@@ -161,7 +161,6 @@ int9;common.@0;10x0
 int9;common.@-1;10x-1
 int9;common.@1;10x1
 label;main
-label;_main_loop
 label;pl.decode
 label;pl.RL_decode_mainloop
 label;seg.init_pos
@@ -195,9 +194,7 @@ label;common.tune
 label;common.print_version
 label;common.mouse_cursor
 label;common.flock
-label;common.drawLOCK
 label;common.mouse_wait
-label;common.mouse_wait_loop
 table;seg.seg_data;16;62
 const;common.DESK_SUB_VERS;:2
 const;common.DESK_MIN_VERS;:1

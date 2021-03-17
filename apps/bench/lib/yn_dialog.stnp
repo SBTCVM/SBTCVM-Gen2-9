@@ -61,7 +61,7 @@ label main
 	set pl.offset
 	gsub pl.decode
 	
-	label _main_loop
+	loop
 	
 		gsub common.mouse_cursor
 		asm ioread1;>mouse.button
@@ -85,7 +85,7 @@ label main
 				end
 			end
 		end
-	goto _main_loop
+	end
 
 include plrle_noalpha as pl
 include segment as seg

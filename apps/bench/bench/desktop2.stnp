@@ -21,7 +21,7 @@ end
 val @1
 set actflg
 
-label main
+loop
 	
 	if actflg,@1 begin
 		val @0
@@ -30,13 +30,14 @@ label main
 		drawcopy @-1
 	end
 	
-	label main_loop
+	{val 0 / set btnbuff}
+	until btnbuff,@1
 	
 		asm ioread1;>mouse.button
 		set btnbuff
 		gsub common.mouse_cursor
 	
-	ifnot btnbuff,@1 goto main_loop
+	end
 	
 	##### Main screen icon click parser #####
 	
@@ -62,7 +63,7 @@ label main
 		ifrange @-120,@-93,xbuff gsub credits
 	
 	end
-goto main
+end
 
 
 
