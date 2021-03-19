@@ -25,6 +25,19 @@ find|(string)|find filenames containing (string) and list them. **(1)**
 ver/version/info|NONE|print version information
 about|NONE|about XAS
 
+## configuration (interactive mode only):
+
+command | arguments | description
+:----------:|:--------------:|:-----------:|
+config|see `config help`|Set various user-focused options of the XAS Shell.
+debug|see `debug help`|set various XAS Debug options.
+
+## history (interactive mode only)
+
+view or reset command history. (not available on all operating systems)
+
+see `help history` for detailed usage.
+
 ### Footnote 1
 
 A path without a '+' means its directly visible in SBTCVM's 'path' 
@@ -40,6 +53,7 @@ command | arguments | description
 :----------:|:--------------:|:-----------:|
 run/runp | (same as pyg_sbtcvm.py) | run SBTCVM's Pygame VM Frontend
 runc | (same as cur_sbtcvm.py) | run SBTCVM's Curses VM Frontend
+runb | (same as bare_sbtcvm.py) | run SBTCVM's bare (headless, non-interactive) VM frontend.
 
 ## Build
 

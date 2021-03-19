@@ -6,7 +6,7 @@
 
 ## Features:
 
-- 4 voices (channels)
+- 2x4 voices (channels) (4 voices per CPU)
 - each voice has: square, sawtooth, triangle, noise, square-pulse, and triangle-pulse.
 - Stereo (left, right, center) panning support.
 - per-channel volume.
