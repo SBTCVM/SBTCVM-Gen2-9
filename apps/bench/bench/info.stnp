@@ -5,6 +5,8 @@ var btnbuff=0
 
 
 label info
+	drawblit @13
+	bprinttail1 INFO
 	gsub ui.base_draw
 	val @1
 	set pl.pixx

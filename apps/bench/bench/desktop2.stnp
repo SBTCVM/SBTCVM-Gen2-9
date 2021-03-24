@@ -95,6 +95,7 @@ label backup_self
 return
 
 label draw_desktop
+	bprinttail1 DESKTOP
 	gsub ui.base_draw
 	
 	val @3

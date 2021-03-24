@@ -1,6 +1,7 @@
 
 const COLOR_hud=+++++++++
 const COLOR_hudshadow1=+00+00+00
+var drawlabel=@1
 
 label base_draw
 	drawx1 @-121
@@ -24,8 +25,18 @@ label base_draw
 		asm setreg1;>ICON_logo
 		set pl.offset
 		gsub pl.decode
-		
+	if drawlabel,$true begin
+		val *---------
+		set seg.color_on
+		val @-90
+		set seg.posx
+		val @-118
+		set seg.posy
+		gsub seg.init_pos
+		gsub seg.output
+	end
 return 
 
+include segment as seg
 include plrle_noalpha as pl
 asm include;bench+media+logo.tas0;ICON_logo

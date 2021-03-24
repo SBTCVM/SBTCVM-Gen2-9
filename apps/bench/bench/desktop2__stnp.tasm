@@ -491,11 +491,22 @@ s1pop1
 gotoreg1
 #label
 zerosize;;draw_desktop--label
+#bprinttail1
+fopset1;>buffer.1.write.tail
+fopwri1;:D
+fopwri1;:E
+fopwri1;:S
+fopwri1;:K
+fopwri1;:T
+fopwri1;:O
+fopwri1;:P
+fopwri1;:\n
+fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-98-0
+setreg1;>goto--jumper-99-0
 s1push1
 goto;>ui.base_draw--label
-zerosize;;goto--jumper-98-0
+zerosize;;goto--jumper-99-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -513,59 +524,59 @@ setreg1;10x-90
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #113-0
-setreg1;>ICON_info#SSTNPL Source Line: '113-0' 
+#_______NOTE: this corresponds to SSTNPL source line #114-0
+setreg1;>ICON_info#SSTNPL Source Line: '114-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-115-0
+setreg1;>goto--jumper-116-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-115-0
+zerosize;;goto--jumper-116-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x-58
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #120-0
-setreg1;>ICON_dos#SSTNPL Source Line: '120-0' 
+#_______NOTE: this corresponds to SSTNPL source line #121-0
+setreg1;>ICON_dos#SSTNPL Source Line: '121-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-122-0
+setreg1;>goto--jumper-123-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-122-0
+zerosize;;goto--jumper-123-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x-26
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #127-0
-setreg1;>ICON_credits#SSTNPL Source Line: '127-0' 
+#_______NOTE: this corresponds to SSTNPL source line #128-0
+setreg1;>ICON_credits#SSTNPL Source Line: '128-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-129-0
+setreg1;>goto--jumper-130-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-129-0
+zerosize;;goto--jumper-130-0
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 135-0: bench/lib/common as common
+#module include: line 136-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 136-0: bench/lib/ui as ui
+#module include: line 137-0: bench/lib/ui as ui
 includeas;bench/lib/ui,ui
-#module include: line 137-0: plrle_noalpha as pl
+#module include: line 138-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #138-0
-include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '138-0' 
-#___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #139-0
-include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '139-0' 
+include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '139-0' 
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #140-0
-include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '140-0' 
+include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '140-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #141-0
+include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '141-0' 
 #END OF FILE
