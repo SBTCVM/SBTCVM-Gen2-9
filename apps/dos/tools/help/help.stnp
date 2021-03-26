@@ -37,10 +37,11 @@ return
 label tools
 	prline Tools
 	gsub divider
-	prline help  - help utility. (You're using it now.)
-	prline mode  - Set SBGTA properties. i.e. Screen Mode.
+	prline help   - help utility. (You're using it now.)
+	prline mode   - Set SBGTA properties. i.e. Screen Mode.
 	prline cpctrl - control SBTGA Coprocessor CPU from DOS.
-	prline about - About SBTCVM-DOS
+	prline vdsh   - Access SBTVDI Serial shell from SBTCVM-DOS
+	prline about  - About SBTCVM-DOS
 return
 
 label toys

@@ -1134,6 +1134,7 @@ fopwri1;:l
 fopwri1;:p
 fopwri1;:\s
 fopwri1;:\s
+fopwri1;:\s
 fopwri1;:-
 fopwri1;:\s
 fopwri1;:h
@@ -1178,6 +1179,7 @@ fopwri1;:m
 fopwri1;:o
 fopwri1;:d
 fopwri1;:e
+fopwri1;:\s
 fopwri1;:\s
 fopwri1;:\s
 fopwri1;:-
@@ -1273,11 +1275,65 @@ fopwri1;:S
 fopwri1;:.
 fopwri1;:\n
 #prline
+fopwri1;:v
+fopwri1;:d
+fopwri1;:s
+fopwri1;:h
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:-
+fopwri1;:\s
+fopwri1;:A
+fopwri1;:c
+fopwri1;:c
+fopwri1;:e
+fopwri1;:s
+fopwri1;:s
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:V
+fopwri1;:D
+fopwri1;:I
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:e
+fopwri1;:r
+fopwri1;:i
+fopwri1;:a
+fopwri1;:l
+fopwri1;:\s
+fopwri1;:s
+fopwri1;:h
+fopwri1;:e
+fopwri1;:l
+fopwri1;:l
+fopwri1;:\s
+fopwri1;:f
+fopwri1;:r
+fopwri1;:o
+fopwri1;:m
+fopwri1;:\s
+fopwri1;:S
+fopwri1;:B
+fopwri1;:T
+fopwri1;:C
+fopwri1;:V
+fopwri1;:M
+fopwri1;:-
+fopwri1;:D
+fopwri1;:O
+fopwri1;:S
+fopwri1;:\n
+#prline
 fopwri1;:a
 fopwri1;:b
 fopwri1;:o
 fopwri1;:u
 fopwri1;:t
+fopwri1;:\s
 fopwri1;:\s
 fopwri1;:-
 fopwri1;:\s
@@ -1310,10 +1366,10 @@ fopwri1;:y
 fopwri1;:s
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-48-0
+setreg1;>goto--jumper-49-0
 s1push1
 goto;>divider--label
-zerosize;;goto--jumper-48-0
+zerosize;;goto--jumper-49-0
 #prline
 fopwri1;:s
 fopwri1;:p
@@ -1421,10 +1477,10 @@ fopwri1;:l
 fopwri1;:p
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-60-0
+setreg1;>goto--jumper-61-0
 s1push1
 goto;>divider--label
-zerosize;;goto--jumper-60-0
+zerosize;;goto--jumper-61-0
 #prline
 fopwri1;:v
 fopwri1;:d
@@ -2021,6 +2077,6 @@ fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 74-0: dosargs as dosargs
+#module include: line 75-0: dosargs as dosargs
 includeas;dosargs,dosargs
 #END OF FILE

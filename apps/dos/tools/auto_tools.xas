@@ -10,3 +10,5 @@ xas %xwd%/about
 xas %xwd%/mode
 
 xas %xwd%/cpctrl
+
+xas %xwd%/vdsh

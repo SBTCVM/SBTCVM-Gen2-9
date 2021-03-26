@@ -1,0 +1,71 @@
+
+var cmdflg=0
+var validflg=0
+var quitflg=0
+gsub dosargs.getentry
+
+textcolor *++0---
+
+{tabstrc dosargs.buffer,@0,@0,/i / set cmdflg / if cmdflg,@1 gsub vdi_default / if cmdflg,@1 =validflg @1}
+{tabstrc dosargs.buffer,@0,@0,/r / set cmdflg / if cmdflg,@1 gsub vdi_no_quit / if cmdflg,@1 =validflg @1}
+{tabstrc dosargs.buffer,@0,@0,/? / set cmdflg / if cmdflg,@1 gsub vdi_help / if cmdflg,@1 =validflg @1}
+if validflg,@0 begin
+	prline Using default mode. see `vdsh /?` for more modes.
+	gsub vdi_default
+end
+vdi rstld -1 command.txe
+prline ERROR: can't find command.txe
+stop
+
+
+label vdi_default
+	prline Using interactive mode (vdsh /i)
+	gsub vdi_serial
+	vdimode @1
+return
+
+label vdi_no_quit
+	prline Using no-quit mode. (vdsh /r) 
+	prline `quit` will NOT shutdown VM in this mode.
+	val @1
+	set quitflg
+	gsub vdi_serial
+	vdimode @1
+return
+
+label vdi_help
+	prline ---VDSH: enter VDI shell from SBTCVM-DOS---
+	prline USAGE:
+	prline /i          : enter interactive VDI shell mode
+	prline [no options]: same as /i
+	prline /?          : this help
+	prline /r          : same as /i, but don't shutdown on QUIT status.
+return
+
+
+label vdi_serial
+	
+	
+	textcolor *0++--0
+	
+	prline VDSH: vdi shell wrapper
+	
+	
+	textcolor *+++---
+	
+	var exitcode=0
+	
+	asm include;vdishell.tas0
+	asm dataread1;>vdiexitcode
+	set exitcode
+	
+	
+	print VDI Status returned: 
+	dumpd exitcode
+	newline
+	if exitcode,@2 begin
+		if quitflg,@0 stop
+	end
+return
+
+include dosargs as dosargs
