@@ -53,6 +53,11 @@ Counterpart to `gettriads`, `mergetriads`, as you may suppose, merges 3 triads i
 
 see _`plotter_gradients`_ in _demos_ for usage example.
 
+### strmacro
+Basic static named string system via SSTNPL macros. Features output support for `segment` module, standard TTY, and SBTVDI serial commands.
+
+see _`string_macros`_ in _demos_ for usage example.
+
 ### rgbadd
 A fairly flexible 9-trit RGB color adding library.
 Features special modes for incremental-addition-based gradients.

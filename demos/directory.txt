@@ -22,6 +22,9 @@ shelldemo:
 shelldemo_macros:
 	similar to `shelldemo` above, only using comprompt's provided macros
 	for command parsing loops.
+	
+string_macros:
+	shows off SSTNPL's named string macro module strmacro [nocurses]
 
 
 ----'demoscene-style demos'----

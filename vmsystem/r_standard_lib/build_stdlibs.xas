@@ -14,6 +14,7 @@ stnp --module gettriads.stnp
 stnp --module mergetriads.stnp
 stnp --module rgbadd.stnp
 stnp --module binrle.stnp
+stnp --module strmacro.stnp
 
 #Standard namespace library
 print;standard namespace library

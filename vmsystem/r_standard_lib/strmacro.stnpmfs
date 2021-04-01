@@ -1,0 +1,7 @@
+macro;strpn;{gsub %0%_STRMAC / newline}
+macro;strpn_vdi;{asm fopset1;>vdi.cli.in / gsub %0%_STRMAC / newline / asm fopset1;>io.ttywr}
+macro;strp;{gsub %0%_STRMAC}
+macro;strpn_seg;{asm fopset1;>buffer.1.write.tail / gsub %0%_STRMAC / newline / asm fopset1;>io.ttywr}
+macro;strp_vdi;{asm fopset1;>vdi.cli.in / gsub %0%_STRMAC / asm fopset1;>io.ttywr}
+macro;strp_seg;{asm fopset1;>buffer.1.write.tail / gsub %0%_STRMAC / asm fopset1;>io.ttywr}
+macro;def;{goto %0%_STRMAC_end / label %0%_STRMAC / print %1% / return / label %0%_STRMAC_end}

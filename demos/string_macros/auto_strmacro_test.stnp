@@ -1,0 +1,71 @@
+!stm.def(sam, THIS IS SAM. )
+!stm.def(bob, HI IM BOB. )
+
+
+
+
+!stm.strp(sam)
+!stm.strp(bob)
+!stm.strpn(sam)
+!stm.strpn(sam)
+!stm.strpn(bob)
+
+prline Press a key to enter segment-specific macro test.
+
+keyprompt
+
+gamode @30
+
+drawfill *---------
+val *+++++++++
+set seg.color_on
+
+val @-119
+set seg.posx
+set seg.posy
+val @2
+set seg.height
+set seg.width
+val @6
+set seg.vert_space
+set seg.hori_space
+
+
+gsub seg.init_pos
+
+!stm.strp_seg(sam)
+!stm.strp_seg(bob)
+!stm.strpn_seg(sam)
+!stm.strpn_seg(sam)
+!stm.strpn_seg(bob)
+
+bprinttail1 --PRESS A KEY TO ENTER SBTVDI TEST--
+
+gsub seg.output
+
+
+keyprompt
+
+gamode @0
+
+!stm.def(help_test, help)
+
+vdimode @1
+
+var out=:n
+!stm.strpn_vdi(help_test)
+
+until out,@0
+	asm ioread1;>vdi.cli.out
+	asm iowrite1;>io.ttywr
+	set1 out
+end
+
+prline press a key to exit
+keyprompt
+stop
+
+
+
+include strmacro as stm
+include segment as seg
