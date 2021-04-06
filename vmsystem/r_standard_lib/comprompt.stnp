@@ -9,6 +9,7 @@ var size=0
 #one less than size, for indexing
 var itersize=0
 
+var firstspace=@-1
 
 var shell_entry_zeroit=0
 var shell_entry_buff=0
@@ -31,6 +32,7 @@ var max=@80
 
 #### basic parser macros ####
 
+var fs_flg=0
 var cmdflg=0
 var validflg=0
 def cmd_get {val @0 / set %mod%validflg / set %mod%cmdflg / gsub %mod%getentry / newline}
@@ -75,6 +77,9 @@ tpad 85
 label getentry
 	val 0
 	set size
+	set fs_flg
+	val @-1
+	set firstspace
 	label getentry_loop
 		keyprompt
 		set shell_entry_chbuff
@@ -114,6 +119,7 @@ label getentry_tobuff
 	set itersize
 	add size,@1
 	set shell_entry_zeroit
+	set firstspace
 	uiter getentry_tobuff_iter,getentry_tobuff_loop,@0,itersize
 	uiter getentry_pad_iter,getentry_pad,size,shell_entry_zeroit
 	if clearbuffer,@0 return
@@ -124,6 +130,19 @@ label getentry_tobuff
 label getentry_tobuff_loop
 	pop
 	set shell_entry_buff
+	ifnot fs_flg,@1 begin
+		if shell_entry_buff,:\s begin
+			get getentry_tobuff_iter
+			asm adddata1;10x1
+			set firstspace
+			val @1
+			set fs_flg
+		end
+	end
+	#dumpd firstspace
+	#newline
+	#chardump shell_entry_buff
+	#newline 
 	tabw buffer,getentry_tobuff_iter,@0,shell_entry_buff
 return
 

@@ -31,6 +31,8 @@ null;::;::
 null;:0;:0
 null;:1;:1
 null;:2;:2
+null;10x-1;@-1
+null;10x5;@5
 null;0;run_s_tmp
 null;0;run_tobuffer_flg
 null;:\s;:\s
@@ -2222,12 +2224,17 @@ s1pop1
 gotoreg1
 #label
 zerosize;;extcheck--label
-#return from subroutine.
-s1pop1
+#conditional return
+dataread1;>cp.firstspace
+dataread2;>@-1
+gotoif;>goto--branch-209-0
+goto;>goto--jumper-209-0
+s1pop1;;goto--branch-209-0
 gotoreg1
+zerosize;;goto--jumper-209-0
 #subtract (2op math)
-dataread1;>cp.size
-dataread2;>@4
+dataread1;>cp.firstspace
+dataread2;>@5
 sub
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>extoffset
@@ -2239,100 +2246,100 @@ mul
 dataread2;>extoffset
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabstrc--adrbuff--212-0
-null;;tabstrc--adrbuff--212-0
+datawrite1;>tabstrc--adrbuff--214-0
+null;;tabstrc--adrbuff--214-0
 #reset output buffer to 0
 setreg1;0
-datawrite1;>tabstrc--outbuff--212-0
-null;;tabstrc--outbuff--212-0
+datawrite1;>tabstrc--outbuff--214-0
+null;;tabstrc--outbuff--214-0
 #recursive_parser
 #recursion
 
-setreg1;>tabstrc--adrbuff--212-0
+setreg1;>tabstrc--adrbuff--214-0
 
-datawrite1;>tabstrc--recurs-tabbuff--212-0_1
-dataread1;;tabstrc--recurs-tabbuff--212-0_1
-datawrite1;>tabstrc--recurs-tabbuff_read--212-0_1
-dataread1;;tabstrc--recurs-tabbuff_read--212-0_1
+datawrite1;>tabstrc--recurs-tabbuff--214-0_1
+dataread1;;tabstrc--recurs-tabbuff--214-0_1
+datawrite1;>tabstrc--recurs-tabbuff_read--214-0_1
+dataread1;;tabstrc--recurs-tabbuff_read--214-0_1
 
 setreg2;:.
 
 
-gotoif;>tabstrc--recurs-checkyes--212-0_1
-goto;>tabstrc--recurs-checkno--212-0_1
-zerosize;;tabstrc--recurs-checkyes--212-0_1
+gotoif;>tabstrc--recurs-checkyes--214-0_1
+goto;>tabstrc--recurs-checkno--214-0_1
+zerosize;;tabstrc--recurs-checkyes--214-0_1
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--212-0
+dataread1;>tabstrc--adrbuff--214-0
 adddata1;+
-datawrite1;>tabstrc--adrbuff--212-0
+datawrite1;>tabstrc--adrbuff--214-0
 
-setreg1;>tabstrc--adrbuff--212-0
+setreg1;>tabstrc--adrbuff--214-0
 
-datawrite1;>tabstrc--recurs-tabbuff--212-0_2
-dataread1;;tabstrc--recurs-tabbuff--212-0_2
-datawrite1;>tabstrc--recurs-tabbuff_read--212-0_2
-dataread1;;tabstrc--recurs-tabbuff_read--212-0_2
+datawrite1;>tabstrc--recurs-tabbuff--214-0_2
+dataread1;;tabstrc--recurs-tabbuff--214-0_2
+datawrite1;>tabstrc--recurs-tabbuff_read--214-0_2
+dataread1;;tabstrc--recurs-tabbuff_read--214-0_2
 
 setreg2;:t
 
 
-gotoif;>tabstrc--recurs-checkyes--212-0_2
-goto;>tabstrc--recurs-checkno--212-0_2
-zerosize;;tabstrc--recurs-checkyes--212-0_2
+gotoif;>tabstrc--recurs-checkyes--214-0_2
+goto;>tabstrc--recurs-checkno--214-0_2
+zerosize;;tabstrc--recurs-checkyes--214-0_2
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--212-0
+dataread1;>tabstrc--adrbuff--214-0
 adddata1;+
-datawrite1;>tabstrc--adrbuff--212-0
+datawrite1;>tabstrc--adrbuff--214-0
 
-setreg1;>tabstrc--adrbuff--212-0
+setreg1;>tabstrc--adrbuff--214-0
 
-datawrite1;>tabstrc--recurs-tabbuff--212-0_3
-dataread1;;tabstrc--recurs-tabbuff--212-0_3
-datawrite1;>tabstrc--recurs-tabbuff_read--212-0_3
-dataread1;;tabstrc--recurs-tabbuff_read--212-0_3
+datawrite1;>tabstrc--recurs-tabbuff--214-0_3
+dataread1;;tabstrc--recurs-tabbuff--214-0_3
+datawrite1;>tabstrc--recurs-tabbuff_read--214-0_3
+dataread1;;tabstrc--recurs-tabbuff_read--214-0_3
 
 setreg2;:x
 
 
-gotoif;>tabstrc--recurs-checkyes--212-0_3
-goto;>tabstrc--recurs-checkno--212-0_3
-zerosize;;tabstrc--recurs-checkyes--212-0_3
+gotoif;>tabstrc--recurs-checkyes--214-0_3
+goto;>tabstrc--recurs-checkno--214-0_3
+zerosize;;tabstrc--recurs-checkyes--214-0_3
 #recursion
 #increment pointer
-dataread1;>tabstrc--adrbuff--212-0
+dataread1;>tabstrc--adrbuff--214-0
 adddata1;+
-datawrite1;>tabstrc--adrbuff--212-0
+datawrite1;>tabstrc--adrbuff--214-0
 
-setreg1;>tabstrc--adrbuff--212-0
+setreg1;>tabstrc--adrbuff--214-0
 
-datawrite1;>tabstrc--recurs-tabbuff--212-0_4
-dataread1;;tabstrc--recurs-tabbuff--212-0_4
-datawrite1;>tabstrc--recurs-tabbuff_read--212-0_4
-dataread1;;tabstrc--recurs-tabbuff_read--212-0_4
+datawrite1;>tabstrc--recurs-tabbuff--214-0_4
+dataread1;;tabstrc--recurs-tabbuff--214-0_4
+datawrite1;>tabstrc--recurs-tabbuff_read--214-0_4
+dataread1;;tabstrc--recurs-tabbuff_read--214-0_4
 
 setreg2;:e
 
 
-gotoif;>tabstrc--recurs-checkyes--212-0_4
-goto;>tabstrc--recurs-checkno--212-0_4
-zerosize;;tabstrc--recurs-checkyes--212-0_4
+gotoif;>tabstrc--recurs-checkyes--214-0_4
+goto;>tabstrc--recurs-checkno--214-0_4
+zerosize;;tabstrc--recurs-checkyes--214-0_4
 ##set flag########
-setreg1;>tabstrc--outbuff--212-0
-datawrite1;>tabstrc--recurs-flag--212-0_4
+setreg1;>tabstrc--outbuff--214-0
+datawrite1;>tabstrc--recurs-flag--214-0_4
 setreg1;+
-datawrite1;;tabstrc--recurs-flag--212-0_4
+datawrite1;;tabstrc--recurs-flag--214-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--212-0_4
+zerosize;;tabstrc--recurs-checkno--214-0_4
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--212-0_3
+zerosize;;tabstrc--recurs-checkno--214-0_3
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--212-0_2
+zerosize;;tabstrc--recurs-checkno--214-0_2
 #recursionskip endpoint
-zerosize;;tabstrc--recurs-checkno--212-0_1
+zerosize;;tabstrc--recurs-checkno--214-0_1
 #read output to register 1 for 'set' to use.
-dataread1;>tabstrc--outbuff--212-0
+dataread1;>tabstrc--outbuff--214-0
 #######tabstrc END
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>extflg
@@ -2344,11 +2351,11 @@ zerosize;;cmd_run_send_newline--label
 #conditional flow control begin
 dataread1;>extflg
 dataread2;>$false
-gotoif;>goto--jumper-219-1
-goto;>goto--branch-219-1
-goto;>flow--con-x-6;goto--branch-219-1
+gotoif;>goto--jumper-221-1
+goto;>goto--branch-221-1
+goto;>flow--con-x-6;goto--branch-221-1
 
-zerosize;;goto--jumper-219-1
+zerosize;;goto--jumper-221-1
 zerosize;;flow--con-x-6--start
 #vdi
 fopset1;>vdi.cli.in
@@ -2387,27 +2394,27 @@ mul
 dataread2;>run_iter
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabr--adrbuff--233-0
-dataread1;;tabr--adrbuff--233-0
+datawrite1;>tabr--adrbuff--235-0
+dataread1;;tabr--adrbuff--235-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>run_s_tmp
 #conditional flow control begin
 dataread1;>run_tobuffer_flg
 dataread2;>@0
-gotoif;>goto--jumper-235-0
-goto;>goto--branch-235-0
-goto;>flow--con-x-7;goto--branch-235-0
+gotoif;>goto--jumper-237-0
+goto;>goto--branch-237-0
+goto;>flow--con-x-7;goto--branch-237-0
 
-zerosize;;goto--jumper-235-0
+zerosize;;goto--jumper-237-0
 zerosize;;flow--con-x-7--start
 #conditional flow control begin
 dataread1;>run_s_tmp
 dataread2;>:\s
-gotoif;>goto--jumper-236-1
-goto;>goto--branch-236-1
-goto;>flow--con-x-8;goto--branch-236-1
+gotoif;>goto--jumper-238-1
+goto;>goto--branch-238-1
+goto;>flow--con-x-8;goto--branch-238-1
 
-zerosize;;goto--jumper-236-1
+zerosize;;goto--jumper-238-1
 zerosize;;flow--con-x-8--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
@@ -2420,8 +2427,8 @@ zerosize;;flow--con-x-8
 #get(1) (may be used with set, or asm code)
 dataread1;>run_s_tmp
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #238-2
-iowrite1;>vdi.cli.in#SSTNPL Source Line: '238-2' 
+#_______NOTE: this corresponds to SSTNPL source line #240-2
+iowrite1;>vdi.cli.in#SSTNPL Source Line: '240-2' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -2441,11 +2448,11 @@ mul
 dataread2;>run_iter
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabr--adrbuff--246-1
-dataread1;;tabr--adrbuff--246-1
+datawrite1;>tabr--adrbuff--248-1
+dataread1;;tabr--adrbuff--248-1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #246-2
-iowrite1;>vdi.cli.in#SSTNPL Source Line: '246-2' 
+#_______NOTE: this corresponds to SSTNPL source line #248-2
+iowrite1;>vdi.cli.in#SSTNPL Source Line: '248-2' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -2458,8 +2465,8 @@ mul
 dataread2;>run_iter
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabr--adrbuff--250-0
-dataread1;;tabr--adrbuff--250-0
+datawrite1;>tabr--adrbuff--252-0
+dataread1;;tabr--adrbuff--252-0
 iowrite1;>io.ttywr
 #return from subroutine.
 s1pop1
@@ -2467,10 +2474,10 @@ gotoreg1
 #label
 zerosize;;version--label
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-254-0
+setreg1;>goto--jumper-256-0
 s1push1
 goto;>splash--label
-zerosize;;goto--jumper-254-0
+zerosize;;goto--jumper-256-0
 #Set text colors
 dataread1;>*0++---
 iowrite1;>io.textcolor
@@ -2507,44 +2514,44 @@ zerosize;;vdi--label
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #262-2
-iowrite1;>vdi.cli.status#SSTNPL Source Line: '262-2' 
+#_______NOTE: this corresponds to SSTNPL source line #264-2
+iowrite1;>vdi.cli.status#SSTNPL Source Line: '264-2' 
 #Upward range iterator
 dataread1;>@4
 datawrite1;>vdi_iter
-setreg1;>uiter-retpos-265-0;uiter-loopback-265-0
+setreg1;>uiter-retpos-267-0;uiter-loopback-267-0
 s1push1
 goto;>vdi_buffiter--label
-dataread1;>vdi_iter;uiter-retpos-265-0
+dataread1;>vdi_iter;uiter-retpos-267-0
 setreg2;10x1
 add
 datawrite1;>vdi_iter
 dataread2;>cp.itersize
-gotoifless;>uiter-loopback-265-0
-gotoif;>uiter-loopback-265-0
+gotoifless;>uiter-loopback-267-0
+gotoif;>uiter-loopback-267-0
 
 #val (used with set to change variable value during runtime.)
 setreg1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #266-2
-iowrite1;>vdi.cli.in#SSTNPL Source Line: '266-2' 
+#_______NOTE: this corresponds to SSTNPL source line #268-2
+iowrite1;>vdi.cli.in#SSTNPL Source Line: '268-2' 
 #goto 
 goto;>vdi_outloop--label
 #label
 zerosize;;vdi_outloop--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #273-0
-ioread1;>vdi.cli.out#SSTNPL Source Line: '273-0' 
+#_______NOTE: this corresponds to SSTNPL source line #275-0
+ioread1;>vdi.cli.out#SSTNPL Source Line: '275-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>vdi_vdioutput_buffer
 #conditional return
 dataread1;>vdi_vdioutput_buffer
 dataread2;>@0
-gotoif;>goto--branch-276-0
-goto;>goto--jumper-276-0
-s1pop1;;goto--branch-276-0
+gotoif;>goto--branch-278-0
+goto;>goto--jumper-278-0
+s1pop1;;goto--branch-278-0
 gotoreg1
-zerosize;;goto--jumper-276-0
+zerosize;;goto--jumper-278-0
 #Dump (character)
 dataread1;>vdi_vdioutput_buffer
 iowrite1;>io.ttywr
@@ -2641,11 +2648,11 @@ mul
 dataread2;>vdi_iter
 add
 adddata1;>cp.buffer--table
-datawrite1;>tabr--adrbuff--289-0
-dataread1;;tabr--adrbuff--289-0
+datawrite1;>tabr--adrbuff--291-0
+dataread1;;tabr--adrbuff--291-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #290-0
-iowrite1;>vdi.cli.in#SSTNPL Source Line: '290-0' 
+#_______NOTE: this corresponds to SSTNPL source line #292-0
+iowrite1;>vdi.cli.in#SSTNPL Source Line: '292-0' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -2768,10 +2775,10 @@ gotoreg1
 #label
 zerosize;;shutdown--label
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-318-0
+setreg1;>goto--jumper-320-0
 s1push1
 goto;>splash--label
-zerosize;;goto--jumper-318-0
+zerosize;;goto--jumper-320-0
 #prline
 fopwri1;:\s
 fopwri1;:i
@@ -2803,6 +2810,6 @@ fopwri1;:.
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 326-0: comprompt as cp
+#module include: line 328-0: comprompt as cp
 includeas;comprompt,cp
 #END OF FILE

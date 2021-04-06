@@ -18,7 +18,7 @@ stop
 		newline
 		gsub splash
 		textcolor *+++---
-		prline  v0.1.1 (SBTCVM Disk Operating System)
+		prline  v0.1.2 (SBTCVM Disk Operating System)
 		prline Part of SBTCVM Gen2-9
 		prline 
 		prline Copyright (c) 2018-2021 Thomas Leathers & Contributors

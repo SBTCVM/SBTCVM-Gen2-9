@@ -206,9 +206,11 @@ label invalid
 #avoid command line arguments causing false engatives.
 #DISABLED for now.
 label extcheck
-	return
-	sub cp.size,@4
+	if cp.firstspace,@-1 return
+	
+	sub cp.firstspace,@5
 	set extoffset
+	
 	tabstrc cp.buffer,extoffset,@0,.txe
 	set extflg
 	#dumpd extflg

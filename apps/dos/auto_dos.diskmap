@@ -1,4 +1,4 @@
-SBTCVM DOS v0.1.1
+SBTCVM DOS v0.1.2
 #INFO:
 #first part is source type (currently only 'trom' is valid)
 #second is entry source filename (in the same form you would use when running

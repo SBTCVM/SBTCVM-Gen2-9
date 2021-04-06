@@ -9,7 +9,7 @@ newline
 if has_tty_color,@1 gsub bigsplash
 if has_tty_color,@0 gsub bigsplash_curses
 textcolor *++0---
-prline SBTCVM-DOS v0.1.1 [ALPHA]
+prline SBTCVM-DOS v0.1.2 [ALPHA]
 prline load Command Interpreter...
 
 vdimode @1

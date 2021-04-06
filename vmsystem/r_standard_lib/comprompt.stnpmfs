@@ -1,11 +1,13 @@
 int9;size;0
 int9;itersize;0
+int9;firstspace;10x-1
 int9;shell_entry_zeroit;0
 int9;shell_entry_buff;0
 int9;shell_entry_chbuff;0
 int9;DOSEXIT;10x1
 int9;clearbuffer;10x0
 int9;max;10x80
+int9;fs_flg;0
 int9;cmdflg;0
 int9;validflg;0
 int9;skb;0
@@ -31,6 +33,8 @@ int9;@0;10x0
 int9;getentry_pad_iter;10x0
 int9;@0;10x0
 int9;getentry_pad_iter;10x0
+int9;@1;10x1
+int9;:\s;:\s
 int9;@0;10x0
 int9;@0;10x0
 int9;@0;10x0
