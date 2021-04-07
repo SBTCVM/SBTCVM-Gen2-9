@@ -53,8 +53,8 @@ tabstrc dosargs.buffer,@0,@0,/?
 
 
 if validflg,@0 gsub Errortext
-vdi rstld -1 command.txe
-stop
+gsub dos.exit
+
 
 label Errortext
 prline Please see `cpctrl /?` for usage
@@ -71,3 +71,4 @@ prline /?    : This help text
 return
 
 include dosargs as dosargs
+include doslib as dos

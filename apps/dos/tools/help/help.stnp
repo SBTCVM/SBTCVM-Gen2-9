@@ -10,8 +10,8 @@ textcolor *++0---
 {tabstrc dosargs.buffer,@0,@0,toys / set cmdflg / if cmdflg,@1 gsub toys / if cmdflg,@1 =validflg @1}
 {tabstrc dosargs.buffer,@0,@0,/? / set cmdflg / if cmdflg,@1 gsub help_help / if cmdflg,@1 =validflg @1}
 if validflg,@0 gsub Errortext
-vdi rstld -1 command.txe
-stop
+gsub dos.exit
+
 
 label Errortext
 prline Please see `help /?` for usage
@@ -72,4 +72,5 @@ label command_txe_help
 		prline shutdown     : Shutdown SBTCVM-DOS
 return
 
+include doslib as dos
 include dosargs as dosargs

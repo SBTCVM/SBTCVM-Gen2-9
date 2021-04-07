@@ -13,9 +13,7 @@ if validflg,@0 begin
 	prline Using default mode. see `vdsh /?` for more modes.
 	gsub vdi_default
 end
-vdi rstld -1 command.txe
-prline ERROR: can't find command.txe
-stop
+gsub dos.exit
 
 
 label vdi_default
@@ -68,4 +66,5 @@ label vdi_serial
 	end
 return
 
+include doslib as dos
 include dosargs as dosargs

@@ -64,64 +64,11 @@ setreg2;0
 iowrite1;>io.ttyrd
 ioread1;>io.ttyrd;keyprompt--loop-5-0
 gotoif;>keyprompt--loop-5-0
-#vdi
-fopset1;>vdi.cli.in
-fopwri1;:r
-fopwri1;:s
-fopwri1;:t
-fopwri1;:l
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:-
-fopwri1;:1
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:t
-fopwri1;:x
-fopwri1;:e
-fopwri1;:\n
-fopset1;>io.ttywr
-#prline
-fopwri1;:E
-fopwri1;:R
-fopwri1;:R
-fopwri1;:O
-fopwri1;:R
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:a
-fopwri1;:n
-fopwri1;:n
-fopwri1;:o
-fopwri1;:t
-fopwri1;:\s
-fopwri1;:l
-fopwri1;:o
-fopwri1;:a
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:t
-fopwri1;:x
-fopwri1;:e
-fopwri1;:!
-fopwri1;:\n
-#stop (shutdown vm)
-stop
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-6-0
+s1push1
+goto;>dos.exit--label
+zerosize;;goto--jumper-6-0
 #label
 zerosize;;about--label
 #Set text colors
@@ -190,10 +137,10 @@ iowrite1;>io.textcolor
 #print newline
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-19-0
+setreg1;>goto--jumper-18-0
 s1push1
 goto;>splash--label
-zerosize;;goto--jumper-19-0
+zerosize;;goto--jumper-18-0
 #Set text colors
 dataread1;>*+++---
 iowrite1;>io.textcolor
@@ -992,4 +939,6 @@ iowrite1;>io.textcolor
 #return from subroutine.
 s1pop1
 gotoreg1
+#module include: line 61-0: doslib as dos
+includeas;doslib,dos
 #END OF FILE

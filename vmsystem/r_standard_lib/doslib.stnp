@@ -1,0 +1,28 @@
+
+!stm.def(c_return_cmd, rstld 2 command.state.tri)
+!stm.def(c_init_cmd, rstld -1 command.txe)
+!stm.def(error, DOS-ERORR-)
+
+var error_halt=@1
+var quiet=@0
+label exit
+	!stm.strpn_vdi(c_return_cmd)
+	!stm.strpn_vdi(c_init_cmd)
+	if quiet,$true goto error_response
+	!stm.strp(error)
+	prline 1
+	goto error_response
+
+label init
+	!stm.strpn_vdi(c_init_cmd)
+	!stm.strpn_vdi(c_return_cmd)
+	if quiet,$true goto error_response
+	!stm.strp(error)
+	prline 2
+	goto error_response
+
+label error_response
+if error_halt,$true stop
+return
+
+include strmacro as stm

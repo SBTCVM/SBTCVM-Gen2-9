@@ -62,7 +62,11 @@ goto Main
 label QUIT
 	gamode @0
 	#this should return to DOS if available.
-	vdi rstld -1 command.txe
+	val @0
+	set dos.error_halt
+	val @1
+	set dos.quiet
+	gsub dos.exit
 	prline Shutting down...
 	stop
 
@@ -103,3 +107,4 @@ label DEMO_pixmap
 	stop
 
 include segment as seg
+include doslib as dos

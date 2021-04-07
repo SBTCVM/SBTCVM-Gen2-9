@@ -51,8 +51,7 @@ tabstrc dosargs.buffer,@0,@0,/?
 
 
 if validflg,@0 gsub Errortext
-vdi rstld -1 command.txe
-stop
+gsub dos.exit
 
 label Errortext
 prline Please see `mode /?` for usage
@@ -68,4 +67,5 @@ prline /?   : This help text
 prline /Q   : use as shown above to suppress mode change text.
 return
 
+include doslib as dos
 include dosargs as dosargs

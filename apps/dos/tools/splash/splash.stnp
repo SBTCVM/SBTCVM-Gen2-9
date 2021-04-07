@@ -11,8 +11,9 @@ keyprompt
 
 gamode @0
 
-vdi rstld -1 command.txe
+gsub dos.exit
 
 
 include plrle_noalpha as pl
 asm include;dos+media+dosfloppy.tas0;image_offset1
+include doslib as dos

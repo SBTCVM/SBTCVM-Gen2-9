@@ -1,6 +1,10 @@
 
 bprinttail1 Exit to DOS?
 gsub yn_dialog.main
+val @0
+set dos.error_halt
+val @1
+set dos.quiet
 
 if yn_dialog.answer,@0 begin
 	prline Starting desktop.app...
@@ -14,11 +18,12 @@ gamode @0
 newline
 prline Starting SBTCVM-DOS command shell... run 'bench' to return!
 prline Try to load...
-vdi rstld -1 command.txe
+gsub dos.exit
 prline Can't load, try to mount dos disk on drive 1...
 vdi dmnt1 dos
-vdi rstld -1 command.txe
+gsub dos.init
 prline ERROR! can't load SBTCVM-DOS!
 stop
 
 include bench/lib/yn_dialog as yn_dialog
+include doslib as dos

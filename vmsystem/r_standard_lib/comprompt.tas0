@@ -106,8 +106,7 @@ fopwri1;:t
 fopwri1;:l
 fopwri1;:d
 fopwri1;:\s
-fopwri1;:-
-fopwri1;:1
+fopwri1;:2
 fopwri1;:\s
 fopwri1;:c
 fopwri1;:o
@@ -117,9 +116,15 @@ fopwri1;:a
 fopwri1;:n
 fopwri1;:d
 fopwri1;:.
+fopwri1;:s
 fopwri1;:t
-fopwri1;:x
+fopwri1;:a
+fopwri1;:t
 fopwri1;:e
+fopwri1;:.
+fopwri1;:t
+fopwri1;:r
+fopwri1;:i
 fopwri1;:\n
 fopset1;>io.ttywr
 #prline

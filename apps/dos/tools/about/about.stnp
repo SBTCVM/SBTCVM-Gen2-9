@@ -3,9 +3,8 @@
 gsub about
 prline Press any key to return to SBTCVM-DOS
 keyprompt
-vdi rstld -1 command.txe
-prline ERROR cannot load command.txe!
-stop
+gsub dos.exit
+
 
 ##About Subroutine##
 	label about
@@ -59,4 +58,4 @@ label splash
 	textcolor *+++---
 return
 
-
+include doslib as dos

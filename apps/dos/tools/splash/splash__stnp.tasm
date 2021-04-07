@@ -75,33 +75,16 @@ gotoif;>keyprompt--loop-10-0
 #Set SBTGA mode
 dataread1;>@0
 iowrite1;>ga.mode
-#vdi
-fopset1;>vdi.cli.in
-fopwri1;:r
-fopwri1;:s
-fopwri1;:t
-fopwri1;:l
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:-
-fopwri1;:1
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:t
-fopwri1;:x
-fopwri1;:e
-fopwri1;:\n
-fopset1;>io.ttywr
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-14-0
+s1push1
+goto;>dos.exit--label
+zerosize;;goto--jumper-14-0
 #module include: line 17-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #18-0
 include;dos+media+dosfloppy.tas0;image_offset1#SSTNPL Source Line: '18-0' 
+#module include: line 19-0: doslib as dos
+includeas;doslib,dos
 #END OF FILE

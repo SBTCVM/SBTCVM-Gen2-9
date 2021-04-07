@@ -1,0 +1,21 @@
+int9;error_halt;10x1
+int9;quiet;10x0
+int9;$true;10x1
+int9;$true;10x1
+int9;$true;10x1
+label;c_return_cmd_STRMAC
+label;c_return_cmd_STRMAC_end
+label;c_init_cmd_STRMAC
+label;c_init_cmd_STRMAC_end
+label;error_STRMAC
+label;error_STRMAC_end
+label;exit
+label;init
+label;error_response
+macro;stm.strp_seg;{asm fopset1;>buffer.1.write.tail / gsub %0%_STRMAC / asm fopset1;>io.ttywr}
+macro;stm.def;{goto %0%_STRMAC_end / label %0%_STRMAC / print %1% / return / label %0%_STRMAC_end}
+macro;stm.strp;{gsub %0%_STRMAC}
+macro;stm.strpn_seg;{asm fopset1;>buffer.1.write.tail / gsub %0%_STRMAC / newline / asm fopset1;>io.ttywr}
+macro;stm.strp_vdi;{asm fopset1;>vdi.cli.in / gsub %0%_STRMAC / asm fopset1;>io.ttywr}
+macro;stm.strpn;{gsub %0%_STRMAC / newline}
+macro;stm.strpn_vdi;{asm fopset1;>vdi.cli.in / gsub %0%_STRMAC / newline / asm fopset1;>io.ttywr}

@@ -62,7 +62,7 @@ label stopYN
 
 label exitcode
 	if DOSEXIT,@1 begin
-		vdi rstld -1 command.txe
+		vdi rstld 2 command.state.tri
 		prline DOS NOT FOUND.
 	end
 	stop

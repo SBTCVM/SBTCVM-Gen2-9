@@ -667,32 +667,11 @@ setreg1;>goto--jumper-53-0;goto--branch-53-0
 s1push1
 goto;>Errortext--label
 zerosize;;goto--jumper-53-0
-#vdi
-fopset1;>vdi.cli.in
-fopwri1;:r
-fopwri1;:s
-fopwri1;:t
-fopwri1;:l
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:-
-fopwri1;:1
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:t
-fopwri1;:x
-fopwri1;:e
-fopwri1;:\n
-fopset1;>io.ttywr
-#stop (shutdown vm)
-stop
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-54-0
+s1push1
+goto;>dos.exit--label
+zerosize;;goto--jumper-54-0
 #label
 zerosize;;Errortext--label
 #prline
@@ -1004,6 +983,8 @@ fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
+#module include: line 70-0: doslib as dos
+includeas;doslib,dos
 #module include: line 71-0: dosargs as dosargs
 includeas;dosargs,dosargs
 #END OF FILE

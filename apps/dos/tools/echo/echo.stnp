@@ -7,9 +7,10 @@ label tail_readout
 	#exit when buffer2 is empty.
 	if tempvar,@0 begin
 		newline
-		vdi rstld -1 command.txe
+		gsub dos.exit
 	end
 	
 	chardump tempvar
 goto tail_readout
 
+include doslib as dos

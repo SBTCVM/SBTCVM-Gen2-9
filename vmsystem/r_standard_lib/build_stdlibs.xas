@@ -3,18 +3,26 @@ print;---Standard library rebuild script.---
 #standard library master build script.
 
 print;SSTNPL modules
+##very basic SSTNPL modules (some are used in other modules)
+stnp --module strmacro.stnp
+stnp --module gettriads.stnp
+stnp --module mergetriads.stnp
+
+
+##everything else
 stnp --module comprompt.stnp
 stnp --module cprle.stnp
 stnp --module plrle.stnp
 stnp --module plrle_noalpha.stnp
 stnp --module musicengine.stnp
 stnp --module segment.stnp
-stnp --module dosargs.stnp
-stnp --module gettriads.stnp
-stnp --module mergetriads.stnp
 stnp --module rgbadd.stnp
 stnp --module binrle.stnp
-stnp --module strmacro.stnp
+
+## SBTCVM-DOS SSTNPL Modules
+stnp --module doslib.stnp
+stnp --module dosargs.stnp
+
 
 #Standard namespace library
 print;standard namespace library

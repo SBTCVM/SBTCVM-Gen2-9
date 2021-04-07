@@ -329,63 +329,11 @@ s1push1
 goto;>vdi_default--label
 zerosize;;goto--jumper-14-0
 zerosize;;flow--con-x-1
-#vdi
-fopset1;>vdi.cli.in
-fopwri1;:r
-fopwri1;:s
-fopwri1;:t
-fopwri1;:l
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:-
-fopwri1;:1
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:t
-fopwri1;:x
-fopwri1;:e
-fopwri1;:\n
-fopset1;>io.ttywr
-#prline
-fopwri1;:E
-fopwri1;:R
-fopwri1;:R
-fopwri1;:O
-fopwri1;:R
-fopwri1;::
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:a
-fopwri1;:n
-fopwri1;:'
-fopwri1;:t
-fopwri1;:\s
-fopwri1;:f
-fopwri1;:i
-fopwri1;:n
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:t
-fopwri1;:x
-fopwri1;:e
-fopwri1;:\n
-#stop (shutdown vm)
-stop
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-16-0
+s1push1
+goto;>dos.exit--label
+zerosize;;goto--jumper-16-0
 #label
 zerosize;;vdi_default--label
 #prline
@@ -423,10 +371,10 @@ fopwri1;:i
 fopwri1;:)
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-23-0
+setreg1;>goto--jumper-21-0
 s1push1
 goto;>vdi_serial--label
-zerosize;;goto--jumper-23-0
+zerosize;;goto--jumper-21-0
 #vdi mode set
 dataread1;>@1
 iowrite1;>vdi.cli.status
@@ -515,10 +463,10 @@ setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>quitflg
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-32-0
+setreg1;>goto--jumper-30-0
 s1push1
 goto;>vdi_serial--label
-zerosize;;goto--jumper-32-0
+zerosize;;goto--jumper-30-0
 #vdi mode set
 dataread1;>@1
 iowrite1;>vdi.cli.status
@@ -778,11 +726,11 @@ fopwri1;:\n
 dataread1;>*+++---
 iowrite1;>io.textcolor
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #58-0
-include;vdishell.tas0#SSTNPL Source Line: '58-0' 
+#_______NOTE: this corresponds to SSTNPL source line #56-0
+include;vdishell.tas0#SSTNPL Source Line: '56-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #59-0
-dataread1;>vdiexitcode#SSTNPL Source Line: '59-0' 
+#_______NOTE: this corresponds to SSTNPL source line #57-0
+dataread1;>vdiexitcode#SSTNPL Source Line: '57-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>exitcode
 #print
@@ -815,24 +763,26 @@ fopwri1;:\n
 #conditional flow control begin
 dataread1;>exitcode
 dataread2;>@2
-gotoif;>goto--jumper-66-0
-goto;>goto--branch-66-0
-goto;>flow--con-x-2;goto--branch-66-0
+gotoif;>goto--jumper-64-0
+goto;>goto--branch-64-0
+goto;>flow--con-x-2;goto--branch-64-0
 
-zerosize;;goto--jumper-66-0
+zerosize;;goto--jumper-64-0
 zerosize;;flow--con-x-2--start
 #conditional stop
 dataread1;>quitflg
 dataread2;>@0
-gotoif;>goto--branch-67-0
-goto;>goto--jumper-67-0
-stop;;goto--branch-67-0
+gotoif;>goto--branch-65-0
+goto;>goto--jumper-65-0
+stop;;goto--branch-65-0
 
-zerosize;;goto--jumper-67-0
+zerosize;;goto--jumper-65-0
 zerosize;;flow--con-x-2
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 71-0: dosargs as dosargs
+#module include: line 69-0: doslib as dos
+includeas;doslib,dos
+#module include: line 70-0: dosargs as dosargs
 includeas;dosargs,dosargs
 #END OF FILE
