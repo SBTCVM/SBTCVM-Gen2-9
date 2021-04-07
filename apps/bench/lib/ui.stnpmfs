@@ -26,6 +26,8 @@ int9;seg.segy2;0
 int9;seg.segxBOTH;0
 int9;seg.segyBOTH;0
 int9;seg.b_tmp;0
+int9;seg.width_x2;0
+int9;seg.height_x2;0
 int9;seg.@0;10x0
 int9;seg.@1;10x1
 int9;seg.@1;10x1
@@ -82,37 +84,37 @@ int9;seg.@60;10x60
 int9;seg.:!;:!
 int9;seg.@61;10x61
 int9;seg.@0;10x0
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@1;10x1
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@2;10x2
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@3;10x3
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@4;10x4
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@5;10x5
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@6;10x6
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@7;10x7
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@8;10x8
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@9;10x9
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@10;10x10
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@11;10x11
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@12;10x12
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@13;10x13
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@14;10x14
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;seg.@15;10x15
-int9;seg.$false;10x0
+int9;seg.$true;10x1
 int9;pl.offset;0
 int9;pl.pixx;10x1
 int9;pl.pixy;10x1
@@ -132,6 +134,7 @@ int9;pl.@1;10x1
 int9;pl.@1;10x1
 int9;pl.rl_iter;10x0
 label;base_draw
+label;seg.init
 label;seg.init_pos
 label;seg.output
 label;seg.skip_alpha_lower
@@ -141,26 +144,26 @@ label;seg.end
 label;seg.skip_draw
 label;seg.newline
 label;seg.segment_draw
-label;seg.seg_1
-label;seg.seg_2
-label;seg.seg_3
-label;seg.seg_4
-label;seg.seg_5
-label;seg.seg_6
-label;seg.seg_7
-label;seg.seg_8
-label;seg.seg_9
-label;seg.seg_10
-label;seg.seg_11
-label;seg.seg_12
-label;seg.seg_13
-label;seg.seg_14
-label;seg.seg_15
-label;seg.segment_single
-label;seg.segment_single_x_twin
-label;seg.segment_single_y_twin
 label;pl.decode
 label;pl.RL_decode_mainloop
 table;seg.seg_data;16;62
 const;COLOR_hud;+++++++++
 const;COLOR_hudshadow1;+00+00+00
+macro;seg.0x2;{get1 current_x / asm iowrite1;>plot.x2}
+macro;seg.2x1;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x1}
+macro;seg.2y1;{get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y1}
+macro;seg.2y2;{get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y2}
+macro;seg.0y1;{get1 posy / asm iowrite1;>plot.y1}
+macro;seg.0y2;{get1 posy / asm iowrite1;>plot.y2}
+macro;seg.1xb;{get1 current_x / get2 width / asm add / asm iowrite1;>plot.x1 / asm iowrite1;>plot.x2}
+macro;seg.1yb;{get1 posy / get2 height / asm add / asm iowrite1;>plot.y1 / asm iowrite1;>plot.y2}
+macro;seg.0yb;{get1 posy / asm iowrite1;>plot.y1 / asm iowrite1;>plot.y2}
+macro;seg.2x2;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x2}
+macro;seg.0xb;{get1 current_x / asm iowrite1;>plot.x1 / asm iowrite1;>plot.x2}
+macro;seg.2yb;{get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y1 / asm iowrite1;>plot.y2}
+macro;seg.2xb;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x1 / asm iowrite1;>plot.x2}
+macro;seg.0x1;{get1 current_x / asm iowrite1;>plot.x1}
+macro;seg.1x2;{get1 current_x / get2 width / asm add / asm iowrite1;>plot.x2}
+macro;seg.1y1;{get1 posy / get2 height / asm add / asm iowrite1;>plot.y1}
+macro;seg.1y2;{get1 posy / get2 height / asm add / asm iowrite1;>plot.y2}
+macro;seg.1x1;{get1 current_x / get2 width / asm add / asm iowrite1;>plot.x1}

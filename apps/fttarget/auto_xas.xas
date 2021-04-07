@@ -1,6 +1,6 @@
-gfxcon -cp %xwd%/title
-gfxcon -cp %xwd%/gameover
-gfxcon -cp %xwd%/help
-gfxcon -cp %xwd%/about
-gfxcon -plrlei %xwd%/gamebg 20
+gfxcon -cp %xwd%/media/title
+gfxcon -cp %xwd%/media/gameover
+gfxcon -cp %xwd%/media/help
+gfxcon -cp %xwd%/media/about
+gfxcon -plrlei %xwd%/media/gamebg 20
 stnp %xwd%

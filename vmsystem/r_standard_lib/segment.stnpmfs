@@ -16,6 +16,8 @@ int9;segy2;0
 int9;segxBOTH;0
 int9;segyBOTH;0
 int9;b_tmp;0
+int9;width_x2;0
+int9;height_x2;0
 int9;@0;10x0
 int9;@1;10x1
 int9;@1;10x1
@@ -72,37 +74,38 @@ int9;@60;10x60
 int9;:!;:!
 int9;@61;10x61
 int9;@0;10x0
-int9;$false;10x0
+int9;$true;10x1
 int9;@1;10x1
-int9;$false;10x0
+int9;$true;10x1
 int9;@2;10x2
-int9;$false;10x0
+int9;$true;10x1
 int9;@3;10x3
-int9;$false;10x0
+int9;$true;10x1
 int9;@4;10x4
-int9;$false;10x0
+int9;$true;10x1
 int9;@5;10x5
-int9;$false;10x0
+int9;$true;10x1
 int9;@6;10x6
-int9;$false;10x0
+int9;$true;10x1
 int9;@7;10x7
-int9;$false;10x0
+int9;$true;10x1
 int9;@8;10x8
-int9;$false;10x0
+int9;$true;10x1
 int9;@9;10x9
-int9;$false;10x0
+int9;$true;10x1
 int9;@10;10x10
-int9;$false;10x0
+int9;$true;10x1
 int9;@11;10x11
-int9;$false;10x0
+int9;$true;10x1
 int9;@12;10x12
-int9;$false;10x0
+int9;$true;10x1
 int9;@13;10x13
-int9;$false;10x0
+int9;$true;10x1
 int9;@14;10x14
-int9;$false;10x0
+int9;$true;10x1
 int9;@15;10x15
-int9;$false;10x0
+int9;$true;10x1
+label;init
 label;init_pos
 label;output
 label;skip_alpha_lower
@@ -112,22 +115,22 @@ label;end
 label;skip_draw
 label;newline
 label;segment_draw
-label;seg_1
-label;seg_2
-label;seg_3
-label;seg_4
-label;seg_5
-label;seg_6
-label;seg_7
-label;seg_8
-label;seg_9
-label;seg_10
-label;seg_11
-label;seg_12
-label;seg_13
-label;seg_14
-label;seg_15
-label;segment_single
-label;segment_single_x_twin
-label;segment_single_y_twin
 table;seg_data;16;62
+macro;1xb;{get1 current_x / get2 width / asm add / asm iowrite1;>plot.x1 / asm iowrite1;>plot.x2}
+macro;0y1;{get1 posy / asm iowrite1;>plot.y1}
+macro;0y2;{get1 posy / asm iowrite1;>plot.y2}
+macro;2xb;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x1 / asm iowrite1;>plot.x2}
+macro;1y1;{get1 posy / get2 height / asm add / asm iowrite1;>plot.y1}
+macro;2yb;{get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y1 / asm iowrite1;>plot.y2}
+macro;1y2;{get1 posy / get2 height / asm add / asm iowrite1;>plot.y2}
+macro;1x2;{get1 current_x / get2 width / asm add / asm iowrite1;>plot.x2}
+macro;2y1;{get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y1}
+macro;1x1;{get1 current_x / get2 width / asm add / asm iowrite1;>plot.x1}
+macro;0x2;{get1 current_x / asm iowrite1;>plot.x2}
+macro;2x1;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x1}
+macro;0xb;{get1 current_x / asm iowrite1;>plot.x1 / asm iowrite1;>plot.x2}
+macro;0yb;{get1 posy / asm iowrite1;>plot.y1 / asm iowrite1;>plot.y2}
+macro;2x2;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x2}
+macro;2y2;{get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y2}
+macro;0x1;{get1 current_x / asm iowrite1;>plot.x1}
+macro;1yb;{get1 posy / get2 height / asm add / asm iowrite1;>plot.y1 / asm iowrite1;>plot.y2}

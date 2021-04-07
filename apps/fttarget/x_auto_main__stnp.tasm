@@ -55,7 +55,7 @@ null;10x101;@101
 zerosize;;MAIN--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #23-0
-include;fttarget/title.tas0#SSTNPL Source Line: '23-0' 
+include;fttarget/media/title.tas0#SSTNPL Source Line: '23-0' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -734,7 +734,7 @@ iowrite1;>ga.mode
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #156-0
-include;fttarget/gameover.tas0#SSTNPL Source Line: '156-0' 
+include;fttarget/media/gameover.tas0#SSTNPL Source Line: '156-0' 
 #print newline
 fopwri1;:\n
 #print
@@ -872,7 +872,7 @@ gotoreg1
 zerosize;;Help--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #231-0
-include;fttarget/help.tas0#SSTNPL Source Line: '231-0' 
+include;fttarget/media/help.tas0#SSTNPL Source Line: '231-0' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1122,7 +1122,7 @@ gotoreg1
 zerosize;;About--label
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #244-0
-include;fttarget/about.tas0#SSTNPL Source Line: '244-0' 
+include;fttarget/media/about.tas0#SSTNPL Source Line: '244-0' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -2033,5 +2033,5 @@ gotoreg1
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #285-0
-include;fttarget/gamebg.tas0;image_offset1#SSTNPL Source Line: '285-0' 
+include;fttarget/media/gamebg.tas0;image_offset1#SSTNPL Source Line: '285-0' 
 #END OF FILE

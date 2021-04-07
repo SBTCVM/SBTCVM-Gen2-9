@@ -20,7 +20,7 @@ var kb=0
 
 
 label MAIN
-asm include;fttarget/title.tas0
+asm include;fttarget/media/title.tas0
 prline Falling Ternary Targets v0.3
 prline 1: Begin Easy Game         3: Begin Hard Game
 prline 2: Begin Medium Game       4: Begin Crazy Game
@@ -153,7 +153,7 @@ label gameloop
 label gameover
 	gamode @0
 	newline
-	asm include;fttarget/gameover.tas0
+	asm include;fttarget/media/gameover.tas0
 	newline
 	print Score: 
 	dumpd score
@@ -228,7 +228,7 @@ return
 
 
 label Help
-asm include;fttarget/help.tas0
+asm include;fttarget/media/help.tas0
 prline Falling Ternary Targets - HELP
 prline -------------
 prline use mouse to move targeting triangle left or right.
@@ -241,7 +241,7 @@ newline
 return
 
 label About
-asm include;fttarget/about.tas0
+asm include;fttarget/media/about.tas0
 prline Falling Ternary Targets - v0.3 - a falling targets game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
 prline Written in SSTNPL.
@@ -282,4 +282,4 @@ return
 
 
 include plrle_noalpha as pl
-asm include;fttarget/gamebg.tas0;image_offset1
+asm include;fttarget/media/gamebg.tas0;image_offset1
