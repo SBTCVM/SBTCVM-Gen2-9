@@ -62,8 +62,7 @@ label stopYN
 
 label exitcode
 	if DOSEXIT,@1 begin
-		vdi rstld 2 command.state.tri
-		prline DOS NOT FOUND.
+		gsub dos.exit
 	end
 	stop
 
@@ -151,3 +150,5 @@ label getentry_pad
 	tabw buffer,getentry_pad_iter,@0,@0
 	
 	return
+
+include doslib as dos

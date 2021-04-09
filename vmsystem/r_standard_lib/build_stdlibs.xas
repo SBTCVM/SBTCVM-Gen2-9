@@ -3,13 +3,19 @@ print;---Standard library rebuild script.---
 #standard library master build script.
 
 print;SSTNPL modules
-##very basic SSTNPL modules (some are used in other modules)
+
+# ----very basic SSTNPL modules (some are used in other modules)----
 stnp --module strmacro.stnp
 stnp --module gettriads.stnp
 stnp --module mergetriads.stnp
 
+# ----SBTCVM-DOS SSTNPL Modules----
+#DEPENDENCY: doslib depends on strmacro
+stnp --module doslib.stnp
+stnp --module dosargs.stnp
 
-##everything else
+# ----everything else----
+#DEPENDENCY: comprompt depends on doslib
 stnp --module comprompt.stnp
 stnp --module cprle.stnp
 stnp --module plrle.stnp
@@ -19,9 +25,7 @@ stnp --module segment.stnp
 stnp --module rgbadd.stnp
 stnp --module binrle.stnp
 
-## SBTCVM-DOS SSTNPL Modules
-stnp --module doslib.stnp
-stnp --module dosargs.stnp
+
 
 
 #Standard namespace library

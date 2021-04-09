@@ -98,51 +98,11 @@ goto;>flow--con-x-1;goto--branch-64-0
 
 zerosize;;goto--jumper-64-0
 zerosize;;flow--con-x-1--start
-#vdi
-fopset1;>vdi.cli.in
-fopwri1;:r
-fopwri1;:s
-fopwri1;:t
-fopwri1;:l
-fopwri1;:d
-fopwri1;:\s
-fopwri1;:2
-fopwri1;:\s
-fopwri1;:c
-fopwri1;:o
-fopwri1;:m
-fopwri1;:m
-fopwri1;:a
-fopwri1;:n
-fopwri1;:d
-fopwri1;:.
-fopwri1;:s
-fopwri1;:t
-fopwri1;:a
-fopwri1;:t
-fopwri1;:e
-fopwri1;:.
-fopwri1;:t
-fopwri1;:r
-fopwri1;:i
-fopwri1;:\n
-fopset1;>io.ttywr
-#prline
-fopwri1;:D
-fopwri1;:O
-fopwri1;:S
-fopwri1;:\s
-fopwri1;:N
-fopwri1;:O
-fopwri1;:T
-fopwri1;:\s
-fopwri1;:F
-fopwri1;:O
-fopwri1;:U
-fopwri1;:N
-fopwri1;:D
-fopwri1;:.
-fopwri1;:\n
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-65-0
+s1push1
+goto;>dos.exit--label
+zerosize;;goto--jumper-65-0
 zerosize;;flow--con-x-1
 #stop (shutdown vm)
 stop
@@ -251,70 +211,70 @@ zerosize;;getentry_loop--label
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-84-0
-gotoif;>keyprompt--loop-84-0
+ioread1;>io.ttyrd;keyprompt--loop-83-0
+gotoif;>keyprompt--loop-83-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>shell_entry_chbuff
 #conditional goto
 dataread1;>size
 dataread2;>@0
+gotoif;>goto--branch-85-0
+goto;>goto--jumper-85-0
+setreg1;>goto--jumper-85-0;goto--branch-85-0
+goto;>shell_entry_skipnewline--label
+zerosize;;goto--jumper-85-0
+#conditional subroutine goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\n
 gotoif;>goto--branch-86-0
 goto;>goto--jumper-86-0
 setreg1;>goto--jumper-86-0;goto--branch-86-0
-goto;>shell_entry_skipnewline--label
+s1push1
+goto;>getentry_tobuff--label
 zerosize;;goto--jumper-86-0
-#conditional subroutine goto
+#conditional return
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
 gotoif;>goto--branch-87-0
 goto;>goto--jumper-87-0
-setreg1;>goto--jumper-87-0;goto--branch-87-0
-s1push1
-goto;>getentry_tobuff--label
-zerosize;;goto--jumper-87-0
-#conditional return
-dataread1;>shell_entry_chbuff
-dataread2;>:\n
-gotoif;>goto--branch-88-0
-goto;>goto--jumper-88-0
-s1pop1;;goto--branch-88-0
+s1pop1;;goto--branch-87-0
 gotoreg1
-zerosize;;goto--jumper-88-0
+zerosize;;goto--jumper-87-0
 #label
 zerosize;;shell_entry_skipnewline--label
 #conditional goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\n
-gotoif;>goto--branch-91-0
-goto;>goto--jumper-91-0
-setreg1;>goto--jumper-91-0;goto--branch-91-0
+gotoif;>goto--branch-90-0
+goto;>goto--jumper-90-0
+setreg1;>goto--jumper-90-0;goto--branch-90-0
 goto;>getentry_loop--label
-zerosize;;goto--jumper-91-0
+zerosize;;goto--jumper-90-0
 #conditional subroutine goto
+dataread1;>shell_entry_chbuff
+dataread2;>:\x
+gotoif;>goto--branch-92-0
+goto;>goto--jumper-92-0
+setreg1;>goto--jumper-92-0;goto--branch-92-0
+s1push1
+goto;>getentry_backone--label
+zerosize;;goto--jumper-92-0
+#conditional goto
 dataread1;>shell_entry_chbuff
 dataread2;>:\x
 gotoif;>goto--branch-93-0
 goto;>goto--jumper-93-0
 setreg1;>goto--jumper-93-0;goto--branch-93-0
-s1push1
-goto;>getentry_backone--label
-zerosize;;goto--jumper-93-0
-#conditional goto
-dataread1;>shell_entry_chbuff
-dataread2;>:\x
-gotoif;>goto--branch-94-0
-goto;>goto--jumper-94-0
-setreg1;>goto--jumper-94-0;goto--branch-94-0
 goto;>getentry_loop--label
-zerosize;;goto--jumper-94-0
+zerosize;;goto--jumper-93-0
 #conditional goto
 dataread1;>size
 dataread2;>max
-gotoif;>goto--branch-97-0
-goto;>goto--jumper-97-0
-setreg1;>goto--jumper-97-0;goto--branch-97-0
+gotoif;>goto--branch-96-0
+goto;>goto--jumper-96-0
+setreg1;>goto--jumper-96-0;goto--branch-96-0
 goto;>getentry_loop--label
-zerosize;;goto--jumper-97-0
+zerosize;;goto--jumper-96-0
 #Dump (character)
 dataread1;>shell_entry_chbuff
 iowrite1;>io.ttywr
@@ -335,11 +295,11 @@ zerosize;;getentry_backone--label
 #conditional return
 dataread1;>size
 dataread2;>@0
-gotoif;>goto--branch-108-0
-goto;>goto--jumper-108-0
-s1pop1;;goto--branch-108-0
+gotoif;>goto--branch-107-0
+goto;>goto--jumper-107-0
+s1pop1;;goto--branch-107-0
 gotoreg1
-zerosize;;goto--jumper-108-0
+zerosize;;goto--jumper-107-0
 #Dump (character)
 dataread1;>:\x
 iowrite1;>io.ttywr
@@ -375,52 +335,52 @@ datawrite1;>firstspace
 #Upward range iterator
 dataread1;>@0
 datawrite1;>getentry_tobuff_iter
-setreg1;>uiter-retpos-123-0;uiter-loopback-123-0
+setreg1;>uiter-retpos-122-0;uiter-loopback-122-0
 s1push1
 goto;>getentry_tobuff_loop--label
-dataread1;>getentry_tobuff_iter;uiter-retpos-123-0
+dataread1;>getentry_tobuff_iter;uiter-retpos-122-0
 setreg2;10x1
 add
 datawrite1;>getentry_tobuff_iter
 dataread2;>itersize
-gotoifless;>uiter-loopback-123-0
-gotoif;>uiter-loopback-123-0
+gotoifless;>uiter-loopback-122-0
+gotoif;>uiter-loopback-122-0
 
 #Upward range iterator
 dataread1;>size
 datawrite1;>getentry_pad_iter
-setreg1;>uiter-retpos-124-0;uiter-loopback-124-0
+setreg1;>uiter-retpos-123-0;uiter-loopback-123-0
 s1push1
 goto;>getentry_pad--label
-dataread1;>getentry_pad_iter;uiter-retpos-124-0
+dataread1;>getentry_pad_iter;uiter-retpos-123-0
 setreg2;10x1
 add
 datawrite1;>getentry_pad_iter
 dataread2;>shell_entry_zeroit
-gotoifless;>uiter-loopback-124-0
-gotoif;>uiter-loopback-124-0
+gotoifless;>uiter-loopback-123-0
+gotoif;>uiter-loopback-123-0
 
 #conditional return
 dataread1;>clearbuffer
 dataread2;>@0
-gotoif;>goto--branch-125-0
-goto;>goto--jumper-125-0
-s1pop1;;goto--branch-125-0
+gotoif;>goto--branch-124-0
+goto;>goto--jumper-124-0
+s1pop1;;goto--branch-124-0
 gotoreg1
-zerosize;;goto--jumper-125-0
+zerosize;;goto--jumper-124-0
 #Upward range iterator
 dataread1;>shell_entry_zeroit
 datawrite1;>getentry_pad_iter
-setreg1;>uiter-retpos-126-0;uiter-loopback-126-0
+setreg1;>uiter-retpos-125-0;uiter-loopback-125-0
 s1push1
 goto;>getentry_pad--label
-dataread1;>getentry_pad_iter;uiter-retpos-126-0
+dataread1;>getentry_pad_iter;uiter-retpos-125-0
 setreg2;10x1
 add
 datawrite1;>getentry_pad_iter
 dataread2;>max
-gotoifless;>uiter-loopback-126-0
-gotoif;>uiter-loopback-126-0
+gotoifless;>uiter-loopback-125-0
+gotoif;>uiter-loopback-125-0
 
 #return from subroutine.
 s1pop1
@@ -434,26 +394,26 @@ datawrite1;>shell_entry_buff
 #conditional flow control begin
 dataread1;>fs_flg
 dataread2;>@1
-gotoif;>goto--branch-133-0
-goto;>goto--jumper-133-0
-goto;>flow--con-x-2;goto--branch-133-0
+gotoif;>goto--branch-132-0
+goto;>goto--jumper-132-0
+goto;>flow--con-x-2;goto--branch-132-0
 
-zerosize;;goto--jumper-133-0
+zerosize;;goto--jumper-132-0
 zerosize;;flow--con-x-2--start
 #conditional flow control begin
 dataread1;>shell_entry_buff
 dataread2;>:\s
-gotoif;>goto--jumper-134-0
-goto;>goto--branch-134-0
-goto;>flow--con-x-3;goto--branch-134-0
+gotoif;>goto--jumper-133-0
+goto;>goto--branch-133-0
+goto;>flow--con-x-3;goto--branch-133-0
 
-zerosize;;goto--jumper-134-0
+zerosize;;goto--jumper-133-0
 zerosize;;flow--con-x-3--start
 #get(1) (may be used with set, or asm code)
 dataread1;>getentry_tobuff_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #136-0
-adddata1;10x1#SSTNPL Source Line: '136-0' 
+#_______NOTE: this corresponds to SSTNPL source line #135-0
+adddata1;10x1#SSTNPL Source Line: '135-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>firstspace
 #val (used with set to change variable value during runtime.)
@@ -469,9 +429,9 @@ mul
 dataread2;>getentry_tobuff_iter
 add
 adddata1;>buffer--table
-datawrite1;>tabw--adrbuff--146-0
+datawrite1;>tabw--adrbuff--145-0
 dataread1;>shell_entry_buff
-datawrite1;;tabw--adrbuff--146-0
+datawrite1;;tabw--adrbuff--145-0
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -484,10 +444,12 @@ mul
 dataread2;>getentry_pad_iter
 add
 adddata1;>buffer--table
-datawrite1;>tabw--adrbuff--151-0
+datawrite1;>tabw--adrbuff--150-0
 dataread1;>@0
-datawrite1;;tabw--adrbuff--151-0
+datawrite1;;tabw--adrbuff--150-0
 #return from subroutine.
 s1pop1
 gotoreg1
+#module include: line 154-0: doslib as dos
+includeas;doslib,dos
 #END OF FILE

@@ -215,8 +215,7 @@ zerosize;;tabstrc--recurs-checkyes--38-1_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--38-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--38-1
 
 setreg1;>tabstrc--adrbuff--38-1
@@ -235,8 +234,7 @@ zerosize;;tabstrc--recurs-checkyes--38-1_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--38-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--38-1
 
 setreg1;>tabstrc--adrbuff--38-1
@@ -255,8 +253,7 @@ zerosize;;tabstrc--recurs-checkyes--38-1_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--38-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--38-1
 
 setreg1;>tabstrc--adrbuff--38-1
@@ -340,8 +337,7 @@ zerosize;;tabstrc--recurs-checkyes--39-1_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--39-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--39-1
 
 setreg1;>tabstrc--adrbuff--39-1
@@ -360,8 +356,7 @@ zerosize;;tabstrc--recurs-checkyes--39-1_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--39-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--39-1
 
 setreg1;>tabstrc--adrbuff--39-1
@@ -380,8 +375,7 @@ zerosize;;tabstrc--recurs-checkyes--39-1_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--39-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--39-1
 
 setreg1;>tabstrc--adrbuff--39-1
@@ -400,8 +394,7 @@ zerosize;;tabstrc--recurs-checkyes--39-1_4
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--39-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--39-1
 
 setreg1;>tabstrc--adrbuff--39-1
@@ -487,8 +480,7 @@ zerosize;;tabstrc--recurs-checkyes--42-1_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--42-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--42-1
 
 setreg1;>tabstrc--adrbuff--42-1
@@ -507,8 +499,7 @@ zerosize;;tabstrc--recurs-checkyes--42-1_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--42-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--42-1
 
 setreg1;>tabstrc--adrbuff--42-1
@@ -527,8 +518,7 @@ zerosize;;tabstrc--recurs-checkyes--42-1_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--42-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--42-1
 
 setreg1;>tabstrc--adrbuff--42-1
@@ -603,8 +593,7 @@ zerosize;;tabstrc--recurs-checkyes--43-1_1
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--43-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--43-1
 
 setreg1;>tabstrc--adrbuff--43-1
@@ -623,8 +612,7 @@ zerosize;;tabstrc--recurs-checkyes--43-1_2
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--43-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--43-1
 
 setreg1;>tabstrc--adrbuff--43-1
@@ -643,8 +631,7 @@ zerosize;;tabstrc--recurs-checkyes--43-1_3
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--43-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--43-1
 
 setreg1;>tabstrc--adrbuff--43-1
@@ -663,8 +650,7 @@ zerosize;;tabstrc--recurs-checkyes--43-1_4
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--43-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--43-1
 
 setreg1;>tabstrc--adrbuff--43-1
@@ -683,8 +669,7 @@ zerosize;;tabstrc--recurs-checkyes--43-1_5
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--43-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--43-1
 
 setreg1;>tabstrc--adrbuff--43-1
@@ -703,8 +688,7 @@ zerosize;;tabstrc--recurs-checkyes--43-1_6
 #recursion
 #increment pointer
 dataread1;>tabstrc--adrbuff--43-1
-setreg2;+
-add
+adddata1;+
 datawrite1;>tabstrc--adrbuff--43-1
 
 setreg1;>tabstrc--adrbuff--43-1

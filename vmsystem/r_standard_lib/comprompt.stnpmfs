@@ -38,6 +38,11 @@ int9;:\s;:\s
 int9;@0;10x0
 int9;@0;10x0
 int9;@0;10x0
+int9;dos.error_halt;10x1
+int9;dos.quiet;10x0
+int9;dos.$true;10x1
+int9;dos.$true;10x1
+int9;dos.$true;10x1
 label;stopYN
 label;stopYN_loop
 label;exitcode
@@ -48,9 +53,25 @@ label;getentry_backone
 label;getentry_tobuff
 label;getentry_tobuff_loop
 label;getentry_pad
+label;dos.c_return_cmd_STRMAC
+label;dos.c_return_cmd_STRMAC_end
+label;dos.c_init_cmd_STRMAC
+label;dos.c_init_cmd_STRMAC_end
+label;dos.error_STRMAC
+label;dos.error_STRMAC_end
+label;dos.exit
+label;dos.init
+label;dos.error_response
 table;buffer;85;1
-macro;cmd_stop_YN;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %mod%stopYN / if %mod%cmdflg,@1 =%mod%validflg @1}
-macro;cmd_else;{ifnot %mod%validflg,@1 gsub %0%}
+macro;dos.stm.strpn_vdi;{asm fopset1;>vdi.cli.in / gsub %0%_STRMAC / newline / asm fopset1;>io.ttywr}
+macro;dos.stm.strpn_seg;{asm fopset1;>buffer.1.write.tail / gsub %0%_STRMAC / newline / asm fopset1;>io.ttywr}
+macro;dos.stm.strp_vdi;{asm fopset1;>vdi.cli.in / gsub %0%_STRMAC / asm fopset1;>io.ttywr}
+macro;dos.stm.def;{goto %0%_STRMAC_end / label %0%_STRMAC / print %1% / return / label %0%_STRMAC_end}
 macro;cmd_get;{val @0 / set %mod%validflg / set %mod%cmdflg / gsub %mod%getentry / newline}
 macro;cmd;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %1% / if %mod%cmdflg,@1 =%mod%validflg @1}
 macro;cmd_stop;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 goto %mod%exitcode}
+macro;cmd_stop_YN;{tabstrc %mod%buffer,@0,@0,%0% / set %mod%cmdflg / if %mod%cmdflg,@1 gsub %mod%stopYN / if %mod%cmdflg,@1 =%mod%validflg @1}
+macro;dos.stm.strp;{gsub %0%_STRMAC}
+macro;cmd_else;{ifnot %mod%validflg,@1 gsub %0%}
+macro;dos.stm.strp_seg;{asm fopset1;>buffer.1.write.tail / gsub %0%_STRMAC / asm fopset1;>io.ttywr}
+macro;dos.stm.strpn;{gsub %0%_STRMAC / newline}
