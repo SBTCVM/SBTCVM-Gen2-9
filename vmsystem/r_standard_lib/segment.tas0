@@ -1515,9 +1515,8 @@ zerosize;;segment_draw--label
 dataread1;>color_on
 iowrite1;>plot.color
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@0
 add
 adddata1;>seg_data--table
@@ -1566,9 +1565,8 @@ iowrite1;>plot.y1#SSTNPL Source Line: '269-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-2
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@1
 add
 adddata1;>seg_data--table
@@ -1612,9 +1610,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '278-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-3
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@2
 add
 adddata1;>seg_data--table
@@ -1658,9 +1655,8 @@ iowrite1;>plot.x2#SSTNPL Source Line: '288-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-4
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@3
 add
 adddata1;>seg_data--table
@@ -1709,9 +1705,8 @@ iowrite1;>plot.x2#SSTNPL Source Line: '298-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-5
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@4
 add
 adddata1;>seg_data--table
@@ -1760,9 +1755,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '308-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-6
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@5
 add
 adddata1;>seg_data--table
@@ -1816,9 +1810,8 @@ iowrite1;>plot.y1#SSTNPL Source Line: '318-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-7
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@6
 add
 adddata1;>seg_data--table
@@ -1872,9 +1865,8 @@ iowrite1;>plot.x2#SSTNPL Source Line: '328-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-8
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@7
 add
 adddata1;>seg_data--table
@@ -1923,9 +1915,8 @@ iowrite1;>plot.x2#SSTNPL Source Line: '338-2'
 iowrite1;>plot.line
 zerosize;;flow--con-x-9
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@8
 add
 adddata1;>seg_data--table
@@ -1976,9 +1967,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '349-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-10
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@9
 add
 adddata1;>seg_data--table
@@ -2027,9 +2017,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '359-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-11
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@10
 add
 adddata1;>seg_data--table
@@ -2085,9 +2074,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '370-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-12
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@11
 add
 adddata1;>seg_data--table
@@ -2141,9 +2129,8 @@ iowrite1;>plot.x2#SSTNPL Source Line: '380-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-13
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@12
 add
 adddata1;>seg_data--table
@@ -2204,9 +2191,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '391-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-14
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@13
 add
 adddata1;>seg_data--table
@@ -2260,9 +2246,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '401-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-15
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@14
 add
 adddata1;>seg_data--table
@@ -2318,9 +2303,8 @@ iowrite1;>plot.y2#SSTNPL Source Line: '412-4'
 iowrite1;>plot.line
 zerosize;;flow--con-x-16
 #SSTNPL table read instruction.
-setreg1;10x16
-dataread2;>offset
-mul
+dataread1;>offset
+muldata1;10x16
 dataread2;>@15
 add
 adddata1;>seg_data--table

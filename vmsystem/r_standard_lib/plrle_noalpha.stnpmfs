@@ -11,10 +11,11 @@ int9;draw_pixx;0
 int9;draw_pixy;0
 int9;px;0
 int9;py;0
+int9;rl_iter;0
 int9;@1;10x1
 int9;@1;10x1
 int9;@1;10x1
 int9;@1;10x1
-int9;rl_iter;10x0
 label;decode
+label;iter_return
 label;RL_decode_mainloop

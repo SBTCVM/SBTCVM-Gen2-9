@@ -1,4 +1,4 @@
-#SSTNPL COMPILER v0.3.0
+#SSTNPL COMPILER v0.4.0
 #header
 head-rname=stnptable2
 head-nspin=stdnsp
@@ -9,15 +9,13 @@ null;0;vb0
 null;0;vb1
 null;10x0;@0
 #SSTNPL table read instruction.
-setreg1;10x2
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x2
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>sam2--table
-datawrite1;>tabr--adrbuff--13
-dataread1;;tabr--adrbuff--13
+datawrite1;>tabr--adrbuff--13-0
+dataread1;;tabr--adrbuff--13-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>vb0
 #Dump (decimal)
@@ -31,15 +29,13 @@ iowrite1;>io.ttywr
 #print newline
 fopwri1;:\n
 #SSTNPL table read instruction.
-setreg1;10x2
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x2
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>sam2--table
-datawrite1;>tabr--adrbuff--20
-instread1;;tabr--adrbuff--20
+datawrite1;>tabr--adrbuff--20-0
+instread1;;tabr--adrbuff--20-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>vb1
 #Dump (decimal)
@@ -53,37 +49,31 @@ iowrite1;>io.ttywr
 #print newline
 fopwri1;:\n
 #SSTNPL table write instruction.
-setreg1;10x2
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x2
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>sam2--table
-datawrite1;>tabw--adrbuff--27
+datawrite1;>tabw--adrbuff--27-0
 dataread1;>vb0
-instwrite1;;tabw--adrbuff--27
+instwrite1;;tabw--adrbuff--27-0
 #SSTNPL table write instruction.
-setreg1;10x2
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x2
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>sam2--table
-datawrite1;>tabw--adrbuff--28
+datawrite1;>tabw--adrbuff--28-0
 dataread1;>vb1
-datawrite1;;tabw--adrbuff--28
+datawrite1;;tabw--adrbuff--28-0
 #SSTNPL table read instruction.
-setreg1;10x2
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x2
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>sam2--table
-datawrite1;>tabr--adrbuff--30
-dataread1;;tabr--adrbuff--30
+datawrite1;>tabr--adrbuff--30-0
+dataread1;;tabr--adrbuff--30-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>vb0
 #Dump (decimal)
@@ -97,15 +87,13 @@ iowrite1;>io.ttywr
 #print newline
 fopwri1;:\n
 #SSTNPL table read instruction.
-setreg1;10x2
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x2
 dataread2;>@0
 add
-adddata1;10x1
 adddata1;>sam2--table
-datawrite1;>tabr--adrbuff--38
-instread1;;tabr--adrbuff--38
+datawrite1;>tabr--adrbuff--38-0
+instread1;;tabr--adrbuff--38-0
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>vb1
 #Dump (decimal)
@@ -121,7 +109,7 @@ fopwri1;:\n
 #stop (shutdown vm)
 stop
 #table width=2, height=4
-null;;sam2--table
+zerosize;;sam2--table
 #tdat
 raw;10x1,:a
 raw;10x2,:b

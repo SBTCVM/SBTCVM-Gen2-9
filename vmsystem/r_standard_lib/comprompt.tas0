@@ -423,9 +423,8 @@ datawrite1;>fs_flg
 zerosize;;flow--con-x-3
 zerosize;;flow--con-x-2
 #SSTNPL table write instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>getentry_tobuff_iter
 add
 adddata1;>buffer--table
@@ -438,9 +437,8 @@ gotoreg1
 #label
 zerosize;;getentry_pad--label
 #SSTNPL table write instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>getentry_pad_iter
 add
 adddata1;>buffer--table

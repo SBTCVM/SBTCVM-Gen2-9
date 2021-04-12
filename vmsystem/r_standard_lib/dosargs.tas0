@@ -237,9 +237,8 @@ s2pop1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>shell_entry_buff
 #SSTNPL table write instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>getentry_tobuff_iter
 add
 adddata1;>buffer--table
@@ -252,9 +251,8 @@ gotoreg1
 #label
 zerosize;;getentry_pad--label
 #SSTNPL table write instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>getentry_pad_iter
 add
 adddata1;>buffer--table

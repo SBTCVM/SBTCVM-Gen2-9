@@ -24,6 +24,7 @@ var draw_pixx=0
 var draw_pixy=0
 var px=0
 var py=0
+var rl_iter=0
 
 label decode
 	get posx
@@ -58,7 +59,19 @@ label decode
 	set RL_pointer
 	
 	#iterate decoder loop over data
-	uiter rl_iter,RL_decode_mainloop,RL_pointer,RL_SIZE
+	#uiter rl_iter,RL_decode_mainloop,RL_pointer,RL_SIZE
+	get RL_pointer
+	set rl_iter
+	asm zerosize;;iter_loopback
+	
+	goto RL_decode_mainloop
+	label iter_return
+	get1 rl_iter
+	asm adddata1;10x1
+	set1 rl_iter
+	get2 RL_SIZE
+	asm gotoifless;>iter_loopback
+	asm gotoif;>iter_loopback
 	
 
 return
@@ -86,7 +99,7 @@ label RL_decode_mainloop
 	drawcolor RL_data
 	#uiter RL_ilvar,RL_printlooop,@0,RL_loopcount
 	gsub RL_printBAR
-	return
+	goto iter_return
 
 label RL_newline
 	add py,pixy
@@ -97,7 +110,7 @@ label RL_newline
 	set px
 	#drawx1 px
 	asm iowrite1;>plot.x1
-return
+goto iter_return
 
 var RL_BARWIDE=0
 var RL_BARWIDEDRAW=0

@@ -20,8 +20,8 @@ null;0;draw_pixx
 null;0;draw_pixy
 null;0;px
 null;0;py
+null;0;rl_iter
 null;10x1;@1
-null;10x0;rl_iter
 null;10x-1;@-1
 null;0;RL_BARWIDE
 null;0;RL_BARWIDEDRAW
@@ -71,11 +71,11 @@ datawrite1;>RL_pointer
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #51-0
-datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '51-0' 
-#___RAW ASSEMBLY CODE___
 #_______NOTE: this corresponds to SSTNPL source line #52-0
-dataread1;;RL_GET_SIZE#SSTNPL Source Line: '52-0' 
+datawrite1;>RL_GET_SIZE#SSTNPL Source Line: '52-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #53-0
+dataread1;;RL_GET_SIZE#SSTNPL Source Line: '53-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_SIZE
 #subtract (2op math)
@@ -90,20 +90,32 @@ dataread2;>@1
 add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_pointer
-#Upward range iterator
+#get(1) (may be used with set, or asm code)
 dataread1;>RL_pointer
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>rl_iter
-setreg1;>uiter-retpos-61-0;uiter-loopback-61-0
-s1push1
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #65-0
+zerosize;;iter_loopback#SSTNPL Source Line: '65-0' 
+#goto 
 goto;>RL_decode_mainloop--label
-dataread1;>rl_iter;uiter-retpos-61-0
-setreg2;10x1
-add
+#label
+zerosize;;iter_return--label
+#get(1) (may be used with set, or asm code)
+dataread1;>rl_iter
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #70-0
+adddata1;10x1#SSTNPL Source Line: '70-0' 
+#set(1) (used after 2-op math, asm code, or get)
 datawrite1;>rl_iter
+#get2 (may be used with set2, and asm code.)
 dataread2;>RL_SIZE
-gotoifless;>uiter-loopback-61-0
-gotoif;>uiter-loopback-61-0
-
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #73-0
+gotoifless;>iter_loopback#SSTNPL Source Line: '73-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #74-0
+gotoif;>iter_loopback#SSTNPL Source Line: '74-0' 
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -112,40 +124,39 @@ zerosize;;RL_decode_mainloop--label
 #get(1) (may be used with set, or asm code)
 dataread1;>rl_iter
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #71-0
-datawrite1;>RL_GET_DATA#SSTNPL Source Line: '71-0' 
+#_______NOTE: this corresponds to SSTNPL source line #84-0
+datawrite1;>RL_GET_DATA#SSTNPL Source Line: '84-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #72-0
-datawrite1;>RL_GET_LEN#SSTNPL Source Line: '72-0' 
+#_______NOTE: this corresponds to SSTNPL source line #85-0
+datawrite1;>RL_GET_LEN#SSTNPL Source Line: '85-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #75-0
-instread1;;RL_GET_LEN#SSTNPL Source Line: '75-0' 
+#_______NOTE: this corresponds to SSTNPL source line #88-0
+instread1;;RL_GET_LEN#SSTNPL Source Line: '88-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_loopcount
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #79-0
-dataread1;;RL_GET_DATA#SSTNPL Source Line: '79-0' 
+#_______NOTE: this corresponds to SSTNPL source line #92-0
+dataread1;;RL_GET_DATA#SSTNPL Source Line: '92-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_data
 #conditional goto
 dataread1;>RL_loopcount
 dataread2;>@-1
-gotoif;>goto--branch-83-0
-goto;>goto--jumper-83-0
-setreg1;>goto--jumper-83-0;goto--branch-83-0
+gotoif;>goto--branch-96-0
+goto;>goto--jumper-96-0
+setreg1;>goto--jumper-96-0;goto--branch-96-0
 goto;>RL_newline--label
-zerosize;;goto--jumper-83-0
+zerosize;;goto--jumper-96-0
 #plotter draw line
 dataread1;>RL_data
 iowrite1;>plot.color
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-88-0
+setreg1;>goto--jumper-101-0
 s1push1
 goto;>RL_printBAR--label
-zerosize;;goto--jumper-88-0
-#return from subroutine.
-s1pop1
-gotoreg1
+zerosize;;goto--jumper-101-0
+#goto 
+goto;>iter_return--label
 #label
 zerosize;;RL_newline--label
 #add (2op math)
@@ -155,58 +166,57 @@ add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>py
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #95-0
-iowrite1;>plot.y1#SSTNPL Source Line: '95-0' 
+#_______NOTE: this corresponds to SSTNPL source line #108-0
+iowrite1;>plot.y1#SSTNPL Source Line: '108-0' 
 #get(1) (may be used with set, or asm code)
 dataread1;>posx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>px
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #99-0
-iowrite1;>plot.x1#SSTNPL Source Line: '99-0' 
-#return from subroutine.
-s1pop1
-gotoreg1
+#_______NOTE: this corresponds to SSTNPL source line #112-0
+iowrite1;>plot.x1#SSTNPL Source Line: '112-0' 
+#goto 
+goto;>iter_return--label
 #label
 zerosize;;RL_printBAR--label
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_loopcount
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #111-0
-adddata1;10x1#SSTNPL Source Line: '111-0' 
+#_______NOTE: this corresponds to SSTNPL source line #124-0
+adddata1;10x1#SSTNPL Source Line: '124-0' 
 #get2 (may be used with set2, and asm code.)
 dataread2;>pixx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #113-0
-mul#SSTNPL Source Line: '113-0' 
+#_______NOTE: this corresponds to SSTNPL source line #126-0
+mul#SSTNPL Source Line: '126-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>RL_BARWIDE
 #conditional goto
 dataread1;>do_trans
 dataread2;>@0
-gotoif;>goto--branch-118-0
-goto;>goto--jumper-118-0
-setreg1;>goto--jumper-118-0;goto--branch-118-0
+gotoif;>goto--branch-131-0
+goto;>goto--jumper-131-0
+setreg1;>goto--jumper-131-0;goto--branch-131-0
 goto;>no_trans--label
-zerosize;;goto--jumper-118-0
+zerosize;;goto--jumper-131-0
 #conditional goto
 dataread1;>RL_data
 dataread2;>transkey
-gotoif;>goto--branch-119-0
-goto;>goto--jumper-119-0
-setreg1;>goto--jumper-119-0;goto--branch-119-0
+gotoif;>goto--branch-132-0
+goto;>goto--jumper-132-0
+setreg1;>goto--jumper-132-0;goto--branch-132-0
 goto;>yes_trans--label
-zerosize;;goto--jumper-119-0
+zerosize;;goto--jumper-132-0
 #label
 zerosize;;no_trans--label
 #get(1) (may be used with set, or asm code)
 dataread1;>RL_BARWIDE
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #124-0
-adddata1;10x1#SSTNPL Source Line: '124-0' 
+#_______NOTE: this corresponds to SSTNPL source line #137-0
+adddata1;10x1#SSTNPL Source Line: '137-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #126-0
-iowrite1;>plot.width#SSTNPL Source Line: '126-0' 
+#_______NOTE: this corresponds to SSTNPL source line #139-0
+iowrite1;>plot.width#SSTNPL Source Line: '139-0' 
 #plotter draw rect
 iowrite1;>plot.rect
 #label
@@ -218,8 +228,8 @@ add
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>px
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #134-0
-iowrite1;>plot.x1#SSTNPL Source Line: '134-0' 
+#_______NOTE: this corresponds to SSTNPL source line #147-0
+iowrite1;>plot.x1#SSTNPL Source Line: '147-0' 
 #return from subroutine.
 s1pop1
 gotoreg1

@@ -128,11 +128,11 @@ int9;pl.draw_pixx;0
 int9;pl.draw_pixy;0
 int9;pl.px;0
 int9;pl.py;0
+int9;pl.rl_iter;0
 int9;pl.@1;10x1
 int9;pl.@1;10x1
 int9;pl.@1;10x1
 int9;pl.@1;10x1
-int9;pl.rl_iter;10x0
 label;base_draw
 label;seg.init
 label;seg.init_pos
@@ -145,6 +145,7 @@ label;seg.skip_draw
 label;seg.newline
 label;seg.segment_draw
 label;pl.decode
+label;pl.iter_return
 label;pl.RL_decode_mainloop
 table;seg.seg_data;16;62
 const;COLOR_hud;+++++++++

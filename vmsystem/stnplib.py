@@ -793,9 +793,8 @@ class in_tabr:
 		else:
 			readop="dataread1"
 		destobj.write('''#SSTNPL table read instruction.
-setreg1;10x''' + str(tabvar.vdata[0]) + '''
-dataread2;>''' + yv + '''
-mul
+dataread1;>''' + yv + '''
+muldata1;10x''' + str(tabvar.vdata[0]) + '''
 dataread2;>''' + xv + '''
 add
 adddata1;>''' + tname + '''--table
@@ -862,9 +861,8 @@ class in_tabw:
 		else:
 			writeop="datawrite1"
 		destobj.write('''#SSTNPL table write instruction.
-setreg1;10x''' + str(tabvar.vdata[0]) + '''
-dataread2;>''' + yv + '''
-mul
+dataread1;>''' + yv + '''
+muldata1;10x''' + str(tabvar.vdata[0]) + '''
 dataread2;>''' + xv + '''
 add
 adddata1;>''' + tname + '''--table

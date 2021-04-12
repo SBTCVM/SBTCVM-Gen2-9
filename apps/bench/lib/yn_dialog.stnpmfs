@@ -30,11 +30,11 @@ int9;pl.draw_pixx;0
 int9;pl.draw_pixy;0
 int9;pl.px;0
 int9;pl.py;0
+int9;pl.rl_iter;0
 int9;pl.@1;10x1
 int9;pl.@1;10x1
 int9;pl.@1;10x1
 int9;pl.@1;10x1
-int9;pl.rl_iter;10x0
 int9;seg.posx;0
 int9;seg.posy;0
 int9;seg.height;10x8
@@ -164,6 +164,7 @@ int9;common.@-1;10x-1
 int9;common.@1;10x1
 label;main
 label;pl.decode
+label;pl.iter_return
 label;pl.RL_decode_mainloop
 label;seg.init
 label;seg.init_pos
