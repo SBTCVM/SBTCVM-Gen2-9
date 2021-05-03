@@ -1,0 +1,6 @@
+rom0=vmconf_test/boot.trom
+rom1=vmconf_test/sbtga_cocpu.trom
+name=VMCONF TEST: This is a test of the vmconf machine config system.
+vdi0=dos
+vdi1=bench
+cocpu_halt=False

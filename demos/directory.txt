@@ -83,8 +83,11 @@ comppack:
 ----Plotter----
 
 music_plrle:
-	Another tritmao demo, but with a twist: it also plays back a music 
+	Another tritmap demo, but with a twist: it also plays back a music 
 	track using the 3.25Khz CoCPU (coprocessor) [nocurses][sound]
+	
+	(side note: this also shows off some of the functions of the .vmconf
+	feature of SBTCVM, see docs for more details.
 
 tritmap:
 	A 243x243 PLRLE tritmap example. (a basic 9-trit RGB, per-line

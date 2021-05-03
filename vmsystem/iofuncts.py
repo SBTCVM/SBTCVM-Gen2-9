@@ -26,11 +26,16 @@ class logit:
 
 # Config File Helper
 
-def cfg_load(filename, defaults, bool_names, int_names, display_name):
+def cfg_load(filename, defaults, bool_names, int_names, display_name, use_raw_filename=False):
 	cfg_dict=defaults.copy()
 	try:
-		fileobj=open(os.path.join(*["vmuser", "CFG", filename]), "r")
-		fileobj.seek(0)
+		if use_raw_filename==True:
+			fileobj=open((filename), "r")
+			fileobj.seek(0)
+		else:
+			
+			fileobj=open(os.path.join(*["vmuser", "CFG", filename]), "r")
+			fileobj.seek(0)
 		for f in fileobj:
 			f=f.replace("\n", "")
 			if not f.startswith("#") and "=" in f:

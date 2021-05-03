@@ -57,7 +57,9 @@ class cocpu:
 		
 		self.clcnt=0.0
 		self.starttime=None
+		
 		self.cocpu_hlt=1
+		
 		self.powoff_flg=0
 		self.iosys1=iosys1
 		self.iosys2=iosys2
@@ -80,6 +82,8 @@ class cocpu:
 		
 		iosys2.setreadoverride(1000, self.io_cocpu_getstate)
 		self.ishalted=1
+	def engage_on_start(self):
+		self.cocpu_hlt=2
 	def io_reset(self, addr, data):
 		self.cocpu_hlt=2
 		self.cpusys.softreset(cocpu=1)

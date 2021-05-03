@@ -1,9 +1,7 @@
-newline
-prline Begin CoCPU startup....
 
-vdi garstld -1 sbtga_cocpu.txe
-val @0
-asm iowrite1;>cocpu.status
+prline Begin CoCPU startup....
+#val @0
+#asm iowrite1;>cocpu.status
 
 gamode @30
 

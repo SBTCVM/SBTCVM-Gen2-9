@@ -1,0 +1,6 @@
+#image program
+rom0=music_plrle/boot.trom
+#music program
+rom1=music_plrle/sbtga_cocpu.trom
+#enable cocpu on startup.
+cocpu_halt=False

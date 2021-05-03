@@ -1,0 +1,53 @@
+
+
+
+#prline Begin CoCPU startup....
+
+#vdi garstld -1 sbtga_cocpu.txe
+
+#val @0
+#asm iowrite1;>cocpu.status
+
+var tmp=0
+var cocpu_state=0
+
+gsub test1
+
+vdi gamembak 2 sbtga.tri
+vdi garstld 2 sbtga.tri
+
+gsub test1
+
+prline ensure disks were loaded.
+
+
+asm include;vdishell.tas0
+
+prline press any key to exit
+keyprompt
+stop
+
+label test1
+	val @0
+	asm iowrite1;>cocpu.status
+	set cocpu_state
+	while cocpu_state,@0
+		
+		
+		asm ioread1;>cocpu.status
+		set cocpu_state
+		
+	end
+	
+	loop
+		asm ioread1;>cross.io.1
+		set tmp
+		ifnot tmp,@0 begin
+			dumpd tmp
+			newline
+		end
+		if tmp,@0 break
+	end
+return
+
+

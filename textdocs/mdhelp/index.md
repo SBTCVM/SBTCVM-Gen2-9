@@ -17,6 +17,7 @@ This is the main index for SBTCVM Gen 2-9's Markdown-based help.
 
 - [XAS shell/script help](xas.md) - SBTCVM's integrated build script system and interactive shell.
 - [XAS shell/script command reference](xas_com.md)
+- [VMCONF Files](vmconf.md) - Customize VM startup parameters per-program. Read XAS help first!
 
 ### Other Devices
 - [SBTCVM Mouse](mouse.md) - SBTCVM's official mouse device. (not supported by curses!)

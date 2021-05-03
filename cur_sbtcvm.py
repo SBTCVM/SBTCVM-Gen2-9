@@ -18,6 +18,7 @@ import vmsystem.SBTVDI_IO_G2x_9 as vdi
 import vmsystem.SND_G2x_9 as snd
 import vmsystem.tdisk1lib as td1
 import vmsystem.iofuncts as iofuncts
+import vmsystem.libvmconf as vmconf
 import time
 import sys
 import curses
@@ -123,28 +124,48 @@ else:
 		print("Notice: somewhat buggy, incomplete. pygame frontend HIGHLY recommended.")
 		
 		diska=None
-		diskfile=iofuncts.findtrom(romfile, ext=".tdsk1", exitonfail=0, dirauto=1)
-		if diskfile!=None:
-			retval=td1.loaddisk(diskfile, readonly=0)
-			if not isinstance(retval, str):
-				diska=retval
-				romfile='VDIBOOT'
+		diskb=None
+		garom=None
+		cocpuhalt=True
+		if vmconf.check_has_vmconf(romfile):
+			cfg_dict=vmconf.load_vmconf(romfile)
+			romfile=iofuncts.findtrom(cfg_dict["rom0"], ext=".trom", exitonfail=1, dirauto=1)
+			if cfg_dict["rom1"]!=None:
+				garom=iofuncts.findtrom(cfg_dict["rom1"], ext=".trom", exitonfail=1, dirauto=1)
+			if cfg_dict["vdi0"]!=None:
+				diska=td1.loaddisk(iofuncts.findtrom(cfg_dict["vdi0"], ext=".tdsk1", exitonfail=1, dirauto=1))
+			if cfg_dict["vdi1"]!=None:
+				diskb=td1.loaddisk(iofuncts.findtrom(cfg_dict["vdi1"], ext=".tdsk1", exitonfail=1, dirauto=1))
 			
-		
+			#if cfg_dict["name"]!=None:
+			#	windowprefix=cfg_dict["name"]
+			if cfg_dict["cocpu_halt"]!=None:
+				cocpuhalt=cfg_dict["cocpu_halt"]
+			
+		else:
+			diskfile=iofuncts.findtrom(romfile, ext=".tdsk1", exitonfail=0, dirauto=1)
+			if diskfile!=None:
+				retval=td1.loaddisk(diskfile, readonly=0)
+				windowprefix=retval.label
+				if not isinstance(retval, str):
+					diska=retval
+					romfile='VDIBOOT'
+				
 		#initialize memory subsystem
 		memsys=vmsystem.MEM_G2x_9.memory(romfile)
 		#initialize IO subsystem
 		iosys=vmsystem.IO_G2x_9.io()
 		
 		cpusys=vmsystem.CPU_G2x_9.cpu(memsys, iosys)
-		memsys2=vmsystem.MEM_G2x_9.memory(None, mem_id=1, ignore_trom=1)
+		memsys2=vmsystem.MEM_G2x_9.memory(garom, mem_id=1)
 		iosys2=vmsystem.IO_G2x_9.io(io_id=1)
 		cpusys2=vmsystem.CPU_G2x_9.cpu(memsys2, iosys2, cpu_id=1)
 		cocpu=ccpu.cocpu_setup(cpusys2, iosys, iosys2, memsys2, targtime, targspeed)
+		
 		devcommon.factorydevs(iosys)
 		devcommon.factorydevs(iosys2)
 		#init SBTVDI interface.
-		vdi.sbtvdi(iosys, cpusys, memsys, cocpu, iosys2, cpusys2, memsys2, diska=diska)
+		vdi.sbtvdi(iosys, cpusys, memsys, cocpu, iosys2, cpusys2, memsys2, diska=diska, diskb=diskb)
 		progrun=1
 		
 		#start sound system
@@ -179,6 +200,9 @@ else:
 		ttywin.refresh()
 		statwin.redrawwin()
 		statwin.refresh()
+		
+		if cocpuhalt==False:
+			cocpu.engage_on_start()
 		#main loop
 		clcnt=0.0
 		starttime=time.time()

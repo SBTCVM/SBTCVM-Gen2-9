@@ -8,13 +8,13 @@ import sys
 #this is SBTCVM Gen 2's Memory bus subsystem.
 
 class memory:
-	def __init__(self, trom, mem_id=0, ignore_trom=0):
+	def __init__(self, trom, mem_id=0):
 		self.trom=trom
 		self.INSTDICT={}
 		self.DATDICT={}
 		linecnt=libbaltcalc.mni(9)
 		print("MEM" + str(mem_id) + ": Ram subsystem initializing...")
-		if not ignore_trom:
+		if not trom==None:
 			TROMFILE=iofuncts.loadtrom(trom, dirauto=1)
 			for rmline in TROMFILE:
 				rmline=rmline.replace("\n", "").split(",")
