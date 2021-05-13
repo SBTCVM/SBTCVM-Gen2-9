@@ -17,11 +17,11 @@ end
 gamode @0
 newline
 prline Starting SBTCVM-DOS command shell... run 'bench' to return!
-prline Try to load...
+#prline Try to load...
 gsub dos.exit
-prline Can't load, try to mount dos disk on drive 1...
-vdi dmnt1 dos
-gsub dos.init
+#prline Can't load, try to mount dos disk on drive 1...
+#vdi dmnt1 dos
+#gsub dos.init
 prline ERROR! can't load SBTCVM-DOS!
 stop
 

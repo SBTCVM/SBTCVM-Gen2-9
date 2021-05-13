@@ -33,6 +33,8 @@ bench:
 	SBTCVM BENCH: A single-tasking, mouse-driven GUI 'Desktop' running
 	in SBTCVM's Plotter mode. makes heavy use of SBTVDI. can launch into
 	SBTCVM-DOS automatically.
+	
+	Special Note: Requires SBTCVM DOS! (loads 'dos' into SBTVDI Drive 1)
 	[plotter],[nocurses],[mouse]
 
 showcase:
