@@ -1,4 +1,4 @@
-def def {goto %0%_STRMAC_end / label %0%_STRMAC / print %1% / return / label %0%_STRMAC_end}
+def def {ignore / label %0%_STRMAC / print %1% / return / end}
 
 def strp {gsub %0%_STRMAC}
 def strpn {gsub %0%_STRMAC / newline}

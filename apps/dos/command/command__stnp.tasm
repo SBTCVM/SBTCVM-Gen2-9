@@ -2016,9 +2016,8 @@ goto;>flow--con-x-4;goto--branch-170-0
 zerosize;;goto--jumper-170-0
 zerosize;;flow--con-x-4--start
 #SSTNPL table read instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>@1
 add
 adddata1;>cp.buffer--table
@@ -2388,9 +2387,8 @@ gotoreg1
 #label
 zerosize;;run_send_char_exec--label
 #SSTNPL table read instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>run_iter
 add
 adddata1;>cp.buffer--table
@@ -2442,9 +2440,8 @@ gotoreg1
 #label
 zerosize;;run_send_char--label
 #SSTNPL table read instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>run_iter
 add
 adddata1;>cp.buffer--table
@@ -2459,9 +2456,8 @@ gotoreg1
 #label
 zerosize;;pattern_print_char--label
 #SSTNPL table read instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>run_iter
 add
 adddata1;>cp.buffer--table
@@ -2642,9 +2638,8 @@ gotoreg1
 #label
 zerosize;;vdi_buffiter--label
 #SSTNPL table read instruction.
-setreg1;10x85
-dataread2;>@0
-mul
+dataread1;>@0
+muldata1;10x85
 dataread2;>vdi_iter
 add
 adddata1;>cp.buffer--table

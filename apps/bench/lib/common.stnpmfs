@@ -9,8 +9,12 @@ int9;mouse_line;+++++++++
 int9;mx;0
 int9;my;0
 int9;locktmp;0
+int9;px;0
+int9;py;0
 int9;@-2;10x-2
 int9;@-1;10x-1
+int9;@2;10x2
+int9;@4;10x4
 int9;@0;10x0
 int9;@0;10x0
 int9;@0;10x0

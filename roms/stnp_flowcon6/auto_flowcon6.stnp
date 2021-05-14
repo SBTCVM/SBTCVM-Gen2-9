@@ -1,0 +1,22 @@
+
+
+
+#VERY basic `ignore` block test.
+
+
+ignore
+	label ignore_test
+		prline You should NOT see this twice!
+		return
+end
+
+ignore
+	
+	gsub ignore_test
+	
+end
+gsub ignore_test
+prline Done. press key to exit.
+keyprompt
+stop
+

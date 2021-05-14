@@ -236,6 +236,24 @@ Command documentation:
 		end
 		stop
 
+--ignore blocks:
+	
+	Ignore blocks do just that, `ignore` (aka skip over) sections of code not 
+	meant to be executed in-line in a larger routine.\
+	
+	`end` statement is REQUIRED.
+	
+	DO NOT use with `break` or `top` statements, as this is NOT SUPPORTED.
+		(the above DOES NOT include usage in blocks nested WITHIN `ignore` blocks!)
+	
+	--example:
+	
+		ignore
+			label my_subroutine
+				prline do something.
+			return
+		end
+
 --for loops:
 		NOTE: like conditional 'begin' statements, an 'end' statement is REQUIRED.
 		NOTE: 'break' will break from loop. 

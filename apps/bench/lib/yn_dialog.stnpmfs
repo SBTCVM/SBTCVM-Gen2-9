@@ -153,8 +153,12 @@ int9;common.mouse_line;+++++++++
 int9;common.mx;0
 int9;common.my;0
 int9;common.locktmp;0
+int9;common.px;0
+int9;common.py;0
 int9;common.@-2;10x-2
 int9;common.@-1;10x-1
+int9;common.@2;10x2
+int9;common.@4;10x4
 int9;common.@0;10x0
 int9;common.@0;10x0
 int9;common.@0;10x0

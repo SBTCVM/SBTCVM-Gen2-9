@@ -142,6 +142,23 @@ zerosize;;''' + fcon_loopback() + "\n")
 		
 		return
 
+class in_fcon_ignore:
+	def __init__(self):
+		self.keywords=["ignore"]
+	def p0(self, args, keyword, lineno):
+		return 0, None
+	def p1(self, args, keyword, lineno):
+		return []
+	def p2(self, args, keyword, lineno, nvars, valid_nvars, labels, tables):
+		fsyntax_begin(lineno, keyword)
+		fsyntax_break(lineno, keyword)
+		return 0, None
+	def p3(self, args, keyword, lineno, nvars, valid_nvars, labels, tables, destobj):
+		blockname=fcon_begin(loop=False)
+		destobj.write('''#ignore block
+zerosize;;''' + fcon_loopback() + "\n")
+		destobj.write("goto;>" + fcon_break() + "\n")
+		return
 
 class in_fcon_begin:
 	def __init__(self):
@@ -2388,6 +2405,7 @@ class mainloop:
 		in_fcon_end(),
 		in_fcon_loop(),
 		in_fcon_begin(),
+		in_fcon_ignore(),
 		in_fcon_top(),
 		in_for(),
 		in_condgoto(["if"], "gotoif", condmode=0),#conditionals

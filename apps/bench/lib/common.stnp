@@ -57,6 +57,8 @@ var mouse_line=*+++++++++
 var mx=0
 var my=0
 var locktmp=0
+var px=0
+var py=0
 
 label mouse_cursor
 	drawselect @-2
@@ -67,10 +69,15 @@ label mouse_cursor
 	asm iowrite1;>plot.x1
 	asm iowrite1;>plot.x2
 	
+	asm setreg2;10x2
+	asm add2
+	set2 px
+	
 	asm setreg2;10x6
 	asm add2
 	asm iowrite2;>plot.x3
 	set2 mx
+	
 	###Y###
 	asm ioread1;>mouse.realy
 	asm iowrite1;>plot.y1
@@ -85,6 +92,7 @@ label mouse_cursor
 	
 	asm iowrite2;>plot.y3
 	set2 my
+	set2 py
 	drawtri
 	
 	drawcolor mouse_line
@@ -93,6 +101,13 @@ label mouse_cursor
 	drawx2 mx
 	drawy2 my
 	drawline
+	
+	drawcolor mouse_color
+	drawx1 px
+	drawy1 py
+	drawwidth @2
+	drawheight @4
+	drawrect
 	
 	drawcopy @0
 	drawselect @0

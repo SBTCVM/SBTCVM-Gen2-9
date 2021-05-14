@@ -8,8 +8,9 @@ fopset2;>io.packart
 null;10x1;error_halt
 null;10x0;quiet
 null;10x1;$true
-#goto 
-goto;>c_return_cmd_STRMAC_end--label
+#ignore block
+zerosize;;flow--con-x-1--start
+goto;>flow--con-x-1
 #label
 zerosize;;c_return_cmd_STRMAC--label
 #print
@@ -41,10 +42,10 @@ fopwri1;:i
 #return from subroutine.
 s1pop1
 gotoreg1
-#label
-zerosize;;c_return_cmd_STRMAC_end--label
-#goto 
-goto;>c_init_cmd_STRMAC_end--label
+zerosize;;flow--con-x-1
+#ignore block
+zerosize;;flow--con-x-2--start
+goto;>flow--con-x-2
 #label
 zerosize;;c_init_cmd_STRMAC--label
 #print
@@ -71,10 +72,10 @@ fopwri1;:e
 #return from subroutine.
 s1pop1
 gotoreg1
-#label
-zerosize;;c_init_cmd_STRMAC_end--label
-#goto 
-goto;>error_STRMAC_end--label
+zerosize;;flow--con-x-2
+#ignore block
+zerosize;;flow--con-x-3--start
+goto;>flow--con-x-3
 #label
 zerosize;;error_STRMAC--label
 #print
@@ -91,8 +92,7 @@ fopwri1;:-
 #return from subroutine.
 s1pop1
 gotoreg1
-#label
-zerosize;;error_STRMAC_end--label
+zerosize;;flow--con-x-3
 #label
 zerosize;;exit--label
 #___RAW ASSEMBLY CODE___
