@@ -5,7 +5,10 @@ stnp --module bench/lib/common.stnp
 stnp --module bench/lib/ui.stnp
 stnp --module bench/lib/yn_dialog.stnp
 
+stnp --module bench/lib/sndkern_lib.stnp
 
 xas bench/bench/bench.xas
+
+xas bench/sys/sys.xas
 
 diskedit --new bench

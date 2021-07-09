@@ -10,8 +10,8 @@ null;10x1;@1
 null;:v;:v
 null;:0;$common.DESK_MAIN_VERS
 null;:.;:.
-null;:2;$common.DESK_SUB_VERS
-null;:1;$common.DESK_MIN_VERS
+null;:3;$common.DESK_SUB_VERS
+null;:0;$common.DESK_MIN_VERS
 null;10x0;@0
 #plotter buffer blit
 dataread1;>@13

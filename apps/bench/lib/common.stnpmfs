@@ -1,9 +1,9 @@
 int9;:v;:v
 int9;$DESK_MAIN_VERS;:0
 int9;:.;:.
-int9;$DESK_SUB_VERS;:2
+int9;$DESK_SUB_VERS;:3
 int9;:.;:.
-int9;$DESK_MIN_VERS;:1
+int9;$DESK_MIN_VERS;:0
 int9;mouse_color;---------
 int9;mouse_line;+++++++++
 int9;mx;0
@@ -22,11 +22,10 @@ int9;btnbuff;0
 int9;@0;10x0
 int9;@-1;10x-1
 int9;@1;10x1
-label;tune
 label;print_version
 label;mouse_cursor
 label;flock
 label;mouse_wait
-const;DESK_SUB_VERS;:2
-const;DESK_MIN_VERS;:1
+const;DESK_SUB_VERS;:3
+const;DESK_MIN_VERS;:0
 const;DESK_MAIN_VERS;:0

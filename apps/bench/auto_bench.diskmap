@@ -1,7 +1,8 @@
-SBTCVM Bench v0.2.1
+SBTCVM Bench v0.3.0
 trom;bench/bench/desktop2.trom;desktop.app
 trom;bench/bench/boot.trom;boot.txe
 trom;bench/bench/boot.trom;bench.txe
 trom;bench/bench/info.trom;info.app
 trom;bench/bench/dos.trom;dos.app
 trom;bench/bench/credits.trom;credits.app
+trom;bench/sys/sndkern.trom;sndkern.tri

@@ -13,7 +13,9 @@ var isbackup=0
 if isbackup,@0 begin
 	val @1
 	set isbackup
-	gsub common.tune
+	##moved to sndkern
+	#gsub common.tune
+	!sklib.sk_startup()
 	gsub draw_desktop
 	drawcopy @12
 	drawcopy @-1
@@ -136,6 +138,7 @@ return
 include bench/lib/common as common
 include bench/lib/ui as ui
 include plrle_noalpha as pl
+include bench/lib/sndkern_lib as sklib
 asm include;bench/media/info.tas0;ICON_info
 asm include;bench/media/dos.tas0;ICON_dos
 asm include;bench/media/credits_icn.tas0;ICON_credits

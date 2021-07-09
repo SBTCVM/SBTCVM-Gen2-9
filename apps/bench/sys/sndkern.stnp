@@ -1,0 +1,97 @@
+#concurrent sound effects kernel for SBTCVM Bench. v1.*
+
+
+
+
+var cb=@0
+
+
+
+loop
+	asm ioread1;>cross.io.1
+	set cb
+	if cb,$sklib.snd_notify gsub notify
+	if cb,$sklib.snd_startup gsub startup
+	if cb,$sklib.kern_quit begin
+		#poweroff (i.e. exit to SBTCVM-DOS)
+		val @1
+		asm iowrite1;>cocpu.status
+	end
+end
+
+label notify
+	get1 @0
+	asm iowrite1;>snd.1.wave
+	get1 $sklib.notify_tone
+	asm iowrite1;>snd.1.freq
+	asm iowrite1;>snd.1.play
+	waitcy 150
+	val @9
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @8
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @7
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @6
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @5
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @4
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @3
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @2
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	val @1
+	asm iowrite1;>snd.1.vol
+	waitcy 150
+	asm iowrite1;>snd.1.stop
+	val @10
+	asm iowrite1;>snd.1.vol
+return
+
+
+label startup
+	#soundchip param setup
+	val @220
+	asm iowrite1;>snd.1.freq
+	val @277
+	asm iowrite1;>snd.2.freq
+	val @330
+	asm iowrite1;>snd.3.freq
+	val @2
+	asm iowrite1;>snd.1.wave
+	asm iowrite1;>snd.2.wave
+	asm iowrite1;>snd.3.wave
+	val @5
+	asm iowrite1;>snd.1.vol
+	asm iowrite1;>snd.2.vol
+	asm iowrite1;>snd.3.vol
+	val @-1
+	asm iowrite1;>snd.1.pan
+	val @0
+	asm iowrite1;>snd.2.pan
+	val @1
+	asm iowrite1;>snd.3.pan
+	#play startup tune.
+	asm iowrite1;>snd.1.play
+	waitcy 600
+	asm iowrite1;>snd.2.play
+	waitcy 600
+	asm iowrite1;>snd.3.play
+	waitcy 5000
+	
+	asm iowrite1;>snd.1.stop
+	asm iowrite1;>snd.2.stop
+	asm iowrite1;>snd.3.stop
+return
+
+include bench/lib/sndkern_lib as sklib

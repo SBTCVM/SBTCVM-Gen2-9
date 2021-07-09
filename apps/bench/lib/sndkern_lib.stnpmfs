@@ -1,0 +1,7 @@
+const;snd_startup;10x1
+const;snd_notify;10x2
+const;notify_tone;10x440
+const;kern_quit;10x-1
+macro;sk_notify;{get1 $%mod%snd_notify / asm iowrite1;>cross.io.1}
+macro;sk_quit;{get1 $%mod%kern_quit / asm iowrite1;>cross.io.1}
+macro;sk_startup;{get1 $%mod%snd_startup / asm iowrite1;>cross.io.1}

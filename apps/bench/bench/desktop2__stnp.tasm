@@ -11,6 +11,7 @@ null;10x1;actflg
 null;0;btnbuff
 null;0;isbackup
 null;10x0;@0
+null;10x1;$sklib.snd_startup
 null;10x12;@12
 null;10x-1;@-1
 null;10x1;@1
@@ -34,16 +35,16 @@ zerosize;;flow--con-x-1--start
 setreg1;10x1
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>isbackup
+#get(1) (may be used with set, or asm code)
+dataread1;>$sklib.snd_startup
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #18-2
+iowrite1;>cross.io.1#SSTNPL Source Line: '18-2' 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-16-0
-s1push1
-goto;>common.tune--label
-zerosize;;goto--jumper-16-0
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-17-0
+setreg1;>goto--jumper-19-0
 s1push1
 goto;>draw_desktop--label
-zerosize;;goto--jumper-17-0
+zerosize;;goto--jumper-19-0
 #plotter buffer copy
 dataread1;>@12
 iowrite1;>plot.copy
@@ -60,11 +61,11 @@ zerosize;;flowloop--con-x-2--start
 #conditional flow control begin
 dataread1;>actflg
 dataread2;>@1
-gotoif;>goto--jumper-26-0
-goto;>goto--branch-26-0
-goto;>flow--con-x-3;goto--branch-26-0
+gotoif;>goto--jumper-28-0
+goto;>goto--branch-28-0
+goto;>flow--con-x-3;goto--branch-28-0
 
-zerosize;;goto--jumper-26-0
+zerosize;;goto--jumper-28-0
 zerosize;;flow--con-x-3--start
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
@@ -85,124 +86,124 @@ datawrite1;>btnbuff
 null;;flowloop--con-x-4--start
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--branch-34-0
-goto;>goto--jumper-34-0
-goto;>flowloop--con-x-4;goto--branch-34-0
-zerosize;;goto--jumper-34-0
+gotoif;>goto--branch-36-0
+goto;>goto--jumper-36-0
+goto;>flowloop--con-x-4;goto--branch-36-0
+zerosize;;goto--jumper-36-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #36-0
-ioread1;>mouse.button#SSTNPL Source Line: '36-0' 
+#_______NOTE: this corresponds to SSTNPL source line #38-0
+ioread1;>mouse.button#SSTNPL Source Line: '38-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-38-0
+setreg1;>goto--jumper-40-0
 s1push1
 goto;>common.mouse_cursor--label
-zerosize;;goto--jumper-38-0
+zerosize;;goto--jumper-40-0
 goto;>flowloop--con-x-4--start
 zerosize;;flowloop--con-x-4
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #44-0
-ioread1;>mouse.lockx#SSTNPL Source Line: '44-0' 
+#_______NOTE: this corresponds to SSTNPL source line #46-0
+ioread1;>mouse.lockx#SSTNPL Source Line: '46-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>xbuff
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #46-0
-ioread1;>mouse.locky#SSTNPL Source Line: '46-0' 
+#_______NOTE: this corresponds to SSTNPL source line #48-0
+ioread1;>mouse.locky#SSTNPL Source Line: '48-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>ybuff
 #conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-90
-gotoifmore;>goto--halfstep-48-0
-gotoif;>goto--halfstep-48-0
-goto;>goto--branch-48-0
-dataread1;>ybuff;goto--halfstep-48-0
+gotoifmore;>goto--halfstep-50-0
+gotoif;>goto--halfstep-50-0
+goto;>goto--branch-50-0
+dataread1;>ybuff;goto--halfstep-50-0
 dataread2;>@-63
-gotoifless;>goto--jumper-48-0
-gotoif;>goto--jumper-48-0
-goto;>goto--branch-48-0
-goto;>flow--con-x-5;goto--branch-48-0
+gotoifless;>goto--jumper-50-0
+gotoif;>goto--jumper-50-0
+goto;>goto--branch-50-0
+goto;>flow--con-x-5;goto--branch-50-0
 
-zerosize;;goto--jumper-48-0
+zerosize;;goto--jumper-50-0
 zerosize;;flow--con-x-5--start
 #conditional subroutine goto
 dataread1;>xbuff
 dataread2;>@-120
-gotoifmore;>goto--halfstep-51-0
-gotoif;>goto--halfstep-51-0
-goto;>goto--jumper-51-0
-dataread1;>xbuff;goto--halfstep-51-0
+gotoifmore;>goto--halfstep-53-0
+gotoif;>goto--halfstep-53-0
+goto;>goto--jumper-53-0
+dataread1;>xbuff;goto--halfstep-53-0
 dataread2;>@-93
-gotoifless;>goto--branch-51-0
-gotoif;>goto--branch-51-0
-goto;>goto--jumper-51-0
-setreg1;>goto--jumper-51-0;goto--branch-51-0
+gotoifless;>goto--branch-53-0
+gotoif;>goto--branch-53-0
+goto;>goto--jumper-53-0
+setreg1;>goto--jumper-53-0;goto--branch-53-0
 s1push1
 goto;>info--label
-zerosize;;goto--jumper-51-0
+zerosize;;goto--jumper-53-0
 zerosize;;flow--con-x-5
 #conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-58
-gotoifmore;>goto--halfstep-54-0
-gotoif;>goto--halfstep-54-0
-goto;>goto--branch-54-0
-dataread1;>ybuff;goto--halfstep-54-0
+gotoifmore;>goto--halfstep-56-0
+gotoif;>goto--halfstep-56-0
+goto;>goto--branch-56-0
+dataread1;>ybuff;goto--halfstep-56-0
 dataread2;>@-32
-gotoifless;>goto--jumper-54-0
-gotoif;>goto--jumper-54-0
-goto;>goto--branch-54-0
-goto;>flow--con-x-6;goto--branch-54-0
+gotoifless;>goto--jumper-56-0
+gotoif;>goto--jumper-56-0
+goto;>goto--branch-56-0
+goto;>flow--con-x-6;goto--branch-56-0
 
-zerosize;;goto--jumper-54-0
+zerosize;;goto--jumper-56-0
 zerosize;;flow--con-x-6--start
 #conditional subroutine goto
 dataread1;>xbuff
 dataread2;>@-120
-gotoifmore;>goto--halfstep-57-0
-gotoif;>goto--halfstep-57-0
-goto;>goto--jumper-57-0
-dataread1;>xbuff;goto--halfstep-57-0
+gotoifmore;>goto--halfstep-59-0
+gotoif;>goto--halfstep-59-0
+goto;>goto--jumper-59-0
+dataread1;>xbuff;goto--halfstep-59-0
 dataread2;>@-93
-gotoifless;>goto--branch-57-0
-gotoif;>goto--branch-57-0
-goto;>goto--jumper-57-0
-setreg1;>goto--jumper-57-0;goto--branch-57-0
+gotoifless;>goto--branch-59-0
+gotoif;>goto--branch-59-0
+goto;>goto--jumper-59-0
+setreg1;>goto--jumper-59-0;goto--branch-59-0
 s1push1
 goto;>dos--label
-zerosize;;goto--jumper-57-0
+zerosize;;goto--jumper-59-0
 zerosize;;flow--con-x-6
 #conditional flow control begin
 dataread1;>ybuff
 dataread2;>@-26
-gotoifmore;>goto--halfstep-60-0
-gotoif;>goto--halfstep-60-0
-goto;>goto--branch-60-0
-dataread1;>ybuff;goto--halfstep-60-0
+gotoifmore;>goto--halfstep-62-0
+gotoif;>goto--halfstep-62-0
+goto;>goto--branch-62-0
+dataread1;>ybuff;goto--halfstep-62-0
 dataread2;>@1
-gotoifless;>goto--jumper-60-0
-gotoif;>goto--jumper-60-0
-goto;>goto--branch-60-0
-goto;>flow--con-x-7;goto--branch-60-0
+gotoifless;>goto--jumper-62-0
+gotoif;>goto--jumper-62-0
+goto;>goto--branch-62-0
+goto;>flow--con-x-7;goto--branch-62-0
 
-zerosize;;goto--jumper-60-0
+zerosize;;goto--jumper-62-0
 zerosize;;flow--con-x-7--start
 #conditional subroutine goto
 dataread1;>xbuff
 dataread2;>@-120
-gotoifmore;>goto--halfstep-63-0
-gotoif;>goto--halfstep-63-0
-goto;>goto--jumper-63-0
-dataread1;>xbuff;goto--halfstep-63-0
+gotoifmore;>goto--halfstep-65-0
+gotoif;>goto--halfstep-65-0
+goto;>goto--jumper-65-0
+dataread1;>xbuff;goto--halfstep-65-0
 dataread2;>@-93
-gotoifless;>goto--branch-63-0
-gotoif;>goto--branch-63-0
-goto;>goto--jumper-63-0
-setreg1;>goto--jumper-63-0;goto--branch-63-0
+gotoifless;>goto--branch-65-0
+gotoif;>goto--branch-65-0
+goto;>goto--jumper-65-0
+setreg1;>goto--jumper-65-0;goto--branch-65-0
 s1push1
 goto;>credits--label
-zerosize;;goto--jumper-63-0
+zerosize;;goto--jumper-65-0
 zerosize;;flow--con-x-7
 goto;>flowloop--con-x-2--start
 zerosize;;flowloop--con-x-2
@@ -231,10 +232,10 @@ fopwri1;:.
 fopwri1;:.
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-73-0
+setreg1;>goto--jumper-75-0
 s1push1
 goto;>backup_self--label
-zerosize;;goto--jumper-73-0
+zerosize;;goto--jumper-75-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -311,10 +312,10 @@ fopwri1;:.
 fopwri1;:.
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-80-0
+setreg1;>goto--jumper-82-0
 s1push1
 goto;>backup_self--label
-zerosize;;goto--jumper-80-0
+zerosize;;goto--jumper-82-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -393,10 +394,10 @@ fopwri1;:.
 fopwri1;:.
 fopwri1;:\n
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-87-0
+setreg1;>goto--jumper-89-0
 s1push1
 goto;>backup_self--label
-zerosize;;goto--jumper-87-0
+zerosize;;goto--jumper-89-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -503,10 +504,10 @@ fopwri1;:P
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-99-0
+setreg1;>goto--jumper-101-0
 s1push1
 goto;>ui.base_draw--label
-zerosize;;goto--jumper-99-0
+zerosize;;goto--jumper-101-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -524,59 +525,61 @@ setreg1;10x-90
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #114-0
-setreg1;>ICON_info#SSTNPL Source Line: '114-0' 
+#_______NOTE: this corresponds to SSTNPL source line #116-0
+setreg1;>ICON_info#SSTNPL Source Line: '116-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-116-0
+setreg1;>goto--jumper-118-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-116-0
+zerosize;;goto--jumper-118-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x-58
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #121-0
-setreg1;>ICON_dos#SSTNPL Source Line: '121-0' 
+#_______NOTE: this corresponds to SSTNPL source line #123-0
+setreg1;>ICON_dos#SSTNPL Source Line: '123-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-123-0
+setreg1;>goto--jumper-125-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-123-0
+zerosize;;goto--jumper-125-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x-26
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #128-0
-setreg1;>ICON_credits#SSTNPL Source Line: '128-0' 
+#_______NOTE: this corresponds to SSTNPL source line #130-0
+setreg1;>ICON_credits#SSTNPL Source Line: '130-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-130-0
+setreg1;>goto--jumper-132-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-130-0
+zerosize;;goto--jumper-132-0
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 136-0: bench/lib/common as common
+#module include: line 138-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 137-0: bench/lib/ui as ui
+#module include: line 139-0: bench/lib/ui as ui
 includeas;bench/lib/ui,ui
-#module include: line 138-0: plrle_noalpha as pl
+#module include: line 140-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
+#module include: line 141-0: bench/lib/sndkern_lib as sklib
+includeas;bench/lib/sndkern_lib,sklib
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #139-0
-include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '139-0' 
+#_______NOTE: this corresponds to SSTNPL source line #142-0
+include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '142-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #140-0
-include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '140-0' 
+#_______NOTE: this corresponds to SSTNPL source line #143-0
+include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '143-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #141-0
-include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '141-0' 
+#_______NOTE: this corresponds to SSTNPL source line #144-0
+include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '144-0' 
 #END OF FILE

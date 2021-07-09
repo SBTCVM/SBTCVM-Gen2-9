@@ -145,9 +145,9 @@ int9;seg.$true;10x1
 int9;common.:v;:v
 int9;common.$DESK_MAIN_VERS;:0
 int9;common.:.;:.
-int9;common.$DESK_SUB_VERS;:2
+int9;common.$DESK_SUB_VERS;:3
 int9;common.:.;:.
-int9;common.$DESK_MIN_VERS;:1
+int9;common.$DESK_MIN_VERS;:0
 int9;common.mouse_color;---------
 int9;common.mouse_line;+++++++++
 int9;common.mx;0
@@ -180,14 +180,13 @@ label;seg.end
 label;seg.skip_draw
 label;seg.newline
 label;seg.segment_draw
-label;common.tune
 label;common.print_version
 label;common.mouse_cursor
 label;common.flock
 label;common.mouse_wait
 table;seg.seg_data;16;62
-const;common.DESK_SUB_VERS;:2
-const;common.DESK_MIN_VERS;:1
+const;common.DESK_SUB_VERS;:3
+const;common.DESK_MIN_VERS;:0
 const;common.DESK_MAIN_VERS;:0
 macro;seg.0x2;{get1 current_x / asm iowrite1;>plot.x2}
 macro;seg.2x1;{get1 current_x / get2 width_x2 / asm add / asm iowrite1;>plot.x1}

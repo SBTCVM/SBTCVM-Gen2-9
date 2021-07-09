@@ -1,44 +1,10 @@
 #SBTCVM DESK common functions
 
 const DESK_MAIN_VERS=:0
-const DESK_SUB_VERS=:2
-const DESK_MIN_VERS=:1
+const DESK_SUB_VERS=:3
+const DESK_MIN_VERS=:0
 
 
-label tune
-	#soundchip param setup
-	val @220
-	asm iowrite1;>snd.1.freq
-	val @277
-	asm iowrite1;>snd.2.freq
-	val @330
-	asm iowrite1;>snd.3.freq
-	val @2
-	asm iowrite1;>snd.1.wave
-	asm iowrite1;>snd.2.wave
-	asm iowrite1;>snd.3.wave
-	val @5
-	asm iowrite1;>snd.1.vol
-	asm iowrite1;>snd.2.vol
-	asm iowrite1;>snd.3.vol
-	val @-1
-	asm iowrite1;>snd.1.pan
-	val @0
-	asm iowrite1;>snd.2.pan
-	val @1
-	asm iowrite1;>snd.3.pan
-	#play startup tune.
-	asm iowrite1;>snd.1.play
-	waitcy 1000
-	asm iowrite1;>snd.2.play
-	waitcy 1000
-	asm iowrite1;>snd.3.play
-	waitcy 8000
-	
-	asm iowrite1;>snd.1.stop
-	asm iowrite1;>snd.2.stop
-	asm iowrite1;>snd.3.stop
-return
 
 
 

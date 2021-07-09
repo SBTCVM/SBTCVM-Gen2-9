@@ -1,0 +1,8 @@
+const snd_notify=@2
+const kern_quit=@-1
+const notify_tone=@440
+const snd_startup=@1
+
+def sk_quit {get1 $%mod%kern_quit / asm iowrite1;>cross.io.1}
+def sk_notify {get1 $%mod%snd_notify / asm iowrite1;>cross.io.1}
+def sk_startup {get1 $%mod%snd_startup / asm iowrite1;>cross.io.1}

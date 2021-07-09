@@ -1,6 +1,10 @@
 print SBTCVM BENCH 
 gsub common.print_version
 prline  bootup...
+prline Starting sndkern.tri...
+vdi garstld -1 sndkern.tri
+get1 @0
+asm iowrite1;>cocpu.status
 prline Starting desktop.app...
 gamode @30
 

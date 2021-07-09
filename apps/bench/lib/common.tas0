@@ -8,8 +8,8 @@ fopset2;>io.packart
 null;:v;:v
 null;:0;$DESK_MAIN_VERS
 null;:.;:.
-null;:2;$DESK_SUB_VERS
-null;:1;$DESK_MIN_VERS
+null;:3;$DESK_SUB_VERS
+null;:0;$DESK_MIN_VERS
 null;---------;mouse_color
 null;+++++++++;mouse_line
 null;0;mx
@@ -24,111 +24,6 @@ null;10x4;@4
 null;10x0;@0
 null;0;btnbuff
 null;10x1;@1
-#label
-zerosize;;tune--label
-#val (used with set to change variable value during runtime.)
-setreg1;10x220
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #11-0
-iowrite1;>snd.1.freq#SSTNPL Source Line: '11-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x277
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #13-0
-iowrite1;>snd.2.freq#SSTNPL Source Line: '13-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x330
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #15-0
-iowrite1;>snd.3.freq#SSTNPL Source Line: '15-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x2
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #17-0
-iowrite1;>snd.1.wave#SSTNPL Source Line: '17-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #18-0
-iowrite1;>snd.2.wave#SSTNPL Source Line: '18-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #19-0
-iowrite1;>snd.3.wave#SSTNPL Source Line: '19-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x5
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #21-0
-iowrite1;>snd.1.vol#SSTNPL Source Line: '21-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #22-0
-iowrite1;>snd.2.vol#SSTNPL Source Line: '22-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #23-0
-iowrite1;>snd.3.vol#SSTNPL Source Line: '23-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x-1
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #25-0
-iowrite1;>snd.1.pan#SSTNPL Source Line: '25-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x0
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #27-0
-iowrite1;>snd.2.pan#SSTNPL Source Line: '27-0' 
-#val (used with set to change variable value during runtime.)
-setreg1;10x1
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #29-0
-iowrite1;>snd.3.pan#SSTNPL Source Line: '29-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #31-0
-iowrite1;>snd.1.play#SSTNPL Source Line: '31-0' 
-#Wait loop
-setreg1;0
-datawrite1;>waitcy-loopback-32-0
-setreg1;0;waitcy-loopback-32-0
-setreg2;10x1
-add
-datawrite1;>waitcy-loopback-32-0
-setreg2;10x166
-gotoifless;>waitcy-loopback-32-0
-
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #33-0
-iowrite1;>snd.2.play#SSTNPL Source Line: '33-0' 
-#Wait loop
-setreg1;0
-datawrite1;>waitcy-loopback-34-0
-setreg1;0;waitcy-loopback-34-0
-setreg2;10x1
-add
-datawrite1;>waitcy-loopback-34-0
-setreg2;10x166
-gotoifless;>waitcy-loopback-34-0
-
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #35-0
-iowrite1;>snd.3.play#SSTNPL Source Line: '35-0' 
-#Wait loop
-setreg1;0
-datawrite1;>waitcy-loopback-36-0
-setreg1;0;waitcy-loopback-36-0
-setreg2;10x1
-add
-datawrite1;>waitcy-loopback-36-0
-setreg2;10x1333
-gotoifless;>waitcy-loopback-36-0
-
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #38-0
-iowrite1;>snd.1.stop#SSTNPL Source Line: '38-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #39-0
-iowrite1;>snd.2.stop#SSTNPL Source Line: '39-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #40-0
-iowrite1;>snd.3.stop#SSTNPL Source Line: '40-0' 
-#return from subroutine.
-s1pop1
-gotoreg1
 #label
 zerosize;;print_version--label
 #Dump (character)
@@ -164,57 +59,57 @@ iowrite1;>plot.blit
 dataread1;>mouse_color
 iowrite1;>plot.color
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #68-0
-ioread1;>mouse.realx#SSTNPL Source Line: '68-0' 
+#_______NOTE: this corresponds to SSTNPL source line #34-0
+ioread1;>mouse.realx#SSTNPL Source Line: '34-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #69-0
-iowrite1;>plot.x1#SSTNPL Source Line: '69-0' 
+#_______NOTE: this corresponds to SSTNPL source line #35-0
+iowrite1;>plot.x1#SSTNPL Source Line: '35-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #70-0
-iowrite1;>plot.x2#SSTNPL Source Line: '70-0' 
+#_______NOTE: this corresponds to SSTNPL source line #36-0
+iowrite1;>plot.x2#SSTNPL Source Line: '36-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #72-0
-setreg2;10x2#SSTNPL Source Line: '72-0' 
+#_______NOTE: this corresponds to SSTNPL source line #38-0
+setreg2;10x2#SSTNPL Source Line: '38-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #73-0
-add2#SSTNPL Source Line: '73-0' 
+#_______NOTE: this corresponds to SSTNPL source line #39-0
+add2#SSTNPL Source Line: '39-0' 
 #set2 (used for asm, or get2)
 datawrite2;>px
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #76-0
-setreg2;10x6#SSTNPL Source Line: '76-0' 
+#_______NOTE: this corresponds to SSTNPL source line #42-0
+setreg2;10x6#SSTNPL Source Line: '42-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #77-0
-add2#SSTNPL Source Line: '77-0' 
+#_______NOTE: this corresponds to SSTNPL source line #43-0
+add2#SSTNPL Source Line: '43-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #78-0
-iowrite2;>plot.x3#SSTNPL Source Line: '78-0' 
+#_______NOTE: this corresponds to SSTNPL source line #44-0
+iowrite2;>plot.x3#SSTNPL Source Line: '44-0' 
 #set2 (used for asm, or get2)
 datawrite2;>mx
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #82-0
-ioread1;>mouse.realy#SSTNPL Source Line: '82-0' 
+#_______NOTE: this corresponds to SSTNPL source line #48-0
+ioread1;>mouse.realy#SSTNPL Source Line: '48-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #83-0
-iowrite1;>plot.y1#SSTNPL Source Line: '83-0' 
+#_______NOTE: this corresponds to SSTNPL source line #49-0
+iowrite1;>plot.y1#SSTNPL Source Line: '49-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #84-0
-setreg2;10x8#SSTNPL Source Line: '84-0' 
+#_______NOTE: this corresponds to SSTNPL source line #50-0
+setreg2;10x8#SSTNPL Source Line: '50-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #85-0
-add2#SSTNPL Source Line: '85-0' 
+#_______NOTE: this corresponds to SSTNPL source line #51-0
+add2#SSTNPL Source Line: '51-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #87-0
-iowrite2;>plot.y2#SSTNPL Source Line: '87-0' 
+#_______NOTE: this corresponds to SSTNPL source line #53-0
+iowrite2;>plot.y2#SSTNPL Source Line: '53-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #90-0
-setreg2;10x6#SSTNPL Source Line: '90-0' 
+#_______NOTE: this corresponds to SSTNPL source line #56-0
+setreg2;10x6#SSTNPL Source Line: '56-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #91-0
-add2#SSTNPL Source Line: '91-0' 
+#_______NOTE: this corresponds to SSTNPL source line #57-0
+add2#SSTNPL Source Line: '57-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #93-0
-iowrite2;>plot.y3#SSTNPL Source Line: '93-0' 
+#_______NOTE: this corresponds to SSTNPL source line #59-0
+iowrite2;>plot.y3#SSTNPL Source Line: '59-0' 
 #set2 (used for asm, or get2)
 datawrite2;>my
 #set2 (used for asm, or get2)
@@ -258,33 +153,33 @@ iowrite1;>plot.copy
 dataread1;>@0
 iowrite1;>plot.select
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-114-0
+setreg1;>goto--jumper-80-0
 s1push1
 goto;>flock--label
-zerosize;;goto--jumper-114-0
+zerosize;;goto--jumper-80-0
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 zerosize;;flock--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #118-0
-iowrite1;>plot.fhalt#SSTNPL Source Line: '118-0' 
+#_______NOTE: this corresponds to SSTNPL source line #84-0
+iowrite1;>plot.fhalt#SSTNPL Source Line: '84-0' 
 #unconditional loop
 zerosize;;flowloop--con-x-1--start
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #120-0
-ioread1;>plot.buffer#SSTNPL Source Line: '120-0' 
+#_______NOTE: this corresponds to SSTNPL source line #86-0
+ioread1;>plot.buffer#SSTNPL Source Line: '86-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>locktmp
 #conditional flow control break
 dataread1;>locktmp
 dataread2;>@0
-gotoifmore;>goto--jumper-122-0
-goto;>goto--branch-122-0
-goto;>flowloop--con-x-1;goto--branch-122-0
+gotoifmore;>goto--jumper-88-0
+goto;>goto--branch-88-0
+goto;>flowloop--con-x-1;goto--branch-88-0
 
-zerosize;;goto--jumper-122-0
+zerosize;;goto--jumper-88-0
 goto;>flowloop--con-x-1--start
 zerosize;;flowloop--con-x-1
 #return from subroutine.
@@ -301,23 +196,23 @@ iowrite1;>plot.copy
 #unconditional loop
 zerosize;;flowloop--con-x-2--start
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-132-0
+setreg1;>goto--jumper-98-0
 s1push1
 goto;>mouse_cursor--label
-zerosize;;goto--jumper-132-0
+zerosize;;goto--jumper-98-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #133-0
-ioread1;>mouse.button#SSTNPL Source Line: '133-0' 
+#_______NOTE: this corresponds to SSTNPL source line #99-0
+ioread1;>mouse.button#SSTNPL Source Line: '99-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>btnbuff
 #conditional flow control break
 dataread1;>btnbuff
 dataread2;>@1
-gotoif;>goto--branch-135-0
-goto;>goto--jumper-135-0
-goto;>flowloop--con-x-2;goto--branch-135-0
+gotoif;>goto--branch-101-0
+goto;>goto--jumper-101-0
+goto;>flowloop--con-x-2;goto--branch-101-0
 
-zerosize;;goto--jumper-135-0
+zerosize;;goto--jumper-101-0
 goto;>flowloop--con-x-2--start
 zerosize;;flowloop--con-x-2
 #return from subroutine.

@@ -1,4 +1,4 @@
-
+!sklib.sk_notify()
 bprinttail1 Exit to DOS?
 gsub yn_dialog.main
 val @0
@@ -13,6 +13,7 @@ if yn_dialog.answer,@0 begin
 	stop
 end
 
+!sklib.sk_quit()
 
 gamode @0
 newline
@@ -27,3 +28,4 @@ stop
 
 include bench/lib/yn_dialog as yn_dialog
 include doslib as dos
+include bench/lib/sndkern_lib as sklib
