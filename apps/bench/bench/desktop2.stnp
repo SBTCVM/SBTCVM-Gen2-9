@@ -66,29 +66,19 @@ loop
 	
 	end
 end
-
-
-
-
 label info
-	prline Starting info.app...
 	gsub backup_self
-	vdi rstld -1 info.app
-	prline ERROR! info.app not found!
+	!b_lib.app_run(info.app)
 return
 
 label dos
-	prline Starting dos.app...
 	gsub backup_self
-	vdi rstld -1 dos.app
-	prline ERROR! dos.app not found!
+	!b_lib.app_run(dos.app)
 return
 
 label credits
-	prline Starting credits.app...
 	gsub backup_self
-	vdi rstld -1 credits.app
-	prline ERROR! credits.app not found!
+	!b_lib.app_run(credits.app)
 return
 
 
@@ -139,6 +129,7 @@ include bench/lib/common as common
 include bench/lib/ui as ui
 include plrle_noalpha as pl
 include bench/lib/sndkern_lib as sklib
+include bench/lib/bench_lib as b_lib
 asm include;bench/media/info.tas0;ICON_info
 asm include;bench/media/dos.tas0;ICON_dos
 asm include;bench/media/credits_icn.tas0;ICON_credits

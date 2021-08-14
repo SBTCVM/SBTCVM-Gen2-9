@@ -1,0 +1,4 @@
+label;_appexit_intenral
+label;_load_desktop_internal
+macro;app_exit;{gsub %mod%_appexit_intenral}
+macro;app_run;{prline starting %0%... / vdi rstld -1 %0% / prline ERROR:  can't run %0%}

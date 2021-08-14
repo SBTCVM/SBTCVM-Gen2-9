@@ -209,8 +209,13 @@ goto;>flowloop--con-x-2--start
 zerosize;;flowloop--con-x-2
 #label
 zerosize;;info--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-70-0
+s1push1
+goto;>backup_self--label
+zerosize;;goto--jumper-70-0
 #prline
-fopwri1;:S
+fopwri1;:s
 fopwri1;:t
 fopwri1;:a
 fopwri1;:r
@@ -231,11 +236,6 @@ fopwri1;:.
 fopwri1;:.
 fopwri1;:.
 fopwri1;:\n
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-75-0
-s1push1
-goto;>backup_self--label
-zerosize;;goto--jumper-75-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -263,7 +263,18 @@ fopwri1;:R
 fopwri1;:R
 fopwri1;:O
 fopwri1;:R
-fopwri1;:!
+fopwri1;::
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:a
+fopwri1;:n
+fopwri1;:'
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:r
+fopwri1;:u
+fopwri1;:n
 fopwri1;:\s
 fopwri1;:i
 fopwri1;:n
@@ -273,25 +284,19 @@ fopwri1;:.
 fopwri1;:a
 fopwri1;:p
 fopwri1;:p
-fopwri1;:\s
-fopwri1;:n
-fopwri1;:o
-fopwri1;:t
-fopwri1;:\s
-fopwri1;:f
-fopwri1;:o
-fopwri1;:u
-fopwri1;:n
-fopwri1;:d
-fopwri1;:!
 fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 zerosize;;dos--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-75-0
+s1push1
+goto;>backup_self--label
+zerosize;;goto--jumper-75-0
 #prline
-fopwri1;:S
+fopwri1;:s
 fopwri1;:t
 fopwri1;:a
 fopwri1;:r
@@ -311,11 +316,6 @@ fopwri1;:.
 fopwri1;:.
 fopwri1;:.
 fopwri1;:\n
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-82-0
-s1push1
-goto;>backup_self--label
-zerosize;;goto--jumper-82-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -342,7 +342,18 @@ fopwri1;:R
 fopwri1;:R
 fopwri1;:O
 fopwri1;:R
-fopwri1;:!
+fopwri1;::
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:a
+fopwri1;:n
+fopwri1;:'
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:r
+fopwri1;:u
+fopwri1;:n
 fopwri1;:\s
 fopwri1;:d
 fopwri1;:o
@@ -351,25 +362,19 @@ fopwri1;:.
 fopwri1;:a
 fopwri1;:p
 fopwri1;:p
-fopwri1;:\s
-fopwri1;:n
-fopwri1;:o
-fopwri1;:t
-fopwri1;:\s
-fopwri1;:f
-fopwri1;:o
-fopwri1;:u
-fopwri1;:n
-fopwri1;:d
-fopwri1;:!
 fopwri1;:\n
 #return from subroutine.
 s1pop1
 gotoreg1
 #label
 zerosize;;credits--label
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-80-0
+s1push1
+goto;>backup_self--label
+zerosize;;goto--jumper-80-0
 #prline
-fopwri1;:S
+fopwri1;:s
 fopwri1;:t
 fopwri1;:a
 fopwri1;:r
@@ -393,11 +398,6 @@ fopwri1;:.
 fopwri1;:.
 fopwri1;:.
 fopwri1;:\n
-#goto (extra code stores away return address.)
-setreg1;>goto--jumper-89-0
-s1push1
-goto;>backup_self--label
-zerosize;;goto--jumper-89-0
 #vdi
 fopset1;>vdi.cli.in
 fopwri1;:r
@@ -428,7 +428,18 @@ fopwri1;:R
 fopwri1;:R
 fopwri1;:O
 fopwri1;:R
-fopwri1;:!
+fopwri1;::
+fopwri1;:\s
+fopwri1;:\s
+fopwri1;:c
+fopwri1;:a
+fopwri1;:n
+fopwri1;:'
+fopwri1;:t
+fopwri1;:\s
+fopwri1;:r
+fopwri1;:u
+fopwri1;:n
 fopwri1;:\s
 fopwri1;:c
 fopwri1;:r
@@ -441,17 +452,6 @@ fopwri1;:.
 fopwri1;:a
 fopwri1;:p
 fopwri1;:p
-fopwri1;:\s
-fopwri1;:n
-fopwri1;:o
-fopwri1;:t
-fopwri1;:\s
-fopwri1;:f
-fopwri1;:o
-fopwri1;:u
-fopwri1;:n
-fopwri1;:d
-fopwri1;:!
 fopwri1;:\n
 #return from subroutine.
 s1pop1
@@ -504,10 +504,10 @@ fopwri1;:P
 fopwri1;:\n
 fopset1;>io.ttywr
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-101-0
+setreg1;>goto--jumper-91-0
 s1push1
 goto;>ui.base_draw--label
-zerosize;;goto--jumper-101-0
+zerosize;;goto--jumper-91-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x3
 #set(1) (used after 2-op math, asm code, or get)
@@ -525,61 +525,63 @@ setreg1;10x-90
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #116-0
-setreg1;>ICON_info#SSTNPL Source Line: '116-0' 
+#_______NOTE: this corresponds to SSTNPL source line #106-0
+setreg1;>ICON_info#SSTNPL Source Line: '106-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-118-0
+setreg1;>goto--jumper-108-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-118-0
+zerosize;;goto--jumper-108-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x-58
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #123-0
-setreg1;>ICON_dos#SSTNPL Source Line: '123-0' 
+#_______NOTE: this corresponds to SSTNPL source line #113-0
+setreg1;>ICON_dos#SSTNPL Source Line: '113-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-125-0
+setreg1;>goto--jumper-115-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-125-0
+zerosize;;goto--jumper-115-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x-26
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.posy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #130-0
-setreg1;>ICON_credits#SSTNPL Source Line: '130-0' 
+#_______NOTE: this corresponds to SSTNPL source line #120-0
+setreg1;>ICON_credits#SSTNPL Source Line: '120-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-132-0
+setreg1;>goto--jumper-122-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-132-0
+zerosize;;goto--jumper-122-0
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 138-0: bench/lib/common as common
+#module include: line 128-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 139-0: bench/lib/ui as ui
+#module include: line 129-0: bench/lib/ui as ui
 includeas;bench/lib/ui,ui
-#module include: line 140-0: plrle_noalpha as pl
+#module include: line 130-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
-#module include: line 141-0: bench/lib/sndkern_lib as sklib
+#module include: line 131-0: bench/lib/sndkern_lib as sklib
 includeas;bench/lib/sndkern_lib,sklib
+#module include: line 132-0: bench/lib/bench_lib as b_lib
+includeas;bench/lib/bench_lib,b_lib
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #142-0
-include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '142-0' 
+#_______NOTE: this corresponds to SSTNPL source line #133-0
+include;bench/media/info.tas0;ICON_info#SSTNPL Source Line: '133-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #143-0
-include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '143-0' 
+#_______NOTE: this corresponds to SSTNPL source line #134-0
+include;bench/media/dos.tas0;ICON_dos#SSTNPL Source Line: '134-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #144-0
-include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '144-0' 
+#_______NOTE: this corresponds to SSTNPL source line #135-0
+include;bench/media/credits_icn.tas0;ICON_credits#SSTNPL Source Line: '135-0' 
 #END OF FILE

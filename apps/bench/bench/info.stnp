@@ -30,6 +30,7 @@ label info
 	asm setreg1;>IMAGE_credits
 	set pl.offset
 	gsub pl.decode
+	!sklib.sk_notify()
 	gsub common.mouse_wait
 
 
@@ -41,5 +42,7 @@ stop
 include plrle_noalpha as pl
 include bench/lib/common as common
 include bench/lib/ui as ui
+include bench/lib/sndkern_lib as sklib
+
 asm include;bench/media/credits1.tas0;IMAGE_credits
 asm include;bench/media/image_info.tas0;IMAGE_info

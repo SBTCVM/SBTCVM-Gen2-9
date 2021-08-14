@@ -10,6 +10,7 @@ null;0;ybuff
 null;10x1;actflg
 null;0;btnbuff
 null;10x13;@13
+null;10x2;$sklib.snd_notify
 #label
 zerosize;;info--label
 #plotter buffer blit
@@ -74,11 +75,16 @@ setreg1;>goto--jumper-32-0
 s1push1
 goto;>pl.decode--label
 zerosize;;goto--jumper-32-0
+#get(1) (may be used with set, or asm code)
+dataread1;>$sklib.snd_notify
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #33-2
+iowrite1;>cross.io.1#SSTNPL Source Line: '33-2' 
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-33-0
+setreg1;>goto--jumper-34-0
 s1push1
 goto;>common.mouse_wait--label
-zerosize;;goto--jumper-33-0
+zerosize;;goto--jumper-34-0
 #prline
 fopwri1;:S
 fopwri1;:t
@@ -165,16 +171,18 @@ fopwri1;:!
 fopwri1;:\n
 #stop (shutdown vm)
 stop
-#module include: line 41-0: plrle_noalpha as pl
+#module include: line 42-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
-#module include: line 42-0: bench/lib/common as common
+#module include: line 43-0: bench/lib/common as common
 includeas;bench/lib/common,common
-#module include: line 43-0: bench/lib/ui as ui
+#module include: line 44-0: bench/lib/ui as ui
 includeas;bench/lib/ui,ui
+#module include: line 45-0: bench/lib/sndkern_lib as sklib
+includeas;bench/lib/sndkern_lib,sklib
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #44-0
-include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '44-0' 
+#_______NOTE: this corresponds to SSTNPL source line #47-0
+include;bench/media/credits1.tas0;IMAGE_credits#SSTNPL Source Line: '47-0' 
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #45-0
-include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '45-0' 
+#_______NOTE: this corresponds to SSTNPL source line #48-0
+include;bench/media/image_info.tas0;IMAGE_info#SSTNPL Source Line: '48-0' 
 #END OF FILE

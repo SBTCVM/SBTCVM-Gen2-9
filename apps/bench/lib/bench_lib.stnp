@@ -1,0 +1,16 @@
+
+
+
+def app_run {prline starting %0%... / vdi rstld -1 %0% / prline ERROR:  can't run %0%}
+def app_exit {gsub %mod%_appexit_intenral}
+
+label _appexit_intenral
+prline reload desktop.app...
+gsub _load_desktop_internal
+prline ERROR: RAM state not found.
+stop
+
+
+label _load_desktop_internal
+vdi rstld 2 desktop.back.tri
+return
