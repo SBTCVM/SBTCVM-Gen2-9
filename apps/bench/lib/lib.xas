@@ -1,0 +1,6 @@
+stnp --module %xwd%/common.stnp
+stnp --module %xwd%/ui.stnp
+stnp --module %xwd%/yn_dialog.stnp
+
+stnp --module %xwd%/sndkern_lib.stnp
+stnp --module %xwd%/bench_lib.stnp

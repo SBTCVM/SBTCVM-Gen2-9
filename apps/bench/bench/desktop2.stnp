@@ -7,8 +7,18 @@ var xbuff=0
 var ybuff=0
 var actflg=@1
 var btnbuff=0
+var cl_y=0
+var cl_y2=0
 
 var isbackup=0
+
+#done via (pixy*icon_height+5)
+var i_yspace=@32
+
+var i_ysize=@27
+var i_ygap=@5
+var i_start_y=@-90
+
 
 if isbackup,@0 begin
 	val @1
@@ -23,6 +33,13 @@ end
 val @1
 set actflg
 
+#local macro functions for making y position checks automatic.
+def cl_y_init {get i_start_y / set cl_y}
+def get_cl_y2 {add cl_y,i_ysize / set cl_y2}
+def inc_cl_y {add cl_y,i_yspace / set cl_y}
+
+
+
 loop
 	
 	if actflg,@1 begin
@@ -35,37 +52,46 @@ loop
 	{val 0 / set btnbuff}
 	until btnbuff,@1
 	
-		asm ioread1;>mouse.button
-		set btnbuff
+		{asm ioread1;>mouse.button / set btnbuff}
 		gsub common.mouse_cursor
 	
 	end
 	
 	##### Main screen icon click parser #####
 	
-	asm ioread1;>mouse.lockx
-	set xbuff
-	asm ioread1;>mouse.locky
-	set ybuff
-	ifrange @-90,@-63,ybuff begin
+	{asm ioread1;>mouse.lockx / set xbuff}
+	{asm ioread1;>mouse.locky / set ybuff}
 	
-		#ifrange @-120,@-93,xbuff =actflg @1
-		ifrange @-120,@-93,xbuff gsub info
 	
-	end
-	ifrange @-58,@-32,ybuff begin
+	!cl_y_init()
 	
-		#ifrange @-120,@-93,xbuff =actflg @1
-		ifrange @-120,@-93,xbuff gsub dos
 	
-	end
-	ifrange @-26,@1,ybuff begin
+	!get_cl_y2()
+		ifrange cl_y,cl_y2,ybuff begin
+		
+			ifrange @-120,@-93,xbuff gsub info
+		
+		end
+	!inc_cl_y()
 	
-		#ifrange @-120,@-93,xbuff =actflg @1
-		ifrange @-120,@-93,xbuff gsub credits
+	!get_cl_y2()
+		ifrange cl_y,cl_y2,ybuff begin
+		
+			ifrange @-120,@-93,xbuff gsub dos
+		
+		end
+	!inc_cl_y()
 	
-	end
+	!get_cl_y2()
+		ifrange cl_y,cl_y2,ybuff begin
+		
+			ifrange @-120,@-93,xbuff gsub credits
+		
+		end
+	!inc_cl_y()
 end
+
+
 label info
 	gsub backup_self
 	!b_lib.app_run(info.app)
@@ -96,30 +122,28 @@ label draw_desktop
 	
 	val @-120
 	set pl.posx
+	get i_start_y
 	set pl.posy
 	
-	#vertical spacing: start+(3*9)+5
 	
 	#info
-		val @-90
-		set pl.posy
+		
 		asm setreg1;>ICON_info
 		set pl.offset
 		gsub pl.decode
+		{add pl.posy,i_yspace / set pl.posy}
 	
 	#dos
-		val @-58
-		set pl.posy
 		asm setreg1;>ICON_dos
 		set pl.offset
 		gsub pl.decode
+		{add pl.posy,i_yspace / set pl.posy}
 	
 	#credits
-		val @-26
-		set pl.posy
 		asm setreg1;>ICON_credits
 		set pl.offset
 		gsub pl.decode
+		{add pl.posy,i_yspace / set pl.posy}
 return
 
 

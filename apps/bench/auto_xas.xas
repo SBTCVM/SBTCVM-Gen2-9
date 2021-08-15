@@ -1,15 +1,10 @@
 print SBTCVM DISKMAP build script
-xas bench/media/media.xas
+xas %xwd%/media/media.xas
 
-stnp --module bench/lib/common.stnp
-stnp --module bench/lib/ui.stnp
-stnp --module bench/lib/yn_dialog.stnp
+xas %xwd%/lib/lib.xas
 
-stnp --module bench/lib/sndkern_lib.stnp
-stnp --module bench/lib/bench_lib.stnp
+xas %xwd%/bench/bench.xas
 
-xas bench/bench/bench.xas
-
-xas bench/sys/sys.xas
+xas %xwd%/sys/sys.xas
 
 diskedit --new bench
