@@ -1,6 +1,6 @@
 gfxcon -cp %xwd%/media/bigsplash
 gfxcon -p %xwd%/media/bigsplash_curses
-gfxcon -plrle %xwd%/media/dosfloppy
+gfxcon -plrlei %xwd%/media/dosfloppy
 print build boot.txe
 stnp %xwd%/boot/boot_txe.stnp
 

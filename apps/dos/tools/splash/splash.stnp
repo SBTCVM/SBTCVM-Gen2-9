@@ -1,19 +1,87 @@
- 
-gamode @30
-prline Notice: This program requires SBTGA Graphics!
 
-asm setreg1;>image_offset1
-set pl.offset
 
-gsub pl.decode
+gsub init
+gsub screen_refresh
 
-keyprompt
+loop
+	bprinttail1 SBTCVM-DOS v0.1.2
+	bprinttail1 A DOS-like Ternary OS.
+	gsub textwait
+	bprinttail1 Part of
+	bprinttail1 the SBTCVM Project
+	bprinttail1 Working on Balanced
+	bprinttail1 Ternary computing
+	bprinttail1 for over 5 years.
+	gsub textwait
+	bprinttail1 Built For
+	bprinttail1 SBTCVM Gen 2-9
+	bprinttail1 With SSTNPL
+	bprinttail1 and SBTCVM Assembly.
+	
+	gsub textwait
+	bprinttail1 See Contributors.md
+	bprinttail1 to see the awesome
+	bprinttail1 people who helped make
+	bprinttail1 SBTCVM Possible!
+	gsub textwait
+end
 
-gamode @0
+var kb=0
 
-gsub dos.exit
+label screen_refresh
+	getchar kb
+	ifnot kb,@0 begin
+		gamode @0
+		gsub dos.exit
+	end
+	drawblit @1
+	val @-46
+	set seg.posx
+	val @14
+	set seg.posy
+	gsub seg.init_pos
+return
+
+label textwait
+	gsub seg.output
+	getchar kb
+	ifnot kb,@0 begin
+		gamode @0
+		gsub dos.exit
+	end
+	waitcy 16000
+	gsub screen_refresh
+return
+
+label init
+	clearcharbuff
+	
+	gamode @30
+	prline Notice: This program requires SBTGA Graphics!
+	
+	asm setreg1;>image_offset1
+	set pl.offset
+	
+	gsub pl.decode
+	
+	drawselect @0
+	drawcopy @1
+	## SEGMENT PARAMS ##
+	val @-9841
+	set seg.color_on
+	val @4
+	set seg.height
+	val @2
+	set seg.width
+	val @5
+	set seg.hori_space
+	val @10
+	set seg.vert_space
+return
+
 
 
 include plrle_noalpha as pl
 asm include;dos+media+dosfloppy.tas0;image_offset1
 include doslib as dos
+include segment as seg
