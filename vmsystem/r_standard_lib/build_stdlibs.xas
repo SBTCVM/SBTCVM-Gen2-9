@@ -24,7 +24,8 @@ stnp --module musicengine.stnp
 stnp --module segment.stnp
 stnp --module rgbadd.stnp
 stnp --module binrle.stnp
-
+#DEPENDENCY: flocklib depends on the flock.tas0 assembler module.
+stnp --module flocklib.stnp
 
 
 

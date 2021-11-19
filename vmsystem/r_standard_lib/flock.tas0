@@ -1,0 +1,13 @@
+head-nspin=stdnsp
+
+
+####Basic Flock routine.
+#Syncs your code loop with Plotter frame output via plot.fhalt.
+#  slower code may not hit 30FPS, but should maintain sync 
+#  (especially if a buffer is used)
+
+iowrite1;>plot.fhalt
+zerosize;;.loop
+ioread1;>plot.buffer
+setreg2;0
+gotoifmore;>.loop

@@ -1,0 +1,5 @@
+int9;internal_fcnt;10x0
+int9;@0;10x0
+label;flock
+label;internal_waitf
+macro;waitf;{get %0% / set %mod%internal_fcnt / gsub %mod%internal_waitf}

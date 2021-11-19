@@ -74,9 +74,25 @@ _ternarydreams_ and _ontrain_ both contain examples of separate music data store
 
 Also see counterpart `musnsp.nsp` library for assembler namespace constants for music control code data.
 
+### flocklib
+
+Helps time code around SBTGA's plotter framerate (30FPS).
+
+Wraps `flock.tas0` into a SSTNPL module, while providing a `wait x frames` style function.
+
+see _flock_test_ in _roms_ for a basic test program.
+
+
 ## Assembler modules (.tas0)
 
+### flock
+
+Use inline in a loop of SBTGA Plotter code to 'lock' the code's timing to the plotter's 30FPS framerate.
+Extra useful if used with a double-buffer scheme using one of SBTGA's secondary graphics buffers.
+
+
 ### vdishell
+
 Standard wrapper routine for the as-yet-unfinished SBTVDI disk system
 serial shell.
 

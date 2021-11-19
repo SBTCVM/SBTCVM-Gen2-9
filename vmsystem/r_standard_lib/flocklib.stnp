@@ -1,0 +1,21 @@
+
+
+
+var internal_fcnt=@0
+
+label flock
+	asm include;flock.tas0
+return
+
+
+def waitf {get %0% / set %mod%internal_fcnt / gsub %mod%internal_waitf}
+
+
+label internal_waitf
+	until internal_fcnt,@0
+		gsub flock
+		get1 internal_fcnt
+		asm subdata1;10x1
+		set1 internal_fcnt
+	end
+return

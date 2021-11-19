@@ -1,0 +1,17 @@
+
+
+
+gamode @30
+
+prline [SBTGA REQUIRED] please wait 3 seconds...
+!flk.waitf(@90)
+prline done. press key to exit.
+keyprompt
+stop
+
+
+
+
+
+
+include flocklib as flk
