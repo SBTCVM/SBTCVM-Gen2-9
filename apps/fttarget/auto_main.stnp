@@ -61,6 +61,30 @@ if kb,:Q stop
 
 goto MAIN
 
+label countdown
+	val @-40
+	set pl.posx
+	val @-121
+	set pl.posy
+	val @27
+	set pl.pixx
+	set pl.pixy
+		asm setreg1;>image_cnt3
+			set pl.offset
+			gsub pl.decode
+			drawcopy @0
+			!flk.waitf(@30)
+		asm setreg1;>image_cnt2
+			set pl.offset
+			gsub pl.decode
+			drawcopy @0
+			!flk.waitf(@30)
+		asm setreg1;>image_cnt1
+			set pl.offset
+			gsub pl.decode
+			drawcopy @0
+			!flk.waitf(@30)
+return
 
 
 label GAMESTART
@@ -74,6 +98,8 @@ gamode @30
 	val @440
 	asm iowrite1;>snd.1.freq
 	drawfill *---------
+	
+	gsub countdown
 	
 	drawwidth @20
 	drawheight @20
@@ -125,13 +151,8 @@ label gameloop
 		drawtri
 		
 		
-		label drawLOCK
-			asm ioread1;>plot.buffer
-			set locktmp
-			ifmore locktmp,@0 goto drawLOCK
+		gsub flk.flock
 		drawcopy @0
-		asm iowrite1;>plot.fhalt
-		
 		
 		asm ioread1;>mouse.button
 			set clickbuff
@@ -179,7 +200,8 @@ label DO_hit
 	drawcolor *000000+++
 	drawline
 	drawcopy @0
-	waitcy 2500
+	#waitcy 2500
+	!flk.waitf(@12)
 	drawcolor *---------
 	
 	##erase blast & laser
@@ -204,7 +226,9 @@ label DO_miss
 	drawcolor *000000+++
 	drawline
 	drawcopy @0
-	waitcy 600
+	#waitcy 600
+	!flk.waitf(@3)
+	
 	drawcolor *---------
 	
 	##erase laser
@@ -242,11 +266,11 @@ return
 
 label About
 asm include;fttarget/media/about.tas0
-prline Falling Ternary Targets - v0.3 - a falling targets game.
+prline Falling Ternary Targets - v0.4 - a falling targets game.
 prline Written as a bundled game for: SBTCVM Gen2-9 (SBTGA)
 prline Written in SSTNPL.
 prline 
-prline Copyright (c) 2018-2020 Thomas Leathers & Contributors
+prline Copyright (c) 2018-2021 Thomas Leathers & Contributors
 prline 
 prline Falling Ternary Targets is free software: you can redistribute it and/or modify
 prline it under the terms of the GNU General Public License as published by
@@ -281,5 +305,9 @@ drawselect @1
 return
 
 
+include flocklib as flk
 include plrle_noalpha as pl
 asm include;fttarget/media/gamebg.tas0;image_offset1
+asm include;fttarget/media/cnt3.tas0;image_cnt3
+asm include;fttarget/media/cnt2.tas0;image_cnt2
+asm include;fttarget/media/cnt1.tas0;image_cnt1

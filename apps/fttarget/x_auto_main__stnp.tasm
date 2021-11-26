@@ -38,6 +38,7 @@ null;:a;:a
 null;:A;:A
 null;:q;:q
 null;:Q;:Q
+null;10x0;@0
 null;10x30;@30
 null;---------;*---------
 null;10x2;@2
@@ -46,10 +47,10 @@ null;+++------;*+++------
 null;10x-121;@-121
 null;10x121;@121
 null;+++00++++;*+++00++++
-null;10x0;@0
 null;10x1;@1
 null;+++++++++;*+++++++++
 null;000000+++;*000000+++
+null;10x3;@3
 null;10x101;@101
 #label
 zerosize;;MAIN--label
@@ -517,15 +518,100 @@ zerosize;;goto--jumper-58-0
 #goto 
 goto;>MAIN--label
 #label
+zerosize;;countdown--label
+#val (used with set to change variable value during runtime.)
+setreg1;10x-40
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.posx
+#val (used with set to change variable value during runtime.)
+setreg1;10x-121
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.posy
+#val (used with set to change variable value during runtime.)
+setreg1;10x27
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.pixx
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.pixy
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #72-0
+setreg1;>image_cnt3#SSTNPL Source Line: '72-0' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-74-0
+s1push1
+goto;>pl.decode--label
+zerosize;;goto--jumper-74-0
+#plotter buffer copy
+dataread1;>@0
+iowrite1;>plot.copy
+#get(1) (may be used with set, or asm code)
+dataread1;>@30
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>flk.internal_fcnt
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-76-3
+s1push1
+goto;>flk.internal_waitf--label
+zerosize;;goto--jumper-76-3
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #77-0
+setreg1;>image_cnt2#SSTNPL Source Line: '77-0' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-79-0
+s1push1
+goto;>pl.decode--label
+zerosize;;goto--jumper-79-0
+#plotter buffer copy
+dataread1;>@0
+iowrite1;>plot.copy
+#get(1) (may be used with set, or asm code)
+dataread1;>@30
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>flk.internal_fcnt
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-81-3
+s1push1
+goto;>flk.internal_waitf--label
+zerosize;;goto--jumper-81-3
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #82-0
+setreg1;>image_cnt1#SSTNPL Source Line: '82-0' 
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>pl.offset
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-84-0
+s1push1
+goto;>pl.decode--label
+zerosize;;goto--jumper-84-0
+#plotter buffer copy
+dataread1;>@0
+iowrite1;>plot.copy
+#get(1) (may be used with set, or asm code)
+dataread1;>@30
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>flk.internal_fcnt
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-86-3
+s1push1
+goto;>flk.internal_waitf--label
+zerosize;;goto--jumper-86-3
+#return from subroutine.
+s1pop1
+gotoreg1
+#label
 zerosize;;GAMESTART--label
 #Set SBTGA mode
 dataread1;>@30
 iowrite1;>ga.mode
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-68-0
+setreg1;>goto--jumper-92-0
 s1push1
 goto;>prep_bg--label
-zerosize;;goto--jumper-68-0
+zerosize;;goto--jumper-92-0
 #val (used with set to change variable value during runtime.)
 setreg1;10x0
 #set(1) (used after 2-op math, asm code, or get)
@@ -533,16 +619,21 @@ datawrite1;>score
 #val (used with set to change variable value during runtime.)
 setreg1;10x1
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #73-0
-iowrite1;>snd.1.wave#SSTNPL Source Line: '73-0' 
+#_______NOTE: this corresponds to SSTNPL source line #97-0
+iowrite1;>snd.1.wave#SSTNPL Source Line: '97-0' 
 #val (used with set to change variable value during runtime.)
 setreg1;10x440
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #75-0
-iowrite1;>snd.1.freq#SSTNPL Source Line: '75-0' 
+#_______NOTE: this corresponds to SSTNPL source line #99-0
+iowrite1;>snd.1.freq#SSTNPL Source Line: '99-0' 
 #plotter fill
 dataread1;>*---------
 iowrite1;>plot.fill
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-102-0
+s1push1
+goto;>countdown--label
+zerosize;;goto--jumper-102-0
 #plotter width
 dataread1;>@20
 iowrite1;>plot.width
@@ -550,15 +641,15 @@ iowrite1;>plot.width
 dataread1;>@20
 iowrite1;>plot.height
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-81-0
+setreg1;>goto--jumper-107-0
 s1push1
 goto;>badG_start--label
-zerosize;;goto--jumper-81-0
+zerosize;;goto--jumper-107-0
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-82-0
+setreg1;>goto--jumper-108-0
 s1push1
 goto;>gameloop--label
-zerosize;;goto--jumper-82-0
+zerosize;;goto--jumper-108-0
 #prline
 fopwri1;:p
 fopwri1;:r
@@ -599,8 +690,8 @@ fopwri1;:\n
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-84-0
-gotoif;>keyprompt--loop-84-0
+ioread1;>io.ttyrd;keyprompt--loop-110-0
+gotoif;>keyprompt--loop-110-0
 #return from subroutine.
 s1pop1
 gotoreg1
@@ -618,11 +709,11 @@ datawrite1;>badguy_Y
 #conditional goto
 dataread1;>badguy_Y
 dataread2;>@100
-gotoifmore;>goto--branch-99-0
-goto;>goto--jumper-99-0
-setreg1;>goto--jumper-99-0;goto--branch-99-0
+gotoifmore;>goto--branch-125-0
+goto;>goto--jumper-125-0
+setreg1;>goto--jumper-125-0;goto--branch-125-0
 goto;>gameover--label
-zerosize;;goto--jumper-99-0
+zerosize;;goto--jumper-125-0
 #plotter draw line
 dataread1;>*+++------
 iowrite1;>plot.color
@@ -650,8 +741,8 @@ iowrite1;>plot.y2
 dataread1;>@100
 iowrite1;>plot.y3
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #120-0
-ioread1;>mouse.realx#SSTNPL Source Line: '120-0' 
+#_______NOTE: this corresponds to SSTNPL source line #146-0
+ioread1;>mouse.realx#SSTNPL Source Line: '146-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>realx
 #plotter x pos 3
@@ -662,43 +753,30 @@ dataread1;>*+++00++++
 iowrite1;>plot.color
 #plotter draw triangle
 iowrite1;>plot.tri
-#label
-zerosize;;drawLOCK--label
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #129-0
-ioread1;>plot.buffer#SSTNPL Source Line: '129-0' 
-#set(1) (used after 2-op math, asm code, or get)
-datawrite1;>locktmp
-#conditional goto
-dataread1;>locktmp
-dataread2;>@0
-gotoifmore;>goto--branch-131-0
-goto;>goto--jumper-131-0
-setreg1;>goto--jumper-131-0;goto--branch-131-0
-goto;>drawLOCK--label
-zerosize;;goto--jumper-131-0
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-154-0
+s1push1
+goto;>flk.flock--label
+zerosize;;goto--jumper-154-0
 #plotter buffer copy
 dataread1;>@0
 iowrite1;>plot.copy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #133-0
-iowrite1;>plot.fhalt#SSTNPL Source Line: '133-0' 
-#___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #136-0
-ioread1;>mouse.button#SSTNPL Source Line: '136-0' 
+#_______NOTE: this corresponds to SSTNPL source line #157-0
+ioread1;>mouse.button#SSTNPL Source Line: '157-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>clickbuff
 #conditional goto
 dataread1;>clickbuff
 dataread2;>@0
-gotoifmore;>goto--jumper-138-0
-goto;>goto--branch-138-0
-setreg1;>goto--jumper-138-0;goto--branch-138-0
+gotoifmore;>goto--jumper-159-0
+goto;>goto--branch-159-0
+setreg1;>goto--jumper-159-0;goto--branch-159-0
 goto;>gameloop--label
-zerosize;;goto--jumper-138-0
+zerosize;;goto--jumper-159-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #140-0
-ioread1;>mouse.lockx#SSTNPL Source Line: '140-0' 
+#_______NOTE: this corresponds to SSTNPL source line #161-0
+ioread1;>mouse.lockx#SSTNPL Source Line: '161-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>clickx
 #add (2op math)
@@ -710,17 +788,17 @@ datawrite1;>hit_du
 #conditional goto
 dataread1;>clickx
 dataread2;>badguy_X
-gotoifmore;>goto--halfstep-145-0
-gotoif;>goto--halfstep-145-0
-goto;>goto--jumper-145-0
-dataread1;>clickx;goto--halfstep-145-0
+gotoifmore;>goto--halfstep-166-0
+gotoif;>goto--halfstep-166-0
+goto;>goto--jumper-166-0
+dataread1;>clickx;goto--halfstep-166-0
 dataread2;>hit_du
-gotoifless;>goto--branch-145-0
-gotoif;>goto--branch-145-0
-goto;>goto--jumper-145-0
-setreg1;>goto--jumper-145-0;goto--branch-145-0
+gotoifless;>goto--branch-166-0
+gotoif;>goto--branch-166-0
+goto;>goto--jumper-166-0
+setreg1;>goto--jumper-166-0;goto--branch-166-0
 goto;>DO_hit--label
-zerosize;;goto--jumper-145-0
+zerosize;;goto--jumper-166-0
 #goto 
 goto;>DO_miss--label
 #goto 
@@ -733,8 +811,8 @@ iowrite1;>ga.mode
 #print newline
 fopwri1;:\n
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #156-0
-include;fttarget/media/gameover.tas0#SSTNPL Source Line: '156-0' 
+#_______NOTE: this corresponds to SSTNPL source line #177-0
+include;fttarget/media/gameover.tas0#SSTNPL Source Line: '177-0' 
 #print newline
 fopwri1;:\n
 #print
@@ -756,8 +834,8 @@ gotoreg1
 #label
 zerosize;;DO_hit--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #165-0
-iowrite1;>snd.1.play#SSTNPL Source Line: '165-0' 
+#_______NOTE: this corresponds to SSTNPL source line #186-0
+iowrite1;>snd.1.play#SSTNPL Source Line: '186-0' 
 #add (2op math)
 dataread1;>@1
 dataread2;>score
@@ -792,27 +870,26 @@ iowrite1;>plot.line
 #plotter buffer copy
 dataread1;>@0
 iowrite1;>plot.copy
-#Wait loop
-setreg1;0
-datawrite1;>waitcy-loopback-182-0
-setreg1;0;waitcy-loopback-182-0
-setreg2;10x1
-add
-datawrite1;>waitcy-loopback-182-0
-setreg2;10x416
-gotoifless;>waitcy-loopback-182-0
-
+#get(1) (may be used with set, or asm code)
+dataread1;>@12
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>flk.internal_fcnt
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-204-3
+s1push1
+goto;>flk.internal_waitf--label
+zerosize;;goto--jumper-204-3
 #plotter draw line
 dataread1;>*---------
 iowrite1;>plot.color
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-190-0
+setreg1;>goto--jumper-212-0
 s1push1
 goto;>badG_start--label
-zerosize;;goto--jumper-190-0
+zerosize;;goto--jumper-212-0
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #192-0
-iowrite1;>snd.1.stop#SSTNPL Source Line: '192-0' 
+#_______NOTE: this corresponds to SSTNPL source line #214-0
+iowrite1;>snd.1.stop#SSTNPL Source Line: '214-0' 
 #goto 
 goto;>gameloop--label
 #label
@@ -837,16 +914,15 @@ iowrite1;>plot.line
 #plotter buffer copy
 dataread1;>@0
 iowrite1;>plot.copy
-#Wait loop
-setreg1;0
-datawrite1;>waitcy-loopback-207-0
-setreg1;0;waitcy-loopback-207-0
-setreg2;10x1
-add
-datawrite1;>waitcy-loopback-207-0
-setreg2;10x100
-gotoifless;>waitcy-loopback-207-0
-
+#get(1) (may be used with set, or asm code)
+dataread1;>@3
+#set(1) (used after 2-op math, asm code, or get)
+datawrite1;>flk.internal_fcnt
+#goto (extra code stores away return address.)
+setreg1;>goto--jumper-230-3
+s1push1
+goto;>flk.internal_waitf--label
+zerosize;;goto--jumper-230-3
 #plotter draw line
 dataread1;>*---------
 iowrite1;>plot.color
@@ -871,8 +947,8 @@ gotoreg1
 #label
 zerosize;;Help--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #231-0
-include;fttarget/media/help.tas0#SSTNPL Source Line: '231-0' 
+#_______NOTE: this corresponds to SSTNPL source line #255-0
+include;fttarget/media/help.tas0#SSTNPL Source Line: '255-0' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1111,8 +1187,8 @@ fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-239-0
-gotoif;>keyprompt--loop-239-0
+ioread1;>io.ttyrd;keyprompt--loop-263-0
+gotoif;>keyprompt--loop-263-0
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -1121,8 +1197,8 @@ gotoreg1
 #label
 zerosize;;About--label
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #244-0
-include;fttarget/media/about.tas0#SSTNPL Source Line: '244-0' 
+#_______NOTE: this corresponds to SSTNPL source line #268-0
+include;fttarget/media/about.tas0#SSTNPL Source Line: '268-0' 
 #prline
 fopwri1;:F
 fopwri1;:a
@@ -1153,7 +1229,7 @@ fopwri1;:\s
 fopwri1;:v
 fopwri1;:0
 fopwri1;:.
-fopwri1;:3
+fopwri1;:4
 fopwri1;:\s
 fopwri1;:-
 fopwri1;:\s
@@ -1280,7 +1356,7 @@ fopwri1;:-
 fopwri1;:2
 fopwri1;:0
 fopwri1;:2
-fopwri1;:0
+fopwri1;:1
 fopwri1;:\s
 fopwri1;:T
 fopwri1;:h
@@ -1989,8 +2065,8 @@ fopwri1;:?
 #keprompt: prompt for single keypress, continue only when keypress is received.
 setreg2;0
 iowrite1;>io.ttyrd
-ioread1;>io.ttyrd;keyprompt--loop-265-0
-gotoif;>keyprompt--loop-265-0
+ioread1;>io.ttyrd;keyprompt--loop-289-0
+gotoif;>keyprompt--loop-289-0
 #print newline
 fopwri1;:\n
 #return from subroutine.
@@ -2014,24 +2090,35 @@ datawrite1;>pl.pixx
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.pixy
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #277-0
-setreg1;>image_offset1#SSTNPL Source Line: '277-0' 
+#_______NOTE: this corresponds to SSTNPL source line #301-0
+setreg1;>image_offset1#SSTNPL Source Line: '301-0' 
 #set(1) (used after 2-op math, asm code, or get)
 datawrite1;>pl.offset
 #goto (extra code stores away return address.)
-setreg1;>goto--jumper-279-0
+setreg1;>goto--jumper-303-0
 s1push1
 goto;>pl.decode--label
-zerosize;;goto--jumper-279-0
+zerosize;;goto--jumper-303-0
 #plotter buffer select
 dataread1;>@1
 iowrite1;>plot.select
 #return from subroutine.
 s1pop1
 gotoreg1
-#module include: line 284-0: plrle_noalpha as pl
+#module include: line 308-0: flocklib as flk
+includeas;flocklib,flk
+#module include: line 309-0: plrle_noalpha as pl
 includeas;plrle_noalpha,pl
 #___RAW ASSEMBLY CODE___
-#_______NOTE: this corresponds to SSTNPL source line #285-0
-include;fttarget/media/gamebg.tas0;image_offset1#SSTNPL Source Line: '285-0' 
+#_______NOTE: this corresponds to SSTNPL source line #310-0
+include;fttarget/media/gamebg.tas0;image_offset1#SSTNPL Source Line: '310-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #311-0
+include;fttarget/media/cnt3.tas0;image_cnt3#SSTNPL Source Line: '311-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #312-0
+include;fttarget/media/cnt2.tas0;image_cnt2#SSTNPL Source Line: '312-0' 
+#___RAW ASSEMBLY CODE___
+#_______NOTE: this corresponds to SSTNPL source line #313-0
+include;fttarget/media/cnt1.tas0;image_cnt1#SSTNPL Source Line: '313-0' 
 #END OF FILE

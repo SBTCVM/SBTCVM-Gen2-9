@@ -3,4 +3,7 @@ gfxcon -cp %xwd%/media/gameover
 gfxcon -cp %xwd%/media/help
 gfxcon -cp %xwd%/media/about
 gfxcon -plrlei %xwd%/media/gamebg 20
+gfxcon -plrle %xwd%/media/cnt3
+gfxcon -plrle %xwd%/media/cnt2
+gfxcon -plrle %xwd%/media/cnt1
 stnp %xwd%

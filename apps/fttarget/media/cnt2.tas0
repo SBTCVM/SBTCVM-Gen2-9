@@ -1,0 +1,34 @@
+#SBTCVM Gen2-9 GFXCON: run-length encoded tritmap
+#Needs to be decoded manually.
+#image file: apps/fttarget/media/cnt2.png
+null;>.DATASIZE
+raw;10x0,---------
+raw;10x0,+++++++++
+raw;10x0,---------
+raw;-,0
+###LINE DIV
+raw;10x0,+++++++++
+raw;10x0,---------
+raw;10x0,+++++++++
+raw;-,0
+###LINE DIV
+raw;10x1,---------
+raw;10x0,+++++++++
+raw;-,0
+###LINE DIV
+raw;10x0,---------
+raw;10x0,+++++++++
+raw;10x0,---------
+raw;-,0
+###LINE DIV
+raw;10x0,+++++++++
+raw;10x1,---------
+raw;-,0
+###LINE DIV
+raw;10x2,+++++++++
+raw;-,0
+###LINE DIV
+raw;10x2,---------
+raw;-,0
+###LINE DIV
+null;;.DATASIZE
