@@ -49,102 +49,103 @@ label output
 	get1 height
 	asm muldata1;10x2
 	set height_x2
+	drawcolor color_on
 loop
 	brdhead1
 	set b_tmp
 	
 	val 0
 	set offset
-	#A-Z
+	
 	
 	if b_tmp,@0 return
 	if b_tmp,@1 gsub newline
 	if b_tmp,@1 top
-	#if b_tmp,:\s =offset @1
+	
 	if b_tmp,:\s goto skip_draw
 	
 	ifmore b_tmp,:9 goto skip_to_symbols
 	ifmore b_tmp,:Z goto skip_alpha
-	#ifmore b_tmp,:T goto skip_alpha_upper_thirdquar
-	#ifmore b_tmp,:M goto skip_alpha_upper_firsthalf
-	#ifmore b_tmp,:G goto skip_alpha_upper_firstquar
-	
 	ifmore b_tmp,:\s goto skip_alpha_lower
 	
-	
-	#this code calculates constant. (can be replaced with constant once calculated)
-	#asm setreg1;:a
-	#asm setreg2;10x-2
-	#asm add
-	#asm abs1
-	#asm iowrite1;>io.decdump
-	
-	#constant is 123
-	asm setreg1;10x123
-	get2 b_tmp
-	asm add
-	set offset
-	
-	
-	goto end
+	#a-z
+		
+		
+		#this code calculates constant. (can be replaced with constant once calculated)
+		#asm setreg1;:a
+		#asm setreg2;10x-2
+		#asm add
+		#asm abs1
+		#asm iowrite1;>io.decdump
+		
+		#constant is 123
+		asm setreg1;10x123
+		get2 b_tmp
+		asm add
+		set offset
+		
+		
+		goto end
 	label skip_alpha_lower
-	
-	#this code calculates constant. (can be replaced with constant once calculated)
-	#asm setreg1;:A
-	#asm setreg2;10x-2
-	#asm add
-	#asm abs1
-	#asm iowrite1;>io.decdump
-	
-	asm setreg1;10x96
-	get2 b_tmp
-	asm add
-	set offset
-	
-	
-	goto end
+	#A-Z
+		#this code calculates constant. (can be replaced with constant once calculated)
+		#asm setreg1;:A
+		#asm setreg2;10x-2
+		#asm add
+		#asm abs1
+		#asm iowrite1;>io.decdump
+		
+		asm setreg1;10x96
+		get2 b_tmp
+		asm add
+		set offset
+		
+		
+		goto end
 	label skip_alpha
 	#0-9
-	
-	#this code calculates constant. (can be replaced with constant once calculated)
-	#asm setreg1;:0
-	#asm setreg2;10x-28
-	#asm add
-	#asm abs1
-	#asm iowrite1;>io.decdump
-	
-	asm setreg1;10x95
-	get2 b_tmp
-	asm add
-	set offset
-	goto end
-	
+		
+		#this code calculates constant. (can be replaced with constant once calculated)
+		#asm setreg1;:0
+		#asm setreg2;10x-28
+		#asm add
+		#asm abs1
+		#asm iowrite1;>io.decdump
+		
+		asm setreg1;10x95
+		get2 b_tmp
+		asm add
+		set offset
+		goto end
+		
 	#SYMBOLS
 	label skip_to_symbols
-	if b_tmp,:? =offset @38
-	if b_tmp,:+ =offset @39
-	if b_tmp,:- =offset @40
-	if b_tmp,:_ =offset @41
-	if b_tmp,:< =offset @42
-	if b_tmp,:> =offset @43
-	if b_tmp,:" =offset @44
-	if b_tmp,:' =offset @45
-	if b_tmp,:$ =offset @46
-	if b_tmp,:% =offset @47
-	if b_tmp,:\v =offset @48#vertical bar
-	if b_tmp,:/ =offset @49
-	if b_tmp,:\b =offset @50#backslash
-	if b_tmp,:= =offset @51
-	if b_tmp,:. =offset @52
-	if b_tmp,:\m =offset @53#comma
-	if b_tmp,:[ =offset @54
-	if b_tmp,:] =offset @55
-	if b_tmp,:{ =offset @56
-	if b_tmp,:} =offset @57
-	if b_tmp,:^ =offset @58
-	if b_tmp,:` =offset @59
-	if b_tmp,:* =offset @60
-	if b_tmp,:! =offset @61
+		if b_tmp,:? =offset @38
+		if b_tmp,:+ =offset @39
+		if b_tmp,:- =offset @40
+		if b_tmp,:_ =offset @41
+		if b_tmp,:< =offset @42
+		if b_tmp,:> =offset @43
+		if b_tmp,:" =offset @44
+		if b_tmp,:' =offset @45
+		if b_tmp,:$ =offset @46
+		if b_tmp,:% =offset @47
+		if b_tmp,:\v =offset @48#vertical bar
+		if b_tmp,:/ =offset @49
+		if b_tmp,:\b =offset @50#backslash
+		if b_tmp,:= =offset @51
+		if b_tmp,:. =offset @52
+		if b_tmp,:\m =offset @53#comma
+		if b_tmp,:[ =offset @54
+		if b_tmp,:] =offset @55
+		if b_tmp,:{ =offset @56
+		if b_tmp,:} =offset @57
+		if b_tmp,:^ =offset @58
+		if b_tmp,:` =offset @59
+		if b_tmp,:* =offset @60
+		if b_tmp,:! =offset @61
+		if b_tmp,:~ =offset @62
+		if b_tmp,:& =offset @63
 	
 	label end
 	gsub segment_draw
@@ -217,6 +218,8 @@ tdat 0;0;0;0;0;0;0;0;0;0;0;0;+;0;+;0#^
 tdat 0;0;+;0;0;0;0;0;+;+;0;0;0;0;0;0#`
 tdat 0;0;0;0;0;0;0;0;+;+;+;+;+;+;+;+#*
 tdat 0;+;+;0;0;0;0;+;0;+;0;0;0;0;0;+#!
+tdat +;0;0;0;0;+;0;0;0;0;0;0;+;0;0;+#~
+tdat +;0;0;+;0;0;0;+;0;+;+;+;+;+;0;+#&
 
 #key 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
 
@@ -259,7 +262,6 @@ def 2y1 {get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y1}
 def 2y2 {get1 posy / get2 height_x2 / asm add / asm iowrite1;>plot.y2}
 
 label segment_draw
-drawcolor color_on
 ##0
 	tabr seg_data,@0,offset
 	set boolt

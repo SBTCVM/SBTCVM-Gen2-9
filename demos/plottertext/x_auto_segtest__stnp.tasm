@@ -95,6 +95,10 @@ fopwri1;:\s
 fopwri1;:*
 fopwri1;:\s
 fopwri1;:!
+fopwri1;:\s
+fopwri1;:~
+fopwri1;:\s
+fopwri1;:&
 fopwri1;:\n
 fopset1;>io.ttywr
 #bprinttail1
