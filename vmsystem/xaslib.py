@@ -123,7 +123,7 @@ interactive shell mode.
 ''' + xasvers + '''
 part of SBTCVM-Gen2-9 (v2.1.0.alpha)
 
-Copyright (c) 2016-2021 Thomas Leathers and Contributors 
+Copyright (c) 2016-2022 Thomas Leathers and Contributors 
 
 see readme.md for more information and licensing of media.
 

@@ -418,7 +418,7 @@ class uio:
 				self.blinkflg=1
 				uprects.append(pygame.draw.line(self.screensurf, self.textbg, (self.charx+2, self.chary), (self.charx+2, self.chary+charheight), 2))
 		
-		while len(self.ttybuff)>0 and dcount!=30:
+		while len(self.ttybuff)>0 and dcount!=90:
 			dcount+=1
 			char=self.ttybuff.pop(0)
 			if self.charx>=self.ttywide and char!="\n":

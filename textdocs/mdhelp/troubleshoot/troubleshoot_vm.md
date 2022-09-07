@@ -11,17 +11,13 @@ the pygame frontend. Also, ensure your Operating System hasn't
 muted the program in some way.
 
 # Q: Why does the pygame frontend have a slower TTY?
-Its 600 Characters per second. (CPS) (30 characters max per frame, at 30 FPS)
+Its 2700 Characters per second. (CPS) (90 characters max per frame, at 30 FPS)
 
-The reason for this slow speed is mainly to ensure the CPU has enough
-processing time to run properly. However, it actually has splendid color
-support. Check out `colortest` and `packtest3` in `DEMOS`.
+## Why 2700 CPS?
 
-## Why 600 CPS?
-
-600 CPS is meant to be a decent enough speed (for a computer running at 6.5Khz with)
-without slowing the CPU to a crawl. Any kind of software emulation has its drawbacks,
-and number crunching has been placed above text printing in this case.
+Originally It was 900 CPS but this was found to be far lower than it really needed
+to be performance-wise, particularly when considering the often intermittent
+nature of the TTY's output in general.
 
 # Q: Why is curses so limited? Why no colors?
 Well It has to do partly with how much terminals in general, even after over half

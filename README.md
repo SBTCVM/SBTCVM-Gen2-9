@@ -97,7 +97,7 @@ _Please try and read though existing issues to see if its a known bug._
 SBTCVM gen2-9 ships with **fssynthlib.py**, a general-use waveform synthesis library from
 the FSSS synthesizer suite. You can find its readme in the [textdocs directory.](/textdocs/fssynthlib_README.md)
      
-Copyright (c) 2016-2021 Thomas Leathers and Contributors 
+Copyright (c) 2016-2022 Thomas Leathers and Contributors 
 
 
   SBTCVM Gen2 9-trit is free software: you can redistribute it and/or modify
@@ -124,4 +124,4 @@ Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 Image and other media content created by, (unless otherwise noted below) Thomas Leathers.
 
 SBTCVM's Stylized text logo and SBTCVM's 3 eyed, 3 eared mascot were created by Thomas Leathers.
-Copyright (c) 2018-2020 Thomas Leathers and Contributors.
+Copyright (c) 2018-2022 Thomas Leathers and Contributors.
