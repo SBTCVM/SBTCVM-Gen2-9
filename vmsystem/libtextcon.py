@@ -1,135 +1,169 @@
 #!/usr/bin/env python
-from . import libbaltcalc
-#import libbaltcalc
-btint=libbaltcalc.btint
-import os
 import sys
-#SBTCVM-BTT2: SBTCVM Gen2's next generation text encoding.
-#NOTE: while the encoding currently contains ~100 chars, and the latin set
+import os
+from . import libbaltcalc
+# import libbaltcalc
+btint = libbaltcalc.btint
+# SBTCVM-BTT2: SBTCVM Gen2's next generation text encoding.
+# NOTE: while the encoding currently contains ~100 chars, and the latin set
 #   begins at MNI(5), various virtual hardware & software of SBTCVM is designed
 #   to accept a full 9 trits.
 
+
 class schr:
-	def __init__(self, uchar, asmchar, dataval, chrname=None, dumpstr=None, bldumpstr=None):
-		if chrname==None:
-			self.chrname=uchar
-		else:
-			self.chrname=chrname
-		if dumpstr==None:
-			self.dumpstr=" "+uchar
-		else:
-			self.dumpstr=dumpstr
-		if bldumpstr==None:
-			self.bldumpstr=uchar
-		else:
-			self.bldumpstr=bldumpstr
-		
-		self.uchar=uchar
-		self.asmchar=asmchar
-		self.dataval=dataval
+    def __init__(
+            self,
+            uchar,
+            asmchar,
+            dataval,
+            chrname=None,
+            dumpstr=None,
+            bldumpstr=None):
+        if chrname is None:
+            self.chrname = uchar
+        else:
+            self.chrname = chrname
+        if dumpstr is None:
+            self.dumpstr = " " + uchar
+        else:
+            self.dumpstr = dumpstr
+        if bldumpstr is None:
+            self.bldumpstr = uchar
+        else:
+            self.bldumpstr = bldumpstr
+
+        self.uchar = uchar
+        self.asmchar = asmchar
+        self.dataval = dataval
+
 
 def nchr(uchar, dataval):
-	#check for normal chars used in assembler syntax. (aka that need escaping) (only vertical bar and semicolon for now)
-	if uchar in asmchar_special:
-		return schr(uchar, asmchar_special[uchar], dataval, chrname=None, dumpstr=None, bldumpstr=None)
-	else:
-		return schr(uchar, uchar, dataval, chrname=None, dumpstr=None, bldumpstr=None)
+    # check for normal chars used in assembler syntax. (aka that need
+    # escaping) (only vertical bar and semicolon for now)
+    if uchar in asmchar_special:
+        return schr(
+            uchar,
+            asmchar_special[uchar],
+            dataval,
+            chrname=None,
+            dumpstr=None,
+            bldumpstr=None)
+    else:
+        return schr(
+            uchar,
+            uchar,
+            dataval,
+            chrname=None,
+            dumpstr=None,
+            bldumpstr=None)
 
-#----------dataset startup code below---------
+# ----------dataset startup code below---------
 
 
 # master latin bank #1 character reference for SBTCVM-BTT2
-#WARNING: THE ORDER OF CHARS IN STRING DETERMINE HOW THEY ARE MAPPED!
-#ensure each of these are precisely 27 chars long.
-chardata0="""abcdefghijklmnopqrstuvwxyz """
-chardata1="""ABCDEFGHIJKLMNOPQRSTUVWXYZ."""
-chardata2="""0123456789`-=~!@#$%^&*()_+!"""
-chardata3='[]' + "\\" + "{}|;':" + '"' + ',./<>?'
+# WARNING: THE ORDER OF CHARS IN STRING DETERMINE HOW THEY ARE MAPPED!
+# ensure each of these are precisely 27 chars long.
+chardata0 = """abcdefghijklmnopqrstuvwxyz """
+chardata1 = """ABCDEFGHIJKLMNOPQRSTUVWXYZ."""
+chardata2 = """0123456789`-=~!@#$%^&*()_+!"""
+chardata3 = '[]' + "\\" + "{}|;':" + '"' + ',./<>?'
 
 
-#normal characters that require escaping.
-asmchar_special={"|": "\\v", ";": "\\c", "\\": "\\b", " ": "\\s", "#": "\\p", ",": "\\m"}
+# normal characters that require escaping.
+asmchar_special = {
+    "|": "\\v",
+    ";": "\\c",
+    "\\": "\\b",
+    " ": "\\s",
+    "#": "\\p",
+    ",": "\\m"}
 
 # Special bank #1 (0-??)
-#Special case chars (currently newline, backspace, and NULL. all three have fixed positions in datastructure.)
+# Special case chars (currently newline, backspace, and NULL. all three
+# have fixed positions in datastructure.)
 
-spchars=[schr("\n", "\\n", 1, "newline", "\\n", "."), schr(None, "\\0", 0, "null", "\\0", "."), schr('\b', "\\x", 2, "backspace", "\\x", ".")]
-spcharlist_asm=["\\n", "\\0", "\\x"]
+spchars = [
+    schr(
+        "\n", "\\n", 1, "newline", "\\n", "."), schr(
+            None, "\\0", 0, "null", "\\0", "."), schr(
+                '\b', "\\x", 2, "backspace", "\\x", ".")]
+spcharlist_asm = ["\\n", "\\0", "\\x"]
 
 
-curses_specials={'KEY_BACKSPACE': '\b'}
+curses_specials = {'KEY_BACKSPACE': '\b'}
 
 # --- INIT NORMAL CHARACTERS ---
-normchars=[]
-normcharlist=list(chardata0 + chardata1 + chardata2 + chardata3)
+normchars = []
+normcharlist = list(chardata0 + chardata1 + chardata2 + chardata3)
 
-#latin bank #1 (MNI(5)-0)
+# latin bank #1 (MNI(5)-0)
 
-#assign codes to each of the normal chars algorithmically.
-charval=libbaltcalc.mni(5)
-#charval=1
+# assign codes to each of the normal chars algorithmically.
+charval = libbaltcalc.mni(5)
+# charval=1
 for ch in normcharlist:
-	normchars.extend([nchr(ch, charval)])
-	charval+=1
-	#skip special chars (null and newline)
-	if charval==0:
-		charval+=2
+    normchars.extend([nchr(ch, charval)])
+    charval += 1
+    # skip special chars (null and newline)
+    if charval == 0:
+        charval += 2
 
 
+# debug messages (comment out if not working on lib)
+# print("SBTCVM-BTT2 (libtextcon): Last assigned normal char: '" + ch + "'")
+# print("SBTCVM-BTT2 (libtextcon): next available normal charcode: '" + str(charval) + "'")
+# print("SBTCVM-BTT2 (libtextcon): normal chars assigned: " + str(len(normcharlist)))
 
-####debug messages (comment out if not working on lib)
-#print("SBTCVM-BTT2 (libtextcon): Last assigned normal char: '" + ch + "'")
-#print("SBTCVM-BTT2 (libtextcon): next available normal charcode: '" + str(charval) + "'")
-#print("SBTCVM-BTT2 (libtextcon): normal chars assigned: " + str(len(normcharlist)))
+# build main character list
+allchars = normchars + spchars
 
-#build main character list
-allchars=normchars+spchars
-
-normal_char_list=normcharlist
+normal_char_list = normcharlist
 
 
-#build dict for UIO to use.
-dattostr={}
+# build dict for UIO to use.
+dattostr = {}
 for ch in allchars:
-	if ch.uchar!=None:
-		dattostr[ch.dataval]=ch.uchar
-		
-strtodat={}
+    if ch.uchar is not None:
+        dattostr[ch.dataval] = ch.uchar
+
+strtodat = {}
 for ch in allchars:
-	if ch.uchar!=None:
-		strtodat[ch.uchar]=ch.dataval
+    if ch.uchar is not None:
+        strtodat[ch.uchar] = ch.dataval
 
-#build asm char lookup for compilers
-chartoasmchar={}
+# build asm char lookup for compilers
+chartoasmchar = {}
 for ch in allchars:
-	if ch.uchar!=None:
-		chartoasmchar[ch.uchar]=ch.asmchar
+    if ch.uchar is not None:
+        chartoasmchar[ch.uchar] = ch.asmchar
 
-#--- ASSEMBLER DATA STRUCTURES ---
+# --- ASSEMBLER DATA STRUCTURES ---
 
-#build raw list of all characters for assembler
-allcharlist_asm=normcharlist+spcharlist_asm
+# build raw list of all characters for assembler
+allcharlist_asm = normcharlist + spcharlist_asm
 
-#build assembler character data lookup and escaped character reference list.
-asm_chrtodat={}
-asm_escaped=[]
+# build assembler character data lookup and escaped character reference list.
+asm_chrtodat = {}
+asm_escaped = []
 for ch in allchars:
-	if ch.asmchar!=None:
-		asm_chrtodat[ch.asmchar]=ch.dataval
-	#dynamically add escaped chars to 
-	if ch.asmchar.startswith("\\"):
-		asm_escaped.extend([ch.asmchar])
-		
+    if ch.asmchar is not None:
+        asm_chrtodat[ch.asmchar] = ch.dataval
+    # dynamically add escaped chars to
+    if ch.asmchar.startswith("\\"):
+        asm_escaped.extend([ch.asmchar])
+
+
 def datlisttostr(datlist):
-	retval=''
-	for x in datlist:
-		if x in dattostr:
-			retval+=dattostr[x]
-	return retval
+    retval = ''
+    for x in datlist:
+        if x in dattostr:
+            retval += dattostr[x]
+    return retval
+
 
 def strtodatlist(strinp):
-	retval=[]
-	for x in strinp:
-		if x in strtodat:
-			retval.append(strtodat[x])
-	return retval
+    retval = []
+    for x in strinp:
+        if x in strtodat:
+            retval.append(strtodat[x])
+    return retval
